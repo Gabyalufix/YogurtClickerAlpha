@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.collapsible {
+  background-color: #0515ff;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+.collapsibleLV2 {
+  background-color: #0515ff;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.collapsibleTHIN {
+  background-color: #0515ff;
+  color: white;
+  cursor: pointer;
+  padding: 6px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+}
+
+
+.active, .collapsible:hover {
+  background-color: #166fff;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #87b5ff;
+}
+.subColumnBox {
+  padding: 0 18px;
+  background-color: #adadad;
+}
+.contentLV3 {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #9b9b9b;
+}
+
+.slidecontainer {
+  width: 100%;
+}
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.multiPctSliderBox{
+  width: 100%;
+}
+
+</style>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  height: 10000px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+.multiPctSliderBox {
+  float: left;
+  width: 90%;
+  padding: 0px;
+}
+.multiPctSliderHoldBox {
+  float: left;
+  vertical-align: middle;
+  width: 9.9%;
+  padding: 10px;
+}
+.multiPctSliderHoldBox:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+</style>
+
+
+</head>
+<body>
+
+
+<!--
+####################################################################################################
+------------------------------ BODY
+####################################################################################################
+-->
+
+<h2>Collapsibles</h2>
+<div class="row">
+
+<!--
+#################################################
+------------------------------ COLUMN 1:
+#################################################
+-->
+
+  <div class="column" style="background-color:#aaa;">
+
+<!--<p>A Collapsible:</p>-->
+
+<!--
+=================================================
+------------------------------ RESEARCH
+-->
+<button class="collapsible">SCIENCE</button>
+		<div class="content">
+
+
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange2">
+  <p>Value: <span id="demo2"></span></p>
+</div>
+
+		  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+			<button class="collapsibleTHIN">
+			   <h3>BIO:</h3>
+			</button>
+
+			<div class="contentLV3">
+
+			<h5>Basic Research</h5>
+				<div class="multiPctSliderBox">
+					<div class="slidecontainer">
+						  <input type="range" min="1" max="10000" value="2000" class="slider" id="bioSliderPct1">
+					</div>
+				</div>
+				<div class="multiPctSliderHoldBox">
+					<label class="container">
+					  <input type="checkbox" checked="checked" id = "bioSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5>Biowarfare</h5>
+				<div class="multiPctSliderBox">
+					<div class="slidecontainer">
+						  <input type="range" min="1" max="10000" value="4000" class="slider" id="bioSliderPct2">
+					</div>
+				</div>
+				<div class="multiPctSliderHoldBox">
+					<label class="container">
+					  <input type="checkbox" checked="checked" id = "bioSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5>Yogosynthesis</h5>
+				<div class="multiPctSliderBox">
+					<div class="slidecontainer">
+						  <input type="range" min="1" max="10000" value="3000" class="slider" id="bioSliderPct3">
+					</div>
+				</div>
+				<div class="multiPctSliderHoldBox">
+					<label class="container">
+					  <input type="checkbox" checked="checked" id = "bioSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5>Bioengineering</h5>
+				<div class="multiPctSliderBox">
+					<div class="slidecontainer">
+						  <input type="range" min="1" max="10000" value="1000" class="slider" id="bioSliderPct4">
+					</div>
+				</div>
+				<div class="multiPctSliderHoldBox">
+					<label class="container">
+					  <input type="checkbox" checked="checked" id = "bioSliderCheck4">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+		</div>
+		<p> VALUE=<span id="bioSliderPctVal"></span> </p>
+
+
+</div>
+
+<button class="collapsible">RESEARCH PROJECTS</button>
+		<div class="content">
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
+
+
+<!--
+=================================================
+------------------------------ THINKING ENGINE
+-->
+
+<button class="collapsible">THINKING ENGINE</button>
+		<div class="content">
+		  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+		<button class="collapsible">Open Section 1.2 </button>
+			<div class="contentLV2">
+		 	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			</div>
+
+		</div>
+
+
+<!--
+=================================================
+------------------------------ SOULSWARM
+-->
+
+<button class="collapsible">SOULSWARM</button>
+	<div class="content">
+ 		 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	</div>
+
+</div>
+
+<!--
+#################################################
+------------------------------ COLUMN 2:
+#################################################
+-->
+
+
+<!--
+=================================================
+------------------------------ CONSOLE
+-->
+
+<div class="column" style="background-color:#bbb;">
+
+<div style="height:120px;border:1px solid #ccc;overflow:auto;background-color:#626262;color:#1AFE01;font-family:Monospace;font-weight:bold">
+CONSOLE:<br>
+CONSOLE:<br>
+CONSOLE:<br>
+CONSOLE:<br>
+CONSOLE:<br>
+CONSOLE:<br>
+CONSOLE:<br>
+CONSOLE:<br>
+CONSOLE:<br>
+CONSOLE:<br>
+CONSOLE:<br>
+CONSOLE:<br>
+CONSOLE:<br>
+CONSOLE:<br>
+
+</div>
+
+<!--
+=================================================
+------------------------------ WORLDFORGE
+-->
+
+<button class="collapsible">WORLDFORGE</button>
+		<div class="content">
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
+
+
+<!--
+=================================================
+------------------------------ BOTWORLDS
+-->
+<button class="collapsible">BOTWORLDS</button>
+		<div class="content">
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
+
+<!--
+=================================================
+------------------------------ GREENWORLDS
+-->
+<button class="collapsible">GREENWORLDS</button>
+		<div class="content">
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
+
+<!--
+#################################################
+------------------------------ COLUMN 3:
+#################################################
+-->
+
+</div>
+
+<div class="column" style="background-color:#ccc;">
+
+
+<button class="collapsible">FLEET</button>
+		<div class="content">
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
+
+<button class="collapsible">INTELLIGENCE REPORT</button>
+		<div class="content">
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
+
+<button class="collapsible">MILTARY REPORT</button>
+		<div class="content">
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
+
+
+
+
+</div>
+
+<!--
+####################################################################################################
+------------------------------ SCRIPTS:
+####################################################################################################
+-->
+
+
+<script>
+
+
+
+
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+var coll = document.getElementsByClassName("collapsibleTHIN");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+var coll = document.getElementsByClassName("collapsibleLV2");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+
+
+
+var output = document.getElementById("bioSliderPctVal");
+output.innerHTML = 10;
+
+var s1 = document.getElementById("bioSliderPct1");
+var s2 = document.getElementById("bioSliderPct2");
+var s3 = document.getElementById("bioSliderPct3");
+var s4 = document.getElementById("bioSliderPct4");
+var sarray = [s1,s2,s3,s4];
+var scbaNAMES = ["bioSliderCheck1","bioSliderCheck2","bioSliderCheck3","bioSliderCheck4"]
+var scba = []
+for(i = 0; i < 4; i++){
+   scba[i] = document.getElementById(scbaNAMES[i]);
+}
+
+for(i = 0; i < 4; i++){
+    var ss = sarray[i];
+    console.log("i = "+i)
+    ss.othrArray = sarray.slice()
+    ss.othrArray.splice(i,1)
+    ss.lockbox = scba[i]
+    ss.ssf = []
+    ss.stotal = 0
+	ss.onmousedown = function() {
+	  output.innerHTML = "DOWN"
+      this.stotal = 0
+      this.ktotal = 0
+      this.downval = parseFloat(this.value);
+      for(j = 0; j < 3; j++){
+        if(this.othrArray[j].lockbox.checked == true){
+          this.ssf[j] = parseFloat(this.othrArray[j].value);
+          this.ktotal = this.ktotal + this.ssf[j]
+        } else {
+          this.ssf[j] = parseFloat(this.othrArray[j].value);
+          this.stotal = this.stotal + this.ssf[j]
+        }
+      }
+      for(j = 0; j < 3; j++){
+        this.ssf[j] = this.ssf[j] / this.stotal
+      }
+	}
+	ss.onmouseup = function() {
+	  output.innerHTML = "UP"
+	}
+	ss.oninput = function() {
+	  var cval = parseFloat(this.value)
+	  if(this.ktotal + cval > 10000){
+	    this.value = 10000 - this.ktotal
+	  } else if(this.ktotal + cval < 10000 && this.stotal == 0) {
+	    this.value = 10000 - this.ktotal
+	  } else {
+	    var othrVal = 10000 - this.ktotal - cval
+        for(j = 0; j < 3; j++){
+          if(this.othrArray[j].lockbox.checked == false){
+            this.othrArray[j].value = this.ssf[j] * othrVal
+          }
+        }
+	    output.innerHTML = this.stotal
+	  }
+	}
+}
+
+
+
+</script>
+
+</body>
+</html>
