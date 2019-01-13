@@ -3,11 +3,26 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+
+h1, h2 , h3, h4, h5, h6, p {
+  padding-top: 1px;
+  padding-right: 1px;
+  padding-bottom: 1px;
+  padding-left: 1px;
+  line-height: 1;
+  margin-bottom: 1px;
+  margin-top: 1px;
+
+}
+
 .collapsible {
   background-color: #0515ff;
   color: white;
   cursor: pointer;
-  padding: 18px;
+  padding-top: 4px;
+  padding-right: 18px;
+  padding-bottom: 4px;
+  padding-left: 18px;
   width: 100%;
   border: none;
   text-align: left;
@@ -97,6 +112,71 @@
   width: 100%;
 }
 
+
+.button2 {
+   border: 1px solid #1a1a1a;
+   background: #666666;
+
+   background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
+   background: -webkit-linear-gradient(top, #ffffff, #888888);
+   background: -moz-linear-gradient(top, #ffffff, #888888);
+   background: -ms-linear-gradient(top, #ffffff, #888888);
+   background: -o-linear-gradient(top, #ffffff, #888888);
+   background-image: -ms-linear-gradient(top, #ffffff 0%, #888888 100%);
+
+   padding: 2px 4px;
+   -webkit-border-radius: 2px;
+   -moz-border-radius: 2px;
+   border-radius: 2px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #cccccc 0 1px 0;
+   color: #000000;
+   font-size: 11px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   outline: none;
+   }
+
+.button2:hover {
+   border: 1px solid #898989;
+   text-shadow: #d4d4d4 0 1px 0;
+   background: #616161;
+
+   background: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#888888));
+   background: -webkit-linear-gradient(top, #f7f7f7, #888888);
+   background: -moz-linear-gradient(top, #f7f7f7, #888888);
+   background: -ms-linear-gradient(top, #f7f7f7, #888888);
+   background: -o-linear-gradient(top, #f7f7f7, #888888);
+   background-image: -ms-linear-gradient(top, #f7f7f7 0%, #888888 100%);
+
+   color: #000000;
+   }
+
+.button2:active {
+   text-shadow: #bfbfbf 0 1px 0;
+   border: 1px solid #2e2e2e;
+
+   background: #d9d9d9;
+   background: -webkit-gradient(linear, left top, left bottom, from(#595959), to(#616161));
+   background: -webkit-linear-gradient(top, #595959, #d9d9d9);
+   background: -moz-linear-gradient(top, #595959, #d9d9d9);
+   background: -ms-linear-gradient(top, #595959, #d9d9d9);
+   background: -o-linear-gradient(top, #595959, #d9d9d9);
+   background-image: -ms-linear-gradient(top, #595959 0%, #d9d9d9 100%);
+
+   color: #444444;
+   }
+
+.button2:disabled {
+   opacity: 0.6;
+   border: 1px solid #ffffff;
+}
+
+
+
 </style>
 
 <style>
@@ -124,6 +204,7 @@
   float: left;
   width: 90%;
   padding: 0px;
+  vertical-align:middle
 }
 .multiPctSliderHoldBox {
   float: left;
@@ -148,6 +229,7 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  vertical-align:middle
 }
 
 /* Hide the browser's default checkbox */
@@ -157,6 +239,7 @@
   cursor: pointer;
   height: 0;
   width: 0;
+
 }
 
 /* Create a custom checkbox */
@@ -167,6 +250,7 @@
   height: 25px;
   width: 25px;
   background-color: #eee;
+  vertical-align:middle
 }
 
 /* On mouse-over, add a grey background color */
@@ -238,11 +322,6 @@
 		<div class="content">
 
 
-<div class="slidecontainer">
-  <input type="range" min="1" max="100" value="50" class="slider" id="myRange2">
-  <p>Value: <span id="demo2"></span></p>
-</div>
-
 		  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
 			<button class="collapsibleTHIN">
@@ -259,7 +338,7 @@
 				</div>
 				<div class="multiPctSliderHoldBox">
 					<label class="container">
-					  <input type="checkbox" checked="checked" id = "bioSliderCheck1">
+					  <input type="checkbox"  id = "bioSliderCheck1">
 					  <span class="checkmark"></span>
 					</label>
 				</div>
@@ -272,7 +351,7 @@
 				</div>
 				<div class="multiPctSliderHoldBox">
 					<label class="container">
-					  <input type="checkbox" checked="checked" id = "bioSliderCheck2">
+					  <input type="checkbox"  id = "bioSliderCheck2">
 					  <span class="checkmark"></span>
 					</label>
 				</div>
@@ -285,7 +364,7 @@
 				</div>
 				<div class="multiPctSliderHoldBox">
 					<label class="container">
-					  <input type="checkbox" checked="checked" id = "bioSliderCheck3">
+					  <input type="checkbox"  id = "bioSliderCheck3">
 					  <span class="checkmark"></span>
 					</label>
 				</div>
@@ -298,7 +377,7 @@
 				</div>
 				<div class="multiPctSliderHoldBox">
 					<label class="container">
-					  <input type="checkbox" checked="checked" id = "bioSliderCheck4">
+					  <input type="checkbox"  id = "bioSliderCheck4">
 					  <span class="checkmark"></span>
 					</label>
 				</div>
@@ -379,30 +458,171 @@ CONSOLE:<br>
 =================================================
 ------------------------------ WORLDFORGE
 -->
+<h3> DYSON SPHERES </h3>
 
-<button class="collapsible">WORLDFORGE</button>
+<button class="collapsible">WORLD FORGE:</button>
 		<div class="content">
-  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+			<h5>Falloworlds: <span id="wfSliderDisplayPct0"></span></h5>
+            <button class = "button2" id ="button_wfFallowBB" > << </button>
+            <button class = "button2" id ="button_wfFallowB" > < </button>
+            <button class = "button2" id ="button_wfFallowF" > > </button>
+            <button class = "button2" id ="button_wfFallowFF" > >> </button>
+			<h5>Inhabited Worlds: <span id="wfSliderDisplayPct0B"></span></h5>
+            <button class = "button2" id ="button_wfHabitBB" > << </button>
+            <button class = "button2" id ="button_wfHabitB" > < </button>
+            <button class = "button2" id ="button_wfHabitF" > > </button>
+            <button class = "button2" id ="button_wfHabitFF" > >> </button>
+			<h5>OmniWorlds: <span id="wfSliderDisplayPct1"></span></h5>
+            <button class = "button2" id ="button_wfOmniBB" > << </button>
+            <button class = "button2" id ="button_wfOmniB" > < </button>
+            <button class = "button2" id ="button_wfOmniF" > > </button>
+            <button class = "button2" id ="button_wfOmniFF" > >> </button>
+			<h5>Botworlds: <span id="wfSliderDisplayPct2"></span></h5>
+            <button class = "button2" id ="button_wfBotBB" > << </button>
+            <button class = "button2" id ="button_wfBotB" > < </button>
+            <button class = "button2" id ="button_wfBotF" > > </button>
+            <button class = "button2" id ="button_wfBotFF" > >> </button>
+			<h5>Greenworlds: <span id="wfSliderDisplayPct3"></span></h5>
+            <button class = "button2" id ="button_wfGreenBB" > << </button>
+            <button class = "button2" id ="button_wfGreenB" > < </button>
+            <button class = "button2" id ="button_wfGreenF" > > </button>
+            <button class = "button2" id ="button_wfGreenFF" > >> </button>
+			<h5>Compute Node: <span id="wfSliderDisplayPct4"></span></h5>
+            <button class = "button2" id ="button_wfCompBB" > << </button>
+            <button class = "button2" id ="button_wfCompB" > < </button>
+            <button class = "button2" id ="button_wfCompF" > > </button>
+            <button class = "button2" id ="button_wfCompFF" > >> </button>
+			<h5>HubWorlds: <span id="wfSliderDisplayPct5"></span></h5>
+            <button class = "button2" id ="button_wfHubBB" > << </button>
+            <button class = "button2" id ="button_wfHubB" > < </button>
+            <button class = "button2" id ="button_wfHubF" > > </button>
+            <button class = "button2" id ="button_wfHubFF" > >> </button>
 		</div>
+
 
 
 <!--
 =================================================
 ------------------------------ BOTWORLDS
 -->
-<button class="collapsible">BOTWORLDS</button>
-		<div class="content">
-  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-		</div>
 
-<!--
-=================================================
------------------------------- GREENWORLDS
--->
-<button class="collapsible">GREENWORLDS</button>
-		<div class="content">
+			<button class="collapsible">BOTWORLDS:</button>
+			<div class="content">
   			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-		</div>
+
+
+			<h5>Process Raw: <span id="botSliderDisplayPct1"></span></h5>
+				<div class="multiPctSliderBox">
+					<div class="slidecontainer">
+						  <input type="range" min="1" max="10000" value="2000" class="slider" id="botSliderPct1">
+					</div>
+				</div>
+				<div class="multiPctSliderHoldBox">
+					<label class="container">
+					  <input type="checkbox"  id = "botSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5>Reprocess Waste: <span id="botSliderDisplayPct2"></span></h5>
+				<div class="multiPctSliderBox">
+					<div class="slidecontainer">
+						  <input type="range" min="1" max="10000" value="4000" class="slider" id="botSliderPct2">
+					</div>
+				</div>
+				<div class="multiPctSliderHoldBox">
+					<label class="container">
+					  <input type="checkbox"  id = "botSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5>Transmute Yogurt: <span id="botSliderDisplayPct3"></span></h5>
+				<div class="multiPctSliderBox">
+					<div class="slidecontainer">
+						  <input type="range" min="1" max="10000" value="3000" class="slider" id="botSliderPct3">
+					</div>
+				</div>
+				<div class="multiPctSliderHoldBox">
+					<label class="container">
+					  <input type="checkbox"  id = "botSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+			<h5>Construct Weapons: <span id="botSliderDisplayPct4"></span></h5>
+				<div class="multiPctSliderBox">
+					<div class="slidecontainer">
+						  <input type="range" min="1" max="10000" value="3000" class="slider" id="botSliderPct4">
+					</div>
+				</div>
+				<div class="multiPctSliderHoldBox">
+					<label class="container">
+					  <input type="checkbox"  id = "botSliderCheck4">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+
+            </div>
+
+
+			<button class="collapsible">
+			   GREENWORLDS:
+			</button>
+			<div class="content">
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+			<h5>Biological Research: <span id="greenSliderDisplayPct1"></span></h5>
+				<div class="multiPctSliderBox">
+					<div class="slidecontainer">
+						  <input type="range" min="1" max="10000" value="2000" class="slider" id="greenSliderPct1">
+					</div>
+				</div>
+				<div class="multiPctSliderHoldBox">
+					<label class="container">
+					  <input type="checkbox"  id = "greenSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5>Grow Yogurt: <span id="greenSliderDisplayPct2"></span></h5>
+				<div class="multiPctSliderBox">
+					<div class="slidecontainer">
+						  <input type="range" min="1" max="10000" value="4000" class="slider" id="greenSliderPct2">
+					</div>
+				</div>
+				<div class="multiPctSliderHoldBox">
+					<label class="container">
+					  <input type="checkbox"  id = "greenSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5>Grow Bioweapons: <span id="greenSliderDisplayPct3"></span></h5>
+				<div class="multiPctSliderBox">
+					<div class="slidecontainer">
+						  <input type="range" min="1" max="10000" value="3000" class="slider" id="greenSliderPct3">
+					</div>
+				</div>
+				<div class="multiPctSliderHoldBox">
+					<label class="container">
+					  <input type="checkbox"  id = "greenSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+
+			</div>
+
+
+			<button class="collapsible">
+			   SHIPYARDS:
+			</button>
+			<div class="content">
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			</div>
+
 
 <!--
 #################################################
@@ -414,8 +634,12 @@ CONSOLE:<br>
 
 <div class="column" style="background-color:#ccc;">
 
+<button class="collapsible">TERRITORY REPORT</button>
+		<div class="content">
+  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
 
-<button class="collapsible">FLEET</button>
+<button class="collapsible">FLEET REPORT</button>
 		<div class="content">
   			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 		</div>
