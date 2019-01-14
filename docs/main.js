@@ -45,13 +45,25 @@ for (i = 0; i < coll.length; i++) {
     }
   });
 }
-
 function onInputMultiSliderPct(ss){
 	  var cval = parseFloat(ss.value)
-	  if(ss.ktotal + cval > 10000){
+	  if(ss.ktotal + cval >= 10000){
 	    ss.value = 10000 - ss.ktotal
+		for(j = 0; j < 3; j++){
+		  if(ss.othrArray[j].lockbox.checked == false){
+		    ss.othrArray[j].value = 0
+		  }
+		  ss.othrArray[j].sdisplay.innerHTML = ss.othrArray[j].value / 100
+		}
 	  } else if(ss.ktotal + cval < 10000 && ss.stotal == 0) {
 	    ss.value = 10000 - ss.ktotal
+		for(j = 0; j < 3; j++){
+		  if(ss.othrArray[j].lockbox.checked == false){
+		    ss.othrArray[j].value = 1
+		  }
+		  ss.othrArray[j].sdisplay.innerHTML = ss.othrArray[j].value / 100
+		}
+		onDownMultiSliderPct(ss)
 	  } else {
 	    var othrVal = 10000 - ss.ktotal - cval
         for(j = 0; j < 3; j++){
