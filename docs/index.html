@@ -288,6 +288,28 @@ h1, h2 , h3, h4, h5, h6, p {
   transform: rotate(45deg);
 }
 
+
+
+input[type=numEntry], select {
+  width: 50px;
+  padding: 3px 3px;
+  margin: 2px 0;
+  display: inline;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=unitEntry], select {
+  width: 30px;
+  padding: 3px 3px;
+  margin: 2px 0;
+  display: inline;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
 </style>
 
 
@@ -474,6 +496,28 @@ CONSOLE:<br>
             <button class = "button2" id ="button_wfHabitF" > > </button>
             <button class = "button2" id ="button_wfHabitFF" > >> </button>
 			<h5>OmniWorlds: <span id="wfSliderDisplayPct1"></span></h5>
+			<input type="numEntry" id="wfBuildRateNum_Omni" placeholder="0.0">
+			<!--<input type="unitEntry" id="wfBuildUnits_Omni" list = "unitList_S">-->
+				<datalist id="unitList_S">
+				  <option>YYS</option>
+				  <option>ZYS</option>
+				  <option>EYS</option>
+				  <option>PYS</option>
+				  <option>TYS</option>
+				  <option>GYS</option>
+				  <option>MYS</option>
+				  <option>kYS</option>
+				  <option>YS</option>
+				  <option>ZS</option>
+				  <option>ES</option>
+				  <option>PS</option>
+				  <option>TS</option>
+				  <option>GS</option>
+				  <option>MS</option>
+				  <option>kS</option>
+				  <option>kS</option>
+				</datalist>
+
             <button class = "button2" id ="button_wfOmniBB" > << </button>
             <button class = "button2" id ="button_wfOmniB" > < </button>
             <button class = "button2" id ="button_wfOmniF" > > </button>
