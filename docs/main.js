@@ -136,3 +136,72 @@ for(i = 0; i < 4; i++){
 	}
 }
 
+var eng_slider_NAMES = ["engSliderPct1","engSliderPct2","engSliderPct3","engSliderPct4"]
+var eng_check_NAMES = ["engSliderCheck1","engSliderCheck2","engSliderCheck3","engSliderCheck4"]
+var eng_display_NAMES = ["engSliderDisplayPct1","engSliderDisplayPct2","engSliderDisplayPct3","engSliderDisplayPct4"]
+var eng_check_elem = []
+var eng_display_elem = []
+var eng_slider_elem = []
+for(i = 0; i < 4; i++){
+     eng_slider_elem[i] = document.getElementById(eng_slider_NAMES[i]);
+     eng_check_elem[i] = document.getElementById(eng_check_NAMES[i]);
+     eng_display_elem[i] = document.getElementById(eng_display_NAMES[i]);
+}
+
+for(i = 0; i < 4; i++){
+    var ss = eng_slider_elem[i];
+    ss.sdisplay = eng_display_elem[i]
+    ss.othrArray = eng_slider_elem.slice()
+    ss.othrArray.splice(i,1)
+    ss.lockbox = eng_check_elem[i]
+    ss.ssf = []
+    ss.stotal = 0
+	ss.onmousedown = function() {
+	  onDownMultiSliderPct(this)
+	}
+	ss.onmouseup = function() {
+	  output.innerHTML = "UP"
+	}
+	ss.oninput = function() {
+      onInputMultiSliderPct(this)
+	}
+	ss.onchange = function() {
+      onInputMultiSliderPct(this)
+	}
+}
+
+
+var psy_slider_NAMES = ["psySliderPct1","psySliderPct2","psySliderPct3","psySliderPct4"]
+var psy_check_NAMES = ["psySliderCheck1","psySliderCheck2","psySliderCheck3","psySliderCheck4"]
+var psy_display_NAMES = ["psySliderDisplayPct1","psySliderDisplayPct2","psySliderDisplayPct3","psySliderDisplayPct4"]
+var psy_check_elem = []
+var psy_display_elem = []
+var psy_slider_elem = []
+for(i = 0; i < 4; i++){
+     psy_slider_elem[i] = document.getElementById(psy_slider_NAMES[i]);
+     psy_check_elem[i] = document.getElementById(psy_check_NAMES[i]);
+     psy_display_elem[i] = document.getElementById(psy_display_NAMES[i]);
+}
+
+for(i = 0; i < 4; i++){
+    var ss = psy_slider_elem[i];
+    ss.sdisplay = psy_display_elem[i]
+    ss.othrArray = psy_slider_elem.slice()
+    ss.othrArray.splice(i,1)
+    ss.lockbox = psy_check_elem[i]
+    ss.ssf = []
+    ss.stotal = 0
+	ss.onmousedown = function() {
+	  onDownMultiSliderPct(this)
+	}
+	ss.onmouseup = function() {
+	  output.innerHTML = "UP"
+	}
+	ss.oninput = function() {
+      onInputMultiSliderPct(this)
+	}
+	ss.onchange = function() {
+      onInputMultiSliderPct(this)
+	}
+}
+
