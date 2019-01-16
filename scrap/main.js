@@ -99,55 +99,6 @@ function onDownMultiSliderPct(ss){
 var output = document.getElementById("bioSliderPctVal");
 output.innerHTML = 10;
 
-
-var SCIENCE_FIELDS = ["bio","eng","psy"]
-var SCIENCE_SUBFIELDCT = [3,3,3]
-
-for(sfi = 0; sfi < SCIENCE_FIELDS.length; sfi++){
-   var slider_NAMES = [];
-   
-}
-
-var eng_slider_NAMES = ["engSliderPct1","engSliderPct2","engSliderPct3","engSliderPct4"]
-var eng_check_NAMES = ["engSliderCheck1","engSliderCheck2","engSliderCheck3","engSliderCheck4"]
-var eng_display_NAMES = ["engSliderDisplayPct1","engSliderDisplayPct2","engSliderDisplayPct3","engSliderDisplayPct4"]
-var eng_check_elem = []
-var eng_display_elem = []
-var eng_slider_elem = []
-for(i = 0; i < 4; i++){
-     eng_slider_elem[i] = document.getElementById(eng_slider_NAMES[i]);
-     eng_check_elem[i] = document.getElementById(eng_check_NAMES[i]);
-     eng_display_elem[i] = document.getElementById(eng_display_NAMES[i]);
-}
-
-for(i = 0; i < 4; i++){
-    var ss = eng_slider_elem[i];
-    ss.sdisplay = eng_display_elem[i]
-    ss.othrArray = eng_slider_elem.slice()
-    ss.othrArray.splice(i,1)
-    ss.lockbox = eng_check_elem[i]
-    ss.ssf = []
-    ss.stotal = 0
-	ss.onmousedown = function() {
-	  onDownMultiSliderPct(this)
-	}
-	ss.onmouseup = function() {
-	  output.innerHTML = "UP"
-	}
-	ss.oninput = function() {
-      onInputMultiSliderPct(this)
-	}
-	ss.onchange = function() {
-      onInputMultiSliderPct(this)
-	}
-}
-
-
-
-
-
-
-
 var s1 = document.getElementById("bioSliderPct1");
 var s2 = document.getElementById("bioSliderPct2");
 var s3 = document.getElementById("bioSliderPct3");
@@ -174,9 +125,6 @@ for(i = 0; i < 4; i++){
 	ss.onmousedown = function() {
 	  onDownMultiSliderPct(this)
 	}
-	ss.ontouchstart = function() {
-	  onDownMultiSliderPct(this)
-	}
 	ss.onmouseup = function() {
 	  output.innerHTML = "UP"
 	}
@@ -186,7 +134,6 @@ for(i = 0; i < 4; i++){
 	ss.onchange = function() {
       onInputMultiSliderPct(this)
 	}
-	
 }
 
 var eng_slider_NAMES = ["engSliderPct1","engSliderPct2","engSliderPct3","engSliderPct4"]
