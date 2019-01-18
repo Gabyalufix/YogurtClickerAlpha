@@ -14,6 +14,9 @@ CRAZY_CHARS:"ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*|+abcdefghijklmnopqrstuvwxyz",
 
 CRAZY_COLORS:["#4286f4","#47d84c","#a1a33c","#a23b3b","#891313","#ff0000","#ff00cb","#6e00ff","#ffcc00","#ff7b00"],
 
+CRAZY_RATE:[0,0.0003,0.0003,0.0003,0.0003,0.0004,0.0004,0.0006,0.0007,0.002],
+CRAZY_REVRATE:[0.001,0.002,0.003,0.003,0.003,0.003,0.005,0.005,0.005,0.005],
+
 CRAZY_FLIPRATE:[0,0.01,0.02,0.05,0.1,0.11,0.12,0.15,0.15,0.15],
 CRAZY_WORD_FLIPRATE:[0,0.001,0.002,0.005,0.01,0.011,0.012,0.015,0.02,0.03],
 CRAZY_WORD_COLORRATE:[0,0.01,0.02,0.05,0.1,0.11,0.12,0.15,0.2,0.3],
@@ -70,9 +73,14 @@ function CRAZY_randomWord(){
 function SLOWTICK_makeCrazy(){
     var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
     var clvl = STATS["CRAZY_LEVEL"]
+    
+    
+    
     for(var tti=0;tti < itsSet.length; tti++){
+        var ISCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_RATE"][clvl]
+        var UNCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_REVRATE"][clvl]
         var tt = itsSet[tti];
-        if( (!tt.CRAZY_FLIP) && Math.random() < STATICVAR_HOLDER["CRAZY_FLIPRATE"][clvl]){
+        if( ISCRAZY && (!tt.CRAZY_FLIP) && Math.random() < STATICVAR_HOLDER["CRAZY_FLIPRATE"][clvl]){
             tt.CRAZY_FLIP = true;
         } else if( (tt.CRAZY_FLIP) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_FLIPRATE"][clvl]){
             tt.CRAZY_FLIP = false;
@@ -80,26 +88,26 @@ function SLOWTICK_makeCrazy(){
         var words = tt.CURRENT_PLAINTEXT.split(" ")
         var out = ""
         for(var ww = 0; ww < tt.wordCt; ww++){
-           if( (!tt.wordFlip[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_FLIPRATE"][clvl]){
+           if( ISCRAZY && (!tt.wordFlip[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_FLIPRATE"][clvl]){
                tt.wordFlip[ww] = true;
-           } else if( (tt.wordFlip[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_FLIPRATE"][clvl]){
+           } else if( UNCRAZY && (tt.wordFlip[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_FLIPRATE"][clvl]){
                tt.wordFlip[ww] = false;
            }
-           if( (!tt.wordColor[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_COLORRATE"][clvl]){
+           if( ISCRAZY && (!tt.wordColor[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_COLORRATE"][clvl]){
                tt.wordColor[ww] = CRAZY_randomColor();
-           } else if( (tt.wordColor[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_COLORRATE"][clvl]){
+           } else if( UNCRAZY && (tt.wordColor[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_COLORRATE"][clvl]){
                tt.wordColor[ww] = "";
            }
-           if( (tt.wordSwap[ww] == "") && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_SWAPRATE"][clvl]){
+           if( ISCRAZY && (tt.wordSwap[ww] == "") && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_SWAPRATE"][clvl]){
                tt.wordSwap[ww] = CRAZY_randomWord()
-           } else if( (tt.wordSwap[ww] != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_SWAPRATE"][clvl]){
+           } else if( UNCRAZY && (tt.wordSwap[ww] != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_SWAPRATE"][clvl]){
                tt.wordSwap[ww] = "";
            }
         }
         for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
-           if( (tt.charSwap[cc] == "") && Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_SWAPRATE"][clvl]){
+           if( ISCRAZY && (tt.charSwap[cc] == "") && Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_SWAPRATE"][clvl]){
                tt.charSwap[ww] = CRAZY_randomChar()
-           } else if( (tt.charSwap[cc] != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CHAR_SWAPRATE"][clvl]){
+           } else if( UNCRAZY && (tt.charSwap[cc] != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CHAR_SWAPRATE"][clvl]){
                tt.charSwap[ww] = "";
            }
         }

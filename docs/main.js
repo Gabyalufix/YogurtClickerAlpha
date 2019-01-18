@@ -368,6 +368,7 @@ window.setInterval(function(){
       secTimer = 0;
       calculateSlowTick();
     }
+    SLOWTICK_makeCrazy();
 
 },10);
 
@@ -376,7 +377,6 @@ varNumTicksSoFar = 0
 function calculateSlowTick(){
     varNumTicksSoFar = varNumTicksSoFar + 1
     printlnToAiConsole("" + varNumTicksSoFar+" secTimer = "+secTimer)
-    SLOWTICK_makeCrazy();
 
 }
 //SETTINGS["bio"+"_FRACTION"]
