@@ -14,8 +14,10 @@ CRAZY_CHARS:"ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*|+abcdefghijklmnopqrstuvwxyz",
 
 CRAZY_COLORS:["#4286f4","#47d84c","#a1a33c","#a23b3b","#891313","#ff0000","#ff00cb","#6e00ff","#ffcc00","#ff7b00"],
 
-CRAZY_RATE:[0,0.0003,0.0003,0.0003,0.0003,0.0004,0.0004,0.0006,0.0007,0.002],
-CRAZY_REVRATE:[0.001,0.002,0.003,0.003,0.003,0.003,0.005,0.005,0.005,0.005],
+CRAZY_RATE:   [0,    0.0003,0.0003,0.0003,0.0003,0.0004,0.0004,0.0006,0.0007,0.02],
+CRAZY_REVRATE:[0.001,0.0004,0.0004,0.0004,0.0004,0.0005,0.0005,0.0007,0.0008,0.00005],
+
+
 
 CRAZY_FLIPRATE:[0,0.01,0.02,0.05,0.1,0.11,0.12,0.15,0.15,0.15],
 CRAZY_WORD_FLIPRATE:[0,0.001,0.002,0.005,0.01,0.011,0.012,0.015,0.02,0.03],
@@ -88,24 +90,24 @@ function SLOWTICK_makeCrazy(){
         var words = tt.CURRENT_PLAINTEXT.split(" ")
         var out = ""
         for(var ww = 0; ww < tt.wordCt; ww++){
-           if( ISCRAZY && (!tt.wordFlip[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_FLIPRATE"][clvl]){
-               tt.wordFlip[ww] = true;
+           if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_FLIPRATE"][clvl]){
+               tt.wordFlip[ww] = !tt.wordFlip[ww];
            } else if( UNCRAZY && (tt.wordFlip[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_FLIPRATE"][clvl]){
                tt.wordFlip[ww] = false;
            }
-           if( ISCRAZY && (!tt.wordColor[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_COLORRATE"][clvl]){
+           if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_COLORRATE"][clvl]){
                tt.wordColor[ww] = CRAZY_randomColor();
            } else if( UNCRAZY && (tt.wordColor[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_COLORRATE"][clvl]){
                tt.wordColor[ww] = "";
            }
-           if( ISCRAZY && (tt.wordSwap[ww] == "") && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_SWAPRATE"][clvl]){
+           if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_SWAPRATE"][clvl]){
                tt.wordSwap[ww] = CRAZY_randomWord()
            } else if( UNCRAZY && (tt.wordSwap[ww] != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_SWAPRATE"][clvl]){
                tt.wordSwap[ww] = "";
            }
         }
         for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
-           if( ISCRAZY && (tt.charSwap[cc] == "") && Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_SWAPRATE"][clvl]){
+           if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_SWAPRATE"][clvl]){
                tt.charSwap[ww] = CRAZY_randomChar()
            } else if( UNCRAZY && (tt.charSwap[cc] != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CHAR_SWAPRATE"][clvl]){
                tt.charSwap[ww] = "";
@@ -149,6 +151,7 @@ function getCrazyHTML(tt){
         }
     }
     var currWords = out.split(" ")
+    //console.log(out)
     var out = ""
     for(var ww = 0; ww < tt.wordCt; ww++){
         var wout = currWords[ww]
