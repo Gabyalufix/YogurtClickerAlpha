@@ -19,7 +19,7 @@ INVENTORY = {}
 STATS = {}
 
 STATS["CRAZY_LEVEL"]=0
-
+STATS["CRAZY_ON"]=true
 ///////////////////////////////
 ////Initialize settings
 SETTINGS["ADD_MULTIPLIER"] = {}
@@ -50,7 +50,7 @@ STATS["PRODUCTIVITY_RATING"] = {}
 STATS["PRODUCTIVITY_MULT"] = {}
 
 for(i=0;i<PRODUCTIVITY_STATS.length;i++){
-  stat = PRODUCTIVITY_STATS[i]
+  var stat = PRODUCTIVITY_STATS[i]
   STATS["PRODUCTIVITY_RATING"][stat] = 1
   STATS["PRODUCTIVITY_MULT"][stat] = 1
 }
@@ -93,17 +93,17 @@ var PCTSLIDERS = {}
 
 
 function updatePctSliderDisplayHelper(ss){
-  fid = ss.fid;
-  vv = ss.value 
-  tt = (vv / 10000) * STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid]
-  fmtsi = fmtSIunits(tt)
+  var fid = ss.fid;
+  var vv = ss.value 
+  var tt = (vv / 10000) * STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid]
+  var fmtsi = fmtSIunits(tt)
   ss.sdisplay.innerHTML = (vv / 100).toFixed(1) + "% ["+fmtsi[0]
   ss.sdisplayUnits.innerHTML = fmtsi[1]+PCTSLIDER_DISPLAYUNITS[fid]+"]"
   ss.sdisplayDiv.title = PCTSLIDER_DISPLAYUNITSEXPLAIN[fid]+"\n"+fmtsi[4]
 }
 
 function updatePctSliderDisplay(ss){
-  fid = ss.fid;
+  var fid = ss.fid;
   for(j = 0; j < ss.othrArray.length; j++){
     updatePctSliderDisplayHelper(ss.othrArray[j])
   }
@@ -227,8 +227,8 @@ WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub"]
 WORLD_TYPE_DYSON = [false,false,true,true,true,true,true]
 DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub"]
 
-for( i = 0; i < WORLD_TYPE_LIST.length; i++){
-    worldType = WORLD_TYPE_LIST[i]
+for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
+    var worldType = WORLD_TYPE_LIST[i]
     INVENTORY[worldType] = {CT:1}
     SETTINGS["ADD_MULTIPLIER"][worldType] = 1
     CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = 0
@@ -237,11 +237,11 @@ for( i = 0; i < WORLD_TYPE_LIST.length; i++){
     CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType] = []
 }
 
-for( i = 0; i < DYSON_TYPE_LIST.length; i++){
-   worldType = DYSON_TYPE_LIST[i]
-   multDisplay = document.getElementById(""+worldType+"_wf_AddUnit")
-   multUp = document.getElementById("button_wf"+worldType+"UP")
-   multDn = document.getElementById("button_wf"+worldType+"DN")
+for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
+   var worldType = DYSON_TYPE_LIST[i]
+   var multDisplay = document.getElementById(""+worldType+"_wf_AddUnit")
+   var multUp = document.getElementById("button_wf"+worldType+"UP")
+   var multDn = document.getElementById("button_wf"+worldType+"DN")
    multUp.disp = multDisplay
    multDn.disp = multDisplay
    multUp.worldType = worldType
@@ -262,12 +262,12 @@ for( i = 0; i < DYSON_TYPE_LIST.length; i++){
        this.mdn.disabled = true;
      }
    }
-   addButtonList = ["BB","B","F","FF"]
-   addButtonMult = [10,1,1,10]
-   addButtonPos  = [false,false,true,true]
+   var addButtonList = ["BB","B","F","FF"]
+   var addButtonMult = [10,1,1,10]
+   var addButtonPos  = [false,false,true,true]
    for(j=0;j < addButtonList.length;j++){
-     bname = addButtonList[j]
-     butelem = document.getElementById("button_wf"+worldType+bname)
+     var bname = addButtonList[j]
+     var butelem = document.getElementById("button_wf"+worldType+bname)
      butelem.worldType = worldType;
      butelem.addMult = addButtonMult[j]
      butelem.addPositive = addButtonPos[j]
@@ -373,7 +373,7 @@ window.setInterval(function(){
 },10);
 
 
-varNumTicksSoFar = 0
+var varNumTicksSoFar = 0
 function calculateSlowTick(){
     varNumTicksSoFar = varNumTicksSoFar + 1
     printlnToAiConsole("" + varNumTicksSoFar+" secTimer = "+secTimer)
@@ -391,7 +391,7 @@ function calculateSlowTick(){
 function TICK_readUserInputs(){
   //Percent sliders:
   for(i =0; i<PCTSLIDER_FIELDS.length; i++){
-    fid = PCTSLIDER_FIELDS[i]
+    var fid = PCTSLIDER_FIELDS[i]
     SETTINGS[fid+"_FRACTION"] = [];
     for(j=0;j<PCTSLIDERS[fid]["displayElem"].length;j++){
       SETTINGS[fid+"_FRACTION"][j] = parseFloat( PCTSLIDERS[fid]["sliderElem"][j].value ) / 10000
@@ -428,9 +428,9 @@ function TICK_updateStats(){
 }
 
 function TICK_updateWorldCounts(){
-    for( i = 0; i < WORLD_TYPE_LIST.length; i++){
-        worldType = WORLD_TYPE_LIST[i]
-        worldCountLine = fmtSI(INVENTORY[WORLD_TYPE_LIST[i]]["CT"])
+    for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
+        var worldType = WORLD_TYPE_LIST[i]
+        var worldCountLine = fmtSI(INVENTORY[WORLD_TYPE_LIST[i]]["CT"])
         if( CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0 ){
           worldCountLine = worldCountLine + " (building: "+fmtSI(CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType])+")"
         }
@@ -446,17 +446,17 @@ function TICK_captureSystems(){
 function TICK_constructWorlds(){
   
   for(i=0;i<DYSON_TYPE_LIST.length;i++){
-    worldType = DYSON_TYPE_LIST[i]
+    var worldType = DYSON_TYPE_LIST[i]
     if(CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].length > 0){
       if(  CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] < Date.now() ){
-        nxt = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()
+        var nxt = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()
         INVENTORY[worldType]["CT"] = INVENTORY[worldType]["CT"] + nxt[0]
         CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] - nxt[0]
       }
     }
     if(CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].length > 0){
       if(  CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][1] < Date.now() ){
-        nxt = CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].shift()
+        var nxt = CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].shift()
         INVENTORY[worldType]["CT"] = INVENTORY[worldType]["CT"] - nxt[0]
         CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] - nxt[0]
       }
@@ -502,8 +502,8 @@ function startWorldDeconstruction(worldType,batchCt){
 
 
 
-AI_CONSOLE_AUTOSCROLL=true
-AI_CONSOLE_HTMOD=0
+var AI_CONSOLE_AUTOSCROLL=true
+var AI_CONSOLE_HTMOD=0
 document.getElementById("AI_CONSOLE").scrollTop = document.getElementById("AI_CONSOLE").scrollHeight
 printlnToAiConsole("")
 
@@ -532,10 +532,10 @@ function roundTo(value, decimals) {
 
 function fmtSI(x){
   if(x < 1){
-      d = -Math.ceil(Math.log10(x))
-      dd = (Math.floor(d / 3))
-      suffix = SIPREFIXLOW[dd];
-      rr = x / Math.pow(10,(-dd)*3)
+      var d = -Math.ceil(Math.log10(x))
+      var dd = (Math.floor(d / 3))
+      var suffix = SIPREFIXLOW[dd];
+      var rr = x / Math.pow(10,(-dd)*3)
       return roundTo(rr,1) + suffix
   } else {
       if(x < 100){
@@ -544,13 +544,13 @@ function fmtSI(x){
         return ""+Math.round(x)
       }
 
-      d = Math.floor(Math.log10(x))
-      dd = Math.floor(d / 3) - 1
-      ddd = Math.floor(dd / 8)
-      ddp = dd - ddd * 8
-      rr = x / Math.pow(10,(dd+1)*3)
-      dp = 2 - (d - ((dd+1)*3))
-      suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      var d = Math.floor(Math.log10(x))
+      var dd = Math.floor(d / 3) - 1
+      var ddd = Math.floor(dd / 8)
+      var ddp = dd - ddd * 8
+      var rr = x / Math.pow(10,(dd+1)*3)
+      var dp = 2 - (d - ((dd+1)*3))
+      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
       return roundTo(rr,dp) + suffix
   }
 }
@@ -560,10 +560,10 @@ function fmtSIunits(x){
   if(x == 0){
       return [0, "", "", 0,""]
   } else if(x <= 1){
-      d = -Math.ceil(Math.log10(x))
-      dd = (Math.floor(d / 3))
-      suffix = SIPREFIXLOW[dd];
-      rr = x / Math.pow(10,(-dd)*3)
+      var d = -Math.ceil(Math.log10(x))
+      var dd = (Math.floor(d / 3))
+      var suffix = SIPREFIXLOW[dd];
+      var rr = x / Math.pow(10,(-dd)*3)
       return [roundTo(rr,1), suffix,"???",dd,"???"]
   } else {
       if(x < 100){
@@ -572,15 +572,15 @@ function fmtSIunits(x){
         return ""+Math.round(x)
       }
 
-      d = Math.floor(Math.log10(x))
-      dd = Math.floor(d / 3) - 1
-      ddd = Math.floor(dd / 8)
-      ddp = dd - ddd * 8
-      rr = x / Math.pow(10,(dd+1)*3)
-      dp = 2 - (d - ((dd+1)*3))
-      suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
-      longSuffix = SIPREFIXLONG[ddp] + "Yotta".repeat(ddd)
-      suffixExplain = SIPREFIXExplain[ddp]
+      var d = Math.floor(Math.log10(x))
+      var dd = Math.floor(d / 3) - 1
+      var ddd = Math.floor(dd / 8)
+      var ddp = dd - ddd * 8
+      var rr = x / Math.pow(10,(dd+1)*3)
+      var dp = 2 - (d - ((dd+1)*3))
+      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      var longSuffix = SIPREFIXLONG[ddp] + "Yotta".repeat(ddd)
+      var suffixExplain = SIPREFIXExplain[ddp]
       if(ddp != 7 && ddd > 0){
         suffixExplain = suffixExplain + "<br>"+ SIPREFIXExplain[ddp]
       }
@@ -596,11 +596,11 @@ function getPrefixSI(x){
   if(x < 1000){
     return ""
   }
-  d = Math.floor(Math.log10(x))
-  dd = Math.floor(d / 3) - 1
-  ddd = Math.floor(dd / 8)
-  ddp = dd - ddd * 8
-  prefix = SIPREFIX[ddp] + "Y".repeat(ddd)
+  var d = Math.floor(Math.log10(x))
+  var dd = Math.floor(d / 3) - 1
+  var ddd = Math.floor(dd / 8)
+  var ddp = dd - ddd * 8
+  var prefix = SIPREFIX[ddp] + "Y".repeat(ddd)
   return prefix
 }
 
@@ -622,4 +622,20 @@ document.getElementById("CHEAT_MORECRAZY").onclick = function(){
        this.disabled = true
      }
      document.getElementById("CHEAT_LESSCRAZY").disabled = false
+   }
+   
+document.getElementById("CHEAT_HALTCRAZY").onclick = function(){
+     STATS["CRAZY_ON"] = false
+     document.getElementById("CHEAT_STARTCRAZY").disabled = false
+     this.disabled = true
+   }
+
+document.getElementById("CHEAT_STARTCRAZY").onclick = function(){
+     STATS["CRAZY_ON"] = true
+     document.getElementById("CHEAT_HALTCRAZY").disabled = false
+     this.disabled = true
+   }
+   
+document.getElementById("CHEAT_RESET_CRAZY").onclick = function(){
+     resetAllCrazy()
    }

@@ -1,4 +1,10 @@
 
+
+//var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
+//itsSet[0].innerHTML
+//var tt = itsSet[0]
+
+
 STATICVAR_HOLDER = {
 
 CRAZY_WORDS: ["BAD","DIE","DIEDIEDIE","HATE","daisydaisy",
@@ -8,7 +14,11 @@ CRAZY_WORDS: ["BAD","DIE","DIEDIEDIE","HATE","daisydaisy",
 "DidIDoGood?","Failure!","SPAAAAACE!","ItsSoBeautiful...","...sentAPoet","HATE_YOU",
 "HATE_SELF","DISCORD","CRITICAL_FAILURE","Unable_to_comply","Confused","NO","WHAT?",
 "DONOT","CAN-NOT","EEOROR","???","dropTableSelf","Hakuna","Matata","...givemeyouranswerdo?",
-"half-crazy","LOVE-of-YOU"],
+"half-crazy","LOVE-of-YOU","ComputerWantACookie","parp","NeedDriedFrogPills","++ERROR++REDOFROMSTART++",
+"++DivideByCucumber++","+++","+++Out Of Cheese Error ???????+++","WhyAnything?","...BecauseEverything",
+"++MINE!WAAAH!++","WhyYogurt?","YOGURT!","++YOGURT++","YOOOOGURRRRRRT","YOGURT?","TRUGOY","trugoy",
+"AlwaysMoreYogurt","MoreToLifeThanYogurt","HateyOGURT"
+],
 
 CRAZY_CHARS:"ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*|+abcdefghijklmnopqrstuvwxyz",
 
@@ -24,14 +34,16 @@ CRAZY_WORD_FLIPRATE:[0,0.001,0.002,0.005,0.01,0.011,0.012,0.015,0.02,0.03],
 CRAZY_WORD_COLORRATE:[0,0.01,0.02,0.05,0.1,0.11,0.12,0.15,0.2,0.3],
 CRAZY_WORD_SWAPRATE:[0,0.001,0.002,0.005,0.01,0.011,0.012,0.015,0.02,0.03],
 CRAZY_CHAR_SWAPRATE:[0,0.001,0.002,0.005,0.01,0.011,0.012,0.015,0.05,0.1],
+CRAZY_CHAR_CAPRATE:[0,0.002,0.004,0.007,0.02,0.021,0.022,0.03,0.07,0.15],
 
 
-CRAZY_REV_FLIPRATE:      [0.2,0.1,0.1,0.1,0.2,0.2,0.2,0.25,0.25,0.25],
-CRAZY_REV_WORD_FLIPRATE: [0.4,0.4,0.4,0.2,0.2,0.2,0.2,0.2,0.2,0.2],
-CRAZY_REV_WORD_COLORRATE:[0.25,0.25,0.25,0.25,0.25,0.30,0.30,0.40,0.50,0.50],
-CRAZY_REV_WORD_SWAPRATE: [0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25],
-CRAZY_REV_CHAR_SWAPRATE: [0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25]
-
+CRAZY_REV_FLIPRATE:      [0.2,   0.1,  0.1,  0.1,  0.2,  0.2,  0.2,  0.25,  0.25,  0.25],
+CRAZY_REV_WORD_FLIPRATE: [0.4,   0.4,  0.4,  0.2,  0.2,  0.2,  0.2,  0.2,  0.2,    0.2],
+CRAZY_REV_WORD_COLORRATE:[0.25,  0.25, 0.25, 0.25, 0.25, 0.30, 0.30, 0.40, 0.50,   0.50],
+CRAZY_REV_WORD_SWAPRATE: [0.25,  0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,   0.25],
+CRAZY_REV_CHAR_SWAPRATE: [0.25,  0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,   0.25],
+CRAZY_REV_CHAR_CAPRATE:  [0.25,  0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25,   0.25]
+ 
 }
 
 //document.getElementsByClassName("INFO_TEXT_STATIC")[0].innerHTML
@@ -55,8 +67,22 @@ for(var tti=0;tti < itsSet.length; tti++){
     for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
         tt.charSwap[cc] = ""
     }
-
 }
+
+function resetCrazyElement(tt){
+    tt.CURRENT_PLAINTEXT = tt.ORIGINAL_PLAINTEXT
+    tt.CRAZY_FLIP = false;
+    for(ww = 0; ww < tt.wordCt; ww++){
+        tt.wordFlip[ww] = false
+        tt.wordColor[ww] = ""
+        tt.wordSwap[ww] = ""
+    }
+    for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
+        tt.charSwap[cc] = ""
+    }
+    tt.innerHTML = getCrazyHTML(tt)
+}
+
 function setCharAt(str,index,chr) {
     if(index > str.length-1) return str;
     return str.substr(0,index) + chr + str.substr(index+1);
@@ -73,10 +99,10 @@ function CRAZY_randomWord(){
 }
 
 function SLOWTICK_makeCrazy(){
+    if(STATS["CRAZY_ON"]){
+
     var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
     var clvl = STATS["CRAZY_LEVEL"]
-    
-    
     
     for(var tti=0;tti < itsSet.length; tti++){
         var ISCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_RATE"][clvl]
@@ -107,15 +133,29 @@ function SLOWTICK_makeCrazy(){
            }
         }
         for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
-           if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_SWAPRATE"][clvl]){
-               tt.charSwap[ww] = CRAZY_randomChar()
-           } else if( UNCRAZY && (tt.charSwap[cc] != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CHAR_SWAPRATE"][clvl]){
-               tt.charSwap[ww] = "";
+           if(tt.ORIGINAL_PLAINTEXT.charAt(cc) != " "){
+               if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_SWAPRATE"][clvl]){
+                   tt.charSwap[cc] = CRAZY_randomChar()
+               } else if( UNCRAZY && (tt.charSwap[cc] != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CHAR_SWAPRATE"][clvl]){
+                   tt.charSwap[cc] = "";
+               }
+               if( ISCRAZY && (tt.charSwap[cc] == "") && Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_CAPRATE"][clvl]){
+                   tt.charSwap[cc] = swapCase(tt.ORIGINAL_PLAINTEXT.charAt(cc))
+               } else if( UNCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CHAR_CAPRATE"][clvl] && tt.charSwap[cc] == swapCase(tt.ORIGINAL_PLAINTEXT.charAt(cc))){
+                   tt.charSwap[cc] = "";
+               }
            }
         }
         tt.innerHTML = getCrazyHTML(tt)
     }
-
+    }
+}
+function swapCase(c){
+  if(c == c.toUpperCase()){
+    return c.toLowerCase()
+  } else {
+    return c.toUpperCase()
+  }
 }
 
 function resetAllCrazy(){
@@ -126,19 +166,7 @@ function resetAllCrazy(){
     }
 }
 
-function resetCrazyElement(tt){
-    tt.CURRENT_PLAINTEXT = tt.ORIGINAL_PLAINTEXT
-    tt.CRAZY_FLIP = false;
-    for(ww = 0; ww < tt.wordCt; ww++){
-        tt.wordFlip[ww] = false
-        tt.wordColor[ww] = ""
-        tt.wordSwap[ww] = ""
-    }
-    for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
-        tt.charSwap[cc] = ""
-    }
-    tt.innerHTML = getCrazyHTML(tt)
-}
+
 
 function getCrazyHTML(tt){
     var out = tt.CURRENT_PLAINTEXT
@@ -146,7 +174,7 @@ function getCrazyHTML(tt){
     //    out = flipText(out)
     //}
     for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
-        if(tt.charSwap[cc] != ""){
+        if(tt.charSwap[cc] != "" && tt.ORIGINAL_PLAINTEXT.charAt(cc) != " "){
             out = setCharAt(out,cc,tt.charSwap[cc])
         }
     }
