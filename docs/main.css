@@ -1,4 +1,15 @@
 
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   Default formatting
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
 h1, h2 , h3, h4, h5, h6, p {
   padding-top: 1px;
   padding-right: 1px;
@@ -9,6 +20,16 @@ h1, h2 , h3, h4, h5, h6, p {
   margin-top: 1px;
 
 }
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   COLLAPSE BOXES
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
 
 .collapsible {
   background-color: #0515ff;
@@ -70,6 +91,50 @@ h1, h2 , h3, h4, h5, h6, p {
   background-color: #9b9b9b;
 }
 
+
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   CHECK BOXES
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  height: 10000px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   SLIDER BARS
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
 .slidecontainer {
   width: 100%;
 }
@@ -103,97 +168,6 @@ h1, h2 , h3, h4, h5, h6, p {
   cursor: pointer;
 }
 
-.multiPctSliderBox{
-  width: 100%;
-}
-
-
-.button2 {
-   border: 1px solid #1a1a1a;
-   background: #666666;
-
-   background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
-   background: -webkit-linear-gradient(top, #ffffff, #888888);
-   background: -moz-linear-gradient(top, #ffffff, #888888);
-   background: -ms-linear-gradient(top, #ffffff, #888888);
-   background: -o-linear-gradient(top, #ffffff, #888888);
-   background-image: -ms-linear-gradient(top, #ffffff 0%, #888888 100%);
-
-   padding: 2px 4px;
-   -webkit-border-radius: 2px;
-   -moz-border-radius: 2px;
-   border-radius: 2px;
-   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   text-shadow: #cccccc 0 1px 0;
-   color: #000000;
-   font-size: 11px;
-   font-family: helvetica, serif;
-   text-decoration: none;
-   vertical-align: middle;
-   outline: none;
-   }
-
-.button2:hover {
-   border: 1px solid #898989;
-   text-shadow: #d4d4d4 0 1px 0;
-   background: #616161;
-
-   background: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#888888));
-   background: -webkit-linear-gradient(top, #f7f7f7, #888888);
-   background: -moz-linear-gradient(top, #f7f7f7, #888888);
-   background: -ms-linear-gradient(top, #f7f7f7, #888888);
-   background: -o-linear-gradient(top, #f7f7f7, #888888);
-   background-image: -ms-linear-gradient(top, #f7f7f7 0%, #888888 100%);
-
-   color: #000000;
-   }
-
-.button2:active {
-   text-shadow: #bfbfbf 0 1px 0;
-   border: 1px solid #2e2e2e;
-
-   background: #d9d9d9;
-   background: -webkit-gradient(linear, left top, left bottom, from(#595959), to(#616161));
-   background: -webkit-linear-gradient(top, #595959, #d9d9d9);
-   background: -moz-linear-gradient(top, #595959, #d9d9d9);
-   background: -ms-linear-gradient(top, #595959, #d9d9d9);
-   background: -o-linear-gradient(top, #595959, #d9d9d9);
-   background-image: -ms-linear-gradient(top, #595959 0%, #d9d9d9 100%);
-
-   color: #444444;
-   }
-
-.button2:disabled {
-   opacity: 0.6;
-   border: 1px solid #ffffff;
-}
-
-
-
-
-* {
-  box-sizing: border-box;
-}
-
-/* Create three equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 10px;
-  height: 10000px; /* Should be removed. Only for demonstration */
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-
-
 .multiPctSliderSuper {
   float: left;
   width: 100%;
@@ -223,6 +197,16 @@ h1, h2 , h3, h4, h5, h6, p {
   display: table;
   clear: both;
 }
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   CHECK BOXES
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
 
 .container {
   display: block;
@@ -294,6 +278,9 @@ h1, h2 , h3, h4, h5, h6, p {
   transform: rotate(45deg);
 }
 
+/*
+-----------------------------------   Fake lock checkbox
+*/
 
 .lockedcheckmark {
   position: absolute;
@@ -328,6 +315,80 @@ input[type=unitEntry], select {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   BUTTONS
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
+
+.button2 {
+   border: 1px solid #1a1a1a;
+   background: #666666;
+
+   background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
+   background: -webkit-linear-gradient(top, #ffffff, #888888);
+   background: -moz-linear-gradient(top, #ffffff, #888888);
+   background: -ms-linear-gradient(top, #ffffff, #888888);
+   background: -o-linear-gradient(top, #ffffff, #888888);
+   background-image: -ms-linear-gradient(top, #ffffff 0%, #888888 100%);
+
+   padding: 2px 4px;
+   -webkit-border-radius: 2px;
+   -moz-border-radius: 2px;
+   border-radius: 2px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #cccccc 0 1px 0;
+   color: #000000;
+   font-size: 11px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   outline: none;
+   }
+
+.button2:hover {
+   border: 1px solid #898989;
+   text-shadow: #d4d4d4 0 1px 0;
+   background: #616161;
+
+   background: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#888888));
+   background: -webkit-linear-gradient(top, #f7f7f7, #888888);
+   background: -moz-linear-gradient(top, #f7f7f7, #888888);
+   background: -ms-linear-gradient(top, #f7f7f7, #888888);
+   background: -o-linear-gradient(top, #f7f7f7, #888888);
+   background-image: -ms-linear-gradient(top, #f7f7f7 0%, #888888 100%);
+
+   color: #000000;
+   }
+
+.button2:active {
+   text-shadow: #bfbfbf 0 1px 0;
+   border: 1px solid #2e2e2e;
+
+   background: #d9d9d9;
+   background: -webkit-gradient(linear, left top, left bottom, from(#595959), to(#616161));
+   background: -webkit-linear-gradient(top, #595959, #d9d9d9);
+   background: -moz-linear-gradient(top, #595959, #d9d9d9);
+   background: -ms-linear-gradient(top, #595959, #d9d9d9);
+   background: -o-linear-gradient(top, #595959, #d9d9d9);
+   background-image: -ms-linear-gradient(top, #595959 0%, #d9d9d9 100%);
+
+   color: #444444;
+   }
+
+.button2:disabled {
+   opacity: 0.6;
+   border: 1px solid #ffffff;
 }
 
 
@@ -392,6 +453,15 @@ input[type=unitEntry], select {
    border: 1px solid #ffffff;
 }
 
+
+/*
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   PLANET CONSTRUCTION CONTROL PANEL
+===================================================================================================================
+===================================================================================================================
+*/
+
 .buildCtrlPanel {
   display: grid;
   grid-template-columns: 25px 25px 25px 25px 25px 50px auto;
@@ -419,6 +489,77 @@ input[type=unitEntry], select {
   clear: both;
   display: table;
 }
+
+/*
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   TOOLTIPS
+===================================================================================================================
+===================================================================================================================
+*/
+
+
+.tooltip {
+    display:inline-block;
+    position:relative;
+    border-bottom:1px dotted #666;
+    text-align:left;
+}
+
+.tooltip .right {
+    min-width:200px; 
+    top:50%;
+    left:100%;
+    margin-left:20px;
+    transform:translate(0, -25%);
+    padding:10px 20px;
+    color:#444444;
+    background-color:#EEEEEE;
+    font-weight:normal;
+    font-size:13px;
+    border-radius:8px;
+    position:absolute;
+    z-index:99999999;
+    box-sizing:border-box;
+    box-shadow:0 1px 8px rgba(0,0,0,0.5);
+    display:none;
+}
+
+.tooltip:hover .right {
+    display:block;
+}
+
+.tooltip .right i {
+    position:absolute;
+    top:25%;
+    right:100%;
+    margin-top:-12px;
+    width:12px;
+    height:24px;
+    overflow:hidden;
+}
+
+.tooltip .right i::after {
+    content:'';
+    position:absolute;
+    width:12px;
+    height:12px;
+    left:0;
+    top:50%;
+    transform:translate(50%,-50%) rotate(-45deg);
+    background-color:#EEEEEE;
+    box-shadow:0 1px 8px rgba(0,0,0,0.5);
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

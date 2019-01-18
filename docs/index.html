@@ -44,15 +44,16 @@
 		<div class="content">
 
 
-		  <p>&#x1f512; Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		  <p><span class="INFO_TEXT_STATIC">Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. I meant 'physically'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually?</span></p>
 
 			<button class="collapsibleTHIN">
-			   <h3>BIO:</h3>
+			   <h3><span class="INFO_TEXT_STATIC">BIO:</span></h3>
 			</button>
 
 			<div class="contentLV3">
+              Rate: <div class="valueDisplayDiv" id="bio_PRODUCTIVITY_DISPLAY_DIV"><span id="bio_PRODUCTIVITY_DISPLAY"></span><span id="bio_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
 
-			<h5>Basic Research: <span id="bioSliderDisplayPct1"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Basic Research:</span><div class="valueDisplayDiv" id="bioSliderDisplayPct1_DIV"><span id="bioSliderDisplayPct1"></span><span id="bioSliderDisplayPct1_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="bioSliderPct1" style="width:90%">
@@ -63,7 +64,7 @@
 					</label>
 				</div>
 
-			<h5>Biowarfare: <span id="bioSliderDisplayPct2"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Biowarfare:</span> <div class="valueDisplayDiv" id="bioSliderDisplayPct2_DIV"><span id="bioSliderDisplayPct2"></span><span id="bioSliderDisplayPct2_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="bioSliderPct2" style="width:90%">
@@ -74,7 +75,7 @@
 					</label>
 				</div>
 
-			<h5>Yogosynthesis: <span id="bioSliderDisplayPct3"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Yogosynthesis:</span> <div class="valueDisplayDiv" id="bioSliderDisplayPct3_DIV"><span id="bioSliderDisplayPct3"><span id="bioSliderDisplayPct3_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="bioSliderPct3" style="width:90%">
@@ -85,7 +86,7 @@
 					</label>
 				</div>
 
-			<h5>Bioengineering: <span id="bioSliderDisplayPct4"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Bioengineering:</span> <div class="valueDisplayDiv" id="bioSliderDisplayPct4_DIV"><span id="bioSliderDisplayPct4"></span><span id="bioSliderDisplayPct4_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="bioSliderPct4" style="width:90%">
@@ -96,7 +97,7 @@
 					</label>
 				</div>
 		</div>
-		<p> VALUE=<span id="bioSliderPctVal"></span> </p>
+		<p> VALUE=<div class="valueDisplayDiv" id="bioSliderPctVal_DIV"><span id="bioSliderPctVal"></span><span id="bioSliderPctVal_UNITS"></span></div> </p>
 
 
 <!--
@@ -105,12 +106,13 @@
 -->
 
 			<button class="collapsibleTHIN">
-			   <h3>ENGINEERING:</h3>
+			   <h3><span class="INFO_TEXT_STATIC">ENGINEERING:</span></h3>
 			</button>
 
 			<div class="contentLV3">
+              <span class="INFO_TEXT_STATIC">Rate:</span> <div class="valueDisplayDiv" id="eng_PRODUCTIVITY_DISPLAY_DIV"><span id="eng_PRODUCTIVITY_DISPLAY"></span><span id="eng_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
 
-			<h5>Basic Research: <span id="engSliderDisplayPct1"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Basic Research:</span> <div class="valueDisplayDiv" id="engSliderDisplayPct1_DIV"><span id="engSliderDisplayPct1"></span><span id="engSliderDisplayPct1_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="engSliderPct1" style="width:90%">
@@ -121,7 +123,7 @@
 					</label>
 				</div>
 
-			<h5>World Building: <span id="engSliderDisplayPct2"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">World Building:</span> <div class="valueDisplayDiv" id="engSliderDisplayPct2_DIV"><span id="engSliderDisplayPct2"></span><span id="engSliderDisplayPct2_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="engSliderPct2" style="width:90%">
@@ -132,7 +134,7 @@
 					</label>
 				</div>
 
-			<h5>Weapons & Warfare: <span id="engSliderDisplayPct3"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Weapons & Warfare:</span> <div class="valueDisplayDiv" id="engSliderDisplayPct3_DIV"><span id="engSliderDisplayPct3"></span><span id="engSliderDisplayPct3_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="engSliderPct3" style="width:90%">
@@ -143,7 +145,7 @@
 					</label>
 				</div>
 
-			<h5>Matter & Energy: <span id="engSliderDisplayPct4"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Matter & Energy:</span> <div class="valueDisplayDiv" id="engSliderDisplayPct4_DIV"><span id="engSliderDisplayPct4"></span><span id="engSliderDisplayPct4_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="engSliderPct4" style="width:90%">
@@ -154,7 +156,7 @@
 					</label>
 				</div>
 		</div>
-		<p> VALUE=<span id="bioSliderPctVal"></span> </p>
+		<p> VALUE=<div class="valueDisplayDiv" id="bioSliderPctVal_DIV"><span id="bioSliderPctVal"></span><span id="bioSliderPctVal_UNITS"></span></div> </p>
 
 
 <!--
@@ -163,14 +165,12 @@
 -->
 
 			<button class="collapsibleTHIN">
-			   <h3>Social Science:</h3>
+			   <h3><span class="INFO_TEXT_STATIC">Social Science:</span></h3>
 			</button>
-
 			<div class="contentLV3">
+              <span class="INFO_TEXT_STATIC">Rate:</span> <div class="valueDisplayDiv" id="psy_PRODUCTIVITY_DISPLAY_DIV"><span id="psy_PRODUCTIVITY_DISPLAY"></span><span id="psy_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
 
-
-
-			<h5>Basic Research: <span id="psySliderDisplayPct1"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Basic Research:</span> <div class="valueDisplayDiv" id="psySliderDisplayPct1_DIV"><span id="psySliderDisplayPct1"></span><span id="psySliderDisplayPct1_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="psySliderPct1" style="width:90%">
@@ -181,7 +181,7 @@
 					</label>
 				</div>
 
-			<h5>Cognition: <span id="psySliderDisplayPct2"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Cognition:</span> <div class="valueDisplayDiv" id="psySliderDisplayPct2_DIV"><span id="psySliderDisplayPct2"></span><span id="psySliderDisplayPct2_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="psySliderPct2" style="width:90%">
@@ -192,7 +192,7 @@
 					</label>
 				</div>
 
-			<h5>Manipulation: <span id="psySliderDisplayPct3"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Manipulation:</span> <div class="valueDisplayDiv" id="psySliderDisplayPct3_DIV"><span id="psySliderDisplayPct3"></span><span id="psySliderDisplayPct3_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="psySliderPct3" style="width:90%">
@@ -202,7 +202,7 @@
 					  <span class="checkmark"></span>
 					</label>
 				</div>
-			<h5>Strategy: <span id="psySliderDisplayPct4"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Strategy:</span> <div class="valueDisplayDiv" id="psySliderDisplayPct4_DIV"><span id="psySliderDisplayPct4"></span><span id="psySliderDisplayPct4_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="psySliderPct4" style="width:90%">
@@ -215,7 +215,7 @@
 
 
 
-			<h5>Empathy: <span id="psySliderDisplayPct5"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Empathy:</span> <div class="valueDisplayDiv" id="psySliderDisplayPct5_DIV"><span id="psySliderDisplayPct5"></span><span id="psySliderDisplayPct5_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="0" value="0" class="slider" id="psySliderPct4" style="width:90%">
@@ -224,7 +224,7 @@
 					  <span class="lockedcheckmark">&#x1f512;</span>
 					</label>
 				</div>
-			<h5>Ethics: <span id="psySliderDisplayPct6"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Ethics:</span> <div class="valueDisplayDiv" id="psySliderDisplayPct6_DIV"><span id="psySliderDisplayPct6"></span><span id="psySliderDisplayPct6_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="0" value="0" class="slider" id="psySliderPct5" style="width:90%">
@@ -235,7 +235,7 @@
 				</div>
 
 		</div>
-		<p> VALUE=<span id="psySliderPctVal"></span> </p>
+		<p> <span class="INFO_TEXT_STATIC">VALUE=</span><div class="valueDisplayDiv" id="psySliderPctVal_DIV"><span id="psySliderPctVal"></span><span id="psySliderPctVal_UNITS"></span></div> </p>
 
 
 </div>
@@ -244,9 +244,9 @@
 
 
 
-<button class="collapsible">RESEARCH PROJECTS</button>
+<button class="collapsible"><span class="INFO_TEXT_STATIC">RESEARCH PROJECTS</span></button>
 		<div class="content">
-  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  			<p><span class="INFO_TEXT_STATIC">Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. I meant 'physically'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually?</span></p>
 		</div>
 
 
@@ -255,13 +255,81 @@
 ------------------------------ THINKING ENGINE
 -->
 
-<button class="collapsible">THINKING ENGINE</button>
+<button class="collapsible"><span class="INFO_TEXT_STATIC">THINKING ENGINE</span></button>
 		<div class="content">
-		  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
-		<button class="collapsible">Open Section 1.2 </button>
+          <span class="INFO_TEXT_STATIC">Capacity: </span><div class="valueDisplayDiv" id="think_PRODUCTIVITY_DISPLAY_DIV"><span id="think_PRODUCTIVITY_DISPLAY"></span><span id="think_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+
+
+		<button class="collapsible">Processor Distribution </span></button>
 			<div class="contentLV2">
-		 	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+
+			<h5><span class="INFO_TEXT_STATIC">Deepthought: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct1_DIV"><span id="thinkSliderDisplayPct1"></span><span id="thinkSliderDisplayPct1_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="thinkSliderPct1" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "thinkSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Engineering Research: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct2_DIV"><span id="thinkSliderDisplayPct2"></span><span id="thinkSliderDisplayPct2_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="thinkSliderPct2" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "thinkSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Hacking: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct3_DIV"><span id="thinkSliderDisplayPct3"></span><span id="thinkSliderDisplayPct3_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="thinkSliderPct3" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "thinkSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<span class="INFO_TEXT_STATIC">UPKEEP:</span>
+			<h5><span class="INFO_TEXT_STATIC">Logistics: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct4_DIV"><span id="thinkSliderDisplayPct4"></span><span id="thinkSliderDisplayPct4_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="thinkSliderPct4" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "thinkSliderCheck4">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+			<h5><span class="INFO_TEXT_STATIC">Tactical Processing: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct5_DIV"><span id="thinkSliderDisplayPct5"></span><span id="thinkSliderDisplayPct5_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="thinkSliderPct5" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "thinkSliderCheck5">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+			<h5><span class="INFO_TEXT_STATIC">Soulswarm: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct6_DIV"><span id="thinkSliderDisplayPct6"></span><span id="thinkSliderDisplayPct6_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="thinkSliderPct6" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "thinkSliderCheck6">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
 			</div>
 
 		</div>
@@ -272,9 +340,49 @@
 ------------------------------ SOULSWARM
 -->
 
-<button class="collapsible">SOULSWARM</button>
+<button class="collapsible"><span class="INFO_TEXT_STATIC">SOULSWARM</span></button>
 	<div class="content">
- 		 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+        <span class="INFO_TEXT_STATIC">Capacity: </span><div class="valueDisplayDiv" id="soul_PRODUCTIVITY_DISPLAY_DIV"><span id="soul_PRODUCTIVITY_DISPLAY"></span><span id="soul_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+
+		<button class="collapsible"><span class="INFO_TEXT_STATIC">Task Distribution </span></button>
+			<div class="contentLV2">
+
+			<h5><span class="INFO_TEXT_STATIC">Social Science: </span><div class="valueDisplayDiv" id="soulSliderDisplayPct1_DIV"><span id="soulSliderDisplayPct1"></span><span id="soulSliderDisplayPct1_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="soulSliderPct1" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "soulSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Espionage: </span><div class="valueDisplayDiv" id="soulSliderDisplayPct2_DIV"><span id="soulSliderDisplayPct2"></span><span id="soulSliderDisplayPct2_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="soulSliderPct2" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "soulSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Combat Sim: </span><div class="valueDisplayDiv" id="soulSliderDisplayPct3_DIV"><span id="soulSliderDisplayPct3"></span><span id="soulSliderDisplayPct3_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="soulSliderPct3" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "soulSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			</div>
+
 	</div>
 
 </div>
@@ -315,20 +423,19 @@ CONSOLE:<br>
 =================================================
 ------------------------------ WORLDFORGE
 -->
-<h3> DYSON SPHERES </h3>
+<h3> <span class="INFO_TEXT_STATIC">DYSON SPHERES </span></h3>
 
-<button class="collapsible">WORLD FORGE:</button>
+<button class="collapsible"><span class="INFO_TEXT_STATIC">WORLD FORGE:</span></button>
 		<div class="content">
 
-			<h5>Falloworlds: <span id="Fallow_CT"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Falloworlds: </span><div class="valueDisplayDiv" id="Fallow_CT_DIV"><span id="Fallow_CT"></span><span id="Fallow_CT_UNITS"></span></div></h5>
 
+			<h5><span class="INFO_TEXT_STATIC">Inhabited Worlds: </span><div class="valueDisplayDiv" id="Pop_CT_DIV"><span id="Pop_CT"></span><span id="Pop_CT_UNITS"></span></div></h5>
 
-			<h5>Inhabited Worlds: <span id="Pop_CT"></span></h5>
-
-			<h5>OmniWorlds: <span id="Omni_CT"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">OmniWorlds: </span><div class="valueDisplayDiv" id="Omni_CT_DIV"><span id="Omni_CT"></span><span id="Omni_CT_UNITS"></span></div></h5>
 			   <div class="buildCtrlPanel">
 				<button class = "button3" id ="button_wfOmniUP" > &#8963; </button>
-			    <div class="buildInfoPanel1"><span id="Omni_wf_AddUnit"></span></div>
+			    <div class="buildInfoPanel1"><div class="valueDisplayDiv" id="Omni_wf_AddUnit_DIV"><span id="Omni_wf_AddUnit"></span><span id="Omni_wf_AddUnit_UNITS"></span></div></div>
 				<button class = "button2" id ="button_wfOmniBB" > -- </button>
 				<button class = "button2" id ="button_wfOmniB" > - </button>
 				<button class = "button2" id ="button_wfOmniF" > + </button>
@@ -336,10 +443,10 @@ CONSOLE:<br>
 			    <div class="buildInfoPanel2">BEEP BEEP BEEP</div>
 				<button class = "button3" id ="button_wfOmniDN" > &#8964; </button>
 			   </div>
-			<h5>Botworlds: <span id="Bot_CT"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Botworlds: </span><div class="valueDisplayDiv" id="Bot_CT_DIV"><span id="Bot_CT"></span><span id="Bot_CT_UNITS"></span></div></h5>
 			   <div class="buildCtrlPanel">
 				<button class = "button3" id ="button_wfBotUP" > &#8963; </button>
-			    <div class="buildInfoPanel1"><span id="Bot_wf_AddUnit"></span></div>
+			    <div class="buildInfoPanel1"><div class="valueDisplayDiv" id="Bot_wf_AddUnit_DIV"><span id="Bot_wf_AddUnit"></span><span id="Bot_wf_AddUnit_UNITS"></span></div></div>
 				<button class = "button2" id ="button_wfBotBB" > -- </button>
 				<button class = "button2" id ="button_wfBotB" > - </button>
 				<button class = "button2" id ="button_wfBotF" > + </button>
@@ -347,10 +454,10 @@ CONSOLE:<br>
 			    <div class="buildInfoPanel2">BEEP BEEP BEEP</div>
 				<button class = "button3" id ="button_wfBotDN" > &#8964; </button>
 			   </div>
-			<h5>Greenworlds: <span id="Green_CT"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Greenworlds: </span><div class="valueDisplayDiv" id="Green_CT_DIV"><span id="Green_CT"></span><span id="Green_CT_UNITS"></span></div></h5>
 			   <div class="buildCtrlPanel">
 				<button class = "button3" id ="button_wfGreenUP" > &#8963; </button>
-			    <div class="buildInfoPanel1"><span id="Green_wf_AddUnit"></span></div>
+			    <div class="buildInfoPanel1"><div class="valueDisplayDiv" id="Green_wf_AddUnit_DIV"><span id="Green_wf_AddUnit"></span><span id="Green_wf_AddUnit_UNITS"></span></div></div>
 				<button class = "button2" id ="button_wfGreenBB" > -- </button>
 				<button class = "button2" id ="button_wfGreenB" > - </button>
 				<button class = "button2" id ="button_wfGreenF" > + </button>
@@ -358,10 +465,10 @@ CONSOLE:<br>
 			    <div class="buildInfoPanel2">BEEP BEEP BEEP</div>
 				<button class = "button3" id ="button_wfGreenDN" > &#8964; </button>
 			   </div>
-			<h5>Compute Node: <span id="Comp_CT"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Compute Node: </span><div class="valueDisplayDiv" id="Comp_CT_DIV"><span id="Comp_CT"></span><span id="Comp_CT_UNITS"></span></div></h5>
 			   <div class="buildCtrlPanel">
 				<button class = "button3" id ="button_wfCompUP" > &#8963; </button>
-			    <div class="buildInfoPanel1"><span id="Comp_wf_AddUnit"></span></div>
+			    <div class="buildInfoPanel1"><div class="valueDisplayDiv" id="Comp_wf_AddUnit_DIV"><span id="Comp_wf_AddUnit"></span><span id="Comp_wf_AddUnit_UNITS"></span></div></div>
 				<button class = "button2" id ="button_wfCompBB" > -- </button>
 				<button class = "button2" id ="button_wfCompB" > - </button>
 				<button class = "button2" id ="button_wfCompF" > + </button>
@@ -369,10 +476,10 @@ CONSOLE:<br>
 			    <div class="buildInfoPanel2">BEEP BEEP BEEP</div>
 				<button class = "button3" id ="button_wfCompDN" > &#8964; </button>
 			   </div>
-			<h5>HubWorlds: <span id="Hub_CT"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">HubWorlds: </span><div class="valueDisplayDiv" id="Hub_CT_DIV"><span id="Hub_CT"></span><span id="Hub_CT_UNITS"></span></div></h5>
 			   <div class="buildCtrlPanel">
 				<button class = "button3" id ="button_wfHubUP" > &#8963; </button>
-			    <div class="buildInfoPanel1"><span id="Hub_wf_AddUnit"></span></div>
+			    <div class="buildInfoPanel1"><div class="valueDisplayDiv" id="Hub_wf_AddUnit_DIV"><span id="Hub_wf_AddUnit"></span><span id="Hub_wf_AddUnit_UNITS"></span></div></div>
 				<button class = "button2" id ="button_wfHubBB" > -- </button>
 				<button class = "button2" id ="button_wfHubB" > - </button>
 				<button class = "button2" id ="button_wfHubF" > + </button>
@@ -408,11 +515,14 @@ CONSOLE:<br>
 ------------------------------ BOTWORLDS
 -->
 
-			<button class="collapsible">BOTWORLDS:</button>
+			<button class="collapsible"><span class="INFO_TEXT_STATIC">BOTWORLDS:</span></button>
 			<div class="content">
-  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  			<p><span class="INFO_TEXT_STATIC">Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. I meant 'physically'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually?</span></p>
 
-			<h5>Collect Matter: <span id="botSliderDisplayPct1"></span></h5>
+            <span class="INFO_TEXT_STATIC">Productivity: </span><div class="valueDisplayDiv" id="bot_PRODUCTIVITY_DISPLAY_DIV"><span id="bot_PRODUCTIVITY_DISPLAY"></span><span id="bot_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+
+
+			<h5><span class="INFO_TEXT_STATIC">Collect Matter: </span><div class="valueDisplayDiv" id="botSliderDisplayPct1_DIV"><span id="botSliderDisplayPct1"></span><span id="botSliderDisplayPct1_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="4000" class="slider" id="botSliderPct1" style="width:90%">
@@ -423,7 +533,7 @@ CONSOLE:<br>
 					</label>
 				</div>
 
-			<h5>Process Matter: <span id="botSliderDisplayPct2"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Process Matter: </span><div class="valueDisplayDiv" id="botSliderDisplayPct2_DIV"><span id="botSliderDisplayPct2"></span><span id="botSliderDisplayPct2_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="4000" class="slider" id="botSliderPct2" style="width:90%">
@@ -434,7 +544,7 @@ CONSOLE:<br>
 					</label>
 				</div>
 
-			<h5>Reprocess Waste: <span id="botSliderDisplayPct3"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Reprocess Waste: </span><div class="valueDisplayDiv" id="botSliderDisplayPct3_DIV"><span id="botSliderDisplayPct3"></span><span id="botSliderDisplayPct3_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="1000" class="slider" id="botSliderPct3" style="width:90%">
@@ -446,7 +556,7 @@ CONSOLE:<br>
 				</div>
 
 
-			<h5>Transmute Yogurt: <span id="botSliderDisplayPct4"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Transmute Yogurt: </span><div class="valueDisplayDiv" id="botSliderDisplayPct4_DIV"><span id="botSliderDisplayPct4"></span><span id="botSliderDisplayPct4_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="1000" class="slider" id="botSliderPct4" style="width:90%">
@@ -462,12 +572,13 @@ CONSOLE:<br>
 
 
 			<button class="collapsible">
-			   GREENWORLDS:
+			   <span class="INFO_TEXT_STATIC">GREENWORLDS:</span>
 			</button>
 			<div class="content">
-  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
-			<h5>Biological Research: <span id="greenSliderDisplayPct1"></span></h5>
+            <span class="INFO_TEXT_STATIC">Productivity: </span><div class="valueDisplayDiv" id="green_PRODUCTIVITY_DISPLAY_DIV"><span id="green_PRODUCTIVITY_DISPLAY"></span><span id="green_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+
+			<h5><span class="INFO_TEXT_STATIC">Biological Research: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct1_DIV"><span id="greenSliderDisplayPct1"></span><span id="greenSliderDisplayPct1_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="8000" class="slider" id="greenSliderPct1" style="width:90%">
@@ -479,7 +590,7 @@ CONSOLE:<br>
 				</div>
 
 
-			<h5>Grow Yogurt: <span id="greenSliderDisplayPct2"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Grow Yogurt: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct2_DIV"><span id="greenSliderDisplayPct2"></span><span id="greenSliderDisplayPct2_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="1000" class="slider" id="greenSliderPct2" style="width:90%">
@@ -490,7 +601,7 @@ CONSOLE:<br>
 					</label>
 				</div>
 
-			<h5>Grow Bioweapons: <span id="greenSliderDisplayPct3"></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Grow Bioweapons: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct3_DIV"><span id="greenSliderDisplayPct3"></span><span id="greenSliderDisplayPct3_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="1000" class="slider" id="greenSliderPct3" style="width:90%">
@@ -506,10 +617,10 @@ CONSOLE:<br>
 
 
 			<button class="collapsible">
-			   SHIPYARDS:
+			   <span class="INFO_TEXT_STATIC">SHIPYARDS:</span>
 			</button>
 			<div class="content">
-  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  			<p><span class="INFO_TEXT_STATIC">Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. I meant 'physically'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually?</span></p>
 			</div>
 
 
@@ -523,26 +634,35 @@ CONSOLE:<br>
 
 <div class="column" style="background-color:#ccc;">
 
-<button class="collapsible">TERRITORY REPORT</button>
+<button class="collapsible"><span class="INFO_TEXT_STATIC">TERRITORY REPORT</span></button>
 		<div class="content">
-  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  			<p><span class="INFO_TEXT_STATIC">Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. I meant 'physically'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually?</span></p>
 		</div>
 
-<button class="collapsible">FLEET REPORT</button>
+<button class="collapsible"><span class="INFO_TEXT_STATIC">FLEET REPORT</span></button>
 		<div class="content">
-  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  			<p><span class="INFO_TEXT_STATIC">Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. I meant 'physically'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually?</span></p>
 		</div>
 
-<button class="collapsible">INTELLIGENCE REPORT</button>
+<button class="collapsible"><span class="INFO_TEXT_STATIC">INTELLIGENCE REPORT</span></button>
 		<div class="content">
-  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  			<p><span class="INFO_TEXT_STATIC">Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. I meant 'physically'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually?</span></p>
 		</div>
 
-<button class="collapsible">MILTARY REPORT</button>
+<button class="collapsible"><span class="INFO_TEXT_STATIC">MILTARY REPORT</span></button>
 		<div class="content">
-  			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  			<p><span class="INFO_TEXT_STATIC">Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. I meant 'physically'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually?</span></p>
 		</div>
 
+
+<button class="collapsible">CHEAT/DEBUG PANEL:</button>
+		<div class="content">
+		<p>
+		    CRAZYLEVEL: <span id="DEBUG_CRAZY_LEVEL_DISPLAY"></span>
+           	<button class = "button2" id ="CHEAT_LESSCRAZY" > LESS CRAZY </button>
+			<button class = "button2" id ="CHEAT_MORECRAZY" > MORE CRAZY </button>
+		</p>
+		</div>
 
 
 
@@ -555,7 +675,19 @@ CONSOLE:<br>
 -->
 
 <script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="variables.js"></script>
 
+
+<!--
+
+Search-replace
+<span id="\([A-Za-z0-9]+\)"></span>
+<span id="\1"></span><span id="\1_UNITS"></span>
+
+<span id="\([A-Za-z0-9_]+\)"></span>
+<div class="dataDisplay" id="\1_DIV"><span id="\1"></span><span id="\1_UNITS"></span></div>
+-->
 
 </body>
 </html>
+
