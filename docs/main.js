@@ -18,7 +18,7 @@ SETTINGS = {}
 INVENTORY = {}
 STATS = {}
 
-STATS["CRAZY_LEVEL"]=5
+STATS["CRAZY_LEVEL"]=0
 
 ///////////////////////////////
 ////Initialize settings
@@ -618,7 +618,7 @@ document.getElementById("CHEAT_LESSCRAZY").onclick = function(){
 
 document.getElementById("CHEAT_MORECRAZY").onclick = function(){
      STATS["CRAZY_LEVEL"] = STATS["CRAZY_LEVEL"] + 1
-     if(STATS["CRAZY_LEVEL"] == 10){
+     if(STATS["CRAZY_LEVEL"] == 9){
        this.disabled = true
      }
      document.getElementById("CHEAT_LESSCRAZY").disabled = false
