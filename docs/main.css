@@ -103,7 +103,7 @@ h1, h2 , h3, h4, h5, h6, p {
 ===================================================================================================================
 ===================================================================================================================
 ===================================================================================================================
------------------------------------   CHECK BOXES
+-----------------------------------  COLUMNS
 ===================================================================================================================
 ===================================================================================================================
 ===================================================================================================================
@@ -116,14 +116,96 @@ h1, h2 , h3, h4, h5, h6, p {
   padding: 10px;
   height: 10000px; /* Should be removed. Only for demonstration */
 }
-
-/* Clear floats after the columns */
+.MAINGRID_CONTAINER {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.MAINGRID_LT {
+   grid-column: 1 / 2;
+   grid-row: 1 / 4;
+}
+.MAINGRID_RT {
+   grid-column: 3 / 4;
+   grid-row: 1 / 4;
+}
+.MAINGRID_CTR {
+   grid-column: 2 / 3;
+   grid-row: 2 / 4;
+}
+.MAINGRID_CONSOLE {
+   grid-column: 2 / 3;
+   grid-row: 1 / 2;
+}
+/* Clear floats after the columns 
 .row:after {
   content: "";
   display: table;
   clear: both;
-}
+}*/
 
+
+@media only screen and (max-width: 1200px) {
+	.MAINGRID_LT {
+	   grid-column: 1 / 2;
+	   grid-row: 2 / 4;
+	}
+	.MAINGRID_RT {
+	   grid-column: 3 / 4;
+	   grid-row: 1 / 4;
+	}
+	.MAINGRID_CTR {
+	   grid-column: 2 / 3;
+	   grid-row: 2 / 4;
+	}
+	.MAINGRID_CONSOLE {
+	   grid-column: 1 / 3;
+	   grid-row: 1 / 2;
+	}
+}
+@media only screen and (max-width: 1000px) {
+	.MAINGRID_CONTAINER {
+	  display: grid;
+	  grid-template-columns: auto auto;
+	}
+	.MAINGRID_LT {
+	   grid-column: 1 / 2;
+	   grid-row: 2 / 4;
+	}
+	.MAINGRID_RT {
+	   grid-column: 2 / 3;
+	   grid-row: 3 / 4;
+	}
+	.MAINGRID_CTR {
+	   grid-column: 2 / 3;
+	   grid-row: 2 / 3;
+	}
+	.MAINGRID_CONSOLE {
+	   grid-column: 1 / 3;
+	   grid-row: 1 / 2;
+	}
+}
+@media only screen and (max-width: 640px) {
+	.MAINGRID_CONTAINER {
+	  display: grid;
+	  grid-template-columns: auto;
+	}
+	.MAINGRID_LT {
+	   grid-column: 1 / 2;
+	   grid-row: 3 / 4;
+	}
+	.MAINGRID_RT {
+	   grid-column: 1 / 2;
+	   grid-row: 4 / 5;
+	}
+	.MAINGRID_CTR {
+	   grid-column: 1 / 2;
+	   grid-row: 2 / 3;
+	}
+	.MAINGRID_CONSOLE {
+	   grid-column: 1 / 2;
+	   grid-row: 1 / 2;
+	}
+}
 
 /*
 ===================================================================================================================
