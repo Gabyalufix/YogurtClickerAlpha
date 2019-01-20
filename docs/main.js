@@ -639,3 +639,36 @@ document.getElementById("CHEAT_STARTCRAZY").onclick = function(){
 document.getElementById("CHEAT_RESET_CRAZY").onclick = function(){
      resetAllCrazy()
    }
+
+
+////////////////////////////////////
+
+var UNLOCKS={
+  WASTEREPROCESS:false,
+  TRANSMUTEYOGURT:false,
+  BIOWEAPONS:false,
+  ESPIONAGE:false,
+  HACKING:false
+}
+
+
+////////////////////////////////////
+
+UNLOCKABLES=["WASTEREPROCESS","TRANSMUTEYOGURT","BIOWEAPONS","ESPIONAGE","HACKING"]
+
+for(var i=0;i<UNLOCKABLES.length;i++){ 
+   document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).lockhide = document.getElementById("LOCKHIDE_"+UNLOCKABLES[i])
+   document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).unlockid = UNLOCKABLES[i]
+
+   document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).onclick = function(){
+       if(UNLOCKS[this.unlockid]){
+         this.lockhide.style.display = "none"
+       } else {
+         this.lockhide.style.display = "block"
+       }
+       UNLOCKS[this.unlockid]= ! UNLOCKS[this.unlockid]
+     }
+
+   
+}
+
