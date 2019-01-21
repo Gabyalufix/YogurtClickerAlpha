@@ -56,7 +56,8 @@
 			<h5><span class="INFO_TEXT_STATIC">Basic Research:</span><div class="valueDisplayDiv" id="bioSliderDisplayPct1_DIV"><span id="bioSliderDisplayPct1"></span><span id="bioSliderDisplayPct1_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="bioSliderPct1" style="width:90%">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="bioSliderPct1" style="width:90%; position:relative;">
+					   <div class="sliderFillBar"></div>
 					</div>
 					<label class="container">
 					  <input type="checkbox"  id = "bioSliderCheck1">
@@ -291,7 +292,7 @@
 			<h5><span class="INFO_TEXT_STATIC">Hacking: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct3_DIV"><span id="thinkSliderDisplayPct3"></span><span id="thinkSliderDisplayPct3_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="thinkSliderPct3" style="width:90%">
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="thinkSliderPct3" style="width:90%">
 					</div>
 					<label class="container">
 					  <input type="checkbox"  id = "thinkSliderCheck3">
@@ -365,7 +366,7 @@
 			<h5><span class="INFO_TEXT_STATIC">Espionage: </span><div class="valueDisplayDiv" id="soulSliderDisplayPct2_DIV"><span id="soulSliderDisplayPct2"></span><span id="soulSliderDisplayPct2_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="soulSliderPct2" style="width:90%">
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="soulSliderPct2" style="width:90%">
 					</div>
 					<label class="container">
 					  <input type="checkbox"  id = "soulSliderCheck2">
@@ -539,7 +540,7 @@ CONSOLE:<br>
 ------------------------------ BOTWORLDS
 -->
 
-			<button class="collapsible"><span class="INFO_TEXT_STATIC">BOTWORLDS:</span></button>
+			<button class="collapsible"><span class="INFO_TEXT_STATIC">INDUSTRY:</span></button>
 			<div class="content">
   			<p><span class="INFO_TEXT_STATIC">LINE 333 Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. Michelle, I don't regret this, but I both rue and lament it. I had more, but you go ahead. You are the last hope of the universe. You're going back for the Countess, aren't you? Yep, I remember. </span></p>
 
@@ -568,11 +569,22 @@ CONSOLE:<br>
 					</label>
 				</div>
 
+			<h5><span class="INFO_TEXT_STATIC">Starship Construction: </span><div class="valueDisplayDiv" id="botSliderDisplayPct5_DIV"><span id="botSliderDisplayPct5"></span><span id="botSliderDisplayPct5_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="4000" class="slider" id="botSliderPct5" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "botSliderCheck5">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
 			<div class="unlockableHidden" id="LOCKHIDE_WASTEREPROCESS">
 			<h5><span class="INFO_TEXT_STATIC">Reprocess Waste: </span><div class="valueDisplayDiv" id="botSliderDisplayPct3_DIV"><span id="botSliderDisplayPct3"></span><span id="botSliderDisplayPct3_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
-						  <input type="range" min="0" max="10000" value="1000" class="slider" id="botSliderPct3" style="width:90%">
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="botSliderPct3" style="width:90%">
 					</div>
 					<label class="container">
 					  <input type="checkbox"  id = "botSliderCheck3">
@@ -585,7 +597,7 @@ CONSOLE:<br>
 			<h5><span class="INFO_TEXT_STATIC">Transmute Yogurt: </span><div class="valueDisplayDiv" id="botSliderDisplayPct4_DIV"><span id="botSliderDisplayPct4"></span><span id="botSliderDisplayPct4_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
-						  <input type="range" min="0" max="10000" value="1000" class="slider" id="botSliderPct4" style="width:90%">
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="botSliderPct4" style="width:90%">
 					</div>
 					<label class="container">
 					  <input type="checkbox"  id = "botSliderCheck4">
@@ -593,12 +605,11 @@ CONSOLE:<br>
 					</label>
 				</div>
 			</div>
-
             </div>
 
 
 			<button class="collapsible">
-			   <span class="INFO_TEXT_STATIC">GREENWORLDS:</span>
+			   <span class="INFO_TEXT_STATIC">AGRICULTURE:</span>
 			</button>
 			<div class="content">
 
@@ -631,10 +642,22 @@ CONSOLE:<br>
 			<h5><span class="INFO_TEXT_STATIC">Grow Bioweapons: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct3_DIV"><span id="greenSliderDisplayPct3"></span><span id="greenSliderDisplayPct3_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
-						  <input type="range" min="0" max="10000" value="1000" class="slider" id="greenSliderPct3" style="width:90%">
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="greenSliderPct3" style="width:90%">
 					</div>
 					<label class="container">
 					  <input type="checkbox"  id = "greenSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="unlockableHidden" id="LOCKHIDE_COMPOST">
+			<h5><span class="INFO_TEXT_STATIC">Compost Fermentation: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct4_DIV"><span id="greenSliderDisplayPct4"></span><span id="greenSliderDisplayPct4_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="greenSliderPct4" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "greenSliderCheck4">
 					  <span class="checkmark"></span>
 					</label>
 				</div>
@@ -648,6 +671,42 @@ CONSOLE:<br>
 			</button>
 			<div class="content">
   			<p><span class="INFO_TEXT_STATIC">LINE 444 Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. Michelle, I don't regret this, but I both rue and lament it. I had more, but you go ahead. You are the last hope of the universe. You're going back for the Countess, aren't you? Yep, I remember. </span></p>
+
+            <span class="INFO_TEXT_STATIC">Construction Productivity: </span><div class="valueDisplayDiv" id="ship_PRODUCTIVITY_DISPLAY_DIV"><span id="ship_PRODUCTIVITY_DISPLAY"></span><span id="ship_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+
+			<h5><span class="INFO_TEXT_STATIC">Scout Probes: </span><div class="valueDisplayDiv" id="shipSliderDisplayPct1_DIV"><span id="shipSliderDisplayPct1"></span><span id="shipSliderDisplayPct1_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="8000" class="slider" id="shipSliderPct1" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "shipSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Seedships: </span><div class="valueDisplayDiv" id="shipSliderDisplayPct2_DIV"><span id="shipSliderDisplayPct2"></span><span id="shipSliderDisplayPct2_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="shipSliderPct2" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "shipSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Battleplates: </span><div class="valueDisplayDiv" id="shipSliderDisplayPct3_DIV"><span id="shipSliderDisplayPct3"></span><span id="shipSliderDisplayPct3_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="shipSliderPct3" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "shipSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
 			</div>
 
 
@@ -678,11 +737,12 @@ CONSOLE:<br>
 			<BR>
 			<BR>
 			<h3>UNLOCKABLES:</H3>
-			<button class = "button2" id ="CHEAT_UNLOCK_WASTEREPROCESS" > WASTEREPROCESS </button>
-			<button class = "button2" id ="CHEAT_UNLOCK_TRANSMUTEYOGURT" > TRANSMUTEYOGURT </button>
-			<button class = "button2" id ="CHEAT_UNLOCK_BIOWEAPONS" > BIOWEAPONS </button>
-			<button class = "button2" id ="CHEAT_UNLOCK_ESPIONAGE" > ESPIONAGE </button>
-			<button class = "button2" id ="CHEAT_UNLOCK_HACKING" > HACKING </button>
+			<button class = "button2" id ="CHEAT_UNLOCK_WASTEREPROCESS" > UNLOCK WASTEREPROCESS </button>
+			<button class = "button2" id ="CHEAT_UNLOCK_TRANSMUTEYOGURT" > UNLOCK TRANSMUTEYOGURT </button>
+			<button class = "button2" id ="CHEAT_UNLOCK_BIOWEAPONS" > UNLOCK BIOWEAPONS </button>
+			<button class = "button2" id ="CHEAT_UNLOCK_ESPIONAGE" > UNLOCK ESPIONAGE </button>
+			<button class = "button2" id ="CHEAT_UNLOCK_HACKING" > UNLOCK HACKING </button>
+			<button class = "button2" id ="CHEAT_UNLOCK_COMPOST" > UNLOCK COMPOST </button>
 
 
 		</p>
@@ -723,6 +783,7 @@ CONSOLE:<br>
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="variables.js"></script>
 
+<div class="FOOTER" style="height:250px; background-color:#aaa;">
 
 <!--
 

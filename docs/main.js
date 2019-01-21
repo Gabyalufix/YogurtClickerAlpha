@@ -45,11 +45,11 @@ STATS["CONVERSIONS"]["opToSoul"] = 0.000000001
 STATS["CONVERSIONS"]["sunToOp"] =   3745454516355
 STATS["CONVERSIONS"]["opToByte"] =   0.232
 
-PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","think","soul"]
+PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","think","soul","ship"]
 STATS["PRODUCTIVITY_RATING"] = {}
 STATS["PRODUCTIVITY_MULT"] = {}
 
-for(i=0;i<PRODUCTIVITY_STATS.length;i++){
+for(var i=0;i<PRODUCTIVITY_STATS.length;i++){
   var stat = PRODUCTIVITY_STATS[i]
   STATS["PRODUCTIVITY_RATING"][stat] = 1
   STATS["PRODUCTIVITY_MULT"][stat] = 1
@@ -70,18 +70,19 @@ var UNIT_EXPLANATION = {};
 
 
 
-var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul"]
-var PCTSLIDER_DISPLAYUNITS = {bio:"B/s",eng:"B/s",psy:"B/s",bot:"Suns",green:"Suns",think:"Hz",soul:"I"}
+var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship"]
+var PCTSLIDER_DISPLAYUNITS = {bio:"B/s",eng:"B/s",psy:"B/s",bot:"Suns",green:"Suns",think:"Hz",soul:"I",ship:"Suns"}
 var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of information. A zero, or a one.",
                                      eng:"Byte: the fundamental unit of information. A zero, or a one.",
                                      psy:"Byte: the fundamental unit of information. A zero, or a one.",
                                      bot:"Suns: The total productivity of one standard dyson sphere (before upgrades).",
                                      green:"Suns: The total productivity of one standard dyson sphere (before upgrades).",
                                      think:"Hertz: Compute cycles per second.",
-                                     soul:"Identities: Number of distinct thinking entities being simulated inside the soulswarm network."}
+                                     soul:"Identities: Number of distinct thinking entities being simulated inside the soulswarm network.",
+                                     ship:"Suns: The total productivity of one standard dyson sphere (before upgrades)."}
 
 
-var PCTSLIDER_SUBFIELDCT = [4,4,4,4,3,6,3]
+var PCTSLIDER_SUBFIELDCT = [4,4,4,5,4,6,3,3]
 var PCTSLIDERS = {}
 
 //PRODUCTIVITY_STATS = ["bot","psy","green","bio","eng","psy","think","soul"]
@@ -163,7 +164,7 @@ function onDownMultiSliderPct(ss){
 
 
 
-for(sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
+for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
     var fid = PCTSLIDER_FIELDS[sfi]
     var fct = PCTSLIDER_SUBFIELDCT[sfi]
     var check_elem = []
@@ -171,17 +172,18 @@ for(sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
     var displayUnits_elem = []
     var displayDiv_elem = []
     var slider_elem = []
-    for(i = 0; i < fct; i++){
+    for(var i = 0; i < fct; i++){
          console.log("1: "+fid+"SliderCheck"+(i+1))
          slider_elem[i] = document.getElementById(fid+"SliderPct"+(i+1));
          check_elem[i] = document.getElementById(fid+"SliderCheck"+(i+1));
          display_elem[i] = document.getElementById(fid+"SliderDisplayPct"+(i+1));
          displayUnits_elem[i] = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_UNITS");
          displayDiv_elem[i] = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_DIV");
-         console.log("2: "+fid+"SliderCheck"+(i+1))
+         slider_elem[i].IS_LOCKED = false
+         //console.log("2: "+fid+"SliderCheck"+(i+1))
     }
     PCTSLIDERS[fid] = {checkElem: check_elem, displayElem: display_elem, sliderElem:slider_elem}
-    for(i = 0; i < fct; i++){
+    for(var i = 0; i < fct; i++){
         var ss = slider_elem[i];
         ss.sdisplay = display_elem[i]
         ss.sdisplayUnits = displayUnits_elem[i]
@@ -211,9 +213,7 @@ for(sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
     onDownMultiSliderPct(slider_elem[0])
     updatePctSliderDisplay(slider_elem[0])
     document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fmtSI( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])+PCTSLIDER_DISPLAYUNITS[fid]
-
 }
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -273,7 +273,7 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
      butelem.addPositive = addButtonPos[j]
      butelem.onclick = function(){
        if(this.addPositive){
-         startWorldConstruction(this.worldType,this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
+         startWorldConstruction(  this.worldType,this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
        } else {
          startWorldDeconstruction(this.worldType,this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
        }
@@ -304,7 +304,7 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
 var coll = document.getElementsByClassName("collapsible");
 var i;
 
-for (i = 0; i < coll.length; i++) {
+for (var i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
     this.classList.toggle("active");
     var content = this.nextElementSibling;
@@ -319,9 +319,8 @@ for (i = 0; i < coll.length; i++) {
 
 
 var coll = document.getElementsByClassName("collapsibleTHIN");
-var i;
 
-for (i = 0; i < coll.length; i++) {
+for (var i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
     this.classList.toggle("active");
     var content = this.nextElementSibling;
@@ -333,9 +332,8 @@ for (i = 0; i < coll.length; i++) {
   });
 }
 var coll = document.getElementsByClassName("collapsibleLV2");
-var i;
 
-for (i = 0; i < coll.length; i++) {
+for (var i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
     this.classList.toggle("active");
     var content = this.nextElementSibling;
@@ -390,7 +388,7 @@ function calculateSlowTick(){
 
 function TICK_readUserInputs(){
   //Percent sliders:
-  for(i =0; i<PCTSLIDER_FIELDS.length; i++){
+  for(var i =0; i<PCTSLIDER_FIELDS.length; i++){
     var fid = PCTSLIDER_FIELDS[i]
     SETTINGS[fid+"_FRACTION"] = [];
     for(j=0;j<PCTSLIDERS[fid]["displayElem"].length;j++){
@@ -419,7 +417,7 @@ function TICK_updateStats(){
   STATS["PRODUCTIVITY_RATING"]["eng"]   = STATS["CONVERSIONS"]["opToByte"]  * STATS["PRODUCTIVITY_RATING"]["think"] * SETTINGS["think_FRACTION"][1]
   STATS["PRODUCTIVITY_RATING"]["psy"]   = STATS["CONVERSIONS"]["opToSoul"]  * STATS["PRODUCTIVITY_MULT"]["soul"] * SETTINGS["soul_FRACTION"][0]
   
-  for(sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
+  for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
       var fid = PCTSLIDER_FIELDS[sfi]
       document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fmtSI( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])+PCTSLIDER_DISPLAYUNITS[fid]
       updatePctSliderDisplay(PCTSLIDERS[fid]["sliderElem"][0])
@@ -445,7 +443,7 @@ function TICK_captureSystems(){
 }
 function TICK_constructWorlds(){
   
-  for(i=0;i<DYSON_TYPE_LIST.length;i++){
+  for(var i=0;i<DYSON_TYPE_LIST.length;i++){
     var worldType = DYSON_TYPE_LIST[i]
     if(CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].length > 0){
       if(  CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] < Date.now() ){
@@ -654,21 +652,61 @@ var UNLOCKS={
 
 ////////////////////////////////////
 
-UNLOCKABLES=["WASTEREPROCESS","TRANSMUTEYOGURT","BIOWEAPONS","ESPIONAGE","HACKING"]
+UNLOCKABLES=["WASTEREPROCESS","TRANSMUTEYOGURT","BIOWEAPONS","ESPIONAGE","HACKING","COMPOST"]
+UNLOCKABLE_SLIDERINFO=[["bot",3],["bot",4],["green",3],["soul",3],["think",3],["green",4]]
+
+// botSliderPct4 botSliderCheck4
 
 for(var i=0;i<UNLOCKABLES.length;i++){ 
    document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).lockhide = document.getElementById("LOCKHIDE_"+UNLOCKABLES[i])
    document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).unlockid = UNLOCKABLES[i]
-
+   document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).ss       = document.getElementById(UNLOCKABLE_SLIDERINFO[i][0]+"SliderPct"+  UNLOCKABLE_SLIDERINFO[i][1])
+   document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).ss.lockbox.checked = true;
+   
    document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).onclick = function(){
        if(UNLOCKS[this.unlockid]){
          this.lockhide.style.display = "none"
+         this.innerHTML = "UNLOCK "+ this.unlockid
+         this.ss.value = 0;
+         this.ss.lockbox.checked = true;
+          document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).ss
        } else {
          this.lockhide.style.display = "block"
+         this.innerHTML = "LOCK "+ this.unlockid
        }
        UNLOCKS[this.unlockid]= ! UNLOCKS[this.unlockid]
      }
 
-   
+   document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).ss
 }
+
+document.getElementById("botSliderDisplayPct4").IS_LOCKED = true
+document.getElementById("botSliderDisplayPct4").LOCKER = document.getElementById("LOCKHIDE_TRANSMUTEYOGURT")
+
+document.getElementById("thinkSliderDisplayPct3").IS_LOCKED = true
+document.getElementById("thinkSliderDisplayPct3").LOCKER = document.getElementById("LOCKHIDE_HACKING")
+
+document.getElementById("soulSliderDisplayPct2").IS_LOCKED = true
+document.getElementById("soulSliderDisplayPct2").LOCKER = document.getElementById("LOCKHIDE_ESPIONAGE")
+
+document.getElementById("botSliderDisplayPct3").IS_LOCKED = true
+document.getElementById("botSliderDisplayPct3").LOCKER = document.getElementById("LOCKHIDE_WASTEREPROCESS")
+
+document.getElementById("greenSliderDisplayPct3").IS_LOCKED = true
+document.getElementById("greenSliderDisplayPct3").LOCKER = document.getElementById("LOCKHIDE_BIOWEAPONS")
+
+document.getElementById("greenSliderDisplayPct4").IS_LOCKED = true
+document.getElementById("greenSliderDisplayPct4").LOCKER = document.getElementById("LOCKHIDE_COMPOST")
+
+
+
+
+
+
+
+
+
+
+
+
 

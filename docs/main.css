@@ -44,6 +44,7 @@ h1, h2 , h3, h4, h5, h6, p {
   text-align: left;
   outline: none;
   font-size: 15px;
+  align-self:start
 }
 .collapsibleLV2 {
   background-color: #0515ff;
@@ -55,6 +56,7 @@ h1, h2 , h3, h4, h5, h6, p {
   text-align: left;
   outline: none;
   font-size: 15px;
+  align-self:start
 }
 
 .collapsibleTHIN {
@@ -137,7 +139,7 @@ h1, h2 , h3, h4, h5, h6, p {
 }
 .MAINGRID_CONTAINER {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 33% 33% 33%;
 }
 .MAINGRID_LT {
    grid-column: 1 / 2;
@@ -184,7 +186,7 @@ h1, h2 , h3, h4, h5, h6, p {
 @media only screen and (max-width: 1000px) {
 	.MAINGRID_CONTAINER {
 	  display: grid;
-	  grid-template-columns: auto auto;
+	  grid-template-columns: 50% 50%;
 	}
 	.MAINGRID_LT {
 	   grid-column: 1 / 2;
@@ -206,7 +208,7 @@ h1, h2 , h3, h4, h5, h6, p {
 @media only screen and (max-width: 640px) {
 	.MAINGRID_CONTAINER {
 	  display: grid;
-	  grid-template-columns: auto;
+	  grid-template-columns: 100%;
 	}
 	.MAINGRID_LT {
 	   grid-column: 1 / 2;
@@ -249,6 +251,19 @@ h1, h2 , h3, h4, h5, h6, p {
   opacity: 0.7;
   -webkit-transition: .2s;
   transition: opacity .2s;
+}
+
+.sliderFillBar {
+  position: relative;
+  width: 50%;
+  height: 8px;
+  border-radius: 0px;
+  background: #1bba21;
+  outline: none;
+  opacity: 0.7;
+  top: -15px;
+  left: 0;
+  pointer-events: none
 }
 
 .slider::-webkit-slider-thumb {
