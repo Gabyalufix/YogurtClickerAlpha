@@ -124,6 +124,16 @@ body {
   border-radius: 0 0 10px 10px ;*/
 }
 
+.SliderSetHolder {
+  background-color: var(--LT3);
+  padding: 4px 4px 36px 4px;
+  margin: 0px 4px 0px 4px;
+  border-style: solid;
+  border-width:  2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px ;
+  border-color:var(--DK4);
+  
+}
 
 .contentGrid3 {
   display: grid;
@@ -398,7 +408,7 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  vertical-align:middle
+  vertical-align:middle;
 }
 
 /* Hide the browser's default checkbox */
@@ -419,7 +429,7 @@ body {
   height: 25px;
   width: 25px;
   background-color: #eee;
-  vertical-align:middle
+  border: 1px solid var(--DK4);
 }
 
 /* On mouse-over, add a grey background color */
