@@ -20,6 +20,7 @@ STATS = {}
 
 STATS["CRAZY_LEVEL"]=0
 STATS["CRAZY_ON"]=true
+INVENTORY["WORLDS"] = {};
 ///////////////////////////////
 ////Initialize settings
 SETTINGS["ADD_MULTIPLIER"] = {}
@@ -40,10 +41,12 @@ CONSTRUCTION_BUFFER["WORLDS_DECON"] = {}
 STATS["WORLD_BUILD_TIME"] = {Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000}
 STATS["WORLD_DECON_TIME"]={Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000}
 STATS["CONVERSIONS"] = {}
-STATS["CONVERSIONS"]["sunToByte"] = 1243912971288
-STATS["CONVERSIONS"]["opToSoul"] = 0.000000001
-STATS["CONVERSIONS"]["sunToOp"] =   3745454516355
-STATS["CONVERSIONS"]["opToByte"] =   0.232
+STATS["CONVERSIONS"]["sunToByte"] = Math.log10(1243912971288)
+STATS["CONVERSIONS"]["opToSoul"] = Math.log10(0.000000001)
+STATS["CONVERSIONS"]["sunToOp"] =   Math.log10(3745454516355)
+STATS["CONVERSIONS"]["opToByte"] =   Math.log10(0.232)
+STATS["CONVERSIONS"]["gramsPerWorld"] = 30.3
+
 
 PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","think","soul","ship"]
 STATS["PRODUCTIVITY_RATING"] = {}
@@ -54,8 +57,8 @@ for(var i=0;i<PRODUCTIVITY_STATS.length;i++){
   STATS["PRODUCTIVITY_RATING"][stat] = 1
   STATS["PRODUCTIVITY_MULT"][stat] = 1
 }
-STATS["PRODUCTIVITY_RATING"]["think"] = 1000000000
-STATS["PRODUCTIVITY_RATING"]["soul"] = 10000
+STATS["PRODUCTIVITY_RATING"]["think"] = Math.log10(1000000000)
+STATS["PRODUCTIVITY_RATING"]["soul"] = Math.log10(10000)
 
 //Productivity: <span id="green_PRODUCTIVITY_DISPLAY"></span>
 
@@ -96,8 +99,8 @@ var PCTSLIDERS = {}
 function updatePctSliderDisplayHelper(ss){
   var fid = ss.fid;
   var vv = ss.value 
-  var tt = (vv / 10000) * STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid]
-  var fmtsi = fmtSIunits(tt)
+  var tt = Math.log10(vv / 10000) + STATS["PRODUCTIVITY_RATING"][fid] + STATS["PRODUCTIVITY_MULT"][fid]
+  var fmtsi = fmtSIlog(tt)
   ss.sdisplay.innerHTML = (vv / 100).toFixed(1) + "% ["+fmtsi[0]
   ss.sdisplayUnits.innerHTML = fmtsi[1]+PCTSLIDER_DISPLAYUNITS[fid]+"]"
   ss.sdisplayDiv.title = PCTSLIDER_DISPLAYUNITSEXPLAIN[fid]+"\n"+fmtsi[4]
@@ -223,13 +226,14 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
 // Dyson Sphere / World Management:
 
 
-WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub"]
-WORLD_TYPE_DYSON = [false,false,true,true,true,true,true]
+WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Discovered","Hostile"]
+WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false]
+
 DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub"]
 
 for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
     var worldType = WORLD_TYPE_LIST[i]
-    INVENTORY[worldType] = {CT:1}
+    INVENTORY["WORLDS"][worldType] = {CT:1}
     SETTINGS["ADD_MULTIPLIER"][worldType] = 1
     CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = 0
     CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] = 0
@@ -358,9 +362,11 @@ window.setInterval(function(){
     TICK_TIMESTAMP = Date.now()
     TICK_readUserInputs()
     TICK_updateStats()
+    TICK_scoutSystems()
     TICK_captureSystems()
     TICK_constructWorlds()
     TICK_updateWorldCounts()
+    TICK_calcIndustry();
     secTimer++;
     if (secTimer >= 250){
       secTimer = 0;
@@ -412,8 +418,8 @@ STATS["PRODUCTIVITY"] = {};
 
 function TICK_updateStats(){
 
-  STATS["PRODUCTIVITY_RATING"]["think"] = STATS["CONVERSIONS"]["sunToOp"]   * INVENTORY["Comp"]["CT"] * STATS["PRODUCTIVITY_MULT"]["think"]
-  STATS["PRODUCTIVITY_RATING"]["bio"]   = STATS["CONVERSIONS"]["sunToByte"] * INVENTORY["Green"]["CT"] * STATS["PRODUCTIVITY_MULT"]["green"] * SETTINGS["green_FRACTION"][0]
+  STATS["PRODUCTIVITY_RATING"]["think"] = STATS["CONVERSIONS"]["sunToOp"]   * INVENTORY["WORLDS"]["Comp"]["CT"] * STATS["PRODUCTIVITY_MULT"]["think"]
+  STATS["PRODUCTIVITY_RATING"]["bio"]   = STATS["CONVERSIONS"]["sunToByte"] * INVENTORY["WORLDS"]["Green"]["CT"] * STATS["PRODUCTIVITY_MULT"]["green"] * SETTINGS["green_FRACTION"][0]
   STATS["PRODUCTIVITY_RATING"]["eng"]   = STATS["CONVERSIONS"]["opToByte"]  * STATS["PRODUCTIVITY_RATING"]["think"] * SETTINGS["think_FRACTION"][1]
   STATS["PRODUCTIVITY_RATING"]["psy"]   = STATS["CONVERSIONS"]["opToSoul"]  * STATS["PRODUCTIVITY_MULT"]["soul"] * SETTINGS["soul_FRACTION"][0]
   
@@ -425,22 +431,39 @@ function TICK_updateStats(){
   document.getElementById("DEBUG_CRAZY_LEVEL_DISPLAY").innerHTML = STATS["CRAZY_LEVEL"]
 }
 
+
+
+
 function TICK_updateWorldCounts(){
     for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
         var worldType = WORLD_TYPE_LIST[i]
-        var worldCountLine = fmtSI(INVENTORY[WORLD_TYPE_LIST[i]]["CT"])
+        var worldCountLine = fmtSI(INVENTORY["WORLDS"][WORLD_TYPE_LIST[i]]["CT"])
         if( CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0 ){
           worldCountLine = worldCountLine + " (building: "+fmtSI(CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType])+")"
         }
         if( CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] > 0 ){
           worldCountLine = worldCountLine + " (breaking: "+fmtSI(CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])+")"
         }
-        document.getElementById(WORLD_TYPE_LIST[i] + "_CT").innerHTML = worldCountLine
+        var countDisplay = document.getElementById(WORLD_TYPE_LIST[i] + "_CT")
+        if(countDisplay != null){
+          countDisplay.innerHTML = worldCountLine
+        }
     }
 }
-function TICK_captureSystems(){
-    INVENTORY["Fallow"]["CT"] = ( INVENTORY["Fallow"]["CT"] * ( 1 + Math.random()/2500 ))
+
+function TICK_scoutSystems(){
+    INVENTORY["WORLDS"]["Discovered"]["CT"] = ( INVENTORY["WORLDS"]["Discovered"]["CT"] * ( 1 + Math.random()/2500 ))
 }
+function TICK_calcIndustry(){
+
+}
+
+function TICK_captureSystems(){
+
+    INVENTORY["WORLDS"]["Fallow"]["CT"] = ( INVENTORY["WORLDS"]["Fallow"]["CT"] * ( 1 + Math.random()/2500 ))
+}
+
+
 function TICK_constructWorlds(){
   
   for(var i=0;i<DYSON_TYPE_LIST.length;i++){
@@ -448,14 +471,14 @@ function TICK_constructWorlds(){
     if(CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].length > 0){
       if(  CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] < Date.now() ){
         var nxt = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()
-        INVENTORY[worldType]["CT"] = INVENTORY[worldType]["CT"] + nxt[0]
+        INVENTORY["WORLDS"][worldType]["CT"] = INVENTORY["WORLDS"][worldType]["CT"] + nxt[0]
         CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] - nxt[0]
       }
     }
     if(CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].length > 0){
       if(  CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][1] < Date.now() ){
         var nxt = CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].shift()
-        INVENTORY[worldType]["CT"] = INVENTORY[worldType]["CT"] - nxt[0]
+        INVENTORY["WORLDS"][worldType]["CT"] = INVENTORY["WORLDS"][worldType]["CT"] - nxt[0]
         CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] - nxt[0]
       }
     }
@@ -466,7 +489,7 @@ function TICK_constructWorlds(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
+// TICK: worldconstruction
 
 
 
@@ -475,9 +498,9 @@ function startWorldConstruction(worldType,batchCt){
   CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] + batchCt
 }
 function startWorldDeconstruction(worldType,batchCt){
-  if(INVENTORY[worldType]["CT"] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] < batchCt){
+  if(INVENTORY["WORLDS"][worldType]["CT"] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] < batchCt){
     //console.log("deconstructing ALL: "+batchCt+">"+INVENTORY[worldType]["CT"]);
-    startWorldDeconstruction(worldType,INVENTORY[worldType]["CT"] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])
+    startWorldDeconstruction(worldType,INVENTORY["WORLDS"][worldType]["CT"] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])
   } else {
     //console.log("deconstructing Some: "+batchCt+"<="+INVENTORY[worldType]["CT"]);
     CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].push([batchCt, (Date.now() + STATS["WORLD_DECON_TIME"][worldType]) ])
@@ -492,7 +515,11 @@ function startWorldDeconstruction(worldType,batchCt){
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
+///////// CONSOLE
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -524,6 +551,17 @@ function printlnToAiConsole(ttt){
 console.log( document.getElementById("AI_CONSOLE").scrollTop)
 console.log( document.getElementById("AI_CONSOLE").scrollHeight)
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// STRING FORMATTING / HELPER FUNCTIONS
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 function roundTo(value, decimals) {
   return Number(Math.round(value+'e'+decimals)+'e-'+decimals).toFixed(decimals);
 }
@@ -553,6 +591,42 @@ function fmtSI(x){
   }
 }
 
+
+//Returns [0]baseNumber, [1]prefixAbbrev, [2]prefixFull, [3]prefixExponent, [4]a string of prefix descriptions
+function fmtSIlog(x){
+  if(x == 0){
+      return [1, "", "", 1,""]
+  } else if(x <= -3){
+      return [0, "", "", 0,""]
+  } else if(x < 0){
+      var d = -Math.ceil(x)
+      var dd = Math.floor( d / 3 )
+      var suffix = SIPREFIXLOW[dd]
+      var rr = Math.pow(10,( x - d ))
+      return [roundTo(rr,1), suffix,"",dd,""]
+  } else {
+      if(x < 2){
+        return [roundTo(Math.pow(10,x),1),"","",0,""]
+      } else if(x < 3){
+        return [Math.round(Math.pow(10,x)),"","",0,""]
+      }
+      var d = Math.floor(x)
+      var dd = Math.floor(d / 3) - 1
+      var ddd = Math.floor(dd / 8)
+      var ddp = dd - ddd * 8
+      var rr = Math.pow( 10, x - (dd+1)*3 )
+      var dp = 2 - (d - ((dd+1)*3))
+      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      var longSuffix = SIPREFIXLONG[ddp] + "Yotta".repeat(ddd)
+      var suffixExplain = SIPREFIXExplain[ddp]
+      if(ddp != 7 && ddd > 0){
+        suffixExplain = suffixExplain + "<br>"+ SIPREFIXExplain[ddp]
+      }
+      return [roundTo(rr,dp), suffix, longSuffix, (dd+1)*3,suffixExplain]
+  }
+}
+
+
 //Returns [0]baseNumber, [1]prefixAbbrev, [2]prefixFull, [3]prefixExponent, [4]a string of prefix descriptions
 function fmtSIunits(x){
   if(x == 0){
@@ -565,9 +639,9 @@ function fmtSIunits(x){
       return [roundTo(rr,1), suffix,"???",dd,"???"]
   } else {
       if(x < 100){
-        return roundTo(x,1)
+        return [roundTo(rr,1), "","",0,""]
       } else if(x < 1000){
-        return ""+Math.round(x)
+        return [Math.round(rr), "","",0,""]
       }
 
       var d = Math.floor(Math.log10(x))
@@ -602,6 +676,15 @@ function getPrefixSI(x){
   return prefix
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//CHEATS AND UNLOCKABLE VARS
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
