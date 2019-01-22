@@ -98,7 +98,7 @@ var PCTSLIDERS = {}
 
 function updatePctSliderDisplayHelper(ss){
   var fid = ss.fid;
-  var vv = ss.value
+  var vv = ss.value 
   var tt = Math.log10(vv / 10000) + STATS["PRODUCTIVITY_RATING"][fid] + STATS["PRODUCTIVITY_MULT"][fid]
   var fmtsi = fmtSIlog(tt)
   ss.sdisplay.innerHTML = (vv / 100).toFixed(1) + "% ["+fmtsi[0]
@@ -273,7 +273,7 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    multDn.worldType = worldType
    multDn.mdn = multDn
    multUp.mdn = multDn
-
+   
    multDn.disabled = true;
    multUp.onclick = function(){
      SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] * 1000)
@@ -304,7 +304,7 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
        }
      }
    }
-
+   
 }
 
 CHEATADD_TYPE_LIST = ["Discovered","Hostile"]
@@ -396,6 +396,38 @@ for (var i = 0; i < coll.length; i++) {
 
 
 
+var coll = document.getElementsByClassName("collapsibleTHIN");
+
+for (var i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+var coll = document.getElementsByClassName("collapsibleLV2");
+
+for (var i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///MAIN TICK CYCLE:
 
 var TICK_TIMESTAMP
@@ -444,8 +476,8 @@ function TICK_readUserInputs(){
       SETTINGS[fid+"_FRACTION"][j] = parseFloat( PCTSLIDERS[fid]["sliderElem"][j].value ) / 10000
     }
   }
-
-
+  
+  
 }
 
 
@@ -465,7 +497,7 @@ function TICK_updateStats(){
   STATS["PRODUCTIVITY_RATING"]["bio"]   = STATS["CONVERSIONS"]["sunToByte"] * INVENTORY["WORLDS"]["Green"]["CT"] * STATS["PRODUCTIVITY_MULT"]["green"] * SETTINGS["green_FRACTION"][0]
   STATS["PRODUCTIVITY_RATING"]["eng"]   = STATS["CONVERSIONS"]["opToByte"]  * STATS["PRODUCTIVITY_RATING"]["think"] * SETTINGS["think_FRACTION"][1]
   STATS["PRODUCTIVITY_RATING"]["psy"]   = STATS["CONVERSIONS"]["opToSoul"]  * STATS["PRODUCTIVITY_MULT"]["soul"] * SETTINGS["soul_FRACTION"][0]
-
+  
   for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
       var fid = PCTSLIDER_FIELDS[sfi]
       document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fmtSI( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])+PCTSLIDER_DISPLAYUNITS[fid]
@@ -539,7 +571,7 @@ function TICK_captureSystems(){
 
 
 function TICK_constructWorlds(){
-
+  
   for(var i=0;i<DYSON_TYPE_LIST.length;i++){
     var worldType = DYSON_TYPE_LIST[i]
     if(CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].length > 0){
@@ -770,7 +802,7 @@ document.getElementById("CHEAT_LESSCRAZY").onclick = function(){
        this.disabled = true
      }
      document.getElementById("CHEAT_MORECRAZY").disabled = false
-
+     
    }
 
 document.getElementById("CHEAT_MORECRAZY").onclick = function(){
@@ -780,7 +812,7 @@ document.getElementById("CHEAT_MORECRAZY").onclick = function(){
      }
      document.getElementById("CHEAT_LESSCRAZY").disabled = false
    }
-
+   
 document.getElementById("CHEAT_HALTCRAZY").onclick = function(){
      STATS["CRAZY_ON"] = false
      document.getElementById("CHEAT_STARTCRAZY").disabled = false
@@ -792,7 +824,7 @@ document.getElementById("CHEAT_STARTCRAZY").onclick = function(){
      document.getElementById("CHEAT_HALTCRAZY").disabled = false
      this.disabled = true
    }
-
+   
 document.getElementById("CHEAT_RESET_CRAZY").onclick = function(){
      resetAllCrazy()
    }
@@ -816,12 +848,12 @@ UNLOCKABLE_SLIDERINFO=[["bot",3],["bot",4],["green",3],["soul",3],["think",3],["
 
 // botSliderPct4 botSliderCheck4
 
-for(var i=0;i<UNLOCKABLES.length;i++){
+for(var i=0;i<UNLOCKABLES.length;i++){ 
    document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).lockhide = document.getElementById("LOCKHIDE_"+UNLOCKABLES[i])
    document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).unlockid = UNLOCKABLES[i]
    document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).ss       = document.getElementById(UNLOCKABLE_SLIDERINFO[i][0]+"SliderPct"+  UNLOCKABLE_SLIDERINFO[i][1])
    document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).ss.lockbox.checked = true;
-
+   
    document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).onclick = function(){
        if(UNLOCKS[this.unlockid]){
          this.lockhide.style.display = "none"
