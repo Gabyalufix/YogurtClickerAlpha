@@ -755,11 +755,11 @@ input[type=unitEntry], select {
   display: grid;
   grid-template-columns: 25px 25px 25px 25px 25px 25px auto;
   grid-gap: 1px;
-  background-color: #2196F3;
+  background-color: var(--MID);
   padding: 1px;
 }
 .buildCtrlPanel > div {
-  background-color: #ffffff;
+  background-color: var(--MID);
   text-align: center;
   padding: 2px 0;
   font-size: 14px;
