@@ -20,12 +20,12 @@ STATS = {}
 
 STATS["CRAZY_LEVEL"]=0
 STATS["CRAZY_ON"]=true
-INVENTORY["WORLDS"] = {};
+/*INVENTORY["WORLDS"] = {};*/
 ///////////////////////////////
 ////Initialize settings
 SETTINGS["ADD_MULTIPLIER"] = {}
 
-
+STATS["WORLDS-Total-CT"]=7
 
 ///////////////////////////////
 ////Initialize initial values:
@@ -40,6 +40,22 @@ CONSTRUCTION_BUFFER["WORLDS_DECON"] = {}
 ////Initialize starting stats
 STATS["WORLD_BUILD_TIME"] = {Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000}
 STATS["WORLD_DECON_TIME"]={Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000}
+
+STATS["COST-WORLDBUILD-Fallow"] = [["WORLDS-Secure-CT",1]];
+STATS["COST-WORLDBUILD-Omni"] = [["WORLDS-Fallow-CT",1]];
+STATS["COST-WORLDBUILD-Bot"] = [["WORLDS-Fallow-CT",1]];
+STATS["COST-WORLDBUILD-Green"] = [["WORLDS-Fallow-CT",1]];
+STATS["COST-WORLDBUILD-Comp"] = [["WORLDS-Fallow-CT",1]];
+STATS["COST-WORLDBUILD-Hub"] = [["WORLDS-Fallow-CT",1]];
+
+STATS["COST-WORLDDECON-Fallow"] = [["WORLDS-Secure-CT",-1]];
+STATS["COST-WORLDDECON-Omni"] = [["WORLDS-Fallow-CT",-1]];
+STATS["COST-WORLDDECON-Bot"] = [["WORLDS-Fallow-CT",-1]];
+STATS["COST-WORLDDECON-Green"] = [["WORLDS-Fallow-CT",-1]];
+STATS["COST-WORLDDECON-Comp"] = [["WORLDS-Fallow-CT",-1]];
+STATS["COST-WORLDDECON-Hub"] = [["WORLDS-Fallow-CT",-1]];
+
+
 STATS["CONVERSIONS"] = {}
 STATS["CONVERSIONS"]["sunToByte"] =  (1243912971288)
 STATS["CONVERSIONS"]["opToSoul"] =   (0.000000001)
@@ -247,14 +263,14 @@ for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
 // Dyson Sphere / World Management:
 
 
-WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Discovered","Hostile","Secure"]
+WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure"]
 WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false,false]
 
 DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub"]
 
 for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
     var worldType = WORLD_TYPE_LIST[i]
-    INVENTORY["WORLDS"][worldType] = {CT:1}
+    INVENTORY["WORLDS-"+worldType+"-CT"]=1
     SETTINGS["ADD_MULTIPLIER"][worldType] = 1
     CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = 0
     CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] = 0
@@ -307,7 +323,7 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
 
 }
 
-CHEATADD_TYPE_LIST = ["Discovered","Hostile"]
+CHEATADD_TYPE_LIST = ["Neutral","Hostile"]
 
 
 for( var i = 0; i < CHEATADD_TYPE_LIST.length; i++){
@@ -346,14 +362,11 @@ for( var i = 0; i < CHEATADD_TYPE_LIST.length; i++){
      butelem.addPositive = addButtonPos[j]
      butelem.onclick = function(){
        if(this.addPositive){
-         var worldAdd = INVENTORY["WORLDS"][this.worldType]["CT"] + this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType]
-         INVENTORY["WORLDS"][this.worldType]["CT"] = INVENTORY["WORLDS"][this.worldType]["CT"] + worldAdd
-         if(worldType == "Hostile"){
-           INVENTORY["WORLDS"]["Discovered"]["CT"] = INVENTORY["WORLDS"]["Discovered"]["CT"] + worldAdd
-         }
+         var worldAdd = INVENTORY["WORLDS-"+this.worldType+"-CT"] + this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType]
+         INVENTORY["WORLDS-"+this.worldType+"-CT"] = INVENTORY["WORLDS-"+this.worldType+"-CT"] + worldAdd
        } else {
-         var worldsubtract = Math.min(INVENTORY["WORLDS"][this.worldType]["CT"],this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
-         INVENTORY["WORLDS"][this.worldType]["CT"] = INVENTORY["WORLDS"][this.worldType]["CT"] - worldsubtract
+         var worldsubtract = Math.min(INVENTORY["WORLDS-"+this.worldType+"-CT"],this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
+         INVENTORY["WORLDS-"+this.worldType+"-CT"] = INVENTORY["WORLDS-"+this.worldType+"-CT"] - worldsubtract
        }
      }
    }
@@ -461,8 +474,8 @@ STATS["PRODUCTIVITY"] = {};
 
 function TICK_updateStats(){
 
-  STATS["PRODUCTIVITY_RATING"]["think"] = STATS["CONVERSIONS"]["sunToOp"]   * INVENTORY["WORLDS"]["Comp"]["CT"] * STATS["PRODUCTIVITY_MULT"]["think"]
-  STATS["PRODUCTIVITY_RATING"]["bio"]   = STATS["CONVERSIONS"]["sunToByte"] * INVENTORY["WORLDS"]["Green"]["CT"] * STATS["PRODUCTIVITY_MULT"]["green"] * SETTINGS["green_FRACTION"][0]
+  STATS["PRODUCTIVITY_RATING"]["think"] = STATS["CONVERSIONS"]["sunToOp"]   * INVENTORY["WORLDS-Comp-CT"] * STATS["PRODUCTIVITY_MULT"]["think"]
+  STATS["PRODUCTIVITY_RATING"]["bio"]   = STATS["CONVERSIONS"]["sunToByte"] * INVENTORY["WORLDS-Green-CT"] * STATS["PRODUCTIVITY_MULT"]["green"] * SETTINGS["green_FRACTION"][0]
   STATS["PRODUCTIVITY_RATING"]["eng"]   = STATS["CONVERSIONS"]["opToByte"]  * STATS["PRODUCTIVITY_RATING"]["think"] * SETTINGS["think_FRACTION"][1]
   STATS["PRODUCTIVITY_RATING"]["psy"]   = STATS["CONVERSIONS"]["opToSoul"]  * STATS["PRODUCTIVITY_MULT"]["soul"] * SETTINGS["soul_FRACTION"][0]
 
@@ -480,12 +493,12 @@ function TICK_updateStats(){
 function TICK_updateWorldCounts(){
     for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
         var worldType = WORLD_TYPE_LIST[i]
-        var worldCountLine = fmtSI(INVENTORY["WORLDS"][WORLD_TYPE_LIST[i]]["CT"])
+        var worldCountLine = fmtSIint(INVENTORY["WORLDS-"+WORLD_TYPE_LIST[i]+"-CT"])
         if( CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0 ){
-          worldCountLine = worldCountLine + " (building: "+fmtSI(CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType])+")"
+          worldCountLine = worldCountLine + " (building: "+fmtSIint(CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType])+")"
         }
         if( CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] > 0 ){
-          worldCountLine = worldCountLine + " (breaking: "+fmtSI(CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])+")"
+          worldCountLine = worldCountLine + " (breaking: "+fmtSIint(CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])+")"
         }
         var countDisplay = document.getElementById(WORLD_TYPE_LIST[i] + "_CT")
         if(countDisplay != null){
@@ -496,17 +509,20 @@ function TICK_updateWorldCounts(){
 
 function TICK_scoutSystems(){
     
-    if(INVENTORY["WORLDS"]["Discovered"]["CT"] > 0){
-      var discoverWorlds = INVENTORY["WORLDS"]["Discovered"]["CT"] * ( Math.random()/2500 )
-      INVENTORY["WORLDS"]["Discovered"]["CT"] = INVENTORY["WORLDS"]["Discovered"]["CT"] + discoverWorlds
-      var newDiscWorlds = Math.floor(INVENTORY["WORLDS"]["Discovered"]["CT"] + discoverWorlds) - Math.floor(INVENTORY["WORLDS"]["Discovered"]["CT"])
+    if(INVENTORY["WORLDS-Neutral-CT"] > 0){
+      var oldDisc = INVENTORY["WORLDS-Neutral-CT"]
+      var discoverWorlds = STATS["WORLDS-Total-CT"] * ( Math.random()/2500 )
+      INVENTORY["WORLDS-Neutral-CT"] = INVENTORY["WORLDS-Neutral-CT"] + discoverWorlds
+      var newDiscWorlds = Math.floor(INVENTORY["WORLDS-Neutral-CT"]) - Math.floor(oldDisc)
+      STATS["WORLDS-Total-CT"] = STATS["WORLDS-Total-CT"] + discoverWorlds
       INVENTORY["MATTER"]["Discovered"]["CT"] = INVENTORY["MATTER"]["Discovered"]["CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]
     }
-    if(INVENTORY["WORLDS"]["Hostile"]["CT"] > 0){
-      var discoverWorlds = INVENTORY["WORLDS"]["Hostile"]["CT"] * ( Math.random()/2500 )
-      INVENTORY["WORLDS"]["Hostile"]["CT"] = INVENTORY["WORLDS"]["Hostile"]["CT"] + discoverWorlds
-      INVENTORY["WORLDS"]["Discovered"]["CT"] = INVENTORY["WORLDS"]["Discovered"]["CT"] + discoverWorlds
-      var newDiscWorlds = Math.floor(INVENTORY["WORLDS"]["Discovered"]["CT"] + discoverWorlds) - Math.floor(INVENTORY["WORLDS"]["Discovered"]["CT"])
+    if(INVENTORY["WORLDS-Hostile-CT"] > 0){
+      var oldDisc = INVENTORY["WORLDS-Hostile-CT"]
+      var discoverWorlds = STATS["WORLDS-Total-CT"] * ( Math.random()/2500 )
+      INVENTORY["WORLDS-Hostile-CT"] = INVENTORY["WORLDS-Hostile-CT"] + discoverWorlds
+      var newDiscWorlds = Math.floor(INVENTORY["WORLDS-Hostile-CT"]) - Math.floor(oldDisc)
+      STATS["WORLDS-Total-CT"] = STATS["WORLDS-Total-CT"] + discoverWorlds
       INVENTORY["MATTER"]["Discovered"]["CT"] = INVENTORY["MATTER"]["Discovered"]["CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]
     }
     
@@ -528,17 +544,43 @@ function TICK_calcIndustry(){
 
 
 function TICK_calcWar(){
-    var captureFree = (INVENTORY["WORLDS"]["Discovered"]["CT"] - INVENTORY["WORLDS"]["Hostile"]["CT"] - INVENTORY["WORLDS"]["Secure"]["CT"]) * (Math.random()/3000)
-    var captureHostile = (INVENTORY["WORLDS"]["Hostile"]["CT"]) * (Math.random()/3000)
-    INVENTORY["WORLDS"]["Hostile"]["CT"] = INVENTORY["WORLDS"]["Hostile"]["CT"] - captureHostile
-    INVENTORY["WORLDS"]["Secure"]["CT"] = INVENTORY["WORLDS"]["Secure"]["CT"] + captureHostile + captureFree
+    var captureNeutral = INVENTORY["WORLDS-Neutral-CT"] * (Math.random()/3000)
+    var captureHostile = INVENTORY["WORLDS-Hostile-CT"] * (Math.random()/3000)
+    INVENTORY["WORLDS-Hostile-CT"] = INVENTORY["WORLDS-Hostile-CT"] - captureHostile
+    INVENTORY["WORLDS-Neutral-CT"] = INVENTORY["WORLDS-Neutral-CT"] - captureNeutral
+    INVENTORY["WORLDS-Secure-CT"]  = INVENTORY["WORLDS-Secure-CT"]  + captureHostile + captureNeutral
 }
 
 function TICK_captureSystems(){
-
-    INVENTORY["WORLDS"]["Fallow"]["CT"] = ( INVENTORY["WORLDS"]["Fallow"]["CT"] * ( 1 + Math.random()/2500 ))
+    var seedCapture = ( INVENTORY["WORLDS-Secure-CT"] * ( 1 + Math.random()/2500 ))
+    seedCapture = Math.min( INVENTORY["WORLDS-Secure-CT"], seedCapture )
+    INVENTORY["WORLDS-Fallow-CT"] = INVENTORY["WORLDS-Fallow-CT"] + seedCapture
+    INVENTORY["WORLDS-Secure-CT"] = INVENTORY["WORLDS-Secure-CT"] - seedCapture
+    
+    /*
+     NOTE: later on, allow capture of neutral systems, with risk to the seedship.
+    */
 }
 
+function buildFromCost(itemId, itemCt,itemCost){
+  var buildLimit = Math.abs( itemCt );
+  for(var i=0;i<itemCost.length;i++){
+    var cc = itemCost[i];
+    if(cc[1] > 0){
+      buildLimit = Math.min( Math.floor( INVENTORY[ cc[0] ] / cc[1] ), buildLimit);
+    }
+  }
+  for(var i=0;i<itemCost.length;i++){
+    var cc = itemCost[i];
+    INVENTORY[ cc[0] ] = INVENTORY[ cc[0] ] - (buildLimit*cc[1]);
+  }
+  if(itemCt < 0){
+    INVENTORY[itemId] = INVENTORY[itemId] - buildLimit
+  } else {
+    INVENTORY[itemId] = INVENTORY[itemId] + buildLimit
+  }
+  return buildLimit;
+}
 
 function TICK_constructWorlds(){
 
@@ -546,16 +588,26 @@ function TICK_constructWorlds(){
     var worldType = DYSON_TYPE_LIST[i]
     if(CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].length > 0){
       if(  CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] < Date.now() ){
-        var nxt = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()
-        INVENTORY["WORLDS"][worldType]["CT"] = INVENTORY["WORLDS"][worldType]["CT"] + nxt[0]
-        CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] - nxt[0]
+        var nxtAttempt = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][0]
+        var nxt = buildFromCost("WORLDS-"+worldType+"-CT",nxtAttempt,STATS["COST-WORLDBUILD-"+worldType]);
+        if(nxt == nxtAttempt){
+          var nxtbuf = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()
+        } else {
+          CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] - nxt;
+        }
+        CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] - nxt
       }
     }
     if(CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].length > 0){
       if(  CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][1] < Date.now() ){
-        var nxt = CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].shift()
-        INVENTORY["WORLDS"][worldType]["CT"] = INVENTORY["WORLDS"][worldType]["CT"] - nxt[0]
-        CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] - nxt[0]
+        var nxtAttempt = CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][0]
+        var nxt = buildFromCost("WORLDS-"+worldType+"-CT",-nxtAttempt,STATS["COST-WORLDDECON-"+worldType]);
+        if(nxt == nxtAttempt){
+          var nxtbuf = CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].shift()
+        } else {
+          CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][1] = CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][1] - nxt;
+        }
+        CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] - nxt
       }
     }
   }
@@ -574,9 +626,9 @@ function startWorldConstruction(worldType,batchCt){
   CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] + batchCt
 }
 function startWorldDeconstruction(worldType,batchCt){
-  if(INVENTORY["WORLDS"][worldType]["CT"] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] < batchCt){
+  if(INVENTORY["WORLDS-"+worldType+"-CT"] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] < batchCt){
     //console.log("deconstructing ALL: "+batchCt+">"+INVENTORY[worldType]["CT"]);
-    startWorldDeconstruction(worldType,INVENTORY["WORLDS"][worldType]["CT"] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])
+    startWorldDeconstruction(worldType,INVENTORY["WORLDS-"+worldType+"-CT"] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])
   } else {
     //console.log("deconstructing Some: "+batchCt+"<="+INVENTORY[worldType]["CT"]);
     CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].push([batchCt, (Date.now() + STATS["WORLD_DECON_TIME"][worldType]) ])
@@ -669,6 +721,24 @@ function fmtSI(x){
   }
 }
 
+function fmtSIint(x){
+  if(x < 100){
+    return ""+Math.floor(x)+" (+"+roundTo(100*(x - Math.floor(x)),1)+"%)"
+  } else if(x < 100){
+    return ""+Math.floor(x)+" (+"+Math.round(100*(x - Math.floor(x)))+"%)"
+  } else if(x < 1000){
+    return ""+Math.floor(x)
+  } else {
+      var d = Math.floor(Math.log10(x))
+      var dd = Math.floor(d / 3) - 1
+      var ddd = Math.floor(dd / 8)
+      var ddp = dd - ddd * 8
+      var rr = x / Math.pow(10,(dd+1)*3)
+      var dp = 2 - (d - ((dd+1)*3))
+      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      return roundTo(rr,dp) + suffix
+  }
+}
 
 //Returns [0]baseNumber, [1]prefixAbbrev, [2]prefixFull, [3]prefixExponent, [4]a string of prefix descriptions
 function fmtSIlog(x){

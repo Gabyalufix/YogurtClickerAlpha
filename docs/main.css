@@ -172,7 +172,7 @@ h5 {
 
 .contentGrid3 {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 33% 33% 33%;
   /*grid-gap: 5px;*/
   padding: 1px;
 
