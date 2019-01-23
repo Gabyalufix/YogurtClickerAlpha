@@ -41,11 +41,11 @@ CONSTRUCTION_BUFFER["WORLDS_DECON"] = {}
 STATS["WORLD_BUILD_TIME"] = {Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000}
 STATS["WORLD_DECON_TIME"]={Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000}
 STATS["CONVERSIONS"] = {}
-STATS["CONVERSIONS"]["sunToByte"] = Math.log10(1243912971288)
-STATS["CONVERSIONS"]["opToSoul"] = Math.log10(0.000000001)
-STATS["CONVERSIONS"]["sunToOp"] =   Math.log10(3745454516355)
-STATS["CONVERSIONS"]["opToByte"] =   Math.log10(0.232)
-STATS["CONVERSIONS"]["gramsPerWorld"] = 30.3
+STATS["CONVERSIONS"]["sunToByte"] =  (1243912971288)
+STATS["CONVERSIONS"]["opToSoul"] =   (0.000000001)
+STATS["CONVERSIONS"]["sunToOp"] =    (3745454516355)
+STATS["CONVERSIONS"]["opToByte"] =   (0.232)
+STATS["CONVERSIONS"]["gramsPerWorld"] = 2e30
 
 
 PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","think","soul","ship"]
@@ -99,8 +99,8 @@ var PCTSLIDERS = {}
 function updatePctSliderDisplayHelper(ss){
   var fid = ss.fid;
   var vv = ss.value
-  var tt = Math.log10(vv / 10000) + STATS["PRODUCTIVITY_RATING"][fid] + STATS["PRODUCTIVITY_MULT"][fid]
-  var fmtsi = fmtSIlog(tt)
+  var tt = (vv / 10000) * STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid]
+  var fmtsi = fmtSI(tt)
   ss.sdisplay.innerHTML = (vv / 100).toFixed(1) + "% ["+fmtsi[0]
   ss.sdisplayUnits.innerHTML = fmtsi[1]+PCTSLIDER_DISPLAYUNITS[fid]+"]"
   ss.sdisplayDiv.title = PCTSLIDER_DISPLAYUNITSEXPLAIN[fid]+"\n"+fmtsi[4]
@@ -499,13 +499,15 @@ function TICK_scoutSystems(){
     if(INVENTORY["WORLDS"]["Discovered"]["CT"] > 0){
       var discoverWorlds = INVENTORY["WORLDS"]["Discovered"]["CT"] * ( Math.random()/2500 )
       INVENTORY["WORLDS"]["Discovered"]["CT"] = INVENTORY["WORLDS"]["Discovered"]["CT"] + discoverWorlds
-      /*INVENTORY["MATTER"]["Discovered"]["CT"] = INVENTORY["MATTER"]["Discovered"]["CT"] + discoverWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]*/
+      var newDiscWorlds = Math.floor(INVENTORY["WORLDS"]["Discovered"]["CT"] + discoverWorlds) - Math.floor(INVENTORY["WORLDS"]["Discovered"]["CT"])
+      INVENTORY["MATTER"]["Discovered"]["CT"] = INVENTORY["MATTER"]["Discovered"]["CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]
     }
     if(INVENTORY["WORLDS"]["Hostile"]["CT"] > 0){
       var discoverWorlds = INVENTORY["WORLDS"]["Hostile"]["CT"] * ( Math.random()/2500 )
       INVENTORY["WORLDS"]["Hostile"]["CT"] = INVENTORY["WORLDS"]["Hostile"]["CT"] + discoverWorlds
-      /*INVENTORY["WORLDS"]["Discovered"]["CT"] = INVENTORY["WORLDS"]["Discovered"]["CT"] + discoverWorlds
-      INVENTORY["MATTER"]["Discovered"]["CT"] = INVENTORY["MATTER"]["Discovered"]["CT"] + discoverWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]*/
+      INVENTORY["WORLDS"]["Discovered"]["CT"] = INVENTORY["WORLDS"]["Discovered"]["CT"] + discoverWorlds
+      var newDiscWorlds = Math.floor(INVENTORY["WORLDS"]["Discovered"]["CT"] + discoverWorlds) - Math.floor(INVENTORY["WORLDS"]["Discovered"]["CT"])
+      INVENTORY["MATTER"]["Discovered"]["CT"] = INVENTORY["MATTER"]["Discovered"]["CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]
     }
     
 }
@@ -514,7 +516,7 @@ function TICK_calcIndustry(){
     
    for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
         var matterType = MATTER_TYPE_LIST[i]
-        var fmtsi = fmtSIlog(INVENTORY["MATTER"][matterType]["CT"])
+        var fmtsi = fmtSIunits(INVENTORY["MATTER"][matterType]["CT"])
         var sd = INVENTORY["MATTER"][matterType]["DISPLAY"]
         sd.innerHTML = fmtsi[0]
         sd.displayUnits.innerHTML = fmtsi[1]+"g"
@@ -715,9 +717,9 @@ function fmtSIunits(x){
       return [roundTo(rr,1), suffix,"???",dd,"???"]
   } else {
       if(x < 100){
-        return [roundTo(rr,1), "","",0,""]
+        return [roundTo(x,1), "","",0,""]
       } else if(x < 1000){
-        return [Math.round(rr), "","",0,""]
+        return [Math.round(x), "","",0,""]
       }
 
       var d = Math.floor(Math.log10(x))
@@ -857,13 +859,38 @@ document.getElementById("greenSliderDisplayPct3").LOCKER = document.getElementBy
 document.getElementById("greenSliderDisplayPct4").IS_LOCKED = true
 document.getElementById("greenSliderDisplayPct4").LOCKER = document.getElementById("LOCKHIDE_COMPOST")
 
+var settingsBG = document.getElementById('SETTINGS_WINDOW');
+var settingsWindow = document.getElementById('SETTINGS_WINDOW_CONTENT');
 
+document.getElementById("SETTINGS_BUTTON").onclick = function(){
+    settingsBG.style.display="block"
+    settingsWindow.style.display = "block"
+}
 
+document.getElementById("SETTINGS_WINDOW_CLOSE").onclick = function(){
+    settingsBG.style.display="none"
+    settingsWindow.style.display = "none"
+}
 
+window.onclick = function(event) {
+  if(event.target == settingsBG) {
+    settingsBG.style.display="none"
+    settingsWindow.style.display = "none";
+  }
+}
 
+document.getElementById("ENABLE_CHEATS_CHECKBOX").oninput = function(){
+  if(this.checked){
+    console.log("TEST1")
+    document.getElementById("CHEAT_DEBUG_PANEL_COLLAPSER").style.display = "block";
+    document.getElementById("CHEAT_DEBUG_PANEL_CONTENT").style.display = "block";
+  } else {
+    console.log("TEST2")
+    document.getElementById("CHEAT_DEBUG_PANEL_COLLAPSER").style.display = "none";
+    document.getElementById("CHEAT_DEBUG_PANEL_CONTENT").style.display = "none";
 
-
-
+  }
+}
 
 
 

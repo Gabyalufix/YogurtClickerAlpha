@@ -16,6 +16,25 @@
 </head>
 <body>
 
+<div class="SETTINGS_WINDOW" id="SETTINGS_WINDOW">
+
+
+
+<div class="SETTINGS_WINDOW_CONTENT" id="SETTINGS_WINDOW_CONTENT">
+
+
+<span class="SETTINGS_WINDOW_CLOSE" id="SETTINGS_WINDOW_CLOSE">&times;</span>
+
+  <h1> SETTINGS: </h1>
+  					<BR>
+  					<BR>
+					<input type="checkbox" checked="true" id = "ENABLE_CHEATS_CHECKBOX">
+					Enable Cheats
+					<BR>
+</div>
+
+</div>
+
 
 <!--
 ####################################################################################################
@@ -30,6 +49,7 @@
 ------------------------------ COLUMN 1:
 #################################################
 -->
+
 
 <div class="MAINGRID_LT">
 
@@ -399,7 +419,17 @@
 
 <div class="MAINGRID_CONSOLE">
 
+
+
+<div class="AI_CONSOLE_HOLDER">
+
+<div class="SETTINGS_BUTTON_HOLDER">
+<button class="SETTINGS_BUTTON" id="SETTINGS_BUTTON"> &#9881; </button>
+</div>
+
+
 <div class="AI_CONSOLE" id="AI_CONSOLE">
+
 CONSOLE:<br>
 CONSOLE:<br>
 CONSOLE:<br>
@@ -417,7 +447,12 @@ CONSOLE:<br>
 
 </div>
 
+
 </div>
+
+</div>
+
+
 
 <!--
 =================================================
@@ -735,8 +770,8 @@ CONSOLE:<br>
 <div class="MAINGRID_RT">
 
 
-<button class="collapsible"><h1>CHEAT/DEBUG PANEL:</h1></button>
-		<div class="content">
+<button class="collapsible" id="CHEAT_DEBUG_PANEL_COLLAPSER"><h1>CHEAT/DEBUG PANEL:</h1></button>
+		<div class="content" id="CHEAT_DEBUG_PANEL_CONTENT">
 		<p>
 		    CRAZYLEVEL: <span id="DEBUG_CRAZY_LEVEL_DISPLAY"></span>
 		    <BR>
