@@ -42,6 +42,13 @@
 ####################################################################################################
 -->
 
+<canvas id="BACKGROUND_CANVAS"></canvas>
+
+
+<div id="BACKGROUND_STATIC">
+<div id="ALL_CONTENT_CONTAINER">
+
+
 <div class="MAINGRID_CONTAINER">
 
 <!--
@@ -59,16 +66,17 @@
 =================================================
 ------------------------------ RESEARCH
 -->
+<div class="contentUnitHolder">
 <button class="collapsible"><h1>SCIENCE</h1></button>
 		<div class="content">
 
 
 		  <p><span class="INFO_TEXT_STATIC">LINE 111 Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. </span></p>
 
+      <div class="contentUnitHolder">
 			<button class="collapsibleTHIN collapsible">
 			   <h2><span class="INFO_TEXT_STATIC">BIO:</span></h2>
 			</button>
-
 			<div class="contentLV3">
               Rate: <div class="valueDisplayDiv" id="bio_PRODUCTIVITY_DISPLAY_DIV"><span id="bio_PRODUCTIVITY_DISPLAY"></span><span id="bio_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
 			<h5><span class="INFO_TEXT_STATIC">Basic Research:</span><div class="valueDisplayDiv" id="bioSliderDisplayPct1_DIV"><span id="bioSliderDisplayPct1"></span><span id="bioSliderDisplayPct1_UNITS"></span></div></h5>
@@ -117,13 +125,12 @@
 				</div>
 				</div>
 		<p> VALUE=<div class="valueDisplayDiv" id="bioSliderPctVal_DIV"><span id="bioSliderPctVal"></span><span id="bioSliderPctVal_UNITS"></span></div> </p>
-
-
+     </div>
 <!--
 =================================================
 ------------------------------ ENGINEERING
 -->
-
+      <div class="contentUnitHolder">
 			<button class="collapsibleTHIN  collapsible">
 			   <h2><span class="INFO_TEXT_STATIC">ENGINEERING:</span></h2>
 			</button>
@@ -176,13 +183,13 @@
 				</div>
 				</div>
 		<p> VALUE=<div class="valueDisplayDiv" id="bioSliderPctVal_DIV"><span id="bioSliderPctVal"></span><span id="bioSliderPctVal_UNITS"></span></div> </p>
-
+    </div>
 
 <!--
 =================================================
 ------------------------------ Social Science
 -->
-
+      <div class="contentUnitHolder">
 			<button class="collapsibleTHIN  collapsible">
 			   <h2><span class="INFO_TEXT_STATIC">Social Science:</span></h2>
 			</button>
@@ -255,30 +262,32 @@
 
 		</div>
 		<p> <span class="INFO_TEXT_STATIC">VALUE=</span><div class="valueDisplayDiv" id="psySliderPctVal_DIV"><span id="psySliderPctVal"></span><span id="psySliderPctVal_UNITS"></span></div> </p>
+      </div>
 
+</div>
 
 </div>
 
 
-
-
-
+<div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">RESEARCH PROJECTS</span></h1></button>
 		<div class="content">
   			<p><span class="INFO_TEXT_STATIC">LINE 222 Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. Michelle, I don't regret this, but I both rue and lament it. I had more, but you go ahead. You are the last hope of the universe. You're going back for the Countess, aren't you? Yep, I remember. </span></p>
 		</div>
-
+</div>
 
 <!--
 =================================================
 ------------------------------ THINKING ENGINE
 -->
+<div class="contentUnitHolder">
 
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">THINKING ENGINE</span></h1></button>
 		<div class="content">
 
           <span class="INFO_TEXT_STATIC">Capacity: </span><div class="valueDisplayDiv" id="think_PRODUCTIVITY_DISPLAY_DIV"><span id="think_PRODUCTIVITY_DISPLAY"></span><span id="think_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
 
+        <div class="contentUnitHolder">
 
 		<button class="collapsible"><h2>Processor Distribution </h2></span></button>
 			<div class="contentLV3">
@@ -349,21 +358,23 @@
 					  <span class="checkmark"></span>
 					</label>
 				</div>
-
 		</div>
 		</div>
+		</div>
 
+</div>
 
 <!--
 =================================================
 ------------------------------ SOULSWARM
 -->
-
+<div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">SOULSWARM</span></h1></button>
 	<div class="content">
 
         <span class="INFO_TEXT_STATIC">Capacity: </span><div class="valueDisplayDiv" id="soul_PRODUCTIVITY_DISPLAY_DIV"><span id="soul_PRODUCTIVITY_DISPLAY"></span><span id="soul_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
 
+        <div class="contentUnitHolder">
 		<button class="collapsible"><span class="INFO_TEXT_STATIC"><h2>Task Distribution </h2></span></button>
 			<div class="contentLV3">
 
@@ -402,11 +413,11 @@
 					</label>
 				</div>
 			</div>
-
+	</div>
 	</div>
 
 </div>
-
+</div>
 <!--
 ###################################################################################################################################################
 ###################################################################################################################################################
@@ -465,13 +476,13 @@ CONSOLE:<br>
 =================================================
 ------------------------------ WORLDFORGE
 -->
-
+<div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC"> RESOURCES </span></h1></button>
 		<div class="content">
 
+        <div class="contentUnitHolder">
 
 	<div class="contentGrid3">
-
 	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Discovered_MATTER_DIV">  <span class="INFO_TEXT_STATIC">Discovered Matter:</span><br><span id="RESOURCE_DISPLAY_MATTER_Discovered"></span> <span id="Discovered_MATTER_UNITS"></span></div></div>
 	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Collected_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Collected Matter: </span><br><span id="RESOURCE_DISPLAY_MATTER_Collected"></span>  <span id="Collected_MATTER_UNITS"></span></div></div>
 	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Processed_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Processed Matter: </span><br><span id="RESOURCE_DISPLAY_MATTER_Processed"></span>  <span id="Processed_MATTER_UNITS"></span></div></div>
@@ -480,7 +491,11 @@ CONSOLE:<br>
 	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Yogurt_MATTER_DIV">      <span class="INFO_TEXT_STATIC">Yogurt: </span>          <br><span id="RESOURCE_DISPLAY_MATTER_Yogurt"></span>     <span id="Yogurt_MATTER_UNITS"></span></div></div>
 
 	</div>
+	</div>
+
    <br>
+        <div class="contentUnitHolder">
+
 			<h5><span class="INFO_TEXT_STATIC">Unconquered Worlds: </span></h5>
 	        <div class="contentGrid3">
 			<div class="contentGridItem1x1 contentGridItem" style="text-align:center"><h5><span class="INFO_TEXT_STATIC">Neutral: </span></h5><div class="valueDisplayDiv" id="Neutral_CT_DIV"><span id="Neutral_CT"></span><span id="Neutral_CT_UNITS"></span></div></div>
@@ -488,17 +503,18 @@ CONSOLE:<br>
 			<div class="contentGridItem1x1 contentGridItem" style="text-align:center"><h5><span class="INFO_TEXT_STATIC">Secure: </span></h5><div class="valueDisplayDiv" id="Secure_CT_DIV"><span id="Secure_CT"></span><span id="Secure_CT_UNITS"></span></div></div>
 
 			</div>
+			</div>
 
 </div>
+</div>
 
-
+<div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">WORLD FORGE:</span></h1></button>
 		<div class="content">
 
 
 
 			<br>
-
 
 			<h5><span class="INFO_TEXT_STATIC">Falloworlds: </span><div class="valueDisplayDiv" id="Fallow_CT_DIV"><span id="Fallow_CT"></span><span id="Fallow_CT_UNITS"></span></div></h5>
 
@@ -597,16 +613,20 @@ CONSOLE:<br>
 				  <option>kS</option>
 				  <option>kS</option>
 				</datalist>
+
+</div>
 <!--
 =================================================
 ------------------------------ BOTWORLDS
 -->
-
+<div class="contentUnitHolder">
 			<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">INDUSTRY:</span></h1></button>
 			<div class="content">
   			<p><span class="INFO_TEXT_STATIC">LINE 333 Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. Michelle, I don't regret this, but I both rue and lament it. I had more, but you go ahead. You are the last hope of the universe. You're going back for the Countess, aren't you? Yep, I remember. </span></p>
 
             <span class="INFO_TEXT_STATIC">Productivity: </span><div class="valueDisplayDiv" id="bot_PRODUCTIVITY_DISPLAY_DIV"><span id="bot_PRODUCTIVITY_DISPLAY"></span><span id="bot_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+
+        <div class="contentUnitHolder">
 
 			<div class="SliderSetHolder">
 
@@ -670,12 +690,16 @@ CONSOLE:<br>
 			</div>
             </div>
 			 </div>
+			 </div>
+</div>
 
+<div class="contentUnitHolder">
 			<button class="collapsible">
 			   <h1><span class="INFO_TEXT_STATIC">AGRICULTURE:</span></h1>
 			</button>
 			<div class="content">
 
+<div class="contentUnitHolder">
 			<div class="SliderSetHolder">
 
             <span class="INFO_TEXT_STATIC">Productivity: </span><div class="valueDisplayDiv" id="green_PRODUCTIVITY_DISPLAY_DIV"><span id="green_PRODUCTIVITY_DISPLAY"></span><span id="green_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
@@ -729,8 +753,10 @@ CONSOLE:<br>
 			</div>
 			</div>
 			</div>
+				</div>
+</div>
 
-
+<div class="contentUnitHolder">
 			<button class="collapsible">
 			   <h1><span class="INFO_TEXT_STATIC">SHIPYARDS:</span></h1>
 			</button>
@@ -776,7 +802,7 @@ CONSOLE:<br>
 			</div>
 			</div>
 
-
+</div>
 <!--
 #################################################
 ------------------------------ COLUMN 3:
@@ -838,26 +864,33 @@ CONSOLE:<br>
 		</div>
 
 
-
+<div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">TERRITORY REPORT</span></h1></button>
 		<div class="content">
   			<p><span class="INFO_TEXT_STATIC">LINE 555 Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. Michelle, I don't regret this, but I both rue and lament it. I had more, but you go ahead. You are the last hope of the universe. You're going back for the Countess, aren't you? Yep, I remember. </span></p>
 		</div>
+</div>
 
+<div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">FLEET REPORT</span></h1></button>
 		<div class="content">
   			<p><span class="INFO_TEXT_STATIC">LINE 666 Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. Michelle, I don't regret this, but I both rue and lament it. I had more, but you go ahead. You are the last hope of the universe. You're going back for the Countess, aren't you? Yep, I remember. </span></p>
 		</div>
+</div>
 
+<div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">INTELLIGENCE REPORT</span></h1></button>
 		<div class="content">
   			<p><span class="INFO_TEXT_STATIC">LINE 777 Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. Michelle, I don't regret this, but I both rue and lament it. I had more, but you go ahead. You are the last hope of the universe. You're going back for the Countess, aren't you? Yep, I remember. </span></p>
 		</div>
+</div>
 
+<div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">MILTARY REPORT</span></h1></button>
 		<div class="content">
   			<p><span class="INFO_TEXT_STATIC">LINE 888 Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. Michelle, I don't regret this, but I both rue and lament it. I had more, but you go ahead. You are the last hope of the universe. You're going back for the Countess, aren't you? Yep, I remember. </span></p>
 		</div>
+</div>
 
 </div>
 </div>
@@ -869,10 +902,15 @@ CONSOLE:<br>
 ####################################################################################################
 -->
 
+<script type="text/javascript" src="tvstatic.js"></script>
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="variables.js"></script>
 
-<div class="FOOTER">
+<div class="FOOTER"></div>
+
+</div>
+</div>
+
 
 <!--
 

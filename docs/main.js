@@ -337,7 +337,7 @@ for( var i = 0; i < CHEATADD_TYPE_LIST.length; i++){
    multDn.worldType = worldType
    multDn.mdn = multDn
    multUp.mdn = multDn
-   
+
    multDn.disabled = true;
    multUp.onclick = function(){
      SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] * 1000)
@@ -370,7 +370,7 @@ for( var i = 0; i < CHEATADD_TYPE_LIST.length; i++){
        }
      }
    }
-   
+
 }
 
 //          <h5>OmniWorlds: <span id="Omni_CT"></span></h5>
@@ -410,9 +410,12 @@ for (var i = 0; i < coll.length; i++) {
 
 
 ///MAIN TICK CYCLE:
+var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
+bgCanvas.RUN_STATIC = true;
 
 var TICK_TIMESTAMP
 var secTimer = 0
+var midTimer = 0;
 window.setInterval(function(){
     TICK_TIMESTAMP = Date.now()
     TICK_readUserInputs()
@@ -429,6 +432,16 @@ window.setInterval(function(){
       calculateSlowTick();
     }
     SLOWTICK_makeCrazy();
+
+    midTimer++;
+    if(midTimer >= 5){
+		midTimer = 0;
+      if(bgCanvas.RUN_STATIC){
+         requestAnimFrame(tvStatic_render);
+	  }
+	}
+    /*staticCanvas(bgCanvas)*/
+
 
 },10);
 
@@ -508,7 +521,7 @@ function TICK_updateWorldCounts(){
 }
 
 function TICK_scoutSystems(){
-    
+
     if(INVENTORY["WORLDS-Neutral-CT"] > 0){
       var oldDisc = INVENTORY["WORLDS-Neutral-CT"]
       var discoverWorlds = STATS["WORLDS-Total-CT"] * ( Math.random()/2500 )
@@ -525,11 +538,11 @@ function TICK_scoutSystems(){
       STATS["WORLDS-Total-CT"] = STATS["WORLDS-Total-CT"] + discoverWorlds
       INVENTORY["MATTER"]["Discovered"]["CT"] = INVENTORY["MATTER"]["Discovered"]["CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]
     }
-    
+
 }
 function TICK_calcIndustry(){
-    
-    
+
+
    for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
         var matterType = MATTER_TYPE_LIST[i]
         var fmtsi = fmtSIunits(INVENTORY["MATTER"][matterType]["CT"])
@@ -538,7 +551,7 @@ function TICK_calcIndustry(){
         sd.displayUnits.innerHTML = fmtsi[1]+"g"
         sd.displayDiv.title = "grams: basic unit of mass\n"+fmtsi[4]
     }
- 
+
 }
 
 
@@ -556,7 +569,7 @@ function TICK_captureSystems(){
     seedCapture = Math.min( INVENTORY["WORLDS-Secure-CT"], seedCapture )
     INVENTORY["WORLDS-Fallow-CT"] = INVENTORY["WORLDS-Fallow-CT"] + seedCapture
     INVENTORY["WORLDS-Secure-CT"] = INVENTORY["WORLDS-Secure-CT"] - seedCapture
-    
+
     /*
      NOTE: later on, allow capture of neutral systems, with risk to the seedship.
     */

@@ -34,15 +34,20 @@ CRAZY_WORD_SWAPRATE:   [0.000,0.001,0.002,0.005,0.010,0.011,0.012,0.015,0.020,0.
 CRAZY_CHAR_SWAPRATE:   [0.000,0.001,0.002,0.005,0.010,0.011,0.012,0.015,0.050,0.100],
 CRAZY_CHAR_CAPRATE:    [0.000,0.002,0.004,0.007,0.020,0.021,0.022,0.030,0.070,0.150],
 
-
 CRAZY_REV_FLIPRATE:      [0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.250, 0.250, 0.250,   0.250],
 CRAZY_REV_WORD_FLIPRATE: [0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.250, 0.250, 0.250,   0.200],
 CRAZY_REV_WORD_COLORRATE:[0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.300, 0.400, 0.500,   0.500],
 CRAZY_REV_WORD_SWAPRATE: [0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.250, 0.250, 0.250,   0.250],
 CRAZY_REV_CHAR_SWAPRATE: [0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.250, 0.250, 0.250,   0.250],
-CRAZY_REV_CHAR_CAPRATE:  [0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.250, 0.250, 0.250,   0.250]
+CRAZY_REV_CHAR_CAPRATE:  [0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.250, 0.250, 0.250,   0.250],
+
+CRAZY_CONTENT_FLIPRATE:      [0.000,0.002,0.004,0.007,0.020,0.021,0.022,0.030,0.070,0.150],
+CRAZY_REV_CONTENT_FLIPRATE:  [0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.250, 0.250, 0.250,   0.250]
+
 
 }
+
+
 
 //document.getElementsByClassName("INFO_TEXT_STATIC")[0].innerHTML
 var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
@@ -65,6 +70,13 @@ for(var tti=0;tti < itsSet.length; tti++){
     for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
         tt.charSwap[cc] = ""
     }
+}
+/* .concat(document.getElementsByClassName("contentLV3")) ; */
+
+var contentSet = document.getElementsByClassName("contentUnitHolder")
+for(var tti=0;tti < contentSet.length; tti++){
+  var tt = contentSet[tti];
+  tt.CRAZY_TXFLIP = false;
 }
 
 function resetCrazyElement(tt){
@@ -101,6 +113,25 @@ function SLOWTICK_makeCrazy(){
 
     var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
     var clvl = STATS["CRAZY_LEVEL"]
+    var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
+    if(clvl > 5){
+		bgCanvas.RUN_STATIC = true;
+	} else {
+		bgCanvas.RUN_STATIC = false;
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+	}
+
+    for(var tti=0; tti < contentSet.length;tti++){
+        var ISCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_RATE"][clvl]
+        var UNCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_REVRATE"][clvl]
+        var tt = contentSet[tti];
+        if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_CONTENT_FLIPRATE"][clvl]){
+            tt.CRAZY_TXFLIP = ! tt.CRAZY_TXFLIP;
+        } else if( UNCRAZY && (tt.CRAZY_TXFLIP) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CONTENT_FLIPRATE"][clvl]){
+            tt.CRAZY_TXFLIP = false;
+        }
+        getCrazyContent(tt);
+	}
 
     for(var tti=0;tti < itsSet.length; tti++){
         var ISCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_RATE"][clvl]
@@ -162,9 +193,25 @@ function resetAllCrazy(){
         var tt = itsSet[tti];
         resetCrazyElement(tt)
     }
+    for(var tti=0; tti < contentSet.length;tti++){
+		var tt = contentSet[tti];
+        tt.CRAZY_TXFLIP = false;
+        getCrazyContent(tt);
+	}
 }
 
-
+function getCrazyContent(tt){
+   var rotString;
+   if(tt.CRAZY_TXFLIP){
+	   rotString= "rotate(180deg)"
+   } else {
+       rotString= ""
+   }
+   tt.style.transform = rotString
+   tt.style.msTransform = rotString
+   tt.style.webkitTransform = rotString
+   tt.style.mozTransform = rotString
+}
 
 function getCrazyHTML(tt){
     var out = tt.CURRENT_PLAINTEXT
