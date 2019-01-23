@@ -433,10 +433,14 @@ window.setInterval(function(){
     }
     SLOWTICK_makeCrazy();
 
+    document.getElementById("BACKGROUND_STATIC").style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
+    document.getElementById("BACKGROUND_CANVAS").style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
+
     midTimer++;
     if(midTimer >= 5){
 		midTimer = 0;
       if(bgCanvas.RUN_STATIC){
+
          requestAnimFrame(tvStatic_render);
 	  }
 	}

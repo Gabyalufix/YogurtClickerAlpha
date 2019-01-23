@@ -35,7 +35,7 @@ h2 , h3, h4, h5, h6, p {
 }
 
 body {
-
+  overflow: scroll;
 }
 
 .FOOTER {
@@ -224,8 +224,15 @@ h5 {
   height:100%;
   background-color: var(--baseBG);
   opacity: 0.95;
+  padding:0px;
+  margin:0px;
 }
 #ALL_CONTENT_CONTAINER {
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  padding:0px;
+  margin:0px;
   background-color: transparent;
   opacity: 1;
 }
