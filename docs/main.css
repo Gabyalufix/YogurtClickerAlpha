@@ -1,6 +1,7 @@
 
 :root {
   --white: #ffffff;
+  --black: #000000;
   --LT4: #f0f1f5;
   --LT3: #e1e4ea;
   --LT2: #c3c8d5;
@@ -11,6 +12,72 @@
   --DK3: #343b4b;
   --DK4: #1f232d;
   --baseBG: #c3c8d5
+}
+
+.THEME_HOLDER {
+   display: none;
+}
+
+#THEME_BLOODRED {
+  --white: #ffffff;
+  --black: #000000;
+  --LT4: #f9eceb;
+  --LT3: #f3d8d8;
+  --LT2: #e7b2b1;
+  --LT1: #db8b8a;
+  --MID: #c9514f;
+  --DK1: #bd3d3a;	
+  --DK2: #892c2a;
+  --DK3: #621f1e;
+  --DK4: #4e1918;
+  --baseBG: #e7b2b1;
+}
+#THEME_BLOODRED_INVERT {
+  --white: #000000;
+  --black: #ffffff;
+  --DK4: #f9eceb;
+  --DK3: #f3d8d8;
+  --DK2: #e7b2b1;
+  --DK1: #db8b8a;
+  --MID: #c9514f;
+  --LT1: #bd3d3a;	
+  --LT2: #892c2a;
+  --LT3: #621f1e;
+  --LT4: #4e1918;
+  --baseBG: #892c2a;
+}
+
+#THEME_SLATE_INVERT {
+  --white: #000000;
+  --black: #ffffff;
+  --DK4: #f0f1f5;
+  --DK3: #e1e4ea;
+  --DK2: #c3c8d5;
+  --DK1: #a5adc0;
+  --MID: #7883a1;
+  --LT1: #5e6a87;	
+  --LT2: #485167;
+  --LT3: #343b4b;
+  --LT4: #1f232d;
+  --baseBG: #485167;
+}
+
+#THEME_SLATE {
+  --white: #ffffff;
+  --LT4: #f0f1f5;
+  --LT3: #e1e4ea;
+  --LT2: #c3c8d5;
+  --LT1: #a5adc0;
+  --MID: #7883a1;
+  --DK1: #5e6a87;	
+  --DK2: #485167;
+  --DK3: #343b4b;
+  --DK4: #1f232d;
+  --baseBG: #c3c8d5
+}
+
+.contentUnitHolder{
+  color: var(--black);
 }
 
 /*
@@ -129,6 +196,7 @@ h5 {
   border-width: 0 2px 2px 2px;
   border-radius: 0 0 10px 10px ;
   border-color:var(--DK4);
+  color: var(--black);
   /*margin: 0px 5px 0px 10px;
   border-style: outset;
   border-width: 0 2px 2px 2px;
@@ -149,7 +217,8 @@ h5 {
   overflow: hidden;
   background-color: var(--LT1);
   margin: 0px 5px 0px 10px;
-  
+  color: var(--black);
+
   border-style: solid;
   border-width: 0 2px 2px 2px;
   border-radius: 0 0 10px 10px ;
