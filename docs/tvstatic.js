@@ -66,11 +66,13 @@
 			ctx = canvas.getContext('2d');
 			ctx.fillStyle = '#000';
 			tvStatic_resize();
+
 			/*requestAnimFrame(render);*/
 		}
 		function tvStatic_resize() {
 			canvas.width = window.innerWidth;
 			canvas.height = window.innerHeight;
+
 		}
 		function tvStatic_render() {
 			/*requestAnimFrame(render);*/

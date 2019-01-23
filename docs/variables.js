@@ -42,8 +42,10 @@ CRAZY_REV_CHAR_SWAPRATE: [0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.250, 0.25
 CRAZY_REV_CHAR_CAPRATE:  [0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.250, 0.250, 0.250,   0.250],
 
 CRAZY_CONTENT_FLIPRATE:      [0.000,0.002,0.004,0.007,0.020,0.021,0.022,0.030,0.070,0.150],
-CRAZY_REV_CONTENT_FLIPRATE:  [0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.250, 0.250, 0.250,   0.250]
+CRAZY_REV_CONTENT_FLIPRATE:  [0.750,  0.600, 0.500, 0.500, 0.500, 0.50, 0.50, 0.50, 0.50,   0.50],
 
+CRAZY_ALL_SCARE:      [0.000,0.001,0.001,0.002,0.002,0.005,0.007,0.01,0.05,0.25],
+CRAZY_REV_SCARE:      [1.0,0.9,0.75,0.75,0.5,0.5,0.65,0.45,0.25,0.1]
 
 }
 
@@ -107,11 +109,17 @@ function CRAZY_randomChar(){
 function CRAZY_randomWord(){
     return STATICVAR_HOLDER["CRAZY_WORDS"][Math.floor(Math.random()*STATICVAR_HOLDER["CRAZY_WORDS"].length)]
 }
+function randLT(num) {
+    return Math.floor(Math.random() * num);
+}
+
+var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
+var allContentContainer = document.getElementById("ALL_CONTENT_CONTAINER");
+var scareContainer = document.getElementById("SCARETEXT");
 
 function SLOWTICK_makeCrazy(){
     if(STATS["CRAZY_ON"]){
 
-    var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
     var clvl = STATS["CRAZY_LEVEL"]
     var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
     if(clvl > 5){
@@ -119,6 +127,22 @@ function SLOWTICK_makeCrazy(){
 	} else {
 		bgCanvas.RUN_STATIC = false;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
+	}
+/*wout.fontcolor(tt.wordColor[ww])*/
+	if(Math.random() < STATICVAR_HOLDER["CRAZY_ALL_SCARE"][clvl]){
+       /*allContentContainer.style.opacity = 0.25;*/
+       scareContainer.style.display="block";
+       scareContainer.innerHTML = CRAZY_randomWord().fontcolor(CRAZY_randomColor())
+       for(var iii=0;iii<randLT(6);iii++){
+		   scareContainer.innerHTML = scareContainer.innerHTML+"<BR>"+"<BR>".repeat(randLT(3))+" ".repeat(randLT(5))+CRAZY_randomWord().fontcolor(CRAZY_randomColor())
+	   }
+       scareContainer.style.padding = randLT(45)+"% 0% 0% "+randLT(45)+"%"
+       /*var ht = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight
+       var wd = document.getElementById("ALL_CONTENT_CONTAINER").offsetWidth
+       scareContainer.style.padding = (ht/4)+"px 0px "+(ht/4)+"px "+(wd/4)+"px";*/
+	} else if(scareContainer.style.display=="block" && Math.random() < STATICVAR_HOLDER["CRAZY_REV_SCARE"][clvl]) {
+       allContentContainer.style.opacity = 1;
+       scareContainer.style.display="none";
 	}
 
     for(var tti=0; tti < contentSet.length;tti++){
@@ -198,6 +222,10 @@ function resetAllCrazy(){
         tt.CRAZY_TXFLIP = false;
         getCrazyContent(tt);
 	}
+    allContentContainer.style.opacity = 1;
+    scareContainer.style.display="none";
+    bgCanvas.RUN_STATIC = false;
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function getCrazyContent(tt){
