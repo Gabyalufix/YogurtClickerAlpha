@@ -342,7 +342,7 @@ h5 {
 #DEATH_NOTICE {
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 100px;
   color: var(--consoleGreen)
   pointer-events: none;
   text-shadow:

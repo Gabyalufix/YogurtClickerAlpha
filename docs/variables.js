@@ -214,13 +214,14 @@ function SLOWTICK_makeCrazy(){
       canvasMask.style.opacity = (currOpacity + 0.01)
     }
     var fgOpacity = parseFloat(fgCanvas.style.opacity)
-    if(clvl >= 9){
+    if(clvl >= 9 && STATS["DEATH_SPIRAL"]<100){
       fgCanvas.style.opacity = Math.max( STATS["DEATH_SPIRAL"] / 100,fgCanvas.style.opacity)
       fgMask.style.opacity = STATS["DEATH_SPIRAL"] / 100
       if(STATS["DEATH_SPIRAL"]>90){
         deathNoticeContainer.style.opacity = (STATS["DEATH_SPIRAL"]-90) / 10
       }
-      if(STATS["DEATH_SPIRAL"]>100){
+    } else if(STATS["DEATH_SPIRAL"]>100){
+      if(STATS["DEATH_SPIRAL"]>110){
          STATS["CRAZY_LEVEL"] = 0;
          document.getElementById("CHEAT_LESSCRAZY").disable = true;
          document.getElementById("CHEAT_MORECRAZY").disable = false;
@@ -347,6 +348,8 @@ function resetAllCrazy(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     canvasMask.style.opacity = 1.0;
     fgCanvas.style.opacity = 0.0;
+    fgMask.style.opacity = 0.0;
+    deathNoticeContainer.style.opacity = 0.0;
 }
 
 function getCrazyContent(tt){
