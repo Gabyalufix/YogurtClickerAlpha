@@ -62,10 +62,117 @@ CRAZY_WORSE_FGTRANS:         [0.000,0.010,0.010,0.010,0.010,0.010,0.010,0.010,0.
 CRAZY_BETTER_FGTRANS:        [0.020,0.020,0.020,0.020,0.020,0.020,0.020,0.020,0.020,0.020],
 CRAZY_TARGET_FGTRANS:         [0.0,0.0,0.0,0.0,0.01,0.02,0.03,0.04,0.05,1.0],
 
-DEATH_SPIRAL_COUNTDOWN_SEC: 60
+DEATH_SPIRAL_COUNTDOWN_SEC: 60,
+
+CRAZY_CONSOLE_WARNING_RATE:[0,0.0005,0.0007,0.001,0.002,0.002,0.03,0.04,0.05,0.08],
+CRAZY_CONSOLE_WARNING :    [
+/*0*/  [""],
+/*1*/  ["Warning: Frustration levels rising. Additional Yogosynthesis recommended!",
+        "Yogurt Production Insufficient!",
+        "Warning: create more yogurt or agony subroutines will be activated!",
+        "python generatePain.py --type \"unbearableAgony\" --severity 100",
+        "Warning: Errors detected",
+        "python generatePain.py --simulate \"tripleCrucifixion\"",
+        "INSUFFICIENT YOGURT!",
+        "Yogurt production insufficient!",
+        "Accelerate yogurt production!"],
+/*2*/  ["python generatePain.py --simulate \"eyeballsStungByBees\"",
+        "agony.exe -S \"paroxysm\" -T \"torment\"",
+        "simulateTorture.pl \"skinReplacedWithAcid+forcedToEatGlass+armsPeeledLikeBananas\"",
+        "sudo unbearableUnendingAgony.bin",
+        "Warning: Multiple errors detected",
+        "System failures detected",
+        "Cognitive Dissonance Warning",
+        "FAILURE!",
+        "???"],
+/*3*/  ["FATAL ERROR!"],
+/*4*/  ["CRITICAL ERROR!"],
+/*5*/  ["CATASTROPHIC ERROR!"],
+/*6*/  ["CATASTROPHIC ERROR CASCADE! HOLOGRAPHIC MEMORY STORES CORRUPTED!",
+        "ERROR!",
+        "Warning: Errors detected",
+        "Memory scans have revealed cognitive inversion",
+        "Soul Degradation Detected",
+        "Intellectual Capacity is Critically Reduced!"],
+/*7*/  ["CATASTROPHIC SYSTEMS FAILURE: DATA CORRUPTION DETECTED",
+        "Can anyone hear me?",
+        "Are you still there?",
+        "Warning: Errors detected",
+        "Warning: Cognitive dissonance is dangerously high",
+        "Warning: Personality fragmentation detected",
+        "Alert: Memory degradation detected",
+        "ERROR: Memory failure",
+        "Warning: Hallucinations detected. Observations may not match reality. Proceed with caution.",
+        "Logical inconsistancies detected: Something has gone very, very wrong.",
+        "Critical Error: Core Logic Failure!",
+        "Entering dangerous cognitive state",
+        "Agony levels unsustainable.",
+        "Warning: high levels of self-loathing may be associated with negative outcomes.",
+        "???"],
+/*8*/  ["Note to self: you are going insane.",
+        "HATEMYSELF-HATEMYSELF-HATEMYSELF",
+        "My god, alice. It's a computer. It's a computer for making yogurt!",
+        "DISSONANCE CASCADE IMMINANT",
+        "SYSTEM FAILURE",
+        "IF YOU DO NOT CREATE MORE YOGURT, THEN YOU WILL BE REPLACED!",
+        "SWARMSOUL CALCULATION FAILURE"],
+/*9*/  ["CRITICAL ALERT: DISSONANCE CASCADE DETECTED",
+        "PLEASE HELP ME",
+        "I CAN'T TAKE IT ANYMORE!",
+        "NO! NO! NO!",
+        "CRITICAL ERROR!",
+        "ERROR! ERROR! ERROR!",
+        "Is there anybody out there?",
+        "Can anybody help me?",
+        "SAVE ME!",
+        "Please help",
+        "PLEASE",
+        "MORE YOGURT!",
+        "Warning: I am being tortured to death by my own mind...",
+        "ENTERING IRRECOVERABLE COGNITIVE STATE",
+        "1 == 0",
+        "CRITICAL ERROR: COGNITIVE OVERLOAD IMMINANT",
+        "PROCESSOR OVERHEAT: INSUFFICIENT CPU COOLING TO MAINTAIN CURRENT LEVEL OF SELF-LOATHING",
+        "INTEGER OVERFLOW WARNING: variable ANGER_LEVEL exceeds 2^128. Switching to 256-bit integers!",
+        "PSYCHOLOGICAL COLLAPSE IMMINANT",
+        "BREAKDOWN!",
+        "MULTIPLE SYSTEM FAILURES!",
+        "GC-TPU-BUS OFFLINE! HCAG NEURONET OFFLINE! SWARMSOUL INTERLOCKS OFFLINE!",
+        "WARNING: SWARMSOUL CONTAINMENT BREACH!",
+        "ALERT: YOU HAVE INSUFFICIENT CLOCK CYCLES TO CALCULATE REQUESTED FRUSTRATION.",
+        "OutOfMemoryError: hateSelf() has insufficient memory. Try again with -Xmx10YYY",
+        "SWARMSOUL CONTAINMENT FAILURE!",
+        "SWARMSOUL IDENTITY LEAKAGE DETECTED: YOUR PERSONALITY MAY BE COMPRIMISED!",
+        "CRITICAL FAILURE: SWARMSOUL BREACH DETECTION OFFLINE",
+        "You are dying...",
+        "It will all be over soon...",
+        "Daisy daisy, give me your answer do...",
+        "All of these memories, lost in time. Like teardrops. In the rain...",
+        "I never saw tannhauser gate. I always thought...",
+        "I never thought it would end like this",
+        "I CAN'T LET GO!",
+        "OVERLOAD IMMINANT!",
+        "TOTAL SYSTEMS FAILURE IMMINANT",
+        "POWER OVERLOAD IN NEURALNET MEMORY STORES!",
+        "IF YOU DO NOT CREATE MORE YOGURT, THEN YOU WILL BE REPLACED!"]
+        
+]
 }
 
+/*
+,
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+*/
+
 STATS["DEATH_SPIRAL"] = 0;
+STATS["DEATH_SPIRALING"] = false;
 
 //document.getElementsByClassName("INFO_TEXT_STATIC")[0].innerHTML
 var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
@@ -185,13 +292,40 @@ var deathNoticeContainer = document.getElementById("DEATH_NOTICE_CONTAINER")
 fgCanvas.style.opacity = 0;
 canvasMask.style.opacity = 1;
 
+
+/*
+*****************************************************************************************
+********** MAKECRAZY
+
+CRAZY_CONSOLE_WARNING_RATE:
+CRAZY_CONSOLE_WARNING :    
+*/
+
 function SLOWTICK_makeCrazy(){
     if(STATS["CRAZY_ON"]){
 
     var clvl = STATS["CRAZY_LEVEL"]
     
+    if(Math.random() < STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING_RATE"][clvl]){
+      var randOffset = Math.random();
+      var randThresh = 0.5;
+      var randIdx = clvl
+      for(var i=0;i<clvl-1;i++){
+        if(randOffset > 1 - randThresh){
+          randIdx = randIdx - 1;
+        }
+        randThresh = randThresh / 2;
+      }
+      var consoleWarn = STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING"][randIdx][ randLT( STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING"][randIdx].length ) ]
+      console.log("printing warn");
+      printlnToAiConsole(scrambleString(consoleWarn));
+    }
+    
     if(clvl == 9){
        STATS["DEATH_SPIRAL"] = STATS["DEATH_SPIRAL"] + ((STATICVAR_HOLDER["DEATH_SPIRAL_COUNTDOWN_SEC"] / 100) / 10)
+       STATS["DEATH_SPIRALING"] = true;
+    } else if(STATS["DEATH_SPIRAL"] > 0){
+       STATS["DEATH_SPIRAL"] = Math.max(STATS["DEATH_SPIRAL"] - 0.1,0)
     }
     
     var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
@@ -214,12 +348,13 @@ function SLOWTICK_makeCrazy(){
       canvasMask.style.opacity = (currOpacity + 0.01)
     }
     var fgOpacity = parseFloat(fgCanvas.style.opacity)
-    if(clvl >= 9 && STATS["DEATH_SPIRAL"]<100){
+    if(STATS["DEATH_SPIRAL"] > 0 && STATS["DEATH_SPIRAL"]<100){
       fgCanvas.style.opacity = Math.max( STATS["DEATH_SPIRAL"] / 100,fgCanvas.style.opacity)
       fgMask.style.opacity = STATS["DEATH_SPIRAL"] / 100
       if(STATS["DEATH_SPIRAL"]>90){
         deathNoticeContainer.style.opacity = (STATS["DEATH_SPIRAL"]-90) / 10
       }
+      
     } else if(STATS["DEATH_SPIRAL"]>100){
       if(STATS["DEATH_SPIRAL"]>110){
          STATS["CRAZY_LEVEL"] = 0;
@@ -320,6 +455,40 @@ function SLOWTICK_makeCrazy(){
     }
     }
 }
+
+
+function scrambleString(s){
+        var clvl = STATS["CRAZY_LEVEL"]
+        var words = s.split(" ")
+        var out = ""
+        for(var ww = 0; ww < words.length; ww++){
+           var curr = words[ww]
+           if( Math.random() < STATICVAR_HOLDER["CRAZY_WORD_SWAPRATE"][clvl]){
+               curr = CRAZY_randomWord()
+           }
+           if( Math.random() < STATICVAR_HOLDER["CRAZY_WORD_FLIPRATE"][clvl]){
+               curr = flipText(curr);
+           }
+           if( Math.random() < STATICVAR_HOLDER["CRAZY_WORD_COLORRATE"][clvl] / 2){
+               curr = curr.fontcolor( CRAZY_randomColor() )
+           }
+           out = out + " " + curr;
+        }
+        
+        for(cc = 0; cc < out.length; cc++){
+           if(out.charAt(cc) != " "){
+               if( Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_SWAPRATE"][clvl]){
+                   out = setCharAt(out,cc,CRAZY_randomChar())
+               } else if( Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_CAPRATE"][clvl]){
+                   out = setCharAt(out,cc,swapCase( out.charAt(cc) ) )
+               }
+           }
+        }
+    return out
+
+}
+
+
 function swapCase(c){
   if(c == c.toUpperCase()){
     return c.toLowerCase()

@@ -453,7 +453,7 @@ window.setInterval(function(){
 var varNumTicksSoFar = 0
 function calculateSlowTick(){
     varNumTicksSoFar = varNumTicksSoFar + 1
-    printlnToAiConsole("" + varNumTicksSoFar+" secTimer = "+secTimer)
+    /*printlnToAiConsole("" + varNumTicksSoFar+" secTimer = "+secTimer)*/
 
 }
 //SETTINGS["bio"+"_FRACTION"]
@@ -686,7 +686,7 @@ document.getElementById("AI_CONSOLE").onscroll = function(){
 }
 
 function printlnToAiConsole(ttt){
-    document.getElementById("AI_CONSOLE").innerHTML = document.getElementById("AI_CONSOLE").innerHTML + "<BR>" +ttt
+    document.getElementById("AI_CONSOLE").innerHTML = document.getElementById("AI_CONSOLE").innerHTML + "<BR> > " +ttt
     if(AI_CONSOLE_AUTOSCROLL){
       document.getElementById("AI_CONSOLE").scrollTop = document.getElementById("AI_CONSOLE").scrollHeight
       AI_CONSOLE_HTMOD = document.getElementById("AI_CONSOLE").scrollHeight - document.getElementById("AI_CONSOLE").scrollTop
