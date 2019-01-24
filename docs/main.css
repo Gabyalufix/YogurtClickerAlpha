@@ -11,7 +11,8 @@
   --DK2: #485167;
   --DK3: #343b4b;
   --DK4: #1f232d;
-  --baseBG: #c3c8d5
+  --baseBG: #c3c8d5;
+  --consoleGreen: #33FF00;
 }
 
 .THEME_HOLDER {
@@ -285,6 +286,19 @@ h5 {
   border: 0px solid transparent;
   position:relative;
 }
+#FOREGROUND_CANVAS {
+  height:100%;
+  width:100%;
+  padding:0px;
+  margin:0px;
+  border: 0px solid transparent;
+  position:fixed;
+  top:0px;
+  left:0px;
+  z-index: 99999; /* Sit on top */
+  pointer-events: none;
+  opacity: 0;
+}
 #BACKGROUND_STATIC {
   position:absolute;
   top: 0px;
@@ -295,6 +309,47 @@ h5 {
   opacity: 0.95;
   padding:0px;
   margin:0px;
+}
+#FOREGROUND_STATIC {
+  position:fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height:100%;
+  background-color: var(--white);
+  opacity: 0;
+  padding:0px;
+  margin:0px;
+  z-index: 9999; /* Sit on top */
+  pointer-events: none;
+}
+#DEATH_NOTICE_CONTAINER {
+  position:fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height:100%;
+  background-color: var(--white);
+  opacity: 0;
+  padding:0px;
+  margin:0px;
+  z-index: 99999999; /* Sit on top */
+  pointer-events: none;
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+#DEATH_NOTICE {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 18px;
+  color: var(--consoleGreen)
+  pointer-events: none;
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
 }
 #SCARETEXT {
   position:fixed;

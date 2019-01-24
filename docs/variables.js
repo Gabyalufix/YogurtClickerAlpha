@@ -25,7 +25,7 @@ CRAZY_CHARS:"ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*|+abcdefghijklmnopqrstuvwxyz",
 CRAZY_COLORS:["#4286f4","#47d84c","#a1a33c","#a23b3b","#891313","#ff0000","#ff00cb","#6e00ff","#ffcc00","#ff7b00"],
 
 CRAZY_RATE:   [0,    0.0003,0.0003,0.0003,0.0003,0.0004,0.0004,0.0006,0.0007,0.02],
-CRAZY_REVRATE:[0.005,0.005,0.001,0.001,0.001,0.002,0.002,0.0030,0.0010,0.00005],
+CRAZY_REVRATE:[0.050,  0.0500, 0.0200, 0.0100, 0.0100, 0.010, 0.010, 0.0090, 0.0090,   0.0090],
 
 CRAZY_FLIPRATE:        [0.000,0.010,0.020,0.050,0.100,0.110,0.120,0.150,0.150,0.150],
 CRAZY_WORD_FLIPRATE:   [0.000,0.001,0.002,0.005,0.010,0.011,0.012,0.015,0.020,0.030],
@@ -42,7 +42,7 @@ CRAZY_REV_CHAR_SWAPRATE: [0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.250, 0.25
 CRAZY_REV_CHAR_CAPRATE:  [0.750,  0.600, 0.500, 0.400, 0.300, 0.250, 0.250, 0.250, 0.250,   0.250],
 
 CRAZY_CONTENT_FLIPRATE:      [0.000,0.00002,0.00004,0.00007,0.00020,0.00021,0.00022,0.00030,0.00070,0.00150],
-CRAZY_REV_CONTENT_FLIPRATE:  [0.00750,  0.00600, 0.00500, 0.00500, 0.00500, 0.0050, 0.0050, 0.0050, 0.0050,   0.0050],
+CRAZY_REV_CONTENT_FLIPRATE:  [0.050,  0.0500, 0.0200, 0.0100, 0.0100, 0.010, 0.010, 0.0090, 0.0090,   0.0090],
 
 CRAZY_CONTENT_THEME:      [0.0000,0.0002,0.00004,0.00007,0.00020,0.00021,0.00022,0.00030,0.00070,0.00150],
 CRAZY_REV_CONTENT_THEME:  [0.00750,  0.00600, 0.00500, 0.00500, 0.00500, 0.0050, 0.0050, 0.0050, 0.0050,   0.0015],
@@ -52,11 +52,20 @@ CRAZY_CONTENT_HIDE:      [0.000,0.00001,0.00003,0.00004,0.00005,0.0001,0.0005,0.
 CRAZY_REV_CONTENT_HIDE:  [0.10,  0.10, 0.10, 0.08, 0.075, 0.07, 0.07, 0.05, 0.05,   0.05],
 
 CRAZY_ALL_SCARE:      [0.000,0.001,0.001,0.002,0.002,0.005,0.007,0.01,0.05,0.25],
-CRAZY_REV_SCARE:      [1.0,0.9,0.75,0.75,0.5,0.5,0.65,0.45,0.25,0.1]
+CRAZY_REV_SCARE:      [1.0,0.9,0.75,0.75,0.5,0.5,0.65,0.45,0.25,0.1],
 
+CRAZY_WORSE_BGTRANS:         [0.000,0.010,0.010,0.010,0.010,0.010,0.010,0.010,0.010,0.010],
+CRAZY_BETTER_BGTRANS:        [0.020,0.020,0.020,0.020,0.020,0.020,0.020,0.020,0.020,0.020],
+CRAZY_TARGET_BGTRANS:         [1.0,1.0,1.0,1.0,0.99,0.97,0.94,0.90,0.50,0.0],
+
+CRAZY_WORSE_FGTRANS:         [0.000,0.010,0.010,0.010,0.010,0.010,0.010,0.010,0.010,0.010],
+CRAZY_BETTER_FGTRANS:        [0.020,0.020,0.020,0.020,0.020,0.020,0.020,0.020,0.020,0.020],
+CRAZY_TARGET_FGTRANS:         [0.0,0.0,0.0,0.0,0.01,0.02,0.03,0.04,0.05,1.0],
+
+DEATH_SPIRAL_COUNTDOWN_SEC: 60
 }
 
-
+STATS["DEATH_SPIRAL"] = 0;
 
 //document.getElementsByClassName("INFO_TEXT_STATIC")[0].innerHTML
 var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
@@ -168,18 +177,61 @@ function randLT(num) {
 var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
 var allContentContainer = document.getElementById("ALL_CONTENT_CONTAINER");
 var scareContainer = document.getElementById("SCARETEXT");
+var canvasMask = document.getElementById("BACKGROUND_STATIC");
+var fgCanvas = document.getElementById("FOREGROUND_CANVAS")
+var fgMask = document.getElementById("FOREGROUND_STATIC")
+var deathNoticeContainer = document.getElementById("DEATH_NOTICE_CONTAINER")
+
+fgCanvas.style.opacity = 0;
+canvasMask.style.opacity = 1;
 
 function SLOWTICK_makeCrazy(){
     if(STATS["CRAZY_ON"]){
 
     var clvl = STATS["CRAZY_LEVEL"]
+    
+    if(clvl == 9){
+       STATS["DEATH_SPIRAL"] = STATS["DEATH_SPIRAL"] + ((STATICVAR_HOLDER["DEATH_SPIRAL_COUNTDOWN_SEC"] / 100) / 10)
+    }
+    
     var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
-    if(clvl > 5){
+    if(clvl > 4){
         bgCanvas.RUN_STATIC = true;
     } else {
         bgCanvas.RUN_STATIC = false;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
+    var currOpacity = parseFloat(canvasMask.style.opacity)
+    if(currOpacity > STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_WORSE_BGTRANS"][clvl]){
+      console.log("WORSE");
+      if(currOpacity + 0.1 < STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl]){
+        canvasMask.style.opacity = (currOpacity - 0.04)
+      } else {
+        canvasMask.style.opacity = (currOpacity - 0.01)
+      }
+    } else if(currOpacity < STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_BETTER_BGTRANS"][clvl]){
+      console.log("BETTER");
+      canvasMask.style.opacity = (currOpacity + 0.01)
+    }
+    var fgOpacity = parseFloat(fgCanvas.style.opacity)
+    if(clvl >= 9){
+      fgCanvas.style.opacity = Math.max( STATS["DEATH_SPIRAL"] / 100,fgCanvas.style.opacity)
+      fgMask.style.opacity = STATS["DEATH_SPIRAL"] / 100
+      if(STATS["DEATH_SPIRAL"]>90){
+        deathNoticeContainer.style.opacity = (STATS["DEATH_SPIRAL"]-90) / 10
+      }
+      if(STATS["DEATH_SPIRAL"]>100){
+         STATS["CRAZY_LEVEL"] = 0;
+         document.getElementById("CHEAT_LESSCRAZY").disable = true;
+         document.getElementById("CHEAT_MORECRAZY").disable = false;
+         resetAllCrazy();
+      }
+    } else if(fgOpacity < STATICVAR_HOLDER["CRAZY_TARGET_FGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_WORSE_FGTRANS"][clvl]){
+      fgCanvas.style.opacity = (fgOpacity + 0.01)
+    } else if(fgOpacity > STATICVAR_HOLDER["CRAZY_TARGET_FGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_BETTER_FGTRANS"][clvl]){
+      fgCanvas.style.opacity = (fgOpacity - 0.01)
+    }
+    
     /*wout.fontcolor(tt.wordColor[ww])*/
     if(Math.random() < STATICVAR_HOLDER["CRAZY_ALL_SCARE"][clvl]){
        /*allContentContainer.style.opacity = 0.25;*/
@@ -207,13 +259,13 @@ function SLOWTICK_makeCrazy(){
             tt.CRAZY_TXFLIP = false;
         }
         if( Math.random() < STATICVAR_HOLDER["CRAZY_CONTENT_THEME"][clvl]){
-            console.log("Setting crazy theme!")
+            /*console.log("Setting crazy theme!")*/
             setCrazyTheme(tt);
         } else if( (tt.THEME != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CONTENT_THEME"][clvl]){
             unsetElementTheme(tt);
         }
         if( Math.random() < STATICVAR_HOLDER["CRAZY_CONTENT_HIDE"][clvl]){
-            console.log("Setting crazy HIDE!")
+            /*console.log("Setting crazy HIDE!")*/
             tt.style.opacity=0;
         } else if( (tt.style.opacity==0) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CONTENT_HIDE"][clvl]){
             tt.style.opacity=1;
@@ -293,6 +345,8 @@ function resetAllCrazy(){
     scareContainer.style.display="none";
     bgCanvas.RUN_STATIC = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvasMask.style.opacity = 1.0;
+    fgCanvas.style.opacity = 0.0;
 }
 
 function getCrazyContent(tt){
