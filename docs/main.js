@@ -38,8 +38,8 @@ CONSTRUCTION_BUFFER["WORLDS_DECON"] = {}
 
 ///////////////////////////////
 ////Initialize starting stats
-STATS["WORLD_BUILD_TIME"] = {Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000}
-STATS["WORLD_DECON_TIME"]={Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000}
+STATS["WORLD_BUILD_TIME"] = {Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0}
+STATS["WORLD_DECON_TIME"]={Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0}
 
 STATS["COST-WORLDBUILD-Fallow"] = [["WORLDS-Secure-CT",1]];
 STATS["COST-WORLDBUILD-Omni"] = [["WORLDS-Fallow-CT",1]];
@@ -47,6 +47,11 @@ STATS["COST-WORLDBUILD-Bot"] = [["WORLDS-Fallow-CT",1]];
 STATS["COST-WORLDBUILD-Green"] = [["WORLDS-Fallow-CT",1]];
 STATS["COST-WORLDBUILD-Comp"] = [["WORLDS-Fallow-CT",1]];
 STATS["COST-WORLDBUILD-Hub"] = [["WORLDS-Fallow-CT",1]];
+STATS["COST-WORLDBUILD-Slag"] = [["WORLDS-Fallow-CT",1]];
+STATS["COST-WORLDBUILD-Seedres"] = [["WORLDS-Fallow-CT",1]];
+
+
+
 
 STATS["COST-WORLDDECON-Fallow"] = [["WORLDS-Secure-CT",-1]];
 STATS["COST-WORLDDECON-Omni"] = [["WORLDS-Fallow-CT",-1]];
@@ -54,6 +59,8 @@ STATS["COST-WORLDDECON-Bot"] = [["WORLDS-Fallow-CT",-1]];
 STATS["COST-WORLDDECON-Green"] = [["WORLDS-Fallow-CT",-1]];
 STATS["COST-WORLDDECON-Comp"] = [["WORLDS-Fallow-CT",-1]];
 STATS["COST-WORLDDECON-Hub"] = [["WORLDS-Fallow-CT",-1]];
+STATS["COST-WORLDDECON-Slag"] = [["WORLDS-Fallow-CT",-1]];
+STATS["COST-WORLDDECON-Seedres"] = [["WORLDS-Fallow-CT",-1]];
 
 
 STATS["CONVERSIONS"] = {}
@@ -62,6 +69,8 @@ STATS["CONVERSIONS"]["opToSoul"] =   (0.000000001)
 STATS["CONVERSIONS"]["sunToOp"] =    (3745454516355)
 STATS["CONVERSIONS"]["opToByte"] =   (0.232)
 STATS["CONVERSIONS"]["gramsPerWorld"] = 2e30
+STATS["CONVERSIONS"]["collectPerSunPerTick"] = 1.5e15
+STATS["CONVERSIONS"]["processPerSunPerTick"] = 5.2e15
 
 
 PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","think","soul","ship"]
@@ -73,8 +82,8 @@ for(var i=0;i<PRODUCTIVITY_STATS.length;i++){
   STATS["PRODUCTIVITY_RATING"][stat] = 1
   STATS["PRODUCTIVITY_MULT"][stat] = 1
 }
-STATS["PRODUCTIVITY_RATING"]["think"] = Math.log10(1000000000)
-STATS["PRODUCTIVITY_RATING"]["soul"] = Math.log10(10000)
+STATS["PRODUCTIVITY_RATING"]["think"] = (1000000000)
+STATS["PRODUCTIVITY_RATING"]["soul"] = (10000)
 
 //Productivity: <span id="green_PRODUCTIVITY_DISPLAY"></span>
 
@@ -116,7 +125,7 @@ function updatePctSliderDisplayHelper(ss){
   var fid = ss.fid;
   var vv = ss.value
   var tt = (vv / 10000) * STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid]
-  var fmtsi = fmtSI(tt)
+  var fmtsi = fmtSIunits(tt)
   ss.sdisplay.innerHTML = (vv / 100).toFixed(1) + "% ["+fmtsi[0]
   ss.sdisplayUnits.innerHTML = fmtsi[1]+PCTSLIDER_DISPLAYUNITS[fid]+"]"
   ss.sdisplayDiv.title = PCTSLIDER_DISPLAYUNITSEXPLAIN[fid]+"\n"+fmtsi[4]
@@ -243,13 +252,12 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
 MATTER_TYPE_LIST = ["Discovered","Collected","Processed","Waste","Heat","Yogurt"]
 
 
-INVENTORY["MATTER"]={}
+/*INVENTORY["MATTER"]={}*/
 for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
    var matterType = MATTER_TYPE_LIST[i]
-   INVENTORY["MATTER"][matterType] = {}
-   INVENTORY["MATTER"][matterType]["CT"] = 0
+   INVENTORY["MATTER-"+matterType+"-CT"] = 0
    var matterDisplay = document.getElementById("RESOURCE_DISPLAY_MATTER_"+matterType)
-   INVENTORY["MATTER"][matterType]["DISPLAY"] = matterDisplay
+   INVENTORY["MATTER-"+matterType+"-DISPLAY"] = matterDisplay
    matterDisplay.matterType = matterType
    matterDisplay.displayUnits = document.getElementById(matterType+"_MATTER_UNITS")
    matterDisplay.displayDiv = document.getElementById(matterType+"_MATTER_DIV")
@@ -263,10 +271,10 @@ for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
 // Dyson Sphere / World Management:
 
 
-WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure"]
+WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
 WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false,false]
 
-DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub"]
+DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub","Slag","Seedres"]
 
 for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
     var worldType = WORLD_TYPE_LIST[i]
@@ -277,6 +285,7 @@ for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
     CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType] = []
     CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType] = []
 }
+INVENTORY["WORLDS-"+"Omni"+"-CT"] = 0
 
 for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    var worldType = DYSON_TYPE_LIST[i]
@@ -491,14 +500,20 @@ STATS["PRODUCTIVITY"] = {};
 
 function TICK_updateStats(){
 
-  STATS["PRODUCTIVITY_RATING"]["think"] = STATS["CONVERSIONS"]["sunToOp"]   * INVENTORY["WORLDS-Comp-CT"] * STATS["PRODUCTIVITY_MULT"]["think"]
-  STATS["PRODUCTIVITY_RATING"]["bio"]   = STATS["CONVERSIONS"]["sunToByte"] * INVENTORY["WORLDS-Green-CT"] * STATS["PRODUCTIVITY_MULT"]["green"] * SETTINGS["green_FRACTION"][0]
+  STATS["PRODUCTIVITY_RATING"]["bot"]   = INVENTORY["WORLDS-Bot-CT"] * STATS["PRODUCTIVITY_MULT"]["bot"]
+  STATS["PRODUCTIVITY_RATING"]["green"]   = INVENTORY["WORLDS-Green-CT"] * STATS["PRODUCTIVITY_MULT"]["green"]
+  STATS["PRODUCTIVITY_RATING"]["comp"]   = INVENTORY["WORLDS-Comp-CT"] * STATS["PRODUCTIVITY_MULT"]["comp"]
+
+  STATS["PRODUCTIVITY_RATING"]["ship"]   = STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]
+  STATS["PRODUCTIVITY_RATING"]["think"] = STATS["CONVERSIONS"]["sunToOp"]   * STATS["PRODUCTIVITY_RATING"]["comp"] 
+  STATS["PRODUCTIVITY_RATING"]["bio"]   = STATS["CONVERSIONS"]["sunToByte"] * STATS["PRODUCTIVITY_RATING"]["green"] * SETTINGS["green_FRACTION"][0]
   STATS["PRODUCTIVITY_RATING"]["eng"]   = STATS["CONVERSIONS"]["opToByte"]  * STATS["PRODUCTIVITY_RATING"]["think"] * SETTINGS["think_FRACTION"][1]
   STATS["PRODUCTIVITY_RATING"]["psy"]   = STATS["CONVERSIONS"]["opToSoul"]  * STATS["PRODUCTIVITY_MULT"]["soul"] * SETTINGS["soul_FRACTION"][0]
 
   for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
       var fid = PCTSLIDER_FIELDS[sfi]
-      document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fmtSI( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])+PCTSLIDER_DISPLAYUNITS[fid]
+      var fsi = fmtSIunits( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])
+      document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fsi[0]+" "+fsi[1]+PCTSLIDER_DISPLAYUNITS[fid]
       updatePctSliderDisplay(PCTSLIDERS[fid]["sliderElem"][0])
   }
   document.getElementById("DEBUG_CRAZY_LEVEL_DISPLAY").innerHTML = STATS["CRAZY_LEVEL"]
@@ -532,7 +547,7 @@ function TICK_scoutSystems(){
       INVENTORY["WORLDS-Neutral-CT"] = INVENTORY["WORLDS-Neutral-CT"] + discoverWorlds
       var newDiscWorlds = Math.floor(INVENTORY["WORLDS-Neutral-CT"]) - Math.floor(oldDisc)
       STATS["WORLDS-Total-CT"] = STATS["WORLDS-Total-CT"] + discoverWorlds
-      INVENTORY["MATTER"]["Discovered"]["CT"] = INVENTORY["MATTER"]["Discovered"]["CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]
+      INVENTORY["MATTER-Discovered-CT"] = INVENTORY["MATTER-Discovered-CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]
     }
     if(INVENTORY["WORLDS-Hostile-CT"] > 0){
       var oldDisc = INVENTORY["WORLDS-Hostile-CT"]
@@ -540,7 +555,7 @@ function TICK_scoutSystems(){
       INVENTORY["WORLDS-Hostile-CT"] = INVENTORY["WORLDS-Hostile-CT"] + discoverWorlds
       var newDiscWorlds = Math.floor(INVENTORY["WORLDS-Hostile-CT"]) - Math.floor(oldDisc)
       STATS["WORLDS-Total-CT"] = STATS["WORLDS-Total-CT"] + discoverWorlds
-      INVENTORY["MATTER"]["Discovered"]["CT"] = INVENTORY["MATTER"]["Discovered"]["CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]
+      INVENTORY["MATTER-Discovered-CT"] = INVENTORY["MATTER-Discovered-CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]
     }
 
 }
@@ -549,13 +564,21 @@ function TICK_calcIndustry(){
 
    for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
         var matterType = MATTER_TYPE_LIST[i]
-        var fmtsi = fmtSIunits(INVENTORY["MATTER"][matterType]["CT"])
-        var sd = INVENTORY["MATTER"][matterType]["DISPLAY"]
+        var fmtsi = fmtSIunits(INVENTORY["MATTER-"+matterType+"-CT"])
+        var sd = INVENTORY["MATTER-"+matterType+"-DISPLAY"]
         sd.innerHTML = fmtsi[0]
         sd.displayUnits.innerHTML = fmtsi[1]+"g"
         sd.displayDiv.title = "grams: basic unit of mass\n"+fmtsi[4]
     }
-
+    
+    /*
+    STATS["CONVERSIONS"]["collectPerSunPerTick"]
+    STATS["CONVERSIONS"]["processPerSunPerTick"]
+    */
+    /*var matterCollected = STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]
+    matterCollected = Math.min( INVENTORY["MATTER-Raw-CT"] );
+    INVENTORY["MATTER-Collected-CT"] = INVENTORY["MATTER-Collected-CT"] + matterCollected;
+    var matterProcessed = STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]*/
 }
 
 
@@ -713,13 +736,13 @@ function roundTo(value, decimals) {
 
 function fmtSI(x){
   if(x == 0){
-      return 0.00
+      return "0.00"
   } else if(x < 1){
       var d = -Math.ceil(Math.log10(x))
       var dd = (Math.floor(d / 3))
       var suffix = SIPREFIXLOW[dd];
       var rr = x / Math.pow(10,(-dd)*3)
-      return roundTo(rr,1) + suffix
+      return roundTo(rr,1)
   } else {
       if(x < 100){
         return roundTo(x,1)
@@ -734,15 +757,28 @@ function fmtSI(x){
       var rr = x / Math.pow(10,(dd+1)*3)
       var dp = 2 - (d - ((dd+1)*3))
       var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
-      return roundTo(rr,dp) + suffix
+      var longSuffix = SIPREFIXLONG[ddp] + "Yotta".repeat(ddd)
+      var suffixExplain = SIPREFIXExplain[ddp]
+      if(ddp != 7 && ddd > 0){
+        suffixExplain = suffixExplain + "<br>"+ SIPREFIXExplain[ddp]
+      }
+      return roundTo(rr,dp)
   }
 }
 
 function fmtSIint(x){
   if(x < 100){
-    return ""+Math.floor(x)+" (+"+roundTo(100*(x - Math.floor(x)),1)+"%)"
+    if(x == Math.floor(x)){
+      return ""+Math.floor(x)
+    } else {
+      return ""+Math.floor(x)+" (+"+roundTo(100*(x - Math.floor(x)),1)+"%)"
+    }
   } else if(x < 100){
-    return ""+Math.floor(x)+" (+"+Math.round(100*(x - Math.floor(x)))+"%)"
+    if(x == Math.floor(x)){
+      return ""+Math.floor(x)
+    } else {
+      return ""+Math.floor(x)+" (+"+Math.round(100*(x - Math.floor(x)))+"%)"
+    }
   } else if(x < 1000){
     return ""+Math.floor(x)
   } else {
@@ -756,7 +792,24 @@ function fmtSIint(x){
       return roundTo(rr,dp) + suffix
   }
 }
-
+function fmtSIintWithPct(x){
+  if(x < 100){
+    return ""+Math.floor(x)
+  } else if(x < 100){
+    return ""+Math.floor(x)
+  } else if(x < 1000){
+    return ""+Math.floor(x)
+  } else {
+      var d = Math.floor(Math.log10(x))
+      var dd = Math.floor(d / 3) - 1
+      var ddd = Math.floor(dd / 8)
+      var ddp = dd - ddd * 8
+      var rr = x / Math.pow(10,(dd+1)*3)
+      var dp = 2 - (d - ((dd+1)*3))
+      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      return roundTo(rr,dp) + suffix
+  }
+}
 //Returns [0]baseNumber, [1]prefixAbbrev, [2]prefixFull, [3]prefixExponent, [4]a string of prefix descriptions
 function fmtSIlog(x){
   if(x == 0){
@@ -796,19 +849,20 @@ function fmtSIlog(x){
 function fmtSIunits(x){
   if(x == 0){
       return [0, "", "", 0,""]
-  } else if(x <= 1){
-      var d = -Math.ceil(Math.log10(x))
-      var dd = (Math.floor(d / 3))
+  } else if(x < 1){
+      var d = -Math.floor(Math.log10(x))
+      var dd = (Math.floor((d-1) / 3))
       var suffix = SIPREFIXLOW[dd];
-      var rr = x / Math.pow(10,(-dd)*3)
-      return [roundTo(rr,1), suffix,"???",dd,"???"]
+      var rr = x * Math.pow(10,(dd+1)*3)
+      var dp = ((d+2) % 3)
+      
+      return [roundTo(rr,dp), suffix,"???",dd,"???"]
   } else {
       if(x < 100){
         return [roundTo(x,1), "","",0,""]
       } else if(x < 1000){
         return [Math.round(x), "","",0,""]
       }
-
       var d = Math.floor(Math.log10(x))
       var dd = Math.floor(d / 3) - 1
       var ddd = Math.floor(dd / 8)
