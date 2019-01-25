@@ -730,6 +730,27 @@ console.log( document.getElementById("AI_CONSOLE").scrollHeight)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+var THEME_PROPERTIES = ["--white","--LT4","--LT3","--LT2","--LT1","--MID","--DK1","--DK2","--DK3","--DK4","--baseBG","--black"]
+function setElementTheme(tt,theme){
+  var themeProps = getComputedStyle(theme);
+  for(var iii=0;iii<THEME_PROPERTIES.length;iii++){
+    var pp = THEME_PROPERTIES[iii]
+    tt.style.setProperty(pp,themeProps.getPropertyValue(pp))
+  }
+  tt.THEME = theme.themeID;
+}
+function unsetElementTheme(tt){
+  for(var iii=0;iii<THEME_PROPERTIES.length;iii++){
+    var pp = THEME_PROPERTIES[iii]
+    tt.style.setProperty(pp,null)
+  }
+  tt.THEME = "";
+}
+
+
+
+
 function roundTo(value, decimals) {
   return Number(Math.round(value+'e'+decimals)+'e-'+decimals).toFixed(decimals);
 }

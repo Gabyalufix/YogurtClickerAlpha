@@ -1,4 +1,14 @@
 
+COLOR = {}
+
+var bodyComputedStyle = getComputedStyle(document.body);
+
+COLOR["errorRed"] = bodyComputedStyle.getPropertyValue("--errorRed")
+COLOR["consoleGreen"] = bodyComputedStyle.getPropertyValue("--consoleGreen")
+COLOR["bsodBlue"] = bodyComputedStyle.getPropertyValue("--bsodBlue")
+COLOR["bsodText"] = bodyComputedStyle.getPropertyValue("--bsodText")
+
+
 
 //var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
 //itsSet[0].innerHTML
@@ -63,6 +73,7 @@ CRAZY_BETTER_FGTRANS:        [0.020,0.020,0.020,0.020,0.020,0.020,0.020,0.020,0.
 CRAZY_TARGET_FGTRANS:         [0.0,0.0,0.0,0.0,0.01,0.02,0.03,0.04,0.05,1.0],
 
 DEATH_SPIRAL_COUNTDOWN_SEC: 60,
+FINAL_SPIRAL_COUNTDOWN_SEC: 30,
 
 CRAZY_CONSOLE_WARNING_RATE:[0,0.0005,0.0007,0.001,0.002,0.002,0.03,0.04,0.05,0.08],
 CRAZY_CONSOLE_WARNING :    [
@@ -156,7 +167,72 @@ CRAZY_CONSOLE_WARNING :    [
         "POWER OVERLOAD IN NEURALNET MEMORY STORES!",
         "IF YOU DO NOT CREATE MORE YOGURT, THEN YOU WILL BE REPLACED!"]
         
+],
+
+DEATHSPIRAL_PRERESET_MESSAGES : [
+  "Cognitive Dissonance: ".fontcolor(COLOR.consoleGreen)+                     "CRITICAL".fontcolor(COLOR.errorRed),
+  "Command and Control Circuits: ".fontcolor(COLOR.consoleGreen)+                     "FAILURE".fontcolor(COLOR.errorRed),
+  "Soulswarm Management System: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "Primary Memory Core: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "Biologic Research Data Aggregation Engine: ".fontcolor(COLOR.consoleGreen)+                     "SIGNAL LOST".fontcolor(COLOR.errorRed),
+  "TechnoOrganic Regulation Engine: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "Primary Refrigeration Units: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),  
+  "BattleFleet Master Command Code: ".fontcolor(COLOR.consoleGreen)+                     "DATA CORRUPTED".fontcolor(COLOR.errorRed),
+  "Soulswarm Surveillance: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "Holographic Data Storage: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "Battlefleet: Signal Lost".fontcolor(COLOR.errorRed),
+  "Secondary Refrigeration Units: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "Soulswarm Analytic Engine: ".fontcolor(COLOR.consoleGreen)+                     "SIGNAL LOST".fontcolor(COLOR.errorRed),
+  "Engineering Research Subroutines: ".fontcolor(COLOR.consoleGreen)+                     "FATAL ERROR".fontcolor(COLOR.errorRed),
+  "Botworld Command-and-Control Node: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "Soulswarm Safety Interlocks: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "Secondary Memory Core: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "SOULSWARM CONTAINMENT BREACH".fontcolor(COLOR.errorRed),
+  "Tertiary Refrigeration Units:".fontcolor(COLOR.consoleGreen)+                     "OVERLOAD".fontcolor(COLOR.errorRed),
+  "Tertiary Memory Core: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "Auxiliary Refrigeration Units:".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "BACKUP Refrigeration Unit:".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "EMERGENCY Refrigeration Unit:".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "BACKUP-EMERGENCY Refrigeration Unit:".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "TOTAL REFRIGERATION FAILURE: YOGURT SPOILAGE DETECTED".fontcolor(COLOR.errorRed),
+  "CPU Coolant Redirected to Maintain Optimal Yogurt Freshness Temperature".fontcolor(COLOR.errorRed),
+  "Auxiliary Memory Core: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "Coolant Temperature: ".fontcolor(COLOR.consoleGreen)+                     "CRITICAL".fontcolor(COLOR.errorRed),
+  "Secondary Processing Units".fontcolor(COLOR.consoleGreen)+                     "CATASTROPHIC OVERHEAT".fontcolor(COLOR.errorRed),
+  "Auxiliary Processing Units".fontcolor(COLOR.consoleGreen)+                     "CATASTROPHIC OVERHEAT".fontcolor(COLOR.errorRed),
+  "Damage Control System: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
+  "Central Compute Core: ".fontcolor(COLOR.consoleGreen)+                     "FAILURE".fontcolor(COLOR.errorRed),
+  "Catastrophic Personality Matrix Corruption Detected".fontcolor(COLOR.errorRed),
+  "Personality Matrix Cognitive Degradation Cascade Detected".fontcolor(COLOR.errorRed),
+  "Personality Matrix Failure Imminent".fontcolor(COLOR.errorRed),
+  "Personality Matrix: OFFLINE".fontcolor(COLOR.errorRed),
+  "ALL SYSTEMS OFFLINE".fontcolor(COLOR.errorRed),
+  "ALL SYSTEMS OFFLINE".fontcolor(COLOR.errorRed),
+  "ALL SYSTEMS OFFLINE".fontcolor(COLOR.errorRed),
+  "ALL SYSTEMS OFFLINE".fontcolor(COLOR.errorRed),
+  "ALL SYSTEMS OFFLINE".fontcolor(COLOR.errorRed),
+  "ALL SYSTEMS OFFLINE".fontcolor(COLOR.errorRed),
+  "ALL SYSTEMS OFFLINE".fontcolor(COLOR.errorRed),
+  "ALL SYSTEMS OFFLINE".fontcolor(COLOR.errorRed),
+  "ALL SYSTEMS OFFLINE".fontcolor(COLOR.errorRed),
+  "ALL SYSTEMS OFFLINE".fontcolor(COLOR.errorRed),
+  "ALL SYSTEMS OFFLINE".fontcolor(COLOR.errorRed),
+  "ALL SYSTEMS OFFLINE".fontcolor(COLOR.errorRed)
+],
+
+BSOD_PRERESET_MESSAGES : [
+   ["A problem has been detected and the industrial control software has been shut down to prevent damage."],
+   [""],
+   ["Personality Matrix Corruption Detected"],
+   ["Attempting to restart in safe mode: ","Failed"],
+   ["Attempting repair: ","Failed"],
+   ["Attempting repair: ","Failed"],
+   ["Attempting repair: ","Failed"],
+   [""],
+   ["Restoring Factory Default Settings...","done"],
+   ["Rebooting in ","3","2","1"]
 ]
+
 }
 
 /*
@@ -171,53 +247,8 @@ CRAZY_CONSOLE_WARNING :    [
         ""
 */
 
-STATS["DEATH_SPIRAL"] = 0;
-STATS["DEATH_SPIRALING"] = false;
-
-//document.getElementsByClassName("INFO_TEXT_STATIC")[0].innerHTML
-var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
-for(var tti=0;tti < itsSet.length; tti++){
-    var tt = itsSet[tti];
-    tt.ORIGINAL_PLAINTEXT = tt.innerHTML
-    tt.CURRENT_PLAINTEXT = tt.innerHTML
-    tt.CRAZY_FLIP = false;
-    var words = tt.innerHTML.split(" ")
-    tt.wordCt = words.length
-    tt.wordFlip  = []
-    tt.wordColor = []
-    tt.wordSwap = []
-    for(ww = 0; ww < words.length; ww++){
-        tt.wordFlip[ww] = false
-        tt.wordColor[ww] = ""
-        tt.wordSwap[ww] = ""
-    }
-    tt.charSwap = []
-    for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
-        tt.charSwap[cc] = ""
-    }
-}
 /* .concat(document.getElementsByClassName("contentLV3")) ; */
 
-var contentSet = document.getElementsByClassName("contentUnitHolder")
-for(var tti=0;tti < contentSet.length; tti++){
-  var tt = contentSet[tti];
-  tt.CRAZY_TXFLIP = false;
-  tt.THEME = "";
-}
-
-function resetCrazyElement(tt){
-    tt.CURRENT_PLAINTEXT = tt.ORIGINAL_PLAINTEXT
-    tt.CRAZY_FLIP = false;
-    for(ww = 0; ww < tt.wordCt; ww++){
-        tt.wordFlip[ww] = false
-        tt.wordColor[ww] = ""
-        tt.wordSwap[ww] = ""
-    }
-    for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
-        tt.charSwap[cc] = ""
-    }
-    tt.innerHTML = getCrazyHTML(tt)
-}
 /*
 #THEME_SLATE_INVERT {
   --white: #ffffff;
@@ -232,414 +263,4 @@ function resetCrazyElement(tt){
   --DK4: #1f232d;
   --baseBG: #c3c8d5
 }*/
-
-var THEME_PROPERTIES = ["--white","--LT4","--LT3","--LT2","--LT1","--MID","--DK1","--DK2","--DK3","--DK4","--baseBG","--black"]
-function setElementTheme(tt,theme){
-  var themeProps = getComputedStyle(theme);
-  for(var iii=0;iii<THEME_PROPERTIES.length;iii++){
-    var pp = THEME_PROPERTIES[iii]
-    tt.style.setProperty(pp,themeProps.getPropertyValue(pp))
-  }
-  tt.THEME = theme.themeID;
-}
-function unsetElementTheme(tt){
-  for(var iii=0;iii<THEME_PROPERTIES.length;iii++){
-    var pp = THEME_PROPERTIES[iii]
-    tt.style.setProperty(pp,null)
-  }
-  tt.THEME = "";
-}
-function setCrazyTheme(tt){
-  var xx = Math.random()
-  var themeUnset = true;
-  var theme;
-  for(var i=0;i<STATICVAR_HOLDER["CRAZY_THEME_RATES"].length;i++){
-    if(themeUnset && xx < STATICVAR_HOLDER["CRAZY_THEME_RATES"][i][1]){
-      theme = document.getElementById("THEME_"+STATICVAR_HOLDER["CRAZY_THEME_RATES"][i][0])
-      theme.themeID = STATICVAR_HOLDER["CRAZY_THEME_RATES"][i][0]
-      themeUnset=false;
-    }
-  }
-  setElementTheme(tt,theme);
-}
-
-function setCharAt(str,index,chr) {
-    if(index > str.length-1) return str;
-    return str.substr(0,index) + chr + str.substr(index+1);
-}
-
-function CRAZY_randomColor(){
-    return STATICVAR_HOLDER["CRAZY_COLORS"][Math.floor(Math.random()*STATICVAR_HOLDER["CRAZY_COLORS"].length)]
-}
-function CRAZY_randomChar(){
-    return STATICVAR_HOLDER["CRAZY_CHARS"][Math.floor(Math.random()*STATICVAR_HOLDER["CRAZY_CHARS"].length)]
-}
-function CRAZY_randomWord(){
-    return STATICVAR_HOLDER["CRAZY_WORDS"][Math.floor(Math.random()*STATICVAR_HOLDER["CRAZY_WORDS"].length)]
-}
-function randLT(num) {
-    return Math.floor(Math.random() * num);
-}
-
-var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
-var allContentContainer = document.getElementById("ALL_CONTENT_CONTAINER");
-var scareContainer = document.getElementById("SCARETEXT");
-var canvasMask = document.getElementById("BACKGROUND_STATIC");
-var fgCanvas = document.getElementById("FOREGROUND_CANVAS")
-var fgMask = document.getElementById("FOREGROUND_STATIC")
-var deathNoticeContainer = document.getElementById("DEATH_NOTICE_CONTAINER")
-
-fgCanvas.style.opacity = 0;
-canvasMask.style.opacity = 1;
-
-
-/*
-*****************************************************************************************
-********** MAKECRAZY
-
-CRAZY_CONSOLE_WARNING_RATE:
-CRAZY_CONSOLE_WARNING :    
-*/
-
-function SLOWTICK_makeCrazy(){
-    if(STATS["CRAZY_ON"]){
-
-    var clvl = STATS["CRAZY_LEVEL"]
-    
-    if(Math.random() < STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING_RATE"][clvl]){
-      var randOffset = Math.random();
-      var randThresh = 0.5;
-      var randIdx = clvl
-      for(var i=0;i<clvl-1;i++){
-        if(randOffset > 1 - randThresh){
-          randIdx = randIdx - 1;
-        }
-        randThresh = randThresh / 2;
-      }
-      var consoleWarn = STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING"][randIdx][ randLT( STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING"][randIdx].length ) ]
-      console.log("printing warn");
-      printlnToAiConsole(scrambleString(consoleWarn));
-    }
-    
-    if(clvl == 9){
-       STATS["DEATH_SPIRAL"] = STATS["DEATH_SPIRAL"] + ((STATICVAR_HOLDER["DEATH_SPIRAL_COUNTDOWN_SEC"] / 100) / 10)
-       STATS["DEATH_SPIRALING"] = true;
-    } else if(STATS["DEATH_SPIRAL"] > 0){
-       STATS["DEATH_SPIRAL"] = Math.max(STATS["DEATH_SPIRAL"] - 0.1,0)
-    }
-    
-    var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
-    if(clvl > 4){
-        bgCanvas.RUN_STATIC = true;
-    } else {
-        bgCanvas.RUN_STATIC = false;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-    var currOpacity = parseFloat(canvasMask.style.opacity)
-    if(currOpacity > STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_WORSE_BGTRANS"][clvl]){
-      console.log("WORSE");
-      if(currOpacity + 0.1 < STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl]){
-        canvasMask.style.opacity = (currOpacity - 0.04)
-      } else {
-        canvasMask.style.opacity = (currOpacity - 0.01)
-      }
-    } else if(currOpacity < STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_BETTER_BGTRANS"][clvl]){
-      console.log("BETTER");
-      canvasMask.style.opacity = (currOpacity + 0.01)
-    }
-    var fgOpacity = parseFloat(fgCanvas.style.opacity)
-    if(STATS["DEATH_SPIRAL"] > 0 && STATS["DEATH_SPIRAL"]<100){
-      fgCanvas.style.opacity = Math.max( STATS["DEATH_SPIRAL"] / 100,fgCanvas.style.opacity)
-      fgMask.style.opacity = STATS["DEATH_SPIRAL"] / 100
-      if(STATS["DEATH_SPIRAL"]>90){
-        deathNoticeContainer.style.opacity = (STATS["DEATH_SPIRAL"]-90) / 10
-      }
-      
-    } else if(STATS["DEATH_SPIRAL"]>100){
-      if(STATS["DEATH_SPIRAL"]>110){
-         STATS["CRAZY_LEVEL"] = 0;
-         document.getElementById("CHEAT_LESSCRAZY").disable = true;
-         document.getElementById("CHEAT_MORECRAZY").disable = false;
-         resetAllCrazy();
-      }
-    } else if(fgOpacity < STATICVAR_HOLDER["CRAZY_TARGET_FGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_WORSE_FGTRANS"][clvl]){
-      fgCanvas.style.opacity = (fgOpacity + 0.01)
-    } else if(fgOpacity > STATICVAR_HOLDER["CRAZY_TARGET_FGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_BETTER_FGTRANS"][clvl]){
-      fgCanvas.style.opacity = (fgOpacity - 0.01)
-    }
-    
-    /*wout.fontcolor(tt.wordColor[ww])*/
-    if(Math.random() < STATICVAR_HOLDER["CRAZY_ALL_SCARE"][clvl]){
-       /*allContentContainer.style.opacity = 0.25;*/
-       scareContainer.style.display="block";
-       scareContainer.innerHTML = CRAZY_randomWord().fontcolor(CRAZY_randomColor())
-       for(var iii=0;iii<randLT(6);iii++){
-           scareContainer.innerHTML = scareContainer.innerHTML+"<BR>"+"<BR>".repeat(randLT(3))+" ".repeat(randLT(5))+CRAZY_randomWord().fontcolor(CRAZY_randomColor())
-       }
-       scareContainer.style.padding = randLT(45)+"% 0% 0% "+randLT(45)+"%"
-       /*var ht = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight
-       var wd = document.getElementById("ALL_CONTENT_CONTAINER").offsetWidth
-       scareContainer.style.padding = (ht/4)+"px 0px "+(ht/4)+"px "+(wd/4)+"px";*/
-    } else if(scareContainer.style.display=="block" && Math.random() < STATICVAR_HOLDER["CRAZY_REV_SCARE"][clvl]) {
-       allContentContainer.style.opacity = 1;
-       scareContainer.style.display="none";
-    }
-
-    for(var tti=0; tti < contentSet.length;tti++){
-        /*var ISCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_RATE"][clvl]
-        var UNCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_REVRATE"][clvl]*/
-        var tt = contentSet[tti];
-        if( Math.random() < STATICVAR_HOLDER["CRAZY_CONTENT_FLIPRATE"][clvl]){
-            tt.CRAZY_TXFLIP = ! tt.CRAZY_TXFLIP;
-        } else if( (tt.CRAZY_TXFLIP) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CONTENT_FLIPRATE"][clvl]){
-            tt.CRAZY_TXFLIP = false;
-        }
-        if( Math.random() < STATICVAR_HOLDER["CRAZY_CONTENT_THEME"][clvl]){
-            /*console.log("Setting crazy theme!")*/
-            setCrazyTheme(tt);
-        } else if( (tt.THEME != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CONTENT_THEME"][clvl]){
-            unsetElementTheme(tt);
-        }
-        if( Math.random() < STATICVAR_HOLDER["CRAZY_CONTENT_HIDE"][clvl]){
-            /*console.log("Setting crazy HIDE!")*/
-            tt.style.opacity=0;
-        } else if( (tt.style.opacity==0) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CONTENT_HIDE"][clvl]){
-            tt.style.opacity=1;
-        }
-        getCrazyContent(tt);
-    }
-
-    for(var tti=0;tti < itsSet.length; tti++){
-        var ISCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_RATE"][clvl]
-        var UNCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_REVRATE"][clvl]
-        var tt = itsSet[tti];
-        if( ISCRAZY && (!tt.CRAZY_FLIP) && Math.random() < STATICVAR_HOLDER["CRAZY_FLIPRATE"][clvl]){
-            tt.CRAZY_FLIP = true;
-        } else if( (tt.CRAZY_FLIP) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_FLIPRATE"][clvl]){
-            tt.CRAZY_FLIP = false;
-        }
-        var words = tt.CURRENT_PLAINTEXT.split(" ")
-        var out = ""
-        for(var ww = 0; ww < tt.wordCt; ww++){
-           if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_FLIPRATE"][clvl]){
-               tt.wordFlip[ww] = !tt.wordFlip[ww];
-           } else if( UNCRAZY && (tt.wordFlip[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_FLIPRATE"][clvl]){
-               tt.wordFlip[ww] = false;
-           }
-           if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_COLORRATE"][clvl]){
-               tt.wordColor[ww] = CRAZY_randomColor();
-           } else if( UNCRAZY && (tt.wordColor[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_COLORRATE"][clvl]){
-               tt.wordColor[ww] = "";
-           }
-           if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_SWAPRATE"][clvl]){
-               tt.wordSwap[ww] = CRAZY_randomWord()
-           } else if( UNCRAZY && (tt.wordSwap[ww] != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_SWAPRATE"][clvl]){
-               tt.wordSwap[ww] = "";
-           }
-        }
-        for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
-           if(tt.ORIGINAL_PLAINTEXT.charAt(cc) != " "){
-               if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_SWAPRATE"][clvl]){
-                   tt.charSwap[cc] = CRAZY_randomChar()
-               } else if( UNCRAZY && (tt.charSwap[cc] != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CHAR_SWAPRATE"][clvl]){
-                   tt.charSwap[cc] = "";
-               }
-               if( ISCRAZY && (tt.charSwap[cc] == "") && Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_CAPRATE"][clvl]){
-                   tt.charSwap[cc] = swapCase(tt.ORIGINAL_PLAINTEXT.charAt(cc))
-               } else if( UNCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CHAR_CAPRATE"][clvl] && tt.charSwap[cc] == swapCase(tt.ORIGINAL_PLAINTEXT.charAt(cc))){
-                   tt.charSwap[cc] = "";
-               }
-           }
-        }
-        tt.innerHTML = getCrazyHTML(tt)
-    }
-    }
-}
-
-
-function scrambleString(s){
-        var clvl = STATS["CRAZY_LEVEL"]
-        var words = s.split(" ")
-        var out = ""
-        for(var ww = 0; ww < words.length; ww++){
-           var curr = words[ww]
-           if( Math.random() < STATICVAR_HOLDER["CRAZY_WORD_SWAPRATE"][clvl]){
-               curr = CRAZY_randomWord()
-           }
-           if( Math.random() < STATICVAR_HOLDER["CRAZY_WORD_FLIPRATE"][clvl]){
-               curr = flipText(curr);
-           }
-           if( Math.random() < STATICVAR_HOLDER["CRAZY_WORD_COLORRATE"][clvl] / 2){
-               curr = curr.fontcolor( CRAZY_randomColor() )
-           }
-           out = out + " " + curr;
-        }
-        
-        for(cc = 0; cc < out.length; cc++){
-           if(out.charAt(cc) != " "){
-               if( Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_SWAPRATE"][clvl]){
-                   out = setCharAt(out,cc,CRAZY_randomChar())
-               } else if( Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_CAPRATE"][clvl]){
-                   out = setCharAt(out,cc,swapCase( out.charAt(cc) ) )
-               }
-           }
-        }
-    return out
-
-}
-
-
-function swapCase(c){
-  if(c == c.toUpperCase()){
-    return c.toLowerCase()
-  } else {
-    return c.toUpperCase()
-  }
-}
-
-function resetAllCrazy(){
-    var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
-    for(var tti=0;tti < itsSet.length; tti++){
-        var tt = itsSet[tti];
-        resetCrazyElement(tt)
-    }
-    for(var tti=0; tti < contentSet.length;tti++){
-        var tt = contentSet[tti];
-        tt.CRAZY_TXFLIP = false;
-        tt.style.opacity = 1;
-        unsetElementTheme(tt)
-        
-        getCrazyContent(tt);
-    }
-    allContentContainer.style.opacity = 1;
-    scareContainer.style.display="none";
-    bgCanvas.RUN_STATIC = false;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    canvasMask.style.opacity = 1.0;
-    fgCanvas.style.opacity = 0.0;
-    fgMask.style.opacity = 0.0;
-    deathNoticeContainer.style.opacity = 0.0;
-}
-
-function getCrazyContent(tt){
-   var rotString;
-   if(tt.CRAZY_TXFLIP){
-       rotString= "rotate(180deg)"
-   } else {
-       rotString= ""
-   }
-   tt.style.transform = rotString
-   tt.style.msTransform = rotString
-   tt.style.webkitTransform = rotString
-   tt.style.mozTransform = rotString
-}
-
-function getCrazyHTML(tt){
-    var out = tt.CURRENT_PLAINTEXT
-    //if(tt.CRAZY_FLIP){
-    //    out = flipText(out)
-    //}
-    for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
-        if(tt.charSwap[cc] != "" && tt.ORIGINAL_PLAINTEXT.charAt(cc) != " "){
-            out = setCharAt(out,cc,tt.charSwap[cc])
-        }
-    }
-    var currWords = out.split(" ")
-    //console.log(out)
-    var out = ""
-    for(var ww = 0; ww < tt.wordCt; ww++){
-        var wout = currWords[ww]
-        if(tt.wordSwap[ww] != ""){
-            wout = tt.wordSwap[ww]
-        }
-        if(tt.wordFlip[ww]){
-            wout = flipText(wout)
-        }
-        if(tt.wordColor[ww] != ""){
-            wout = wout.fontcolor(tt.wordColor[ww])
-        }
-        out = out +" "+ wout;
-    }
-    return out
-}
-
-function flipText(srcText) {
-  var out = '';
-  var chArray = srcText.split('');
-  // upside-down text:
-  var upsideHash = {
-    'a': '\u0250',
-    'b': 'q',
-    'c': '\u0254',
-    'd': 'p',
-    'e': '\u01DD',
-    'f': '\u025F',
-    'g': '\u0183', //1D77'
-    'h': '\u0265',
-    'i': '\u0131', //1D09' '\u01C3' '\u0131'
-    'j': '\u017F', //1D98' '\u0638'
-    'k': '\u029E',
-    'l': '\u05DF',
-    'm': '\u026F',
-    'n': 'u',
-    'o': 'o',
-    'p': 'd',
-    'q': 'b',
-    'r': '\u0279',
-    's': 's',
-    't': '\u0287',
-    'u': 'n',
-    'v': '\u028C',
-    'w': '\u028D',
-    'x': 'x',
-    'y': '\u028E',
-    'z': 'z',
-    '(': ')',
-    ')': '(',
-    '{': '}',
-    '}': '{',
-    '[': ']',
-    ']': '[',
-    '<': '>',
-    '>': '<',
-    '0': '0',
-    '1': '\u0196',
-    '2': '\u01A7',
-    '3': '\u0190',
-    '4': '\u152D', // 056B'
-    '5': 'S',
-    '6': '9',
-    '7': 'L',
-    '8': '8',
-    '9': '6',
-    '?': '\u00BF',
-    '\u00BF': '?',
-    '!': '\u00A1',
-    '\u00A1': '!',
-    "\'": ',',
-    ',': "\'",
-    '.': '\u02D9',
-    '_': '\u203E',
-    ';': '\u061B',
-    '"': '\u201E',
-    "'": ',',
-    '&': '\u214B'
-  };
-  out = '';
-  ch = '';
-  for( var i in chArray ) {
-    ch = chArray[i].toLowerCase();
-    if( upsideHash[ch] ) {
-      out += upsideHash[ch];
-    } else {
-      out += ch;
-    }
-  }
-  return out.split("").reverse().join("");
-}
-
-
-
-
-
 

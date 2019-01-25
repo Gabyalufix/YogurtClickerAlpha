@@ -13,6 +13,10 @@
   --DK4: #1f232d;
   --baseBG: #c3c8d5;
   --consoleGreen: #33FF00;
+  --errorRed: #ce0000;
+  --bsodBlue: #0000ce;
+  --bsodText: #ffffff;
+  --consoleBlack: #111111;
 }
 
 .THEME_HOLDER {
@@ -323,6 +327,31 @@ h5 {
   z-index: 9999; /* Sit on top */
   pointer-events: none;
 }
+
+#DEATH_NOTICE_CONTAINER {
+  position:fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height:100%;
+  background-color: var(--consoleBlack);
+  opacity: 0;
+  padding:0px;
+  margin: 15px;
+  z-index: 99999999; /* Sit on top */
+  pointer-events: none;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y:hidden;
+  
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 48px;
+  color: var(--consoleGreen)
+  
+}
+
+/*
 #DEATH_NOTICE_CONTAINER {
   position:fixed;
   top: 0px;
@@ -333,12 +362,12 @@ h5 {
   opacity: 0;
   padding:0px;
   margin:0px;
-  z-index: 99999999; /* Sit on top */
+  z-index: 99999999; 
   pointer-events: none;
   display: flex;
-  justify-content: center; /* align horizontal */
-  align-items: center; /* align vertical */
-}
+  justify-content: center; 
+  align-items: center; 
+}*/
 #DEATH_NOTICE {
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
