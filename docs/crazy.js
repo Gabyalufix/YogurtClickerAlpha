@@ -105,24 +105,22 @@ CRAZY_CONSOLE_WARNING :
 */
 STATS["currSequence"] = "normal"
 
-var nextMessageTime = 0;
-var finalStartTime = 0
-var finalCounter = 0;
-var finalMessageIdx = 10;
+STATS["nextMessageTime"] = 0;
+STATS["finalMessageIdx"] = 0;
+
 function finalSpiral(){
    var currtime = Date.now();
-   if( finalStartTime == 0){
-     finalStartTime = Date.now();
-   }
    
-   if(currtime > nextMessageTime){
-     nextMessageTime = Date.now() + Math.random()* (1000 - (finalMessageIdx/60))
-     deathNoticeContainer.innerHTML = deathNoticeContainer.innerHTML + "<BR> > "+ STATICVAR_HOLDER["DEATHSPIRAL_PRERESET_MESSAGES"][finalMessageIdx]
-     finalMessageIdx = finalMessageIdx + 1;
-     console.log("Final Spiral: "+finalMessageIdx);
+   if(currtime > STATS["nextMessageTime"]){
+     STATS["nextMessageTime"] = Date.now() + Math.random() * (3000 - (STATS["finalMessageIdx"]/60))
+     deathNoticeContainer.innerHTML = "<SPAN> > "+ STATICVAR_HOLDER["DEATHSPIRAL_PRERESET_MESSAGES"][STATS["finalMessageIdx"]]+"</SPAN>" + deathNoticeContainer.innerHTML
+     STATS["finalMessageIdx"] = STATS["finalMessageIdx"] + 1;
+     console.log("Final Spiral: "+STATS["finalMessageIdx"]);
    }
-   if(finalMessageIdx > 40){
+   if(STATS["finalMessageIdx"] > 40){
      STATS["currSequence"] = "bsodSequence"
+     console.log("ENTERING CRASH SEQUENCE")
+     STATS["finalMessageIdx"] = 0;
    }
 }
 
@@ -131,9 +129,53 @@ var bsodMessageTime = 0;
 
 function bsodSequence(){
    deathNoticeContainer.style["background-color"] = COLOR["bsodBlue"];
-   deathNoticeContainer.style.color = COLOR["bsodBlue"];
+   deathNoticeContainer.style.color = COLOR["bsodText"];
+   deathNoticeContainer.innerHTML = "";
+   /*deathNoticeContainer.style["flex-direction"] = "column";*/
+   var currtime = Date.now();
+   if(currtime > nextMessageTime){
+     nextMessageTime = Date.now() + 3000;
+     deathNoticeContainer.innerHTML = "<SPAN> > "+ STATICVAR_HOLDER["BSOD_PRERESET_MESSAGES"][STATS["finalMessageIdx"]]+"</SPAN>" + deathNoticeContainer.innerHTML
+     STATS["finalMessageIdx"] = STATS["finalMessageIdx"] + 1;
+     console.log("Final Spiral: "+STATS["finalMessageIdx"]);
+   }
+   if(STATS["finalMessageIdx"] > 40){
+     STATS["currSequence"] = "resetSequence"
+     console.log("ENTERING RESET SEQUENCE")
+   }
 }
 function resetSequence(){
+   var bsodMsgs = STATICVAR_HOLDER["BSOD_PRERESET_MESSAGES"]
+   deathNoticeContainer.innerHTML = ""
+
+   deathNoticeContainer.style.opacity=1  
+   deathNoticeContainer.style.color="white"  
+   deathNoticeContainer.style["white-space"] = "nowrap"
+   deathNoticeContainer.style["display"] = "inline-block"
+   deathNoticeContainer.style["padding"] = "50px"
+   deathNoticeContainer.style["width"] = "90%"
+   var bsodTextDiv = document.createElement('div')
+   bsodTextDiv.id = "bsodTextDiv";
+   deathNoticeContainer.appendChild(bsodTextDiv)
+   for(var i=0;i<bsodMsgs.length;i++){
+     var currSpan = document.createElement('span');
+     currSpan.innerHTML = bsodMsgs[i] + "<BR>"
+     bsodTextDiv.appendChild(currSpan)
+   }
+   
+   
+   fitty("#bsodTextDiv",minSize=8,multiLine=true)
+   fitty("#bsodTextDiv",minSize=8,multiLine=true)
+   fitty("#bsodTextDiv",minSize=8,multiLine=true)
+
+
+   var ttt = document.createElement('span')
+   ttt.id = "bsodTextLine";
+   ttt.innerHTML = "HELLO I AM SOME TEXT"
+   deathNoticeContainer.insertBefore(ttt,deathNoticeContainer.childNodes[0])
+   document.getElementById("bsodTextLine")
+   
+   document.getElementById("DEATH_NOTICE")
    
 }
 function SLOWTICK_makeCrazy(){
@@ -149,6 +191,7 @@ function SLOWTICK_makeCrazy(){
      console.log("ERROR: IMPOSSIBLE STATE!");
    }
 }
+var deathSpiralStart = 0;
 function SLOWTICK_makeCrazyHelper(){
     if(STATS["CRAZY_ON"]){
 
@@ -165,12 +208,17 @@ function SLOWTICK_makeCrazyHelper(){
         randThresh = randThresh / 2;
       }
       var consoleWarn = STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING"][randIdx][ randLT( STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING"][randIdx].length ) ]
-      console.log("printing warn");
+      /*console.log("printing warn");*/
       printlnToAiConsole(scrambleString(consoleWarn));
     }
     
     if(clvl == 9){
-       STATS["DEATH_SPIRAL"] = STATS["DEATH_SPIRAL"] + ((STATICVAR_HOLDER["DEATH_SPIRAL_COUNTDOWN_SEC"] / 100) / 10)
+       if(deathSpiralStart == 0){
+          deathSpiralStart = Date.now();
+       }
+       var deathSpiralBoost = (STATS["DEATH_SPIRAL"]+1)*((STATICVAR_HOLDER["DEATH_SPIRAL_COUNTDOWN_SEC"] / (100)) / 100)
+       STATS["DEATH_SPIRAL"] = STATS["DEATH_SPIRAL"] + deathSpiralBoost
+       console.log("boost: "+deathSpiralBoost+ " / "+STATS["DEATH_SPIRAL"]+" (time:"+((Date.now()-deathSpiralStart)/1000)+"s)");
        STATS["DEATH_SPIRALING"] = true;
     } else if(STATS["DEATH_SPIRAL"] > 0){
        STATS["DEATH_SPIRAL"] = Math.max(STATS["DEATH_SPIRAL"] - 0.1,0)
@@ -199,15 +247,19 @@ function SLOWTICK_makeCrazyHelper(){
     if(STATS["DEATH_SPIRAL"] > 0 && STATS["DEATH_SPIRAL"]<100){
       fgCanvas.style.opacity = Math.max( STATS["DEATH_SPIRAL"] / 100,fgCanvas.style.opacity)
       fgMask.style.opacity = STATS["DEATH_SPIRAL"] / 100
-      if(STATS["DEATH_SPIRAL"]>90){
+      /*if(STATS["DEATH_SPIRAL"]>90){
         var finalPreIdx = Math.floor(STATS["DEATH_SPIRAL"]-90);
-        STATS["FINAL_SPIRAL"] = finalPreIdx
-        deathNoticeContainer.innerHTML = deathNoticeContainer.innerHTML + "<BR> > "+ STATICVAR_HOLDER["DEATHSPIRAL_PRERESET_MESSAGES"][finalPreIdx]
+        if(finalPreIdx > STATS["FINAL_SPIRAL"]){
+          deathNoticeContainer.innerHTML = "<SPAN> > "+ STATICVAR_HOLDER["DEATHSPIRAL_PRERESET_MESSAGES"][finalPreIdx]+"</SPAN>" + deathNoticeContainer.innerHTML
+          STATS["FINAL_SPIRAL"] = finalPreIdx;
+        }
         deathNoticeContainer.style.opacity = (STATS["DEATH_SPIRAL"]-90) / 10
-      }
+      }*/
       
     } else if(STATS["DEATH_SPIRAL"]>100){
-      STATS["currSequence"] == "finalSpiral"    
+      STATS["currSequence"] = "finalSpiral"    
+      deathNoticeContainer.style.opacity = 1.0
+      console.log("ENTERING FINAL DEATH SPIRAL")
       /*if(STATS["DEATH_SPIRAL"]>110){
          STATS["CRAZY_LEVEL"] = 0;
          document.getElementById("CHEAT_LESSCRAZY").disable = true;
@@ -491,7 +543,9 @@ function flipText(srcText) {
 }
 
 
+/*
+
+generateProceduralText(PROCTEXT["procdata_test1"])
 
 
-
-
+*/

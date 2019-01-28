@@ -47,7 +47,7 @@
 
 <div id="BACKGROUND_STATIC"></div>
 <div id="FOREGROUND_STATIC"></div>
-<div id="DEATH_NOTICE_CONTAINER"><div id="DEATH_NOTICE">++SIGNAL+LOST++</div></div>
+<div id="DEATH_NOTICE_CONTAINER"><div id="DEATH_NOTICE" style="opacity:0"></div></div>
 
 <div id="SCARETEXT"></div>
 
@@ -842,9 +842,9 @@ CONSOLE:<br>
 </div>
 <div class="MAINGRID_RT">
 
-
-<button class="collapsible" id="CHEAT_DEBUG_PANEL_COLLAPSER"><h1>CHEAT/DEBUG PANEL:</h1></button>
-		<div class="content" id="CHEAT_DEBUG_PANEL_CONTENT">
+<div id="CHEAT_DEBUG_PANEL" style="z-index: 9999999999; opacity=1;">
+<button class="collapsible" id="CHEAT_DEBUG_PANEL_COLLAPSER"  style="z-index: 9999999999"><h1>CHEAT/DEBUG PANEL:</h1></button>
+		<div class="content" id="CHEAT_DEBUG_PANEL_CONTENT"  style="z-index: 9999999999">
 		<p>
 		    CRAZYLEVEL: <span id="DEBUG_CRAZY_LEVEL_DISPLAY"></span>
 		    <BR>
@@ -891,7 +891,7 @@ CONSOLE:<br>
 			   </div>
 		</p>
 		</div>
-
+</div>
 
 <div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">TERRITORY REPORT</span></h1></button>
@@ -931,7 +931,10 @@ CONSOLE:<br>
 ####################################################################################################
 -->
 
+<script type="text/javascript" src="fitty.min.js"></script>
 <script type="text/javascript" src="variables.js"></script>
+<script type="text/javascript" src="textData.js"></script>
+<script type="text/javascript" src="util.js"></script>
 <script type="text/javascript" src="tvstatic.js"></script>
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="crazy.js"></script>

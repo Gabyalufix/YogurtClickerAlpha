@@ -8,12 +8,6 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Holder objects:
 
-var SIPREFIX=["k","M","G","T","P","E","Z","Y"]
-var SIPREFIXLOW=["m","u","n","p","f","a","z","y"]
-
-var SIPREFIXLONG=["kilo","Mega","Giga","Tera","Peta","Exa","Zetta","Yotta"]
-var SIPREFIXExplain=["kilo: Thousands, 1e3","Mega: Millions, 1e6","Giga: Billions, 1e9","Tera: Trillions, 1e12","Peta: Quadrillions, 1e15","Exa: Quintillions, 1e18","Zetta: Sextillions, 1e21","Yotta: Septillions, 1e24"]
-
 SETTINGS = {}
 INVENTORY = {}
 STATS = {}
@@ -720,201 +714,6 @@ console.log( document.getElementById("AI_CONSOLE").scrollTop)
 console.log( document.getElementById("AI_CONSOLE").scrollHeight)
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// STRING FORMATTING / HELPER FUNCTIONS
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-var THEME_PROPERTIES = ["--white","--LT4","--LT3","--LT2","--LT1","--MID","--DK1","--DK2","--DK3","--DK4","--baseBG","--black"]
-function setElementTheme(tt,theme){
-  var themeProps = getComputedStyle(theme);
-  for(var iii=0;iii<THEME_PROPERTIES.length;iii++){
-    var pp = THEME_PROPERTIES[iii]
-    tt.style.setProperty(pp,themeProps.getPropertyValue(pp))
-  }
-  tt.THEME = theme.themeID;
-}
-function unsetElementTheme(tt){
-  for(var iii=0;iii<THEME_PROPERTIES.length;iii++){
-    var pp = THEME_PROPERTIES[iii]
-    tt.style.setProperty(pp,null)
-  }
-  tt.THEME = "";
-}
-
-
-
-
-function roundTo(value, decimals) {
-  return Number(Math.round(value+'e'+decimals)+'e-'+decimals).toFixed(decimals);
-}
-
-function fmtSI(x){
-  if(x == 0){
-      return "0.00"
-  } else if(x < 1){
-      var d = -Math.ceil(Math.log10(x))
-      var dd = (Math.floor(d / 3))
-      var suffix = SIPREFIXLOW[dd];
-      var rr = x / Math.pow(10,(-dd)*3)
-      return roundTo(rr,1)
-  } else {
-      if(x < 100){
-        return roundTo(x,1)
-      } else if(x < 1000){
-        return ""+Math.round(x)
-      }
-
-      var d = Math.floor(Math.log10(x))
-      var dd = Math.floor(d / 3) - 1
-      var ddd = Math.floor(dd / 8)
-      var ddp = dd - ddd * 8
-      var rr = x / Math.pow(10,(dd+1)*3)
-      var dp = 2 - (d - ((dd+1)*3))
-      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
-      var longSuffix = SIPREFIXLONG[ddp] + "Yotta".repeat(ddd)
-      var suffixExplain = SIPREFIXExplain[ddp]
-      if(ddp != 7 && ddd > 0){
-        suffixExplain = suffixExplain + "<br>"+ SIPREFIXExplain[ddp]
-      }
-      return roundTo(rr,dp)
-  }
-}
-
-function fmtSIint(x){
-  if(x < 100){
-    if(x == Math.floor(x)){
-      return ""+Math.floor(x)
-    } else {
-      return ""+Math.floor(x)+" (+"+roundTo(100*(x - Math.floor(x)),1)+"%)"
-    }
-  } else if(x < 100){
-    if(x == Math.floor(x)){
-      return ""+Math.floor(x)
-    } else {
-      return ""+Math.floor(x)+" (+"+Math.round(100*(x - Math.floor(x)))+"%)"
-    }
-  } else if(x < 1000){
-    return ""+Math.floor(x)
-  } else {
-      var d = Math.floor(Math.log10(x))
-      var dd = Math.floor(d / 3) - 1
-      var ddd = Math.floor(dd / 8)
-      var ddp = dd - ddd * 8
-      var rr = x / Math.pow(10,(dd+1)*3)
-      var dp = 2 - (d - ((dd+1)*3))
-      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
-      return roundTo(rr,dp) + suffix
-  }
-}
-function fmtSIintWithPct(x){
-  if(x < 100){
-    return ""+Math.floor(x)
-  } else if(x < 100){
-    return ""+Math.floor(x)
-  } else if(x < 1000){
-    return ""+Math.floor(x)
-  } else {
-      var d = Math.floor(Math.log10(x))
-      var dd = Math.floor(d / 3) - 1
-      var ddd = Math.floor(dd / 8)
-      var ddp = dd - ddd * 8
-      var rr = x / Math.pow(10,(dd+1)*3)
-      var dp = 2 - (d - ((dd+1)*3))
-      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
-      return roundTo(rr,dp) + suffix
-  }
-}
-//Returns [0]baseNumber, [1]prefixAbbrev, [2]prefixFull, [3]prefixExponent, [4]a string of prefix descriptions
-function fmtSIlog(x){
-  if(x == 0){
-      return [1, "", "", 1,""]
-  } else if(x <= -3){
-      return [0, "", "", 0,""]
-  } else if(x < 0){
-      var d = -Math.ceil(x)
-      var dd = Math.floor( d / 3 )
-      var suffix = SIPREFIXLOW[dd]
-      var rr = Math.pow(10,( x - d ))
-      return [roundTo(rr,1), suffix,"",dd,""]
-  } else {
-      if(x < 2){
-        return [roundTo(Math.pow(10,x),1),"","",0,""]
-      } else if(x < 3){
-        return [Math.round(Math.pow(10,x)),"","",0,""]
-      }
-      var d = Math.floor(x)
-      var dd = Math.floor(d / 3) - 1
-      var ddd = Math.floor(dd / 8)
-      var ddp = dd - ddd * 8
-      var rr = Math.pow( 10, x - (dd+1)*3 )
-      var dp = 2 - (d - ((dd+1)*3))
-      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
-      var longSuffix = SIPREFIXLONG[ddp] + "Yotta".repeat(ddd)
-      var suffixExplain = SIPREFIXExplain[ddp]
-      if(ddp != 7 && ddd > 0){
-        suffixExplain = suffixExplain + "<br>"+ SIPREFIXExplain[ddp]
-      }
-      return [roundTo(rr,dp), suffix, longSuffix, (dd+1)*3,suffixExplain]
-  }
-}
-
-
-//Returns [0]baseNumber, [1]prefixAbbrev, [2]prefixFull, [3]prefixExponent, [4]a string of prefix descriptions
-function fmtSIunits(x){
-  if(x == 0){
-      return [0, "", "", 0,""]
-  } else if(x < 1){
-      var d = -Math.floor(Math.log10(x))
-      var dd = (Math.floor((d-1) / 3))
-      var suffix = SIPREFIXLOW[dd];
-      var rr = x * Math.pow(10,(dd+1)*3)
-      var dp = ((d+2) % 3)
-      
-      return [roundTo(rr,dp), suffix,"???",dd,"???"]
-  } else {
-      if(x < 100){
-        return [roundTo(x,1), "","",0,""]
-      } else if(x < 1000){
-        return [Math.round(x), "","",0,""]
-      }
-      var d = Math.floor(Math.log10(x))
-      var dd = Math.floor(d / 3) - 1
-      var ddd = Math.floor(dd / 8)
-      var ddp = dd - ddd * 8
-      var rr = x / Math.pow(10,(dd+1)*3)
-      var dp = 2 - (d - ((dd+1)*3))
-      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
-      var longSuffix = SIPREFIXLONG[ddp] + "Yotta".repeat(ddd)
-      var suffixExplain = SIPREFIXExplain[ddp]
-      if(ddp != 7 && ddd > 0){
-        suffixExplain = suffixExplain + "<br>"+ SIPREFIXExplain[ddp]
-      }
-      return [roundTo(rr,dp), suffix, longSuffix, (dd+1)*3,suffixExplain]
-  }
-}
-
-//var SIPREFIXLONG=["kilo","Mega","Giga","Tera","Peta","Exa","Zetta","Yotta"]
-//var SIPREFIXExplain=["kilo: Thousands, 1e3","Mega: Millions, 1e6","Giga: Billions, 1e9","Tera: Trillions, 1e12","Peta: Quadrillions, 1e15","Exa: Quintillions, 1e18","Zetta: Sextillions, 1e21","Yotta: Septillions, 1e24"]
-
-
-function getPrefixSI(x){
-  if(x < 1000){
-    return ""
-  }
-  var d = Math.floor(Math.log10(x))
-  var dd = Math.floor(d / 3) - 1
-  var ddd = Math.floor(dd / 8)
-  var ddp = dd - ddd * 8
-  var prefix = SIPREFIX[ddp] + "Y".repeat(ddd)
-  return prefix
-}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1045,12 +844,10 @@ window.onclick = function(event) {
 document.getElementById("ENABLE_CHEATS_CHECKBOX").oninput = function(){
   if(this.checked){
     console.log("TEST1")
-    document.getElementById("CHEAT_DEBUG_PANEL_COLLAPSER").style.display = "block";
-    document.getElementById("CHEAT_DEBUG_PANEL_CONTENT").style.display = "block";
+    document.getElementById("CHEAT_DEBUG_PANEL").style.display = "block";
   } else {
     console.log("TEST2")
-    document.getElementById("CHEAT_DEBUG_PANEL_COLLAPSER").style.display = "none";
-    document.getElementById("CHEAT_DEBUG_PANEL_CONTENT").style.display = "none";
+    document.getElementById("CHEAT_DEBUG_PANEL").style.display = "none";
 
   }
 }

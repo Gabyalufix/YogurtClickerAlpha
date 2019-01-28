@@ -336,7 +336,7 @@ h5 {
   height:100%;
   background-color: var(--consoleBlack);
   opacity: 0;
-  padding:0px;
+  padding:0px 10px 50px 10px;
   margin: 15px;
   z-index: 99999999; /* Sit on top */
   pointer-events: none;
@@ -347,10 +347,13 @@ h5 {
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
   font-size: 48px;
-  color: var(--consoleGreen)
-  
+  color: var(--consoleGreen);
+  text-indent: 5em hanging;
 }
 
+#CHEAT_DEBUG_PANEL {
+  z-index: 9999999999;
+}
 /*
 #DEATH_NOTICE_CONTAINER {
   position:fixed;
