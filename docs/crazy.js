@@ -117,6 +117,7 @@ function finalSpiral(){
        STATS["nextMessageTime"] = Date.now() + Math.random() * (3000 - (STATS["finalMessageIdx"]/60))
      }
      deathNoticeContainer.innerHTML = "<SPAN> > "+ STATICVAR_HOLDER["DEATHSPIRAL_PRERESET_MESSAGES"][STATS["finalMessageIdx"]]+"</SPAN>" + deathNoticeContainer.innerHTML
+     printlnToAiConsole( STATICVAR_HOLDER["DEATHSPIRAL_PRERESET_MESSAGES"][STATS["finalMessageIdx"]] );
      STATS["finalMessageIdx"] = STATS["finalMessageIdx"] + 1;
      console.log("Final Spiral: "+STATS["finalMessageIdx"]);
    }
@@ -137,15 +138,17 @@ function bsodSequence(){
    /*deathNoticeContainer.style["flex-direction"] = "column";*/
    var currtime = Date.now();
    if(currtime > STATS["nextMessageTime"]){
-     STATS["nextMessageTime"] = Date.now() + 3000;
+     STATS["nextMessageTime"] = Date.now() + 2000;
      var curr = STATICVAR_HOLDER["BSOD_PRERESET_MESSAGES"][STATS["finalMessageIdx"]]
      if( curr instanceof Array){
        var bsodElemId = "BSOD_SEQUENCE_"+STATS["finalMessageIdx"]
        if(STATS["finalMessageJdx"] == 0){
          deathNoticeContainer.innerHTML = "<SPAN id=\""+bsodElemId+"\"> "+"</SPAN>" + deathNoticeContainer.innerHTML
+         printlnToAiConsole("")
        }
        var bsodElem = document.getElementById(bsodElemId);
        bsodElem.innerHTML = bsodElem.innerHTML + curr[ STATS["finalMessageJdx"] ];
+       printToAiConsole( curr[ STATS["finalMessageJdx"] ] );
        if(STATS["finalMessageJdx"] >= curr.length - 1 ){
          STATS["finalMessageJdx"] = 0;
          STATS["finalMessageIdx"] = STATS["finalMessageIdx"] + 1;
@@ -161,47 +164,27 @@ function bsodSequence(){
       STATS["CRAZY_LEVEL"] = 0;
       document.getElementById("CHEAT_LESSCRAZY").disable = true;
       document.getElementById("CHEAT_MORECRAZY").disable = false;
-      STATS["currSequence"] = "normal"
+      STATS["currSequence"] = "resetSequence"
       STATS["finalMessageJdx"] = 0;
       STATS["finalMessageIdx"] = 0;
       STATS["nextMessageTime"] = 0;
       STATS["DEATH_SPIRAL"] = 0;
+      
       resetAllCrazy();
    }
 }
 function resetSequence(){
-   var bsodMsgs = STATICVAR_HOLDER["BSOD_PRERESET_MESSAGES"]
-   deathNoticeContainer.innerHTML = ""
-
-   deathNoticeContainer.style.opacity=1  
-   deathNoticeContainer.style.color="white"  
-   deathNoticeContainer.style["white-space"] = "nowrap"
-   deathNoticeContainer.style["display"] = "inline-block"
-   deathNoticeContainer.style["padding"] = "50px"
-   deathNoticeContainer.style["width"] = "90%"
-   var bsodTextDiv = document.createElement('div')
-   bsodTextDiv.id = "bsodTextDiv";
-   deathNoticeContainer.appendChild(bsodTextDiv)
-   for(var i=0;i<bsodMsgs.length;i++){
-     var currSpan = document.createElement('span');
-     currSpan.innerHTML = bsodMsgs[i] + "<BR>"
-     bsodTextDiv.appendChild(currSpan)
+   var currtime = Date.now();
+   if(currtime > STATS["nextMessageTime"]){
+     printlnToAiConsole(STATICVAR_HOLDER["RESET_PRERESET_MESSAGES"][STATS["finalMessageIdx"]])
+     STATS["nextMessageTime"] = Date.now() + 1250;
+     STATS["finalMessageIdx"] = STATS["finalMessageIdx"] + 1;
    }
-   
-   
-   fitty("#bsodTextDiv",minSize=8,multiLine=true)
-   fitty("#bsodTextDiv",minSize=8,multiLine=true)
-   fitty("#bsodTextDiv",minSize=8,multiLine=true)
-
-
-   var ttt = document.createElement('span')
-   ttt.id = "bsodTextLine";
-   ttt.innerHTML = "HELLO I AM SOME TEXT"
-   deathNoticeContainer.insertBefore(ttt,deathNoticeContainer.childNodes[0])
-   document.getElementById("bsodTextLine")
-   
-   document.getElementById("DEATH_NOTICE")
-   
+   if(STATS["finalMessageIdx"] >=  STATICVAR_HOLDER["RESET_PRERESET_MESSAGES"].length){
+     STATS["currSequence"] = "normal"
+     STATS["finalMessageIdx"] = 0;
+     STATS["nextMessageTime"] = 0;
+   }
 }
 function SLOWTICK_makeCrazy(){
    if(STATS["currSequence"] == "normal"){
@@ -574,3 +557,39 @@ generateProceduralText(PROCTEXT["procdata_test1"])
 
 
 */
+
+
+function testScrap(){
+   var bsodMsgs = STATICVAR_HOLDER["BSOD_PRERESET_MESSAGES"]
+   deathNoticeContainer.innerHTML = ""
+
+   deathNoticeContainer.style.opacity=1  
+   deathNoticeContainer.style.color="white"  
+   deathNoticeContainer.style["white-space"] = "nowrap"
+   deathNoticeContainer.style["display"] = "inline-block"
+   deathNoticeContainer.style["padding"] = "50px"
+   deathNoticeContainer.style["width"] = "90%"
+   var bsodTextDiv = document.createElement('div')
+   bsodTextDiv.id = "bsodTextDiv";
+   deathNoticeContainer.appendChild(bsodTextDiv)
+   for(var i=0;i<bsodMsgs.length;i++){
+     var currSpan = document.createElement('span');
+     currSpan.innerHTML = bsodMsgs[i] + "<BR>"
+     bsodTextDiv.appendChild(currSpan)
+   }
+   
+   
+   fitty("#bsodTextDiv",minSize=8,multiLine=true)
+   fitty("#bsodTextDiv",minSize=8,multiLine=true)
+   fitty("#bsodTextDiv",minSize=8,multiLine=true)
+
+
+   var ttt = document.createElement('span')
+   ttt.id = "bsodTextLine";
+   ttt.innerHTML = "HELLO I AM SOME TEXT"
+   deathNoticeContainer.insertBefore(ttt,deathNoticeContainer.childNodes[0])
+   document.getElementById("bsodTextLine")
+   
+   document.getElementById("DEATH_NOTICE")
+   
+}

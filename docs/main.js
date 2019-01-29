@@ -683,12 +683,6 @@ function startWorldDeconstruction(worldType,batchCt){
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
 var AI_CONSOLE_AUTOSCROLL=true
 var AI_CONSOLE_HTMOD=0
 document.getElementById("AI_CONSOLE").scrollTop = document.getElementById("AI_CONSOLE").scrollHeight
@@ -704,6 +698,13 @@ document.getElementById("AI_CONSOLE").onscroll = function(){
 
 function printlnToAiConsole(ttt){
     document.getElementById("AI_CONSOLE").innerHTML = document.getElementById("AI_CONSOLE").innerHTML + "<BR> > " +ttt
+    if(AI_CONSOLE_AUTOSCROLL){
+      document.getElementById("AI_CONSOLE").scrollTop = document.getElementById("AI_CONSOLE").scrollHeight
+      AI_CONSOLE_HTMOD = document.getElementById("AI_CONSOLE").scrollHeight - document.getElementById("AI_CONSOLE").scrollTop
+    }
+}
+function printToAiConsole(ttt){
+    document.getElementById("AI_CONSOLE").innerHTML = document.getElementById("AI_CONSOLE").innerHTML + "" +ttt
     if(AI_CONSOLE_AUTOSCROLL){
       document.getElementById("AI_CONSOLE").scrollTop = document.getElementById("AI_CONSOLE").scrollHeight
       AI_CONSOLE_HTMOD = document.getElementById("AI_CONSOLE").scrollHeight - document.getElementById("AI_CONSOLE").scrollTop

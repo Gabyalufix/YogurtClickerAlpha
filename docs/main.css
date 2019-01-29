@@ -346,7 +346,7 @@ h5 {
   
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  font-size: 48px;
+  font-size: 2vw;
   color: var(--consoleGreen);
   text-indent: 5em hanging;
 }
@@ -394,7 +394,7 @@ h5 {
   display: none;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  font-size: 78px;
+  font-size: 7vw;
   line-height: 1;
   text-align: left;
   pointer-events: none;
