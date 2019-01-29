@@ -18,81 +18,85 @@ function generateProceduralTextPrintFail(err, ss, SSVAR,soFar){
 
 
 function generateProceduralText(ss, SSVAR, verbose){
-  return generateProceduralTextMain(ss,SSVAR,soFar="",verbose)
+  return generateProceduralTextMain(ss,SSVAR,soFar="",verbose, 1)
 }
 
 
-function generateProceduralTextMain(ssin, SSVAR = {}, soFar = "", verbose = true){
+function generateProceduralTextMain(ssin, SSVAR = {}, soFar = "", verbose = true, lvl = 1){
    var ss = ssin.slice()
    if(ss.length == 0){
-     console.log("Starting on: []; sofar=\""+soFar+"\"");
+     console.log("|  ".repeat(lvl)+"Starting on: []; sofar=\""+soFar+"\" (Lvl="+lvl+")");
    } else {
-     console.log("Starting on: [["+ss[0] + "],...]; sofar=\""+soFar+"\"");
+     console.log("|  ".repeat(lvl)+"Starting on: [["+ss[0] + "],...]; sofar=\""+soFar+"\" (Lvl="+lvl+")");
    }
    
    if(ss.length == 0){
-     if(verbose){ console.log("LEN=0: returning("+soFar+")") }
-     
+     if(verbose){ console.log("|  ".repeat(lvl)+"LEN=0: returning("+soFar+")") }
      return soFar;
    } else if(! (ss[0] instanceof Array)){
-     if(verbose){ console.log("NON ARRAY") }
-     return generateProceduralTextMain(ss, SSVAR, soFar + ss.shift())
+     if(verbose){ console.log("|  ".repeat(lvl)+"NON ARRAY") }
+     return generateProceduralTextMain(ss, SSVAR, soFar + ss.shift(),verbose,lvl)
    } else if(ss[0][0] == "#RANDOR"){
-     if(verbose){ console.log("#RANDOR") }
+     if(verbose){ console.log("|  ".repeat(lvl)+"#RANDOR") }
      var randArray = ss.shift().slice(1);
      var randThresh = parseFloat(randArray.shift());
      if(randThresh > Math.random()){
-       if(verbose){ console.log("#RANDOR[0] START") }
-       var ror = generateProceduralTextMain([randArray[0]],SSVAR,"")
-       if(verbose){ console.log("#RANDOR[0] END") }
-       generateProceduralTextMain(ss, SSVAR, soFar = soFar + ror )
+       if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#RANDOR[0] START ["+randArray[0]+"]") }
+       var ror = generateProceduralTextMain([randArray[0]],SSVAR,"",verbose, lvl + 1)
+       if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#RANDOR[0] END (\""+ror+"\")") }
+       return generateProceduralTextMain(ss, SSVAR, soFar = soFar + ror ,verbose,lvl)
      } else {
-       if(verbose){ console.log("#RANDOR[1] START") }
-       var ror = generateProceduralTextMain([randArray[1]],SSVAR,"")
-       if(verbose){ console.log("#RANDOR[1] END") }
-       generateProceduralTextMain(ss, SSVAR, soFar = soFar + ror)
+       if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#RANDOR[1] START: ["+randArray[1]+"]") }
+       var ror = generateProceduralTextMain([randArray[1]],SSVAR,"",verbose, lvl + 1)
+       if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#RANDOR[1] END (\""+ror+"\")") }
+       return generateProceduralTextMain(ss, SSVAR, soFar = soFar + ror,verbose,lvl)
      }
    } else if(ss[0][0] == "#RAND"){
-     if(verbose){ console.log("#RAND") }
+     if(verbose){ console.log("|  ".repeat(lvl)+"#RAND") }
      var randArray = ss.shift().slice(1);
-     var randPhrase = generateProceduralTextMain([ randArray[randLT(randArray.length)] ], SSVAR,"")
-     if(verbose){ console.log("#END RAND") }
-     return generateProceduralTextMain(ss, SSVAR, soFar + randPhrase)
+     if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#RAND START") }
+     var randPhrase = generateProceduralTextMain([ randArray[randLT(randArray.length)] ], SSVAR,"",verbose, lvl + 1)
+     if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#RAND END (\""+randPhrase+"\")") }
+     return generateProceduralTextMain(ss, SSVAR, soFar + randPhrase,verbose,lvl)
    } else if(ss[0][0] == "#V.SET"){
-     if(verbose){ console.log("#V.SET") }
+     if(verbose){ console.log("|  ".repeat(lvl)+"#V.SET") }
      var sva = ss.shift().slice();
      if(sva.length < 3){
        generateProceduralTextPrintFail("#V.SET: sva.length < 3",ss,SSVAR,soFar)
      }
      var setvar = sva.shift();
      var varid = sva.shift();
-     if(verbose){ console.log("#START VSET:") }
-     var varvalue = generateProceduralTextMain([sva],SSVAR,"");
-     if(verbose){ console.log("#END VSET:") }
+     if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#START VSET:") }
+     var varvalue = generateProceduralTextMain([sva],SSVAR,"",verbose, lvl + 1);
+     if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#END VSET:") }
      SSVAR[varid] = varvalue;
-     return generateProceduralTextMain(ss, SSVAR, soFar + varvalue);
+     return generateProceduralTextMain(ss, SSVAR, soFar + varvalue,verbose,lvl);
    } else if(ss[0][0] == "#V.SET.QUIET"){
-     if(verbose){ console.log("#V.SET.QUIET") }
+     if(verbose){ console.log("|  ".repeat(lvl)+"#V.SET.QUIET") }
      var sva = ss.shift().slice()
      if(sva.length < 3){
        generateProceduralTextPrintFail("#V.SET.QUIET: sva.length < 3",ss,SSVAR,soFar)
      }
      var setvar = sva.shift();
      var varid = sva.shift();
-     var varvalue = generateProceduralTextMain([sva],SSVAR,"");
+     if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#START VSET:") }
+     var varvalue = generateProceduralTextMain([sva],SSVAR,"",verbose, lvl + 1);
+     if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#END VSET:") }
      SSVAR[varid] = varvalue;
-     return generateProceduralTextMain(ss, SSVAR, soFar);
+     return generateProceduralTextMain(ss, SSVAR, soFar,verbose,lvl);
    } else if(ss[0][0] == "#GLOBAL.GET"){
-     if(verbose){ console.log("#GLOBAL.GET") }
+     if(verbose){ console.log("|  ".repeat(lvl)+"#GLOBAL.GET ("+ss[0][1]+")") }
      var sva = ss.shift().slice();
      if(sva.length  != 2){
         generateProceduralTextPrintFail("#GLOBAL.GET: sva.length != 2",ss,SSVAR,soFar)
      }
      var varid = sva[1]
-     var varvalue = generateProceduralTextMain(PROCTEXT[varid],SSVAR,"")
-     return generateProceduralTextMain(ss, SSVAR, soFar + varvalue);
+     if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#GLOBAL.GET START ["+varid+"]"+PROCTEXT[varid]) }
+     var varvalue = generateProceduralTextMain(PROCTEXT[varid],SSVAR,"",verbose, lvl + 1)
+     if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#GLOBAL.GET END (\""+varvalue+"\")") }
+     return generateProceduralTextMain(ss, SSVAR, soFar + varvalue,verbose,lvl);
    } else if(ss[0][0] == "#V.GET"){
-     if(verbose){ console.log("#V.GET") }
+     if(verbose){ console.log("|  ".repeat(lvl)+"#V.GET") }
      var sva = ss.shift().slice();
      if(sva.length  != 2){
         generateProceduralTextPrintFail("#V.GET: sva.length != 2",ss,SSVAR,soFar)
@@ -102,9 +106,9 @@ function generateProceduralTextMain(ssin, SSVAR = {}, soFar = "", verbose = true
      if(varvalue == null){
        generateProceduralTextPrintFail("#V.GET: varid \""+varid+"\" not found!",ss,SSVAR,soFar)
      }
-     return generateProceduralTextMain(ss, SSVAR, soFar + varvalue);
+     return generateProceduralTextMain(ss, SSVAR, soFar + varvalue,verbose,lvl);
    } else if(ss[0][0] == "#V.SWITCH"){
-     if(verbose){ console.log("#V.SWITCH") }
+     if(verbose){ console.log("|  ".repeat(lvl)+"#V.SWITCH") }
      var sva = ss.shift().slice()
      if(sva.length < 3){
         generateProceduralTextPrintFail("#V.SWITCH: sva.length <3",ss,SSVAR,soFar)
@@ -113,33 +117,37 @@ function generateProceduralTextMain(ssin, SSVAR = {}, soFar = "", verbose = true
      var varid = sva.shift()
      var varlookup = SSVAR[varid]
      if(varlookup == null){
-       generateProceduralTextPrintFail("#V.SWITCH: varid \""+varid+"\" not found!",ss,SSVAR,soFar)
+       generateProceduralTextPrintFail("|  ".repeat(lvl)+"#V.SWITCH: varid \""+varid+"\" not found!",ss,SSVAR,soFar)
      }
 
      if((! (sva[0] instanceof Array)) || sva[0].length != 2 || (! (sva[0][0] instanceof Array)) || sva[0][0][0] != "DEFAULT"){
        generateProceduralTextPrintFail("#V.SWITCH: Malformed first/default element",ss,SSVAR,soFar)
      }
-     var varvalue = generateProceduralTextMain([sva.shift()[1]],SSVAR,"");
+     if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#START SWITCH-DEFAULT:") }
+     var varvalue = generateProceduralTextMain([sva.shift()[1]],SSVAR,"",verbose, lvl + 1);
+     if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#END SWITCH-DEFAULT:") }
      for(var ii = 0; ii < sva.length; ii++){
        if((! (sva[i] instanceof Array)) || sva[ii].length != 2 || (! (sva[ii][0] instanceof Array))){
          generateProceduralTextPrintFail("#V.SWITCH: Malformed "+ii+"th element",ss,SSVAR,soFar)
        }
        for(var jj=0; jj < sva[i][0].length; jj++){
          if(varlookup == sva[ii][0][jj]){
-           varvalue = generateProceduralTextMain( [varvalue[ii][1]], SSVAR, "" )
+           if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#START SWITCH:") }
+           varvalue = generateProceduralTextMain( [varvalue[ii][1]], SSVAR, "",verbose, lvl+1 )
+           if(verbose){ console.log("|  ".repeat(lvl)+"###"+ "#END SWITCH:") }
          }
        }
      }
-     return generateProceduralTextMain( ss, SSVAR, soFar + varvalue)
+     return generateProceduralTextMain( ss, SSVAR, soFar + varvalue,verbose,lvl)
    } else {
-     if(verbose){ console.log("#V.DEFAULT") }
+     if(verbose){ console.log("|  ".repeat(lvl)+"#V.DEFAULT") }
      var sva = ss.shift().slice();
      if(! (sva instanceof Array)){
         console.log("error?")
      }
-     console.log(typeof sva)
+     /*console.log(typeof sva)*/
      var sss = sva.concat(ss)
-     return generateProceduralTextMain(sss, SSVAR, soFar)
+     return generateProceduralTextMain(sss, SSVAR, soFar,verbose,lvl)
    }
    
    

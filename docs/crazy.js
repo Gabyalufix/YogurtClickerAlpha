@@ -110,38 +110,63 @@ STATS["finalMessageIdx"] = 0;
 
 function finalSpiral(){
    var currtime = Date.now();
-   
    if(currtime > STATS["nextMessageTime"]){
-     STATS["nextMessageTime"] = Date.now() + Math.random() * (3000 - (STATS["finalMessageIdx"]/60))
+     if(STATS["finalMessageIdx"] < 6){
+       STATS["nextMessageTime"] = Date.now() + 100
+     } else {
+       STATS["nextMessageTime"] = Date.now() + Math.random() * (3000 - (STATS["finalMessageIdx"]/60))
+     }
      deathNoticeContainer.innerHTML = "<SPAN> > "+ STATICVAR_HOLDER["DEATHSPIRAL_PRERESET_MESSAGES"][STATS["finalMessageIdx"]]+"</SPAN>" + deathNoticeContainer.innerHTML
      STATS["finalMessageIdx"] = STATS["finalMessageIdx"] + 1;
      console.log("Final Spiral: "+STATS["finalMessageIdx"]);
    }
-   if(STATS["finalMessageIdx"] > 40){
+   if(STATS["finalMessageIdx"] > STATICVAR_HOLDER["DEATHSPIRAL_PRERESET_MESSAGES"].length){
      STATS["currSequence"] = "bsodSequence"
      console.log("ENTERING CRASH SEQUENCE")
      STATS["finalMessageIdx"] = 0;
+     STATS["nextMessageTime"] = 0;
+     deathNoticeContainer.innerHTML = "";
+     deathNoticeContainer.style["background-color"] = COLOR["bsodBlue"];
+     deathNoticeContainer.style.color = COLOR["bsodText"];
    }
 }
 
-var bsodMessageIdx = 0;
-var bsodMessageTime = 0;
+STATS["finalMessageJdx"] = 0
 
 function bsodSequence(){
-   deathNoticeContainer.style["background-color"] = COLOR["bsodBlue"];
-   deathNoticeContainer.style.color = COLOR["bsodText"];
-   deathNoticeContainer.innerHTML = "";
    /*deathNoticeContainer.style["flex-direction"] = "column";*/
    var currtime = Date.now();
-   if(currtime > nextMessageTime){
-     nextMessageTime = Date.now() + 3000;
-     deathNoticeContainer.innerHTML = "<SPAN> > "+ STATICVAR_HOLDER["BSOD_PRERESET_MESSAGES"][STATS["finalMessageIdx"]]+"</SPAN>" + deathNoticeContainer.innerHTML
-     STATS["finalMessageIdx"] = STATS["finalMessageIdx"] + 1;
-     console.log("Final Spiral: "+STATS["finalMessageIdx"]);
+   if(currtime > STATS["nextMessageTime"]){
+     STATS["nextMessageTime"] = Date.now() + 3000;
+     var curr = STATICVAR_HOLDER["BSOD_PRERESET_MESSAGES"][STATS["finalMessageIdx"]]
+     if( curr instanceof Array){
+       var bsodElemId = "BSOD_SEQUENCE_"+STATS["finalMessageIdx"]
+       if(STATS["finalMessageJdx"] == 0){
+         deathNoticeContainer.innerHTML = "<SPAN id=\""+bsodElemId+"\"> "+"</SPAN>" + deathNoticeContainer.innerHTML
+       }
+       var bsodElem = document.getElementById(bsodElemId);
+       bsodElem.innerHTML = bsodElem.innerHTML + curr[ STATS["finalMessageJdx"] ];
+       if(STATS["finalMessageJdx"] >= curr.length - 1 ){
+         STATS["finalMessageJdx"] = 0;
+         STATS["finalMessageIdx"] = STATS["finalMessageIdx"] + 1;
+       } else {
+         STATS["finalMessageJdx"] = STATS["finalMessageJdx"] + 1;
+       }
+     } else {
+       deathNoticeContainer.innerHTML = "<SPAN id=\""+bsodElemId+"\"> "+curr+"</SPAN>" + deathNoticeContainer.innerHTML
+       STATS["finalMessageIdx"] = STATS["finalMessageIdx"] + 1;
+     }
    }
-   if(STATS["finalMessageIdx"] > 40){
-     STATS["currSequence"] = "resetSequence"
-     console.log("ENTERING RESET SEQUENCE")
+   if(STATS["finalMessageIdx"] >  STATICVAR_HOLDER["BSOD_PRERESET_MESSAGES"].length){
+      STATS["CRAZY_LEVEL"] = 0;
+      document.getElementById("CHEAT_LESSCRAZY").disable = true;
+      document.getElementById("CHEAT_MORECRAZY").disable = false;
+      STATS["currSequence"] = "normal"
+      STATS["finalMessageJdx"] = 0;
+      STATS["finalMessageIdx"] = 0;
+      STATS["nextMessageTime"] = 0;
+      STATS["DEATH_SPIRAL"] = 0;
+      resetAllCrazy();
    }
 }
 function resetSequence(){
@@ -218,7 +243,7 @@ function SLOWTICK_makeCrazyHelper(){
        }
        var deathSpiralBoost = (STATS["DEATH_SPIRAL"]+1)*((STATICVAR_HOLDER["DEATH_SPIRAL_COUNTDOWN_SEC"] / (100)) / 100)
        STATS["DEATH_SPIRAL"] = STATS["DEATH_SPIRAL"] + deathSpiralBoost
-       console.log("boost: "+deathSpiralBoost+ " / "+STATS["DEATH_SPIRAL"]+" (time:"+((Date.now()-deathSpiralStart)/1000)+"s)");
+       /*console.log("boost: "+deathSpiralBoost+ " / "+STATS["DEATH_SPIRAL"]+" (time:"+((Date.now()-deathSpiralStart)/1000)+"s)");*/
        STATS["DEATH_SPIRALING"] = true;
     } else if(STATS["DEATH_SPIRAL"] > 0){
        STATS["DEATH_SPIRAL"] = Math.max(STATS["DEATH_SPIRAL"] - 0.1,0)
@@ -233,14 +258,14 @@ function SLOWTICK_makeCrazyHelper(){
     }
     var currOpacity = parseFloat(canvasMask.style.opacity)
     if(currOpacity > STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_WORSE_BGTRANS"][clvl]){
-      console.log("WORSE");
+      /*console.log("WORSE");*/
       if(currOpacity + 0.1 < STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl]){
         canvasMask.style.opacity = (currOpacity - 0.04)
       } else {
         canvasMask.style.opacity = (currOpacity - 0.01)
       }
     } else if(currOpacity < STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_BETTER_BGTRANS"][clvl]){
-      console.log("BETTER");
+      /*console.log("BETTER");*/
       canvasMask.style.opacity = (currOpacity + 0.01)
     }
     var fgOpacity = parseFloat(fgCanvas.style.opacity)
