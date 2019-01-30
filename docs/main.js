@@ -131,7 +131,7 @@ function updatePctSliderDisplayHelper(ss){
 
 function updatePctSliderDisplay(ss){
   var fid = ss.fid;
-  for(j = 0; j < ss.othrArray.length; j++){
+  for(var j = 0; j < ss.othrArray.length; j++){
     updatePctSliderDisplayHelper(ss.othrArray[j])
   }
   updatePctSliderDisplayHelper(ss)
@@ -142,14 +142,14 @@ function onInputMultiSliderPct(ss){
       var cval = parseFloat(ss.value)
       if(ss.ktotal + cval >= 10000){
         ss.value = 10000 - ss.ktotal
-        for(j = 0; j < ss.othrArray.length; j++){
+        for(var j = 0; j < ss.othrArray.length; j++){
           if(ss.othrArray[j].lockbox.checked == false){
                 ss.othrArray[j].value = 0
           }
         }
       } else if(ss.ktotal + cval < 10000 && ss.stotal == 0) {
         ss.value = 10000 - ss.ktotal
-        for(j = 0; j < ss.othrArray.length; j++){
+        for(var j = 0; j < ss.othrArray.length; j++){
           if(ss.othrArray[j].lockbox.checked == false){
             ss.othrArray[j].value = 1
           }
@@ -157,7 +157,7 @@ function onInputMultiSliderPct(ss){
         onDownMultiSliderPct(ss)
       } else {
         var othrVal = 10000 - ss.ktotal - cval
-        for(j = 0; j < ss.othrArray.length; j++){
+        for(var j = 0; j < ss.othrArray.length; j++){
           if(ss.othrArray[j].lockbox.checked == false){
             ss.othrArray[j].value = ss.ssf[j] * othrVal
           }
@@ -171,7 +171,7 @@ function onDownMultiSliderPct(ss){
       ss.stotal = 0
       ss.ktotal = 0
       ss.downval = parseFloat(ss.value);
-      for(j = 0; j < ss.othrArray.length; j++){
+      for(varj = 0; j < ss.othrArray.length; j++){
         if(ss.othrArray[j].lockbox.checked == true){
           ss.ssf[j] = parseFloat(ss.othrArray[j].value);
           ss.ktotal = ss.ktotal + ss.ssf[j]
@@ -180,7 +180,7 @@ function onDownMultiSliderPct(ss){
           ss.stotal = ss.stotal + ss.ssf[j]
         }
       }
-      for(j = 0; j < ss.othrArray.length; j++){
+      for(var j = 0; j < ss.othrArray.length; j++){
         ss.ssf[j] = ss.ssf[j] / ss.stotal
       }
 }
@@ -313,7 +313,7 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    var addButtonList = ["BB","B","F","FF"]
    var addButtonMult = [10,1,1,10]
    var addButtonPos  = [false,false,true,true]
-   for(j=0;j < addButtonList.length;j++){
+   for(var j=0;j < addButtonList.length;j++){
      var bname = addButtonList[j]
      var butelem = document.getElementById("button_wf"+worldType+bname)
      butelem.worldType = worldType;
@@ -361,7 +361,7 @@ for( var i = 0; i < CHEATADD_TYPE_LIST.length; i++){
    var addButtonList = ["BB","B","F","FF"]
    var addButtonMult = [10,1,1,10]
    var addButtonPos  = [false,false,true,true]
-   for(j=0;j < addButtonList.length;j++){
+   for(var j=0;j < addButtonList.length;j++){
      var bname = addButtonList[j]
      var butelem = document.getElementById("button_wf"+worldType+bname)
      butelem.worldType = worldType;
@@ -477,7 +477,7 @@ function TICK_readUserInputs(){
   for(var i =0; i<PCTSLIDER_FIELDS.length; i++){
     var fid = PCTSLIDER_FIELDS[i]
     SETTINGS[fid+"_FRACTION"] = [];
-    for(j=0;j<PCTSLIDERS[fid]["displayElem"].length;j++){
+    for(var j=0;j<PCTSLIDERS[fid]["displayElem"].length;j++){
       SETTINGS[fid+"_FRACTION"][j] = parseFloat( PCTSLIDERS[fid]["sliderElem"][j].value ) / 10000
     }
   }
@@ -928,7 +928,19 @@ document.getElementById("ENABLE_CHEATS_CHECKBOX").oninput = function(){
 CONSTRUCTION_REQUESTS=[];
 
 /*
-
+    addConstructionRequest("MATTER-Collected-CT", 
+                           (STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]) , 
+                           STATS["COST-MATTER-Collected"])
+                           
+    addConstructionRequest("MATTER-Processed-CT", 
+                           (STATS["CONVERSIONS"]["processPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][1]) , 
+                           STATS["COST-MATTER-Processed"] )
+    addConstructionRequest("SHIP-CONSTRUCT-BUFFER", 
+                           (STATS["CONVERSIONS"]["shipPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]) , 
+                           STATS["COST-MATTER-Ship"])
+                           
+executeAllConstructionRequests()               
+                           
 */
 
 function addConstructionRequest(inventoryItemName, requestCt, unitCost){
@@ -940,41 +952,41 @@ function executeAllConstructionRequests(){
   var costRequests = {};
   for(var i=0;i<CONSTRUCTION_REQUESTS.length;i++){
     for(var j=0; j<CONSTRUCTION_REQUESTS[i][2].length; j++){
-      var cc = CONSTRUCTION_REQUESTS[i][2][j][0];
-      var reqCt = CONSTRUCTION_REQUESTS[i][2][j][1];
-      var uCost = CONSTRUCTION_REQUESTS[i][2][j][2];
-      if(costRequests[cc] == null){
-        costRequests[cc] = []
+      var xcc = CONSTRUCTION_REQUESTS[i][2][j][0];
+      var reqCt = CONSTRUCTION_REQUESTS[i][1];
+      var uCost = CONSTRUCTION_REQUESTS[i][2][j][1];
+      if(costRequests[xcc] == null){
+        costRequests[xcc] = []
       }
-      costRequests[cc].push([i,j,reqCt * uCost])
-      costResourceSet.add(cc)
+      costRequests[xcc].push([i,j,reqCt * uCost])
+      costResourceSet.add(xcc)
     }
   }
   /*console.log("costResourceSet: "+console.log("?"))*/
-  for(let cc of costResourceSet.values() ){
-     /*console.log("?")*/
-     var cr = costRequests[cc]
+  for(let ccx of costResourceSet.values() ){
+     console.log("ccx["+ccx+"]")
+     var cr = costRequests[ccx]
      var crTotal = 0;
      for(let crr of cr){
        crTotal = crTotal + crr[2];
      }
-     if(crTotal < INVENTORY[cc]){
+     if(crTotal > INVENTORY[ccx]){
        for(let crr of cr){
-         var uCost = CONSTRUCTION_REQUESTS[crr[0]][2][crr[1]][2];
-         var currReqCt = CONSTRUCTION_REQUESTS[crr[0]][2][crr[1]][3];
-         console.log("["+cc+"]: ["+uCost+" / "+currReqCt+" / "+((crr[2] / crTotal) * INVENTORY[cc]) / uCost+"]")
-         CONSTRUCTION_REQUESTS[crr[0]][2][crr[1]][3] = Math.min( currReqCt, ((crr[2] / crTotal) * INVENTORY[cc]) / uCost )
+         var uCost = CONSTRUCTION_REQUESTS[crr[0]][2][crr[1]][1];
+         var currReqCt = CONSTRUCTION_REQUESTS[crr[0]][3];
+         console.log("["+ccx+"]: ["+uCost+" / "+currReqCt+" / "+((crr[2] / crTotal) * INVENTORY[ccx]) / uCost+"]")
+         CONSTRUCTION_REQUESTS[crr[0]][3] = Math.min( currReqCt, ((crr[2] / crTotal) * INVENTORY[ccx]) / uCost )
        }
      }
   }
   for(var i=0;i<CONSTRUCTION_REQUESTS.length;i++){
     var bb = CONSTRUCTION_REQUESTS[i][0];
     for(var j=0; j<CONSTRUCTION_REQUESTS[i][2].length; j++){
-      var cc = CONSTRUCTION_REQUESTS[i][2][j][0];
-      var makeCt = CONSTRUCTION_REQUESTS[i][2][j][3];
-      var uCost = CONSTRUCTION_REQUESTS[i][2][j][2];
-      INVENTORY[cc] = INVENTORY[cc] - makeCt * uCost;
-      INVENTORY[bb] = INVENTORY[bb] + makeCt;
+      var ccx = CONSTRUCTION_REQUESTS[i][2][j][0];
+      var reqCt = CONSTRUCTION_REQUESTS[i][3];
+      var uCost = CONSTRUCTION_REQUESTS[i][2][j][1];
+      INVENTORY[ccx] = INVENTORY[ccx] - reqCt * uCost;
+      INVENTORY[bb] = INVENTORY[bb] + reqCt;
     }
   }
   CONSTRUCTION_REQUESTS = [];
