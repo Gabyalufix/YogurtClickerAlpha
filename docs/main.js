@@ -171,7 +171,7 @@ function onDownMultiSliderPct(ss){
       ss.stotal = 0
       ss.ktotal = 0
       ss.downval = parseFloat(ss.value);
-      for(varj = 0; j < ss.othrArray.length; j++){
+      for(var j = 0; j < ss.othrArray.length; j++){
         if(ss.othrArray[j].lockbox.checked == true){
           ss.ssf[j] = parseFloat(ss.othrArray[j].value);
           ss.ktotal = ss.ktotal + ss.ssf[j]
@@ -562,16 +562,10 @@ function TICK_scoutSystems(){
 function TICK_calcIndustry(){
 
    
-   for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
-        var matterType = MATTER_TYPE_LIST[i]
-        var fmtsi = fmtSIunits(INVENTORY["MATTER-"+matterType+"-CT"])
-        var sd = INVENTORY["MATTER-"+matterType+"-DISPLAY"]
-        sd.innerHTML = fmtsi[0]
-        sd.displayUnits.innerHTML = fmtsi[1]+"g"
-        sd.displayDiv.title = "grams: basic unit of mass\n"+fmtsi[4]
-    }
+
+    document.getElementById("SHIPCONSTRUCTBUFFER_DISPLAY_DIV").innerHTML = INVENTORY["SHIP-CONSTRUCT-BUFFER"]
     
-    /*
+    
     addConstructionRequest("MATTER-Collected-CT", 
                            (STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]) , 
                            STATS["COST-MATTER-Collected"])
@@ -583,7 +577,16 @@ function TICK_calcIndustry(){
                            (STATS["CONVERSIONS"]["shipPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]) , 
                            STATS["COST-MATTER-Ship"])
     
-    executeAllConstructionRequests()*/
+    executeAllConstructionRequests()
+    
+   for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
+        var matterType = MATTER_TYPE_LIST[i]
+        var fmtsi = fmtSIunits(INVENTORY["MATTER-"+matterType+"-CT"])
+        var sd = INVENTORY["MATTER-"+matterType+"-DISPLAY"]
+        sd.innerHTML = fmtsi[0]
+        sd.displayUnits.innerHTML = fmtsi[1]+"g"
+        sd.displayDiv.title = "grams: basic unit of mass\n"+fmtsi[4]
+    }
     
     /*
     STATS["CONVERSIONS"]["gramPerSunShip"]
@@ -691,6 +694,7 @@ function startWorldConstruction(worldType,batchCt){
   CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] + batchCt
 }
 function startWorldDeconstruction(worldType,batchCt){
+  console.log("Deconstruct["+worldType+"]["+batchCt+"]: inv="+INVENTORY["WORLDS-"+worldType+"-CT"]+" ConBuf="+CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType]+" DecBuf="+CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType]);
   if(INVENTORY["WORLDS-"+worldType+"-CT"] + CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] < batchCt){
     //console.log("deconstructing ALL: "+batchCt+">"+INVENTORY[worldType]["CT"]);
     startWorldDeconstruction(worldType,INVENTORY["WORLDS-"+worldType+"-CT"] + CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])
@@ -964,7 +968,7 @@ function executeAllConstructionRequests(){
   }
   /*console.log("costResourceSet: "+console.log("?"))*/
   for(let ccx of costResourceSet.values() ){
-     console.log("ccx["+ccx+"]")
+     /*console.log("ccx["+ccx+"]")*/
      var cr = costRequests[ccx]
      var crTotal = 0;
      for(let crr of cr){
@@ -974,7 +978,7 @@ function executeAllConstructionRequests(){
        for(let crr of cr){
          var uCost = CONSTRUCTION_REQUESTS[crr[0]][2][crr[1]][1];
          var currReqCt = CONSTRUCTION_REQUESTS[crr[0]][3];
-         console.log("["+ccx+"]: ["+uCost+" / "+currReqCt+" / "+((crr[2] / crTotal) * INVENTORY[ccx]) / uCost+"]")
+         /*console.log("["+ccx+"]: ["+uCost+" / "+currReqCt+" / "+((crr[2] / crTotal) * INVENTORY[ccx]) / uCost+"]")*/
          CONSTRUCTION_REQUESTS[crr[0]][3] = Math.min( currReqCt, ((crr[2] / crTotal) * INVENTORY[ccx]) / uCost )
        }
      }
