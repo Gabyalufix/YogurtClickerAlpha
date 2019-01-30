@@ -162,8 +162,8 @@ function bsodSequence(){
    }
    if(STATS["finalMessageIdx"] >  STATICVAR_HOLDER["BSOD_PRERESET_MESSAGES"].length){
       STATS["CRAZY_LEVEL"] = 0;
-      document.getElementById("CHEAT_LESSCRAZY").disable = true;
-      document.getElementById("CHEAT_MORECRAZY").disable = false;
+      document.getElementById("CHEAT_LESSCRAZY").disabled = true;
+      document.getElementById("CHEAT_MORECRAZY").disabled = false;
       STATS["currSequence"] = "resetSequence"
       STATS["finalMessageJdx"] = 0;
       STATS["finalMessageIdx"] = 0;

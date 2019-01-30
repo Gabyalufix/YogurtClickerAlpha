@@ -28,7 +28,7 @@ CONSTRUCTION_BUFFER["WORLDS_CONST"] = {}
 CONSTRUCTION_BUFFER["WORLDS_DECON"] = {}
 
 
-
+INVENTORY["SHIP-CONSTRUCT-BUFFER"] = 0;
 
 ///////////////////////////////
 ////Initialize starting stats
@@ -45,6 +45,9 @@ STATS["COST-WORLDBUILD-Slag"] = [["WORLDS-Fallow-CT",1]];
 STATS["COST-WORLDBUILD-Seedres"] = [["WORLDS-Fallow-CT",1]];
 
 
+STATS["COST-MATTER-Collected"] = [["MATTER-Available-CT",1]];
+STATS["COST-MATTER-Processed"] = [["MATTER-Collected-CT",1]];
+STATS["COST-MATTER-Ship"] = [["MATTER-Processed-CT",1]];
 
 
 STATS["COST-WORLDDECON-Fallow"] = [["WORLDS-Secure-CT",-1]];
@@ -65,7 +68,8 @@ STATS["CONVERSIONS"]["opToByte"] =   (0.232)
 STATS["CONVERSIONS"]["gramsPerWorld"] = 2e30
 STATS["CONVERSIONS"]["collectPerSunPerTick"] = 1.5e15
 STATS["CONVERSIONS"]["processPerSunPerTick"] = 5.2e15
-
+STATS["CONVERSIONS"]["shipPerSunPerTick"]    = 1
+STATS["CONVERSIONS"]["gramPerSunShip"]       = 2.3e14
 
 PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","think","soul","ship"]
 STATS["PRODUCTIVITY_RATING"] = {}
@@ -243,7 +247,7 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MATTER:
 
-MATTER_TYPE_LIST = ["Discovered","Collected","Processed","Waste","Heat","Yogurt"]
+MATTER_TYPE_LIST = ["Discovered","Available","Collected","Processed","Waste","Heat","Yogurt"]
 
 
 /*INVENTORY["MATTER"]={}*/
@@ -553,9 +557,11 @@ function TICK_scoutSystems(){
     }
 
 }
+
+
 function TICK_calcIndustry(){
 
-
+   
    for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
         var matterType = MATTER_TYPE_LIST[i]
         var fmtsi = fmtSIunits(INVENTORY["MATTER-"+matterType+"-CT"])
@@ -566,6 +572,28 @@ function TICK_calcIndustry(){
     }
     
     /*
+    addConstructionRequest("MATTER-Collected-CT", 
+                           (STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]) , 
+                           STATS["COST-MATTER-Collected"])
+                           
+    addConstructionRequest("MATTER-Processed-CT", 
+                           (STATS["CONVERSIONS"]["processPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][1]) , 
+                           STATS["COST-MATTER-Processed"] )
+    addConstructionRequest("SHIP-CONSTRUCT-BUFFER", 
+                           (STATS["CONVERSIONS"]["shipPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]) , 
+                           STATS["COST-MATTER-Ship"])
+    
+    executeAllConstructionRequests()*/
+    
+    /*
+    STATS["CONVERSIONS"]["gramPerSunShip"]
+    INVENTORY["SHIP-CONSTRUCT-BUFFER"]
+    STATS["CONVERSIONS"]["shipPerSunPerTick"]
+    INVENTORY[]
+    addConstructionRequest(inventoryItemName, requestCt, unitCost)
+    MATTER_TYPE_LIST = ["Discovered","Collected","Processed","Waste","Heat","Yogurt"]
+
+    
     STATS["CONVERSIONS"]["collectPerSunPerTick"]
     STATS["CONVERSIONS"]["processPerSunPerTick"]
     */
@@ -624,6 +652,9 @@ function TICK_constructWorlds(){
       if(  CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] < Date.now() ){
         var nxtAttempt = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][0]
         var nxt = buildFromCost("WORLDS-"+worldType+"-CT",nxtAttempt,STATS["COST-WORLDBUILD-"+worldType]);
+        if(worldType == "Slag"){
+          INVENTORY["MATTER-Available-CT"] = INVENTORY["MATTER-Available-CT"] + STATS["CONVERSIONS"]["gramsPerWorld"] * nxt;
+        }
         if(nxt == nxtAttempt){
           var nxtbuf = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()
         } else {
@@ -660,9 +691,34 @@ function startWorldConstruction(worldType,batchCt){
   CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] + batchCt
 }
 function startWorldDeconstruction(worldType,batchCt){
-  if(INVENTORY["WORLDS-"+worldType+"-CT"] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] < batchCt){
+  if(INVENTORY["WORLDS-"+worldType+"-CT"] + CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] < batchCt){
     //console.log("deconstructing ALL: "+batchCt+">"+INVENTORY[worldType]["CT"]);
-    startWorldDeconstruction(worldType,INVENTORY["WORLDS-"+worldType+"-CT"] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])
+    startWorldDeconstruction(worldType,INVENTORY["WORLDS-"+worldType+"-CT"] + CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] - CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])
+  } else if(CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0){
+    var leftToDecon = batchCt;
+    if( CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] <= batchCt){
+      leftToDecon = leftToDecon - CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType];
+      CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = 0;
+      CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType] = [];
+    } else {
+      CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] - batchCt;
+      while(leftToDecon > 0){
+        var idx = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].length-1;
+        var xx = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][idx][0];
+        if(xx > leftToDecon){
+          CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][idx][0] = xx - leftToDecon;
+          leftToDecon = 0;
+        } else {
+          leftToDecon = leftToDecon - CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].pop()[0];
+        }
+      }
+    }
+    
+    if(leftToDecon > 0){
+      CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].push([leftToDecon, (Date.now() + STATS["WORLD_DECON_TIME"][worldType]) ])
+      CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] + leftToDecon
+    }
+    
   } else {
     //console.log("deconstructing Some: "+batchCt+"<="+INVENTORY[worldType]["CT"]);
     CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].push([batchCt, (Date.now() + STATS["WORLD_DECON_TIME"][worldType]) ])
@@ -855,5 +911,73 @@ document.getElementById("ENABLE_CHEATS_CHECKBOX").oninput = function(){
 
 
 
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Economy stuff
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+CONSTRUCTION_REQUESTS=[];
+
+/*
+
+*/
+
+function addConstructionRequest(inventoryItemName, requestCt, unitCost){
+   CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt] )
+}
+
+function executeAllConstructionRequests(){
+  var costResourceSet = new Set();
+  var costRequests = {};
+  for(var i=0;i<CONSTRUCTION_REQUESTS.length;i++){
+    for(var j=0; j<CONSTRUCTION_REQUESTS[i][2].length; j++){
+      var cc = CONSTRUCTION_REQUESTS[i][2][j][0];
+      var reqCt = CONSTRUCTION_REQUESTS[i][2][j][1];
+      var uCost = CONSTRUCTION_REQUESTS[i][2][j][2];
+      if(costRequests[cc] == null){
+        costRequests[cc] = []
+      }
+      costRequests[cc].push([i,j,reqCt * uCost])
+      costResourceSet.add(cc)
+    }
+  }
+  /*console.log("costResourceSet: "+console.log("?"))*/
+  for(let cc of costResourceSet.values() ){
+     /*console.log("?")*/
+     var cr = costRequests[cc]
+     var crTotal = 0;
+     for(let crr of cr){
+       crTotal = crTotal + crr[2];
+     }
+     if(crTotal < INVENTORY[cc]){
+       for(let crr of cr){
+         var uCost = CONSTRUCTION_REQUESTS[crr[0]][2][crr[1]][2];
+         var currReqCt = CONSTRUCTION_REQUESTS[crr[0]][2][crr[1]][3];
+         console.log("["+cc+"]: ["+uCost+" / "+currReqCt+" / "+((crr[2] / crTotal) * INVENTORY[cc]) / uCost+"]")
+         CONSTRUCTION_REQUESTS[crr[0]][2][crr[1]][3] = Math.min( currReqCt, ((crr[2] / crTotal) * INVENTORY[cc]) / uCost )
+       }
+     }
+  }
+  for(var i=0;i<CONSTRUCTION_REQUESTS.length;i++){
+    var bb = CONSTRUCTION_REQUESTS[i][0];
+    for(var j=0; j<CONSTRUCTION_REQUESTS[i][2].length; j++){
+      var cc = CONSTRUCTION_REQUESTS[i][2][j][0];
+      var makeCt = CONSTRUCTION_REQUESTS[i][2][j][3];
+      var uCost = CONSTRUCTION_REQUESTS[i][2][j][2];
+      INVENTORY[cc] = INVENTORY[cc] - makeCt * uCost;
+      INVENTORY[bb] = INVENTORY[bb] + makeCt;
+    }
+  }
+  CONSTRUCTION_REQUESTS = [];
+}
 
 
