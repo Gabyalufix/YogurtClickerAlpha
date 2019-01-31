@@ -1019,6 +1019,7 @@ input[type=unitEntry], select {
 
 .tooltipHolder {
   position: relative;
+
 }
 
 .tooltipHolder .tooltiptext {
@@ -1031,6 +1032,7 @@ input[type=unitEntry], select {
   padding: 5px 5px;
   z-index: 100;
   border: 1px solid var(--DK4);
+  pointer-events: none;
 
 }
 
@@ -1038,6 +1040,8 @@ input[type=unitEntry], select {
   position: absolute;
   top: 50%;
   left: 100%;
+    pointer-events: none;
+
   /*margin-left: -50px;*/
 }
 
@@ -1051,6 +1055,8 @@ input[type=unitEntry], select {
   border-width: 5px;
   border-style: solid;
   border-color: transparent black transparent transparent;
+  pointer-events: none;
+
 }
 
 .tooltipHolder:hover .tooltiptext {

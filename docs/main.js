@@ -108,7 +108,7 @@ var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of informat
                                      ship:"Suns: The total productivity of one standard dyson sphere (before upgrades)."}
 
 
-var PCTSLIDER_SUBFIELDCT = [4,4,4,5,4,6,3,3]
+var PCTSLIDER_SUBFIELDCT = [4,4,4,5,6,6,3,3]
 var PCTSLIDERS = {}
 
 //PRODUCTIVITY_STATS = ["bot","psy","green","bio","eng","psy","think","soul"]
