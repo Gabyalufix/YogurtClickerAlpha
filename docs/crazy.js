@@ -168,6 +168,7 @@ function bsodSequence(){
       STATS["finalMessageJdx"] = 0;
       STATS["finalMessageIdx"] = 0;
       STATS["nextMessageTime"] = 0;
+      deathNoticeContainer.style["pointer-events"] = "none";
       STATS["DEATH_SPIRAL"] = 0;
       
       resetAllCrazy();
@@ -267,6 +268,7 @@ function SLOWTICK_makeCrazyHelper(){
     } else if(STATS["DEATH_SPIRAL"]>100){
       STATS["currSequence"] = "finalSpiral"    
       deathNoticeContainer.style.opacity = 1.0
+      deathNoticeContainer.style["pointer-events"] = "auto"
       console.log("ENTERING FINAL DEATH SPIRAL")
       /*if(STATS["DEATH_SPIRAL"]>110){
          STATS["CRAZY_LEVEL"] = 0;
