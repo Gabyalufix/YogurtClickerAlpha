@@ -1033,20 +1033,20 @@ input[type=unitEntry], select {
   z-index: 100;
   border: 1px solid var(--DK4);
   pointer-events: none;
-
+  margin: 0;
 }
 
-.tooltipHolder .LT {
+.tooltipHolder .SEC2 {
   position: absolute;
-  top: 50%;
-  left: 100%;
-    pointer-events: none;
+  top: 0px;
+  left: 105%;
+  pointer-events: none;
 
   /*margin-left: -50px;*/
 }
 
 
-.tooltipHolder .LT::after {
+.tooltipHolder .SEC2::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -1059,10 +1059,12 @@ input[type=unitEntry], select {
 
 }
 
+
+/*
 .tooltipHolder:hover .tooltiptext {
   visibility: visible;
 }
-
+*/
 
 
 

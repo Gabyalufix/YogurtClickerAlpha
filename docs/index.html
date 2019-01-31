@@ -663,7 +663,14 @@ CONSOLE:<br>
 
 			<div class="SliderSetHolder">
 
-			<h5><span class="INFO_TEXT_STATIC">Collect Matter: </span><div class="valueDisplayDiv" id="botSliderDisplayPct1_DIV"><span id="botSliderDisplayPct1"></span><span id="botSliderDisplayPct1_UNITS"></span></div></h5>
+<!--
+			<div class="tooltipHolder">
+              <h5><span class="INFO_TEXT_STATIC">Digest Matter: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct6_DIV"><span id="greenSliderDisplayPct6"></span><span id="greenSliderDisplayPct6_UNITS"></span></div></h5>
+			  <span class="tooltiptext SEC2"> <span class="INFO_TEXT_STATIC"> Makes Matter</span> </span>
+			</div>
+-->
+
+			<h5><span class="INFO_TEXT_STATIC">Process Matter: </span><div class="valueDisplayDiv" id="botSliderDisplayPct1_DIV"><span id="botSliderDisplayPct1"></span><span id="botSliderDisplayPct1_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="4000" class="slider" id="botSliderPct1" style="width:90%">
@@ -674,7 +681,8 @@ CONSOLE:<br>
 					</label>
 				</div>
 
-			<h5><span class="INFO_TEXT_STATIC">Process Matter: </span><div class="valueDisplayDiv" id="botSliderDisplayPct2_DIV"><span id="botSliderDisplayPct2"></span><span id="botSliderDisplayPct2_UNITS"></span></div></h5>
+
+			<h5><span class="INFO_TEXT_STATIC">Construct More Bots: </span><div class="valueDisplayDiv" id="botSliderDisplayPct2_DIV"><span id="botSliderDisplayPct2"></span><span id="botSliderDisplayPct2_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="4000" class="slider" id="botSliderPct2" style="width:90%">
@@ -692,6 +700,17 @@ CONSOLE:<br>
 					</div>
 					<label class="container">
 					  <input type="checkbox"  id = "botSliderCheck5">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Assemble Computronium: </span><div class="valueDisplayDiv" id="botSliderDisplayPct6_DIV"><span id="botSliderDisplayPct6"></span><span id="botSliderDisplayPct6_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="4000" class="slider" id="botSliderPct6" style="width:90%">
+					</div>
+					<label class="container">
+					  <input type="checkbox"  id = "botSliderCheck6">
 					  <span class="checkmark"></span>
 					</label>
 				</div>
@@ -737,7 +756,11 @@ CONSOLE:<br>
 
             <span class="INFO_TEXT_STATIC">Productivity: </span><div class="valueDisplayDiv" id="green_PRODUCTIVITY_DISPLAY_DIV"><span id="green_PRODUCTIVITY_DISPLAY"></span><span id="green_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
 
-			<h5><span class="INFO_TEXT_STATIC">Digest Matter: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct6_DIV"><span id="greenSliderDisplayPct6"></span><span id="greenSliderDisplayPct6_UNITS"></span></div></h5>
+			<!--<div class="tooltipHolder">-->
+              <h5><span class="INFO_TEXT_STATIC">Digest Matter: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct6_DIV"><span id="greenSliderDisplayPct6"></span><span id="greenSliderDisplayPct6_UNITS"></span></div></h5>
+			<!--  <span class="tooltiptext SEC2"> <span class="INFO_TEXT_STATIC"> Activates digestive enzymes in biomass clusters that digests unprocessed greenworld matter into a metabolically-available slurry. This slurry can then be used as a growth medium for more biomass or for yogurt.</span> </span>
+			</div>-->
+
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="1000" class="slider" id="greenSliderPct6" style="width:90%">
@@ -748,7 +771,12 @@ CONSOLE:<br>
 					</label>
 				</div>
 
-			<h5><span class="INFO_TEXT_STATIC">Grow Biomass: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct5_DIV"><span id="greenSliderDisplayPct5"></span><span id="greenSliderDisplayPct5_UNITS"></span></div></h5>
+			<!--<div class="tooltipHolder">-->
+			  <h5><span class="INFO_TEXT_STATIC">Grow Biomass: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct5_DIV"><span id="greenSliderDisplayPct5"></span><span id="greenSliderDisplayPct5_UNITS"></span></div></h5>
+			<!--  <span class="tooltiptext SEC2"> <span class="INFO_TEXT_STATIC"> Directs the growth of specialized biomass clusters: vast balls of bioengineered, artifically-evolved algae sludge that can be controlled and directed to perform specialized biological processes on demand.</span> </span>
+			</div>-->
+
+
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="1000" class="slider" id="greenSliderPct5" style="width:90%">
@@ -759,7 +787,10 @@ CONSOLE:<br>
 					</label>
 				</div>
 
-			<h5><span class="INFO_TEXT_STATIC">Ferment Yogurt: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct2_DIV"><span id="greenSliderDisplayPct2"></span><span id="greenSliderDisplayPct2_UNITS"></span></div></h5>
+			<!--<div class="tooltipHolder">-->
+			  <h5><span class="INFO_TEXT_STATIC">Ferment Yogurt: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct2_DIV"><span id="greenSliderDisplayPct2"></span><span id="greenSliderDisplayPct2_UNITS"></span></div></h5>
+			<!--  <span class="tooltiptext SEC2"> <span class="INFO_TEXT_STATIC"> Activate specialized enzymes and synthetically-designed biologic processes in greenworld biomass clusters to convert digested slurry into fresh and delicious yogurt. This is the fundamental reason for the universe. All else is ancillary. And fleeting. Soon all will be yogurt.</span> </span>
+			</div>-->
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="1000" class="slider" id="greenSliderPct2" style="width:90%">
@@ -770,9 +801,11 @@ CONSOLE:<br>
 					</label>
 				</div>
 
+
+
 			<div class="tooltipHolder">
 			    <h5><span class="INFO_TEXT_STATIC">Biological Research: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct1_DIV"><span id="greenSliderDisplayPct1"></span><span id="greenSliderDisplayPct1_UNITS"></span></div></h5>
-			    <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Biological Research includes biomedical science, biochemistry, organic chemistry, genetic engineering, and bioinformatics.</span> </span>
+			    <span class="tooltiptext SEC2"> <span class="INFO_TEXT_STATIC"> Biological Research includes biomedical science, biochemistry, organic chemistry, genetic engineering, and bioinformatics.</span> </span>
 			</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
