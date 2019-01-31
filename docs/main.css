@@ -219,7 +219,6 @@ h5 {
 .contentLV3 {
   padding: 18px 18px;
   display: block;
-  overflow: hidden;
   background-color: var(--LT1);
   margin: 0px 5px 0px 10px;
   color: var(--black);
@@ -1024,17 +1023,12 @@ input[type=unitEntry], select {
   border: 1px solid var(--DK4);
   pointer-events: none;
   margin: 0;
-}
-
-.tooltipHolder .SEC2 {
+  
   position: absolute;
   top: 0px;
   left: 105%;
   pointer-events: none;
-
-  /*margin-left: -50px;*/
 }
-
 
 .tooltiptext.LT::after {
   content: "";

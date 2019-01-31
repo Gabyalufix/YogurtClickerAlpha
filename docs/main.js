@@ -1029,27 +1029,79 @@ for(var i = 0; i < ttList.length; i++){
 }
 
 /*var ttList = document.getElementsByClassName("tooltipHolder");*/
+var ttList_S1 = document.getElementsByClassName("ttSEC1");
+var ttList_S2 = document.getElementsByClassName("ttSEC2");
+var ttList_S3 = document.getElementsByClassName("ttSEC3");
 
 
 function fitTooltipsToWindow(){
   if(window.innerWidth > 1000){
-    for(var i=0; i < ttList.length; i++){
-		ttList[i].ttTextElem.style.position = "absolute";
-		ttList[i].ttTextElem.style.top = "-"+(ttList[i].ttTextElem.clientHeight /2) + "px"
-		ttList[i].ttTextElem.style.left = "105%";
-        ttList[i].ttTextElem.style.right = "auto";
-        ttList[i].ttTextElem.style.bottom = "auto";
-        ttList[i].ttTextElem.className = "tooltiptext SEC2 LT"
+	var tt = ttList_S1;
+    for(var i=0; i < tt.length; i++){
+		tt[i].ttTextElem.style.position = "absolute";
+		tt[i].ttTextElem.style.top = "-"+(tt[i].ttTextElem.clientHeight /2) + "px"
+		tt[i].ttTextElem.style.left = "105%";
+        tt[i].ttTextElem.style.right = "auto";
+        tt[i].ttTextElem.style.bottom = "auto";
+        tt[i].ttTextElem.className = "tooltiptext LT";
+        tt[i].ttTextElem.style.width = "200px";
+
+    }
+    tt = ttList_S2;
+    for(var i=0; i < tt.length; i++){
+		tt[i].ttTextElem.style.position = "absolute";
+		tt[i].ttTextElem.style.top = "-"+(tt[i].ttTextElem.clientHeight /2) + "px"
+		tt[i].ttTextElem.style.left = "105%";
+        tt[i].ttTextElem.style.right = "auto";
+        tt[i].ttTextElem.style.bottom = "auto";
+        tt[i].ttTextElem.className = "tooltiptext LT";
+        tt[i].ttTextElem.style.width = "200px";
+    }
+    tt = ttList_S3;
+    for(var i=0; i < tt.length; i++){
+		tt[i].ttTextElem.style.position = "absolute";
+		tt[i].ttTextElem.style.top = "-"+(tt[i].ttTextElem.clientHeight /2) + "px"
+		tt[i].ttTextElem.style.right = "105%";
+        tt[i].ttTextElem.style.left = "auto";
+        tt[i].ttTextElem.style.bottom = "auto";
+        tt[i].ttTextElem.className = "tooltiptext RT";
+        tt[i].ttTextElem.style.width = "200px";
+
     }
   } else if(window.innerWidth >  640){
-    for(var i=0; i < ttList.length; i++){
-		ttList[i].ttTextElem.style.position = "absolute";
-		ttList[i].ttTextElem.style.top = "-"+(ttList[i].ttTextElem.clientHeight /2) + "px"
-		ttList[i].ttTextElem.style.right = "105%";
-        ttList[i].ttTextElem.style.left = "auto";
-        ttList[i].ttTextElem.style.bottom = "auto";
-        ttList[i].ttTextElem.className = "tooltiptext SEC2 RT"
-	}
+	var tt = ttList_S1;
+    for(var i=0; i < tt.length; i++){
+		tt[i].ttTextElem.style.position = "absolute";
+		tt[i].ttTextElem.style.top = "-"+(tt[i].ttTextElem.clientHeight /2) + "px"
+		tt[i].ttTextElem.style.left = "105%";
+        tt[i].ttTextElem.style.right = "auto";
+        tt[i].ttTextElem.style.bottom = "auto";
+        tt[i].ttTextElem.className = "tooltiptext LT";
+        tt[i].ttTextElem.style.width = "200px";
+
+    }
+    tt = ttList_S2;
+    for(var i=0; i < tt.length; i++){
+		tt[i].ttTextElem.style.position = "absolute";
+		tt[i].ttTextElem.style.top = "-"+(tt[i].ttTextElem.clientHeight /2) + "px"
+		tt[i].ttTextElem.style.right = "105%";
+        tt[i].ttTextElem.style.left = "auto";
+        tt[i].ttTextElem.style.bottom = "auto";
+        tt[i].ttTextElem.className = "tooltiptext RT";
+        tt[i].ttTextElem.style.width = "200px";
+
+    }
+    tt = ttList_S3;
+    for(var i=0; i < tt.length; i++){
+		tt[i].ttTextElem.style.position = "absolute";
+		tt[i].ttTextElem.style.top = "-"+(tt[i].ttTextElem.clientHeight /2) + "px"
+		tt[i].ttTextElem.style.right = "105%";
+        tt[i].ttTextElem.style.left = "auto";
+        tt[i].ttTextElem.style.bottom = "auto";
+        tt[i].ttTextElem.className = "tooltiptext RT";
+        tt[i].ttTextElem.style.width = "200px";
+
+    }
   } else {
     for(var i=0; i < ttList.length; i++){
 		ttList[i].ttTextElem.style.position = "fixed"
@@ -1058,6 +1110,8 @@ function fitTooltipsToWindow(){
 		ttList[i].ttTextElem.style.left = 0;
 		ttList[i].ttTextElem.style.right = 0;
 		ttList[i].ttTextElem.style.width = "100%";
+        ttList[i].ttTextElem.className = "tooltiptext RT";
+
 	}
   }
 }
