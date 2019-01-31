@@ -552,7 +552,7 @@ h5 {
 }*/
 
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1900px) {
 	.MAINGRID_LT {
 	   grid-column: 1 / 2;
 	   grid-row: 2 / 4;
@@ -672,33 +672,23 @@ h5 {
 }
 
 .multiPctSliderSuper {
-  float: left;
+  grid: auto auto auto auto auto auto;
   width: 100%;
   padding: 0px;
-  vertical-align:middle
 }
 
 .multiPctSliderBox {
   float: left;
   width: 90%;
   padding: 0px;
-  vertical-align:middle
+  grid-area: span 1 / span 5;
 }
 .multiPctSliderHoldBox {
   float: left;
   vertical-align: middle;
   width: 9.9%;
   padding: 0px;
-}
-.multiPctSliderHoldBox:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.multiPctSliderSuper:after {
-  content: "";
-  display: table;
-  clear: both;
+  grid-area: span 1 / span 1;
 }
 
 /*
@@ -1046,7 +1036,7 @@ input[type=unitEntry], select {
 }
 
 
-.tooltipHolder .SEC2::after {
+.tooltiptext.LT::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -1056,8 +1046,30 @@ input[type=unitEntry], select {
   border-style: solid;
   border-color: transparent black transparent transparent;
   pointer-events: none;
-
 }
+.tooltiptext.RT::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+  pointer-events: none;
+}
+.tooltiptext.DN::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent transparent;
+  pointer-events: none;
+}
+
 
 
 /*

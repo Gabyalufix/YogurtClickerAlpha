@@ -503,7 +503,7 @@ function TICK_updateStats(){
   STATS["PRODUCTIVITY_RATING"]["comp"]   = INVENTORY["WORLDS-Comp-CT"] * STATS["PRODUCTIVITY_MULT"]["comp"]
 
   STATS["PRODUCTIVITY_RATING"]["ship"]   = STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]
-  STATS["PRODUCTIVITY_RATING"]["think"] = STATS["CONVERSIONS"]["sunToOp"]   * STATS["PRODUCTIVITY_RATING"]["comp"] 
+  STATS["PRODUCTIVITY_RATING"]["think"] = STATS["CONVERSIONS"]["sunToOp"]   * STATS["PRODUCTIVITY_RATING"]["comp"]
   STATS["PRODUCTIVITY_RATING"]["bio"]   = STATS["CONVERSIONS"]["sunToByte"] * STATS["PRODUCTIVITY_RATING"]["green"] * SETTINGS["green_FRACTION"][0]
   STATS["PRODUCTIVITY_RATING"]["eng"]   = STATS["CONVERSIONS"]["opToByte"]  * STATS["PRODUCTIVITY_RATING"]["think"] * SETTINGS["think_FRACTION"][1]
   STATS["PRODUCTIVITY_RATING"]["psy"]   = STATS["CONVERSIONS"]["opToSoul"]  * STATS["PRODUCTIVITY_MULT"]["soul"] * SETTINGS["soul_FRACTION"][0]
@@ -561,24 +561,24 @@ function TICK_scoutSystems(){
 
 function TICK_calcIndustry(){
 
-   
+
 
     document.getElementById("SHIPCONSTRUCTBUFFER_DISPLAY_DIV").innerHTML = INVENTORY["SHIP-CONSTRUCT-BUFFER"]
-    
-    
-    addConstructionRequest("MATTER-Collected-CT", 
-                           (STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]) , 
+
+
+    addConstructionRequest("MATTER-Collected-CT",
+                           (STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]) ,
                            STATS["COST-MATTER-Collected"])
-                           
-    addConstructionRequest("MATTER-Processed-CT", 
-                           (STATS["CONVERSIONS"]["processPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][1]) , 
+
+    addConstructionRequest("MATTER-Processed-CT",
+                           (STATS["CONVERSIONS"]["processPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][1]) ,
                            STATS["COST-MATTER-Processed"] )
-    addConstructionRequest("SHIP-CONSTRUCT-BUFFER", 
-                           (STATS["CONVERSIONS"]["shipPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]) , 
+    addConstructionRequest("SHIP-CONSTRUCT-BUFFER",
+                           (STATS["CONVERSIONS"]["shipPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]) ,
                            STATS["COST-MATTER-Ship"])
-    
+
     executeAllConstructionRequests()
-    
+
    for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
         var matterType = MATTER_TYPE_LIST[i]
         var fmtsi = fmtSIunits(INVENTORY["MATTER-"+matterType+"-CT"])
@@ -587,7 +587,7 @@ function TICK_calcIndustry(){
         sd.displayUnits.innerHTML = fmtsi[1]+"g"
         sd.displayDiv.title = "grams: basic unit of mass\n"+fmtsi[4]
     }
-    
+
     /*
     STATS["CONVERSIONS"]["gramPerSunShip"]
     INVENTORY["SHIP-CONSTRUCT-BUFFER"]
@@ -596,7 +596,7 @@ function TICK_calcIndustry(){
     addConstructionRequest(inventoryItemName, requestCt, unitCost)
     MATTER_TYPE_LIST = ["Discovered","Collected","Processed","Waste","Heat","Yogurt"]
 
-    
+
     STATS["CONVERSIONS"]["collectPerSunPerTick"]
     STATS["CONVERSIONS"]["processPerSunPerTick"]
     */
@@ -717,12 +717,12 @@ function startWorldDeconstruction(worldType,batchCt){
         }
       }
     }
-    
+
     if(leftToDecon > 0){
       CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].push([leftToDecon, (Date.now() + STATS["WORLD_DECON_TIME"][worldType]) ])
       CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] + leftToDecon
     }
-    
+
   } else {
     //console.log("deconstructing Some: "+batchCt+"<="+INVENTORY[worldType]["CT"]);
     CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].push([batchCt, (Date.now() + STATS["WORLD_DECON_TIME"][worldType]) ])
@@ -932,19 +932,19 @@ document.getElementById("ENABLE_CHEATS_CHECKBOX").oninput = function(){
 CONSTRUCTION_REQUESTS=[];
 
 /*
-    addConstructionRequest("MATTER-Collected-CT", 
-                           (STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]) , 
+    addConstructionRequest("MATTER-Collected-CT",
+                           (STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]) ,
                            STATS["COST-MATTER-Collected"])
-                           
-    addConstructionRequest("MATTER-Processed-CT", 
-                           (STATS["CONVERSIONS"]["processPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][1]) , 
+
+    addConstructionRequest("MATTER-Processed-CT",
+                           (STATS["CONVERSIONS"]["processPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][1]) ,
                            STATS["COST-MATTER-Processed"] )
-    addConstructionRequest("SHIP-CONSTRUCT-BUFFER", 
-                           (STATS["CONVERSIONS"]["shipPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]) , 
+    addConstructionRequest("SHIP-CONSTRUCT-BUFFER",
+                           (STATS["CONVERSIONS"]["shipPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]) ,
                            STATS["COST-MATTER-Ship"])
-                           
-executeAllConstructionRequests()               
-                           
+
+executeAllConstructionRequests()
+
 */
 
 function addConstructionRequest(inventoryItemName, requestCt, unitCost){
@@ -1006,14 +1006,16 @@ function executeAllConstructionRequests(){
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  /*"-"+(this.ttTextElem.clientHeight /4) + "px"*/
- 
- 
+
+
 var ttList = document.getElementsByClassName("tooltipHolder");
 var currentlyOpenTooltip = null;
 var clickToggle = true
 
 for(var i = 0; i < ttList.length; i++){
-  ttList[i].ttTextElem = ttList[i].lastElementChild
+  ttList[i].ttTextElem      = ttList[i].firstElementChild
+  ttList[i].ttTextElemArrow = ttList[i].ttTextElem.nextElementSibling
+  /*ttList[i].ttTextElem.style.top = "-"+(ttList[i].ttTextElem.clientHeight /2) + "px"*/
   ttList[i].addEventListener('click',function(){
       if(currentlyOpenTooltip != null){
         currentlyOpenTooltip.ttTextElem.style.visibility = "hidden";
@@ -1021,12 +1023,48 @@ for(var i = 0; i < ttList.length; i++){
       }
       this.ttTextElem.style.visibility = "visible"
       currentlyOpenTooltip = this
-      this.ttTextElem.style.top = 0  
       console.log("ht = "+this.ttTextElem.offsetHeight+", top:"+this.ttTextElem.style.top);
       clickToggle = false
   },false)
 }
 
+/*var ttList = document.getElementsByClassName("tooltipHolder");*/
+
+
+function fitTooltipsToWindow(){
+  if(window.innerWidth > 1000){
+    for(var i=0; i < ttList.length; i++){
+		ttList[i].ttTextElem.style.position = "absolute";
+		ttList[i].ttTextElem.style.top = "-"+(ttList[i].ttTextElem.clientHeight /2) + "px"
+		ttList[i].ttTextElem.style.left = "105%";
+        ttList[i].ttTextElem.style.right = "auto";
+        ttList[i].ttTextElem.style.bottom = "auto";
+        ttList[i].ttTextElem.className = "tooltiptext SEC2 LT"
+    }
+  } else if(window.innerWidth >  640){
+    for(var i=0; i < ttList.length; i++){
+		ttList[i].ttTextElem.style.position = "absolute";
+		ttList[i].ttTextElem.style.top = "-"+(ttList[i].ttTextElem.clientHeight /2) + "px"
+		ttList[i].ttTextElem.style.right = "105%";
+        ttList[i].ttTextElem.style.left = "auto";
+        ttList[i].ttTextElem.style.bottom = "auto";
+        ttList[i].ttTextElem.className = "tooltiptext SEC2 RT"
+	}
+  } else {
+    for(var i=0; i < ttList.length; i++){
+		ttList[i].ttTextElem.style.position = "fixed"
+		ttList[i].ttTextElem.style.top = "auto";
+		ttList[i].ttTextElem.style.bottom = 0;
+		ttList[i].ttTextElem.style.left = 0;
+		ttList[i].ttTextElem.style.right = 0;
+		ttList[i].ttTextElem.style.width = "100%";
+	}
+  }
+}
+
+fitTooltipsToWindow()
+
+window.addEventListener('resize',fitTooltipsToWindow, false);
 
 
 window.addEventListener('click',function(event) {
