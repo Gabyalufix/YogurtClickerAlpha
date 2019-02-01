@@ -497,15 +497,65 @@ CONSOLE:<br>
         <div class="contentUnitHolder">
 
 	<h5><span class="INFO_TEXT_STATIC">Inventory: </span></h5>
-	<div class="contentGrid3">
-	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Available_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Available Matter:</span><br><span id="RESOURCE_DISPLAY_MATTER_Available"></span> <span id="Available_MATTER_UNITS"></span></div></div>
+	<div class="contentGrid5Hz">
+	<div class="contentGridItem1x1 contentGridItemHzT" style="border-right-width: 1px; border-right-style: dashed; border-right-color: var(--MID)"> <span class="INFO_TEXT_STATIC">Bot</span></div>
+    <div class="contentGridItem1x1 contentGridItemHzB" style="border-right-width: 1px; border-right-style: dashed; border-right-color: var(--MID)"> <span class="INFO_TEXT_STATIC">Worlds</span></div>
+
+    <div class="contentGridItemHzT valueDisplayDiv" id="FreeBot_MATTER_DIV">     <span class="INFO_TEXT_STATIC">Free:</span></div>
+                       <div class="contentGridItemHzB"><span id="RESOURCE_DISPLAY_MATTER_FreeBot">0.0</span> <span id="FreeBot_MATTER_UNITS">g</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv" id="Feedstock_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Feedstock:</span></div>
+                       <div class="contentGridItemHzB"><span id="RESOURCE_DISPLAY_MATTER_Feedstock">0.0</span> <span id="Feedstock_MATTER_UNITS">g</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv" id="Botbots_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Bots:</span></div>
+                       <div class="contentGridItemHzB"><span id="RESOURCE_DISPLAY_MATTER_Botbots">0.0</span> <span id="Botbots_MATTER_UNITS">g</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv" id="Compute_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Compute:</span></div>
+                       <div class="contentGridItemHzB"> <span id="RESOURCE_DISPLAY_MATTER_Compute">0.0</span> <span id="Compute_MATTER_UNITS">g</span></div>
+	</div>
+
+	<div class="contentGrid5Hz">
+	<div class="contentGridItem1x1 contentGridItemHzT" style="border-right-width: 1px; border-right-style: dashed; border-right-color: var(--MID)"> <span class="INFO_TEXT_STATIC">Green</span></div>
+    <div class="contentGridItem1x1 contentGridItemHzB" style="border-right-width: 1px; border-right-style: dashed; border-right-color: var(--MID)"> <span class="INFO_TEXT_STATIC">Worlds</span></div>
+
+    <div class="contentGridItemHzT valueDisplayDiv" id="FreeGreen_MATTER_DIV">     <span class="INFO_TEXT_STATIC">Free:</span></div>
+                       <div class="contentGridItemHzB"><span id="RESOURCE_DISPLAY_MATTER_FreeGreen">0.0</span> <span id="FreeGreen_MATTER_UNITS">g</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv" id="Digested_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Digested:</span></div>
+                       <div class="contentGridItemHzB"><span id="RESOURCE_DISPLAY_MATTER_Digested">0.0</span> <span id="Digested_MATTER_UNITS">g</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv" id="Biomass_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Biomass:</span></div>
+                       <div class="contentGridItemHzB"><span id="RESOURCE_DISPLAY_MATTER_Biomass">0.0</span> <span id="Biomass_MATTER_UNITS">g</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv" id="Yogurt_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Yogurt:</span></div>
+                       <div class="contentGridItemHzB"> <span id="RESOURCE_DISPLAY_MATTER_Yogurt">0.0</span> <span id="Yogurt_MATTER_UNITS">g</span></div>
+	</div>
+
+<!--
+
+	<div class="contentGrid5Hz">
+	<div class="contentGridItem1x1 contentGridItemHzT"> <span class="INFO_TEXT_STATIC">Green<BR>World</span></div>
+	<div class="contentGridItem1x1 contentGridItemHzT"><div class="valueDisplayDiv" id="FreeBot_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Free Matter:</span><br><span class="contentGridItemHzB" id="RESOURCE_DISPLAY_MATTER_Available">0.0</span> <span id="Available_MATTER_UNITS">g</span></div>
+	<div class="contentGridItem1x1 contentGridItemHzT"><div class="valueDisplayDiv" id="Digested_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Digested:</span><br><span class="contentGridItemHzB" id="RESOURCE_DISPLAY_MATTER_Available">0.0</span> <span id="Available_MATTER_UNITS">g</span></div>
+	<div class="contentGridItem1x1 contentGridItemHzT"><div class="valueDisplayDiv" id="Processed_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Biomass:</span><br><span class="contentGridItemHzB" id="RESOURCE_DISPLAY_MATTER_Available">0.0</span> <span id="Available_MATTER_UNITS">g</span></div>
+	<div class="contentGridItem1x1 contentGridItemHzT"><div class="valueDisplayDiv" id="Processed_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Yogurt:</span><br><span class="contentGridItemHzB" id="RESOURCE_DISPLAY_MATTER_Available">0.0</span> <span id="Available_MATTER_UNITS">g</span></div>
+	</div>
+-->
+    <br>
+    <h5><span class="INFO_TEXT_STATIC">Other Matter: </span></h5>
+	<div class="contentGrid4">
+		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Ships_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Starships:</span><br><span id="RESOURCE_DISPLAY_MATTER_Ships">0.0</span> <span id="Ships_MATTER_UNITS">g</span></div></div>
+		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Waste_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Waste Matter:</span><br><span id="RESOURCE_DISPLAY_MATTER_Waste">0.0</span> <span id="Waste_MATTER_UNITS">g</span></div></div>
+		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Heat_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Waste Heat:</span><br><span id="RESOURCE_DISPLAY_MATTER_Heat">0.0</span> <span id="Heat_MATTER_UNITS">g</span></div></div>
+		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Total_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Total Matter:</span><br><span id="RESOURCE_DISPLAY_MATTER_Total">0.0</span> <span id="Total_MATTER_UNITS">g</span></div></div>
+	</div>
+
+<!--
 	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Collected_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Collected Matter: </span><br><span id="RESOURCE_DISPLAY_MATTER_Collected"></span>  <span id="Collected_MATTER_UNITS"></span></div></div>
 	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Processed_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Processed Matter: </span><br><span id="RESOURCE_DISPLAY_MATTER_Processed"></span>  <span id="Processed_MATTER_UNITS"></span></div></div>
 	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Waste_MATTER_DIV">       <span class="INFO_TEXT_STATIC">Waste Matter: </span>    <br><span id="RESOURCE_DISPLAY_MATTER_Waste"></span>      <span id="Waste_MATTER_UNITS"></span></div></div>
 	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Heat_MATTER_DIV">        <span class="INFO_TEXT_STATIC">Waste Heat: </span>      <br><span id="RESOURCE_DISPLAY_MATTER_Heat"></span>       <span id="Heat_MATTER_UNITS"></span></div></div>
 	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Yogurt_MATTER_DIV">      <span class="INFO_TEXT_STATIC">Yogurt: </span>          <br><span id="RESOURCE_DISPLAY_MATTER_Yogurt"></span>     <span id="Yogurt_MATTER_UNITS"></span></div></div>
 	<div class="contentGridItem1x1 contentGridItem" style="display:none"><div class="valueDisplayDiv" id="Discovered_MATTER_DIV">  <span class="INFO_TEXT_STATIC">Discovered Matter:</span><br><span id="RESOURCE_DISPLAY_MATTER_Discovered"></span> <span id="Discovered_MATTER_UNITS"></span></div></div>
-	</div>
+-->
+
+
+
+
 
 
 
@@ -668,7 +718,7 @@ CONSOLE:<br>
 
             <span class="INFO_TEXT_STATIC">Productivity: </span><div class="valueDisplayDiv" id="bot_PRODUCTIVITY_DISPLAY_DIV"><span id="bot_PRODUCTIVITY_DISPLAY"></span><span id="bot_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
 
-        <div class="contentUnitHolder">
+        <div class="contentUnitHolder" style="padding: 0px; margin:0px;">
 
 			<div class="SliderSetHolder">
 
@@ -679,7 +729,10 @@ CONSOLE:<br>
 			</div>
 -->
 
-			<h5><span class="INFO_TEXT_STATIC">Process Matter: </span><div class="valueDisplayDiv" id="botSliderDisplayPct1_DIV"><span id="botSliderDisplayPct1"></span><span id="botSliderDisplayPct1_UNITS"></span></div></h5>
+			<div class="tooltipHolder ttSEC2">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Process raw matter into processed feedstock for your robots to turn into other things.</span> </span>
+              <h5><span class="INFO_TEXT_STATIC">Process Matter: </span><div class="valueDisplayDiv" id="botSliderDisplayPct1_DIV"><span id="botSliderDisplayPct1"></span><span id="botSliderDisplayPct1_UNITS"></span></div></h5>
+				</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="4000" class="slider" id="botSliderPct1" style="width:90%">
@@ -690,8 +743,10 @@ CONSOLE:<br>
 					</label>
 				</div>
 
-
-			<h5><span class="INFO_TEXT_STATIC">Construct More Bots: </span><div class="valueDisplayDiv" id="botSliderDisplayPct2_DIV"><span id="botSliderDisplayPct2"></span><span id="botSliderDisplayPct2_UNITS"></span></div></h5>
+			<div class="tooltipHolder ttSEC2">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Direct your Van-Neumann factory robots to create more Van-Neumann factory robots. Those new Van-Neumann factory robots can then be directed to do likewise.</span> </span>
+			  <h5><span class="INFO_TEXT_STATIC">Construct More Bots: </span><div class="valueDisplayDiv" id="botSliderDisplayPct2_DIV"><span id="botSliderDisplayPct2"></span><span id="botSliderDisplayPct2_UNITS"></span></div></h5>
+				</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="4000" class="slider" id="botSliderPct2" style="width:90%">
@@ -702,7 +757,10 @@ CONSOLE:<br>
 					</label>
 				</div>
 
+			<div class="tooltipHolder ttSEC2">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Builds starships to explore, secure, and seed new worlds for processing into yogurt.</span> </span>
 			<h5><span class="INFO_TEXT_STATIC">Starship Construction: </span><div class="valueDisplayDiv" id="botSliderDisplayPct5_DIV"><span id="botSliderDisplayPct5"></span><span id="botSliderDisplayPct5_UNITS"></span></div></h5>
+				</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="4000" class="slider" id="botSliderPct5" style="width:90%">
@@ -713,7 +771,10 @@ CONSOLE:<br>
 					</label>
 				</div>
 
+			<div class="tooltipHolder ttSEC2">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Activates digestive enzymes in biomass clusters that digests unprocessed greenworld matter into a metabolically-available slurry. This slurry can then be used as a growth medium for more biomass or for yogurt.</span> </span>
 			<h5><span class="INFO_TEXT_STATIC">Assemble Computronium: </span><div class="valueDisplayDiv" id="botSliderDisplayPct6_DIV"><span id="botSliderDisplayPct6"></span><span id="botSliderDisplayPct6_UNITS"></span></div></h5>
+				</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="4000" class="slider" id="botSliderPct6" style="width:90%">
@@ -1017,6 +1078,7 @@ CONSOLE:<br>
 <script type="text/javascript" src="util.js"></script>
 <script type="text/javascript" src="tvstatic.js"></script>
 <script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="tick.js"></script>
 <script type="text/javascript" src="crazy.js"></script>
 
 <div class="FOOTER"></div>

@@ -250,11 +250,48 @@ h5 {
   padding: 1px;
 
 }
+.contentGrid4 {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+
+}
+.contentGrid5Hz {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: auto auto;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+  grid-auto-flow: column;
+  background-color: var(--LT2);
+}
+
+
 .contentGridItem {
   background-color: var(--LT2);
   border: 1px solid var(--DK2);
   padding: 5px;
   text-align: left;
+}
+.contentGridItemHzT {
+  background-color: var(--LT2);
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+  border-color: var(--DK2);
+  padding: 5px;
+  text-align: center;
+  align-self: start;
+  vertical-align: bottom;
+}
+.contentGridItemHzB {
+  background-color: var(--LT2);
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: var(--DK2);
+  padding: 5px;
+  text-align: center;
+  align-self: end;
 }
 
 .contentGridItem1x1 {
@@ -266,6 +303,9 @@ h5 {
 .contentGridItem1x2 {
   grid-area: span 1 / span 2
 }
+
+
+
 
 * {
   box-sizing: border-box;
