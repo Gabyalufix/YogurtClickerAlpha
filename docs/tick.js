@@ -25,7 +25,9 @@ window.setInterval(function(){
       secTimer = 0;
       calculateSlowTick();
     }
-    SLOWTICK_makeCrazy();
+    if(STATS["CRAZY_ON"]){
+       SLOWTICK_makeCrazy();
+    }
 
     document.getElementById("BACKGROUND_STATIC").style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
     document.getElementById("BACKGROUND_CANVAS").style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
@@ -35,13 +37,13 @@ window.setInterval(function(){
         midTimer = 0;
       if(bgCanvas.RUN_STATIC){
 
-         requestAnimFrame(tvStatic_render);
+        // requestAnimFrame(tvStatic_render);
       }
     }
     /*staticCanvas(bgCanvas)*/
 
 
-},10);
+},100);
 
 
 var varNumTicksSoFar = 0
@@ -84,10 +86,16 @@ function TICK_readUserInputs(){
 STATS["PRODUCTIVITY"] = {};
 
 function TICK_updateStats(){
+/*
 
-  STATS["PRODUCTIVITY_RATING"]["bot"]   = INVENTORY["WORLDS-Bot-CT"] * STATS["PRODUCTIVITY_MULT"]["bot"]
-  STATS["PRODUCTIVITY_RATING"]["green"]   = INVENTORY["WORLDS-Green-CT"] * STATS["PRODUCTIVITY_MULT"]["green"]
-  STATS["PRODUCTIVITY_RATING"]["comp"]   = INVENTORY["WORLDS-Comp-CT"] * STATS["PRODUCTIVITY_MULT"]["comp"]
+//MATTER-Botbots-CT
+//MATTER-Biomass-CT
+//MATTER-Compute-CT
+
+*/
+  STATS["PRODUCTIVITY_RATING"]["bot"]   = INVENTORY["MATTER-Botbots-CT"] * STATS["PRODUCTIVITY_MULT"]["bot"]
+  STATS["PRODUCTIVITY_RATING"]["green"]   = INVENTORY["MATTER-Biomass-CT"] * STATS["PRODUCTIVITY_MULT"]["green"]
+  STATS["PRODUCTIVITY_RATING"]["comp"]   = INVENTORY["MATTER-Compute-CT"] * STATS["PRODUCTIVITY_MULT"]["comp"]
 
   STATS["PRODUCTIVITY_RATING"]["ship"]   = STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]
   STATS["PRODUCTIVITY_RATING"]["think"] = STATS["CONVERSIONS"]["sunToOp"]   * STATS["PRODUCTIVITY_RATING"]["comp"]
@@ -144,29 +152,60 @@ function TICK_scoutSystems(){
     }
 
 }
+//MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt"]
+//WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
 
 
 function TICK_calcIndustry(){
 
+//MATTER-Botbots-CT
+//MATTER-Biomass-CT
+//MATTER-Compute-CT
 
+    addConstructionRequest("MATTER-Feedstock-CT",
+                           (STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]) ,
+                           STATS["COST-MATTER-Feedstock"] )
+    addConstructionRequest("MATTER-Digested-CT",
+                           (STATS["CONVERSIONS"]["DigestedPerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["green"] * SETTINGS["green_FRACTION"][5]) ,
+                           STATS["COST-MATTER-Digested"] )
 
-    document.getElementById("SHIPCONSTRUCTBUFFER_DISPLAY_DIV").innerHTML = INVENTORY["SHIP-CONSTRUCT-BUFFER"]
-/*
+    addConstructionRequest("MATTER-Botbots-CT",
+                           (STATS["CONVERSIONS"]["BotbotsPerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][1]) ,
+                           STATS["COST-MATTER-Botbots"] )
+    addConstructionRequest("MATTER-Biomass-CT",
+                           (STATS["CONVERSIONS"]["BiomassPerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["green"] * SETTINGS["green_FRACTION"][4]) ,
+                           STATS["COST-MATTER-Biomass"] )
 
-    addConstructionRequest("MATTER-Collected-CT",
-                           (STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]) ,
-                           STATS["COST-MATTER-Collected"])
+    addConstructionRequest("MATTER-Compute-CT",
+                           (STATS["CONVERSIONS"]["ComputePerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][1]) ,
+                           STATS["COST-MATTER-Compute"] )
 
-    addConstructionRequest("MATTER-Processed-CT",
-                           (STATS["CONVERSIONS"]["processPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][1]) ,
-                           STATS["COST-MATTER-Processed"] )
+    addConstructionRequest("MATTER-Yogurt-CT",
+                           (STATS["CONVERSIONS"]["YogurtPerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["green"] * SETTINGS["green_FRACTION"][1]) ,
+                           STATS["COST-MATTER-Yogurt"] )
+
     addConstructionRequest("SHIP-CONSTRUCT-BUFFER",
-                           (STATS["CONVERSIONS"]["shipPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]) ,
+                           (STATS["CONVERSIONS"]["ShipPerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]) ,
                            STATS["COST-MATTER-Ship"])
 
     executeAllConstructionRequests()
-*/
 
+    var shipBuffer = INVENTORY["SHIP-CONSTRUCT-BUFFER"];
+    for(var i=0; i < SHIP_TYPE_LIST.length;i++){
+		var shipType = SHIP_TYPE_LIST[i];
+		INVENTORY["SHIPS-"+shipType+"-CT"] = INVENTORY["SHIPS-"+shipType+"-CT"] + ((shipBuffer * SETTINGS["ship_FRACTION"][i]) / STATS["CONVERSIONS"]["bufferPerShip-"+shipType])
+		var sd = INVENTORY["SHIPS-"+shipType+"-DISPLAY"]
+		var fmtsi = fmtSIint(INVENTORY["SHIPS-"+shipType+"-CT"])
+		sd.innerHTML = fmtsi
+	}
+
+
+    //STATS["CONVERSIONS"]["bufferPerShip-scout"]
+	//STATS["CONVERSIONS"]["bufferPerShip-battleplate"]
+    //STATS["CONVERSIONS"]["bufferPerShip-seedship"]
+
+  //update displays:
+   document.getElementById("SHIPCONSTRUCTBUFFER_DISPLAY_DIV").innerHTML = INVENTORY["SHIP-CONSTRUCT-BUFFER"]
    for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
         var matterType = MATTER_TYPE_LIST[i]
         var fmtsi = fmtSIunits(INVENTORY["MATTER-"+matterType+"-CT"])

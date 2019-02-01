@@ -30,15 +30,73 @@ CONSTRUCTION_BUFFER["WORLDS_DECON"] = {}
 
 INVENTORY["SHIP-CONSTRUCT-BUFFER"] = 0;
 
+
 ///////////////////////////////
 ////Initialize starting stats
+
+STATS["CONVERSIONS"] = {}
+STATS["CONVERSIONS"]["sunToByte"] =  (1243912971288)
+STATS["CONVERSIONS"]["opToSoul"] =   (0.000000001)
+STATS["CONVERSIONS"]["sunToOp"] =    (3745454516355)
+STATS["CONVERSIONS"]["opToByte"] =   (0.232)
+STATS["CONVERSIONS"]["gramsPerWorld"] = 2e27
+
+//STATS["CONVERSIONS"]["collectPerSunPerTick"] = 1.5e15
+//STATS["CONVERSIONS"]["processPerSunPerTick"] = 5.2e15
+//STATS["CONVERSIONS"]["shipPerSunPerTick"]    = 1
+//STATS["CONVERSIONS"]["gramPerSunShip"]       = 2.3e14
+
+
+
+STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] = 0.0001
+STATS["COST-MATTER-Feedstock"] = [["MATTER-FreeBot-CT",1.01],["MATTER-WASTE-CT",-0.01]]
+STATS["CONVERSIONS"]["DigestedPerProdPerTick"] = 0.0001
+STATS["COST-MATTER-Digested"] = [["MATTER-FreeGreen-CT",1.01],["MATTER-WASTE-CT",-0.01]]
+STATS["CONVERSIONS"]["ShipPerProdPerTick"] = 0.000000000001
+STATS["COST-MATTER-Ship"] = [["MATTER-Feedstock-CT",125000000],["MATTER-WASTE-CT",-25000000]]
+
+
+STATS["CONVERSIONS"]["YogurtPerProdPerTick"] = 0.0001
+STATS["COST-MATTER-Yogurt"] = [["MATTER-Digested-CT",1.2],["MATTER-WASTE-CT",-0.2]]
+STATS["CONVERSIONS"]["BotbotsPerProdPerTick"] = 0.0001
+STATS["COST-MATTER-Botbots"] = [["MATTER-Feedstock-CT",1.3],["MATTER-WASTE-CT",-0.3]]
+STATS["CONVERSIONS"]["BiomassPerProdPerTick"] = 0.0001
+STATS["COST-MATTER-Biomass"] = [["MATTER-Digested-CT",1.1],["MATTER-WASTE-CT",-0.1]]
+STATS["CONVERSIONS"]["ComputePerProdPerTick"] = 0.0001
+STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3],["MATTER-WASTE-CT",-0.3]]
+
+STATS["CONVERSIONS"]["bufferPerShip-scout"] = 100
+STATS["CONVERSIONS"]["bufferPerShip-battleplate"] = 250
+STATS["CONVERSIONS"]["bufferPerShip-seedship"] = 160
+
+/*
+STATS["PRODUCTIVITY_MULT"]["bot"]  = 1
+STATS["PRODUCTIVITY_MULT"]["green"]  = 1
+STATS["PRODUCTIVITY_MULT"]["comp"]  = 1
+*/
+
+
+
+///////////////////////////////
+////Initialize starting stats
+//MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt"]
+
+
 STATS["WORLD_BUILD_TIME"] = {Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0}
 STATS["WORLD_DECON_TIME"]={Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0}
 
 STATS["COST-WORLDBUILD-Fallow"] = [["WORLDS-Secure-CT",1]];
 STATS["COST-WORLDBUILD-Omni"] = [["WORLDS-Fallow-CT",1]];
-STATS["COST-WORLDBUILD-Bot"] = [["WORLDS-Fallow-CT",1]];
-STATS["COST-WORLDBUILD-Green"] = [["WORLDS-Fallow-CT",1]];
+STATS["COST-WORLDBUILD-Bot"] = [["WORLDS-Fallow-CT",1],
+                                ["MATTER-FreeBot-CT",-STATS["CONVERSIONS"]["gramsPerWorld"]],
+                                ["MATTER-Botbots-CT",-10000000000],
+                                ["MATTER-Waste-CT",-10000000000]
+                                ];
+STATS["COST-WORLDBUILD-Green"] = [["WORLDS-Fallow-CT",1],
+                                ["MATTER-FreeGreen-CT",-STATS["CONVERSIONS"]["gramsPerWorld"]],
+                                ["MATTER-Biomass-CT",-10000000000],
+                                ["MATTER-Waste-CT",  -10000000000]
+                              ];
 STATS["COST-WORLDBUILD-Comp"] = [["WORLDS-Fallow-CT",1]];
 STATS["COST-WORLDBUILD-Hub"] = [["WORLDS-Fallow-CT",1]];
 STATS["COST-WORLDBUILD-Slag"] = [["WORLDS-Fallow-CT",1]];
@@ -59,17 +117,6 @@ STATS["COST-WORLDDECON-Hub"] = [["WORLDS-Fallow-CT",-1]];
 STATS["COST-WORLDDECON-Slag"] = [["WORLDS-Fallow-CT",-1]];
 STATS["COST-WORLDDECON-Seedres"] = [["WORLDS-Fallow-CT",-1]];
 
-
-STATS["CONVERSIONS"] = {}
-STATS["CONVERSIONS"]["sunToByte"] =  (1243912971288)
-STATS["CONVERSIONS"]["opToSoul"] =   (0.000000001)
-STATS["CONVERSIONS"]["sunToOp"] =    (3745454516355)
-STATS["CONVERSIONS"]["opToByte"] =   (0.232)
-STATS["CONVERSIONS"]["gramsPerWorld"] = 2e30
-STATS["CONVERSIONS"]["collectPerSunPerTick"] = 1.5e15
-STATS["CONVERSIONS"]["processPerSunPerTick"] = 5.2e15
-STATS["CONVERSIONS"]["shipPerSunPerTick"]    = 1
-STATS["CONVERSIONS"]["gramPerSunShip"]       = 2.3e14
 
 PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","think","soul","ship"]
 STATS["PRODUCTIVITY_RATING"] = {}
@@ -97,15 +144,15 @@ var UNIT_EXPLANATION = {};
 
 
 var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship"]
-var PCTSLIDER_DISPLAYUNITS = {bio:"B/s",eng:"B/s",psy:"B/s",bot:"Suns",green:"Suns",think:"Hz",soul:"I",ship:"Suns"}
+var PCTSLIDER_DISPLAYUNITS = {bio:"B/s",eng:"B/s",psy:"B/s",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns"}
 var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of information. A zero, or a one.",
                                      eng:"Byte: the fundamental unit of information. A zero, or a one.",
                                      psy:"Byte: the fundamental unit of information. A zero, or a one.",
-                                     bot:"Suns: The total productivity of one standard dyson sphere (before upgrades).",
-                                     green:"Suns: The total productivity of one standard dyson sphere (before upgrades).",
+                                     bot:"gI: The industrial productivity of one gram of basic smartmatter (before upgrades).",
+                                     green:"gI: The industrial productivity of one gram of basic smartmatter (before upgrades)",
                                      think:"Hertz: Compute cycles per second.",
                                      soul:"Identities: Number of distinct thinking entities being simulated inside the soulswarm network.",
-                                     ship:"Suns: The total productivity of one standard dyson sphere (before upgrades)."}
+                                     ship:"gI: The industrial productivity of one gram of basic smartmatter (before upgrades)"}
 
 
 var PCTSLIDER_SUBFIELDCT = [4,4,4,6,6,6,3,3]
@@ -241,6 +288,20 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
     document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fmtSI( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])+PCTSLIDER_DISPLAYUNITS[fid]
 }
 
+
+SHIP_TYPE_LIST = ["scout","battleplate","seedship"]
+for( var i = 0; i < SHIP_TYPE_LIST.length; i++){
+  var shipType = SHIP_TYPE_LIST[i];
+  INVENTORY["SHIPS-"+shipType+"-CT"] = 0;
+  var disp = document.getElementById("RESOURCE_DISPLAY_SHIPS_"+shipType)
+  INVENTORY["SHIPS-"+shipType+"-DISPLAY"] = disp;
+  disp.shipType = shipType;
+  disp.displayUnits = document.getElementById(shipType+"_SHIPS_UNITS")
+  disp.displayDiv = document.getElementById(shipType+"_SHIPS_DIV")
+}
+//		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Ships_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Starships:</span><br><span id="RESOURCE_DISPLAY_MATTER_Ships">0.0</span> <span id="Ships_MATTER_UNITS">g</span></div></div>
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -279,7 +340,7 @@ DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub","Slag","Seedres"]
 
 for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
     var worldType = WORLD_TYPE_LIST[i]
-    INVENTORY["WORLDS-"+worldType+"-CT"]=1
+    INVENTORY["WORLDS-"+worldType+"-CT"]=0
     SETTINGS["ADD_MULTIPLIER"][worldType] = 1
     CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = 0
     CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] = 0
@@ -287,6 +348,11 @@ for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
     CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType] = []
 }
 INVENTORY["WORLDS-"+"Omni"+"-CT"] = 0
+INVENTORY["WORLDS-"+"Fallow"+"-CT"] = 1
+INVENTORY["WORLDS-"+"Neutral"+"-CT"] = 1
+INVENTORY["WORLDS-"+"Hostile"+"-CT"] = 1
+INVENTORY["WORLDS-"+"Secure"+"-CT"] = 1
+
 
 for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    var worldType = DYSON_TYPE_LIST[i]

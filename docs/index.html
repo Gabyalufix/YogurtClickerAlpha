@@ -600,7 +600,7 @@ CONSOLE:<br>
 				<button class = "button3" id ="button_wfSeedresDN" > &#8964; </button>
 			   </div>
 
-			   <div class="buildCtrlPanel">
+			   <div class="buildCtrlPanel" style="display:none;">
 			   <div class="ctrlPanelTopLine"> <h5><span class="INFO_TEXT_STATIC">Slagworld: </span><span class="valueDisplayDiv" id="Slag_CT_DIV"><span id="Slag_CT"></span><span id="Slag_CT_UNITS"></span></span></h5></div>
 				<button class = "button3" id ="button_wfSlagUP" > &#8963; </button>
 			    <div class="buildInfoPanel1"><div class="valueDisplayDiv" id="Slag_wf_AddUnit_DIV"><span id="Slag_wf_AddUnit"></span><span id="Slag_wf_AddUnit_UNITS"></span></div></div>
@@ -655,7 +655,7 @@ CONSOLE:<br>
 			    <div class="buildInfoPanel2">BEEP BEEP BEEP</div>
 				<button class = "button3" id ="button_wfGreenDN" > &#8964; </button>
 			   </div>
-			   <div class="buildCtrlPanel">
+			   <div class="buildCtrlPanel" style="display:none;">
 			   <div class="ctrlPanelTopLine">
 			     <h5><span class="INFO_TEXT_STATIC">Compute Node: </span><span class="valueDisplayDiv" id="Comp_CT_DIV"><span id="Comp_CT"></span><span id="Comp_CT_UNITS"></span></span></h5>
                </div>
@@ -669,7 +669,7 @@ CONSOLE:<br>
 				<button class = "button3" id ="button_wfCompDN" > &#8964; </button>
 			   </div>
 
-			   <div class="buildCtrlPanel">
+			   <div class="buildCtrlPanel" style="display:none;">
 			   <div class="ctrlPanelTopLine">
 			     <h5><span class="INFO_TEXT_STATIC">HubWorlds: </span><span class="valueDisplayDiv" id="Hub_CT_DIV"><span id="Hub_CT"></span><span id="Hub_CT_UNITS"></span></span></h5>
                </div>
@@ -1036,15 +1036,23 @@ CONSOLE:<br>
 <div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">FLEET REPORT</span></h1></button>
 		<div class="content">
+
+    <h5><span class="INFO_TEXT_STATIC">Fleet composition: </span></h5>
+	<div class="contentGrid3">
+
+    <div class="contentGridItem1x1 contentGridItem">
 					<div class="tooltipHolder ttSEC3">
 					  <span class="tooltiptext RT"> <span class="INFO_TEXT_STATIC"> Blah blah blah Stuff goes here!</span> </span>
-		    Scoutships:
-		    </div>
-		    Battleplates:
-		    Seedships:
-		    <br>
+		              <div class="valueDisplayDiv" id="scout_SHIPS_DIV">   <span class="INFO_TEXT_STATIC">Scoutships:</span><br><span id="RESOURCE_DISPLAY_SHIPS_scout">0.0</span> <span id="scout_SHIPS_UNITS">g</span></div>
+		            </div>
+		</div>
+		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="battleplate_SHIPS_DIV">   <span class="INFO_TEXT_STATIC">Battleplates:</span><br><span id="RESOURCE_DISPLAY_SHIPS_battleplate">0.0</span> <span id="battleplate_SHIPS_UNITS">g</span></div></div>
+		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="seedship_SHIPS_DIV">   <span class="INFO_TEXT_STATIC">Seedships:</span><br><span id="RESOURCE_DISPLAY_SHIPS_seedship">0.0</span> <span id="seedship_SHIPS_UNITS">g</span></div></div>
+	</div>
+
 
   			<p><span class="INFO_TEXT_STATIC">LINE 666 Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. Michelle, I don't regret this, but I both rue and lament it. I had more, but you go ahead. You are the last hope of the universe. You're going back for the Countess, aren't you? Yep, I remember. </span></p>
+
 		</div>
 </div>
 
