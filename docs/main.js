@@ -118,7 +118,7 @@ STATS["COST-WORLDDECON-Slag"] = [["WORLDS-Fallow-CT",-1]];
 STATS["COST-WORLDDECON-Seedres"] = [["WORLDS-Fallow-CT",-1]];
 
 
-PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","think","soul","ship"]
+PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","comp","think","soul","ship"]
 STATS["PRODUCTIVITY_RATING"] = {}
 STATS["PRODUCTIVITY_MULT"] = {}
 

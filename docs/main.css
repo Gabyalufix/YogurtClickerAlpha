@@ -683,11 +683,11 @@ h5 {
 */
 
 .slidecontainer {
-  width: 100%;
+  grid-area: span 1 / span 5;
 }
 .slider {
   -webkit-appearance: none;
-  width: 100%;
+  width: 85%;
   height: 15px;
   border-radius: 5px;
   background: #d3d3d3;
@@ -729,19 +729,20 @@ h5 {
 }
 
 .multiPctSliderSuper {
+  position: relative;
+  display: grid;
   grid: auto auto auto auto auto auto;
   width: 100%;
   padding: 0px;
+
 }
 
 .multiPctSliderBox {
-  float: left;
   width: 90%;
   padding: 0px;
   grid-area: span 1 / span 5;
 }
 .multiPctSliderHoldBox {
-  float: left;
   vertical-align: middle;
   width: 9.9%;
   padding: 0px;
@@ -758,9 +759,8 @@ h5 {
 ===================================================================================================================
 */
 
-.container {
-  display: block;
-  position: relative;
+.pctCheckContainer {
+  grid-area: span 1 / span 1;
   padding-left: 35px;
   margin-top: 1px;
   cursor: pointer;
@@ -769,11 +769,10 @@ h5 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  vertical-align:middle;
 }
 
 /* Hide the browser's default checkbox */
-.container input {
+.pctCheckContainer input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -794,12 +793,12 @@ h5 {
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.pctCheckContainer:hover input ~ .checkmark {
   background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.pctCheckContainer input:checked ~ .checkmark {
   background-color: #2196F3;
 }
 
@@ -811,12 +810,12 @@ h5 {
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
+.pctCheckContainer input:checked ~ .checkmark:after {
   display: block;
 }
 
 /* Style the checkmark/indicator */
-.container .checkmark:after {
+.pctCheckContainer .checkmark:after {
   left: 9px;
   top: 5px;
   width: 5px;
