@@ -205,7 +205,7 @@ function TICK_calcIndustry(){
         var fmtsi = fmtSIint(INVENTORY["SHIPS-"+shipType+"-CT"])
         sd.innerHTML = fmtsi
     }
-
+    INVENTORY["SHIP-CONSTRUCT-BUFFER"] = 0;
 
     //STATS["CONVERSIONS"]["bufferPerShip-scout"]
     //STATS["CONVERSIONS"]["bufferPerShip-battleplate"]
