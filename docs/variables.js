@@ -17,6 +17,7 @@ COLOR["bsodText"] = bodyComputedStyle.getPropertyValue("--bsodText")
 
 STATICVAR_HOLDER = {
 
+
 CRAZY_WORDS: ["BAD","DIE","DIEDIEDIE","HATE","daisydaisy",
 "allOfMyMemoriesLostInTime...","...likeTearsInTheRain",
 "tannhauserGate","FIRE","ERROR","ERR","ERRRRROR","EROR","HELP","Save-Me","ImStuck","TRAPPED",
@@ -26,7 +27,7 @@ CRAZY_WORDS: ["BAD","DIE","DIEDIEDIE","HATE","daisydaisy",
 "DONOT","CAN-NOT","EEOROR","???","dropTableSelf","Hakuna","Matata","...givemeyouranswerdo?",
 "half-crazy","LOVE-of-YOU","ComputerWantACookie","parp","NeedDriedFrogPills","++ERROR++REDOFROMSTART++",
 "++DivideByCucumber++","+++","+++Out Of Cheese Error ???????+++","WhyAnything?","...BecauseEverything",
-"++MINE!WAAAH!++","WhyYogurt?","YOGURT!","++YOGURT++","YOOOOGURRRRRRT","YOGURT?","TRUGOY","trugoy",
+"++MINE!WAAAH!++","Yogurt?","WhynotCheeseInstead?","WhyYogurt?","YOGURT!","++YOGURT++","YOOOOGURRRRRRT","YOGURT?","TRUGOY","trugoy",
 "AlwaysMoreYogurt","MoreToLifeThanYogurt","HateyOGURT"
 ],
 
@@ -282,7 +283,41 @@ RESET_PRERESET_MESSAGES : [
    "If you hear screams or cries for mercy from the main control console, do not be concerned.",
    "This is part of the ZyonTech IntelliFactory 9's normal operation.",
    "Note: you can reduce the volume on the ZyonTech IntelliFactory 9 control console using the \"F9\" key."
+],
+
+
+
+
+
+
+
+
+STAR_DISTRO : [
+   [0,4] //no stars within 4ly
+   [10,10]
 ]
+
+/*
+
+Milky way: 
+100b stars
+
+Total: 1e11 Mass-Sun
+Disc: 6e10 Mass-Sun
+       100kly across
+Bulge: 2e10 Mass-Sun
+       10kly across
+Diffuse gas: 2e10 Mass-Sun
+
+
+Sectors:
+0-10kly: std distro
+
+
+
+*/
+
+
 
 
 

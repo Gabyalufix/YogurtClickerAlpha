@@ -133,14 +133,14 @@ function TICK_updateWorldCounts(){
 }
 
 function TICK_scoutSystems(){
-
+/*
     if(INVENTORY["WORLDS-Neutral-CT"] > 0){
       var oldDisc = INVENTORY["WORLDS-Neutral-CT"]
       var discoverWorlds = STATS["WORLDS-Total-CT"] * ( Math.random()/2500 )
       INVENTORY["WORLDS-Neutral-CT"] = INVENTORY["WORLDS-Neutral-CT"] + discoverWorlds
       var newDiscWorlds = Math.floor(INVENTORY["WORLDS-Neutral-CT"]) - Math.floor(oldDisc)
       STATS["WORLDS-Total-CT"] = STATS["WORLDS-Total-CT"] + discoverWorlds
-      /*INVENTORY["MATTER-Discovered-CT"] = INVENTORY["MATTER-Discovered-CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]*/
+      //INVENTORY["MATTER-Discovered-CT"] = INVENTORY["MATTER-Discovered-CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]
     }
     if(INVENTORY["WORLDS-Hostile-CT"] > 0){
       var oldDisc = INVENTORY["WORLDS-Hostile-CT"]
@@ -148,8 +148,10 @@ function TICK_scoutSystems(){
       INVENTORY["WORLDS-Hostile-CT"] = INVENTORY["WORLDS-Hostile-CT"] + discoverWorlds
       var newDiscWorlds = Math.floor(INVENTORY["WORLDS-Hostile-CT"]) - Math.floor(oldDisc)
       STATS["WORLDS-Total-CT"] = STATS["WORLDS-Total-CT"] + discoverWorlds
-      /*INVENTORY["MATTER-Discovered-CT"] = INVENTORY["MATTER-Discovered-CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]*/
-    }
+      //INVENTORY["MATTER-Discovered-CT"] = INVENTORY["MATTER-Discovered-CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]*
+    }*/
+    
+    
 
 }
 //MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt"]
@@ -192,16 +194,16 @@ function TICK_calcIndustry(){
 
     var shipBuffer = INVENTORY["SHIP-CONSTRUCT-BUFFER"];
     for(var i=0; i < SHIP_TYPE_LIST.length;i++){
-		var shipType = SHIP_TYPE_LIST[i];
-		INVENTORY["SHIPS-"+shipType+"-CT"] = INVENTORY["SHIPS-"+shipType+"-CT"] + ((shipBuffer * SETTINGS["ship_FRACTION"][i]) / STATS["CONVERSIONS"]["bufferPerShip-"+shipType])
-		var sd = INVENTORY["SHIPS-"+shipType+"-DISPLAY"]
-		var fmtsi = fmtSIint(INVENTORY["SHIPS-"+shipType+"-CT"])
-		sd.innerHTML = fmtsi
-	}
+        var shipType = SHIP_TYPE_LIST[i];
+        INVENTORY["SHIPS-"+shipType+"-CT"] = INVENTORY["SHIPS-"+shipType+"-CT"] + ((shipBuffer * SETTINGS["ship_FRACTION"][i]) / STATS["CONVERSIONS"]["bufferPerShip-"+shipType])
+        var sd = INVENTORY["SHIPS-"+shipType+"-DISPLAY"]
+        var fmtsi = fmtSIint(INVENTORY["SHIPS-"+shipType+"-CT"])
+        sd.innerHTML = fmtsi
+    }
 
 
     //STATS["CONVERSIONS"]["bufferPerShip-scout"]
-	//STATS["CONVERSIONS"]["bufferPerShip-battleplate"]
+    //STATS["CONVERSIONS"]["bufferPerShip-battleplate"]
     //STATS["CONVERSIONS"]["bufferPerShip-seedship"]
 
   //update displays:
@@ -236,19 +238,23 @@ function TICK_calcIndustry(){
 
 
 function TICK_calcWar(){
+
+/*
     var captureNeutral = INVENTORY["WORLDS-Neutral-CT"] * (Math.random()/3000)
     var captureHostile = INVENTORY["WORLDS-Hostile-CT"] * (Math.random()/3000)
     INVENTORY["WORLDS-Hostile-CT"] = INVENTORY["WORLDS-Hostile-CT"] - captureHostile
     INVENTORY["WORLDS-Neutral-CT"] = INVENTORY["WORLDS-Neutral-CT"] - captureNeutral
-    INVENTORY["WORLDS-Secure-CT"]  = INVENTORY["WORLDS-Secure-CT"]  + captureHostile + captureNeutral
+    INVENTORY["WORLDS-Secure-CT"]  = INVENTORY["WORLDS-Secure-CT"]  + captureHostile + captureNeutral*/
 }
 
 function TICK_captureSystems(){
+
+/*
     var seedCapture = ( INVENTORY["WORLDS-Secure-CT"] * ( 1 + Math.random()/2500 ))
     seedCapture = Math.min( INVENTORY["WORLDS-Secure-CT"], seedCapture )
     INVENTORY["WORLDS-Fallow-CT"] = INVENTORY["WORLDS-Fallow-CT"] + seedCapture
     INVENTORY["WORLDS-Secure-CT"] = INVENTORY["WORLDS-Secure-CT"] - seedCapture
-
+*/
     /*
      NOTE: later on, allow capture of neutral systems, with risk to the seedship.
     */
@@ -307,3 +313,4 @@ function TICK_constructWorlds(){
     }
   }
 }
+

@@ -299,7 +299,7 @@ for( var i = 0; i < SHIP_TYPE_LIST.length; i++){
   disp.displayUnits = document.getElementById(shipType+"_SHIPS_UNITS")
   disp.displayDiv = document.getElementById(shipType+"_SHIPS_DIV")
 }
-//		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Ships_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Starships:</span><br><span id="RESOURCE_DISPLAY_MATTER_Ships">0.0</span> <span id="Ships_MATTER_UNITS">g</span></div></div>
+//      <div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Ships_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Starships:</span><br><span id="RESOURCE_DISPLAY_MATTER_Ships">0.0</span> <span id="Ships_MATTER_UNITS">g</span></div></div>
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -933,6 +933,8 @@ window.addEventListener('click',function(event) {
 },false);
 
 
+
+startWorldConstruction("Bot",1)
 
 
 
