@@ -143,8 +143,8 @@ var UNIT_EXPLANATION = {};
 
 
 
-var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship"]
-var PCTSLIDER_DISPLAYUNITS = {bio:"B/s",eng:"B/s",psy:"B/s",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns"}
+var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate"]
+var PCTSLIDER_DISPLAYUNITS = {bio:"B/s",eng:"B/s",psy:"B/s",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns",scout:"Ships"}
 var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of information. A zero, or a one.",
                                      eng:"Byte: the fundamental unit of information. A zero, or a one.",
                                      psy:"Byte: the fundamental unit of information. A zero, or a one.",
@@ -152,10 +152,12 @@ var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of informat
                                      green:"gI: The industrial productivity of one gram of basic smartmatter (before upgrades)",
                                      think:"Hertz: Compute cycles per second.",
                                      soul:"Identities: Number of distinct thinking entities being simulated inside the soulswarm network.",
-                                     ship:"gI: The industrial productivity of one gram of basic smartmatter (before upgrades)"}
+                                     ship:"gI: The industrial productivity of one gram of basic smartmatter (before upgrades)",
+                                     ships:"Ships: the number of ships assigned a given task.",
+                                     ships:"Ships: the number of ships assigned a given task."}
 
 
-var PCTSLIDER_SUBFIELDCT = [4,4,4,6,6,6,3,3]
+var PCTSLIDER_SUBFIELDCT = [4,4,4,6,6,6,3,3,3,3]
 var PCTSLIDERS = {}
 
 //PRODUCTIVITY_STATS = ["bot","psy","green","bio","eng","psy","think","soul"]
@@ -164,7 +166,8 @@ var PCTSLIDERS = {}
 
 //function fmtSIunits(x){
 //Returns [0]baseNumber, [1]prefixAbbrev, [2]prefixFull, [3]prefixExponent, [4]a string of prefix descriptions
-
+STATS["PRODUCTIVITY_MULT"]["scout"] = 1
+STATS["PRODUCTIVITY_MULT"]["battleplate"] = 1
 
 function updatePctSliderDisplayHelper(ss){
   var fid = ss.fid;
@@ -285,7 +288,9 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
     }
     onDownMultiSliderPct(slider_elem[0])
     updatePctSliderDisplay(slider_elem[0])
-    document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fmtSI( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])+PCTSLIDER_DISPLAYUNITS[fid]
+    if(document.getElementById(fid+"_PRODUCTIVITY_DISPLAY") != null){
+      document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fmtSI( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])+PCTSLIDER_DISPLAYUNITS[fid]
+    }
 }
 
 

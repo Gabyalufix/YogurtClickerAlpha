@@ -103,10 +103,15 @@ function TICK_updateStats(){
   STATS["PRODUCTIVITY_RATING"]["eng"]   = STATS["CONVERSIONS"]["opToByte"]  * STATS["PRODUCTIVITY_RATING"]["think"] * SETTINGS["think_FRACTION"][1]
   STATS["PRODUCTIVITY_RATING"]["psy"]   = STATS["CONVERSIONS"]["opToSoul"]  * STATS["PRODUCTIVITY_MULT"]["soul"] * SETTINGS["soul_FRACTION"][0]
 
+   STATS["PRODUCTIVITY_RATING"]["scout"]   = INVENTORY["SHIPS-"+"scout"+"-CT"]
+   STATS["PRODUCTIVITY_RATING"]["battleplate"]   = INVENTORY["SHIPS-"+"battleplate"+"-CT"]
+
   for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
       var fid = PCTSLIDER_FIELDS[sfi]
-      var fsi = fmtSIunits( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])
-      document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fsi[0]+" "+fsi[1]+PCTSLIDER_DISPLAYUNITS[fid]
+      if(document.getElementById(fid+"_PRODUCTIVITY_DISPLAY") != null){
+        var fsi = fmtSIunits( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])
+        document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fsi[0]+" "+fsi[1]+PCTSLIDER_DISPLAYUNITS[fid]
+	  }
       updatePctSliderDisplay(PCTSLIDERS[fid]["sliderElem"][0])
   }
   document.getElementById("DEBUG_CRAZY_LEVEL_DISPLAY").innerHTML = STATS["CRAZY_LEVEL"]
@@ -150,8 +155,8 @@ function TICK_scoutSystems(){
       STATS["WORLDS-Total-CT"] = STATS["WORLDS-Total-CT"] + discoverWorlds
       //INVENTORY["MATTER-Discovered-CT"] = INVENTORY["MATTER-Discovered-CT"] + newDiscWorlds * STATS["CONVERSIONS"]["gramsPerWorld"]*
     }*/
-    
-    
+
+
 
 }
 //MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt"]

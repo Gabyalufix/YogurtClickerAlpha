@@ -728,6 +728,7 @@ CONSOLE:<br>
 				<button class = "button3" id ="button_wfBotDN" > &#8964; </button>
 			   </div>
 			   <div class="buildCtrlPanel">
+
 			   <div class="ctrlPanelTopLine">
 			     <h5><span class="INFO_TEXT_STATIC">Greenworlds: </span><span class="valueDisplayDiv" id="Green_CT_DIV"><span id="Green_CT"></span><span id="Green_CT_UNITS"></span></span></h5>
                </div>
@@ -1026,7 +1027,7 @@ CONSOLE:<br>
 					</label>
 				</div>
 
-			<h5><span class="INFO_TEXT_STATIC">Seedships: </span><div class="valueDisplayDiv" id="shipSliderDisplayPct2_DIV"><span id="shipSliderDisplayPct2"></span><span id="shipSliderDisplayPct2_UNITS"></span></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Battleplates: </span><div class="valueDisplayDiv" id="shipSliderDisplayPct2_DIV"><span id="shipSliderDisplayPct2"></span><span id="shipSliderDisplayPct2_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="2000" class="slider" id="shipSliderPct2">
@@ -1037,7 +1038,7 @@ CONSOLE:<br>
 					</label>
 				</div>
 
-			<h5><span class="INFO_TEXT_STATIC">Battleplates: </span><div class="valueDisplayDiv" id="shipSliderDisplayPct3_DIV"><span id="shipSliderDisplayPct3"></span><span id="shipSliderDisplayPct3_UNITS"></span></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Seedships: </span><div class="valueDisplayDiv" id="shipSliderDisplayPct3_DIV"><span id="shipSliderDisplayPct3"></span><span id="shipSliderDisplayPct3_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="0" class="slider" id="shipSliderPct3">
@@ -1136,13 +1137,16 @@ CONSOLE:<br>
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">FLEET REPORT</span></h1></button>
 		<div class="content">
 
+  			<p><span class="INFO_TEXT_STATIC">LINE 666 Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. Michelle, I don't regret this, but I both rue and lament it. I had more, but you go ahead. You are the last hope of the universe. You're going back for the Countess, aren't you? Yep, I remember. </span></p>
+
+
     <h5><span class="INFO_TEXT_STATIC">Fleet composition: </span></h5>
 	<div class="contentGrid3">
 
     <div class="contentGridItem1x1 contentGridItem">
 					<div class="tooltipHolder ttSEC3">
 					  <span class="tooltiptext RT"> <span class="INFO_TEXT_STATIC"> Blah blah blah Stuff goes here!</span> </span>
-		              <div class="valueDisplayDiv" id="scout_SHIPS_DIV">   <span class="INFO_TEXT_STATIC">Scoutships:</span><br><span id="RESOURCE_DISPLAY_SHIPS_scout">0.0</span> <span id="scout_SHIPS_UNITS"></span></div>
+		              <div class="valueDisplayDiv" id="scout_SHIPS_DIV">   <span class="INFO_TEXT_STATIC">scouts:</span><br><span id="RESOURCE_DISPLAY_SHIPS_scout">0.0</span> <span id="scout_SHIPS_UNITS"></span></div>
 		            </div>
 		</div>
 		<div class="contentGridItem1x1 contentGridItem">
@@ -1160,8 +1164,135 @@ CONSOLE:<br>
 		</div>
 	</div>
 
+      <div class="contentUnitHolder">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC"> scouts </span></h2>
+			</button>
+			<div class="contentLV3">
 
-  			<p><span class="INFO_TEXT_STATIC">LINE 666 Morbo can't understand his teleprompter because he forgot how you say that letter that's shaped like a man wearing a hat. Michelle, I don't regret this, but I both rue and lament it. I had more, but you go ahead. You are the last hope of the universe. You're going back for the Countess, aren't you? Yep, I remember. </span></p>
+			scout stuff...<br>
+
+			<h5><span class="INFO_TEXT_STATIC">Explore: </span><span class="valueDisplayDiv" id="scoutSliderDisplayPct1_DIV"><span id="scoutSliderDisplayPct1"></span><span id="scoutSliderDisplayPct1_UNITS"></span></span></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="scoutSliderPct1">
+					</div>
+					<label class="pctCheckContainer">
+					  <input type="checkbox"  id = "scoutSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+
+			<h5><span class="INFO_TEXT_STATIC">Recon: </span><span class="valueDisplayDiv" id="scoutSliderDisplayPct2_DIV"><span id="scoutSliderDisplayPct2"></span><span id="scoutSliderDisplayPct2_UNITS"></span></span></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="scoutSliderPct2">
+					</div>
+					<label class="pctCheckContainer">
+					  <input type="checkbox"  id = "scoutSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Train: </span><span class="valueDisplayDiv" id="scoutSliderDisplayPct3_DIV"><span id="scoutSliderDisplayPct3"></span><span id="scoutSliderDisplayPct3_UNITS"></span></span></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="scoutSliderPct3">
+					</div>
+					<label class="pctCheckContainer">
+					  <input type="checkbox"  id = "scoutSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+<!--
+			<div class="unlockableHidden" id="LOCKHIDE_SCOUTSPY">
+			<h5><span class="INFO_TEXT_STATIC">Spy: </span><div class="valueDisplayDiv" id="scoutSliderDisplayPct4_DIV"><span id="scoutSliderDisplayPct4"></span><span id="scoutSliderDisplayPct4_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="scoutSliderPct4">
+					</div>
+					<label class="pctCheckContainer">
+					  <input type="checkbox"  id = "scoutSliderCheck4">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+				</div>-->
+
+
+            </div>
+      </div>
+      <div class="contentUnitHolder">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC"> Battleplates </span></h2>
+			</button>
+			<div class="contentLV3">
+
+			Battleplate stuff...
+
+			<h5><span class="INFO_TEXT_STATIC">Explore: </span><span class="valueDisplayDiv" id="battleplateSliderDisplayPct1_DIV"><span id="battleplateSliderDisplayPct1"></span><span id="battleplateSliderDisplayPct1_UNITS"></span></span></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="battleplateSliderPct1">
+					</div>
+					<label class="pctCheckContainer">
+					  <input type="checkbox"  id = "battleplateSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+
+			<h5><span class="INFO_TEXT_STATIC">Recon: </span><span class="valueDisplayDiv" id="battleplateSliderDisplayPct2_DIV"><span id="battleplateSliderDisplayPct2"></span><span id="battleplateSliderDisplayPct2_UNITS"></span></span></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="battleplateSliderPct2">
+					</div>
+					<label class="pctCheckContainer">
+					  <input type="checkbox"  id = "battleplateSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Train: </span><span class="valueDisplayDiv" id="battleplateSliderDisplayPct3_DIV"><span id="battleplateSliderDisplayPct3"></span><span id="battleplateSliderDisplayPct3_UNITS"></span></span></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="battleplateSliderPct3">
+					</div>
+					<label class="pctCheckContainer">
+					  <input type="checkbox"  id = "battleplateSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+            </div>
+      </div>
+      <div class="contentUnitHolder">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC"> Seedships </span></h2>
+			</button>
+			<div class="contentLV3">
+
+			Seedships stuff...
+
+			   <div class="buildCtrlPanel">
+			   <div class="ctrlPanelTopLine">
+			     <h5><span class="INFO_TEXT_STATIC">Seedship reserve: </span><span class="valueDisplayDiv" id="seedshipres_CT_DIV"><span id="seedshipres_CT"></span><span id="seedshipres_CT_UNITS"></span></span></h5>
+               </div>
+				<button class = "button3" id ="button_wfseedshipresUP" > &#8963; </button>
+			    <div class="buildInfoPanel1"><div class="valueDisplayDiv" id="seedshipres_wf_AddUnit_DIV"><span id="seedshipres_wf_AddUnit"></span><span id="seedshipres_wf_AddUnit_UNITS"></span></div></div>
+				<button class = "button2" id ="button_wfseedshipresBB" > -- </button>
+				<button class = "button2" id ="button_wfseedshipresB" > - </button>
+				<button class = "button2" id ="button_wfseedshipresF" > + </button>
+				<button class = "button2" id ="button_wfseedshipresFF" > ++ </button>
+			    <div class="buildInfoPanel2">BEEP BEEP BEEP</div>
+				<button class = "button3" id ="button_wfseedshipresDN" > &#8964; </button>
+			   </div>
+
+
+
+            </div>
+      </div>
 
 		</div>
 </div>
