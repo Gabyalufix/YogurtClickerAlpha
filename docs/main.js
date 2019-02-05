@@ -15,6 +15,7 @@ STATS = {}
 STATS["TICK"] = 0;
 STATS["PAUSE"] = false;
 
+ELEMS = {};
 
 STATS["CRAZY_LEVEL"]=0
 STATS["CRAZY_ON"]=true
@@ -331,7 +332,7 @@ for( var i = 0; i < SHIP_TYPE_LIST.length; i++){
   var shipType = SHIP_TYPE_LIST[i];
   INVENTORY["SHIPS-"+shipType+"-CT"] = 0;
   var disp = document.getElementById("RESOURCE_DISPLAY_SHIPS_"+shipType)
-  INVENTORY["SHIPS-"+shipType+"-DISPLAY"] = disp;
+  ELEMS["SHIPS-"+shipType+"-DISPLAY"] = disp;
   disp.shipType = shipType;
   disp.displayUnits = document.getElementById(shipType+"_SHIPS_UNITS")
   disp.displayDiv = document.getElementById(shipType+"_SHIPS_DIV")
@@ -356,7 +357,7 @@ for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
       console.log("matter:"+matterType)
    INVENTORY["MATTER-"+matterType+"-CT"] = 0
    var matterDisplay = document.getElementById("RESOURCE_DISPLAY_MATTER_"+matterType)
-   INVENTORY["MATTER-"+matterType+"-DISPLAY"] = matterDisplay
+   ELEMS["MATTER-"+matterType+"-DISPLAY"] = matterDisplay
    matterDisplay.matterType = matterType
    matterDisplay.displayUnits = document.getElementById(matterType+"_MATTER_UNITS")
    matterDisplay.displayDiv = document.getElementById(matterType+"_MATTER_DIV")

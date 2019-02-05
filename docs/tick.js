@@ -45,16 +45,17 @@ window.setInterval(function(){
         }
         /*staticCanvas(bgCanvas)*/
     }
-    
+
     if(SAVE_GAME_COMMAND_FLAG.length > 0){
       if( SAVE_GAME_COMMAND_FLAG[0] == "SAVE"){
         writeSavegameObject(getCurrentSavegameObject(),SAVE_GAME_COMMAND_FLAG[1])
       } else if(SAVE_GAME_COMMAND_FLAG[0] == "LOAD"){
         loadSavegameObject(getSavegameObject(SAVE_GAME_COMMAND_FLAG[1]))
+        TICK_setUserInputs();
       }
       SAVE_GAME_COMMAND_FLAG = []
     }
-    
+
 
 },100);
 
@@ -73,19 +74,35 @@ function calculateSlowTick(){
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //TICK FUNCTIONS:
 
-
+//SETTINGS["bot"+"_FRACTION"]
 function TICK_readUserInputs(){
   //Percent sliders:
   for(var i =0; i<PCTSLIDER_FIELDS.length; i++){
     var fid = PCTSLIDER_FIELDS[i]
     SETTINGS[fid+"_FRACTION"] = [];
+    SETTINGS[fid+"_LOCKEDBOX"] = [];
     for(var j=0;j<PCTSLIDERS[fid]["displayElem"].length;j++){
       SETTINGS[fid+"_FRACTION"][j] = parseFloat( PCTSLIDERS[fid]["sliderElem"][j].value ) / 10000
+      SETTINGS[fid+"_LOCKEDBOX"][j] = PCTSLIDERS[fid]["sliderElem"][j].lockbox.checked
+      updatePctSliderDisplay(PCTSLIDERS[fid]["sliderElem"][j])
     }
   }
 
 
 }
+function TICK_setUserInputs(){
+  //Percent sliders:
+  for(var i =0; i<PCTSLIDER_FIELDS.length; i++){
+    var fid = PCTSLIDER_FIELDS[i]
+    for(var j=0;j<PCTSLIDERS[fid]["displayElem"].length;j++){
+      PCTSLIDERS[fid]["sliderElem"][j].value = SETTINGS[fid+"_FRACTION"][j] * 10000;
+      PCTSLIDERS[fid]["sliderElem"][j].lockbox.checked = SETTINGS[fid+"_LOCKEDBOX"][j];
+    }
+  }
+
+
+}
+
 
 
 //STATS["CONVERSIONS"]["sunToByte"] = 1243912971288
@@ -165,7 +182,7 @@ function TICK_scoutSystems(){
       xxr = xxr + 1;
     }
     INVENTORY["WORLDS-Neutral-CT"] = INVENTORY["WORLDS-Neutral-CT"] + xxr;
-    
+
 
 /*
     if(INVENTORY["WORLDS-Neutral-CT"] > 0){
@@ -230,7 +247,7 @@ function TICK_calcIndustry(){
     for(var i=0; i < SHIP_TYPE_LIST.length;i++){
         var shipType = SHIP_TYPE_LIST[i];
         INVENTORY["SHIPS-"+shipType+"-CT"] = INVENTORY["SHIPS-"+shipType+"-CT"] + ((shipBuffer * SETTINGS["ship_FRACTION"][i]) / STATS["CONVERSIONS"]["bufferPerShip-"+shipType])
-        var sd = INVENTORY["SHIPS-"+shipType+"-DISPLAY"]
+        var sd = ELEMS["SHIPS-"+shipType+"-DISPLAY"]
         var fmtsi = fmtSIint(INVENTORY["SHIPS-"+shipType+"-CT"])
         sd.innerHTML = fmtsi
     }
@@ -245,16 +262,16 @@ function TICK_calcIndustry(){
    for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
         var matterType = MATTER_TYPE_LIST[i]
         var fmtsi = fmtSIunits(INVENTORY["MATTER-"+matterType+"-CT"])
-        var sd = INVENTORY["MATTER-"+matterType+"-DISPLAY"]
+        var sd = ELEMS["MATTER-"+matterType+"-DISPLAY"]
         sd.innerHTML = fmtsi[0]
         sd.displayUnits.innerHTML = fmtsi[1]+"t"
         sd.displayDiv.title = "tons: basic unit of mass\n"+fmtsi[4]
-        
+
     }
 
     CONSTRUCTION_REQUESTS = [];
 
-   
+
     /*
     STATS["CONVERSIONS"]["gramPerSunShip"]
     INVENTORY["SHIP-CONSTRUCT-BUFFER"]
@@ -286,7 +303,7 @@ function TICK_calcWar(){
 }
 
 function TICK_captureSystems(){
-    
+
     /*
     STATS["seedship-speed"] = 0.001;
     STATS["seedship-toughness"] = 1;
@@ -301,30 +318,30 @@ function TICK_captureSystems(){
 
     STATS["seedship-distToNextStar"] = 1.219;
     */
-    
+
     var ssct = Math.floor(INVENTORY["SHIPS-"+"seedship"+"-CT"]);
-    
-    
+
+
     if(ssct > 0){
       var arriveTime = ( STATS["seedship-distToNextStar"] / STATS["seedship-speed"] ) + STATS["TICK"]
       INVENTORY["seedship-transit-CT"] = INVENTORY["seedship-transit-CT"] + ssct;
       INVENTORY["seedship-transit-buffer"].push([ssct,arriveTime]);
       INVENTORY["SHIPS-"+"seedship"+"-CT"] = INVENTORY["SHIPS-"+"seedship"+"-CT"] - ssct;
     }
-    
+
     while(INVENTORY["seedship-transit-buffer"].length > 0 && INVENTORY["seedship-transit-buffer"][0][1] <= STATS["TICK"]){
       var landct = INVENTORY["seedship-transit-buffer"].shift()[0];
       INVENTORY["WORLDS-Fallow-CT"] = INVENTORY["WORLDS-Fallow-CT"] + landct;
       INVENTORY["seedship-transit-CT"] = INVENTORY["seedship-transit-CT"] - landct;
     }
-    
+
     document.getElementById("seedshipsInTransit_SPAN").innerHTML = fmtSIintNoPct(INVENTORY["seedship-transit-CT"]);
     if(INVENTORY["seedship-transit-buffer"].length > 0){
        document.getElementById("timeToNextLanding_SPAN").innerHTML = Math.floor( (INVENTORY["seedship-transit-buffer"][0][1] - STATS["TICK"]) * STATS["CONVERSIONS"]["timeUnitPerTick"]) + " "+STATICVAR_HOLDER["TIME_UNIT"]
     } else {
        document.getElementById("timeToNextLanding_SPAN").innerHTML = "N/A"
     }
-    
+
     /*Fallow
                 <span id="seedshipsInTransit_HOLDER"><span class="INFO_TEXT_STATIC">In-transit: </span> <span id="seedshipsInTransit_SPAN"></span></span>
             <span id="timeToNextLanding_HOLDER"><span class="INFO_TEXT_STATIC">Time to next landing: </span> <span id="timeToNextLanding_SPAN"></span></span>
