@@ -46,8 +46,9 @@ STATS["CONVERSIONS"]["sunToOp"] =    (3745454516355)
 STATS["CONVERSIONS"]["opToByte"] =   (0.232)
 STATS["CONVERSIONS"]["gramsPerWorld"] = 2e21
 
-STATS["CONVERSIONS"]["timeUnitPerTick"] = 0.1;
-STATS["CONVERSIONS"]["timeAtZero"] = 2152;
+STATS["CONVERSIONS"]["yearPerTick"] = 1 / 52;
+STATS["CONVERSIONS"]["timeUnitPerTick"] = 1;
+STATS["CONVERSIONS"]["timeAtZero"]  = 2152;
 
 
 
@@ -174,7 +175,7 @@ var UNIT_EXPLANATION = {};
 
 
 var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate","comp","strat"]
-var PCTSLIDER_DISPLAYUNITS = {bio:"B/s",eng:"B/s",psy:"B/s",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns",scout:" Ships",battleplate:" Ships",comp:"Hz",strat:" Ships"}
+var PCTSLIDER_DISPLAYUNITS = {bio:"B/wk",eng:"B/wk",psy:"B/wk",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns",scout:" Ships",battleplate:" Ships",comp:"Hz",strat:" Ships"}
 var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of information. A zero, or a one.",
                                      eng:"Byte: the fundamental unit of information. A zero, or a one.",
                                      psy:"Byte: the fundamental unit of information. A zero, or a one.",
@@ -729,6 +730,7 @@ var settingsWindow = document.getElementById('SETTINGS_WINDOW_CONTENT');
 document.getElementById("SETTINGS_BUTTON").onclick = function(){
     settingsBG.style.display="block"
     settingsWindow.style.display = "block"
+    querySavegamesAndUpdate();
 }
 
 document.getElementById("SETTINGS_WINDOW_CLOSE").onclick = function(){

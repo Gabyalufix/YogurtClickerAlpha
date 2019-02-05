@@ -10,6 +10,10 @@ bgCanvas.RUN_STATIC = true;
 var TICK_TIMESTAMP
 var secTimer = 0;
 var midTimer = 0;
+
+//var bgStatic = document.getElementById("BACKGROUND_STATIC")
+//var vgCanvas = document.getElementById("BACKGROUND_CANVAS")
+//var allContentContainer =
 window.setInterval(function(){
 
     if(! STATS["PAUSE"]){
@@ -39,10 +43,12 @@ window.setInterval(function(){
         if(midTimer >= 5){
             midTimer = 0;
           if(bgCanvas.RUN_STATIC){
-
-            // requestAnimFrame(tvStatic_render);
+            requestAnimFrame(tvStatic_render);
           }
         }
+
+
+
         /*staticCanvas(bgCanvas)*/
     }
 
@@ -148,8 +154,16 @@ function TICK_updateStats(){
       updatePctSliderDisplay(PCTSLIDERS[fid]["sliderElem"][0])
   }
   document.getElementById("DEBUG_CRAZY_LEVEL_DISPLAY").innerHTML = STATS["CRAZY_LEVEL"]
+
+  document.getElementById("DATE_DISPLAY").innerHTML = getDateStringFromTick(STATS["TICK"])
+
 }
 
+function getDateStringFromTick(tt){
+  var y =  Math.floor( tt * STATS["CONVERSIONS"]["yearPerTick"] );
+  var wk = tt - y / STATS["CONVERSIONS"]["yearPerTick"];
+  return (y + STATS["CONVERSIONS"]["timeAtZero"])+ ", wk"+wk
+}
 
 
 
