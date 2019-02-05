@@ -37,10 +37,6 @@ Stellar pop:
 
 */
 
-function getRandomBetween(a,b){
-  var span = b-a;
-  return (Math.random() * span) + a;
-}
 
 
 function getMainSequenceType(){

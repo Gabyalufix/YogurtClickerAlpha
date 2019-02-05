@@ -8,10 +8,11 @@ var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
 bgCanvas.RUN_STATIC = true;
 
 var TICK_TIMESTAMP
-var secTimer = 0
+var secTimer = 0;
 var midTimer = 0;
 window.setInterval(function(){
     TICK_TIMESTAMP = Date.now()
+    STATS["TICK"] = STATS["TICK"] + 1;
     TICK_readUserInputs()
     TICK_updateStats()
     TICK_scoutSystems()
@@ -41,7 +42,6 @@ window.setInterval(function(){
       }
     }
     /*staticCanvas(bgCanvas)*/
-
 
 },100);
 
@@ -95,23 +95,26 @@ function TICK_updateStats(){
 */
   STATS["PRODUCTIVITY_RATING"]["bot"]   = INVENTORY["MATTER-Botbots-CT"] * STATS["PRODUCTIVITY_MULT"]["bot"]
   STATS["PRODUCTIVITY_RATING"]["green"]   = INVENTORY["MATTER-Biomass-CT"] * STATS["PRODUCTIVITY_MULT"]["green"]
-  STATS["PRODUCTIVITY_RATING"]["comp"]   = INVENTORY["MATTER-Compute-CT"] * STATS["PRODUCTIVITY_MULT"]["comp"]
+  STATS["PRODUCTIVITY_RATING"]["comp"]   = INVENTORY["MATTER-Compute-CT"] * STATS["PRODUCTIVITY_MULT"]["comp"] * STATS["CONVERSIONS"]["sunToOp"]
 
   STATS["PRODUCTIVITY_RATING"]["ship"]   = STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]
-  STATS["PRODUCTIVITY_RATING"]["think"] = STATS["CONVERSIONS"]["sunToOp"]   * STATS["PRODUCTIVITY_RATING"]["comp"]
+  STATS["PRODUCTIVITY_RATING"]["think"] = STATS["PRODUCTIVITY_RATING"]["comp"] * SETTINGS["comp_FRACTION"][0]
+  STATS["PRODUCTIVITY_RATING"]["soul"] = STATS["PRODUCTIVITY_RATING"]["comp"] * SETTINGS["comp_FRACTION"][1] * STATS["CONVERSIONS"]["opToSoul"]
+
   STATS["PRODUCTIVITY_RATING"]["bio"]   = STATS["CONVERSIONS"]["sunToByte"] * STATS["PRODUCTIVITY_RATING"]["green"] * SETTINGS["green_FRACTION"][0]
   STATS["PRODUCTIVITY_RATING"]["eng"]   = STATS["CONVERSIONS"]["opToByte"]  * STATS["PRODUCTIVITY_RATING"]["think"] * SETTINGS["think_FRACTION"][1]
-  STATS["PRODUCTIVITY_RATING"]["psy"]   = STATS["CONVERSIONS"]["opToSoul"]  * STATS["PRODUCTIVITY_MULT"]["soul"] * SETTINGS["soul_FRACTION"][0]
+  STATS["PRODUCTIVITY_RATING"]["psy"]   =  STATS["PRODUCTIVITY_RATING"]["soul"] * SETTINGS["soul_FRACTION"][0]
 
-   STATS["PRODUCTIVITY_RATING"]["scout"]   = INVENTORY["SHIPS-"+"scout"+"-CT"]
-   STATS["PRODUCTIVITY_RATING"]["battleplate"]   = INVENTORY["SHIPS-"+"battleplate"+"-CT"]
+   STATS["PRODUCTIVITY_RATING"]["scout"]   = Math.floor(INVENTORY["SHIPS-"+"scout"+"-CT"])
+   STATS["PRODUCTIVITY_RATING"]["battleplate"]   = Math.floor(INVENTORY["SHIPS-"+"battleplate"+"-CT"])
+   STATS["PRODUCTIVITY_RATING"]["seedship"]   = Math.floor(INVENTORY["SHIPS-"+"seedship"+"-CT"])
 
   for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
       var fid = PCTSLIDER_FIELDS[sfi]
       if(document.getElementById(fid+"_PRODUCTIVITY_DISPLAY") != null){
         var fsi = fmtSIunits( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])
         document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fsi[0]+" "+fsi[1]+PCTSLIDER_DISPLAYUNITS[fid]
-	  }
+      }
       updatePctSliderDisplay(PCTSLIDERS[fid]["sliderElem"][0])
   }
   document.getElementById("DEBUG_CRAZY_LEVEL_DISPLAY").innerHTML = STATS["CRAZY_LEVEL"]
@@ -138,6 +141,19 @@ function TICK_updateWorldCounts(){
 }
 
 function TICK_scoutSystems(){
+    var exploreRating = STATS["PRODUCTIVITY_RATING"]["scout"] * SETTINGS["scout"+"_FRACTION"][0];
+    var areaExplored = STATS["scout-speed"] * STATS["scout-sensorrange"] * exploreRating;
+    var meanDiscovered = areaExplored * STATS["explore-starDensity"];
+    var varDiscovered = meanDiscovered * 0.25;
+    var xx = meanDiscovered + getRandomBetween(-varDiscovered,varDiscovered);
+    var xxr = Math.floor(xx);
+    var rem = xx - xxr;
+    if(Math.random() < rem){
+      xxr = xxr + 1;
+    }
+    INVENTORY["WORLDS-Neutral-CT"] = INVENTORY["WORLDS-Neutral-CT"] + xxr;
+    
+
 /*
     if(INVENTORY["WORLDS-Neutral-CT"] > 0){
       var oldDisc = INVENTORY["WORLDS-Neutral-CT"]
@@ -184,7 +200,7 @@ function TICK_calcIndustry(){
                            STATS["COST-MATTER-Biomass"] )
 
     addConstructionRequest("MATTER-Compute-CT",
-                           (STATS["CONVERSIONS"]["ComputePerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][1]) ,
+                           (STATS["CONVERSIONS"]["ComputePerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][5]) ,
                            STATS["COST-MATTER-Compute"] )
 
     addConstructionRequest("MATTER-Yogurt-CT",
@@ -218,10 +234,14 @@ function TICK_calcIndustry(){
         var fmtsi = fmtSIunits(INVENTORY["MATTER-"+matterType+"-CT"])
         var sd = INVENTORY["MATTER-"+matterType+"-DISPLAY"]
         sd.innerHTML = fmtsi[0]
-        sd.displayUnits.innerHTML = fmtsi[1]+"g"
-        sd.displayDiv.title = "grams: basic unit of mass\n"+fmtsi[4]
+        sd.displayUnits.innerHTML = fmtsi[1]+"t"
+        sd.displayDiv.title = "tons: basic unit of mass\n"+fmtsi[4]
+        
     }
 
+    CONSTRUCTION_REQUESTS = [];
+
+   
     /*
     STATS["CONVERSIONS"]["gramPerSunShip"]
     INVENTORY["SHIP-CONSTRUCT-BUFFER"]
@@ -253,13 +273,54 @@ function TICK_calcWar(){
 }
 
 function TICK_captureSystems(){
+    
+    /*
+    STATS["seedship-speed"] = 0.001;
+    STATS["seedship-toughness"] = 1;
 
-/*
-    var seedCapture = ( INVENTORY["WORLDS-Secure-CT"] * ( 1 + Math.random()/2500 ))
-    seedCapture = Math.min( INVENTORY["WORLDS-Secure-CT"], seedCapture )
-    INVENTORY["WORLDS-Fallow-CT"] = INVENTORY["WORLDS-Fallow-CT"] + seedCapture
-    INVENTORY["WORLDS-Secure-CT"] = INVENTORY["WORLDS-Secure-CT"] - seedCapture
-*/
+    STATS["seedship-Secure-seedRate"] = 0.95;
+    STATS["seedship-Neutral-seedRate"] = 0.75;
+    STATS["seedship-Hostile-seedRate"] = 0.05;
+
+    INVENTORY["seedship-transit-buffer"] = [];
+    INVENTORY["seedship-transit-CT"] = 0;
+
+
+    STATS["seedship-distToNextStar"] = 1.219;
+    */
+    
+    var ssct = Math.floor(INVENTORY["SHIPS-"+"seedship"+"-CT"]);
+    
+    
+    if(ssct > 0){
+      var arriveTime = ( STATS["seedship-distToNextStar"] / STATS["seedship-speed"] ) + STATS["TICK"]
+      INVENTORY["seedship-transit-CT"] = INVENTORY["seedship-transit-CT"] + ssct;
+      INVENTORY["seedship-transit-buffer"].push([ssct,arriveTime]);
+      INVENTORY["SHIPS-"+"seedship"+"-CT"] = INVENTORY["SHIPS-"+"seedship"+"-CT"] - ssct;
+    }
+    
+    while(INVENTORY["seedship-transit-buffer"].length > 0 && INVENTORY["seedship-transit-buffer"][0][1] <= STATS["TICK"]){
+      var landct = INVENTORY["seedship-transit-buffer"].shift()[0];
+      INVENTORY["WORLDS-Fallow-CT"] = INVENTORY["WORLDS-Fallow-CT"] + landct;
+      INVENTORY["seedship-transit-CT"] = INVENTORY["seedship-transit-CT"] - landct;
+    }
+    
+    document.getElementById("seedshipsInTransit_SPAN").innerHTML = fmtSIintNoPct(INVENTORY["seedship-transit-CT"]);
+    if(INVENTORY["seedship-transit-buffer"].length > 0){
+       document.getElementById("timeToNextLanding_SPAN").innerHTML = Math.floor( (INVENTORY["seedship-transit-buffer"][0][1] - STATS["TICK"]) * STATS["CONVERSIONS"]["timeUnitPerTick"]) + " "+STATICVAR_HOLDER["TIME_UNIT"]
+    } else {
+       document.getElementById("timeToNextLanding_SPAN").innerHTML = "N/A"
+    }
+    
+    /*Fallow
+                <span id="seedshipsInTransit_HOLDER"><span class="INFO_TEXT_STATIC">In-transit: </span> <span id="seedshipsInTransit_SPAN"></span></span>
+            <span id="timeToNextLanding_HOLDER"><span class="INFO_TEXT_STATIC">Time to next landing: </span> <span id="timeToNextLanding_SPAN"></span></span>
+
+        var seedCapture = ( INVENTORY["WORLDS-Secure-CT"] * ( 1 + Math.random()/2500 ))
+        seedCapture = Math.min( INVENTORY["WORLDS-Secure-CT"], seedCapture )
+        INVENTORY["WORLDS-Fallow-CT"] = INVENTORY["WORLDS-Fallow-CT"] + seedCapture
+        INVENTORY["WORLDS-Secure-CT"] = INVENTORY["WORLDS-Secure-CT"] - seedCapture
+    */
     /*
      NOTE: later on, allow capture of neutral systems, with risk to the seedship.
     */

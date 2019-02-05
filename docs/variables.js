@@ -17,6 +17,7 @@ COLOR["bsodText"] = bodyComputedStyle.getPropertyValue("--bsodText")
 
 STATICVAR_HOLDER = {
 
+TIME_UNIT:"years",
 
 CRAZY_WORDS: ["BAD","DIE","DIEDIEDIE","HATE","daisydaisy",
 "allOfMyMemoriesLostInTime...","...likeTearsInTheRain",

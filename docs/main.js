@@ -12,6 +12,9 @@ SETTINGS = {}
 INVENTORY = {}
 STATS = {}
 
+STATS["TICK"] = 0;
+
+
 STATS["CRAZY_LEVEL"]=0
 STATS["CRAZY_ON"]=true
 /*INVENTORY["WORLDS"] = {};*/
@@ -39,7 +42,11 @@ STATS["CONVERSIONS"]["sunToByte"] =  (1243912971288)
 STATS["CONVERSIONS"]["opToSoul"] =   (0.000000001)
 STATS["CONVERSIONS"]["sunToOp"] =    (3745454516355)
 STATS["CONVERSIONS"]["opToByte"] =   (0.232)
-STATS["CONVERSIONS"]["gramsPerWorld"] = 2e27
+STATS["CONVERSIONS"]["gramsPerWorld"] = 2e21
+
+STATS["CONVERSIONS"]["timeUnitPerTick"] = 0.1;
+
+
 
 //STATS["CONVERSIONS"]["collectPerSunPerTick"] = 1.5e15
 //STATS["CONVERSIONS"]["processPerSunPerTick"] = 5.2e15
@@ -48,26 +55,26 @@ STATS["CONVERSIONS"]["gramsPerWorld"] = 2e27
 
 
 
-STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] = 0.0001
-STATS["COST-MATTER-Feedstock"] = [["MATTER-FreeBot-CT",1.01],["MATTER-WASTE-CT",-0.01]]
-STATS["CONVERSIONS"]["DigestedPerProdPerTick"] = 0.0001
-STATS["COST-MATTER-Digested"] = [["MATTER-FreeGreen-CT",1.01],["MATTER-WASTE-CT",-0.01]]
-STATS["CONVERSIONS"]["ShipPerProdPerTick"] = 0.000000000001
-STATS["COST-MATTER-Ship"] = [["MATTER-Feedstock-CT",125000000],["MATTER-WASTE-CT",-25000000]]
+STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] = 0.001
+STATS["COST-MATTER-Feedstock"] = [["MATTER-FreeBot-CT",1.01],["MATTER-Waste-CT",-0.01]]
+STATS["CONVERSIONS"]["DigestedPerProdPerTick"] = 0.001
+STATS["COST-MATTER-Digested"] = [["MATTER-FreeGreen-CT",1.01],["MATTER-Waste-CT",-0.01]]
+STATS["CONVERSIONS"]["ShipPerProdPerTick"] = 0.001
+STATS["COST-MATTER-Ship"] = [["MATTER-Feedstock-CT",1.25],["MATTER-Waste-CT",-0.25]]
 
 
-STATS["CONVERSIONS"]["YogurtPerProdPerTick"] = 0.0001
-STATS["COST-MATTER-Yogurt"] = [["MATTER-Digested-CT",1.2],["MATTER-WASTE-CT",-0.2]]
-STATS["CONVERSIONS"]["BotbotsPerProdPerTick"] = 0.0001
-STATS["COST-MATTER-Botbots"] = [["MATTER-Feedstock-CT",1.3],["MATTER-WASTE-CT",-0.3]]
-STATS["CONVERSIONS"]["BiomassPerProdPerTick"] = 0.0001
-STATS["COST-MATTER-Biomass"] = [["MATTER-Digested-CT",1.1],["MATTER-WASTE-CT",-0.1]]
-STATS["CONVERSIONS"]["ComputePerProdPerTick"] = 0.0001
-STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3],["MATTER-WASTE-CT",-0.3]]
+STATS["CONVERSIONS"]["YogurtPerProdPerTick"] = 0.001
+STATS["COST-MATTER-Yogurt"] = [["MATTER-Digested-CT",1.2],["MATTER-Waste-CT",-0.2]]
+STATS["CONVERSIONS"]["BotbotsPerProdPerTick"] = 0.001
+STATS["COST-MATTER-Botbots"] = [["MATTER-Feedstock-CT",1.3],["MATTER-Waste-CT",-0.3]]
+STATS["CONVERSIONS"]["BiomassPerProdPerTick"] = 0.001
+STATS["COST-MATTER-Biomass"] = [["MATTER-Digested-CT",1.1],["MATTER-Waste-CT",-0.1]]
+STATS["CONVERSIONS"]["ComputePerProdPerTick"] = 0.001
+STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3],["MATTER-Waste-CT",-0.3]]
 
-STATS["CONVERSIONS"]["bufferPerShip-scout"] = 100
-STATS["CONVERSIONS"]["bufferPerShip-battleplate"] = 250
-STATS["CONVERSIONS"]["bufferPerShip-seedship"] = 160
+STATS["CONVERSIONS"]["bufferPerShip-scout"] =        118000000
+STATS["CONVERSIONS"]["bufferPerShip-battleplate"] = 2500000000
+STATS["CONVERSIONS"]["bufferPerShip-seedship"] =     160000000
 
 /*
 STATS["PRODUCTIVITY_MULT"]["bot"]  = 1
@@ -79,33 +86,49 @@ STATS["PRODUCTIVITY_MULT"]["comp"]  = 1
 
 ///////////////////////////////
 ////Initialize starting stats
+
+STATS["scout-speed"] = 0.01;
+STATS["scout-sensorrange"] = 1;
+STATS["explore-starDensity"] = 0.876;
+
+STATS["seedship-speed"] = 0.0025;
+STATS["seedship-toughness"] = 1;
+
+STATS["seedship-Secure-seedRate"] = 0.95;
+STATS["seedship-Neutral-seedRate"] = 0.75;
+STATS["seedship-Hostile-seedRate"] = 0.05;
+
+INVENTORY["seedship-transit-buffer"] = [];
+INVENTORY["seedship-transit-CT"] = 0;
+
+
+STATS["seedship-distToNextStar"] = 1.219;
+
+
+///////////////////////////////
+////Initialize starting stats
 //MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt"]
 
 
-STATS["WORLD_BUILD_TIME"] = {Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0}
-STATS["WORLD_DECON_TIME"]={Fallow:0,Pop:0,Omni:5000, Bot:20000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0}
+STATS["WORLD_BUILD_TIME"] = {Fallow:0,Pop:0,Omni:5000, Bot:2000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0}
+STATS["WORLD_DECON_TIME"]={Fallow:0,Pop:0,Omni:5000, Bot:2000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0}
 
 STATS["COST-WORLDBUILD-Fallow"] = [["WORLDS-Secure-CT",1]];
 STATS["COST-WORLDBUILD-Omni"] = [["WORLDS-Fallow-CT",1]];
 STATS["COST-WORLDBUILD-Bot"] = [["WORLDS-Fallow-CT",1],
                                 ["MATTER-FreeBot-CT",-STATS["CONVERSIONS"]["gramsPerWorld"]],
-                                ["MATTER-Botbots-CT",-10000000000],
-                                ["MATTER-Waste-CT",-10000000000]
+                                ["MATTER-Botbots-CT",-100000000],
+                                ["MATTER-Waste-CT",-100000000]
                                 ];
 STATS["COST-WORLDBUILD-Green"] = [["WORLDS-Fallow-CT",1],
                                 ["MATTER-FreeGreen-CT",-STATS["CONVERSIONS"]["gramsPerWorld"]],
-                                ["MATTER-Biomass-CT",-10000000000],
-                                ["MATTER-Waste-CT",  -10000000000]
+                                ["MATTER-Biomass-CT",-100000000],
+                                ["MATTER-Waste-CT",  -100000000]
                               ];
 STATS["COST-WORLDBUILD-Comp"] = [["WORLDS-Fallow-CT",1]];
 STATS["COST-WORLDBUILD-Hub"] = [["WORLDS-Fallow-CT",1]];
 STATS["COST-WORLDBUILD-Slag"] = [["WORLDS-Fallow-CT",1]];
 STATS["COST-WORLDBUILD-Seedres"] = [["WORLDS-Fallow-CT",1]];
-
-
-STATS["COST-MATTER-Collected"] = [["MATTER-Available-CT",1]];
-STATS["COST-MATTER-Processed"] = [["MATTER-Collected-CT",1]];
-STATS["COST-MATTER-Ship"] = [["MATTER-Processed-CT",1]];
 
 
 STATS["COST-WORLDDECON-Fallow"] = [["WORLDS-Secure-CT",-1]];
@@ -130,6 +153,10 @@ for(var i=0;i<PRODUCTIVITY_STATS.length;i++){
 STATS["PRODUCTIVITY_RATING"]["think"] = (1000000000)
 STATS["PRODUCTIVITY_RATING"]["soul"] = (10000)
 
+
+
+
+
 //Productivity: <span id="green_PRODUCTIVITY_DISPLAY"></span>
 
 
@@ -143,21 +170,23 @@ var UNIT_EXPLANATION = {};
 
 
 
-var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate"]
-var PCTSLIDER_DISPLAYUNITS = {bio:"B/s",eng:"B/s",psy:"B/s",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns",scout:"Ships"}
+var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate","comp"]
+var PCTSLIDER_DISPLAYUNITS = {bio:"B/s",eng:"B/s",psy:"B/s",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns",scout:" Ships",battleplate:" Ships",comp:"Hz"}
 var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of information. A zero, or a one.",
                                      eng:"Byte: the fundamental unit of information. A zero, or a one.",
                                      psy:"Byte: the fundamental unit of information. A zero, or a one.",
-                                     bot:"gI: The industrial productivity of one gram of basic smartmatter (before upgrades).",
-                                     green:"gI: The industrial productivity of one gram of basic smartmatter (before upgrades)",
+                                     bot:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades).",
+                                     green:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades)",
                                      think:"Hertz: Compute cycles per second.",
                                      soul:"Identities: Number of distinct thinking entities being simulated inside the soulswarm network.",
-                                     ship:"gI: The industrial productivity of one gram of basic smartmatter (before upgrades)",
+                                     ship:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades)",
                                      ships:"Ships: the number of ships assigned a given task.",
-                                     ships:"Ships: the number of ships assigned a given task."}
+                                     scout:"Ships: the number of ships assigned a given task.",
+                                     battleplate:"Ships: the number of ships assigned a given task.",
+                                     comp:"Hertz: Compute cycles per second."}
 
 
-var PCTSLIDER_SUBFIELDCT = [4,4,4,6,6,6,3,3,3,3]
+var PCTSLIDER_SUBFIELDCT = [4,4,4,6,6,3,3,3,3,3,2]
 var PCTSLIDERS = {}
 
 //PRODUCTIVITY_STATS = ["bot","psy","green","bio","eng","psy","think","soul"]
@@ -756,6 +785,7 @@ executeAllConstructionRequests()
 */
 
 function addConstructionRequest(inventoryItemName, requestCt, unitCost){
+   //console.log("addConstructionRequest("+inventoryItemName+","+requestCt+","+unitCost)
    CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt] )
 }
 
@@ -774,9 +804,9 @@ function executeAllConstructionRequests(){
       costResourceSet.add(xcc)
     }
   }
-  /*console.log("costResourceSet: "+console.log("?"))*/
+  //console.log("costResourceSet: ")
   for(let ccx of costResourceSet.values() ){
-     /*console.log("ccx["+ccx+"]")*/
+     //console.log("    ccx["+ccx+"]")
      var cr = costRequests[ccx]
      var crTotal = 0;
      for(let crr of cr){
