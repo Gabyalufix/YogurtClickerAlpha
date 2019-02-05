@@ -170,8 +170,8 @@ var UNIT_EXPLANATION = {};
 
 
 
-var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate","comp"]
-var PCTSLIDER_DISPLAYUNITS = {bio:"B/s",eng:"B/s",psy:"B/s",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns",scout:" Ships",battleplate:" Ships",comp:"Hz"}
+var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate","comp","strat"]
+var PCTSLIDER_DISPLAYUNITS = {bio:"B/s",eng:"B/s",psy:"B/s",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns",scout:" Ships",battleplate:" Ships",comp:"Hz",strat:" Ships"}
 var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of information. A zero, or a one.",
                                      eng:"Byte: the fundamental unit of information. A zero, or a one.",
                                      psy:"Byte: the fundamental unit of information. A zero, or a one.",
@@ -183,10 +183,11 @@ var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of informat
                                      ships:"Ships: the number of ships assigned a given task.",
                                      scout:"Ships: the number of ships assigned a given task.",
                                      battleplate:"Ships: the number of ships assigned a given task.",
-                                     comp:"Hertz: Compute cycles per second."}
+                                     comp:"Hertz: Compute cycles per second.",
+                                     strat:"Ships: the number of ships assigned a given task."}
 
 
-var PCTSLIDER_SUBFIELDCT = [4,4,4,6,6,3,3,3,3,3,2]
+var PCTSLIDER_SUBFIELDCT = [4,4,4,6,6,3,3,3,3,3,2,3]
 var PCTSLIDERS = {}
 
 //PRODUCTIVITY_STATS = ["bot","psy","green","bio","eng","psy","think","soul"]
@@ -673,8 +674,8 @@ var UNLOCKS={
 
 ////////////////////////////////////
 
-UNLOCKABLES=["WASTEREPROCESS","TRANSMUTEYOGURT","BIOWEAPONS","ESPIONAGE","HACKING","COMPOST"]
-UNLOCKABLE_SLIDERINFO=[["bot",3],["bot",4],["green",3],["soul",3],["think",3],["green",4]]
+UNLOCKABLES=["WASTEREPROCESS","TRANSMUTEYOGURT","BIOWEAPONS","HACKING","COMPOST"]
+UNLOCKABLE_SLIDERINFO=[["bot",3],["bot",4],["green",3],["think",3],["green",4]]
 
 // botSliderPct4 botSliderCheck4
 
@@ -707,8 +708,8 @@ document.getElementById("botSliderDisplayPct4").LOCKER = document.getElementById
 document.getElementById("thinkSliderDisplayPct3").IS_LOCKED = true
 document.getElementById("thinkSliderDisplayPct3").LOCKER = document.getElementById("LOCKHIDE_HACKING")
 
-document.getElementById("soulSliderDisplayPct2").IS_LOCKED = true
-document.getElementById("soulSliderDisplayPct2").LOCKER = document.getElementById("LOCKHIDE_ESPIONAGE")
+//document.getElementById("soulSliderDisplayPct2").IS_LOCKED = true
+//document.getElementById("soulSliderDisplayPct2").LOCKER = document.getElementById("LOCKHIDE_ESPIONAGE")
 
 document.getElementById("botSliderDisplayPct3").IS_LOCKED = true
 document.getElementById("botSliderDisplayPct3").LOCKER = document.getElementById("LOCKHIDE_WASTEREPROCESS")

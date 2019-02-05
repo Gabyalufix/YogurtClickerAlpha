@@ -235,7 +235,6 @@
 					</label>
 				</div>
 
-			<div class="unlockableHidden" id="LOCKHIDE_ESPIONAGE">
 			<h5><span class="INFO_TEXT_STATIC">Espionage: </span><div class="valueDisplayDiv" id="soulSliderDisplayPct2_DIV"><span id="soulSliderDisplayPct2"></span><span id="soulSliderDisplayPct2_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -245,7 +244,6 @@
 					  <input type="checkbox"  id = "soulSliderCheck2">
 					  <span class="checkmark"></span>
 					</label>
-				</div>
 				</div>
 
 
@@ -977,6 +975,8 @@ CONSOLE:<br>
 			   <h1><span class="INFO_TEXT_STATIC">SHIPYARDS:</span></h1>
 			</button>
 			<div class="content">
+
+
   			<p><span class="INFO_TEXT_STATIC"> Ship construction text goes here. </span></p>
 
            SHIPCONSTRUCTBUFFER
@@ -1297,6 +1297,45 @@ Stellar pop:
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">MILITARY REPORT</span></h1></button>
 		<div class="content">
   			<p><span class="INFO_TEXT_STATIC">This area will contain information and controls for your combat forces. Combat strategies, capabilities, and so on.</span></p>
+
+            <div class="SliderSetHolder">
+
+			<h5><span class="INFO_TEXT_STATIC">Seek & Destroy: </span><div class="valueDisplayDiv" id="stratSliderDisplayPct1_DIV"><span id="stratSliderDisplayPct1"></span><span id="stratSliderDisplayPct1_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="8000" class="slider" id="stratSliderPct1">
+					</div>
+					<label class="pctCheckContainer">
+					  <input type="checkbox"  id = "stratSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Exterminate: </span><div class="valueDisplayDiv" id="stratSliderDisplayPct2_DIV"><span id="stratSliderDisplayPct2"></span><span id="stratSliderDisplayPct2_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="stratSliderPct2">
+					</div>
+					<label class="pctCheckContainer">
+					  <input type="checkbox"  id = "stratSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Interdiction: </span><div class="valueDisplayDiv" id="stratSliderDisplayPct3_DIV"><span id="stratSliderDisplayPct3"></span><span id="stratSliderDisplayPct3_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="stratSliderPct3">
+					</div>
+					<label class="pctCheckContainer">
+					  <input type="checkbox"  id = "stratSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+
+			</div>
+
 		</div>
 </div>
 
