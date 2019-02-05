@@ -13,6 +13,7 @@ INVENTORY = {}
 STATS = {}
 
 STATS["TICK"] = 0;
+STATS["PAUSE"] = false;
 
 
 STATS["CRAZY_LEVEL"]=0
@@ -45,6 +46,7 @@ STATS["CONVERSIONS"]["opToByte"] =   (0.232)
 STATS["CONVERSIONS"]["gramsPerWorld"] = 2e21
 
 STATS["CONVERSIONS"]["timeUnitPerTick"] = 0.1;
+STATS["CONVERSIONS"]["timeAtZero"] = 2152;
 
 
 

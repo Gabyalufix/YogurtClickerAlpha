@@ -11,37 +11,50 @@ var TICK_TIMESTAMP
 var secTimer = 0;
 var midTimer = 0;
 window.setInterval(function(){
-    TICK_TIMESTAMP = Date.now()
-    STATS["TICK"] = STATS["TICK"] + 1;
-    TICK_readUserInputs()
-    TICK_updateStats()
-    TICK_scoutSystems()
-    TICK_captureSystems()
-    TICK_calcWar()
-    TICK_constructWorlds()
-    TICK_updateWorldCounts()
-    TICK_calcIndustry();
-    secTimer++;
-    if (secTimer >= 250){
-      secTimer = 0;
-      calculateSlowTick();
+
+    if(! STATS["PAUSE"]){
+        TICK_TIMESTAMP = Date.now()
+        STATS["TICK"] = STATS["TICK"] + 1;
+        TICK_readUserInputs()
+        TICK_updateStats()
+        TICK_scoutSystems()
+        TICK_captureSystems()
+        TICK_calcWar()
+        TICK_constructWorlds()
+        TICK_updateWorldCounts()
+        TICK_calcIndustry();
+        secTimer++;
+        if (secTimer >= 250){
+          secTimer = 0;
+          calculateSlowTick();
+        }
+        if(STATS["CRAZY_ON"]){
+           SLOWTICK_makeCrazy();
+        }
+
+        document.getElementById("BACKGROUND_STATIC").style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
+        document.getElementById("BACKGROUND_CANVAS").style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
+
+        midTimer++;
+        if(midTimer >= 5){
+            midTimer = 0;
+          if(bgCanvas.RUN_STATIC){
+
+            // requestAnimFrame(tvStatic_render);
+          }
+        }
+        /*staticCanvas(bgCanvas)*/
     }
-    if(STATS["CRAZY_ON"]){
-       SLOWTICK_makeCrazy();
-    }
-
-    document.getElementById("BACKGROUND_STATIC").style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
-    document.getElementById("BACKGROUND_CANVAS").style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
-
-    midTimer++;
-    if(midTimer >= 5){
-        midTimer = 0;
-      if(bgCanvas.RUN_STATIC){
-
-        // requestAnimFrame(tvStatic_render);
+    
+    if(SAVE_GAME_COMMAND_FLAG.length > 0){
+      if( SAVE_GAME_COMMAND_FLAG[0] == "SAVE"){
+        writeSavegameObject(getCurrentSavegameObject(),SAVE_GAME_COMMAND_FLAG[1])
+      } else if(SAVE_GAME_COMMAND_FLAG[0] == "LOAD"){
+        loadSavegameObject(getSavegameObject(SAVE_GAME_COMMAND_FLAG[1]))
       }
+      SAVE_GAME_COMMAND_FLAG = []
     }
-    /*staticCanvas(bgCanvas)*/
+    
 
 },100);
 

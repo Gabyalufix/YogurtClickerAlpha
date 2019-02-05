@@ -31,6 +31,23 @@
 					<input type="checkbox" checked="true" id = "ENABLE_CHEATS_CHECKBOX">
 					Enable Cheats
 					<BR>
+					<select id="SAVED_GAME_SLOT_LIST" style="width:100px">
+					   <option value="slot1"> slot1 </option>
+					   <option value="slot2"> slot2 </option>
+					   <option value="slot3"> slot3 </option>
+					</select>
+					<button class = "button2" id ="SAVE_GAME" > SAVE </button>
+					<button class = "button2" id ="LOAD_GAME" > LOAD </button>
+					<br><br>
+					<button class = "button2" id ="CLEAR_SAVEGAMES" > <h2> CLEAR ALL SAVEGAMES </h2> </button><br>
+					<button class = "button2" id ="QUERY_SAVEGAMES" > GET SAVEGAME INFO: </button>
+					<div id="SAVEGAMEINFO">
+                      <div id="SAVEGAMEINFO_slot1">slot1: </div>
+                      <div id="SAVEGAMEINFO_slot2">slot2: </div>
+                      <div id="SAVEGAMEINFO_slot3">slot3: </div>
+					</div>
+
+
 </div>
 
 </div>
@@ -1399,6 +1416,7 @@ Stellar pop:
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="tick.js"></script>
 <script type="text/javascript" src="crazy.js"></script>
+<script type="text/javascript" src="savegame.js"></script>
 
 <div class="FOOTER"></div>
 
