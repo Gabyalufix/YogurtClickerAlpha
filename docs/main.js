@@ -67,6 +67,15 @@ STATS["CONVERSIONS"]["ShipPerProdPerTick"] = 0.001
 STATS["COST-MATTER-Ship"] = [["MATTER-Feedstock-CT",1.25],["MATTER-Waste-CT",-0.25]]
 
 
+
+
+STATS["CONVERSIONS"]["BiopwrPerProdPerTick"] = 0.002
+STATS["COST-MATTER-Biopwr"] = [["MATTER-Digested-CT",2],["MATTER-Waste-CT",-1]]
+
+STATS["CONVERSIONS"]["BotpwrPerProdPerTick"] = 0.0015
+STATS["COST-MATTER-Botpwr"] = [["MATTER-Feedstock-CT",1.2],["MATTER-Waste-CT",-0.2]]
+
+
 STATS["CONVERSIONS"]["YogurtPerProdPerTick"] = 0.001
 STATS["COST-MATTER-Yogurt"] = [["MATTER-Digested-CT",1.2],["MATTER-Waste-CT",-0.2]]
 STATS["CONVERSIONS"]["BotbotsPerProdPerTick"] = 0.001
@@ -75,6 +84,8 @@ STATS["CONVERSIONS"]["BiomassPerProdPerTick"] = 0.001
 STATS["COST-MATTER-Biomass"] = [["MATTER-Digested-CT",1.1],["MATTER-Waste-CT",-0.1]]
 STATS["CONVERSIONS"]["ComputePerProdPerTick"] = 0.001
 STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3],["MATTER-Waste-CT",-0.3]]
+
+
 
 STATS["CONVERSIONS"]["bufferPerShip-scout"] =        118000000
 STATS["CONVERSIONS"]["bufferPerShip-battleplate"] = 2500000000
@@ -191,7 +202,7 @@ var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of informat
                                      strat:"Ships: the number of ships assigned a given task."}
 
 
-var PCTSLIDER_SUBFIELDCT = [4,4,4,6,6,3,3,3,3,3,2,3]
+var PCTSLIDER_SUBFIELDCT = [4,4,4,7,7,3,3,3,3,3,2,3]
 var PCTSLIDERS = {}
 
 //PRODUCTIVITY_STATS = ["bot","psy","green","bio","eng","psy","think","soul"]
@@ -348,7 +359,7 @@ for( var i = 0; i < SHIP_TYPE_LIST.length; i++){
 // MATTER:
 
 /*MATTER_TYPE_LIST = ["Discovered","Available","Collected","Processed","Waste","Heat","Yogurt"]*/
-MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt"]
+MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt","Biopwr","Botpwr"]
 
 
 /*INVENTORY["MATTER"]={}*/

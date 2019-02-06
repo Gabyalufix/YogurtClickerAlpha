@@ -29,8 +29,12 @@ var GAME_GLOBAL = {
        SHIPCONSTRUCTBUFFER_DISPLAY_DIV:document.getElementById("SHIPCONSTRUCTBUFFER_DISPLAY_DIV"),
        ELEMS:ELEMS,
        WORLD_TYPE_LIST:WORLD_TYPE_LIST,
+       DYSON_TYPE_LIST:DYSON_TYPE_LIST,
        CONSTRUCTION_REQUESTS:CONSTRUCTION_REQUESTS,
-       SHIP_TYPE_LIST:SHIP_TYPE_LIST
+       SHIP_TYPE_LIST:SHIP_TYPE_LIST,
+       ALL_CONTENT_CONTAINER:document.getElementById("ALL_CONTENT_CONTAINER"),
+       timeToNextLanding_SPAN: document.getElementById("timeToNextLanding_SPAN"),
+       seedshipsInTransit_SPAN:document.getElementById("seedshipsInTransit_SPAN")
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -55,9 +59,9 @@ window.setInterval(function(){
         GAME.TICK_readUserInputs()
         GAME.TICK_updateStats()
         GAME.TICK_scoutSystems()
-        TICK_captureSystems()
-        TICK_calcWar()
-        TICK_constructWorlds()
+        GAME.TICK_captureSystems()
+        GAME.TICK_calcWar()
+        GAME.TICK_constructWorlds()
         GAME.TICK_updateWorldCounts()
         GAME.TICK_calcIndustry();
         secTimer++;
@@ -69,8 +73,8 @@ window.setInterval(function(){
            SLOWTICK_makeCrazy(GAME);
         }
 
-        bgStatic.style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
-        bgCanvas.style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
+        bgStatic.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
+        bgCanvas.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
 
         midTimer++;
         if(midTimer >= 5){
@@ -185,7 +189,7 @@ function TICK_updateStats(){
   }
   this.DEBUG_CRAZY_LEVEL_DISPLAY.innerHTML = this.STATS["CRAZY_LEVEL"]
 
-  this.DATE_DISPLAY.innerHTML = getDateStringFromTick(this.STATS["TICK"])
+  this.DATE_DISPLAY.innerHTML = this.getDateStringFromTick(this.STATS["TICK"])
   this.MOOD_DISPLAY.innerHTML = this.STATS["MOOD"]
   this["INVENTORY-PREVTICK"] = {};
   for( var i = 0; i < this.MATTER_TYPE_LIST.length; i++){
@@ -194,11 +198,16 @@ function TICK_updateStats(){
   }
 
 }
+function getTimeStringFromTick(tt){
+  var y =  Math.floor( tt * STATS["CONVERSIONS"]["yearPerTick"] );
+  var wk = tt - y / STATS["CONVERSIONS"]["yearPerTick"];
+  return (y)+ " years, "+Math.floor(wk) +" weeks"
+}
 
 function getDateStringFromTick(tt){
   var y =  Math.floor( tt * STATS["CONVERSIONS"]["yearPerTick"] );
   var wk = tt - y / STATS["CONVERSIONS"]["yearPerTick"];
-  return (y + STATS["CONVERSIONS"]["timeAtZero"])+ ", wk"+wk
+  return (y + STATS["CONVERSIONS"]["timeAtZero"])+ ", wk"+Math.floor(wk)
 }
 
 for( var i = 0; i < this.WORLD_TYPE_LIST.length; i++){
@@ -292,6 +301,13 @@ function TICK_calcIndustry(){
     this.addConstructionRequest("SHIP-CONSTRUCT-BUFFER",
                            (this.STATS["CONVERSIONS"]["ShipPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][4]) ,
                            this.STATS["COST-MATTER-Ship"])
+
+    this.addConstructionRequest("MATTER-Biopwr-CT",
+                           (this.STATS["CONVERSIONS"]["BiopwrPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][6]) ,
+                           this.STATS["COST-MATTER-Biopwr"] )
+    this.addConstructionRequest("MATTER-Botpwr-CT",
+                           (this.STATS["CONVERSIONS"]["BotpwrPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][6]) ,
+                           this.STATS["COST-MATTER-Botpwr"] )
 
     this.executeAllConstructionRequests()
 
@@ -391,27 +407,28 @@ function TICK_captureSystems(){
     STATS["seedship-distToNextStar"] = 1.219;
     */
 
-    var ssct = Math.floor(INVENTORY["SHIPS-"+"seedship"+"-CT"]);
+    var ssct = Math.min( Math.floor(this.INVENTORY["SHIPS-"+"seedship"+"-CT"]), this.INVENTORY["WORLDS-Neutral-CT"]-this.INVENTORY["seedship-transit-CT"] );
 
 
     if(ssct > 0){
-      var arriveTime = ( STATS["seedship-distToNextStar"] / STATS["seedship-speed"] ) + STATS["TICK"]
-      INVENTORY["seedship-transit-CT"] = INVENTORY["seedship-transit-CT"] + ssct;
-      INVENTORY["seedship-transit-buffer"].push([ssct,arriveTime]);
-      INVENTORY["SHIPS-"+"seedship"+"-CT"] = INVENTORY["SHIPS-"+"seedship"+"-CT"] - ssct;
+      var arriveTime = ( this.STATS["seedship-distToNextStar"] / this.STATS["seedship-speed"] ) + this.STATS["TICK"]
+      this.INVENTORY["seedship-transit-CT"] = this.INVENTORY["seedship-transit-CT"] + ssct;
+      this.INVENTORY["seedship-transit-buffer"].push([ssct,arriveTime]);
+      this.INVENTORY["SHIPS-"+"seedship"+"-CT"] = this.INVENTORY["SHIPS-"+"seedship"+"-CT"] - ssct;
     }
 
-    while(INVENTORY["seedship-transit-buffer"].length > 0 && INVENTORY["seedship-transit-buffer"][0][1] <= STATS["TICK"]){
-      var landct = INVENTORY["seedship-transit-buffer"].shift()[0];
-      INVENTORY["WORLDS-Fallow-CT"] = INVENTORY["WORLDS-Fallow-CT"] + landct;
-      INVENTORY["seedship-transit-CT"] = INVENTORY["seedship-transit-CT"] - landct;
+    while(this.INVENTORY["seedship-transit-buffer"].length > 0 && this.INVENTORY["seedship-transit-buffer"][0][1] <= this.STATS["TICK"]){
+      var landct = this.INVENTORY["seedship-transit-buffer"].shift()[0];
+      this.INVENTORY["WORLDS-Fallow-CT"] = this.INVENTORY["WORLDS-Fallow-CT"] + landct;
+      this.INVENTORY["seedship-transit-CT"] = this.INVENTORY["seedship-transit-CT"] - landct;
+      this.INVENTORY["WORLDS-Neutral-CT"] = this.INVENTORY["WORLDS-Neutral-CT"] - landct;
     }
 
-    document.getElementById("seedshipsInTransit_SPAN").innerHTML = fmtSIintNoPct(INVENTORY["seedship-transit-CT"]);
-    if(INVENTORY["seedship-transit-buffer"].length > 0){
-       document.getElementById("timeToNextLanding_SPAN").innerHTML = Math.floor( (INVENTORY["seedship-transit-buffer"][0][1] - STATS["TICK"]) * STATS["CONVERSIONS"]["timeUnitPerTick"]) + " "+STATICVAR_HOLDER["TIME_UNIT"]
+    this.seedshipsInTransit_SPAN.innerHTML = fmtSIintNoPct(this.INVENTORY["seedship-transit-CT"]);
+    if(this.INVENTORY["seedship-transit-buffer"].length > 0){
+       this.timeToNextLanding_SPAN.innerHTML = this.getTimeStringFromTick(this.INVENTORY["seedship-transit-buffer"][0][1] - this.STATS["TICK"])
     } else {
-       document.getElementById("timeToNextLanding_SPAN").innerHTML = "N/A"
+       this.timeToNextLanding_SPAN.innerHTML = "N/A"
     }
 
     /*Fallow
@@ -433,50 +450,50 @@ function buildFromCost(itemId, itemCt,itemCost){
   for(var i=0;i<itemCost.length;i++){
     var cc = itemCost[i];
     if(cc[1] > 0){
-      buildLimit = Math.min( Math.floor( INVENTORY[ cc[0] ] / cc[1] ), buildLimit);
+      buildLimit = Math.min( Math.floor( this.INVENTORY[ cc[0] ] / cc[1] ), buildLimit);
     }
   }
   for(var i=0;i<itemCost.length;i++){
     var cc = itemCost[i];
-    INVENTORY[ cc[0] ] = INVENTORY[ cc[0] ] - (buildLimit*cc[1]);
+    this.INVENTORY[ cc[0] ] = this.INVENTORY[ cc[0] ] - (buildLimit*cc[1]);
   }
   if(itemCt < 0){
-    INVENTORY[itemId] = INVENTORY[itemId] - buildLimit
+    this.INVENTORY[itemId] = this.INVENTORY[itemId] - buildLimit
   } else {
-    INVENTORY[itemId] = INVENTORY[itemId] + buildLimit
+    this.INVENTORY[itemId] = this.INVENTORY[itemId] + buildLimit
   }
   return buildLimit;
 }
 
 function TICK_constructWorlds(){
 
-  for(var i=0;i<DYSON_TYPE_LIST.length;i++){
-    var worldType = DYSON_TYPE_LIST[i]
-    if(CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].length > 0){
-      if(  CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] < Date.now() ){
-        var nxtAttempt = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][0]
-        var nxt = buildFromCost("WORLDS-"+worldType+"-CT",nxtAttempt,STATS["COST-WORLDBUILD-"+worldType]);
+  for(var i=0;i<this.DYSON_TYPE_LIST.length;i++){
+    var worldType = this.DYSON_TYPE_LIST[i]
+    if(this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].length > 0){
+      if(  this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] < Date.now() ){
+        var nxtAttempt = this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][0]
+        var nxt = this.buildFromCost("WORLDS-"+worldType+"-CT",nxtAttempt,this.STATS["COST-WORLDBUILD-"+worldType]);
         if(worldType == "Slag"){
           /*INVENTORY["MATTER-Available-CT"] = INVENTORY["MATTER-Available-CT"] + STATS["CONVERSIONS"]["gramsPerWorld"] * nxt;*/
         }
         if(nxt == nxtAttempt){
-          var nxtbuf = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()
+          var nxtbuf = this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()
         } else {
-          CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] = CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] - nxt;
+          this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] = this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] - nxt;
         }
-        CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] - nxt
+        this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] - nxt
       }
     }
-    if(CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].length > 0){
-      if(  CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][1] < Date.now() ){
-        var nxtAttempt = CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][0]
-        var nxt = buildFromCost("WORLDS-"+worldType+"-CT",-nxtAttempt,STATS["COST-WORLDDECON-"+worldType]);
+    if(this.CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].length > 0){
+      if(  this.CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][1] < Date.now() ){
+        var nxtAttempt = this.CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][0]
+        var nxt = this.buildFromCost("WORLDS-"+worldType+"-CT",-nxtAttempt,this.STATS["COST-WORLDDECON-"+worldType]);
         if(nxt == nxtAttempt){
-          var nxtbuf = CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].shift()
+          var nxtbuf = this.CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType].shift()
         } else {
-          CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][1] = CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][1] - nxt;
+          this.CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][1] = this.CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType][0][1] - nxt;
         }
-        CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] = CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] - nxt
+        this.CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] = this.CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] - nxt
       }
     }
   }
@@ -494,3 +511,15 @@ GAME_GLOBAL.TICK_scoutSystems=TICK_scoutSystems;
 GAME_GLOBAL.TICK_calcIndustry=TICK_calcIndustry;
 
 GAME_GLOBAL.TICK_updateWorldCounts=TICK_updateWorldCounts;
+
+GAME_GLOBAL.TICK_constructWorlds = TICK_constructWorlds;
+
+GAME_GLOBAL.TICK_calcWar = TICK_calcWar;
+GAME_GLOBAL.TICK_captureSystems = TICK_captureSystems;
+GAME_GLOBAL.buildFromCost = buildFromCost;
+
+
+GAME_GLOBAL.getTimeStringFromTick = getTimeStringFromTick
+GAME_GLOBAL.getDateStringFromTick = getDateStringFromTick;
+
+

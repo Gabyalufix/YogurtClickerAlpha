@@ -203,7 +203,7 @@ function SLOWTICK_makeCrazyHelper(GAME){
     if(GAME.STATS["CRAZY_ON"]){
     var clvl = GAME.STATS["CRAZY_LEVEL"]
 
-    if( Math.random() < 0.025 || STATS["MOOD"] == ""){
+    if( Math.random() < 0.0025 || STATS["MOOD"] == ""){
       if(clvl <= 0){
         var moodChoices = GAME.STATICVAR_HOLDER["MOODS_SANE"][- clvl ]
         GAME.STATS["MOOD"] = moodChoices[Math.floor(Math.random()*moodChoices.length)]
