@@ -358,10 +358,20 @@ for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
       console.log("matter:"+matterType)
    INVENTORY["MATTER-"+matterType+"-CT"] = 0
    var matterDisplay = document.getElementById("RESOURCE_DISPLAY_MATTER_"+matterType)
+   var matterDeltaDisplay = document.getElementById("RESOURCE_DISPLAY_MATTERDELTA_"+matterType)
+
+
    ELEMS["MATTER-"+matterType+"-DISPLAY"] = matterDisplay
    matterDisplay.matterType = matterType
    matterDisplay.displayUnits = document.getElementById(matterType+"_MATTER_UNITS")
    matterDisplay.displayDiv = document.getElementById(matterType+"_MATTER_DIV")
+   if(matterDeltaDisplay != null){
+   ELEMS["MATTERDELTA-"+matterType+"-DISPLAY"] = matterDeltaDisplay;
+   matterDeltaDisplay.displayUnits = document.getElementById(matterType+"_MATTERDELTA_UNITS")
+   matterDeltaDisplay.displayDiv = document.getElementById(matterType+"_MATTERDELTA_DIV")
+   } else {
+     console.log("matterDeltaDisplay null:"+matterType);
+   }
 
 }
 
@@ -372,10 +382,10 @@ for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
 // Dyson Sphere / World Management:
 
 
-WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
-WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false,false]
+var WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
+var WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false,false]
 
-DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub","Slag","Seedres"]
+var DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub","Slag","Seedres"]
 
 for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
     var worldType = WORLD_TYPE_LIST[i]
@@ -772,7 +782,7 @@ document.getElementById("ENABLE_CHEATS_CHECKBOX").oninput = function(){
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-CONSTRUCTION_REQUESTS=[];
+var CONSTRUCTION_REQUESTS=[];
 
 /*
     addConstructionRequest("MATTER-Collected-CT",
@@ -792,17 +802,17 @@ executeAllConstructionRequests()
 
 function addConstructionRequest(inventoryItemName, requestCt, unitCost){
    //console.log("addConstructionRequest("+inventoryItemName+","+requestCt+","+unitCost)
-   CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt] )
+   this.CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt] )
 }
 
 function executeAllConstructionRequests(){
   var costResourceSet = new Set();
   var costRequests = {};
-  for(var i=0;i<CONSTRUCTION_REQUESTS.length;i++){
-    for(var j=0; j<CONSTRUCTION_REQUESTS[i][2].length; j++){
-      var xcc = CONSTRUCTION_REQUESTS[i][2][j][0];
-      var reqCt = CONSTRUCTION_REQUESTS[i][1];
-      var uCost = CONSTRUCTION_REQUESTS[i][2][j][1];
+  for(var i=0;i<this.CONSTRUCTION_REQUESTS.length;i++){
+    for(var j=0; j<this.CONSTRUCTION_REQUESTS[i][2].length; j++){
+      var xcc = this.CONSTRUCTION_REQUESTS[i][2][j][0];
+      var reqCt = this.CONSTRUCTION_REQUESTS[i][1];
+      var uCost = this.CONSTRUCTION_REQUESTS[i][2][j][1];
       if(costRequests[xcc] == null){
         costRequests[xcc] = []
       }
@@ -820,24 +830,24 @@ function executeAllConstructionRequests(){
      }
      if(crTotal > INVENTORY[ccx]){
        for(let crr of cr){
-         var uCost = CONSTRUCTION_REQUESTS[crr[0]][2][crr[1]][1];
-         var currReqCt = CONSTRUCTION_REQUESTS[crr[0]][3];
+         var uCost = this.CONSTRUCTION_REQUESTS[crr[0]][2][crr[1]][1];
+         var currReqCt = this.CONSTRUCTION_REQUESTS[crr[0]][3];
          /*console.log("["+ccx+"]: ["+uCost+" / "+currReqCt+" / "+((crr[2] / crTotal) * INVENTORY[ccx]) / uCost+"]")*/
-         CONSTRUCTION_REQUESTS[crr[0]][3] = Math.min( currReqCt, ((crr[2] / crTotal) * INVENTORY[ccx]) / uCost )
+         this.CONSTRUCTION_REQUESTS[crr[0]][3] = Math.min( currReqCt, ((crr[2] / crTotal) * INVENTORY[ccx]) / uCost )
        }
      }
   }
-  for(var i=0;i<CONSTRUCTION_REQUESTS.length;i++){
-    var bb = CONSTRUCTION_REQUESTS[i][0];
-    for(var j=0; j<CONSTRUCTION_REQUESTS[i][2].length; j++){
-      var ccx = CONSTRUCTION_REQUESTS[i][2][j][0];
-      var reqCt = CONSTRUCTION_REQUESTS[i][3];
-      var uCost = CONSTRUCTION_REQUESTS[i][2][j][1];
-      INVENTORY[ccx] = INVENTORY[ccx] - reqCt * uCost;
-      INVENTORY[bb] = INVENTORY[bb] + reqCt;
+  for(var i=0;i<this.CONSTRUCTION_REQUESTS.length;i++){
+    var bb = this.CONSTRUCTION_REQUESTS[i][0];
+    for(var j=0; j<this.CONSTRUCTION_REQUESTS[i][2].length; j++){
+      var ccx = this.CONSTRUCTION_REQUESTS[i][2][j][0];
+      var reqCt = this.CONSTRUCTION_REQUESTS[i][3];
+      var uCost = this.CONSTRUCTION_REQUESTS[i][2][j][1];
+      this.INVENTORY[ccx] = this.INVENTORY[ccx] - reqCt * uCost;
+      this.INVENTORY[bb] = this.INVENTORY[bb] + reqCt;
     }
   }
-  CONSTRUCTION_REQUESTS = [];
+  this.CONSTRUCTION_REQUESTS = [];
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

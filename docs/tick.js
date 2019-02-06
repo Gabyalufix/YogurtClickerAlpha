@@ -1,11 +1,44 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// SET FINAL VARS:
+var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
+bgCanvas.RUN_STATIC = false;
+
+var contentSet = document.getElementsByClassName("contentUnitHolder")
+var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
+var bgStatic = document.getElementById("BACKGROUND_STATIC")
+var GAME_GLOBAL = {
+       SETTINGS:SETTINGS,
+       INVENTORY:INVENTORY,
+       STATS:STATS,
+       CONSTRUCTION_BUFFER:CONSTRUCTION_BUFFER,
+       UNLOCKS:UNLOCKS,
+       STATICVAR_HOLDER:STATICVAR_HOLDER,
+       contentSet:contentSet,
+       itsSet:itsSet,
+       bgCanvas:bgCanvas,
+       bgStatic:bgStatic,
+       PCTSLIDER_FIELDS:PCTSLIDER_FIELDS,
+       PCTSLIDER_DISPLAYUNITS:PCTSLIDER_DISPLAYUNITS,
+       PCTSLIDERS:PCTSLIDERS,
+       DEBUG_CRAZY_LEVEL_DISPLAY:document.getElementById("DEBUG_CRAZY_LEVEL_DISPLAY"),
+       DATE_DISPLAY:document.getElementById("DATE_DISPLAY"),
+       MOOD_DISPLAY:document.getElementById("MOOD_DISPLAY"),
+       MATTER_TYPE_LIST:MATTER_TYPE_LIST,
+       SHIPCONSTRUCTBUFFER_DISPLAY_DIV:document.getElementById("SHIPCONSTRUCTBUFFER_DISPLAY_DIV"),
+       ELEMS:ELEMS,
+       WORLD_TYPE_LIST:WORLD_TYPE_LIST,
+       CONSTRUCTION_REQUESTS:CONSTRUCTION_REQUESTS,
+       SHIP_TYPE_LIST:SHIP_TYPE_LIST
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///MAIN TICK CYCLE:
-var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
-bgCanvas.RUN_STATIC = true;
+
 
 var TICK_TIMESTAMP
 var secTimer = 0;
@@ -15,29 +48,29 @@ var midTimer = 0;
 //var vgCanvas = document.getElementById("BACKGROUND_CANVAS")
 //var allContentContainer =
 window.setInterval(function(){
-
+    var GAME = GAME_GLOBAL;
     if(! STATS["PAUSE"]){
         TICK_TIMESTAMP = Date.now()
-        STATS["TICK"] = STATS["TICK"] + 1;
-        TICK_readUserInputs()
-        TICK_updateStats()
-        TICK_scoutSystems()
+        GAME.STATS["TICK"] = GAME.STATS["TICK"] + 1;
+        GAME.TICK_readUserInputs()
+        GAME.TICK_updateStats()
+        GAME.TICK_scoutSystems()
         TICK_captureSystems()
         TICK_calcWar()
         TICK_constructWorlds()
-        TICK_updateWorldCounts()
-        TICK_calcIndustry();
+        GAME.TICK_updateWorldCounts()
+        GAME.TICK_calcIndustry();
         secTimer++;
         if (secTimer >= 250){
           secTimer = 0;
           calculateSlowTick();
         }
-        if(STATS["CRAZY_ON"]){
-           SLOWTICK_makeCrazy();
+        if(GAME.STATS["CRAZY_ON"]){
+           SLOWTICK_makeCrazy(GAME);
         }
 
-        document.getElementById("BACKGROUND_STATIC").style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
-        document.getElementById("BACKGROUND_CANVAS").style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
+        bgStatic.style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
+        bgCanvas.style.height = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight + "px"
 
         midTimer++;
         if(midTimer >= 5){
@@ -83,32 +116,29 @@ function calculateSlowTick(){
 //SETTINGS["bot"+"_FRACTION"]
 function TICK_readUserInputs(){
   //Percent sliders:
-  for(var i =0; i<PCTSLIDER_FIELDS.length; i++){
-    var fid = PCTSLIDER_FIELDS[i]
-    SETTINGS[fid+"_FRACTION"] = [];
-    SETTINGS[fid+"_LOCKEDBOX"] = [];
-    for(var j=0;j<PCTSLIDERS[fid]["displayElem"].length;j++){
-      SETTINGS[fid+"_FRACTION"][j] = parseFloat( PCTSLIDERS[fid]["sliderElem"][j].value ) / 10000
-      SETTINGS[fid+"_LOCKEDBOX"][j] = PCTSLIDERS[fid]["sliderElem"][j].lockbox.checked
-      updatePctSliderDisplay(PCTSLIDERS[fid]["sliderElem"][j])
+  for(var i =0; i<this.PCTSLIDER_FIELDS.length; i++){
+    var fid = this.PCTSLIDER_FIELDS[i]
+    this.SETTINGS[fid+"_FRACTION"] = [];
+    this.SETTINGS[fid+"_LOCKEDBOX"] = [];
+    for(var j=0;j<this.PCTSLIDERS[fid]["displayElem"].length;j++){
+      this.SETTINGS[fid+"_FRACTION"][j] = parseFloat( this.PCTSLIDERS[fid]["sliderElem"][j].value ) / 10000
+      this.SETTINGS[fid+"_LOCKEDBOX"][j] = this.PCTSLIDERS[fid]["sliderElem"][j].lockbox.checked
+      updatePctSliderDisplay(this.PCTSLIDERS[fid]["sliderElem"][j])
     }
   }
-
-
 }
 function TICK_setUserInputs(){
   //Percent sliders:
-  for(var i =0; i<PCTSLIDER_FIELDS.length; i++){
-    var fid = PCTSLIDER_FIELDS[i]
-    for(var j=0;j<PCTSLIDERS[fid]["displayElem"].length;j++){
-      PCTSLIDERS[fid]["sliderElem"][j].value = SETTINGS[fid+"_FRACTION"][j] * 10000;
-      PCTSLIDERS[fid]["sliderElem"][j].lockbox.checked = SETTINGS[fid+"_LOCKEDBOX"][j];
+  for(var i =0; i<this.PCTSLIDER_FIELDS.length; i++){
+    var fid = this.PCTSLIDER_FIELDS[i]
+    for(var j=0;j<this.PCTSLIDERS[fid]["displayElem"].length;j++){
+      this.PCTSLIDERS[fid]["sliderElem"][j].value = this.SETTINGS[fid+"_FRACTION"][j] * 10000;
+      this.PCTSLIDERS[fid]["sliderElem"][j].lockbox.checked = this.SETTINGS[fid+"_LOCKEDBOX"][j];
     }
   }
 
 
 }
-
 
 
 //STATS["CONVERSIONS"]["sunToByte"] = 1243912971288
@@ -129,35 +159,39 @@ function TICK_updateStats(){
 //MATTER-Compute-CT
 
 */
-  STATS["PRODUCTIVITY_RATING"]["bot"]   = INVENTORY["MATTER-Botbots-CT"] * STATS["PRODUCTIVITY_MULT"]["bot"]
-  STATS["PRODUCTIVITY_RATING"]["green"]   = INVENTORY["MATTER-Biomass-CT"] * STATS["PRODUCTIVITY_MULT"]["green"]
-  STATS["PRODUCTIVITY_RATING"]["comp"]   = INVENTORY["MATTER-Compute-CT"] * STATS["PRODUCTIVITY_MULT"]["comp"] * STATS["CONVERSIONS"]["sunToOp"]
+  this.STATS["PRODUCTIVITY_RATING"]["bot"]   = this.INVENTORY["MATTER-Botbots-CT"] * this.STATS["PRODUCTIVITY_MULT"]["bot"]
+  this.STATS["PRODUCTIVITY_RATING"]["green"]   = this.INVENTORY["MATTER-Biomass-CT"] * this.STATS["PRODUCTIVITY_MULT"]["green"]
+  this.STATS["PRODUCTIVITY_RATING"]["comp"]   = this.INVENTORY["MATTER-Compute-CT"] * this.STATS["PRODUCTIVITY_MULT"]["comp"] * this.STATS["CONVERSIONS"]["sunToOp"]
 
-  STATS["PRODUCTIVITY_RATING"]["ship"]   = STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]
-  STATS["PRODUCTIVITY_RATING"]["think"] = STATS["PRODUCTIVITY_RATING"]["comp"] * SETTINGS["comp_FRACTION"][0]
-  STATS["PRODUCTIVITY_RATING"]["soul"] = STATS["PRODUCTIVITY_RATING"]["comp"] * SETTINGS["comp_FRACTION"][1] * STATS["CONVERSIONS"]["opToSoul"]
+  this.STATS["PRODUCTIVITY_RATING"]["ship"]   = this.STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]
+  this.STATS["PRODUCTIVITY_RATING"]["think"] = this.STATS["PRODUCTIVITY_RATING"]["comp"] * this.SETTINGS["comp_FRACTION"][0]
+  this.STATS["PRODUCTIVITY_RATING"]["soul"] = this.STATS["PRODUCTIVITY_RATING"]["comp"] * this.SETTINGS["comp_FRACTION"][1] * this.STATS["CONVERSIONS"]["opToSoul"]
 
-  STATS["PRODUCTIVITY_RATING"]["bio"]   = STATS["CONVERSIONS"]["sunToByte"] * STATS["PRODUCTIVITY_RATING"]["green"] * SETTINGS["green_FRACTION"][0]
-  STATS["PRODUCTIVITY_RATING"]["eng"]   = STATS["CONVERSIONS"]["opToByte"]  * STATS["PRODUCTIVITY_RATING"]["think"] * SETTINGS["think_FRACTION"][1]
-  STATS["PRODUCTIVITY_RATING"]["psy"]   =  STATS["PRODUCTIVITY_RATING"]["soul"] * SETTINGS["soul_FRACTION"][0]
+  this.STATS["PRODUCTIVITY_RATING"]["bio"]   = this.STATS["CONVERSIONS"]["sunToByte"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][0]
+  this.STATS["PRODUCTIVITY_RATING"]["eng"]   = this.STATS["CONVERSIONS"]["opToByte"]  * this.STATS["PRODUCTIVITY_RATING"]["think"] * this.SETTINGS["think_FRACTION"][1]
+  this.STATS["PRODUCTIVITY_RATING"]["psy"]   =  this.STATS["PRODUCTIVITY_RATING"]["soul"] * this.SETTINGS["soul_FRACTION"][0]
 
-   STATS["PRODUCTIVITY_RATING"]["scout"]   = Math.floor(INVENTORY["SHIPS-"+"scout"+"-CT"])
-   STATS["PRODUCTIVITY_RATING"]["battleplate"]   = Math.floor(INVENTORY["SHIPS-"+"battleplate"+"-CT"])
-   STATS["PRODUCTIVITY_RATING"]["seedship"]   = Math.floor(INVENTORY["SHIPS-"+"seedship"+"-CT"])
+   this.STATS["PRODUCTIVITY_RATING"]["scout"]   = Math.floor(this.INVENTORY["SHIPS-"+"scout"+"-CT"])
+   this.STATS["PRODUCTIVITY_RATING"]["battleplate"]   = Math.floor(this.INVENTORY["SHIPS-"+"battleplate"+"-CT"])
+   this.STATS["PRODUCTIVITY_RATING"]["seedship"]   = Math.floor(this.INVENTORY["SHIPS-"+"seedship"+"-CT"])
 
-  for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
-      var fid = PCTSLIDER_FIELDS[sfi]
+  for(var sfi = 0; sfi < this.PCTSLIDER_FIELDS.length; sfi++){
+      var fid = this.PCTSLIDER_FIELDS[sfi]
       if(document.getElementById(fid+"_PRODUCTIVITY_DISPLAY") != null){
-        var fsi = fmtSIunits( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])
-        document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fsi[0]+" "+fsi[1]+PCTSLIDER_DISPLAYUNITS[fid]
+        var fsi = fmtSIunits( this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid])
+        document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fsi[0]+" "+fsi[1]+this.PCTSLIDER_DISPLAYUNITS[fid]
       }
-      updatePctSliderDisplay(PCTSLIDERS[fid]["sliderElem"][0])
+      updatePctSliderDisplay(this.PCTSLIDERS[fid]["sliderElem"][0])
   }
-  document.getElementById("DEBUG_CRAZY_LEVEL_DISPLAY").innerHTML = STATS["CRAZY_LEVEL"]
+  this.DEBUG_CRAZY_LEVEL_DISPLAY.innerHTML = this.STATS["CRAZY_LEVEL"]
 
-  document.getElementById("DATE_DISPLAY").innerHTML = getDateStringFromTick(STATS["TICK"])
-  document.getElementById("MOOD_DISPLAY").innerHTML = STATS["MOOD"]
-
+  this.DATE_DISPLAY.innerHTML = getDateStringFromTick(this.STATS["TICK"])
+  this.MOOD_DISPLAY.innerHTML = this.STATS["MOOD"]
+  this["INVENTORY-PREVTICK"] = {};
+  for( var i = 0; i < this.MATTER_TYPE_LIST.length; i++){
+        var matterType = this.MATTER_TYPE_LIST[i]
+        this["INVENTORY-PREVTICK"]["MATTER-"+matterType+"-CT"] = this.INVENTORY["MATTER-"+matterType+"-CT"]
+  }
 
 }
 
@@ -167,19 +201,21 @@ function getDateStringFromTick(tt){
   return (y + STATS["CONVERSIONS"]["timeAtZero"])+ ", wk"+wk
 }
 
-
+for( var i = 0; i < this.WORLD_TYPE_LIST.length; i++){
+   GAME_GLOBAL[WORLD_TYPE_LIST[i] + "_CT"] = document.getElementById(WORLD_TYPE_LIST[i] + "_CT");
+}
 
 function TICK_updateWorldCounts(){
-    for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
-        var worldType = WORLD_TYPE_LIST[i]
-        var worldCountLine = fmtSIint(INVENTORY["WORLDS-"+WORLD_TYPE_LIST[i]+"-CT"])
-        if( CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0 ){
-          worldCountLine = worldCountLine + " (building: "+fmtSIint(CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType])+")"
+    for( var i = 0; i < this.WORLD_TYPE_LIST.length; i++){
+        var worldType = this.WORLD_TYPE_LIST[i]
+        var worldCountLine = fmtSIint(this.INVENTORY["WORLDS-"+WORLD_TYPE_LIST[i]+"-CT"])
+        if( this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0 ){
+          worldCountLine = worldCountLine + " (building: "+fmtSIint(this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType])+")"
         }
-        if( CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] > 0 ){
-          worldCountLine = worldCountLine + " (breaking: "+fmtSIint(CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])+")"
+        if( this.CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] > 0 ){
+          worldCountLine = worldCountLine + " (breaking: "+fmtSIint(this.CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])+")"
         }
-        var countDisplay = document.getElementById(WORLD_TYPE_LIST[i] + "_CT")
+        var countDisplay = this[WORLD_TYPE_LIST[i] + "_CT"]
         if(countDisplay != null){
           countDisplay.innerHTML = worldCountLine
         }
@@ -187,9 +223,9 @@ function TICK_updateWorldCounts(){
 }
 
 function TICK_scoutSystems(){
-    var exploreRating = STATS["PRODUCTIVITY_RATING"]["scout"] * SETTINGS["scout"+"_FRACTION"][0];
-    var areaExplored = STATS["scout-speed"] * STATS["scout-sensorrange"] * exploreRating;
-    var meanDiscovered = areaExplored * STATS["explore-starDensity"];
+    var exploreRating = this.STATS["PRODUCTIVITY_RATING"]["scout"] * this.SETTINGS["scout"+"_FRACTION"][0];
+    var areaExplored = this.STATS["scout-speed"] * STATS["scout-sensorrange"] * exploreRating;
+    var meanDiscovered = areaExplored * this.STATS["explore-starDensity"];
     var varDiscovered = meanDiscovered * 0.25;
     var xx = meanDiscovered + getRandomBetween(-varDiscovered,varDiscovered);
     var xxr = Math.floor(xx);
@@ -197,7 +233,7 @@ function TICK_scoutSystems(){
     if(Math.random() < rem){
       xxr = xxr + 1;
     }
-    INVENTORY["WORLDS-Neutral-CT"] = INVENTORY["WORLDS-Neutral-CT"] + xxr;
+    this.INVENTORY["WORLDS-Neutral-CT"] = this.INVENTORY["WORLDS-Neutral-CT"] + xxr;
 
 
 /*
@@ -231,61 +267,81 @@ function TICK_calcIndustry(){
 //MATTER-Biomass-CT
 //MATTER-Compute-CT
 
-    addConstructionRequest("MATTER-Feedstock-CT",
-                           (STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]) ,
-                           STATS["COST-MATTER-Feedstock"] )
-    addConstructionRequest("MATTER-Digested-CT",
-                           (STATS["CONVERSIONS"]["DigestedPerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["green"] * SETTINGS["green_FRACTION"][5]) ,
-                           STATS["COST-MATTER-Digested"] )
+    this.addConstructionRequest("MATTER-Feedstock-CT",
+                           (this.STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][0]) ,
+                           this.STATS["COST-MATTER-Feedstock"] )
+    this.addConstructionRequest("MATTER-Digested-CT",
+                           (this.STATS["CONVERSIONS"]["DigestedPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][5]) ,
+                           this.STATS["COST-MATTER-Digested"] )
 
-    addConstructionRequest("MATTER-Botbots-CT",
-                           (STATS["CONVERSIONS"]["BotbotsPerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][1]) ,
-                           STATS["COST-MATTER-Botbots"] )
-    addConstructionRequest("MATTER-Biomass-CT",
-                           (STATS["CONVERSIONS"]["BiomassPerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["green"] * SETTINGS["green_FRACTION"][4]) ,
-                           STATS["COST-MATTER-Biomass"] )
+    this.addConstructionRequest("MATTER-Botbots-CT",
+                           (this.STATS["CONVERSIONS"]["BotbotsPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][1]) ,
+                           this.STATS["COST-MATTER-Botbots"] )
+    this.addConstructionRequest("MATTER-Biomass-CT",
+                           (this.STATS["CONVERSIONS"]["BiomassPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][4]) ,
+                           this.STATS["COST-MATTER-Biomass"] )
 
-    addConstructionRequest("MATTER-Compute-CT",
-                           (STATS["CONVERSIONS"]["ComputePerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][5]) ,
-                           STATS["COST-MATTER-Compute"] )
+    this.addConstructionRequest("MATTER-Compute-CT",
+                           (this.STATS["CONVERSIONS"]["ComputePerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][5]) ,
+                           this.STATS["COST-MATTER-Compute"] )
 
-    addConstructionRequest("MATTER-Yogurt-CT",
-                           (STATS["CONVERSIONS"]["YogurtPerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["green"] * SETTINGS["green_FRACTION"][1]) ,
-                           STATS["COST-MATTER-Yogurt"] )
+    this.addConstructionRequest("MATTER-Yogurt-CT",
+                           (this.STATS["CONVERSIONS"]["YogurtPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][1]) ,
+                           this.STATS["COST-MATTER-Yogurt"] )
 
-    addConstructionRequest("SHIP-CONSTRUCT-BUFFER",
-                           (STATS["CONVERSIONS"]["ShipPerProdPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]) ,
-                           STATS["COST-MATTER-Ship"])
+    this.addConstructionRequest("SHIP-CONSTRUCT-BUFFER",
+                           (this.STATS["CONVERSIONS"]["ShipPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][4]) ,
+                           this.STATS["COST-MATTER-Ship"])
 
-    executeAllConstructionRequests()
+    this.executeAllConstructionRequests()
 
-    var shipBuffer = INVENTORY["SHIP-CONSTRUCT-BUFFER"];
-    for(var i=0; i < SHIP_TYPE_LIST.length;i++){
-        var shipType = SHIP_TYPE_LIST[i];
-        INVENTORY["SHIPS-"+shipType+"-CT"] = INVENTORY["SHIPS-"+shipType+"-CT"] + ((shipBuffer * SETTINGS["ship_FRACTION"][i]) / STATS["CONVERSIONS"]["bufferPerShip-"+shipType])
-        var sd = ELEMS["SHIPS-"+shipType+"-DISPLAY"]
-        var fmtsi = fmtSIint(INVENTORY["SHIPS-"+shipType+"-CT"])
+    var shipBuffer = this.INVENTORY["SHIP-CONSTRUCT-BUFFER"];
+    for(var i=0; i < this.SHIP_TYPE_LIST.length;i++){
+        var shipType = this.SHIP_TYPE_LIST[i];
+        this.INVENTORY["SHIPS-"+shipType+"-CT"] = this.INVENTORY["SHIPS-"+shipType+"-CT"] + ((shipBuffer * this.SETTINGS["ship_FRACTION"][i]) / this.STATS["CONVERSIONS"]["bufferPerShip-"+shipType])
+        var sd = this.ELEMS["SHIPS-"+shipType+"-DISPLAY"]
+        var fmtsi = fmtSIint(this.INVENTORY["SHIPS-"+shipType+"-CT"])
         sd.innerHTML = fmtsi
     }
-    INVENTORY["SHIP-CONSTRUCT-BUFFER"] = 0;
+    this.INVENTORY["SHIP-CONSTRUCT-BUFFER"] = 0;
 
     //STATS["CONVERSIONS"]["bufferPerShip-scout"]
     //STATS["CONVERSIONS"]["bufferPerShip-battleplate"]
     //STATS["CONVERSIONS"]["bufferPerShip-seedship"]
 
   //update displays:
-   document.getElementById("SHIPCONSTRUCTBUFFER_DISPLAY_DIV").innerHTML = INVENTORY["SHIP-CONSTRUCT-BUFFER"]
-   for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
-        var matterType = MATTER_TYPE_LIST[i]
-        var fmtsi = fmtSIunits(INVENTORY["MATTER-"+matterType+"-CT"])
-        var sd = ELEMS["MATTER-"+matterType+"-DISPLAY"]
+   this["SHIPCONSTRUCTBUFFER_DISPLAY_DIV"].innerHTML = this.INVENTORY["SHIP-CONSTRUCT-BUFFER"]
+   for( var i = 0; i < this.MATTER_TYPE_LIST.length; i++){
+        var matterType = this.MATTER_TYPE_LIST[i]
+        var matterCt = this.INVENTORY["MATTER-"+matterType+"-CT"];
+        var fmtsi = fmtSIunits(matterCt)
+        var sd = this.ELEMS["MATTER-"+matterType+"-DISPLAY"]
         sd.innerHTML = fmtsi[0]
         sd.displayUnits.innerHTML = fmtsi[1]+"t"
-        sd.displayDiv.title = "tons: basic unit of mass\n"+fmtsi[4]
+        sd.displayDiv.title = "tons: basic unit of mass\n"+fmtsi[4];
+        
+        var sdd = this.ELEMS["MATTERDELTA-"+matterType+"-DISPLAY"]
+        if( sdd != null){
+        var diff = matterCt - this["INVENTORY-PREVTICK"]["MATTER-"+matterType+"-CT"];
+        var sign = "+";
+        if(diff < 0){
+          diff = -diff
+          sign = "-";
+        }
+        if(sdd == null){
+           console.log("sdd null: "+matterType);
+        }
+        if(sdd.displayUnits == null){
+        console.log("sdd.displayUnits null: "+matterType);
+        }
+        var fmtsid = fmtSIunits(diff);
+        sdd.innerHTML = sign+fmtsid[0];
+        sdd.displayUnits.innerHTML = fmtsid[1]+"t/wk";
+        }
 
     }
 
-    CONSTRUCTION_REQUESTS = [];
+    this.CONSTRUCTION_REQUESTS = [];
 
 
     /*
@@ -426,3 +482,15 @@ function TICK_constructWorlds(){
   }
 }
 
+
+
+
+GAME_GLOBAL.TICK_readUserInputs = TICK_readUserInputs;
+GAME_GLOBAL.TICK_setUserInputs = TICK_setUserInputs;
+GAME_GLOBAL.TICK_updateStats = TICK_updateStats;
+GAME_GLOBAL.addConstructionRequest = addConstructionRequest;
+GAME_GLOBAL.executeAllConstructionRequests = executeAllConstructionRequests;
+GAME_GLOBAL.TICK_scoutSystems=TICK_scoutSystems;
+GAME_GLOBAL.TICK_calcIndustry=TICK_calcIndustry;
+
+GAME_GLOBAL.TICK_updateWorldCounts=TICK_updateWorldCounts;

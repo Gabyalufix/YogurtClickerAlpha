@@ -1,6 +1,5 @@
 
 
-var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
 var allContentContainer = document.getElementById("ALL_CONTENT_CONTAINER");
 var scareContainer = document.getElementById("SCARETEXT");
 var canvasMask = document.getElementById("BACKGROUND_STATIC");
@@ -11,7 +10,6 @@ var deathNoticeContainer = document.getElementById("DEATH_NOTICE_CONTAINER")
 fgCanvas.style.opacity = 0;
 canvasMask.style.opacity = 1;
 
-var contentSet = document.getElementsByClassName("contentUnitHolder")
 for(var tti=0;tti < contentSet.length; tti++){
   var tt = contentSet[tti];
   tt.CRAZY_TXFLIP = false;
@@ -187,36 +185,36 @@ function resetSequence(){
      STATS["nextMessageTime"] = 0;
    }
 }
-function SLOWTICK_makeCrazy(){
-   if(STATS["currSequence"] == "normal"){
-     SLOWTICK_makeCrazyHelper()
-   } else if(STATS["currSequence"] == "finalSpiral"){
+function SLOWTICK_makeCrazy(GAME){
+   if(GAME.STATS["currSequence"] == "normal"){
+     SLOWTICK_makeCrazyHelper(GAME)
+   } else if(GAME.STATS["currSequence"] == "finalSpiral"){
      finalSpiral();
-   } else if(STATS["currSequence"] == "bsodSequence"){
+   } else if(GAME.STATS["currSequence"] == "bsodSequence"){
      bsodSequence()
-   } else if(STATS["currSequence"] == "resetSequence"){
+   } else if(GAME.STATS["currSequence"] == "resetSequence"){
      resetSequence()
    } else {
      console.log("ERROR: IMPOSSIBLE STATE!");
    }
 }
 var deathSpiralStart = 0;
-function SLOWTICK_makeCrazyHelper(){
-    if(STATS["CRAZY_ON"]){
-    var clvl = STATS["CRAZY_LEVEL"]
+function SLOWTICK_makeCrazyHelper(GAME){
+    if(GAME.STATS["CRAZY_ON"]){
+    var clvl = GAME.STATS["CRAZY_LEVEL"]
 
     if( Math.random() < 0.025 || STATS["MOOD"] == ""){
       if(clvl <= 0){
-        var moodChoices = STATICVAR_HOLDER["MOODS_SANE"][- clvl ]
-        STATS["MOOD"] = moodChoices[Math.floor(Math.random()*moodChoices.length)]
+        var moodChoices = GAME.STATICVAR_HOLDER["MOODS_SANE"][- clvl ]
+        GAME.STATS["MOOD"] = moodChoices[Math.floor(Math.random()*moodChoices.length)]
       } else {
-        var moodChoices = STATICVAR_HOLDER["MOODS_SANE"][ clvl ]
-        STATS["MOOD"] = moodChoices[Math.floor(Math.random()*moodChoices.length)]
+        var moodChoices = GAME.STATICVAR_HOLDER["MOODS_INSANE"][ clvl ]
+        GAME.STATS["MOOD"] = moodChoices[Math.floor(Math.random()*moodChoices.length)]
       }
     }
 
     
-    if(Math.random() < STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING_RATE"][clvl]){
+    if(Math.random() < GAME.STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING_RATE"][clvl]){
       var randOffset = Math.random();
       var randThresh = 0.5;
       var randIdx = clvl
@@ -226,7 +224,7 @@ function SLOWTICK_makeCrazyHelper(){
         }
         randThresh = randThresh / 2;
       }
-      var consoleWarn = STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING"][randIdx][ randLT( STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING"][randIdx].length ) ]
+      var consoleWarn = GAME.STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING"][randIdx][ randLT( GAME.STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING"][randIdx].length ) ]
       /*console.log("printing warn");*/
       printlnToAiConsole(scrambleString(consoleWarn));
     }
@@ -235,15 +233,15 @@ function SLOWTICK_makeCrazyHelper(){
        if(deathSpiralStart == 0){
           deathSpiralStart = Date.now();
        }
-       var deathSpiralBoost = (STATS["DEATH_SPIRAL"]+1)*((STATICVAR_HOLDER["DEATH_SPIRAL_COUNTDOWN_SEC"] / (100)) / 100)
-       STATS["DEATH_SPIRAL"] = STATS["DEATH_SPIRAL"] + deathSpiralBoost
+       var deathSpiralBoost = (GAME.STATS["DEATH_SPIRAL"]+1)*((GAME.STATICVAR_HOLDER["DEATH_SPIRAL_COUNTDOWN_SEC"] / (100)) / 100)
+       GAME.STATS["DEATH_SPIRAL"] = GAME.STATS["DEATH_SPIRAL"] + deathSpiralBoost
        /*console.log("boost: "+deathSpiralBoost+ " / "+STATS["DEATH_SPIRAL"]+" (time:"+((Date.now()-deathSpiralStart)/1000)+"s)");*/
-       STATS["DEATH_SPIRALING"] = true;
+       GAME.STATS["DEATH_SPIRALING"] = true;
     } else if(STATS["DEATH_SPIRAL"] > 0){
-       STATS["DEATH_SPIRAL"] = Math.max(STATS["DEATH_SPIRAL"] - 0.1,0)
+       GAME.STATS["DEATH_SPIRAL"] = Math.max(GAME.STATS["DEATH_SPIRAL"] - 0.1,0)
     }
     
-    var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
+    var bgCanvas = GAME.bgCanvas;
     if(clvl > 4){
         bgCanvas.RUN_STATIC = true;
     } else {
@@ -251,21 +249,21 @@ function SLOWTICK_makeCrazyHelper(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
     var currOpacity = parseFloat(canvasMask.style.opacity)
-    if(currOpacity > STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_WORSE_BGTRANS"][clvl]){
+    if(currOpacity > GAME.STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl] && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_WORSE_BGTRANS"][clvl]){
       /*console.log("WORSE");*/
-      if(currOpacity + 0.1 < STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl]){
+      if(currOpacity + 0.1 < GAME.STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl]){
         canvasMask.style.opacity = (currOpacity - 0.04)
       } else {
         canvasMask.style.opacity = (currOpacity - 0.01)
       }
-    } else if(currOpacity < STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_BETTER_BGTRANS"][clvl]){
+    } else if(currOpacity < GAME.STATICVAR_HOLDER["CRAZY_TARGET_BGTRANS"][clvl] && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_BETTER_BGTRANS"][clvl]){
       /*console.log("BETTER");*/
       canvasMask.style.opacity = (currOpacity + 0.01)
     }
     var fgOpacity = parseFloat(fgCanvas.style.opacity)
-    if(STATS["DEATH_SPIRAL"] > 0 && STATS["DEATH_SPIRAL"]<100){
-      fgCanvas.style.opacity = Math.max( STATS["DEATH_SPIRAL"] / 100,fgCanvas.style.opacity)
-      fgMask.style.opacity = STATS["DEATH_SPIRAL"] / 100
+    if(GAME.STATS["DEATH_SPIRAL"] > 0 && GAME.STATS["DEATH_SPIRAL"]<100){
+      fgCanvas.style.opacity = Math.max( GAME.STATS["DEATH_SPIRAL"] / 100,fgCanvas.style.opacity)
+      fgMask.style.opacity = GAME.STATS["DEATH_SPIRAL"] / 100
       /*if(STATS["DEATH_SPIRAL"]>90){
         var finalPreIdx = Math.floor(STATS["DEATH_SPIRAL"]-90);
         if(finalPreIdx > STATS["FINAL_SPIRAL"]){
@@ -275,8 +273,8 @@ function SLOWTICK_makeCrazyHelper(){
         deathNoticeContainer.style.opacity = (STATS["DEATH_SPIRAL"]-90) / 10
       }*/
       
-    } else if(STATS["DEATH_SPIRAL"]>100){
-      STATS["currSequence"] = "finalSpiral"    
+    } else if(GAME.STATS["DEATH_SPIRAL"]>100){
+      GAME.STATS["currSequence"] = "finalSpiral"    
       deathNoticeContainer.style.opacity = 1.0
       deathNoticeContainer.style["pointer-events"] = "auto"
       console.log("ENTERING FINAL DEATH SPIRAL")
@@ -286,14 +284,14 @@ function SLOWTICK_makeCrazyHelper(){
          document.getElementById("CHEAT_MORECRAZY").disable = false;
          resetAllCrazy();
       }*/
-    } else if(fgOpacity < STATICVAR_HOLDER["CRAZY_TARGET_FGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_WORSE_FGTRANS"][clvl]){
+    } else if(fgOpacity < GAME.STATICVAR_HOLDER["CRAZY_TARGET_FGTRANS"][clvl] && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_WORSE_FGTRANS"][clvl]){
       fgCanvas.style.opacity = (fgOpacity + 0.01)
-    } else if(fgOpacity > STATICVAR_HOLDER["CRAZY_TARGET_FGTRANS"][clvl] && Math.random() < STATICVAR_HOLDER["CRAZY_BETTER_FGTRANS"][clvl]){
+    } else if(fgOpacity > GAME.STATICVAR_HOLDER["CRAZY_TARGET_FGTRANS"][clvl] && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_BETTER_FGTRANS"][clvl]){
       fgCanvas.style.opacity = (fgOpacity - 0.01)
     }
     
     /*wout.fontcolor(tt.wordColor[ww])*/
-    if(STATS["DEATH_SPIRAL"] < 50 && Math.random() < STATICVAR_HOLDER["CRAZY_ALL_SCARE"][clvl]){
+    if(STATS["DEATH_SPIRAL"] < 50 && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_ALL_SCARE"][clvl]){
        /*allContentContainer.style.opacity = 0.25;*/
        scareContainer.style.display="block";
        scareContainer.innerHTML = CRAZY_randomWord().fontcolor(CRAZY_randomColor())
@@ -304,7 +302,7 @@ function SLOWTICK_makeCrazyHelper(){
        /*var ht = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight
        var wd = document.getElementById("ALL_CONTENT_CONTAINER").offsetWidth
        scareContainer.style.padding = (ht/4)+"px 0px "+(ht/4)+"px "+(wd/4)+"px";*/
-    } else if(scareContainer.style.display=="block" && Math.random() < STATICVAR_HOLDER["CRAZY_REV_SCARE"][clvl]) {
+    } else if(scareContainer.style.display=="block" && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_REV_SCARE"][clvl]) {
        allContentContainer.style.opacity = 1;
        scareContainer.style.display="none";
     }
@@ -313,64 +311,64 @@ function SLOWTICK_makeCrazyHelper(){
         /*var ISCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_RATE"][clvl]
         var UNCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_REVRATE"][clvl]*/
         var tt = contentSet[tti];
-        if( Math.random() < STATICVAR_HOLDER["CRAZY_CONTENT_FLIPRATE"][clvl]){
+        if( Math.random() < GAME.STATICVAR_HOLDER["CRAZY_CONTENT_FLIPRATE"][clvl]){
             tt.CRAZY_TXFLIP = ! tt.CRAZY_TXFLIP;
-        } else if( (tt.CRAZY_TXFLIP) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CONTENT_FLIPRATE"][clvl]){
+        } else if( (tt.CRAZY_TXFLIP) && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_REV_CONTENT_FLIPRATE"][clvl]){
             tt.CRAZY_TXFLIP = false;
         }
-        if( Math.random() < STATICVAR_HOLDER["CRAZY_CONTENT_THEME"][clvl]){
+        if( Math.random() < GAME.STATICVAR_HOLDER["CRAZY_CONTENT_THEME"][clvl]){
             /*console.log("Setting crazy theme!")*/
             setCrazyTheme(tt);
-        } else if( (tt.THEME != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CONTENT_THEME"][clvl]){
+        } else if( (tt.THEME != "") && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_REV_CONTENT_THEME"][clvl]){
             unsetElementTheme(tt);
         }
-        if( Math.random() < STATICVAR_HOLDER["CRAZY_CONTENT_HIDE"][clvl]){
+        if( Math.random() < GAME.STATICVAR_HOLDER["CRAZY_CONTENT_HIDE"][clvl]){
             /*console.log("Setting crazy HIDE!")*/
             tt.style.opacity=0;
-        } else if( (tt.style.opacity==0) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CONTENT_HIDE"][clvl]){
+        } else if( (tt.style.opacity==0) && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_REV_CONTENT_HIDE"][clvl]){
             tt.style.opacity=1;
         }
         getCrazyContent(tt);
     }
 
-    for(var tti=0;tti < itsSet.length; tti++){
-        var ISCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_RATE"][clvl]
-        var UNCRAZY = Math.random() < STATICVAR_HOLDER["CRAZY_REVRATE"][clvl]
-        var tt = itsSet[tti];
-        if( ISCRAZY && (!tt.CRAZY_FLIP) && Math.random() < STATICVAR_HOLDER["CRAZY_FLIPRATE"][clvl]){
+    for(var tti=0;tti < GAME.itsSet.length; tti++){
+        var ISCRAZY = Math.random() < GAME.STATICVAR_HOLDER["CRAZY_RATE"][clvl]
+        var UNCRAZY = Math.random() < GAME.STATICVAR_HOLDER["CRAZY_REVRATE"][clvl]
+        var tt = GAME.itsSet[tti];
+        if( ISCRAZY && (!tt.CRAZY_FLIP) && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_FLIPRATE"][clvl]){
             tt.CRAZY_FLIP = true;
-        } else if( (tt.CRAZY_FLIP) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_FLIPRATE"][clvl]){
+        } else if( (tt.CRAZY_FLIP) && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_REV_FLIPRATE"][clvl]){
             tt.CRAZY_FLIP = false;
         }
         var words = tt.CURRENT_PLAINTEXT.split(" ")
         var out = ""
         for(var ww = 0; ww < tt.wordCt; ww++){
-           if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_FLIPRATE"][clvl]){
+           if( ISCRAZY && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_WORD_FLIPRATE"][clvl]){
                tt.wordFlip[ww] = !tt.wordFlip[ww];
-           } else if( UNCRAZY && (tt.wordFlip[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_FLIPRATE"][clvl]){
+           } else if( UNCRAZY && (tt.wordFlip[ww]) && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_REV_WORD_FLIPRATE"][clvl]){
                tt.wordFlip[ww] = false;
            }
-           if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_COLORRATE"][clvl]){
+           if( ISCRAZY && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_WORD_COLORRATE"][clvl]){
                tt.wordColor[ww] = CRAZY_randomColor();
-           } else if( UNCRAZY && (tt.wordColor[ww]) && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_COLORRATE"][clvl]){
+           } else if( UNCRAZY && (tt.wordColor[ww]) && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_REV_WORD_COLORRATE"][clvl]){
                tt.wordColor[ww] = "";
            }
-           if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_WORD_SWAPRATE"][clvl]){
+           if( ISCRAZY && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_WORD_SWAPRATE"][clvl]){
                tt.wordSwap[ww] = CRAZY_randomWord()
-           } else if( UNCRAZY && (tt.wordSwap[ww] != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_WORD_SWAPRATE"][clvl]){
+           } else if( UNCRAZY && (tt.wordSwap[ww] != "") && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_REV_WORD_SWAPRATE"][clvl]){
                tt.wordSwap[ww] = "";
            }
         }
         for(cc = 0; cc < tt.ORIGINAL_PLAINTEXT.length; cc++){
            if(tt.ORIGINAL_PLAINTEXT.charAt(cc) != " "){
-               if( ISCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_SWAPRATE"][clvl]){
+               if( ISCRAZY && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_CHAR_SWAPRATE"][clvl]){
                    tt.charSwap[cc] = CRAZY_randomChar()
-               } else if( UNCRAZY && (tt.charSwap[cc] != "") && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CHAR_SWAPRATE"][clvl]){
+               } else if( UNCRAZY && (tt.charSwap[cc] != "") && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_REV_CHAR_SWAPRATE"][clvl]){
                    tt.charSwap[cc] = "";
                }
-               if( ISCRAZY && (tt.charSwap[cc] == "") && Math.random() < STATICVAR_HOLDER["CRAZY_CHAR_CAPRATE"][clvl]){
+               if( ISCRAZY && (tt.charSwap[cc] == "") && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_CHAR_CAPRATE"][clvl]){
                    tt.charSwap[cc] = swapCase(tt.ORIGINAL_PLAINTEXT.charAt(cc))
-               } else if( UNCRAZY && Math.random() < STATICVAR_HOLDER["CRAZY_REV_CHAR_CAPRATE"][clvl] && tt.charSwap[cc] == swapCase(tt.ORIGINAL_PLAINTEXT.charAt(cc))){
+               } else if( UNCRAZY && Math.random() < GAME.STATICVAR_HOLDER["CRAZY_REV_CHAR_CAPRATE"][clvl] && tt.charSwap[cc] == swapCase(tt.ORIGINAL_PLAINTEXT.charAt(cc))){
                    tt.charSwap[cc] = "";
                }
            }

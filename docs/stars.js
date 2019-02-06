@@ -214,7 +214,7 @@ function getRandomStarBatch(ct){
 
 
 
-
+/*
 var M=0;
 var L=0;
 
@@ -225,7 +225,7 @@ for(var i=0; i<1000; i++){
    M = M + xx[1];
    L = L + xx[2];
    
-}
+}*/
 
 /*
 var M=0;
