@@ -633,7 +633,7 @@ console.log( document.getElementById("AI_CONSOLE").scrollHeight)
 
 document.getElementById("CHEAT_LESSCRAZY").onclick = function(){
      STATS["CRAZY_LEVEL"] = STATS["CRAZY_LEVEL"] - 1
-     if(STATS["CRAZY_LEVEL"] == 0){
+     if(STATS["CRAZY_LEVEL"] == -9){
        this.disabled = true
      }
      document.getElementById("CHEAT_MORECRAZY").disabled = false

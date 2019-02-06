@@ -156,6 +156,8 @@ function TICK_updateStats(){
   document.getElementById("DEBUG_CRAZY_LEVEL_DISPLAY").innerHTML = STATS["CRAZY_LEVEL"]
 
   document.getElementById("DATE_DISPLAY").innerHTML = getDateStringFromTick(STATS["TICK"])
+  document.getElementById("MOOD_DISPLAY").innerHTML = STATS["MOOD"]
+
 
 }
 

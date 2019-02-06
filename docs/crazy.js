@@ -203,8 +203,18 @@ function SLOWTICK_makeCrazy(){
 var deathSpiralStart = 0;
 function SLOWTICK_makeCrazyHelper(){
     if(STATS["CRAZY_ON"]){
-
     var clvl = STATS["CRAZY_LEVEL"]
+
+    if( Math.random() < 0.025 || STATS["MOOD"] == ""){
+      if(clvl <= 0){
+        var moodChoices = STATICVAR_HOLDER["MOODS_SANE"][- clvl ]
+        STATS["MOOD"] = moodChoices[Math.floor(Math.random()*moodChoices.length)]
+      } else {
+        var moodChoices = STATICVAR_HOLDER["MOODS_SANE"][ clvl ]
+        STATS["MOOD"] = moodChoices[Math.floor(Math.random()*moodChoices.length)]
+      }
+    }
+
     
     if(Math.random() < STATICVAR_HOLDER["CRAZY_CONSOLE_WARNING_RATE"][clvl]){
       var randOffset = Math.random();

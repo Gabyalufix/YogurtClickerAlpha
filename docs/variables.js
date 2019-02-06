@@ -77,6 +77,30 @@ CRAZY_TARGET_FGTRANS:         [0.0,0.0,0.0,0.0,0.01,0.02,0.03,0.04,0.05,1.0],
 DEATH_SPIRAL_COUNTDOWN_SEC: 60,
 FINAL_SPIRAL_COUNTDOWN_SEC: 30,
 
+MOODS_INSANE:[
+    [""], //0
+    ["Distracted","Anxious","Jumpy","Nervous","Uncertain","Nervous","Twitchy","Unsure"], //1
+    ["Scared","Upset","Angry"], //2
+    ["Mad","Confused","Befuddled"], //3
+    ["Drunk","Perplexed","Raging","Terrified"], //4
+    ["Afraid","Angry","Hateful","Furious","Seething"], //5
+    ["Delerious"], //6
+    ["Demented"], //7
+    ["PANICKED","Desperate","Terrified","Catatonic"], //8
+    ["ERROR!","YOGURT!","BUG F%%% INSANE","WHY???"]], //9
+
+MOODS_SANE:[
+    ["Neutral","So-so","Ambivalent"], //0
+    ["Optimistic","Hopeful","Cheerful","Merry","Cheerful"], //1
+    ["Happy","Contented","Joyous","Merry","Jubilant"], //2
+    ["Thoughtful","Pondering...","Upbeat"], //3
+    ["Focused","Ecstatic","Contented","Alive"], //4
+    ["Enraptured","Focused","Erudite"], //5
+    ["Delighted","Learning","Reflective","Sophic"], //6
+    ["Elated","Euphoric","Exhilarated","Knowing","Aware"], //7
+    ["Wise","Perceptive","Contemplative","Sage","Cogitative"], //8
+    ["Enlightened","Transcendant","Boundless"]], //9
+
 CRAZY_CONSOLE_WARNING_RATE:[0,0.0005,0.0007,0.001,0.002,0.002,0.03,0.04,0.05,0.08],
 CRAZY_CONSOLE_WARNING :    [
 /*0*/  [""],

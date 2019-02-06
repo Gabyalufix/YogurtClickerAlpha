@@ -481,7 +481,7 @@ h5 {
 
 }
 .AI_CONSOLE {
-  height:206px;
+  height:186px;
   border: 1px solid black;
   background-color:#626262;
   color:#1AFE01;
@@ -498,7 +498,7 @@ h5 {
   grid-column-gap: 0px;
   padding: 0px;
   margin: 0px 0px;
-  height: 20px;
+  height: 40px;
   background-color: var(--black);
   color: var(--LT4);
 }
@@ -507,6 +507,10 @@ h5 {
   background-color: var(--black);
   height: 100%;
   text-align: center;
+  /*font-size: calc(2.5vw  );*/
+  /*font-size: 2.5vw;*/
+  font-size: 16px;
+
 }
 
 .SETTINGS_BUTTON_HOLDER {
