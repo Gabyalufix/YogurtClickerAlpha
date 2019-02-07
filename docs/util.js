@@ -35,7 +35,7 @@ function generateProceduralTextMain(ssin, SSVAR = {}, soFar = "", verbose = true
    } else {
      console.log("|  ".repeat(lvl)+"Starting on: [["+ss[0] + "],...]; sofar=\""+soFar+"\" (Lvl="+lvl+")");
    }
-   
+
    if(ss.length == 0){
      if(verbose){ console.log("|  ".repeat(lvl)+"LEN=0: returning("+soFar+")") }
      return soFar;
@@ -155,8 +155,8 @@ function generateProceduralTextMain(ssin, SSVAR = {}, soFar = "", verbose = true
      var sss = sva.concat(ss)
      return generateProceduralTextMain(sss, SSVAR, soFar,verbose,lvl)
    }
-   
-   
+
+
 
 }
 
@@ -299,6 +299,26 @@ function fmtSIintNoPct(x){
       return roundTo(rr,dp) + suffix
   }
 }
+
+function fmtSIflat(x){
+  if(x < 100){
+    return ""+Math.floor(x)
+  } else if(x < 100){
+    return ""+Math.floor(x)
+  } else if(x < 1000){
+    return ""+Math.floor(x)
+  } else {
+      var d = Math.floor(Math.log10(x))
+      var dd = Math.floor(d / 3) - 1
+      var ddd = Math.floor(dd / 8)
+      var ddp = dd - ddd * 8
+      var rr = x / Math.pow(10,(dd+1)*3)
+      var dp = 2 - (d - ((dd+1)*3))
+      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      return Math.round(rr) + suffix
+  }
+}
+
 //Returns [0]baseNumber, [1]prefixAbbrev, [2]prefixFull, [3]prefixExponent, [4]a string of prefix descriptions
 function fmtSIlog(x){
   if(x == 0){
@@ -344,7 +364,7 @@ function fmtSIunits(x){
       var suffix = SIPREFIXLOW[dd];
       var rr = x * Math.pow(10,(dd+1)*3)
       var dp = ((d+2) % 3)
-      
+
       return [roundTo(rr,dp), suffix,"???",dd,"???"]
   } else {
       if(x < 100){

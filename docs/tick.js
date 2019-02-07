@@ -34,7 +34,8 @@ var GAME_GLOBAL = {
        SHIP_TYPE_LIST:SHIP_TYPE_LIST,
        ALL_CONTENT_CONTAINER:document.getElementById("ALL_CONTENT_CONTAINER"),
        timeToNextLanding_SPAN: document.getElementById("timeToNextLanding_SPAN"),
-       seedshipsInTransit_SPAN:document.getElementById("seedshipsInTransit_SPAN")
+       seedshipsInTransit_SPAN:document.getElementById("seedshipsInTransit_SPAN"),
+       RESEARCH_BUTTONS:RESEARCH_BUTTONS
 }
 
 
@@ -42,6 +43,7 @@ GAME_GLOBAL.SCIENCE_DISPLAY   = SCIENCE_DISPLAY;
 GAME_GLOBAL.SCIENCE_TYPES     = SCIENCE_TYPES;
 GAME_GLOBAL.SCIENCE_SUBFIELDS = SCIENCE_SUBFIELDS;
 
+GAME_GLOBAL.STAR_TYPE_SET = STAR_TYPE_SET;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -217,7 +219,12 @@ function getDateStringFromTick(tt){
 }
 
 for( var i = 0; i < this.WORLD_TYPE_LIST.length; i++){
-   GAME_GLOBAL[WORLD_TYPE_LIST[i] + "_CT"] = document.getElementById(WORLD_TYPE_LIST[i] + "_CT");
+   ELEMS[WORLD_TYPE_LIST[i] + "_CT_DISPLAY"] = document.getElementById(WORLD_TYPE_LIST[i] + "_CT");
+   var cancelButton = document.getElementById("button_wf"+WORLD_TYPE_LIST[i]+"Cancel");
+   if(cancelButton != null){
+	   ELEMS[WORLD_TYPE_LIST[i] + "_CT_DISPLAY"].cancelButton = cancelButton;
+   }
+
 }
 
 function TICK_updateWorldCounts(){
@@ -230,9 +237,25 @@ function TICK_updateWorldCounts(){
         if( this.CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType] > 0 ){
           worldCountLine = worldCountLine + " (breaking: "+fmtSIint(this.CONSTRUCTION_BUFFER["WORLDS_DECON_CT"][worldType])+")"
         }
-        var countDisplay = this[WORLD_TYPE_LIST[i] + "_CT"]
+        var countDisplay = this.ELEMS[WORLD_TYPE_LIST[i] + "_CT_DISPLAY"]
         if(countDisplay != null){
           countDisplay.innerHTML = worldCountLine
+          if(countDisplay.cancelButton != null){
+			  if(this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0){
+			    countDisplay.cancelButton.style.display = "block";
+			    countDisplay.cancelButton.disabled = false;
+			  } else {
+			    countDisplay.cancelButton.style.display = "none";
+			    countDisplay.cancelButton.disabled = true;
+			  }
+		  }
+
+
+          if(countDisplay.cancelButton != null && this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0){
+
+		  } else {
+
+		  }
         }
     }
 }
@@ -341,7 +364,7 @@ function TICK_calcIndustry(){
         sd.innerHTML = fmtsi[0]
         sd.displayUnits.innerHTML = fmtsi[1]+"t"
         sd.displayDiv.title = "tons: basic unit of mass\n"+fmtsi[4];
-        
+
         var sdd = this.ELEMS["MATTERDELTA-"+matterType+"-DISPLAY"]
         if( sdd != null){
         var diff = matterCt - this["INVENTORY-PREVTICK"]["MATTER-"+matterType+"-CT"];
@@ -389,12 +412,17 @@ function TICK_calcIndustry(){
       }
     }
 
+
+    for(var i=0; i<this.RESEARCH_BUTTONS.length; i++){
+		this.RESEARCH_BUTTONS[i].canAffordTest()
+	}
+
 /*
 GAME_GLOBAL.SCIENCE_DISPLAY   = SCIENCE_DISPLAY;
 GAME_GLOBAL.SCIENCE_TYPES     = SCIENCE_TYPES;
 GAME_GLOBAL.SCIENCE_SUBFIELDS = SCIENCE_SUBFIELDS;
 */
-    
+
 
 
 
@@ -454,13 +482,13 @@ function TICK_captureSystems(){
       this.INVENTORY["seedship-transit-buffer"].push([ssct,arriveTime]);
       this.INVENTORY["SHIPS-"+"seedship"+"-CT"] = this.INVENTORY["SHIPS-"+"seedship"+"-CT"] - ssct;
     }
-
+    var landct = 0;
     while(this.INVENTORY["seedship-transit-buffer"].length > 0 && this.INVENTORY["seedship-transit-buffer"][0][1] <= this.STATS["TICK"]){
-      var landct = this.INVENTORY["seedship-transit-buffer"].shift()[0];
-      this.INVENTORY["WORLDS-Fallow-CT"] = this.INVENTORY["WORLDS-Fallow-CT"] + landct;
-      this.INVENTORY["seedship-transit-CT"] = this.INVENTORY["seedship-transit-CT"] - landct;
-      this.INVENTORY["WORLDS-Neutral-CT"] = this.INVENTORY["WORLDS-Neutral-CT"] - landct;
+      landct = landct + this.INVENTORY["seedship-transit-buffer"].shift()[0];
     }
+    this.INVENTORY["WORLDS-Fallow-CT"] = this.INVENTORY["WORLDS-Fallow-CT"] + landct;
+    this.INVENTORY["seedship-transit-CT"] = this.INVENTORY["seedship-transit-CT"] - landct;
+    this.INVENTORY["WORLDS-Neutral-CT"] = this.INVENTORY["WORLDS-Neutral-CT"] - landct;
 
     this.seedshipsInTransit_SPAN.innerHTML = fmtSIintNoPct(this.INVENTORY["seedship-transit-CT"]);
     if(this.INVENTORY["seedship-transit-buffer"].length > 0){

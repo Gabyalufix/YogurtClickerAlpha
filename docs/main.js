@@ -11,6 +11,7 @@
 SETTINGS = {}
 INVENTORY = {}
 STATS = {}
+RESEARCH_BUTTONS=[];
 
 STATS["TICK"] = 0;
 STATS["PAUSE"] = false;
@@ -516,7 +517,7 @@ STATS["UNLOCK_PROJECTS"]["eng"] = [
     {  projectTitle:"Matter Recycling 3", projectID:"engDUMMY3",
        cost:[["eng_SCIENCE_FREE",50e19],["eng2_SCIENCE_FREE",15e18]],
        desc:"Recycle waste matter (3) using advanced matter transmutation technology. This requires huge amounts of energy, but allows waste matter to be recovered back into processed feedstock."
-    }, 
+    },
     {  projectTitle:"Matter Recycling 4", projectID:"engDUMMY4",
        cost:[["eng_SCIENCE_FREE",50e22],["eng2_SCIENCE_FREE",15e19]],
        desc:"Recycle waste matter (4) using advanced matter transmutation technology. This requires huge amounts of energy, but allows waste matter to be recovered back into processed feedstock."
@@ -571,6 +572,21 @@ STATS["UNLOCK_PROJECTS"]["psy"] = [
     },
 ]
 
+UPGRADE_COST = {};
+UPGRADE_COST["Bot"] = {};
+UPGRADE_COST["Green"] = {};
+
+UPGRADE_COST["Bot"]["calc"] = function(lvl){
+	return [["eng_SCIENCE_FREE",Math.pow(1.6,lvl) * 50e17]];
+}
+UPGRADE_COST["Green"]["calc"] = function(lvl){
+	return [["bio_SCIENCE_FREE",Math.pow(1.6,lvl) * 50e17]];
+}
+UPGRADE_COST["Bot"]["curr"] = UPGRADE_COST["Bot"].calc(1)
+UPGRADE_COST["Green"]["curr"] = UPGRADE_COST["Green"].calc(1)
+
+
+
 for(var i=0; i< SCIENCE_TYPES.length; i++){
    //PROJECTSAVAIL_LIST_bio
    //CURRENT_AVAIL_PROJECT_DESC_bio
@@ -584,11 +600,14 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
    availListElem.researchButton = researchButton;
    researchButton.fid = fid;
    researchButton.availListElem = availListElem;
-   
+   researchButton.STATS = STATS;
+   researchButton.canAfford = canAfford;
+   researchButton.INVENTORY = INVENTORY;
+   RESEARCH_BUTTONS.push(researchButton);
 
    SCIENCE_DISPLAY[fid].availListElem = availListElem;
-   
-   
+
+
    for(var j=0; j < STATS["UNLOCK_PROJECTS"][fid].length; j++){
      var pp = STATS["UNLOCK_PROJECTS"][fid][j];
      STATS["AVAIL_PROJECT_LIST"][fid].push(pp.projectID);
@@ -599,6 +618,19 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
      elem.appendChild( document.createTextNode( pp.projectTitle ) );
      availListElem.appendChild(elem);
    }
+
+   researchButton.canAffordTest = function(){
+	   var vv = this.availListElem.value;
+	   var pp = this.STATS["AVAIL_PROJECTS"][this.fid][vv];
+	   if( this.canAfford(pp.cost) ){
+		   this.disabled = false;
+		   return true;
+	   } else {
+		   this.disabled = true;
+		   return false;
+	   }
+   }
+
      availListElem.onchange = function(){
        var pp = STATS["AVAIL_PROJECTS"][this.fid][this.value]
        var dd = pp.desc;
@@ -626,7 +658,7 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
         this.availListElem.remove(this.availListElem.selectedIndex)
         this.disabled = true;
      }
-     
+
      availListElem.value = STATS["UNLOCK_PROJECTS"][fid][0].projectID;
      availListElem.onchange();
 }
@@ -647,6 +679,13 @@ function canAfford(c){
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Dyson Sphere / World Management:
 
+/*UPGRADE_COST_FCN = {};
+UPGRADE_COST_FCN["Bot"] = function(lvl){
+	[["eng_SCIENCE_FREE",Math.pow(1.6,lvl) * 50e17]];
+}
+UPGRADE_COST_FCN["Green"] = function(lvl){
+	[["bio_SCIENCE_FREE",Math.pow(1.6,lvl) * 50e17]];
+}*/
 
 var WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
 var WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false,false]
@@ -672,6 +711,7 @@ INVENTORY["WORLDS-"+"Secure"+"-CT"] = 1
 for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    var worldType = DYSON_TYPE_LIST[i]
    var multDisplay = document.getElementById(""+worldType+"_wf_AddUnit")
+   multDisplay.innerHTML = "1";
    var multUp = document.getElementById("button_wf"+worldType+"UP")
    var multDn = document.getElementById("button_wf"+worldType+"DN")
    multUp.disp = multDisplay
@@ -680,16 +720,17 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    multDn.worldType = worldType
    multDn.mdn = multDn
    multUp.mdn = multDn
+   INVENTORY["WORLDS-"+worldType+"-LVL"] = 1;
 
    multDn.disabled = true;
    multUp.onclick = function(){
-     SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] * 1000)
-     this.disp.innerHTML = getPrefixSI( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
+     SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] * 10)
+     this.disp.innerHTML = fmtSIflat( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
      this.mdn.disabled = false;
    }
    multDn.onclick = function(){
-     SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] / 1000)
-     this.disp.innerHTML = getPrefixSI( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
+     SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] / 10)
+     this.disp.innerHTML = fmtSIflat( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
      if(SETTINGS["ADD_MULTIPLIER"][this.worldType] <= 1){
        this.mdn.disabled = true;
      }
@@ -700,19 +741,61 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    for(var j=0;j < addButtonList.length;j++){
      var bname = addButtonList[j]
      var butelem = document.getElementById("button_wf"+worldType+bname)
-     butelem.worldType = worldType;
-     butelem.addMult = addButtonMult[j]
-     butelem.addPositive = addButtonPos[j]
-     butelem.onclick = function(){
-       if(this.addPositive){
-         startWorldConstruction(  this.worldType,this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
-       } else {
-         startWorldDeconstruction(this.worldType,this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
-       }
+     if(butelem != null){
+		 butelem.worldType = worldType;
+		 butelem.addMult = addButtonMult[j]
+		 butelem.addPositive = addButtonPos[j]
+		 butelem.onclick = function(){
+		   if(this.addPositive){
+			 startWorldConstruction(  this.worldType,this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
+		   } else {
+			 startWorldDeconstruction(this.worldType,this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
+		   }
+         }
      }
+   }
+   var cancelElem =  document.getElementById("button_wf"+worldType+"Cancel")
+   if(cancelElem != null){
+      cancelElem.worldType = worldType;
+      cancelElem.CONSTRUCTION_BUFFER = CONSTRUCTION_BUFFER;
+      cancelElem.onclick = function(){
+        this.CONSTRUCTION_BUFFER["WORLDS_CONST"][this.worldType] = []
+        this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][this.worldType] = 0;
+        this.disabled = true;
+        this.style.display = "none";
+	  }
+   }
+   var upgradeElem =  document.getElementById("button_wf"+worldType+"UPGRADE")
+   if(upgradeElem != null){
+
+      upgradeElem.worldType = worldType;
+      upgradeElem.INVENTORY = INVENTORY;
+      upgradeElem.UPCOST = UPGRADE_COST[worldType];
+      upgradeElem.canAfford = canAfford;
+      upgradeElem.onclick = function(){
+        for(var kk = 0; kk < this.UPCOST.curr.length; kk++){
+           INVENTORY[ this.UPCOST.curr[kk][0] ] = INVENTORY[ this.UPCOST.curr[kk][0] ] - this.UPCOST.curr[kk][1];
+        }
+        var lvl = this.INVENTORY["WORLDS-"+this.worldType+"-LVL"] + 1;
+        this.INVENTORY["WORLDS-"+this.worldType+"-LVL"] = lvl
+        upgradeElem.UPCOST.curr = upgradeElem.UPCOST.calc(lvl);
+	  }
+	  upgradeElem.canAffordTest = function(){
+		//console.log(this.UPCOST);
+	    if( this.canAfford(this.UPCOST.curr) ){
+		    this.disabled = false;
+		    return true;
+	    } else {
+		    this.disabled = true;
+		    return false;
+	    }
+      }
+      RESEARCH_BUTTONS.push(upgradeElem);
    }
 
 }
+
+
 
 CHEATADD_TYPE_LIST = ["Neutral","Hostile"]
 
@@ -731,13 +814,13 @@ for( var i = 0; i < CHEATADD_TYPE_LIST.length; i++){
 
    multDn.disabled = true;
    multUp.onclick = function(){
-     SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] * 1000)
-     this.disp.innerHTML = getPrefixSI( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
+     SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] * 10)
+     this.disp.innerHTML = fmtSIflat( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
      this.mdn.disabled = false;
    }
    multDn.onclick = function(){
-     SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] / 1000)
-     this.disp.innerHTML = getPrefixSI( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
+     SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] / 10)
+     this.disp.innerHTML = fmtSIflat( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
      if(SETTINGS["ADD_MULTIPLIER"][this.worldType] <= 1){
        this.mdn.disabled = true;
      }
