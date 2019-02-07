@@ -342,6 +342,164 @@ h5 {
 ===================================================================================================================
 ===================================================================================================================
 ===================================================================================================================
+-----------------------------------  Tabs
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
+
+
+/*
+.collapsible {
+  background-color: var(--DK3);
+  color: var(--white);
+  cursor: pointer;
+  margin-top: 4px;
+  padding-top: 4px;
+  padding-right: 18px;
+  padding-bottom: 4px;
+  padding-left: 18px;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  align-self:start;
+  
+  border-style: outset;
+  border-width: 2px;
+  border-radius: 2px 15px 2px 2px;
+  
+  vertical-align: middle;
+}
+
+*/
+
+
+.projectSelectPanel {
+  width: 100%;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 80%;
+  color: var(--DK4);
+  background-color: var(--LT3);
+  
+}
+
+.projectSelectPanel-selected {
+  background-color: var(--DK3);
+}
+
+.tabbedUL {
+	list-style: none;
+	padding: 0 0 0 10px;
+	
+}
+
+.tabbedUL .tabHolder {
+	float: left;
+	position: relative;
+	height: 20px;
+	border-radius: 7px 15px 0 0;
+	margin-left: -10px;
+	text-shadow: 1px 1px 0 #bbb;
+	box-shadow: 0px 0px 10px rgba(0,0,0,.5);
+	transition: .2s;
+}
+
+.tabHolder .prettyTab {
+	display: block;
+	position: relative;
+	width: 90px;
+	height: 10px;
+	padding: 6px 12px 12px 0;
+	border-radius: 7px 15px 0 0;
+	background: var(--LT2);
+	color: var(--DK2);
+	text-align: center;
+	text-decoration: none;
+	transition: .2s;
+}
+
+.tabHolder .prettyTab:hover {
+	z-index: 1;
+}
+
+.tabHolder .prettyTab:hover .prettyTab {
+	background: var(--LT4);
+	color: var(--DK2);
+}
+
+.selectedTab {
+	z-index: 2;
+}
+
+.selectedTab .prettyTab {
+	z-index: 3;
+	background: var(--LT4);
+	color: var(--DK2);
+	text-shadow: none;
+	font-weight: 500;
+}
+/*
+
+
+
+
+.tabbedUL {
+	list-style: none;
+	padding: 0 0 0 10px;
+	
+}
+
+.tabbedUL .tabHolder {
+	float: left;
+	position: relative;
+	height: 20px;
+	border-radius: 7px 15px 0 0;
+	margin-left: -10px;
+	text-shadow: 1px 1px 0 #bbb;
+	box-shadow: 0px 0px 10px rgba(0,0,0,.5);
+	transition: .2s;
+}
+
+.tabHolder .prettyTab {
+	display: block;
+	position: relative;
+	width: 90px;
+	height: 10px;
+	padding: 6px 6px 12px 0;
+	border-radius: 7px 15px 0 0;
+	background: #999;
+	color: #444;
+	text-align: center;
+	text-decoration: none;
+	transition: .2s;
+}
+
+.tabHolder .prettyTab:hover {
+	z-index: 1;
+}
+
+.tabHolder .prettyTab:hover .prettyTab {
+	background: #ccc;
+	color: #000;
+}
+
+.selectedTab {
+	z-index: 2;
+}
+
+.selectedTab .prettyTab {
+	z-index: 3;
+	background: #fff;
+	color: #000;
+	text-shadow: none;
+	font-weight: 500;
+}
+
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
 -----------------------------------  SPECIAL:
 ===================================================================================================================
 ===================================================================================================================

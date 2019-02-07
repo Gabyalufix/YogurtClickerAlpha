@@ -15,6 +15,8 @@ COLOR["bsodText"] = bodyComputedStyle.getPropertyValue("--bsodText")
 //var tt = itsSet[0]
 
 
+
+
 STATICVAR_HOLDER = {
 
 TIME_UNIT:"years",

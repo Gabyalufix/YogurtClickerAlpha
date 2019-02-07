@@ -36,6 +36,9 @@ CONSTRUCTION_BUFFER["WORLDS_DECON"] = {}
 INVENTORY["SHIP-CONSTRUCT-BUFFER"] = 0;
 
 
+
+
+
 ///////////////////////////////
 ////Initialize starting stats
 
@@ -120,6 +123,8 @@ INVENTORY["seedship-transit-CT"] = 0;
 STATS["seedship-distToNextStar"] = 1.219;
 
 
+
+
 ///////////////////////////////
 ////Initialize starting stats
 //MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt"]
@@ -170,6 +175,34 @@ STATS["PRODUCTIVITY_RATING"]["soul"] = (10000)
 
 
 
+SCIENCE_DISPLAY = {};
+SCIENCE_TYPES = ["bio","eng","psy"];
+SCIENCE_SUBFIELDS = {bio:3,eng:3,psy:3};
+
+for(var i=0;i<SCIENCE_TYPES.length;i++){
+  var scienceName = SCIENCE_TYPES[i];
+  var subf = SCIENCE_SUBFIELDS[scienceName];
+  SCIENCE_DISPLAY[scienceName] = [];
+  SCIENCE_DISPLAY[scienceName].total = document.getElementById(scienceName+"_TOTAL_DISPLAY");
+    if(SCIENCE_DISPLAY[scienceName].total == null){
+       console.log(scienceName+": is null");
+    }
+  SCIENCE_DISPLAY[scienceName].total.unitDisplay = document.getElementById(scienceName+"_TOTAL_DISPLAY_UNITS");
+  SCIENCE_DISPLAY[scienceName].total.free = document.getElementById(scienceName+"_FREE_DISPLAY");
+  INVENTORY[scienceName+"_SCIENCE_TOTAL"] = 0
+  INVENTORY[scienceName+"_SCIENCE_FREE"] = 0
+
+  for(var j=0;j<subf;j++){
+    SCIENCE_DISPLAY[scienceName][j]      = document.getElementById(scienceName+(j+1)+"_TOTAL_DISPLAY");
+    SCIENCE_DISPLAY[scienceName][j].free = document.getElementById(scienceName+(j+1)+"_FREE_DISPLAY");
+    if(SCIENCE_DISPLAY[scienceName][j] == null){
+       console.log(scienceName+j+": is null");
+    }
+    SCIENCE_DISPLAY[scienceName][j].unitDisplay = document.getElementById(scienceName+(j+1)+"_TOTAL_DISPLAY_UNITS");
+    INVENTORY[scienceName+j+"_SCIENCE_TOTAL"] = 0
+    INVENTORY[scienceName+j+"_SCIENCE_FREE"] = 0
+  }
+}
 
 
 //Productivity: <span id="green_PRODUCTIVITY_DISPLAY"></span>
@@ -202,7 +235,7 @@ var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of informat
                                      strat:"Ships: the number of ships assigned a given task."}
 
 
-var PCTSLIDER_SUBFIELDCT = [4,4,4,7,7,3,3,3,3,3,2,3]
+var PCTSLIDER_SUBFIELDCT = [3,3,3,7,7,3,3,3,3,3,2,3]
 var PCTSLIDERS = {}
 
 //PRODUCTIVITY_STATS = ["bot","psy","green","bio","eng","psy","think","soul"]
@@ -384,6 +417,228 @@ for( var i = 0; i < MATTER_TYPE_LIST.length; i++){
      console.log("matterDeltaDisplay null:"+matterType);
    }
 
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Tabs:
+
+
+var tabHolderList = document.getElementsByClassName("tabHolder")
+var tabSetSet = [];
+var tabSetNames = [];
+
+for(var i=0; i<tabHolderList.length; i++){
+   var xx = tabHolderList[i].id.split("_");
+   var xn = xx[0]
+   var xv = parseInt(xx[1])
+   var elem = tabHolderList[i];
+   if(tabSetSet[xn] == null){
+     var xobj = {};
+     xobj.tabID = xx[0];
+     tabHolderList[i].tabHolder = xobj;
+     xobj.tabElem = [elem];
+     xobj.tabCt = xv;
+     tabSetSet[xn] = xobj
+     tabSetNames.push(xn);
+     elem.contentDiv = document.getElementById(xn+"_CONTENT_"+xv);
+   } else {
+     var xobj = tabSetSet[xn];
+     tabHolderList[i].tabHolder = xobj;
+     xobj.tabElem.push(tabHolderList[i]);
+     xobj.tabCt = Math.max(xobj.tabCt,xv);
+     elem.contentDiv = document.getElementById(xn+"_CONTENT_"+xv);
+   }
+}
+
+for(var i=0; i<tabSetNames.length; i++){
+   var xn = tabSetNames[i];
+   for(var j=0; j<tabSetSet[xn].tabCt;j++){
+     tabSetSet[xn].tabElem[j].onclick = function(){
+       for(var k=0; k<this.tabHolder.tabCt; k++){
+          this.tabHolder.tabElem[k].classList.remove("selectedTab");
+          this.tabHolder.tabElem[k].contentDiv.style.display = "none";
+       }
+       this.classList.add("selectedTab")
+       this.contentDiv.style.display = "block"
+     }
+   }
+}
+
+
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"] = {};
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio_SCIENCE_FREE"] = "B Biology"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio0_SCIENCE_FREE"] = "B Biowarfare"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio1_SCIENCE_FREE"] = "B Yogosynthesis"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio2_SCIENCE_FREE"] = "B Bioengineering"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng_SCIENCE_FREE"] = "B Engineering"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng0_SCIENCE_FREE"] = "B World Building"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng1_SCIENCE_FREE"] = "B Weapons & Warfare"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng2_SCIENCE_FREE"] = "B Matter & Energy"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy_SCIENCE_FREE"] = "B Social Science"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy0_SCIENCE_FREE"] = "B Cognition"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy1_SCIENCE_FREE"] = "B Manipulation"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy2_SCIENCE_FREE"] = "B Strategy"
+
+///////////////////////////////
+////Starting Projects:
+
+STATS["AVAIL_PROJECT_LIST"] = {
+   bio:[],
+   eng:[],
+   psy:[]
+}
+STATS["AVAIL_PROJECTS"] = {
+   bio:{},
+   eng:{},
+   psy:{}
+}
+
+175848665414992000000
+500000000000000000000
+5000000000000000000
+STATS["UNLOCK_PROJECTS"] = {
+   bio:{},
+   eng:{},
+   psy:{}
+}
+STATS["UNLOCK_PROJECTS"]["eng"] = [
+    {  projectTitle:"Matter Recycling", projectID:"engDUMMY1",
+       cost:[["eng_SCIENCE_FREE",50e17],["eng2_SCIENCE_FREE",15e16]],
+       desc:"Recycle waste matter (1) using advanced matter transmutation technology. This requires huge amounts of energy, but allows waste matter to be recovered back into processed feedstock."
+    },
+    {  projectTitle:"Matter Recycling 2", projectID:"engDUMMY2",
+       cost:[["eng_SCIENCE_FREE",50e18],["eng2_SCIENCE_FREE",15e17]],
+       desc:"Recycle waste matter (2) using advanced matter transmutation technology. This requires huge amounts of energy, but allows waste matter to be recovered back into processed feedstock."
+    },
+    {  projectTitle:"Matter Recycling 3", projectID:"engDUMMY3",
+       cost:[["eng_SCIENCE_FREE",50e19],["eng2_SCIENCE_FREE",15e18]],
+       desc:"Recycle waste matter (3) using advanced matter transmutation technology. This requires huge amounts of energy, but allows waste matter to be recovered back into processed feedstock."
+    }, 
+    {  projectTitle:"Matter Recycling 4", projectID:"engDUMMY4",
+       cost:[["eng_SCIENCE_FREE",50e22],["eng2_SCIENCE_FREE",15e19]],
+       desc:"Recycle waste matter (4) using advanced matter transmutation technology. This requires huge amounts of energy, but allows waste matter to be recovered back into processed feedstock."
+    },
+    {  projectTitle:"Matter Recycling 5", projectID:"engDUMMY5",
+       cost:[["eng_SCIENCE_FREE",50e22],["eng2_SCIENCE_FREE",15e22]],
+       desc:"Recycle waste matter (5) using advanced matter transmutation technology. This requires huge amounts of energy, but allows waste matter to be recovered back into processed feedstock."
+    }
+]
+STATS["UNLOCK_PROJECTS"]["bio"] = [
+    {  projectTitle:"DUMMY BIO PROJECT 1", projectID:"bioDUMMY1",
+       cost:[["bio_SCIENCE_FREE",50e22],["bio2_SCIENCE_FREE",15e20]],
+       desc:"blah 1b blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY BIO PROJECT 2", projectID:"bioDUMMY2",
+       cost:[["bio_SCIENCE_FREE",50e22],["bio2_SCIENCE_FREE",15e21]],
+       desc:"blah 2b blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY BIO PROJECT 3", projectID:"bioDUMMY3",
+       cost:[["bio_SCIENCE_FREE",50e22],["bio2_SCIENCE_FREE",15e22]],
+       desc:"blah 3b blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY BIO PROJECT 4", projectID:"bioDUMMY4",
+       cost:[["bio_SCIENCE_FREE",50e22],["bio2_SCIENCE_FREE",15e22]],
+       desc:"blah 4b blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY BIO PROJECT 5", projectID:"bioDUMMY5",
+       cost:[["bio_SCIENCE_FREE",50e22],["bio2_SCIENCE_FREE",15e22]],
+       desc:"blah 5b blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+]
+STATS["UNLOCK_PROJECTS"]["psy"] = [
+    {  projectTitle:"DUMMY PSYCH PROJECT 1", projectID:"psyDUMMY1",
+       cost:[["psy_SCIENCE_FREE",50e22],["psy2_SCIENCE_FREE",15e22]],
+       desc:"blah 1p blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY PSYCH PROJECT 2", projectID:"psyDUMMY2",
+       cost:[["psy_SCIENCE_FREE",50e22],["psy2_SCIENCE_FREE",15e22]],
+       desc:"blah 2p blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY PSYCH PROJECT 3", projectID:"psyDUMMY3",
+       cost:[["psy_SCIENCE_FREE",50e22],["psy2_SCIENCE_FREE",15e22]],
+       desc:"blah 3p blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY PSYCH PROJECT 4", projectID:"psyDUMMY4",
+       cost:[["psy_SCIENCE_FREE",50e22],["psy2_SCIENCE_FREE",15e22]],
+       desc:"blah 4p blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY PSYCH PROJECT 5", projectID:"psyDUMMY5",
+       cost:[["psy_SCIENCE_FREE",50e22],["psy2_SCIENCE_FREE",15e22]],
+       desc:"blah 5p blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+]
+
+for(var i=0; i< SCIENCE_TYPES.length; i++){
+   //PROJECTSAVAIL_LIST_bio
+   //CURRENT_AVAIL_PROJECT_DESC_bio
+   //RESEARCH_CURRENT_PROJECT_bio
+   var fid = SCIENCE_TYPES[i];
+   var availListElem = document.getElementById("PROJECTSAVAIL_LIST_"+fid);
+   var descElem = document.getElementById("CURRENT_AVAIL_PROJECT_DESC_"+fid);
+   var researchButton = document.getElementById("RESEARCH_CURRENT_PROJECT_"+fid);
+   availListElem.fid = fid;
+   availListElem.descElem = descElem;
+   availListElem.researchButton = researchButton;
+   researchButton.fid = fid;
+   researchButton.availListElem = availListElem;
+   
+
+   SCIENCE_DISPLAY[fid].availListElem = availListElem;
+   
+   
+   for(var j=0; j < STATS["UNLOCK_PROJECTS"][fid].length; j++){
+     var pp = STATS["UNLOCK_PROJECTS"][fid][j];
+     STATS["AVAIL_PROJECT_LIST"][fid].push(pp.projectID);
+     STATS["AVAIL_PROJECTS"][fid][pp.projectID] = pp;
+     var elem = document.createElement("option");
+     pp.listElem = elem;
+     elem.value = pp.projectID;
+     elem.appendChild( document.createTextNode( pp.projectTitle ) );
+     availListElem.appendChild(elem);
+   }
+     availListElem.onchange = function(){
+       var pp = STATS["AVAIL_PROJECTS"][this.fid][this.value]
+       var dd = pp.desc;
+       for(var k=0; k < pp.cost.length;k++){
+          var ccc = fmtSIunits(pp.cost[k][1]);
+          dd = dd + "<br> &nbsp&nbsp&nbsp"+ccc[0]+ccc[1]+ STATICVAR_HOLDER["INVENTORY_DESC_SHORT"][pp.cost[k][0]]
+       }
+       this.descElem.innerHTML = dd
+       if( canAfford(pp.cost) ){
+         this.researchButton.disabled = false;
+       } else {
+         this.researchButton.disabled = true;
+       }
+       availListElem.pp = pp;
+     }
+     researchButton.onclick = function(){
+        for(var kk = 0; kk < this.availListElem.pp.cost.length; kk++){
+           //console.log(this.availListElem.pp);
+           var vv = this.availListElem.value;
+           var pp = STATS["AVAIL_PROJECTS"][this.fid][vv];
+           console.log("BEFORE: [val="+this.availListElem.value+"] ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
+           INVENTORY[ pp.cost[kk][0] ] = INVENTORY[ pp.cost[kk][0] ] - pp.cost[kk][1];
+           console.log("AFTER: ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
+        }
+        this.availListElem.remove(this.availListElem.selectedIndex)
+        this.disabled = true;
+     }
+     
+     availListElem.value = STATS["UNLOCK_PROJECTS"][fid][0].projectID;
+     availListElem.onchange();
+}
+
+
+function canAfford(c){
+   for(var i=0; i<c.length;i++){
+      if( this.INVENTORY[ c[i][0] ] < c[i][1] ){
+         return false;
+      }
+   }
+   return true;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

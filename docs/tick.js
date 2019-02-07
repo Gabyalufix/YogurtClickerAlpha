@@ -37,6 +37,12 @@ var GAME_GLOBAL = {
        seedshipsInTransit_SPAN:document.getElementById("seedshipsInTransit_SPAN")
 }
 
+
+GAME_GLOBAL.SCIENCE_DISPLAY   = SCIENCE_DISPLAY;
+GAME_GLOBAL.SCIENCE_TYPES     = SCIENCE_TYPES;
+GAME_GLOBAL.SCIENCE_SUBFIELDS = SCIENCE_SUBFIELDS;
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -358,6 +364,38 @@ function TICK_calcIndustry(){
     }
 
     this.CONSTRUCTION_REQUESTS = [];
+
+
+    for(var i=0;i<this.SCIENCE_TYPES.length;i++){
+      var fid = this.SCIENCE_TYPES[i];
+      var subf = this.SCIENCE_SUBFIELDS[fid];
+      var newSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid]
+      this.INVENTORY[fid+"_SCIENCE_TOTAL"] = this.INVENTORY[fid+"_SCIENCE_TOTAL"] + newSci
+      this.INVENTORY[fid+"_SCIENCE_FREE"] = this.INVENTORY[fid+"_SCIENCE_FREE"] + newSci
+
+      var fsi = fmtSIunits( this.INVENTORY[fid+"_SCIENCE_TOTAL"] );
+      this.SCIENCE_DISPLAY[fid].total.innerHTML = fsi[0]+" "+fsi[1]+"B"
+      var ffsi = fmtSIunits( this.INVENTORY[fid+"_SCIENCE_FREE"] );
+      this.SCIENCE_DISPLAY[fid].total.free.innerHTML = ffsi[0]+" "+ffsi[1]+"B"
+
+      for(var j=0;j<subf;j++){
+        var newSubSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid] * this.SETTINGS[fid+"_FRACTION"][j];
+        this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] = this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] + newSubSci
+        this.INVENTORY[fid+j+"_SCIENCE_FREE"]  = this.INVENTORY[fid+j+"_SCIENCE_FREE"]  + newSubSci
+        var fssi = fmtSIunits( this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] );
+        this.SCIENCE_DISPLAY[fid][j].innerHTML =  fssi[0]+" "+fssi[1]+"B"
+        var ffssi = fmtSIunits( this.INVENTORY[fid+j+"_SCIENCE_FREE"] );
+        this.SCIENCE_DISPLAY[fid][j].free.innerHTML =  ffssi[0]+" "+ffssi[1]+"B"
+      }
+    }
+
+/*
+GAME_GLOBAL.SCIENCE_DISPLAY   = SCIENCE_DISPLAY;
+GAME_GLOBAL.SCIENCE_TYPES     = SCIENCE_TYPES;
+GAME_GLOBAL.SCIENCE_SUBFIELDS = SCIENCE_SUBFIELDS;
+*/
+    
+
 
 
     /*
