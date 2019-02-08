@@ -858,10 +858,10 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    var cancelElem =  document.getElementById("button_wf"+worldType+"Cancel")
    if(cancelElem != null){
       cancelElem.worldType = worldType;
-      cancelElem.CONSTRUCTION_BUFFER = CONSTRUCTION_BUFFER;
+      cancelElem.GAME = GAME_GLOBAL;
       cancelElem.onclick = function(){
-        this.CONSTRUCTION_BUFFER["WORLDS_CONST"][this.worldType] = []
-        this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][this.worldType] = 0;
+        this.GAME.CONSTRUCTION_BUFFER["WORLDS_CONST"][this.worldType] = []
+        this.GAME.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][this.worldType] = 0;
         this.disabled = true;
         this.style.display = "none";
       }

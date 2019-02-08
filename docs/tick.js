@@ -216,12 +216,6 @@ function TICK_updateWorldCounts(){
               }
           }
 
-
-          if(countDisplay.cancelButton != null && this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0){
-
-          } else {
-
-          }
         }
     }
 }
