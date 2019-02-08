@@ -36,8 +36,141 @@ CONSTRUCTION_BUFFER["WORLDS_DECON"] = {}
 
 INVENTORY["SHIP-CONSTRUCT-BUFFER"] = 0;
 
+///////////////////////////////
+var UNLOCKS={
+  WASTEREPROCESS:false,
+  TRANSMUTEYOGURT:false,
+  BIOWEAPONS:false,
+  ESPIONAGE:false,
+  HACKING:false
+}
 
 
+////////////////////////////////////
+
+UNLOCKABLES=["WASTEREPROCESS","TRANSMUTEYOGURT","BIOWEAPONS","HACKING","COMPOST"]
+UNLOCKABLE_SLIDERINFO=[["bot",3],["bot",4],["green",3],["think",3],["green",4]]
+
+////////////////////////////////////
+var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate","comp","strat"]
+var PCTSLIDER_DISPLAYUNITS = {bio:"B/wk",eng:"B/wk",psy:"B/wk",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns",scout:" Ships",battleplate:" Ships",comp:"Hz",strat:" Ships"}
+var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of information. A zero, or a one.",
+                                     eng:"Byte: the fundamental unit of information. A zero, or a one.",
+                                     psy:"Byte: the fundamental unit of information. A zero, or a one.",
+                                     bot:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades).",
+                                     green:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades)",
+                                     think:"Hertz: Compute cycles per second.",
+                                     soul:"Identities: Number of distinct thinking entities being simulated inside the soulswarm network.",
+                                     ship:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades)",
+                                     ships:"Ships: the number of ships assigned a given task.",
+                                     scout:"Ships: the number of ships assigned a given task.",
+                                     battleplate:"Ships: the number of ships assigned a given task.",
+                                     comp:"Hertz: Compute cycles per second.",
+                                     strat:"Ships: the number of ships assigned a given task."}
+
+
+var PCTSLIDER_SUBFIELDCT = [3,3,3,7,7,3,3,3,3,3,2,3]
+var PCTSLIDERS = {}
+
+////////////////////////////////////
+
+MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt","Biopwr","Botpwr"]
+
+
+var WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
+var WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false,false]
+
+var DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub","Slag","Seedres"]
+var CONSTRUCTION_REQUESTS=[];
+var SHIP_TYPE_LIST = ["scout","battleplate","seedship"]
+
+////////////////////////////////////
+
+UPGRADE_COST = {};
+UPGRADE_COST["Bot"] = {};
+UPGRADE_COST["Green"] = {};
+
+UPGRADE_COST["Bot"]["calc"] = function(lvl){
+    return [["eng_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
+}
+UPGRADE_COST["Green"]["calc"] = function(lvl){
+    return [["bio_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
+}
+UPGRADE_COST["Bot"]["curr"] = UPGRADE_COST["Bot"].calc(1)
+UPGRADE_COST["Green"]["curr"] = UPGRADE_COST["Green"].calc(1)
+
+UPGRADE_COST["Bot"]["effect"] = function(){
+   STATS["PRODUCTIVITY_MULT"]["bot"] = STATS["PRODUCTIVITY_MULT"]["bot"] + 0.2;
+}
+UPGRADE_COST["Green"]["effect"] = function(){
+   STATS["PRODUCTIVITY_MULT"]["green"] = STATS["PRODUCTIVITY_MULT"]["green"] + 0.2;
+}
+
+STATS["UPGRADE_COST"] = UPGRADE_COST;
+
+////////////////////////////////////
+
+var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
+bgCanvas.RUN_STATIC = false;
+
+var contentSet = document.getElementsByClassName("contentUnitHolder")
+var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
+var bgStatic = document.getElementById("BACKGROUND_STATIC")
+var GAME_GLOBAL = {
+       SETTINGS:SETTINGS,
+       INVENTORY:INVENTORY,
+       STATS:STATS,
+       CONSTRUCTION_BUFFER:CONSTRUCTION_BUFFER,
+       UNLOCKS:UNLOCKS,
+       STATICVAR_HOLDER:STATICVAR_HOLDER,
+       contentSet:contentSet,
+       itsSet:itsSet,
+       bgCanvas:bgCanvas,
+       bgStatic:bgStatic,
+       PCTSLIDER_FIELDS:PCTSLIDER_FIELDS,
+       PCTSLIDER_DISPLAYUNITS:PCTSLIDER_DISPLAYUNITS,
+       PCTSLIDERS:PCTSLIDERS,
+       DEBUG_CRAZY_LEVEL_DISPLAY:document.getElementById("DEBUG_CRAZY_LEVEL_DISPLAY"),
+       DATE_DISPLAY:document.getElementById("DATE_DISPLAY"),
+       MOOD_DISPLAY:document.getElementById("MOOD_DISPLAY"),
+       MATTER_TYPE_LIST:MATTER_TYPE_LIST,
+       SHIPCONSTRUCTBUFFER_DISPLAY_DIV:document.getElementById("SHIPCONSTRUCTBUFFER_DISPLAY_DIV"),
+       ELEMS:ELEMS,
+       WORLD_TYPE_LIST:WORLD_TYPE_LIST,
+       DYSON_TYPE_LIST:DYSON_TYPE_LIST,
+       CONSTRUCTION_REQUESTS:CONSTRUCTION_REQUESTS,
+       SHIP_TYPE_LIST:SHIP_TYPE_LIST,
+       ALL_CONTENT_CONTAINER:document.getElementById("ALL_CONTENT_CONTAINER"),
+       timeToNextLanding_SPAN: document.getElementById("timeToNextLanding_SPAN"),
+       seedshipsInTransit_SPAN:document.getElementById("seedshipsInTransit_SPAN"),
+       RESEARCH_BUTTONS:RESEARCH_BUTTONS
+}
+
+
+///////////////////////////////
+
+function canAfford(c){
+   for(var i=0; i<c.length;i++){
+      if( this.INVENTORY[ c[i][0] ] < c[i][1] ){
+         return false;
+      }
+   }
+   return true;
+}
+GAME_GLOBAL.canAfford = canAfford
+
+function makeCostAbbriv(cc,delim){
+   var ccc = fmtSIunits(cc[0][1]);
+   var costString = ccc[0] + ccc[1] +"B "+ STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[0][0]];
+   if(cc.length > 1){
+     for(var i=1; i<cc.length;i++){
+       var c3 = fmtSIunits(cc[i][1]);
+       costString = costString + delim + ccc[0] + ccc[1] +"B "+ STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[0][0]];
+     }
+   }
+   return costString;
+}
+GAME_GLOBAL.makeCostAbbriv = makeCostAbbriv
 
 
 ///////////////////////////////
@@ -219,25 +352,6 @@ var UNIT_EXPLANATION = {};
 
 
 
-var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate","comp","strat"]
-var PCTSLIDER_DISPLAYUNITS = {bio:"B/wk",eng:"B/wk",psy:"B/wk",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns",scout:" Ships",battleplate:" Ships",comp:"Hz",strat:" Ships"}
-var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of information. A zero, or a one.",
-                                     eng:"Byte: the fundamental unit of information. A zero, or a one.",
-                                     psy:"Byte: the fundamental unit of information. A zero, or a one.",
-                                     bot:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades).",
-                                     green:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades)",
-                                     think:"Hertz: Compute cycles per second.",
-                                     soul:"Identities: Number of distinct thinking entities being simulated inside the soulswarm network.",
-                                     ship:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades)",
-                                     ships:"Ships: the number of ships assigned a given task.",
-                                     scout:"Ships: the number of ships assigned a given task.",
-                                     battleplate:"Ships: the number of ships assigned a given task.",
-                                     comp:"Hertz: Compute cycles per second.",
-                                     strat:"Ships: the number of ships assigned a given task."}
-
-
-var PCTSLIDER_SUBFIELDCT = [3,3,3,7,7,3,3,3,3,3,2,3]
-var PCTSLIDERS = {}
 
 //PRODUCTIVITY_STATS = ["bot","psy","green","bio","eng","psy","think","soul"]
 //STATS["PRODUCTIVITY_RATING"] = {}
@@ -373,7 +487,6 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
 }
 
 
-SHIP_TYPE_LIST = ["scout","battleplate","seedship"]
 for( var i = 0; i < SHIP_TYPE_LIST.length; i++){
   var shipType = SHIP_TYPE_LIST[i];
   INVENTORY["SHIPS-"+shipType+"-CT"] = 0;
@@ -393,7 +506,6 @@ for( var i = 0; i < SHIP_TYPE_LIST.length; i++){
 // MATTER:
 
 /*MATTER_TYPE_LIST = ["Discovered","Available","Collected","Processed","Waste","Heat","Yogurt"]*/
-MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt","Biopwr","Botpwr"]
 
 
 /*INVENTORY["MATTER"]={}*/
@@ -586,26 +698,6 @@ STATS["UNLOCK_PROJECTS"]["psy"] = [
     },
 ]
 
-UPGRADE_COST = {};
-UPGRADE_COST["Bot"] = {};
-UPGRADE_COST["Green"] = {};
-
-UPGRADE_COST["Bot"]["calc"] = function(lvl){
-    return [["eng_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
-}
-UPGRADE_COST["Green"]["calc"] = function(lvl){
-    return [["bio_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
-}
-UPGRADE_COST["Bot"]["curr"] = UPGRADE_COST["Bot"].calc(1)
-UPGRADE_COST["Green"]["curr"] = UPGRADE_COST["Green"].calc(1)
-
-UPGRADE_COST["Bot"]["effect"] = function(){
-   STATS["PRODUCTIVITY_MULT"]["bot"] = STATS["PRODUCTIVITY_MULT"]["bot"] + 0.2;
-}
-UPGRADE_COST["Green"]["effect"] = function(){
-   STATS["PRODUCTIVITY_MULT"]["green"] = STATS["PRODUCTIVITY_MULT"]["green"] + 0.2;
-}
-
 
 for(var i=0; i< SCIENCE_TYPES.length; i++){
    //PROJECTSAVAIL_LIST_bio
@@ -618,11 +710,12 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
    availListElem.fid = fid;
    availListElem.descElem = descElem;
    availListElem.researchButton = researchButton;
+   availListElem.GAME = GAME_GLOBAL;
    researchButton.fid = fid;
    researchButton.availListElem = availListElem;
-   researchButton.STATS = STATS;
-   researchButton.canAfford = canAfford;
-   researchButton.INVENTORY = INVENTORY;
+   researchButton.GAME = GAME_GLOBAL;
+   //researchButton.canAfford = canAfford;
+   //researchButton.INVENTORY = INVENTORY;
    RESEARCH_BUTTONS.push(researchButton);
 
    SCIENCE_DISPLAY[fid].availListElem = availListElem;
@@ -641,8 +734,8 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
 
    researchButton.canAffordTest = function(){
        var vv = this.availListElem.value;
-       var pp = this.STATS["AVAIL_PROJECTS"][this.fid][vv];
-       if( this.canAfford(pp.cost) ){
+       var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
+       if( this.GAME.canAfford(pp.cost) ){
            this.disabled = false;
            return true;
        } else {
@@ -652,14 +745,14 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
    }
 
      availListElem.onchange = function(){
-       var pp = STATS["AVAIL_PROJECTS"][this.fid][this.value]
+       var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][this.value]
        var dd = pp.desc;
        for(var k=0; k < pp.cost.length;k++){
           var ccc = fmtSIunits(pp.cost[k][1]);
-          dd = dd + "<br> &nbsp&nbsp&nbsp"+ccc[0]+ccc[1]+ STATICVAR_HOLDER["INVENTORY_DESC_SHORT"][pp.cost[k][0]]
+          dd = dd + "<br> &nbsp&nbsp&nbsp"+ccc[0]+ccc[1]+ this.GAME.STATICVAR_HOLDER["INVENTORY_DESC_SHORT"][pp.cost[k][0]]
        }
        this.descElem.innerHTML = dd
-       if( canAfford(pp.cost) ){
+       if( this.GAME.canAfford(pp.cost) ){
          this.researchButton.disabled = false;
        } else {
          this.researchButton.disabled = true;
@@ -670,10 +763,10 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
         for(var kk = 0; kk < this.availListElem.pp.cost.length; kk++){
            //console.log(this.availListElem.pp);
            var vv = this.availListElem.value;
-           var pp = STATS["AVAIL_PROJECTS"][this.fid][vv];
-           console.log("BEFORE: [val="+this.availListElem.value+"] ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
-           INVENTORY[ pp.cost[kk][0] ] = INVENTORY[ pp.cost[kk][0] ] - pp.cost[kk][1];
-           console.log("AFTER: ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
+           var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
+           //console.log("BEFORE: [val="+this.availListElem.value+"] ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
+           this.GAME.INVENTORY[ pp.cost[kk][0] ] = this.GAME.INVENTORY[ pp.cost[kk][0] ] - pp.cost[kk][1];
+           //console.log("AFTER: ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
         }
         this.availListElem.remove(this.availListElem.selectedIndex)
         this.disabled = true;
@@ -683,15 +776,6 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
      availListElem.onchange();
 }
 
-
-function canAfford(c){
-   for(var i=0; i<c.length;i++){
-      if( this.INVENTORY[ c[i][0] ] < c[i][1] ){
-         return false;
-      }
-   }
-   return true;
-}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -707,22 +791,7 @@ UPGRADE_COST_FCN["Green"] = function(lvl){
     [["bio_SCIENCE_FREE",Math.pow(1.6,lvl) * 50e17]];
 }*/
 
-function makeCostAbbriv(cc,delim){
-   var ccc = fmtSIunits(cc[0][1]);
-   var costString = ccc[0] + ccc[1] +"B "+ this.STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[0][0]];
-   if(cc.length > 1){
-     for(var i=1; i<cc.length;i++){
-       var c3 = fmtSIunits(cc[i][1]);
-       costString = costString + delim + ccc[0] + ccc[1] +"B "+ this.STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[0][0]];
-     }
-   }
-   return costString;
-}
 
-var WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
-var WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false,false]
-
-var DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub","Slag","Seedres"]
 
 for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
     var worldType = WORLD_TYPE_LIST[i]
@@ -801,31 +870,33 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    if(upgradeElem != null){
 
       upgradeElem.worldType = worldType;
-      upgradeElem.INVENTORY = INVENTORY;
-      upgradeElem.UPCOST = UPGRADE_COST[worldType];
-      upgradeElem.canAfford = canAfford;
-      upgradeElem.makeCostAbbriv = makeCostAbbriv;
-      upgradeElem.STATICVAR_HOLDER = STATICVAR_HOLDER;
+      upgradeElem.GAME = GAME_GLOBAL;
+      //upgradeElem.UPCOST = UPGRADE_COST[worldType];
+      //upgradeElem.canAfford = canAfford;
+      //upgradeElem.makeCostAbbriv = makeCostAbbriv;
+      //upgradeElem.STATICVAR_HOLDER = STATICVAR_HOLDER;
       upgradeElem.costDisplayElem = document.getElementById("wfUPGRADE_"+worldType+"_COST")
       upgradeElem.lvlDisplayElem = document.getElementById(worldType+"_wfLVL")
       upgradeElem.onclick = function(){
-        for(var kk = 0; kk < this.UPCOST.curr.length; kk++){
-           this.INVENTORY[ this.UPCOST.curr[kk][0] ] = this.INVENTORY[ this.UPCOST.curr[kk][0] ] - this.UPCOST.curr[kk][1];
+        var UPCOST = this.GAME.STATS.UPGRADE_COST[this.worldType];
+        for(var kk = 0; kk < UPCOST.curr.length; kk++){
+           this.GAME.INVENTORY[ UPCOST.curr[kk][0] ] = this.GAME.INVENTORY[ UPCOST.curr[kk][0] ] - UPCOST.curr[kk][1];
         }
-        var lvl = this.INVENTORY["WORLDS-"+this.worldType+"-LVL"] + 1;
-        this.INVENTORY["WORLDS-"+this.worldType+"-LVL"] = lvl
-        this.UPCOST.curr = this.UPCOST.calc(lvl);
-        var costString = this.makeCostAbbriv(this.UPCOST.curr,", ");
+        var lvl = this.GAME.INVENTORY["WORLDS-"+this.worldType+"-LVL"] + 1;
+        this.GAME.INVENTORY["WORLDS-"+this.worldType+"-LVL"] = lvl
+        UPCOST.curr = UPCOST.calc(lvl);
+        var costString = this.GAME.makeCostAbbriv(UPCOST.curr,", ");
         this.costDisplayElem.innerHTML = costString;
         this.lvlDisplayElem.innerHTML = "Lvl-"+lvl;
-        this.UPCOST.effect();
+        UPCOST.effect();
       }
-      var costString = upgradeElem.makeCostAbbriv(upgradeElem.UPCOST.curr,", ");
+      var costString = upgradeElem.GAME.makeCostAbbriv(STATS.UPGRADE_COST[worldType].curr,", ");
       upgradeElem.costDisplayElem.innerHTML = costString;
       
       upgradeElem.canAffordTest = function(){
         //console.log(this.UPCOST);
-        if( this.canAfford(this.UPCOST.curr) ){
+        var UPCOST = this.GAME.STATS.UPGRADE_COST[this.worldType];
+        if( this.GAME.canAfford(UPCOST.curr) ){
             this.disabled = false;
             return true;
         } else {
@@ -1070,19 +1141,6 @@ document.getElementById("CHEAT_RESET_CRAZY").onclick = function(){
 
 ////////////////////////////////////
 
-var UNLOCKS={
-  WASTEREPROCESS:false,
-  TRANSMUTEYOGURT:false,
-  BIOWEAPONS:false,
-  ESPIONAGE:false,
-  HACKING:false
-}
-
-
-////////////////////////////////////
-
-UNLOCKABLES=["WASTEREPROCESS","TRANSMUTEYOGURT","BIOWEAPONS","HACKING","COMPOST"]
-UNLOCKABLE_SLIDERINFO=[["bot",3],["bot",4],["green",3],["think",3],["green",4]]
 
 // botSliderPct4 botSliderCheck4
 
@@ -1175,7 +1233,6 @@ document.getElementById("ENABLE_CHEATS_CHECKBOX").oninput = function(){
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-var CONSTRUCTION_REQUESTS=[];
 
 /*
     addConstructionRequest("MATTER-Collected-CT",

@@ -2,41 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// SET FINAL VARS:
-var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
-bgCanvas.RUN_STATIC = false;
 
-var contentSet = document.getElementsByClassName("contentUnitHolder")
-var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
-var bgStatic = document.getElementById("BACKGROUND_STATIC")
-var GAME_GLOBAL = {
-       SETTINGS:SETTINGS,
-       INVENTORY:INVENTORY,
-       STATS:STATS,
-       CONSTRUCTION_BUFFER:CONSTRUCTION_BUFFER,
-       UNLOCKS:UNLOCKS,
-       STATICVAR_HOLDER:STATICVAR_HOLDER,
-       contentSet:contentSet,
-       itsSet:itsSet,
-       bgCanvas:bgCanvas,
-       bgStatic:bgStatic,
-       PCTSLIDER_FIELDS:PCTSLIDER_FIELDS,
-       PCTSLIDER_DISPLAYUNITS:PCTSLIDER_DISPLAYUNITS,
-       PCTSLIDERS:PCTSLIDERS,
-       DEBUG_CRAZY_LEVEL_DISPLAY:document.getElementById("DEBUG_CRAZY_LEVEL_DISPLAY"),
-       DATE_DISPLAY:document.getElementById("DATE_DISPLAY"),
-       MOOD_DISPLAY:document.getElementById("MOOD_DISPLAY"),
-       MATTER_TYPE_LIST:MATTER_TYPE_LIST,
-       SHIPCONSTRUCTBUFFER_DISPLAY_DIV:document.getElementById("SHIPCONSTRUCTBUFFER_DISPLAY_DIV"),
-       ELEMS:ELEMS,
-       WORLD_TYPE_LIST:WORLD_TYPE_LIST,
-       DYSON_TYPE_LIST:DYSON_TYPE_LIST,
-       CONSTRUCTION_REQUESTS:CONSTRUCTION_REQUESTS,
-       SHIP_TYPE_LIST:SHIP_TYPE_LIST,
-       ALL_CONTENT_CONTAINER:document.getElementById("ALL_CONTENT_CONTAINER"),
-       timeToNextLanding_SPAN: document.getElementById("timeToNextLanding_SPAN"),
-       seedshipsInTransit_SPAN:document.getElementById("seedshipsInTransit_SPAN"),
-       RESEARCH_BUTTONS:RESEARCH_BUTTONS
-}
 
 
 GAME_GLOBAL.SCIENCE_DISPLAY   = SCIENCE_DISPLAY;
@@ -222,7 +188,7 @@ for( var i = 0; i < this.WORLD_TYPE_LIST.length; i++){
    ELEMS[WORLD_TYPE_LIST[i] + "_CT_DISPLAY"] = document.getElementById(WORLD_TYPE_LIST[i] + "_CT");
    var cancelButton = document.getElementById("button_wf"+WORLD_TYPE_LIST[i]+"Cancel");
    if(cancelButton != null){
-	   ELEMS[WORLD_TYPE_LIST[i] + "_CT_DISPLAY"].cancelButton = cancelButton;
+       ELEMS[WORLD_TYPE_LIST[i] + "_CT_DISPLAY"].cancelButton = cancelButton;
    }
 
 }
@@ -241,21 +207,21 @@ function TICK_updateWorldCounts(){
         if(countDisplay != null){
           countDisplay.innerHTML = worldCountLine
           if(countDisplay.cancelButton != null){
-			  if(this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0){
-			    countDisplay.cancelButton.style.display = "block";
-			    countDisplay.cancelButton.disabled = false;
-			  } else {
-			    countDisplay.cancelButton.style.display = "none";
-			    countDisplay.cancelButton.disabled = true;
-			  }
-		  }
+              if(this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0){
+                countDisplay.cancelButton.style.display = "block";
+                countDisplay.cancelButton.disabled = false;
+              } else {
+                countDisplay.cancelButton.style.display = "none";
+                countDisplay.cancelButton.disabled = true;
+              }
+          }
 
 
           if(countDisplay.cancelButton != null && this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0){
 
-		  } else {
+          } else {
 
-		  }
+          }
         }
     }
 }
@@ -414,8 +380,8 @@ function TICK_calcIndustry(){
 
 
     for(var i=0; i<this.RESEARCH_BUTTONS.length; i++){
-		this.RESEARCH_BUTTONS[i].canAffordTest()
-	}
+        this.RESEARCH_BUTTONS[i].canAffordTest()
+    }
 
 /*
 GAME_GLOBAL.SCIENCE_DISPLAY   = SCIENCE_DISPLAY;
