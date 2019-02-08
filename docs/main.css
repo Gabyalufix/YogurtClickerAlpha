@@ -815,7 +815,7 @@ h5 {
 	   grid-row: 1 / 2;
 	}
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1300px) {
 	.MAINGRID_CONTAINER {
 	  display: grid;
 	  grid-template-columns: 50% 50%;
@@ -837,7 +837,7 @@ h5 {
 	   grid-row: 1 / 2;
 	}
 }
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 800px) {
 	.MAINGRID_CONTAINER {
 	  display: grid;
 	  grid-template-columns: 100%;
@@ -1199,6 +1199,20 @@ input[type=unitEntry], select {
 ===================================================================================================================
 */
 
+.LVL_DISPLAY {
+   padding: 0px 0px 0px 5px;
+   margin: 0px 0px;
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   background: transparent;
+   color: var(--LT4);
+   border: none;
+   text-decoration: none;
+   font-family: "Courier New", Courier, monospace;
+}
+
+
 .buildCancelButton {
    display: none;
    padding: 0px 5px 0px 0px;
@@ -1218,13 +1232,14 @@ input[type=unitEntry], select {
 .buildCtrlPanel {
   position: relative;
   display: grid;
-  background-color: var(--MID);
+  background-color: var(--LT1);
   padding: 1px;
   margin: 4px 0px 4px 0px;
   border-style: solid;
   border-color: var(--DK4);
   border-width: 2px;
   border-radius: 2px;
+  grid-template-rows: 16px 18px 18px;
 }
 
 .buildCtrlPanel7 {
@@ -1242,7 +1257,7 @@ input[type=unitEntry], select {
 
 
 .buildCtrlPanel > div {
-  background-color: var(--MID);
+  background-color: var(--LT1);
   text-align: center;
   padding: 2px 0;
   font-size: 14px;

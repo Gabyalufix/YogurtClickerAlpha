@@ -483,6 +483,20 @@ STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy0_SCIENCE_FREE"] = "B Cognition"
 STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy1_SCIENCE_FREE"] = "B Manipulation"
 STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy2_SCIENCE_FREE"] = "B Strategy"
 
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"] = {};
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio_SCIENCE_FREE"] = "Bio"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio0_SCIENCE_FREE"] = "Biowar"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio1_SCIENCE_FREE"] = "Yogosyn"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio2_SCIENCE_FREE"] = "Bioengi"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["eng_SCIENCE_FREE"] = "Eng"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["eng0_SCIENCE_FREE"] = "WrldBldg"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["eng1_SCIENCE_FREE"] = "Wpns&War"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["eng2_SCIENCE_FREE"] = "Mtr&Enrgy"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["psy_SCIENCE_FREE"] = "SocSci"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["psy0_SCIENCE_FREE"] = "Cogntn"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["psy1_SCIENCE_FREE"] = "Manip"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["psy2_SCIENCE_FREE"] = "Strat"
+
 ///////////////////////////////
 ////Starting Projects:
 
@@ -497,9 +511,9 @@ STATS["AVAIL_PROJECTS"] = {
    psy:{}
 }
 
-175848665414992000000
-500000000000000000000
-5000000000000000000
+
+
+
 STATS["UNLOCK_PROJECTS"] = {
    bio:{},
    eng:{},
@@ -577,14 +591,20 @@ UPGRADE_COST["Bot"] = {};
 UPGRADE_COST["Green"] = {};
 
 UPGRADE_COST["Bot"]["calc"] = function(lvl){
-	return [["eng_SCIENCE_FREE",Math.pow(1.6,lvl) * 50e17]];
+    return [["eng_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
 }
 UPGRADE_COST["Green"]["calc"] = function(lvl){
-	return [["bio_SCIENCE_FREE",Math.pow(1.6,lvl) * 50e17]];
+    return [["bio_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
 }
 UPGRADE_COST["Bot"]["curr"] = UPGRADE_COST["Bot"].calc(1)
 UPGRADE_COST["Green"]["curr"] = UPGRADE_COST["Green"].calc(1)
 
+UPGRADE_COST["Bot"]["effect"] = function(){
+   STATS["PRODUCTIVITY_MULT"]["bot"] = STATS["PRODUCTIVITY_MULT"]["bot"] + 0.2;
+}
+UPGRADE_COST["Green"]["effect"] = function(){
+   STATS["PRODUCTIVITY_MULT"]["green"] = STATS["PRODUCTIVITY_MULT"]["green"] + 0.2;
+}
 
 
 for(var i=0; i< SCIENCE_TYPES.length; i++){
@@ -620,15 +640,15 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
    }
 
    researchButton.canAffordTest = function(){
-	   var vv = this.availListElem.value;
-	   var pp = this.STATS["AVAIL_PROJECTS"][this.fid][vv];
-	   if( this.canAfford(pp.cost) ){
-		   this.disabled = false;
-		   return true;
-	   } else {
-		   this.disabled = true;
-		   return false;
-	   }
+       var vv = this.availListElem.value;
+       var pp = this.STATS["AVAIL_PROJECTS"][this.fid][vv];
+       if( this.canAfford(pp.cost) ){
+           this.disabled = false;
+           return true;
+       } else {
+           this.disabled = true;
+           return false;
+       }
    }
 
      availListElem.onchange = function(){
@@ -681,11 +701,23 @@ function canAfford(c){
 
 /*UPGRADE_COST_FCN = {};
 UPGRADE_COST_FCN["Bot"] = function(lvl){
-	[["eng_SCIENCE_FREE",Math.pow(1.6,lvl) * 50e17]];
+    [["eng_SCIENCE_FREE",Math.pow(1.6,lvl) * 50e17]];
 }
 UPGRADE_COST_FCN["Green"] = function(lvl){
-	[["bio_SCIENCE_FREE",Math.pow(1.6,lvl) * 50e17]];
+    [["bio_SCIENCE_FREE",Math.pow(1.6,lvl) * 50e17]];
 }*/
+
+function makeCostAbbriv(cc,delim){
+   var ccc = fmtSIunits(cc[0][1]);
+   var costString = ccc[0] + ccc[1] +"B "+ this.STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[0][0]];
+   if(cc.length > 1){
+     for(var i=1; i<cc.length;i++){
+       var c3 = fmtSIunits(cc[i][1]);
+       costString = costString + delim + ccc[0] + ccc[1] +"B "+ this.STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[0][0]];
+     }
+   }
+   return costString;
+}
 
 var WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
 var WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false,false]
@@ -742,15 +774,15 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
      var bname = addButtonList[j]
      var butelem = document.getElementById("button_wf"+worldType+bname)
      if(butelem != null){
-		 butelem.worldType = worldType;
-		 butelem.addMult = addButtonMult[j]
-		 butelem.addPositive = addButtonPos[j]
-		 butelem.onclick = function(){
-		   if(this.addPositive){
-			 startWorldConstruction(  this.worldType,this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
-		   } else {
-			 startWorldDeconstruction(this.worldType,this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
-		   }
+         butelem.worldType = worldType;
+         butelem.addMult = addButtonMult[j]
+         butelem.addPositive = addButtonPos[j]
+         butelem.onclick = function(){
+           if(this.addPositive){
+             startWorldConstruction(  this.worldType,this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
+           } else {
+             startWorldDeconstruction(this.worldType,this.addMult * SETTINGS["ADD_MULTIPLIER"][this.worldType])
+           }
          }
      }
    }
@@ -763,7 +795,7 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
         this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][this.worldType] = 0;
         this.disabled = true;
         this.style.display = "none";
-	  }
+      }
    }
    var upgradeElem =  document.getElementById("button_wf"+worldType+"UPGRADE")
    if(upgradeElem != null){
@@ -772,28 +804,40 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
       upgradeElem.INVENTORY = INVENTORY;
       upgradeElem.UPCOST = UPGRADE_COST[worldType];
       upgradeElem.canAfford = canAfford;
+      upgradeElem.makeCostAbbriv = makeCostAbbriv;
+      upgradeElem.STATICVAR_HOLDER = STATICVAR_HOLDER;
+      upgradeElem.costDisplayElem = document.getElementById("wfUPGRADE_"+worldType+"_COST")
+      upgradeElem.lvlDisplayElem = document.getElementById(worldType+"_wfLVL")
       upgradeElem.onclick = function(){
         for(var kk = 0; kk < this.UPCOST.curr.length; kk++){
-           INVENTORY[ this.UPCOST.curr[kk][0] ] = INVENTORY[ this.UPCOST.curr[kk][0] ] - this.UPCOST.curr[kk][1];
+           this.INVENTORY[ this.UPCOST.curr[kk][0] ] = this.INVENTORY[ this.UPCOST.curr[kk][0] ] - this.UPCOST.curr[kk][1];
         }
         var lvl = this.INVENTORY["WORLDS-"+this.worldType+"-LVL"] + 1;
         this.INVENTORY["WORLDS-"+this.worldType+"-LVL"] = lvl
-        upgradeElem.UPCOST.curr = upgradeElem.UPCOST.calc(lvl);
-	  }
-	  upgradeElem.canAffordTest = function(){
-		//console.log(this.UPCOST);
-	    if( this.canAfford(this.UPCOST.curr) ){
-		    this.disabled = false;
-		    return true;
-	    } else {
-		    this.disabled = true;
-		    return false;
-	    }
+        this.UPCOST.curr = this.UPCOST.calc(lvl);
+        var costString = this.makeCostAbbriv(this.UPCOST.curr,", ");
+        this.costDisplayElem.innerHTML = costString;
+        this.lvlDisplayElem.innerHTML = "Lvl-"+lvl;
+        this.UPCOST.effect();
+      }
+      var costString = upgradeElem.makeCostAbbriv(upgradeElem.UPCOST.curr,", ");
+      upgradeElem.costDisplayElem.innerHTML = costString;
+      
+      upgradeElem.canAffordTest = function(){
+        //console.log(this.UPCOST);
+        if( this.canAfford(this.UPCOST.curr) ){
+            this.disabled = false;
+            return true;
+        } else {
+            this.disabled = true;
+            return false;
+        }
       }
       RESEARCH_BUTTONS.push(upgradeElem);
    }
 
 }
+
 
 
 
