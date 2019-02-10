@@ -16,7 +16,7 @@ GAME_GLOBAL.STAR_TYPE_SET = STAR_TYPE_SET;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///MAIN TICK CYCLE:
-
+//GAME_GLOBAL.TICK_scoutSystems()
 
 var TICK_TIMESTAMP
 var secTimer = 0;
@@ -505,7 +505,7 @@ function TICK_constructWorlds(){
         if(nxt == nxtAttempt){
           var nxtbuf = this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()
         } else {
-          this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] = this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] - nxt;
+          this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][0] = this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][0] - nxt;
         }
         this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] = this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] - nxt
       }

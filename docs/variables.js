@@ -379,3 +379,543 @@ Sectors:
   --baseBG: #c3c8d5
 }*/
 
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Holder objects:
+
+SETTINGS = {}
+INVENTORY = {}
+STATS = {}
+RESEARCH_BUTTONS=[];
+
+STATS["TICK"] = 0;
+STATS["PAUSE"] = false;
+
+ELEMS = {};
+
+STATS["CRAZY_LEVEL"]=0
+STATS["CRAZY_ON"]=true
+/*INVENTORY["WORLDS"] = {};*/
+///////////////////////////////
+////Initialize settings
+SETTINGS["ADD_MULTIPLIER"] = {}
+
+STATS["WORLDS-Total-CT"]=7
+
+///////////////////////////////
+////Initialize initial values:
+CONSTRUCTION_BUFFER = {WORLDS_CONST_CT:{},WORLDS_DECON_CT:{}}
+CONSTRUCTION_BUFFER["WORLDS_CONST"] = {}
+CONSTRUCTION_BUFFER["WORLDS_DECON"] = {}
+
+
+INVENTORY["SHIP-CONSTRUCT-BUFFER"] = 0;
+
+///////////////////////////////
+var UNLOCKS={
+  WASTEREPROCESS:false,
+  TRANSMUTEYOGURT:false,
+  BIOWEAPONS:false,
+  ESPIONAGE:false,
+  HACKING:false
+}
+
+
+////////////////////////////////////
+
+UNLOCKABLES=["WASTEREPROCESS","TRANSMUTEYOGURT","BIOWEAPONS","HACKING","COMPOST"]
+UNLOCKABLE_SLIDERINFO=[["bot",3],["bot",4],["green",3],["think",3],["green",4]]
+
+////////////////////////////////////
+var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate","comp","strat"]
+var PCTSLIDER_DISPLAYUNITS = {bio:"B/wk",eng:"B/wk",psy:"B/wk",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns",scout:" Ships",battleplate:" Ships",comp:"Hz",strat:" Ships"}
+var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of information. A zero, or a one.",
+                                     eng:"Byte: the fundamental unit of information. A zero, or a one.",
+                                     psy:"Byte: the fundamental unit of information. A zero, or a one.",
+                                     bot:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades).",
+                                     green:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades)",
+                                     think:"Hertz: Compute cycles per second.",
+                                     soul:"Identities: Number of distinct thinking entities being simulated inside the soulswarm network.",
+                                     ship:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades)",
+                                     ships:"Ships: the number of ships assigned a given task.",
+                                     scout:"Ships: the number of ships assigned a given task.",
+                                     battleplate:"Ships: the number of ships assigned a given task.",
+                                     comp:"Hertz: Compute cycles per second.",
+                                     strat:"Ships: the number of ships assigned a given task."}
+
+
+var PCTSLIDER_SUBFIELDCT = [3,3,3,7,7,3,3,3,3,3,2,3]
+var PCTSLIDERS = {}
+
+////////////////////////////////////
+
+MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt","Biopwr","Botpwr"]
+
+
+var WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
+var WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false,false]
+
+var DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub","Slag","Seedres"]
+var CONSTRUCTION_REQUESTS=[];
+var SHIP_TYPE_LIST = ["scout","battleplate","seedship"]
+
+////////////////////////////////////
+
+UPGRADE_COST = {};
+UPGRADE_COST["Bot"] = {};
+UPGRADE_COST["Green"] = {};
+
+UPGRADE_COST["Bot"]["calc"] = function(lvl){
+    return [["eng_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
+}
+UPGRADE_COST["Green"]["calc"] = function(lvl){
+    return [["bio_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
+}
+//UPGRADE_COST["Bot"]["curr"] = UPGRADE_COST["Bot"].calc(1)
+//UPGRADE_COST["Green"]["curr"] = UPGRADE_COST["Green"].calc(1)
+
+UPGRADE_COST["Bot"]["effect"] = function(){
+   STATS["PRODUCTIVITY_MULT"]["bot"] = STATS["PRODUCTIVITY_MULT"]["bot"] + 0.2;
+}
+UPGRADE_COST["Green"]["effect"] = function(){
+   STATS["PRODUCTIVITY_MULT"]["green"] = STATS["PRODUCTIVITY_MULT"]["green"] + 0.2;
+}
+
+//STATS["UPGRADE_COST"] = UPGRADE_COST;
+STATS["CURRENT_UPGRADE_COST"] = {};
+STATS["CURRENT_UPGRADE_COST"]["Bot"]   = UPGRADE_COST["Bot"].calc(1)
+STATS["CURRENT_UPGRADE_COST"]["Green"] = UPGRADE_COST["Green"].calc(1)
+
+////////////////////////////////////
+
+var bgCanvas = document.getElementById("BACKGROUND_CANVAS");
+bgCanvas.RUN_STATIC = false;
+
+var contentSet = document.getElementsByClassName("contentUnitHolder")
+var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
+var bgStatic = document.getElementById("BACKGROUND_STATIC")
+var GAME_GLOBAL = {
+       SETTINGS:SETTINGS,
+       INVENTORY:INVENTORY,
+       STATS:STATS,
+       CONSTRUCTION_BUFFER:CONSTRUCTION_BUFFER,
+       UNLOCKS:UNLOCKS,
+       STATICVAR_HOLDER:STATICVAR_HOLDER,
+       contentSet:contentSet,
+       itsSet:itsSet,
+       bgCanvas:bgCanvas,
+       bgStatic:bgStatic,
+       PCTSLIDER_FIELDS:PCTSLIDER_FIELDS,
+       PCTSLIDER_DISPLAYUNITS:PCTSLIDER_DISPLAYUNITS,
+       PCTSLIDERS:PCTSLIDERS,
+       DEBUG_CRAZY_LEVEL_DISPLAY:document.getElementById("DEBUG_CRAZY_LEVEL_DISPLAY"),
+       DATE_DISPLAY:document.getElementById("DATE_DISPLAY"),
+       MOOD_DISPLAY:document.getElementById("MOOD_DISPLAY"),
+       MATTER_TYPE_LIST:MATTER_TYPE_LIST,
+       SHIPCONSTRUCTBUFFER_DISPLAY_DIV:document.getElementById("SHIPCONSTRUCTBUFFER_DISPLAY_DIV"),
+       ELEMS:ELEMS,
+       WORLD_TYPE_LIST:WORLD_TYPE_LIST,
+       DYSON_TYPE_LIST:DYSON_TYPE_LIST,
+       CONSTRUCTION_REQUESTS:CONSTRUCTION_REQUESTS,
+       SHIP_TYPE_LIST:SHIP_TYPE_LIST,
+       ALL_CONTENT_CONTAINER:document.getElementById("ALL_CONTENT_CONTAINER"),
+       timeToNextLanding_SPAN: document.getElementById("timeToNextLanding_SPAN"),
+       seedshipsInTransit_SPAN:document.getElementById("seedshipsInTransit_SPAN"),
+       RESEARCH_BUTTONS:RESEARCH_BUTTONS,
+       UPGRADE_COST:UPGRADE_COST
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+
+STATS["CONVERSIONS"] = {}
+STATS["CONVERSIONS"]["sunToByte"] =  (1243912971288)
+STATS["CONVERSIONS"]["opToSoul"] =   (0.000000001)
+STATS["CONVERSIONS"]["sunToOp"] =    (3745454516355)
+STATS["CONVERSIONS"]["opToByte"] =   (0.232)
+STATS["CONVERSIONS"]["gramsPerWorld"] = 2e21
+
+STATS["CONVERSIONS"]["yearPerTick"] = 1 / 52;
+STATS["CONVERSIONS"]["timeUnitPerTick"] = 1;
+STATS["CONVERSIONS"]["timeAtZero"]  = 2152;
+
+
+
+//STATS["CONVERSIONS"]["collectPerSunPerTick"] = 1.5e15
+//STATS["CONVERSIONS"]["processPerSunPerTick"] = 5.2e15
+//STATS["CONVERSIONS"]["shipPerSunPerTick"]    = 1
+//STATS["CONVERSIONS"]["gramPerSunShip"]       = 2.3e14
+
+
+
+STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] = 0.001
+STATS["COST-MATTER-Feedstock"] = [["MATTER-FreeBot-CT",1.01],["MATTER-Waste-CT",-0.01]]
+STATS["CONVERSIONS"]["DigestedPerProdPerTick"] = 0.001
+STATS["COST-MATTER-Digested"] = [["MATTER-FreeGreen-CT",1.01],["MATTER-Waste-CT",-0.01]]
+STATS["CONVERSIONS"]["ShipPerProdPerTick"] = 0.001
+STATS["COST-MATTER-Ship"] = [["MATTER-Feedstock-CT",1.25],["MATTER-Waste-CT",-0.25]]
+
+
+
+
+STATS["CONVERSIONS"]["BiopwrPerProdPerTick"] = 0.002
+STATS["COST-MATTER-Biopwr"] = [["MATTER-Digested-CT",2],["MATTER-Waste-CT",-1]]
+
+STATS["CONVERSIONS"]["BotpwrPerProdPerTick"] = 0.0015
+STATS["COST-MATTER-Botpwr"] = [["MATTER-Feedstock-CT",1.2],["MATTER-Waste-CT",-0.2]]
+
+
+STATS["CONVERSIONS"]["YogurtPerProdPerTick"] = 0.001
+STATS["COST-MATTER-Yogurt"] = [["MATTER-Digested-CT",1.2],["MATTER-Waste-CT",-0.2]]
+STATS["CONVERSIONS"]["BotbotsPerProdPerTick"] = 0.001
+STATS["COST-MATTER-Botbots"] = [["MATTER-Feedstock-CT",1.3],["MATTER-Waste-CT",-0.3]]
+STATS["CONVERSIONS"]["BiomassPerProdPerTick"] = 0.001
+STATS["COST-MATTER-Biomass"] = [["MATTER-Digested-CT",1.1],["MATTER-Waste-CT",-0.1]]
+STATS["CONVERSIONS"]["ComputePerProdPerTick"] = 0.001
+STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3],["MATTER-Waste-CT",-0.3]]
+
+
+
+STATS["CONVERSIONS"]["bufferPerShip-scout"] =        118000000
+STATS["CONVERSIONS"]["bufferPerShip-battleplate"] = 2500000000
+STATS["CONVERSIONS"]["bufferPerShip-seedship"] =     160000000
+
+/*
+STATS["PRODUCTIVITY_MULT"]["bot"]  = 1
+STATS["PRODUCTIVITY_MULT"]["green"]  = 1
+STATS["PRODUCTIVITY_MULT"]["comp"]  = 1
+*/
+
+
+
+///////////////////////////////
+////Initialize starting stats
+
+STATS["scout-speed"] = 0.01;
+STATS["scout-sensorrange"] = 1;
+STATS["explore-starDensity"] = 0.876;
+
+STATS["seedship-speed"] = 0.0025;
+STATS["seedship-toughness"] = 1;
+
+STATS["seedship-Secure-seedRate"] = 0.95;
+STATS["seedship-Neutral-seedRate"] = 0.75;
+STATS["seedship-Hostile-seedRate"] = 0.05;
+
+INVENTORY["seedship-transit-buffer"] = [];
+INVENTORY["seedship-transit-CT"] = 0;
+
+
+STATS["seedship-distToNextStar"] = 1.219;
+
+
+
+
+///////////////////////////////
+////Initialize starting stats
+//MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt"]
+
+
+STATS["WORLD_BUILD_TIME"] = {Fallow:0,Pop:0,Omni:5000, Bot:2000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0}
+STATS["WORLD_DECON_TIME"]={Fallow:0,Pop:0,Omni:5000, Bot:2000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0}
+
+STATS["COST-WORLDBUILD-Fallow"] = [["WORLDS-Secure-CT",1]];
+STATS["COST-WORLDBUILD-Omni"] = [["WORLDS-Fallow-CT",1]];
+STATS["COST-WORLDBUILD-Bot"] = [["WORLDS-Fallow-CT",1],
+                                ["MATTER-FreeBot-CT",-STATS["CONVERSIONS"]["gramsPerWorld"]],
+                                ["MATTER-Botbots-CT",-100000000],
+                                ["MATTER-Waste-CT",-100000000]
+                                ];
+STATS["COST-WORLDBUILD-Green"] = [["WORLDS-Fallow-CT",1],
+                                ["MATTER-FreeGreen-CT",-STATS["CONVERSIONS"]["gramsPerWorld"]],
+                                ["MATTER-Biomass-CT",-100000000],
+                                ["MATTER-Waste-CT",  -100000000]
+                              ];
+STATS["COST-WORLDBUILD-Comp"] = [["WORLDS-Fallow-CT",1]];
+STATS["COST-WORLDBUILD-Hub"] = [["WORLDS-Fallow-CT",1]];
+STATS["COST-WORLDBUILD-Slag"] = [["WORLDS-Fallow-CT",1]];
+STATS["COST-WORLDBUILD-Seedres"] = [["WORLDS-Fallow-CT",1]];
+
+
+STATS["COST-WORLDDECON-Fallow"] = [["WORLDS-Secure-CT",-1]];
+STATS["COST-WORLDDECON-Omni"] = [["WORLDS-Fallow-CT",-1]];
+STATS["COST-WORLDDECON-Bot"] = [["WORLDS-Fallow-CT",-1]];
+STATS["COST-WORLDDECON-Green"] = [["WORLDS-Fallow-CT",-1]];
+STATS["COST-WORLDDECON-Comp"] = [["WORLDS-Fallow-CT",-1]];
+STATS["COST-WORLDDECON-Hub"] = [["WORLDS-Fallow-CT",-1]];
+STATS["COST-WORLDDECON-Slag"] = [["WORLDS-Fallow-CT",-1]];
+STATS["COST-WORLDDECON-Seedres"] = [["WORLDS-Fallow-CT",-1]];
+
+
+PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","comp","think","soul","ship"]
+STATS["PRODUCTIVITY_RATING"] = {}
+STATS["PRODUCTIVITY_MULT"] = {}
+
+for(var i=0;i<PRODUCTIVITY_STATS.length;i++){
+  var stat = PRODUCTIVITY_STATS[i]
+  STATS["PRODUCTIVITY_RATING"][stat] = 1
+  STATS["PRODUCTIVITY_MULT"][stat] = 1
+}
+STATS["PRODUCTIVITY_RATING"]["think"] = (1000000000)
+STATS["PRODUCTIVITY_RATING"]["soul"] = (10000)
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+SCIENCE_DISPLAY = {};
+SCIENCE_TYPES = ["bio","eng","psy"];
+SCIENCE_SUBFIELDS = {bio:3,eng:3,psy:3};
+
+SCIENCE_TYPES_FULL = SCIENCE_TYPES.slice().push("sum")
+
+
+STATS["PRODUCTIVITY_MULT"]["scout"] = 1
+STATS["PRODUCTIVITY_MULT"]["battleplate"] = 1
+
+
+
+
+
+
+
+
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"] = {};
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio_SCIENCE_FREE"] = "B Biology"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio0_SCIENCE_FREE"] = "B Biowarfare"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio1_SCIENCE_FREE"] = "B Yogosynthesis"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio2_SCIENCE_FREE"] = "B Bioengineering"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng_SCIENCE_FREE"] = "B Engineering"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng0_SCIENCE_FREE"] = "B World Building"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng1_SCIENCE_FREE"] = "B Weapons & Warfare"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng2_SCIENCE_FREE"] = "B Matter & Energy"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy_SCIENCE_FREE"] = "B Social Science"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy0_SCIENCE_FREE"] = "B Cognition"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy1_SCIENCE_FREE"] = "B Manipulation"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy2_SCIENCE_FREE"] = "B Strategy"
+
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"] = {};
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio_SCIENCE_FREE"] = "Bio"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio0_SCIENCE_FREE"] = "Biowar"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio1_SCIENCE_FREE"] = "Yogosyn"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio2_SCIENCE_FREE"] = "Bioengi"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["eng_SCIENCE_FREE"] = "Eng"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["eng0_SCIENCE_FREE"] = "WrldBldg"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["eng1_SCIENCE_FREE"] = "Wpns&War"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["eng2_SCIENCE_FREE"] = "Mtr&Enrgy"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["psy_SCIENCE_FREE"] = "SocSci"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["psy0_SCIENCE_FREE"] = "Cogntn"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["psy1_SCIENCE_FREE"] = "Manip"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["psy2_SCIENCE_FREE"] = "Strat"
+
+///////////////////////////////
+////Starting Projects:
+
+STATS["AVAIL_PROJECT_LIST"] = {
+   bio:[],
+   eng:[],
+   psy:[]
+}
+STATS["AVAIL_PROJECTS"] = {
+   bio:{},
+   eng:{},
+   psy:{}
+}
+
+
+
+
+STATS["UNLOCK_PROJECTS"] = {
+   bio:{},
+   eng:{},
+   psy:{}
+}
+
+
+STATS["UNLOCK_PROJECTS"]["eng"] = [
+    {  projectTitle:"Matter Recycling", projectID:"engDUMMY1",
+       cost:[["eng_SCIENCE_FREE",50e17],["eng2_SCIENCE_FREE",15e16]],
+       desc:"Recycle waste matter (1) using advanced matter transmutation technology. This requires huge amounts of energy, but allows waste matter to be recovered back into processed feedstock."
+    },
+    {  projectTitle:"Matter Recycling 2", projectID:"engDUMMY2",
+       cost:[["eng_SCIENCE_FREE",50e18],["eng2_SCIENCE_FREE",15e17]],
+       desc:"Recycle waste matter (2) using advanced matter transmutation technology. This requires huge amounts of energy, but allows waste matter to be recovered back into processed feedstock."
+    },
+    {  projectTitle:"Matter Recycling 3", projectID:"engDUMMY3",
+       cost:[["eng_SCIENCE_FREE",50e19],["eng2_SCIENCE_FREE",15e18]],
+       desc:"Recycle waste matter (3) using advanced matter transmutation technology. This requires huge amounts of energy, but allows waste matter to be recovered back into processed feedstock."
+    },
+    {  projectTitle:"Matter Recycling 4", projectID:"engDUMMY4",
+       cost:[["eng_SCIENCE_FREE",50e22],["eng2_SCIENCE_FREE",15e19]],
+       desc:"Recycle waste matter (4) using advanced matter transmutation technology. This requires huge amounts of energy, but allows waste matter to be recovered back into processed feedstock."
+    },
+    {  projectTitle:"Matter Recycling 5", projectID:"engDUMMY5",
+       cost:[["eng_SCIENCE_FREE",50e22],["eng2_SCIENCE_FREE",15e22]],
+       desc:"Recycle waste matter (5) using advanced matter transmutation technology. This requires huge amounts of energy, but allows waste matter to be recovered back into processed feedstock."
+    }
+]
+STATS["UNLOCK_PROJECTS"]["bio"] = [
+    {  projectTitle:"DUMMY BIO PROJECT 1", projectID:"bioDUMMY1",
+       cost:[["bio_SCIENCE_FREE",50e22],["bio2_SCIENCE_FREE",15e20]],
+       desc:"blah 1b blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY BIO PROJECT 2", projectID:"bioDUMMY2",
+       cost:[["bio_SCIENCE_FREE",50e22],["bio2_SCIENCE_FREE",15e21]],
+       desc:"blah 2b blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY BIO PROJECT 3", projectID:"bioDUMMY3",
+       cost:[["bio_SCIENCE_FREE",50e22],["bio2_SCIENCE_FREE",15e22]],
+       desc:"blah 3b blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY BIO PROJECT 4", projectID:"bioDUMMY4",
+       cost:[["bio_SCIENCE_FREE",50e22],["bio2_SCIENCE_FREE",15e22]],
+       desc:"blah 4b blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY BIO PROJECT 5", projectID:"bioDUMMY5",
+       cost:[["bio_SCIENCE_FREE",50e22],["bio2_SCIENCE_FREE",15e22]],
+       desc:"blah 5b blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+]
+STATS["UNLOCK_PROJECTS"]["psy"] = [
+    {  projectTitle:"DUMMY PSYCH PROJECT 1", projectID:"psyDUMMY1",
+       cost:[["psy_SCIENCE_FREE",50e22],["psy2_SCIENCE_FREE",15e22]],
+       desc:"blah 1p blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY PSYCH PROJECT 2", projectID:"psyDUMMY2",
+       cost:[["psy_SCIENCE_FREE",50e22],["psy2_SCIENCE_FREE",15e22]],
+       desc:"blah 2p blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY PSYCH PROJECT 3", projectID:"psyDUMMY3",
+       cost:[["psy_SCIENCE_FREE",50e22],["psy2_SCIENCE_FREE",15e22]],
+       desc:"blah 3p blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY PSYCH PROJECT 4", projectID:"psyDUMMY4",
+       cost:[["psy_SCIENCE_FREE",50e22],["psy2_SCIENCE_FREE",15e22]],
+       desc:"blah 4p blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+    {  projectTitle:"DUMMY PSYCH PROJECT 5", projectID:"psyDUMMY5",
+       cost:[["psy_SCIENCE_FREE",50e22],["psy2_SCIENCE_FREE",15e22]],
+       desc:"blah 5p blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah ."
+    },
+]
+
+
+
+
+STATICVAR_HOLDER.SCIENCE = {};
+
+SCIENCE_PROJECT_TYPES = ["PROGRESS","SCALED","STATICLEVEL"]
+
+//Science projects that ALWAYS appear once the total tech
+//  in a given type 
+STATICVAR_HOLDER.SCIENCE.PROGRESS = {
+  bio:[{projectTitle:"dummyproject1",projectID:"dpro1",
+        req:50e20, 
+        unlockPrereq:[],
+        resPrereq:[],
+        cost:[],
+        effect:function(){
+        
+        },
+        desc:"", descShort:""}
+      ],
+  eng:[],
+  psy:[],
+  sum:[]
+}
+
+//Science projects that can appear at any point in the tech progression 
+//       and can only be researched once.
+//These generally unlock new abilities or provide a large boost to
+//       one specific ability.
+STATICVAR_HOLDER.SCIENCE.SCALED = {
+  bio:[],
+  eng:[],
+  psy:[],
+  sum:[]
+}
+
+
+//Science projects that can appear at any point in the tech progression 
+//       and can be researched more than once.
+//These generally provide a small boost to one specific ability.
+STATICVAR_HOLDER.SCIENCE.MULTI = {
+  bio:[],
+  eng:[],
+  psy:[],
+  sum:[]
+}
+
+//Science projects that can only appear at one specific tech point and randomly either
+//       appear or not.
+STATICVAR_HOLDER.SCIENCE.STATICLEVEL = {
+  bio:[],
+  eng:[],
+  psy:[],
+  sum:[]
+}
+
+SCIENCEUNIV_PROJECT_TYPES = ["BRANCHED","SUPERTECH"]
+
+STATICVAR_HOLDER.SCIENCE.BRANCHED = [
+
+]
+STATICVAR_HOLDER.SCIENCE.SUPERTECH = [
+
+]
+
+STATS.SCIENCE_LOCKED = {};
+
+
+/*
+
+Initialize science locked, unlocked, researched:
+
+*/
+
+for(var j=0; j < SCIENCE_PROJECT_TYPES.length; j++){
+  var protype = SCIENCE_PROJECT_TYPES[j];
+  STATS.SCIENCE_LOCKED[protype] = {};
+  if(STATICVAR_HOLDER.SCIENCE[protype] instanceof Array){ //un-scityped science protype:
+      var pp = STATICVAR_HOLDER.SCIENCE[protype]
+      for(var k=0; k < pp.length; k++){
+         STATS.SCIENCE_LOCKED[protype][k] = k;
+      }
+  } else {
+    for(var i=0; i<SCIENCE_TYPES_FULL.length;i++){ //scityped science protype (bio, eng, psy):
+      var scitype = SCIENCE_TYPES_FULL[i];
+      var pp = STATICVAR_HOLDER.SCIENCE[protype][scitype]
+      if(pp == null){
+        console.log("pp==null: "+protype+" / "+scitype)
+      }
+      STATS.SCIENCE_LOCKED[protype][scitype] = [];
+      for(var k=0; k < pp.length; k++){
+         STATS.SCIENCE_LOCKED[protype][scitype][k] = k;
+      }
+    }
+  }
+}
+
+
+for(var j=0; j < SCIENCEUNIV_PROJECT_TYPES.length; j++){
+  var protype = SCIENCEUNIV_PROJECT_TYPES[j];
+  STATS.SCIENCE_LOCKED[protype] = [];
+  var pp = STATICVAR_HOLDER.SCIENCE[protype]
+  for(var k=0; k < pp.length; k++){
+         STATS.SCIENCE_LOCKED[protype][k] = k;
+  }
+}
+
+
+
+
+
+
+
