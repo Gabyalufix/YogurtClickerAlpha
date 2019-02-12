@@ -452,6 +452,11 @@ var prod = this.calcIndustrialProd(iss);
        var sdx  = iss.sliderIDX;
        var reqCt = STATS["PRODUCTION-REQ"][ iss.inventoryType+"-"+productID+"-CT" ] 
        var currCt = STATS["PRODUCTION-CURR"][ iss.inventoryType+"-"+productID+"-CT" ] 
+       if(null == this.PCTSLIDERS[sd].displayElem[sdx].PROD){
+          console.log("NULL: "+iss.prodTitle);
+          console.log("    ["+sd+" / "+sdx+"]");
+          
+       }
        this.PCTSLIDERS[sd].displayElem[sdx].PROD.innerHTML = ( fmtSIflat(currCt)+" / "+fmtSIflat(reqCt) )
     }
 

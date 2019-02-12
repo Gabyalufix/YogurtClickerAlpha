@@ -638,12 +638,12 @@ STATS["INDUSTRY"]["WasteReprocess"] = { sliderID: "bot", sliderIDX: 3, prodTitle
                                    baseCost:  [["MATTER-Waste-CT",1]],
                                    basePwr:   0.177000,
                                    baseWaste: 0, lockKey: "WASTEREPROCESS"}
-STATS["INDUSTRY"]["WasteFerment"] = { sliderID: "bio", sliderIDX: 3, prodTitle: "Waste Reprocessing", inventoryType: "MATTER", scitype: "eng",
+STATS["INDUSTRY"]["WasteFerment"] = { sliderID: "green", sliderIDX: 3, prodTitle: "Waste Reprocessing", inventoryType: "MATTER", scitype: "eng",
                                    baseProd:  0.001, 
                                    baseCost:  [["MATTER-Waste-CT",1]],
                                    basePwr:   0.177000,
                                    baseWaste: 0, lockKey: "COMPOST"}
-STATS["INDUSTRY"]["Bioweapons"] = { sliderID: "bio", sliderIDX: 2, prodTitle: "Grow Bioweapons", inventoryType: "MATTER", scitype: "bio",
+STATS["INDUSTRY"]["Bioweapons"] = { sliderID: "green", sliderIDX: 2, prodTitle: "Grow Bioweapons", inventoryType: "MATTER", scitype: "bio",
                                    baseProd:  0.000157, 
                                    baseCost:  [["MATTER-Digested-CT",1]],
                                    basePwr:   0.177000,
@@ -787,6 +787,39 @@ STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biomass-PROD"]["costMult"] = [1.5];
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biomass-ENER"]["costMult"] = [1];
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biomass-WAST"]["costMult"] = [1];
 
+
+
+
+
+"","Bioweapons","WasteFerment","WasteReprocess"
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["TransmuteYogurt-PROD"]["costField"] = ["eng_SCIENCE_FREE","bio1_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["TransmuteYogurt-ENER"]["costField"] = ["eng_SCIENCE_FREE","bio1_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["TransmuteYogurt-WAST"]["costField"] = ["eng_SCIENCE_FREE","bio1_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["TransmuteYogurt-PROD"]["costMult"] = [1.5,1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["TransmuteYogurt-ENER"]["costMult"] = [1,1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["TransmuteYogurt-WAST"]["costMult"] = [1,1];
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Bioweapons-PROD"]["costField"] = ["bio_SCIENCE_FREE","bio0_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Bioweapons-ENER"]["costField"] = ["bio_SCIENCE_FREE","bio0_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Bioweapons-WAST"]["costField"] = ["bio_SCIENCE_FREE","bio0_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Bioweapons-PROD"]["costMult"] = [1.5,1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Bioweapons-ENER"]["costMult"] = [1,1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Bioweapons-WAST"]["costMult"] = [1,1];
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteFerment-PROD"]["costField"] = ["bio_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteFerment-ENER"]["costField"] = ["bio_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteFerment-WAST"]["costField"] = ["bio_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteFerment-PROD"]["costMult"] = [1.5];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteFerment-ENER"]["costMult"] = [1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteFerment-WAST"]["costMult"] = [1];
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-PROD"]["costField"] = ["eng_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-ENER"]["costField"] = ["eng_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-WAST"]["costField"] = ["eng_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-PROD"]["costMult"]  = [1.5];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-ENER"]["costMult"]  = [1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-WAST"]["costMult"]  = [1];
 
 
 /*
@@ -1194,7 +1227,93 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            desc:"Develop a new method to reprocess and recycle waste material into raw feedstock." , 
            descShort:"Develop a new method to reprocess and recycle waste material into raw feedstock."}
   ],
-  psy:[],
+  psy:[
+          {projectTitle:"Soul Synthesis",projectID:"SCALED_SOULSYNTHESIS",projectType:"SCALED",
+           costField:["psy_SCIENCE_FREE","psy0_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           effect:function(){
+             console.log("project not yet implemented!")
+           },
+           desc:"" , 
+           descShort:""},
+          {projectTitle:"Misdirection-Counterdetection Technology",projectID:"SCALED_STEALTHTECH",projectType:"SCALED",
+           costField:["psy_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             console.log("project not yet implemented!")
+           },
+           desc:"" , 
+           descShort:""},
+          {projectTitle:"Bioterrorism",projectID:"SCALED_BIOTERROR",projectType:"SCALED",
+           costField:["psy_SCIENCE_FREE","psy1_SCIENCE_FREE","bio0_SCIENCE_FREE"], costMult:[1,1,1], rate:1,
+           effect:function(){
+             console.log("project not yet implemented!")
+           },
+           desc:"" , 
+           descShort:""},
+          {projectTitle:"Battleplate Training Regimen",projectID:"SCALED_BPTRAIN",projectType:"SCALED",
+           costField:["psy_SCIENCE_FREE","psy2_SCIENCE_FREE","eng1_SCIENCE_FREE"], costMult:[1,1,1], rate:1,
+           effect:function(){
+             console.log("project not yet implemented!")
+           },
+           desc:"" , 
+           descShort:""},
+          {projectTitle:"Technology Theft",projectID:"SCALED_TECHSTEAL",projectType:"SCALED",
+           costField:["psy_SCIENCE_FREE","psy1_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           effect:function(){
+             console.log("project not yet implemented!")
+           },
+           desc:"" , 
+           descShort:""},
+          {projectTitle:"Sabotage",projectID:"SCALED_SABOTAGE",projectType:"SCALED",
+           costField:["psy_SCIENCE_FREE","psy1_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           effect:function(){
+             console.log("project not yet implemented!")
+           },
+           desc:"" , 
+           descShort:""},
+          {projectTitle:"Sabotage",projectID:"SCALED_SABOTAGE",projectType:"SCALED",
+           costField:["psy_SCIENCE_FREE","psy1_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           effect:function(){
+             console.log("project not yet implemented!")
+           },
+           desc:"" , 
+           descShort:""},
+          {projectTitle:"Counterintelligence",projectID:"SCALED_COINTEL",projectType:"SCALED",
+           costField:["psy_SCIENCE_FREE","psy1_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           effect:function(){
+             console.log("project not yet implemented!")
+           },
+           desc:"" , 
+           descShort:""},
+          {projectTitle:"Tactical Doctrine: High Risk, High Reward",projectID:"SCALED_STRATHIGHRISK",projectType:"SCALED",
+           costField:["psy_SCIENCE_FREE","psy2_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           effect:function(){
+             console.log("project not yet implemented!")
+           },
+           desc:"" , 
+           descShort:""},
+          {projectTitle:"Tactical Doctrine: Conservative",projectID:"SCALED_STRATLOWRISK",projectType:"SCALED",
+           costField:["psy_SCIENCE_FREE","psy2_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           effect:function(){
+             console.log("project not yet implemented!")
+           },
+           desc:"" , 
+           descShort:""},
+          {projectTitle:"Tactical Doctrine: Max Kill Ratio",projectID:"SCALED_STRATRATIO",projectType:"SCALED",
+           costField:["psy_SCIENCE_FREE","psy2_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           effect:function(){
+             console.log("project not yet implemented!")
+           },
+           desc:"" , 
+           descShort:""},
+          {projectTitle:"Battlemind",projectID:"SCALED_BATTLEMIND",projectType:"SCALED",
+           costField:["psy_SCIENCE_FREE","psy2_SCIENCE_FREE","eng1_SCIENCE_FREE"], costMult:[1,1,1], rate:1,
+           effect:function(){
+             console.log("project not yet implemented!")
+           },
+           desc:"" , 
+           descShort:""}
+
+  ],
   sum:[]
 }
 for(var i=0; i<SCIENCE_TYPES.length; i++){
@@ -1517,6 +1636,11 @@ function addMultiProject(pp, techlvl){
     ap.projectTitle = pp.projectTitle + " " + plvl;
   }
   ap.projectType = pp.projectType;
+  if(null == pp.costField){
+    console.log("costfield null!");
+    console.log("    pp: "+pp.projectTitle);
+  }
+  
   ap.cost = this.GAME.getProjectCost(pp.costField,techlvl,pp.costMult);
   this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] = this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] + 1;
   this.addNewProject(ap);
