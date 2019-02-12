@@ -22,6 +22,8 @@ var TICK_TIMESTAMP
 var secTimer = 0;
 var midTimer = 0;
 
+STATS["PAUSE"] = false;
+
 //var bgStatic = document.getElementById("BACKGROUND_STATIC")
 //var vgCanvas = document.getElementById("BACKGROUND_CANVAS")
 //var allContentContainer =
@@ -80,6 +82,7 @@ window.setInterval(function(){
 var varNumTicksSoFar = 0
 function calculateSlowTick(){
     varNumTicksSoFar = varNumTicksSoFar + 1
+    TICK_calcScience();
     /*printlnToAiConsole("" + varNumTicksSoFar+" secTimer = "+secTimer)*/
 
 }
@@ -218,6 +221,17 @@ function TICK_updateWorldCounts(){
 
         }
     }
+    
+    //this.INVENTORY["STARS-" + sinfo[0] +"-CT"]
+    
+    for( var i=0; i < this.STAR_TYPE_SET.length; i++){
+       var sid = this.STAR_TYPE_SET[i].sid;
+       var ee = ELEMS["STARCT_"+sid] ;
+       var ct = this.INVENTORY["STARS-" + sid +"-CT"];
+       var ff = fmtSIintNoPct(ct)
+       ee.innerHTML = ff;
+    }
+    
 }
 
 function TICK_scoutSystems(){
@@ -261,10 +275,136 @@ function TICK_scoutSystems(){
 
 function TICK_calcIndustry(){
 
+
+    /*
+     * POWER PRODUCTION:
+     
+        <div class="valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Total Power: </span>           <span id="POWER_DISPLAY">0.0W</span> </div>
+
+        this.INVENTORY["MATTER-Free"+worldType+"-CT"] = this.INVENTORY["MATTER-Free"+worldType+"-CT"] + (starInfo[2] * 1.9885e27);
+        this.INVENTORY["POWER-Free"+worldType+"-CT"] = this.INVENTORY["POWER-Free"+worldType+"-CT"] + (starInfo[3] * 3.828e20);
+        SETTINGS["POWER-PriorityList"]
+        
+        STATS["ENERGYRATE_MULT"]["BotpwrGen"] = 0.70
+        STATS["ENERGYRATE_MULT"]["BiopwrGen"] = 0.30
+        STATS["ENERGYRATE_MULT"]["HawkpwrGen"]   = 0.95
+        
+     */
+    //this.STATS["PRODUCTIVITY_RATING"]["HawkingGen"] = 0;
+    var pwrSrc = ["Bot","Bio"];
+    var dysonSrc = ["bot","green"]
+    var dysonSrcCap = ["Bot","Green"]
+    this.INVENTORY["POWER"] = 0;
+    for(var z=0; z< pwrSrc.length; z++){
+       var pc = pwrSrc[z];
+       var dy = dysonSrc[z];
+       this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"] = this.STATS["PRODUCTIVITY_MULT"][pc+"pwrGen"] * this.STATS["CONVERSIONS"]["pwrFrom"+pc+"pwrPerProdPerTick"] * this.STATS["PRODUCTIVITY_MULT"][dy];
+       
+       this.INVENTORY["POWER-"+pc+"-CAP"] = this.INVENTORY["MATTER-"+pc+"pwr-CT"] * this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"]
+       this.INVENTORY["POWER-"+pc+""] = Math.min(this.INVENTORY["POWER-"+pc+"-CAP"],this.INVENTORY["POWER-Free"+dysonSrcCap[z]+"-CT"]);
+       this.INVENTORY["POWER"] = this.INVENTORY["POWER"] + this.INVENTORY["POWER-"+pc]
+       
+       var pwrFmt1 = fmtSIunits( Math.round( this.INVENTORY["POWER-"+pc+""]) * 1000000)
+       this.ELEMS[pc+"pwr_POWER_DISPLAY"].innerHTML = pwrFmt1[0];
+       this.ELEMS[pc+"pwr_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt1[1];
+       
+       
+    }
+    
+    
+    //this.STATS["PRODUCTIVITY_RATING"]["BiopwrGen"] = this.INVENTORY["MATTER-Biopwr-CT"] * this.STATS["PRODUCTIVITY_MULT"]["BiopwrGen"] * this.STATS["CONVERSIONS"]["pwrFromBiopwrPerProdPerTick"] * this.STATS["PRODUCTIVITY_MULT"]["green"];
+
+    //this.INVENTORY["POWER"] = this.STATS["PRODUCTIVITY_RATING"]["BotpwrGen"] + this.STATS["PRODUCTIVITY_RATING"]["BiopwrGen"]
+    this.INVENTORY["POWERGEN"] = this.INVENTORY["POWER"] 
+    
+    
+    /*
+    //var xpwr = ["POWER_DISPLAY","Botpwr_POWER_DISPLAY","Biopwr_POWER_DISPLAY","Hawking_POWER_DISPLAY"]
+    var xpwr = ["POWER_DISPLAY","Botpwr_POWER_DISPLAY","Biopwr_POWER_DISPLAY"]
+    var xpwrAmt = ["POWER","BotpwrGen","BiopwrGen"]
+    
+       var pwrFmt = fmtSIunits( Math.round( this.INVENTORY["POWER"]) * 1000000 )
+       this.ELEMS["POWER_DISPLAY"].innerHTML = pwrFmt[0];
+       this.ELEMS["POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt[1];
+       var pwrFmt1 = fmtSIunits( Math.round( this.STATS["PRODUCTIVITY_RATING"]["BotpwrGen"]) * 1000000)
+       this.ELEMS["Botpwr_POWER_DISPLAY"].innerHTML = pwrFmt1[0];
+       this.ELEMS["Botpwr_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt1[1];
+       var pwrFmt2 = fmtSIunits( Math.round(this.STATS["PRODUCTIVITY_RATING"]["BiopwrGen"]) * 1000000)
+       this.ELEMS["Biopwr_POWER_DISPLAY"].innerHTML = pwrFmt2[0];
+       this.ELEMS["Biopwr_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt2[1];
+       
+       */
+    
+/*
+
+STATS["PRODUCTIVITY_MULT"]["BotpwrGen"] = 1
+STATS["PRODUCTIVITY_MULT"]["BiopwrGen"] = 1
+STATS["PRODUCTIVITY_RATING"]["BotpwrGen"] = 1
+STATS["PRODUCTIVITY_RATING"]["BiopwrGen"] = 1
+
+STATS["CONVERSIONS"]["pwrFromBotpwrPerProdPerTick"] = 1271
+STATS["CONVERSIONS"]["pwrFromBiopwrPerProdPerTick"] =  187
+
+i=0;
+productID = GAME_GLOBAL.INDUSTRY_LIST[i]
+var iss = STATS.INDUSTRY[productID];
+var sliderID = iss.sliderID;
+var sliderIDX = iss.sliderIDX;
+var prod = GAME_GLOBAL.calcIndustrialProd(iss);
+
+i=0;
+productID = GAME_GLOBAL.INDUSTRY_LIST[i]
+var iss = STATS.INDUSTRY[productID];
+var sliderID = iss.sliderID;
+var sliderIDX = iss.sliderIDX;
+var prod2 = GAME_GLOBAL.calcIndustrialProd(iss);
+
+
+
+
+*/
+
 //MATTER-Botbots-CT
 //MATTER-Biomass-CT
 //MATTER-Compute-CT
 
+
+    //GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass"]
+
+    for(var i=0; i<this.INDUSTRY_LIST.length; i++){
+       var productID = this.INDUSTRY_LIST[i];
+       var iss = this.STATS.INDUSTRY[productID];
+       var sliderID = iss.sliderID;
+       var sliderIDX = iss.sliderIDX;
+       var prod = this.calcIndustrialProd(iss);
+       iss.currRequested = prod;
+       this.addConstructionRequest(iss.inventoryType+"-"+productID+"-CT",
+                                   prod,
+                                   this.calcIndustrialCost(iss));
+       //if(productID == "Feedstock"){
+       //   console.log(this.calcIndustrialProd(iss))
+       //}
+    }
+    
+
+    //console.log("A:"+this.calcIndustrialProd(this.STATS.INDUSTRY["Feedstock"]))
+    //console.log("B:"+(this.STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][0]) )
+    //console.log("A:"+this.calcIndustrialCost(this.STATS.INDUSTRY["Feedstock"]));
+    //console.log("B:"+this.STATS["COST-MATTER-Feedstock"]);
+    
+    /*
+    STATS["INDUSTRY"]["Biomass"] = { sliderID: "green", sliderIDX: 4,
+                                       baseProd: 0.00157, 
+                                       baseCost:  ["MATTER-Digested-CT",1],
+                                       basePwr:   0.177000,
+                                       baseWaste: 0.1}
+    
+    GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass"]
+    GAME_GLOBAL.calcIndustrialProd=calcIndustrialProd;
+    GAME_GLOBAL.calcIndustrialCost=calcIndustrialCost;
+
+    */
+/*
     this.addConstructionRequest("MATTER-Feedstock-CT",
                            (this.STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][0]) ,
                            this.STATS["COST-MATTER-Feedstock"] )
@@ -297,10 +437,22 @@ function TICK_calcIndustry(){
     this.addConstructionRequest("MATTER-Botpwr-CT",
                            (this.STATS["CONVERSIONS"]["BotpwrPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][6]) ,
                            this.STATS["COST-MATTER-Botpwr"] )
-
+*/
     this.executeAllConstructionRequests()
 
-    var shipBuffer = this.INVENTORY["SHIP-CONSTRUCT-BUFFER"];
+//CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt]
+
+    for(var i=0; i<this.INDUSTRY_LIST.length; i++){
+       var productID = this.INDUSTRY_LIST[i];
+       var iss = this.STATS.INDUSTRY[productID];
+       var sd   = iss.sliderID;
+       var sdx  = iss.sliderIDX;
+       var reqCt = STATS["PRODUCTION-REQ"][ iss.inventoryType+"-"+productID+"-CT" ] 
+       var currCt = STATS["PRODUCTION-CURR"][ iss.inventoryType+"-"+productID+"-CT" ] 
+       this.PCTSLIDERS[sd].displayElem[sdx].PROD.innerHTML = ( fmtSIflat(currCt)+" / "+fmtSIflat(reqCt) )
+    }
+
+    var shipBuffer = this.INVENTORY["BUFFER-Ship-CT"];
     for(var i=0; i < this.SHIP_TYPE_LIST.length;i++){
         var shipType = this.SHIP_TYPE_LIST[i];
         this.INVENTORY["SHIPS-"+shipType+"-CT"] = this.INVENTORY["SHIPS-"+shipType+"-CT"] + ((shipBuffer * this.SETTINGS["ship_FRACTION"][i]) / this.STATS["CONVERSIONS"]["bufferPerShip-"+shipType])
@@ -402,6 +554,61 @@ GAME_GLOBAL.SCIENCE_SUBFIELDS = SCIENCE_SUBFIELDS;
     matterCollected = Math.min( INVENTORY["MATTER-Raw-CT"] );
     INVENTORY["MATTER-Collected-CT"] = INVENTORY["MATTER-Collected-CT"] + matterCollected;
     var matterProcessed = STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]*/
+    
+    /*
+     POWER USAGE:
+    */
+       var pwrFmt5 = fmtSIunits( Math.round(this.INVENTORY["POWERGEN"]) * 1000000 )
+       this.ELEMS["POWER_DISPLAY"].innerHTML = pwrFmt5[0];
+       this.ELEMS["POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt5[1];
+       
+       var pwrFmt3 = fmtSIunits( Math.round(this.INVENTORY["POWER"]) * 1000000 )
+       this.ELEMS["SURPLUS_POWER_DISPLAY"].innerHTML = pwrFmt3[0];
+       this.ELEMS["SURPLUS_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt3[1];
+    
+       var pwrFmt4 = fmtSIunits( Math.round((this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"]))* 1000000 )
+       this.ELEMS["USAGE_POWER_DISPLAY"].innerHTML = pwrFmt4[0];
+       this.ELEMS["USAGE_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt4[1];
+    
+    
+}
+
+
+console.log("[all science] is lvl "+(1) + ", next threshold: "+fmtSIintNoPct(Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, (2)) * this.SCIENCE_UNLOCK_THRESH_BASE));
+
+
+function TICK_calcScience(){
+    for(var i=0;i<this.SCIENCE_TYPES.length;i++){
+      var sciname = this.SCIENCE_TYPES[i];
+      //var subf = SCIENCE_SUBFIELDS[scienceName];
+      var currLvl = this.INVENTORY["SCIENCE-LEVEL-"+sciname];
+      var currSci = this.INVENTORY[sciname+"_SCIENCE_TOTAL"] + this.INVENTORY["DEEP_SCIENCE_TOTAL"]
+      if( Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, (currLvl + 1)) * this.SCIENCE_UNLOCK_THRESH_BASE < currSci ){
+         console.log("["+sciname+"] is lvl "+(currLvl + 1) + ", next threshold: "+fmtSIintNoPct(Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, (currLvl + 2)) * this.SCIENCE_UNLOCK_THRESH_BASE));
+         INVENTORY["SCIENCE-LEVEL-"+sciname] = INVENTORY["SCIENCE-LEVEL-"+sciname] + 1;
+         
+         if( Math.random() < this.SCIENCE_UNLOCK_RATE ){
+           console.log("   attempting unlock");
+           var projectList   = this.STATICVAR_HOLDER.SCIENCE.MULTI[sciname];
+           var projectCts    = this.STATS.SCIENCE_MULTICT;
+           var idx = Math.floor( getRandomBetween(0,projectList.length) );
+           console.log("   attempting unlock: "+ projectList[idx].projectID);
+           if(Math.random() < projectList[idx].rate){
+              console.log("   unlocking: "+ projectList[idx].projectID);
+              //     var ap1 = availListElem.addMultiProject(projectList[idx1],1,1)
+              this.SCIENCE_DISPLAY[sciname].availListElem.addMultiProject(projectList[idx], currLvl + 1)
+           }
+         } else {
+           console.log("   skipping unlock");
+         }
+         //do the unlocks:getRandomBetween
+         
+
+         
+         
+      }
+    }
+
 }
 
 
@@ -495,13 +702,23 @@ function TICK_constructWorlds(){
 
   for(var i=0;i<this.DYSON_TYPE_LIST.length;i++){
     var worldType = this.DYSON_TYPE_LIST[i]
+    //if( this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType] == null){
+      //console.log("null found: i="+i+", "+this.DYSON_TYPE_LIST[i]);
+    //}
     if(this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].length > 0){
       if(  this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] < Date.now() ){
         var nxtAttempt = this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][0]
         var nxt = this.buildFromCost("WORLDS-"+worldType+"-CT",nxtAttempt,this.STATS["COST-WORLDBUILD-"+worldType]);
-        if(worldType == "Slag"){
-          /*INVENTORY["MATTER-Available-CT"] = INVENTORY["MATTER-Available-CT"] + STATS["CONVERSIONS"]["gramsPerWorld"] * nxt;*/
+        
+        var starInfo = this.STAR_TYPE_SET.getRandStarBatch(nxt,0.5)
+        
+        for( var z=0; z < starInfo[1].length; z++){
+          var sinfo = starInfo[1][z];
+          this.INVENTORY["STARS-" + sinfo[0] +"-CT"] = this.INVENTORY["STARS-" + sinfo[0] +"-CT"] + sinfo[1];
         }
+        this.INVENTORY["MATTER-Free"+worldType+"-CT"] = this.INVENTORY["MATTER-Free"+worldType+"-CT"] + (starInfo[2] * 1.9885e27);
+        this.INVENTORY["POWER-Free"+worldType+"-CT"] = this.INVENTORY["POWER-Free"+worldType+"-CT"] + (starInfo[3] * 3.828e20);
+        
         if(nxt == nxtAttempt){
           var nxtbuf = this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()
         } else {
@@ -526,6 +743,12 @@ function TICK_constructWorlds(){
 }
 
 
+
+
+
+
+//MATTER-FreeBot-CT
+//MATTER-FreeGreen-CT
 
 
 GAME_GLOBAL.TICK_readUserInputs = TICK_readUserInputs;

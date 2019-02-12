@@ -19,7 +19,7 @@ function makeCostAbbriv(cc,delim){
    if(cc.length > 1){
      for(var i=1; i<cc.length;i++){
        var c3 = fmtSIunits(cc[i][1]);
-       costString = costString + delim + ccc[0] + ccc[1] +"B "+ STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[0][0]];
+       costString = costString + delim + c3[0] + c3[1] +"B "+ STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[i][0]];
      }
    }
    return costString;
@@ -55,6 +55,9 @@ for(var i=0;i<SCIENCE_TYPES.length;i++){
     INVENTORY[scienceName+j+"_SCIENCE_FREE"] = 0
   }
 }
+INVENTORY["DEEP"+"_SCIENCE_TOTAL"]  = 0
+INVENTORY["SUPER"+"_SCIENCE_TOTAL"] = 0
+
 
 
 //Productivity: <span id="green_PRODUCTIVITY_DISPLAY"></span>
@@ -159,17 +162,22 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
     var displayDiv_elem = []
     var slider_elem = []
     for(var i = 0; i < fct; i++){
-         console.log("1: "+fid+"SliderCheck"+(i+1))
+         STATS["PRODUCTIVITY_MULT"][fid+"_"+i] = 1;
+         STATS["WASTERATE_MULT"][fid+"_"+i] = 1;
+         STATS["ENERGYRATE_MULT"][fid+"_"+i] = 1;
+         //console.log("1: "+fid+"SliderCheck"+(i+1))
          slider_elem[i] = document.getElementById(fid+"SliderPct"+(i+1));
          check_elem[i] = document.getElementById(fid+"SliderCheck"+(i+1));
          display_elem[i] = document.getElementById(fid+"SliderDisplayPct"+(i+1));
          displayUnits_elem[i] = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_UNITS");
          displayDiv_elem[i] = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_DIV");
+         display_elem[i].PROD = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_PROD");
          slider_elem[i].IS_LOCKED = false
          //console.log("2: "+fid+"SliderCheck"+(i+1))
     }
     PCTSLIDERS[fid] = {checkElem: check_elem, displayElem: display_elem, sliderElem:slider_elem}
     for(var i = 0; i < fct; i++){
+        STATS["PRODUCTIVITY_RATING"][fid]
         var ss = slider_elem[i];
         ss.sdisplay = display_elem[i]
         ss.sdisplayUnits = displayUnits_elem[i]
@@ -308,6 +316,7 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
    var descElem = document.getElementById("CURRENT_AVAIL_PROJECT_DESC_"+fid);
    var researchButton = document.getElementById("RESEARCH_CURRENT_PROJECT_"+fid);
    availListElem.fid = fid;
+   availListElem.addMultiProject = addMultiProject
    availListElem.descElem = descElem;
    availListElem.researchButton = researchButton;
    availListElem.GAME = GAME_GLOBAL;
@@ -320,8 +329,15 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
 
    SCIENCE_DISPLAY[fid].availListElem = availListElem;
 
-
-   for(var j=0; j < STATS["UNLOCK_PROJECTS"][fid].length; j++){
+   availListElem.addNewProject = function(pp){
+     this.GAME.STATS["AVAIL_PROJECTS"][this.fid][pp.uid] = pp;
+     var elem = document.createElement("option");
+     pp.listElem = elem;
+     elem.value = pp.uid;
+     elem.appendChild( document.createTextNode( pp.projectTitle ) );
+     this.appendChild(elem);
+   }
+   /*for(var j=0; j < STATS["UNLOCK_PROJECTS"][fid].length; j++){
      var pp = STATS["UNLOCK_PROJECTS"][fid][j];
      STATS["AVAIL_PROJECT_LIST"][fid].push(pp.projectID);
      STATS["AVAIL_PROJECTS"][fid][pp.projectID] = pp;
@@ -330,22 +346,30 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
      elem.value = pp.projectID;
      elem.appendChild( document.createTextNode( pp.projectTitle ) );
      availListElem.appendChild(elem);
-   }
+   }*/
 
    researchButton.canAffordTest = function(){
        var vv = this.availListElem.value;
        var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
-       if( this.GAME.canAfford(pp.cost) ){
-           this.disabled = false;
-           return true;
+       if(pp != null){
+         if( this.GAME.canAfford(pp.cost) ){
+             this.disabled = false;
+             return true;
+         } else {
+             this.disabled = true;
+             return false;
+         }
        } else {
-           this.disabled = true;
-           return false;
+         return false;
        }
    }
-
+//var pp = this.GAME.STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ this.value ];
      availListElem.onchange = function(){
-       var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][this.value]
+       //var ppid = this.GAME.STATS["AVAIL_PROJECT_LIST"][this.fid][this.value];
+       //var pp = this.GAME.STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ this.value ];
+       var vv = this.value;     
+       var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
+       console.log("this.value="+this.value+", pp = "+pp);
        var dd = pp.desc;
        for(var k=0; k < pp.cost.length;k++){
           var ccc = fmtSIunits(pp.cost[k][1]);
@@ -357,22 +381,31 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
        } else {
          this.researchButton.disabled = true;
        }
-       availListElem.pp = pp;
      }
      researchButton.onclick = function(){
-        for(var kk = 0; kk < this.availListElem.pp.cost.length; kk++){
-           //console.log(this.availListElem.pp);
-           var vv = this.availListElem.value;
-           var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
+        var vv = this.availListElem.value;     
+        var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
+        for(var kk = 0; kk < pp.cost.length; kk++){
+           //console.log(this.availListElem.pp);           
            //console.log("BEFORE: [val="+this.availListElem.value+"] ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
            this.GAME.INVENTORY[ pp.cost[kk][0] ] = this.GAME.INVENTORY[ pp.cost[kk][0] ] - pp.cost[kk][1];
            //console.log("AFTER: ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
         }
+        this.GAME.currentResearchEffect = this.GAME.STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ pp.projectID ].effect;
+        this.GAME.currentResearchEffect();
         this.availListElem.remove(this.availListElem.selectedIndex)
         this.disabled = true;
      }
-
-     availListElem.value = STATS["UNLOCK_PROJECTS"][fid][0].projectID;
+     
+     var projectList   = STATICVAR_HOLDER.SCIENCE.MULTI[fid];
+     var idx1 = Math.floor( getRandomBetween(0,projectList.length) );
+     var idx2 = Math.floor( getRandomBetween(0,projectList.length - 1) );
+     if(idx2 >= idx1){
+       idx2 = idx2 + 1;
+     }
+     var ap1 = availListElem.addMultiProject(projectList[idx1],1)
+     var ap2 = availListElem.addMultiProject(projectList[idx2],1)
+     availListElem.value = ap1.uid;
      availListElem.onchange();
 }
 
@@ -403,10 +436,10 @@ for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
     CONSTRUCTION_BUFFER["WORLDS_DECON"][worldType] = []
 }
 INVENTORY["WORLDS-"+"Omni"+"-CT"] = 0
-INVENTORY["WORLDS-"+"Fallow"+"-CT"] = 1
-INVENTORY["WORLDS-"+"Neutral"+"-CT"] = 1
-INVENTORY["WORLDS-"+"Hostile"+"-CT"] = 1
-INVENTORY["WORLDS-"+"Secure"+"-CT"] = 1
+INVENTORY["WORLDS-"+"Fallow"+"-CT"] = 0
+INVENTORY["WORLDS-"+"Neutral"+"-CT"] = 0
+INVENTORY["WORLDS-"+"Hostile"+"-CT"] = 0
+INVENTORY["WORLDS-"+"Secure"+"-CT"] = 0
 
 
 for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
@@ -860,10 +893,102 @@ function addConstructionRequest(inventoryItemName, requestCt, unitCost){
    this.CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt] )
 }
 
+
+STATICVAR_HOLDER.SHARED_RESOURCE_LIST = ["MATTER-FreeGreen-CT",
+                        "MATTER-Digested-CT",
+                        "MATTER-FreeBot-CT",
+                        "MATTER-Feedstock-CT",
+                        "POWER"]
+
 function executeAllConstructionRequests(){
+  var iterationCausedChange = true;
+  
+  for(var j=0; j < this.CONSTRUCTION_REQUESTS.length;j++){
+    var bb = this.CONSTRUCTION_REQUESTS[j][0];
+    this.STATS["PRODUCTION-REQ"][bb] = this.CONSTRUCTION_REQUESTS[j][1];
+  }
+  
+  var resourceUserList = [];
+  for(var i=0; i<this.STATICVAR_HOLDER.SHARED_RESOURCE_LIST.length; i++){
+        var rr = this.STATICVAR_HOLDER.SHARED_RESOURCE_LIST[i];
+        //console.log("  [[["+rr+"]]]:");
+        resourceUserList[i] = [];
+        var totalResourceRequested = 0;
+        for(var j=0; j < this.CONSTRUCTION_REQUESTS.length;j++){
+           for(var k=0; k < this.CONSTRUCTION_REQUESTS[j][2].length; k++){
+             if(rr == this.CONSTRUCTION_REQUESTS[j][2][k][0]){
+               resourceUserList[i].push([j,k]);
+               //console.log("            [:"+this.CONSTRUCTION_REQUESTS[j][0]+"] uses "+rr);
+               totalResourceRequested = totalResourceRequested + this.CONSTRUCTION_REQUESTS[j][2][k][1] * this.CONSTRUCTION_REQUESTS[j][3];
+             }
+           }
+        }
+  }
+  
+  while(iterationCausedChange){
+      iterationCausedChange = false;
+      
+      for(var i=0; i<this.STATICVAR_HOLDER.SHARED_RESOURCE_LIST.length; i++){
+        var userList = resourceUserList[i];
+        var rr = this.STATICVAR_HOLDER.SHARED_RESOURCE_LIST[i];
+        //console.log("  [[["+rr+"]]]:");
+        var userList = [];
+        var totalResourceRequested = 0;
+        for(var j=0; j < this.CONSTRUCTION_REQUESTS.length;j++){
+           for(var k=0; k < this.CONSTRUCTION_REQUESTS[j][2].length; k++){
+             if(rr == this.CONSTRUCTION_REQUESTS[j][2][k][0]){
+               userList.push([j,k]);
+               //console.log("            [:"+this.CONSTRUCTION_REQUESTS[j][0]+"] uses "+rr);
+               totalResourceRequested = totalResourceRequested + this.CONSTRUCTION_REQUESTS[j][2][k][1] * this.CONSTRUCTION_REQUESTS[j][3];
+             }
+           }
+        }
+        //console.log("    ["+rr+"]"+totalResourceRequested+" vs "+this.INVENTORY[rr]);
+        if(this.INVENTORY[rr] <= 0){
+          //console.log("    zero["+rr+"]");
+          for(var j=0; j < userList.length;j++){
+            var uu = userList[j];
+            this.CONSTRUCTION_REQUESTS[uu[0]][3] = 0;
+            //console.log("            ZEROING:"+this.CONSTRUCTION_REQUESTS[j][0]);
+            //console.log("                  ["+this.CONSTRUCTION_REQUESTS[uu[0]][0]+"]: "+fmtSIflat(this.CONSTRUCTION_REQUESTS[uu[0]][3]));
+          }
+        } else if(totalResourceRequested > 0 && totalResourceRequested > this.INVENTORY[rr]){
+          iterationCausedChange = true;
+          var frac = this.INVENTORY[rr] / totalResourceRequested;
+          //console.log("    Insufficient["+rr+"]: "+frac);
+          for(var j=0; j < userList.length;j++){
+            var uu = userList[j];
+            //console.log("                  ["+this.CONSTRUCTION_REQUESTS[uu[0]][0]+"]: "+fmtSIflat(this.CONSTRUCTION_REQUESTS[uu[0]][3])+"=>"+fmtSIflat(this.CONSTRUCTION_REQUESTS[uu[0]][3] * frac))
+
+            this.CONSTRUCTION_REQUESTS[uu[0]][3] = this.CONSTRUCTION_REQUESTS[uu[0]][3] * frac;
+          }
+        }
+      }
+  }
+  
+  for(var i=0;i<this.CONSTRUCTION_REQUESTS.length;i++){
+    var bb = this.CONSTRUCTION_REQUESTS[i][0];
+    var reqCt = this.CONSTRUCTION_REQUESTS[i][3];
+    for(var j=0; j<this.CONSTRUCTION_REQUESTS[i][2].length; j++){
+      var ccx = this.CONSTRUCTION_REQUESTS[i][2][j][0];
+      var uCost = this.CONSTRUCTION_REQUESTS[i][2][j][1];
+      //console.log("        Expending["+fmtSIflat(reqCt * uCost)+" "+ccx+"]: on "+fmtSIflat(reqCt)+" "+this.CONSTRUCTION_REQUESTS[i][0]+" ["+this.INVENTORY[this.CONSTRUCTION_REQUESTS[i][0]]+"]")
+      this.INVENTORY[ccx] = this.INVENTORY[ccx] - reqCt * uCost;
+    }
+    this.INVENTORY[bb] = this.INVENTORY[bb] + reqCt;
+    this.STATS["PRODUCTION-CURR"][bb] = reqCt;
+  }
+  this.CONSTRUCTION_REQUESTS = [];
+  
+}
+
+function executeAllConstructionRequests_OLD(){
   var costResourceSet = new Set();
   var costRequests = {};
   for(var i=0;i<this.CONSTRUCTION_REQUESTS.length;i++){
+    var bb = this.CONSTRUCTION_REQUESTS[i][0];
+    var reqCt = this.CONSTRUCTION_REQUESTS[i][1];
+    this.STATS["PRODUCTION-REQ"][bb] = reqCt;
     for(var j=0; j<this.CONSTRUCTION_REQUESTS[i][2].length; j++){
       var xcc = this.CONSTRUCTION_REQUESTS[i][2][j][0];
       var reqCt = this.CONSTRUCTION_REQUESTS[i][1];
@@ -874,6 +999,7 @@ function executeAllConstructionRequests(){
       costRequests[xcc].push([i,j,reqCt * uCost])
       costResourceSet.add(xcc)
     }
+    
   }
   //console.log("costResourceSet: ")
   for(let ccx of costResourceSet.values() ){
@@ -883,24 +1009,29 @@ function executeAllConstructionRequests(){
      for(let crr of cr){
        crTotal = crTotal + crr[2];
      }
-     if(crTotal > INVENTORY[ccx]){
+     var crTotalCalc = 0;
+     if(crTotal > this.INVENTORY[ccx]){
+       console.log("   insufficient["+ccx+"]: "+this.INVENTORY[ccx]+" / "+crTotal+"");
        for(let crr of cr){
          var uCost = this.CONSTRUCTION_REQUESTS[crr[0]][2][crr[1]][1];
          var currReqCt = this.CONSTRUCTION_REQUESTS[crr[0]][3];
          /*console.log("["+ccx+"]: ["+uCost+" / "+currReqCt+" / "+((crr[2] / crTotal) * INVENTORY[ccx]) / uCost+"]")*/
-         this.CONSTRUCTION_REQUESTS[crr[0]][3] = Math.min( currReqCt, ((crr[2] / crTotal) * INVENTORY[ccx]) / uCost )
+         this.CONSTRUCTION_REQUESTS[crr[0]][3] = Math.min( currReqCt, ((crr[2] / crTotal) * this.INVENTORY[ccx]) / uCost )
+         crTotalCalc = crTotalCalc + 
+         console.log("       crr["+this.CONSTRUCTION_REQUESTS[crr[0]][0]+"]: "+crr[0]+","+crr[1]+","+crr[2]+": "+uCost+", "+currReqCt +" = "+this.CONSTRUCTION_REQUESTS[crr[0]][3] + " ("+crTotalCalc+")");
        }
      }
   }
   for(var i=0;i<this.CONSTRUCTION_REQUESTS.length;i++){
     var bb = this.CONSTRUCTION_REQUESTS[i][0];
+    var reqCt = this.CONSTRUCTION_REQUESTS[i][3];
     for(var j=0; j<this.CONSTRUCTION_REQUESTS[i][2].length; j++){
       var ccx = this.CONSTRUCTION_REQUESTS[i][2][j][0];
-      var reqCt = this.CONSTRUCTION_REQUESTS[i][3];
       var uCost = this.CONSTRUCTION_REQUESTS[i][2][j][1];
-      this.INVENTORY[ccx] = this.INVENTORY[ccx] - reqCt * uCost;
-      this.INVENTORY[bb] = this.INVENTORY[bb] + reqCt;
+      this.INVENTORY[ccx] = this.INVENTORY[ccx] - reqCt * uCost;      
     }
+    this.INVENTORY[bb] = this.INVENTORY[bb] + reqCt;
+    this.STATS["PRODUCTION-CURR"][bb] = reqCt;
   }
   this.CONSTRUCTION_REQUESTS = [];
 }
@@ -1040,17 +1171,18 @@ window.addEventListener('click',function(event) {
 
 
 
-startWorldConstruction("Bot",1)
+//startWorldConstruction("Bot",1)
+
+INVENTORY["STARS-" + "G" +"-CT"] = 1;
+INVENTORY["MATTER-FreeBot-CT"] = 1.9885e27;
+INVENTORY["POWER-FreeBot-CT"] = 3.828e20;
+
+INVENTORY["MATTER-Botbots-CT"] = 75000000;
+INVENTORY["MATTER-Botpwr-CT"] = 25000000;
+INVENTORY["MATTER-Waste-CT"] = 100000000;
 
 
-
-
-
-
-
-
-
-
+INVENTORY["WORLDS-"+"Bot"+"-CT"] = 1
 
 
 

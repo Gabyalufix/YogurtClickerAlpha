@@ -458,10 +458,12 @@ var PCTSLIDERS = {}
 MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt","Biopwr","Botpwr"]
 
 
-var WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
-var WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false,false]
+INVENTORY["BUFFER-Ship-CT"] = 0;
 
-var DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub","Slag","Seedres"]
+var WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres","Hawk"]
+var WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false,false,true]
+
+var DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub","Slag","Seedres","Hawk"]
 var CONSTRUCTION_REQUESTS=[];
 var SHIP_TYPE_LIST = ["scout","battleplate","seedship"]
 
@@ -470,12 +472,16 @@ var SHIP_TYPE_LIST = ["scout","battleplate","seedship"]
 UPGRADE_COST = {};
 UPGRADE_COST["Bot"] = {};
 UPGRADE_COST["Green"] = {};
+UPGRADE_COST["Hawk"] = {};
 
 UPGRADE_COST["Bot"]["calc"] = function(lvl){
     return [["eng_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
 }
 UPGRADE_COST["Green"]["calc"] = function(lvl){
     return [["bio_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
+}
+UPGRADE_COST["Hawk"]["calc"] = function(lvl){
+    return [["eng_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17],["eng0_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17],["eng2_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
 }
 //UPGRADE_COST["Bot"]["curr"] = UPGRADE_COST["Bot"].calc(1)
 //UPGRADE_COST["Green"]["curr"] = UPGRADE_COST["Green"].calc(1)
@@ -486,11 +492,17 @@ UPGRADE_COST["Bot"]["effect"] = function(){
 UPGRADE_COST["Green"]["effect"] = function(){
    STATS["PRODUCTIVITY_MULT"]["green"] = STATS["PRODUCTIVITY_MULT"]["green"] + 0.2;
 }
+UPGRADE_COST["Hawk"]["effect"] = function(){
+   STATS["PRODUCTIVITY_MULT"]["hawk"] = STATS["PRODUCTIVITY_MULT"]["hawk"] + 0.2;
+}
+
+
 
 //STATS["UPGRADE_COST"] = UPGRADE_COST;
 STATS["CURRENT_UPGRADE_COST"] = {};
 STATS["CURRENT_UPGRADE_COST"]["Bot"]   = UPGRADE_COST["Bot"].calc(1)
 STATS["CURRENT_UPGRADE_COST"]["Green"] = UPGRADE_COST["Green"].calc(1)
+STATS["CURRENT_UPGRADE_COST"]["Hawk"] = UPGRADE_COST["Hawk"].calc(1)
 
 ////////////////////////////////////
 
@@ -557,37 +569,294 @@ STATS["CONVERSIONS"]["timeAtZero"]  = 2152;
 
 
 
+
 STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] = 0.001
-STATS["COST-MATTER-Feedstock"] = [["MATTER-FreeBot-CT",1.01],["MATTER-Waste-CT",-0.01]]
-STATS["CONVERSIONS"]["DigestedPerProdPerTick"] = 0.001
-STATS["COST-MATTER-Digested"] = [["MATTER-FreeGreen-CT",1.01],["MATTER-Waste-CT",-0.01]]
+STATS["COST-MATTER-Feedstock"] = [["MATTER-FreeBot-CT",1.01],["MATTER-Waste-CT",-0.01],["POWER",0.005800]]
+STATS["CONVERSIONS"]["BotpwrPerProdPerTick"] = 0.0005
+STATS["COST-MATTER-Botpwr"] = [["MATTER-Feedstock-CT",1.2],  ["MATTER-Waste-CT",-0.2], ["POWER",0.077200]]
 STATS["CONVERSIONS"]["ShipPerProdPerTick"] = 0.001
-STATS["COST-MATTER-Ship"] = [["MATTER-Feedstock-CT",1.25],["MATTER-Waste-CT",-0.25]]
+STATS["COST-MATTER-Ship"] = [["MATTER-Feedstock-CT",1.25],   ["MATTER-Waste-CT",-0.25],["POWER",0.138000]]
+STATS["CONVERSIONS"]["BotbotsPerProdPerTick"] = 0.00112
+STATS["COST-MATTER-Botbots"] = [["MATTER-Feedstock-CT",1.3], ["MATTER-Waste-CT",-0.3], ["POWER",0.331000]]
+STATS["CONVERSIONS"]["ComputePerProdPerTick"] = 0.0012
+STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3], ["MATTER-Waste-CT",-0.3], ["POWER",0.255000]]
+
+
+STATS["INDUSTRY"] = {};
+STATS["INDUSTRY"]["Feedstock"] = { sliderID: "bot", sliderIDX: 0, prodTitle: "Botworld Feedstock", inventoryType: "MATTER", scitype: "eng",
+                                   baseProd: 0.01, 
+                                   baseCost:  [["MATTER-FreeBot-CT",1]],
+                                   basePwr:   0.005800,
+                                   baseWaste: 0.01}
+STATS["INDUSTRY"]["Botbots"] = { sliderID: "bot", sliderIDX: 1, prodTitle: "Robotic Fabricator Construction", inventoryType: "MATTER", scitype: "eng",
+                                   baseProd: 0.012, 
+                                   baseCost:  [["MATTER-Feedstock-CT",1]],
+                                   basePwr:   0.331000,
+                                   baseWaste: 0.3}
+
+STATS["INDUSTRY"]["Botpwr"] =   { sliderID: "bot", sliderIDX: 6, prodTitle: "Solar Array Construction", inventoryType: "MATTER", scitype: "eng",
+                                   baseProd: 0.005, 
+                                   baseCost:  [["MATTER-Feedstock-CT",1]],
+                                   basePwr:   0.077200,
+                                   baseWaste: 0.2}
+STATS["INDUSTRY"]["Ship"] = { sliderID: "bot", sliderIDX: 4, prodTitle: "Shipyard Construction", inventoryType: "BUFFER", scitype: "eng",
+                                   baseProd: 0.001, 
+                                   baseCost:  [["MATTER-Feedstock-CT",1]],
+                                   basePwr:   0.138000,
+                                   baseWaste: 0.25}
+
+STATS["INDUSTRY"]["Compute"] = { sliderID: "bot", sliderIDX: 5, prodTitle: "Computronium Fabrication", inventoryType: "MATTER", scitype: "eng",
+                                   baseProd: 0.012, 
+                                   baseCost:  [["MATTER-Feedstock-CT",1]],
+                                   basePwr:   0.255000,
+                                   baseWaste: 0.3}
+
+STATS["INDUSTRY"]["Digested"] = { sliderID: "green", sliderIDX: 5, prodTitle: "Matter Digestion", inventoryType: "MATTER", scitype: "bio",
+                                   baseProd: 0.057, 
+                                   baseCost:  [["MATTER-FreeGreen-CT",1]],
+                                   basePwr:   0.007000,
+                                   baseWaste: 0.01}
+STATS["INDUSTRY"]["Biopwr"] = { sliderID: "green", sliderIDX: 6, prodTitle: "Chloroplast Replication", inventoryType: "MATTER", scitype: "bio",
+                                   baseProd: 0.15, 
+                                   baseCost:  [["MATTER-Digested-CT",1]],
+                                   basePwr:   0.015300,
+                                   baseWaste: 1}
+STATS["INDUSTRY"]["Yogurt"] = { sliderID: "green", sliderIDX: 1, prodTitle: "Yogosynthesis", inventoryType: "MATTER", scitype: "bio",
+                                   baseProd: 0.0075, 
+                                   baseCost:  [["MATTER-Digested-CT",1]],
+                                   basePwr:   0.287000,
+                                   baseWaste: 0.2}
+STATS["INDUSTRY"]["Biomass"] = { sliderID: "green", sliderIDX: 4, prodTitle: "Biomass Division", inventoryType: "MATTER", scitype: "bio",
+                                   baseProd: 0.0157, 
+                                   baseCost:  [["MATTER-Digested-CT",1]],
+                                   basePwr:   0.177000,
+                                   baseWaste: 0.1}
+
+GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass"]
+STATS["PRODUCTION-CURR"] = {};
+STATS["PRODUCTION-REQ"] = {};
+for(var i=0; i < GAME_GLOBAL.INDUSTRY_LIST.length; i++){
+  STATS["PRODUCTION-CURR"][ GAME_GLOBAL.INDUSTRY_LIST[i] ] = 0;
+  STATS["PRODUCTION-REQ"][ GAME_GLOBAL.INDUSTRY_LIST[i] ] = 0;
+}
+
+STATICVAR_HOLDER.SCIENCE = {};
+SCIENCE_PROJECT_TYPES = ["PROGRESS","SCALED","STATICLEVEL","MULTI"]
+STATICVAR_HOLDER.SCIENCE.MULTI = {bio:[],eng:[],psy:[]};
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY = {};
+
+
+BASE_MULTI_PROD_BONUS = 0.25;
+BASE_MULTI_WASTERATE_MULT = 0.9;
+BASE_MULTI_ENERGYRATE_MULT = 0.9;
+
+for(var i=0; i < GAME_GLOBAL.INDUSTRY_LIST.length; i++){
+  var productID = GAME_GLOBAL.INDUSTRY_LIST[i];
+  var iis = STATS["INDUSTRY"][productID]
+  var projectIX = iis.sliderID+"_"+iis.sliderIDX;
+  var scitype = iis.scitype;
+  STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-PROD" ] = {
+    projectTitle: iis.prodTitle+" Throughput", scitype : iis.scitype,
+    projectID: "MULTI_STD_PROD_"+productID,
+    projectType: "MULTI",
+    rate: 1,
+    effect: function(){
+             this.STATS["PRODUCTIVITY_MULT"][projectIX] = this.STATS["PRODUCTIVITY_MULT"][projectIX] + BASE_MULTI_PROD_BONUS + 0;
+           },
+    desc:"Increases the rate of "+iis.prodTitle.toLowerCase()+" by "+Math.round((BASE_MULTI_PROD_BONUS+0)*100)+"%." ,
+    descShort:"Increases the rate of "+iis.prodTitle.toLowerCase()+""
+  }
+  STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-ENER" ] = {
+    projectTitle: iis.prodTitle+" Efficiency", scitype : iis.scitype,
+    projectID: "MULTI_STD_ENERGY_"+productID,
+    projectType: "MULTI",
+    rate: 1,
+    effect: function(){
+              STATS["ENERGYRATE_MULT"][projectIX] = STATS["ENERGYRATE_MULT"][projectIX] * BASE_MULTI_ENERGYRATE_MULT;
+           },
+    desc:"Decreases energy usage of "+iis.prodTitle.toLowerCase()+" by "+Math.round((1 - BASE_MULTI_ENERGYRATE_MULT*1)*100)+"%." ,
+    descShort:"Decreases energy usage of "+iis.prodTitle.toLowerCase()+""
+  }
+  STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-WAST" ] = {
+    projectTitle: iis.prodTitle+" Waste Reduction", scitype : iis.scitype,
+    projectID: "MULTI_STD_WASTE_"+productID,
+    projectType: "MULTI",
+    rate: 1,
+    effect: function(){
+              STATS["WASTERATE_MULT"][projectIX] = STATS["WASTERATE_MULT"][projectIX] * BASE_MULTI_WASTERATE_MULT;
+           },
+    desc:"Decreases waste matter byproduct production of "+iis.prodTitle.toLowerCase()+" by "+Math.round((1 - BASE_MULTI_WASTERATE_MULT*1)*100)+"%." ,
+    descShort:"Decreases waste matter byproduct production of "+iis.prodTitle.toLowerCase()+""
+  }
+  STATICVAR_HOLDER.SCIENCE.MULTI[scitype].push( STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-PROD" ] );
+  STATICVAR_HOLDER.SCIENCE.MULTI[scitype].push( STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-ENER" ] );
+  STATICVAR_HOLDER.SCIENCE.MULTI[scitype].push( STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-WAST" ] );
+}
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Feedstock-PROD"]["costField"] = ["eng_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Feedstock-ENER"]["costField"] = ["eng_SCIENCE_FREE","eng2_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Feedstock-WAST"]["costField"] = ["eng_SCIENCE_FREE","eng0_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Feedstock-PROD"]["costMult"] = [1.5];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Feedstock-ENER"]["costMult"] = [1,0.75];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Feedstock-WAST"]["costMult"] = [1,0.75];
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Botbots-PROD"]["costField"] = ["eng_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Botbots-ENER"]["costField"] = ["eng_SCIENCE_FREE","eng2_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Botbots-WAST"]["costField"] = ["eng_SCIENCE_FREE","eng0_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Botbots-PROD"]["costMult"] = [1.5];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Botbots-ENER"]["costMult"] = [1,0.75];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Botbots-WAST"]["costMult"] = [1,0.75];
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Botpwr-PROD"]["costField"] = ["eng_SCIENCE_FREE","eng2_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Botpwr-ENER"]["costField"] = ["eng_SCIENCE_FREE","eng2_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Botpwr-WAST"]["costField"] = ["eng_SCIENCE_FREE","eng0_SCIENCE_FREE","eng2_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Botpwr-PROD"]["costMult"] = [1.5,1.25];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Botpwr-ENER"]["costMult"] = [1,0.75,1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Botpwr-WAST"]["costMult"] = [1,0.75,1];
+
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Ship-PROD"]["costField"] = ["eng_SCIENCE_FREE","eng1_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Ship-ENER"]["costField"] = ["eng_SCIENCE_FREE","eng1_SCIENCE_FREE","eng2_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Ship-WAST"]["costField"] = ["eng_SCIENCE_FREE","eng0_SCIENCE_FREE","eng1_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Ship-PROD"]["costMult"] = [1.5,1.25];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Ship-ENER"]["costMult"] = [1,0.75,1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Ship-WAST"]["costMult"] = [1,0.75,1];
+
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Compute-PROD"]["costField"] = ["eng_SCIENCE_FREE","psy1_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Compute-ENER"]["costField"] = ["eng_SCIENCE_FREE","psy1_SCIENCE_FREE","eng2_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Compute-WAST"]["costField"] = ["eng_SCIENCE_FREE","psy1_SCIENCE_FREE","eng0_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Compute-PROD"]["costMult"] = [1.5,1.25];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Compute-ENER"]["costMult"] = [1,1,1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Compute-WAST"]["costMult"] = [1,1,1];
+
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Digested-PROD"]["costField"] = ["bio_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Digested-ENER"]["costField"] = ["bio_SCIENCE_FREE","bio2_SCIENCE_FREE","eng2_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Digested-WAST"]["costField"] = ["bio_SCIENCE_FREE","bio2_SCIENCE_FREE","eng0_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Digested-PROD"]["costMult"] = [1.5,1.25];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Digested-ENER"]["costMult"] = [1,0.75,0.25];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Digested-WAST"]["costMult"] = [1,0.75,0.25];
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biopwr-PROD"]["costField"] = ["bio_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biopwr-ENER"]["costField"] = ["bio_SCIENCE_FREE","bio2_SCIENCE_FREE","eng2_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biopwr-WAST"]["costField"] = ["bio_SCIENCE_FREE","bio2_SCIENCE_FREE","eng0_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biopwr-PROD"]["costMult"] = [1.5,1.25];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biopwr-ENER"]["costMult"] = [1,0.75,0.1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biopwr-WAST"]["costMult"] = [1,0.75,0.1];
+
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Yogurt-PROD"]["costField"] = ["bio_SCIENCE_FREE","bio1_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Yogurt-ENER"]["costField"] = ["bio_SCIENCE_FREE","bio1_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Yogurt-WAST"]["costField"] = ["bio_SCIENCE_FREE","bio1_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Yogurt-PROD"]["costMult"] = [1.5,3];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Yogurt-ENER"]["costMult"] = [1,3];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Yogurt-WAST"]["costMult"] = [1,3];
+
+
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biomass-PROD"]["costField"] = ["bio_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biomass-ENER"]["costField"] = ["bio_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biomass-WAST"]["costField"] = ["bio_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biomass-PROD"]["costMult"] = [1.5];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biomass-ENER"]["costMult"] = [1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Biomass-WAST"]["costMult"] = [1];
+
+
+
+/*
+GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass"]
+
+
+STATICVAR_HOLDER.SCIENCE.MULTI_BASE = {
+   bio:[
+                   STATS["WASTERATE_MULT"]["green_5"] = STATS["WASTERATE_MULT"]["green_5"] * BASE_MULTI_WASTERATE_MULT;
+                 },
+                 desc:"Decreases the amount of waste byproduct produced by matter digestion by "+Math.round((1 - BASE_MULTI_WASTERATE_MULT*1)*100)+"%.", 
+                 descShort:"Decreases the amount of waste byproduct produced by matter digestion."},
+                
+                {projectTitle:"Digestion Efficiency",projectID:"MULTI_Bio5_ENERGY",projectType:"MULTI",
+                 costField:["bio_SCIENCE_FREE"], costMult:[1], rate:1,
+                 effect:function(){
+                  
+           },
+   ]
+}*/
+
+/*
+STATICVAR_HOLDER.SCIENCE.MULTI = {
+  bio:[
+  
+          {projectTitle:"Digestion Throughput",projectID:"MULTI_Bio5_PROD",projectType:"MULTI",
+           costField:["bio_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             this.STATS["PRODUCTIVITY_MULT"]["green_5"] = this.STATS["PRODUCTIVITY_MULT"]["green_5"] + BASE_MULTI_PROD_BONUS + 0;
+           },
+           desc:"Increases the rate at which greenworlds digest matter by "+Math.round((BASE_MULTI_PROD_BONUS+0)*100)+"%." , 
+           descShort:"Increases the rate at which botworld factories generate Digestion."},
+
+/*
+bot:
+   1-Feedstock         (3x)
+   2-Botbot            (3x)
+   3-Reprocess Waste   (prod+energy)
+   4-Transmute Yogurt  (3x)
+   5-StarshipConstruct (3x)
+   6-Computronium      (3x)
+   7-Solar             (3x)
+green:
+   1-Bioresearch          (energy)
+   2-Yogurt               (3x)
+   3-Bioweapons           (3x)
+   4-Compost Fermentation (prod+energy)
+   5-Biomass              (3x)
+   6-Digest               (3x)
+   7-Photosynth           (3x)
+
+         STATS["PRODUCTIVITY_MULT"][fid+"_"+i] = 1;
+         STATS["WASTERATE_MULT"][fid+"_"+i] = 1;
+         STATS["ENERGYRATE_MULT"][fid+"_"+i] = 1;
+
+
+think:*/
 
 
 
 
-STATS["CONVERSIONS"]["BiopwrPerProdPerTick"] = 0.002
-STATS["COST-MATTER-Biopwr"] = [["MATTER-Digested-CT",2],["MATTER-Waste-CT",-1]]
+function calcIndustrialProd(xx){
+  var xid = xx.sliderID+"_"+xx.sliderIDX;
+  //this.STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][0]
+  return this.STATS["PRODUCTIVITY_MULT"][xid] * xx.baseProd * this.STATS["PRODUCTIVITY_RATING"][xx.sliderID] * this.SETTINGS["bot_FRACTION"][xx.sliderIDX]
+}
+function calcIndustrialCost(xx){
+  var xid = xx.sliderID+"_"+xx.sliderIDX;
+  var out = [];
+  //xx.baseCost.slice();
+  for(var i=0; i < xx.baseCost.length; i++){
+     out[i] = [ xx.baseCost[i][0], xx.baseCost[i][1] ];
+  }
+  out.push(["MATTER-Waste-CT", - xx.baseWaste * this.STATS["WASTERATE_MULT"][xid] ] );
+  out[0][1] = out[0][1] + xx.baseWaste * this.STATS["WASTERATE_MULT"][xid];
+  out.push(["POWER",xx.basePwr * this.STATS["ENERGYRATE_MULT"][xid]]);
+  return out;
+}
+GAME_GLOBAL.calcIndustrialProd=calcIndustrialProd;
+GAME_GLOBAL.calcIndustrialCost=calcIndustrialCost;
 
-STATS["CONVERSIONS"]["BotpwrPerProdPerTick"] = 0.0015
-STATS["COST-MATTER-Botpwr"] = [["MATTER-Feedstock-CT",1.2],["MATTER-Waste-CT",-0.2]]
 
 
-STATS["CONVERSIONS"]["YogurtPerProdPerTick"] = 0.001
-STATS["COST-MATTER-Yogurt"] = [["MATTER-Digested-CT",1.2],["MATTER-Waste-CT",-0.2]]
-STATS["CONVERSIONS"]["BotbotsPerProdPerTick"] = 0.001
-STATS["COST-MATTER-Botbots"] = [["MATTER-Feedstock-CT",1.3],["MATTER-Waste-CT",-0.3]]
-STATS["CONVERSIONS"]["BiomassPerProdPerTick"] = 0.001
-STATS["COST-MATTER-Biomass"] = [["MATTER-Digested-CT",1.1],["MATTER-Waste-CT",-0.1]]
-STATS["CONVERSIONS"]["ComputePerProdPerTick"] = 0.001
-STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3],["MATTER-Waste-CT",-0.3]]
 
+STATS["CONVERSIONS"]["pwrFromBotpwrPerProdPerTick"] = 0.001271
+STATS["CONVERSIONS"]["pwrFromBiopwrPerProdPerTick"] = 0.000187
+STATS["CONVERSIONS"]["pwrFromHawkpwrPerProdPerTick"] = 1
 
+INVENTORY["MATTER-Hawkpwr-CT"] = 0;
 
 STATS["CONVERSIONS"]["bufferPerShip-scout"] =        118000000
 STATS["CONVERSIONS"]["bufferPerShip-battleplate"] = 2500000000
 STATS["CONVERSIONS"]["bufferPerShip-seedship"] =     160000000
+
+
+
 
 /*
 STATS["PRODUCTIVITY_MULT"]["bot"]  = 1
@@ -624,21 +893,27 @@ STATS["seedship-distToNextStar"] = 1.219;
 ////Initialize starting stats
 //MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt"]
 
+INVENTORY["POWER-FreeBot-CT"] = 0;
+INVENTORY["POWER-FreeGreen-CT"] = 0;
+INVENTORY["POWER-FreeHawk-CT"] = 0;
 
-STATS["WORLD_BUILD_TIME"] = {Fallow:0,Pop:0,Omni:5000, Bot:2000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0}
-STATS["WORLD_DECON_TIME"]={Fallow:0,Pop:0,Omni:5000, Bot:2000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0}
+
+STATS["WORLD_BUILD_TIME"] = {Fallow:0,Pop:0,Omni:5000, Bot:2000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0, Hawk:1000}
+STATS["WORLD_DECON_TIME"]={Fallow:0,Pop:0,Omni:5000, Bot:2000, Green:10000, Comp:2000, Hub:2000, Slag:0, Seedres:0, Hawk:1000}
 
 STATS["COST-WORLDBUILD-Fallow"] = [["WORLDS-Secure-CT",1]];
 STATS["COST-WORLDBUILD-Omni"] = [["WORLDS-Fallow-CT",1]];
 STATS["COST-WORLDBUILD-Bot"] = [["WORLDS-Fallow-CT",1],
-                                ["MATTER-FreeBot-CT",-STATS["CONVERSIONS"]["gramsPerWorld"]],
-                                ["MATTER-Botbots-CT",-100000000],
+                                //["MATTER-FreeBot-CT",-STATS["CONVERSIONS"]["gramsPerWorld"]],
+                                ["MATTER-Botbots-CT",-75000000],
+                                ["MATTER-Botpwr-CT",-25000000],
                                 ["MATTER-Waste-CT",-100000000]
                                 ];
 STATS["COST-WORLDBUILD-Green"] = [["WORLDS-Fallow-CT",1],
-                                ["MATTER-FreeGreen-CT",-STATS["CONVERSIONS"]["gramsPerWorld"]],
+                                //["MATTER-FreeGreen-CT",-STATS["CONVERSIONS"]["gramsPerWorld"]],
                                 ["MATTER-Biomass-CT",-100000000],
-                                ["MATTER-Waste-CT",  -100000000]
+                                ["MATTER-Botpwr-CT",  -50000000],
+                                ["MATTER-Waste-CT",   -50000000]
                               ];
 STATS["COST-WORLDBUILD-Comp"] = [["WORLDS-Fallow-CT",1]];
 STATS["COST-WORLDBUILD-Hub"] = [["WORLDS-Fallow-CT",1]];
@@ -656,17 +931,38 @@ STATS["COST-WORLDDECON-Slag"] = [["WORLDS-Fallow-CT",-1]];
 STATS["COST-WORLDDECON-Seedres"] = [["WORLDS-Fallow-CT",-1]];
 
 
-PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","comp","think","soul","ship"]
+PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","comp","think","soul","ship","hawk"]
 STATS["PRODUCTIVITY_RATING"] = {}
 STATS["PRODUCTIVITY_MULT"] = {}
+STATS["WASTERATE_MULT"] = {};
+STATS["ENERGYRATE_MULT"] = {};
 
 for(var i=0;i<PRODUCTIVITY_STATS.length;i++){
   var stat = PRODUCTIVITY_STATS[i]
   STATS["PRODUCTIVITY_RATING"][stat] = 1
   STATS["PRODUCTIVITY_MULT"][stat] = 1
+  STATS["WASTERATE_MULT"][stat] = 1
+  STATS["ENERGYRATE_MULT"][stat] = 1
 }
+
+
 STATS["PRODUCTIVITY_RATING"]["think"] = (1000000000)
 STATS["PRODUCTIVITY_RATING"]["soul"] = (10000)
+
+
+
+STATS["PRODUCTIVITY_MULT"]["BotpwrGen"] = 1
+STATS["PRODUCTIVITY_MULT"]["BiopwrGen"] = 1
+STATS["PRODUCTIVITY_MULT"]["HawkpwrGen"] = 1
+
+STATS["PRODUCTIVITY_RATING"]["BotpwrGen"] = 0
+STATS["PRODUCTIVITY_RATING"]["BiopwrGen"] = 0
+STATS["PRODUCTIVITY_RATING"]["HawkpwrGen"] = 0
+
+STATS["ENERGYRATE_MULT"]["BotpwrGen"] = 0.70
+STATS["ENERGYRATE_MULT"]["BiopwrGen"] = 0.30
+STATS["ENERGYRATE_MULT"]["HawkpwrGen"]   = 0.95
+
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -674,8 +970,8 @@ SCIENCE_DISPLAY = {};
 SCIENCE_TYPES = ["bio","eng","psy"];
 SCIENCE_SUBFIELDS = {bio:3,eng:3,psy:3};
 
-SCIENCE_TYPES_FULL = SCIENCE_TYPES.slice().push("sum")
-
+SCIENCE_TYPES_FULL = SCIENCE_TYPES.slice()
+SCIENCE_TYPES_FULL.push("sum")
 
 STATS["PRODUCTIVITY_MULT"]["scout"] = 1
 STATS["PRODUCTIVITY_MULT"]["battleplate"] = 1
@@ -809,10 +1105,6 @@ STATS["UNLOCK_PROJECTS"]["psy"] = [
 
 
 
-STATICVAR_HOLDER.SCIENCE = {};
-
-SCIENCE_PROJECT_TYPES = ["PROGRESS","SCALED","STATICLEVEL"]
-
 //Science projects that ALWAYS appear once the total tech
 //  in a given type 
 STATICVAR_HOLDER.SCIENCE.PROGRESS = {
@@ -846,12 +1138,399 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
 //Science projects that can appear at any point in the tech progression 
 //       and can be researched more than once.
 //These generally provide a small boost to one specific ability.
+
+
+/*STATICVAR_HOLDER.SCIENCE.MULTI_BASE = {
+   bio:[
+      
+   ]
+}*/
+
+/*
 STATICVAR_HOLDER.SCIENCE.MULTI = {
-  bio:[],
-  eng:[],
-  psy:[],
+  bio:[
+  
+          {projectTitle:"Digestion Throughput",projectID:"MULTI_Bio5_PROD",projectType:"MULTI",
+           costField:["bio_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             this.STATS["PRODUCTIVITY_MULT"]["green_5"] = this.STATS["PRODUCTIVITY_MULT"]["green_5"] + BASE_MULTI_PROD_BONUS + 0;
+           },
+           desc:"Increases the rate at which greenworlds digest matter by "+Math.round((BASE_MULTI_PROD_BONUS+0)*100)+"%." , 
+           descShort:"Increases the rate at which botworld factories generate Digestion."},
+           
+          {projectTitle:"Digestion Byproduct Reduction",projectID:"MULTI_Bio55_WASTE",projectType:"MULTI",
+           costField:["bio_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             STATS["WASTERATE_MULT"]["green_5"] = STATS["WASTERATE_MULT"]["green_5"] * BASE_MULTI_WASTERATE_MULT;
+           },
+           desc:"Decreases the amount of waste byproduct produced by matter digestion by "+Math.round((1 - BASE_MULTI_WASTERATE_MULT*1)*100)+"%.", 
+           descShort:"Decreases the amount of waste byproduct produced by matter digestion."},
+          
+          {projectTitle:"Digestion Efficiency",projectID:"MULTI_Bio5_ENERGY",projectType:"MULTI",
+           costField:["bio_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             STATS["ENERGYRATE_MULT"]["green_5"] = STATS["ENERGYRATE_MULT"]["green_5"] * BASE_MULTI_ENERGYRATE_MULT;
+           },
+           desc:"Decreases the amount of power required to digest matter by "+Math.round((1 - BASE_MULTI_ENERGYRATE_MULT*1)*100)+"%.", 
+           descShort:"Decreases the amount of power required to digest matter."},
+          
+          {projectTitle:"Yogosynthesis Throughput",projectID:"MULTI_Bio1_PROD",projectType:"MULTI",
+           costField:["bio_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             this.STATS["PRODUCTIVITY_MULT"]["green_1"] = this.STATS["PRODUCTIVITY_MULT"]["green_1"] + BASE_MULTI_PROD_BONUS + 0;
+           },
+           desc:"Increases the rate at which greenworld biomasses generate yogurt by "+Math.round((BASE_MULTI_PROD_BONUS+0)*100)+"%." , 
+           descShort:"Increases the rate at which greenworld biomasses generate yogurt."},
+           
+          {projectTitle:"Yogosynthesis Byproduct Reduction",projectID:"MULTI_Bio1_WASTE",projectType:"MULTI",
+           costField:["bio_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             STATS["WASTERATE_MULT"]["green_1"] = STATS["WASTERATE_MULT"]["green_1"] * BASE_MULTI_WASTERATE_MULT;
+           },
+           desc:"Decreases the amount of waste byproduct produced by greenworld yogurt production by "+Math.round((1 - BASE_MULTI_WASTERATE_MULT*1)*100)+"%.", 
+           descShort:"Decreases the amount of waste byproduct produced by greenworld yogurt production."},
+          
+          {projectTitle:"Yogosynthesis Efficiency",projectID:"MULTI_Bio1_ENERGY",projectType:"MULTI",
+           costField:["bio_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             STATS["ENERGYRATE_MULT"]["green_1"] = STATS["ENERGYRATE_MULT"]["green_1"] * BASE_MULTI_ENERGYRATE_MULT;
+           },
+           desc:"Decreases the amount of power required by greenworld yogurt production by "+Math.round((1 - BASE_MULTI_ENERGYRATE_MULT*1)*100)+"%.", 
+           descShort:"Decreases the amount of power required by greenworld yogurt production."},
+  
+  ],
+  eng:[
+          {projectTitle:"Feedstock Throughput",projectID:"MULTI_Bot0_PROD",projectType:"MULTI",
+           costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             this.STATS["PRODUCTIVITY_MULT"]["bot_0"] = this.STATS["PRODUCTIVITY_MULT"]["bot_0"] + BASE_MULTI_PROD_BONUS + 0;
+           },
+           desc:"Increases the rate at which botworld factories generate feedstock by "+Math.round((BASE_MULTI_PROD_BONUS+0)*100)+"%." , 
+           descShort:"Increases the rate at which botworld factories generate feedstock."},
+           
+          {projectTitle:"Feedstock Byproduct Reduction",projectID:"MULTI_Bot0_WASTE",projectType:"MULTI",
+           costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             STATS["WASTERATE_MULT"]["bot_0"] = STATS["WASTERATE_MULT"]["bot_0"] * BASE_MULTI_WASTERATE_MULT;
+           },
+           desc:"Decreases the amount of waste byproduct produced by the manufacture of feedstock by "+Math.round((1 - BASE_MULTI_WASTERATE_MULT*1)*100)+"%.", 
+           descShort:"Decreases the amount of waste byproduct produced by the manufacture of feedstock."},
+          
+          {projectTitle:"Feedstock Efficiency",projectID:"MULTI_Bot0_ENERGY",projectType:"MULTI",
+           costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             STATS["ENERGYRATE_MULT"]["bot_0"] = STATS["ENERGYRATE_MULT"]["bot_0"] * BASE_MULTI_ENERGYRATE_MULT;
+           },
+           desc:"Decreases the amount of power required in the manufacture of feedstock by "+Math.round((1 - BASE_MULTI_ENERGYRATE_MULT*1)*100)+"%.", 
+           descShort:"Decreases the amount of power required in the manufacture of feedstock"},
+          
+          
+          
+          {projectTitle:"Factory Robot Throughput",projectID:"MULTI_Bot1_PROD",projectType:"MULTI",
+           costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             this.STATS["PRODUCTIVITY_MULT"]["bot"+"_"+1] = this.STATS["PRODUCTIVITY_MULT"]["bot"+"_"+1] + BASE_MULTI_PROD_BONUS + 0;
+           },
+           desc:"Increases the rate at which botworld factories generate factory robots by "+Math.round((BASE_MULTI_PROD_BONUS+0)*100)+"%." , 
+           descShort:"Increases the rate at which botworld factories generate factory robots."},
+           
+          {projectTitle:"Factory Robot Byproduct Reduction",projectID:"MULTI_Bot1_WASTE",projectType:"MULTI",
+           costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             STATS["WASTERATE_MULT"]["bot_1"] = STATS["WASTERATE_MULT"]["bot_1"] * BASE_MULTI_WASTERATE_MULT;
+           },
+           desc:"Decreases the amount of waste byproduct produced by the manufacture of factory robots by "+Math.round((1 - BASE_MULTI_WASTERATE_MULT*1)*100)+"%.", 
+           descShort:"Decreases the amount of waste byproduct produced by the manufacture of factory robots."},
+          
+          {projectTitle:"Factory Robot Efficiency",projectID:"MULTI_Bot1_ENERGY",projectType:"MULTI",
+           costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             STATS["ENERGYRATE_MULT"]["bot_1"] = STATS["ENERGYRATE_MULT"]["bot_1"] * BASE_MULTI_ENERGYRATE_MULT;
+           },
+           desc:"Decreases the amount of power required in the manufacture of factory robots by "+Math.round((1 - BASE_MULTI_ENERGYRATE_MULT*1)*100)+"%.", 
+           descShort:"Decreases the amount of power required in the manufacture of factory robots"},
+           
+           
+          {projectTitle:"Waste Reprocessing Throughput",projectID:"MULTI_Bot2_PROD",projectType:"MULTI",
+           costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             this.STATS["PRODUCTIVITY_MULT"]["bot_2"] = this.STATS["PRODUCTIVITY_MULT"]["bot_2"] + BASE_MULTI_PROD_BONUS + 0;
+           },
+           desc:"Increases the rate at which botworld factories  Reprocess Waste by "+Math.round((BASE_MULTI_PROD_BONUS+0)*100)+"%." , 
+           descShort:"Increases the rate at which botworld factories Reprocess Waste."},
+          
+          {projectTitle:"Waste Reprocessing Efficiency",projectID:"MULTI_Bot2_ENERGY",projectType:"MULTI",
+           costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             STATS["ENERGYRATE_MULT"]["bot_2"] = STATS["ENERGYRATE_MULT"]["bot_2"] * BASE_MULTI_ENERGYRATE_MULT;
+           },
+           desc:"Decreases the amount of power required in Waste Reprocessing by "+Math.round((1 - BASE_MULTI_ENERGYRATE_MULT*1)*100)+"%.", 
+           descShort:"Decreases the amount of power required in Waste Reprocessing"},
+           
+          {projectTitle:"Computronium Throughput",projectID:"MULTI_Bot5_PROD",projectType:"MULTI",
+           costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             this.STATS["PRODUCTIVITY_MULT"]["bot"+"_"+5] = this.STATS["PRODUCTIVITY_MULT"]["bot"+"_"+5] + BASE_MULTI_PROD_BONUS + 0;
+           },
+           desc:"Increases the rate at which botworld factories generate Computronium by "+Math.round((BASE_MULTI_PROD_BONUS+0)*100)+"%." , 
+           descShort:"Increases the rate at which botworld factories generate Computronium."},
+           
+          {projectTitle:"Computronium Byproduct Reduction",projectID:"MULTI_Bot5_WASTE",projectType:"MULTI",
+           costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             STATS["WASTERATE_MULT"]["bot_5"] = STATS["WASTERATE_MULT"]["bot_5"] * BASE_MULTI_WASTERATE_MULT;
+           },
+           desc:"Decreases the amount of waste byproduct produced by the manufacture of Computronium by "+Math.round((1 - BASE_MULTI_WASTERATE_MULT*1)*100)+"%.", 
+           descShort:"Decreases the amount of waste byproduct produced by the manufacture of Computronium."},
+          
+          {projectTitle:"Computronium Efficiency",projectID:"MULTI_Bot5_ENERGY",projectType:"MULTI",
+           costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             STATS["ENERGYRATE_MULT"]["bot_5"] = STATS["ENERGYRATE_MULT"]["bot_5"] * BASE_MULTI_ENERGYRATE_MULT;
+           },
+           desc:"Decreases the amount of power required in the manufacture of Computronium by "+Math.round((1 - BASE_MULTI_ENERGYRATE_MULT*1)*100)+"%.", 
+           descShort:"Decreases the amount of power required in the manufacture of Computronium"}
+           
+  ],
+  psy:[
+
+           
+  ],
   sum:[]
 }
+
+*/
+
+SCIENCEMULTI_PSY = [
+          {projectTitle:"Assault Tactics",projectID:"MULTI_Psy_BattlePlateTactics_Assault",projectType:"MULTI",
+           costField:["psy_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+
+           },
+           desc:"...", 
+           descShort:"..."},
+          {projectTitle:"Extermination Tactics",projectID:"MULTI_Psy_BattlePlateTactics_Exterminate",projectType:"MULTI",
+           costField:["psy_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+
+           },
+           desc:"...", 
+           descShort:"..."},
+          {projectTitle:"Assault Tactics",projectID:"MULTI_Psy_BattlePlateTactics_Interdiction",projectType:"MULTI",
+           costField:["psy_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+
+           },
+           desc:"...", 
+           descShort:"..."},
+           
+          {projectTitle:"Heuristic Search Patterns",projectID:"MULTI_Psy_Scout_Explore",projectType:"MULTI",
+           costField:["psy_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+
+           },
+           desc:"...", 
+           descShort:"..."},
+           
+          {projectTitle:"Heuristic Scanner Sweep",projectID:"MULTI_Psy_Scout_Recon",projectType:"MULTI",
+           costField:["psy_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+
+           },
+           desc:"...", 
+           descShort:"..."},
+           
+          {projectTitle:"Advanced Training Techniques",projectID:"MULTI_Psy_BattlePlate_Train",projectType:"MULTI",
+           costField:["psy_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+
+           },
+           desc:"...", 
+           descShort:"..."},
+           
+          {projectTitle:"Combat Escort Schema",projectID:"MULTI_Psy_BattlePlate_Escort",projectType:"MULTI",
+           costField:["psy_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+
+           },
+           desc:"...", 
+           descShort:"..."},
+           
+          {projectTitle:"Scoutship Avoidance Pattern",projectID:"MULTI_Psy_Scout_Survival",projectType:"MULTI",
+           costField:["psy_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+
+           },
+           desc:"...", 
+           descShort:"..."}];
+
+STATICVAR_HOLDER.SCIENCE.MULTI["psy"] = STATICVAR_HOLDER.SCIENCE.MULTI["psy"].concat( SCIENCEMULTI_PSY );
+
+
+var SCIENCE_UNLOCK_THRESH_BASE = 50e18;
+var SCIENCE_UNLOCK_THRESH_MULT = Math.pow(10,0.25)
+INVENTORY["SCIENCE-LEVEL-bio"] = 1
+INVENTORY["SCIENCE-LEVEL-eng"] = 1
+INVENTORY["SCIENCE-LEVEL-psy"] = 1
+SCIENCE_UNLOCK_THRESH_BASE=SCIENCE_UNLOCK_THRESH_BASE;
+SCIENCE_UNLOCK_THRESH_MULT=SCIENCE_UNLOCK_THRESH_MULT;
+SCIENCE_UNLOCK_RATE=0.4;
+
+
+GAME_GLOBAL.SCIENCE_UNLOCK_THRESH_BASE=SCIENCE_UNLOCK_THRESH_BASE
+GAME_GLOBAL.SCIENCE_UNLOCK_THRESH_MULT=SCIENCE_UNLOCK_THRESH_MULT
+GAME_GLOBAL.SCIENCE_UNLOCK_RATE=SCIENCE_UNLOCK_RATE
+
+function getProjectBaseCost(techlvl){
+     return Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, techlvl) * this.SCIENCE_UNLOCK_THRESH_BASE
+}
+GAME_GLOBAL.getProjectBaseCost=getProjectBaseCost;
+
+function getProjectCost(costField, techlvl, costMult){
+     var cost = [];
+     for(var i=0; i < costField.length; i++){
+       cost.push([costField[i], 
+                  costMult[i] * Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, Math.random() + techlvl) * this.SCIENCE_UNLOCK_THRESH_BASE]);
+     }
+     return cost;
+     
+     
+}
+GAME_GLOBAL.getProjectCost=getProjectCost;
+
+
+function addMultiProject(pp, techlvl, plvl){
+  var plvl = this.GAME.STATS.SCIENCE_MULTICT[ pp.projectID ] + 1;
+  var ap = { uid : pp.projectID+"_"+techlvl+"_"+plvl,projectID : pp.projectID, desc : pp.desc, effect : pp.effect}
+  if(plvl == -1){
+    ap.projectTitle = pp.projectTitle
+  } else {
+    ap.projectTitle = pp.projectTitle + " " + plvl;
+  }
+  ap.projectType = pp.projectType;
+  ap.cost = this.GAME.getProjectCost(pp.costField,techlvl,pp.costMult);
+  this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] = this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] + 1;
+  this.addNewProject(ap);
+  return ap;
+  //ap.cost = 
+}
+
+GAME_GLOBAL.addMultiProject = addMultiProject;
+
+          /*{projectTitle:"Computronium Efficiency",projectID:"MULTI_Bot6_ENERGY",projectType:"MULTI",
+           costField:["eng"], costMult:1, rate:1,
+           effect:function(){
+             STATS["ENERGYRATE_MULT"]["Bot_6"] = STATS["ENERGYRATE_MULT"]["Bot_6"] * BASE_MULTI_ENERGYRATE_MULT;
+           },
+           desc:"Decreases the amount of power required in the manufacture of Computronium by "+Math.round((1 - BASE_MULTI_ENERGYRATE_MULT*1)*100)+"%.", 
+           descShort:"Decreases the amount of power required in the manufacture of Computronium"}*/
+
+STATS.SCIENCE_MULTICT = {};
+
+    for(var i=0; i<SCIENCE_TYPES.length;i++){ //scityped science protype (bio, eng, psy):
+      var scitype = SCIENCE_TYPES[i];
+      var pp = STATICVAR_HOLDER.SCIENCE.MULTI[scitype]
+      for(var j=0; j < pp.length; j++){
+        STATS.SCIENCE_MULTICT[pp[j].projectID] = 0;
+      }
+    }
+
+/*
+
+STATS["PRODUCTIVITY_RATING"] = {}
+STATS["PRODUCTIVITY_MULT"] = {}
+STATS["WASTERATE_MULT"] = {};
+STATS["ENERGYRATE_MULT"] = {};
+        <div class="valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Total Power: </span>           <span id="POWER_DISPLAY">0.0W</span> </div>
+        <div class="valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Botworld Power: </span>        <span id="Botpwr_POWER_DISPLAY">0.0W</span> </div>
+        <div class="valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Greenworld Power: </span>      <span id="Biopwr_POWER_DISPLAY">0.0W</span> </div>
+        <div class="valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Hawking Reactor Power: </span> <span id="Hawking_POWER_DISPLAY">0.0W</span> </div>
+        
+
+For each ship type:
+   -Tactics
+   -Toughness
+   -Weapons
+   -Speed
+
+Seedships: Multihop
+         STATS["PRODUCTIVITY_MULT"][fid+"_"+i] = 1;
+         STATS["WASTERATE_MULT"][fid+"_"+i] = 1;
+         STATS["ENERGYRATE_MULT"][fid+"_"+i] = 1;
+
+var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate","comp","strat"]
+var PCTSLIDER_SUBFIELDCT = [3,3,3,7,7,3,3,3,3,3,2,3]
+var PCTSLIDERS = {}
+
+bio/eng/psy: sciences
+
+
+bot:
+   1-Feedstock         (3x)
+   2-Botbot            (3x)
+   3-Reprocess Waste   (prod+energy)
+   4-Transmute Yogurt  (3x)
+   5-StarshipConstruct (3x)
+   6-Computronium      (3x)
+   7-Solar             (3x)
+green:
+   1-Bioresearch          (energy)
+   2-Yogurt               (3x)
+   3-Bioweapons           (3x)
+   4-Compost Fermentation (prod+energy)
+   5-Biomass              (3x)
+   6-Digest               (3x)
+   7-Photosynth           (3x)
+think:
+   1-
+   2-
+   3-
+soul:
+   1-
+   2-
+   3-
+ship:
+   1-
+   2-
+   3-
+scout:
+   1-
+   2-
+   3-
+battleplate:
+   1-
+   2-
+   3-
+comp:
+   1-
+   2-
+strat:
+   1-
+   2-
+   3-
+
+*/
+
+
+
+
+ELEMS["POWER_DISPLAY"] = document.getElementById("POWER_DISPLAY")
+ELEMS["Botpwr_POWER_DISPLAY"] = document.getElementById("Botpwr_POWER_DISPLAY")
+ELEMS["Biopwr_POWER_DISPLAY"] = document.getElementById("Biopwr_POWER_DISPLAY")
+ELEMS["Hawking_POWER_DISPLAY"] = document.getElementById("Hawking_POWER_DISPLAY")
+ELEMS["USAGE_POWER_DISPLAY"] = document.getElementById("USAGE_POWER_DISPLAY")
+ELEMS["SURPLUS_POWER_DISPLAY"] = document.getElementById("SURPLUS_POWER_DISPLAY")
+
+
+
+ELEMS["POWER_DISPLAY"].unitDisp = document.getElementById("POWER_DISPLAY_UNITS")
+ELEMS["Botpwr_POWER_DISPLAY"].unitDisp = document.getElementById("Botpwr_POWER_DISPLAY_UNITS")
+ELEMS["Biopwr_POWER_DISPLAY"].unitDisp = document.getElementById("Biopwr_POWER_DISPLAY_UNITS")
+ELEMS["Hawking_POWER_DISPLAY"].unitDisp = document.getElementById("Hawking_POWER_DISPLAY_UNITS")
+ELEMS["USAGE_POWER_DISPLAY"].unitDisp = document.getElementById("USAGE_POWER_DISPLAY_UNITS")
+ELEMS["SURPLUS_POWER_DISPLAY"].unitDisp = document.getElementById("SURPLUS_POWER_DISPLAY_UNITS")
+
+
 
 //Science projects that can only appear at one specific tech point and randomly either
 //       appear or not.
@@ -880,17 +1559,13 @@ Initialize science locked, unlocked, researched:
 
 */
 
+STATICVAR_HOLDER.SCIENCE.PROJECTTABLE = {};
+
 for(var j=0; j < SCIENCE_PROJECT_TYPES.length; j++){
   var protype = SCIENCE_PROJECT_TYPES[j];
   STATS.SCIENCE_LOCKED[protype] = {};
-  if(STATICVAR_HOLDER.SCIENCE[protype] instanceof Array){ //un-scityped science protype:
-      var pp = STATICVAR_HOLDER.SCIENCE[protype]
-      for(var k=0; k < pp.length; k++){
-         STATS.SCIENCE_LOCKED[protype][k] = k;
-      }
-  } else {
-    for(var i=0; i<SCIENCE_TYPES_FULL.length;i++){ //scityped science protype (bio, eng, psy):
-      var scitype = SCIENCE_TYPES_FULL[i];
+    for(var i=0; i<SCIENCE_TYPES.length;i++){ //scityped science protype (bio, eng, psy):
+      var scitype = SCIENCE_TYPES[i];
       var pp = STATICVAR_HOLDER.SCIENCE[protype][scitype]
       if(pp == null){
         console.log("pp==null: "+protype+" / "+scitype)
@@ -898,9 +1573,9 @@ for(var j=0; j < SCIENCE_PROJECT_TYPES.length; j++){
       STATS.SCIENCE_LOCKED[protype][scitype] = [];
       for(var k=0; k < pp.length; k++){
          STATS.SCIENCE_LOCKED[protype][scitype][k] = k;
+         STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ pp[k].projectID ] = pp[k];
       }
     }
-  }
 }
 
 
@@ -910,10 +1585,9 @@ for(var j=0; j < SCIENCEUNIV_PROJECT_TYPES.length; j++){
   var pp = STATICVAR_HOLDER.SCIENCE[protype]
   for(var k=0; k < pp.length; k++){
          STATS.SCIENCE_LOCKED[protype][k] = k;
+         STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ pp[k].projectID ] = pp[k];
   }
 }
-
-
 
 
 

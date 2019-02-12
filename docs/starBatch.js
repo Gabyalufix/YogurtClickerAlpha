@@ -23,34 +23,36 @@ for(var i=0, imax=STAR_TYPE_SET.length; i<imax; i++){
    STAR_TYPE_SET[i].logLUM_MID  = (STAR_TYPE_SET[i].logLUM_MAX  + STAR_TYPE_SET[i].logLUM_MIN)/2;
    STAR_TYPE_SET[i].logMASS_HSPAN = STAR_TYPE_SET[i].logMASS_SPAN / 2
    STAR_TYPE_SET[i].logLUM_HSPAN = STAR_TYPE_SET[i].logLUM_SPAN / 2
+   
+   INVENTORY[ "STARS-" + STAR_TYPE_SET[i].sid +"-CT"] = 0;
 }
 
 function getRandStar(){
-	var R = Math.random();
-	var ML = Math.random();
-	var sidx = -1;
-	for(var i=0, imax=STAR_TYPE_SET.length; i<imax; i++){
-		if( STAR_TYPE_SET[i].thresh <= R){
-			sidx = i;
-		}
-	}
-	var st = STAR_TYPE_SET[sidx];
-	var mass = Math.pow(10, st.logMASS_SPAN * ML + st.logMASS_MIN );
-	var lum = Math.pow(10, st.logLUM_SPAN * ML + st.logLUM_MIN );
-	return [st.sid, mass, lum];
+    var R = Math.random();
+    var ML = Math.random();
+    var sidx = -1;
+    for(var i=0, imax=STAR_TYPE_SET.length; i<imax; i++){
+        if( STAR_TYPE_SET[i].thresh <= R){
+            sidx = i;
+        }
+    }
+    var st = STAR_TYPE_SET[sidx];
+    var mass = Math.pow(10, st.logMASS_SPAN * ML + st.logMASS_MIN );
+    var lum = Math.pow(10, st.logLUM_SPAN * ML + st.logLUM_MIN );
+    return [st.sid, mass, lum];
 }
 function randSign(){
-	return Math.floor(Math.random() - 0.5)*2+1;
+    return Math.floor(Math.random() - 0.5)*2+1;
 }
 
 function getRandStarBatch(ct,baseVar){
-	var vv = baseVar / (Math.log10(ct)+1);
-	var starCt = [];
-	var mass = 0;
-	var lum = 0;
-	var totalCt = 0;
-	for(var i=0, imax=this.length; i<imax; i++){
-	   var ss = this[i]
+    var vv = baseVar / (Math.log10(ct)+1);
+    var starCt = [];
+    var mass = 0;
+    var lum = 0;
+    var totalCt = 0;
+    for(var i=0, imax=this.length; i<imax; i++){
+       var ss = this[i]
        var variation = ss.p * Math.random() * vv;
        var sign = Math.floor(Math.random() - 0.5)*2+1
        var cc = (ss.p + (variation * sign)) * ct;
@@ -58,10 +60,10 @@ function getRandStarBatch(ct,baseVar){
        var remCt = cc - Math.floor(cc);
        var sct = baseCt;
        if(Math.random() < remCt){
-		   sct = sct + 1;
-	   }
-	   totalCt = totalCt + sct;
-	   if(sct > 0){
+           sct = sct + 1;
+       }
+       totalCt = totalCt + sct;
+       if(sct > 0){
          var RND = Math.random()
          var RNDSN = (Math.floor(Math.random() - 0.5)*2+1)
          var massvar =  RNDSN * ( ss.logMASS_HSPAN * RND / (Math.log10(sct)+1) )
@@ -71,11 +73,11 @@ function getRandStarBatch(ct,baseVar){
          var currlum = sct * Math.pow(10, ( ss.logLUM_MID + lumvar ))
          lum = lum + currlum;
          starCt.push( [ss.sid,sct,currmass,currlum] );
-	   }
-	}
+       }
+    }
 
 
-	return [totalCt,starCt, mass, lum];
+    return [totalCt,starCt, mass, lum];
 }
 
 //getRandStarBatch_GLOBAL(1,0.2)
@@ -90,3 +92,12 @@ STAR_TYPE_SET.STARS_PER_SYSTEM = 1.6;
 //var xx = STAR_TYPE_SET.getRandStarBatch(N * STAR_TYPE_SET.STARS_PER_SYSTEM,1);
 //xx[2] / N
 
+
+GAME_GLOBAL.STAR_TYPE_SET = STAR_TYPE_SET;
+
+
+for(var i=0; i < STAR_TYPE_SET.length; i++){
+   var sid = STAR_TYPE_SET[i].sid;
+   ELEMS["STARCT_"+sid] = document.getElementById("STARTYPE_"+sid+"_DIV")
+   //STARTYPE_RedGiant_DIV
+}

@@ -613,7 +613,29 @@
 <div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC"> ENERGY </span></h1></button>
 		<div class="content">
-		This is where power stuff will go.
+
+	    <h5><span class="INFO_TEXT_STATIC">Power Supply: </span></h5>
+	    <div class="contentGrid3x2Hz">
+		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Total Power Generated: </span></div>
+		<div class="contentGridItemHzB valueDisplayDiv"> <span id="POWER_DISPLAY">0.0W</span>         <span id="POWER_DISPLAY_UNITS"></span>W </div>
+
+		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Power Usage: </span></div>
+		<div class="contentGridItemHzB valueDisplayDiv"> <span id="USAGE_POWER_DISPLAY">0.0W</span> <span id="USAGE_POWER_DISPLAY_UNITS"></span>W</div>
+		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Surplus: </span></div>
+		<div class="contentGridItemHzB valueDisplayDiv"><span id="SURPLUS_POWER_DISPLAY">0.0W</span> <span id="SURPLUS_POWER_DISPLAY_UNITS"></span>W</div>
+        </div>
+
+	    <h5><span class="INFO_TEXT_STATIC">Power Sources: </span></h5>
+	    <div class="contentGrid3x2Hz">
+		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Botworld: </span></div>
+		<div class="contentGridItemHzB valueDisplayDiv"><span id="Botpwr_POWER_DISPLAY">0.0</span>  <span id="Botpwr_POWER_DISPLAY_UNITS"></span>W</div>
+		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Greenworld: </span></div>
+		<div class="contentGridItemHzB valueDisplayDiv"><span id="Biopwr_POWER_DISPLAY">0.0</span>  <span id="Biopwr_POWER_DISPLAY_UNITS"></span>W</div>
+		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Hawking Reactors: </span></div>
+		<div class="contentGridItemHzB valueDisplayDiv"><span id="Hawking_POWER_DISPLAY">0.0</span> <span id="Hawking_POWER_DISPLAY_UNITS"></span>W</div>
+        </div>
+
+
 </div>
 </div>
 
@@ -705,6 +727,21 @@
 			   </div>
 
 
+			   <div class="buildCtrlPanel  buildCtrlPanel5B">
+			   <div class="ctrlPanelTopLine">
+			     <h5><span class="INFO_TEXT_STATIC">Hawking Reactors: </span><span class="valueDisplayDiv" id="Hawk_CT_DIV"><span id="Hawk_CT"></span><span id="Hawk_CT_UNITS"></span></span></h5>
+			     <button class="buildCancelButton" id="button_wfHawkCancel"> &#x274C; </button>
+			     <span class="LVL_DISPLAY" id="Hawk_wfLVL">Lvl-1</span>
+               </div>
+			    <div class="buildInfoPanel1"><div class="valueDisplayDiv" id="Hawk_wf_AddUnit_DIV"><span id="Hawk_wf_AddUnit"></span><span id="Hawk_wf_AddUnit_UNITS"></span></div></div>
+				<button class = "button3" id ="button_wfHawkUP" disabled = "true"> &#8963; </button>
+				<button class = "button2" id ="button_wfHawkF"  disabled = "true"> BUILD </button>
+			    <div class="buildInfoPanel2">BEEP BEEP BEEP <br> <span id="wfUPGRADE_Hawk_COST"></span> </div>
+			    <span></span>
+				<button class = "button3" id ="button_wfHawkDN" > &#8964; </button>
+				<button class = "button3" id ="button_wfHawkUPGRADE"   disabled = "true"> UPGRADE </button>
+			   </div>
+
 			   <div class="buildCtrlPanel  buildCtrlPanel7" style="display:none;">
 			   <div class="ctrlPanelTopLine">
 			     <h5><span class="INFO_TEXT_STATIC">Compute Node: </span><span class="valueDisplayDiv" id="Comp_CT_DIV"><span id="Comp_CT"></span><span id="Comp_CT_UNITS"></span></span></h5>
@@ -781,7 +818,7 @@
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Process raw matter into processed feedstock for your robots to turn into other things.</span> </span>
-              <h5><span class="INFO_TEXT_STATIC">Process Matter: </span><div class="valueDisplayDiv" id="botSliderDisplayPct1_DIV"><span id="botSliderDisplayPct1"></span><span id="botSliderDisplayPct1_UNITS"></span></div></h5>
+              <h5><span class="INFO_TEXT_STATIC">Process Matter: </span><span class="valueDisplayDiv" id="botSliderDisplayPct1_DIV"><span id="botSliderDisplayPct1"></span><span id="botSliderDisplayPct1_UNITS"></span></span><div id="botSliderDisplayPct1_PROD"></div></h5>
 				</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -795,7 +832,7 @@
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Direct your Van-Neumann factory robots to create more Van-Neumann factory robots. Those new Van-Neumann factory robots can then be directed to do likewise.</span> </span>
-			  <h5><span class="INFO_TEXT_STATIC">Construct More Bots: </span><div class="valueDisplayDiv" id="botSliderDisplayPct2_DIV"><span id="botSliderDisplayPct2"></span><span id="botSliderDisplayPct2_UNITS"></span></div></h5>
+			  <h5><span class="INFO_TEXT_STATIC">Construct More Bots: </span><span class="valueDisplayDiv" id="botSliderDisplayPct2_DIV"><span id="botSliderDisplayPct2"></span><span id="botSliderDisplayPct2_UNITS"></span></span><div id="botSliderDisplayPct2_PROD"></div></h5>
 				</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -809,7 +846,7 @@
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Builds starships to explore, secure, and seed new worlds for processing into yogurt.</span> </span>
-			<h5><span class="INFO_TEXT_STATIC">Starship Construction: </span><div class="valueDisplayDiv" id="botSliderDisplayPct5_DIV"><span id="botSliderDisplayPct5"></span><span id="botSliderDisplayPct5_UNITS"></span></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Starship Construction: </span><span class="valueDisplayDiv" id="botSliderDisplayPct5_DIV"><span id="botSliderDisplayPct5"></span><span id="botSliderDisplayPct5_UNITS"></span></span><div id="botSliderDisplayPct5_PROD"></div></h5>
 				</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -823,7 +860,7 @@
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> TODO.</span> </span>
-			<h5><span class="INFO_TEXT_STATIC">Assemble Computronium: </span><div class="valueDisplayDiv" id="botSliderDisplayPct6_DIV"><span id="botSliderDisplayPct6"></span><span id="botSliderDisplayPct6_UNITS"></span></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Assemble Computronium: </span><span class="valueDisplayDiv" id="botSliderDisplayPct6_DIV"><span id="botSliderDisplayPct6"></span><span id="botSliderDisplayPct6_UNITS"></span></span><div id="botSliderDisplayPct6_PROD"></div></h5>
 				</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -836,7 +873,7 @@
 				</div>
 
 			<div class="unlockableHidden" id="LOCKHIDE_WASTEREPROCESS">
-			<h5><span class="INFO_TEXT_STATIC">Reprocess Waste: </span><div class="valueDisplayDiv" id="botSliderDisplayPct3_DIV"><span id="botSliderDisplayPct3"></span><span id="botSliderDisplayPct3_UNITS"></span></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Reprocess Waste: </span><span class="valueDisplayDiv" id="botSliderDisplayPct3_DIV"><span id="botSliderDisplayPct3"></span><span id="botSliderDisplayPct3_UNITS"></span></span><div id="botSliderDisplayPct3_PROD"></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="0" class="slider" id="botSliderPct3">
@@ -849,7 +886,7 @@
 			</div>
 
 			<div class="unlockableHidden" id="LOCKHIDE_TRANSMUTEYOGURT">
-			<h5><span class="INFO_TEXT_STATIC">Transmute Yogurt: </span><div class="valueDisplayDiv" id="botSliderDisplayPct4_DIV"><span id="botSliderDisplayPct4"></span><span id="botSliderDisplayPct4_UNITS"></span></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Transmute Yogurt: </span><span class="valueDisplayDiv" id="botSliderDisplayPct4_DIV"><span id="botSliderDisplayPct4"></span><span id="botSliderDisplayPct4_UNITS"></span></span><div id="botSliderDisplayPct4_PROD"></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="0" class="slider" id="botSliderPct4" >
@@ -863,7 +900,7 @@
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Build vast solar arrays for collecting energy </span> </span>
-			  <h5><span class="INFO_TEXT_STATIC">Construct Solar Arrays </span><div class="valueDisplayDiv" id="botSliderDisplayPct7_DIV"><span id="botSliderDisplayPct7"></span><span id="botSliderDisplayPct7_UNITS"></span></div></h5>
+			  <h5><span class="INFO_TEXT_STATIC">Construct Solar Arrays </span><span class="valueDisplayDiv" id="botSliderDisplayPct7_DIV"><span id="botSliderDisplayPct7"></span><span id="botSliderDisplayPct7_UNITS"></span></span><div id="botSliderDisplayPct7_PROD"></div></h5>
 				</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -892,11 +929,11 @@
 <div class="contentUnitHolder">
 			<div class="SliderSetHolder">
 
-            <span class="INFO_TEXT_STATIC">Productivity: </span><div class="valueDisplayDiv" id="green_PRODUCTIVITY_DISPLAY_DIV"><span id="green_PRODUCTIVITY_DISPLAY"></span><span id="green_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+            <span class="INFO_TEXT_STATIC">Productivity: </span><span class="valueDisplayDiv" id="green_PRODUCTIVITY_DISPLAY_DIV"><span id="green_PRODUCTIVITY_DISPLAY"></span><span id="green_PRODUCTIVITY_DISPLAY_UNITS"></span></span>
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Activates digestive enzymes in biomass clusters that digests unprocessed greenworld matter into a metabolically-available slurry. This slurry can then be used as a growth medium for more biomass or for yogurt.</span> </span>
-              <h5><span class="INFO_TEXT_STATIC">Digest Matter: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct6_DIV"><span id="greenSliderDisplayPct6"></span><span id="greenSliderDisplayPct6_UNITS"></span></div></h5>
+              <h5><span class="INFO_TEXT_STATIC">Digest Matter: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct6_DIV"><span id="greenSliderDisplayPct6"></span><span id="greenSliderDisplayPct6_UNITS"></span></span><div id="greenSliderDisplayPct6_PROD"></div></h5>
 			</div>
 
 				<div class="multiPctSliderSuper">
@@ -911,7 +948,7 @@
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Directs the growth of specialized biomass clusters: vast balls of bioengineered, artifically-evolved algae sludge that can be controlled and directed to perform specialized biological processes on demand.</span> </span>
-			  <h5><span class="INFO_TEXT_STATIC">Grow Biomass: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct5_DIV"><span id="greenSliderDisplayPct5"></span><span id="greenSliderDisplayPct5_UNITS"></span></div></h5>
+			  <h5><span class="INFO_TEXT_STATIC">Grow Biomass: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct5_DIV"><span id="greenSliderDisplayPct5"></span><span id="greenSliderDisplayPct5_UNITS"></span></span><div id="greenSliderDisplayPct5_PROD"></div></h5>
 			</div>
 
 
@@ -927,7 +964,7 @@
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Activate specialized enzymes and synthetically-designed biologic processes in greenworld biomass clusters to convert digested slurry into fresh and delicious yogurt. This is the fundamental reason for the universe. All else is ancillary. And fleeting. Soon all will be yogurt.</span> </span>
-			  <h5><span class="INFO_TEXT_STATIC">Ferment Yogurt: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct2_DIV"><span id="greenSliderDisplayPct2"></span><span id="greenSliderDisplayPct2_UNITS"></span></div></h5>
+			  <h5><span class="INFO_TEXT_STATIC">Ferment Yogurt: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct2_DIV"><span id="greenSliderDisplayPct2"></span><span id="greenSliderDisplayPct2_UNITS"></span></span><div id="greenSliderDisplayPct2_PROD"></div></h5>
 			</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -943,7 +980,7 @@
 
 			<div class="tooltipHolder ttSEC2">
 			    <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Biological Research includes biomedical science, biochemistry, organic chemistry, genetic engineering, and bioinformatics.</span> </span>
-			    <h5><span class="INFO_TEXT_STATIC">Biological Research: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct1_DIV"><span id="greenSliderDisplayPct1"></span><span id="greenSliderDisplayPct1_UNITS"></span></div></h5>
+			    <h5><span class="INFO_TEXT_STATIC">Biological Research: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct1_DIV"><span id="greenSliderDisplayPct1"></span><span id="greenSliderDisplayPct1_UNITS"></span></span><div id="greenSliderDisplayPct1_PROD"></div></h5>
 			</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -956,7 +993,7 @@
 				</div>
 
 			<div class="unlockableHidden" id="LOCKHIDE_BIOWEAPONS">
-			<h5><span class="INFO_TEXT_STATIC">Grow Bioweapons: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct3_DIV"><span id="greenSliderDisplayPct3"></span><span id="greenSliderDisplayPct3_UNITS"></span></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Grow Bioweapons: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct3_DIV"><span id="greenSliderDisplayPct3"></span><span id="greenSliderDisplayPct3_UNITS"></span></span><div id="greenSliderDisplayPct3_PROD"></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="0" class="slider" id="greenSliderPct3">
@@ -968,7 +1005,7 @@
 				</div>
 			</div>
 			<div class="unlockableHidden" id="LOCKHIDE_COMPOST">
-			<h5><span class="INFO_TEXT_STATIC">Compost Fermentation: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct4_DIV"><span id="greenSliderDisplayPct4"></span><span id="greenSliderDisplayPct4_UNITS"></span></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Compost Fermentation: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct4_DIV"><span id="greenSliderDisplayPct4"></span><span id="greenSliderDisplayPct4_UNITS"></span></span><div id="greenSliderDisplayPct4_PROD"></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="0" class="slider" id="greenSliderPct4" >
@@ -982,7 +1019,7 @@
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Creates synthetic chloroplasts which can derive energy from the system's sun. Provides power. Less efficient than solar arrays, but easier to make.</span> </span>
-              <h5><span class="INFO_TEXT_STATIC">Synthesize Chloroplasts </span><div class="valueDisplayDiv" id="greenSliderDisplayPct7_DIV"><span id="greenSliderDisplayPct7"></span><span id="greenSliderDisplayPct7_UNITS"></span></div></h5>
+              <h5><span class="INFO_TEXT_STATIC">Synthesize Chloroplasts </span><span class="valueDisplayDiv" id="greenSliderDisplayPct7_DIV"><span id="greenSliderDisplayPct7"></span><span id="greenSliderDisplayPct7_UNITS"></span></span><div id="greenSliderDisplayPct7_PROD"></div></h5>
 			</div>
 
 				<div class="multiPctSliderSuper">
@@ -1518,29 +1555,29 @@ Stellar pop:
 
   			    <h5> <span class="INFO_TEXT_STATIC">Main-Sequence:</span> </h5>
 				<div class="contentGrid4">
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_O_DIV">  <span class="INFO_TEXT_STATIC">O:</span></div>
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_B_DIV">  <span class="INFO_TEXT_STATIC">B:</span></div>
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_A_DIV">  <span class="INFO_TEXT_STATIC">A:</span></div>
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_F_DIV">  <span class="INFO_TEXT_STATIC">F:</span></div>
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_G_DIV">  <span class="INFO_TEXT_STATIC">G:</span></div>
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_K_DIV">  <span class="INFO_TEXT_STATIC">K:</span></div>
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_M_DIV">  <span class="INFO_TEXT_STATIC">M:</span></div>
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_TOT_DIV">  <span class="INFO_TEXT_STATIC">Total:</span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">O:</span>     <span id="STARTYPE_O_DIV"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">B:</span>     <span id="STARTYPE_B_DIV"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">A:</span>     <span id="STARTYPE_A_DIV"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">F:</span>     <span id="STARTYPE_F_DIV"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">G:</span>     <span id="STARTYPE_G_DIV"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">K:</span>     <span id="STARTYPE_K_DIV"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">M:</span>     <span id="STARTYPE_M_DIV"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">Total:</span>    <span id="STARTYPE_TOT_DIV"></span> </div>
 			    </div>
 
   			    <h5> <span class="INFO_TEXT_STATIC">Giants:</span> </h5>
 				<div class="contentGrid4">
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_rGiant_DIV">  <span class="INFO_TEXT_STATIC">Red Giants:</span></div>
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_bGiant_DIV">  <span class="INFO_TEXT_STATIC">Bright Giants:</span></div>
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_sGiant_DIV">  <span class="INFO_TEXT_STATIC">Supergiants:</span></div>
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_hGiant_DIV">  <span class="INFO_TEXT_STATIC">Hypergiants:</span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">Red Giants:</span>         <span id="STARTYPE_RedGiant_DIV"></span>  </div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">Bright Giants:</span>      <span id="STARTYPE_BrightGiant_DIV"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">Supergiants:</span>        <span id="STARTYPE_Supergiant_DIV"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">Hypergiants:</span>        <span id="STARTYPE_Hypergiant_DIV"></span></div>
                 </div>
 
   			    <h5> <span class="INFO_TEXT_STATIC">Other:</span> </h5>
 				<div class="contentGrid3">
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_wDwarf_DIV">     <span class="INFO_TEXT_STATIC">White Dwarfs:</span></div>
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_neutron_DIV">    <span class="INFO_TEXT_STATIC">Neutron Stars:</span></div>
-			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" id="STARTYPE_blackHole_DIV">  <span class="INFO_TEXT_STATIC">Black Holes:</span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >     <span class="INFO_TEXT_STATIC">White Dwarfs:</span>     <span id="STARTYPE_WhiteDwarf_DIV"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >    <span class="INFO_TEXT_STATIC">Neutron Stars:</span>        <span id="STARTYPE_neutron_DIV"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">Black Holes:</span>          <span id="STARTYPE_blackHole_DIV"></span></div>
                 </div>
 
 

@@ -282,7 +282,9 @@ function fmtSIint(x){
   }
 }
 function fmtSIintNoPct(x){
-  if(x < 100){
+  if(x < 0){
+    return 0;
+  } else if(x < 100){
     return ""+Math.floor(x)
   } else if(x < 100){
     return ""+Math.floor(x)
