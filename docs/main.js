@@ -317,6 +317,8 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
    var researchButton = document.getElementById("RESEARCH_CURRENT_PROJECT_"+fid);
    availListElem.fid = fid;
    availListElem.addMultiProject = addMultiProject
+   availListElem.addScaledProject = addScaledProject
+
    availListElem.descElem = descElem;
    availListElem.researchButton = researchButton;
    availListElem.GAME = GAME_GLOBAL;
@@ -894,7 +896,7 @@ function addConstructionRequest(inventoryItemName, requestCt, unitCost){
 }
 
 
-STATICVAR_HOLDER.SHARED_RESOURCE_LIST = ["MATTER-FreeGreen-CT",
+STATICVAR_HOLDER.SHARED_RESOURCE_LIST = ["MATTER-Waste-CT","MATTER-FreeGreen-CT",
                         "MATTER-Digested-CT",
                         "MATTER-FreeBot-CT",
                         "MATTER-Feedstock-CT",
@@ -915,11 +917,13 @@ function executeAllConstructionRequests(){
         resourceUserList[i] = [];
         var totalResourceRequested = 0;
         for(var j=0; j < this.CONSTRUCTION_REQUESTS.length;j++){
-           for(var k=0; k < this.CONSTRUCTION_REQUESTS[j][2].length; k++){
-             if(rr == this.CONSTRUCTION_REQUESTS[j][2][k][0]){
-               resourceUserList[i].push([j,k]);
-               //console.log("            [:"+this.CONSTRUCTION_REQUESTS[j][0]+"] uses "+rr);
-               totalResourceRequested = totalResourceRequested + this.CONSTRUCTION_REQUESTS[j][2][k][1] * this.CONSTRUCTION_REQUESTS[j][3];
+           if(this.CONSTRUCTION_REQUESTS[j][1] > 0){
+             for(var k=0; k < this.CONSTRUCTION_REQUESTS[j][2].length; k++){
+               if(rr == this.CONSTRUCTION_REQUESTS[j][2][k][0] && this.CONSTRUCTION_REQUESTS[j][2][k][1] > 0){
+                 resourceUserList[i].push([j,k]);
+                 //console.log("            [:"+this.CONSTRUCTION_REQUESTS[j][0]+"] uses "+rr);
+                 totalResourceRequested = totalResourceRequested + this.CONSTRUCTION_REQUESTS[j][2][k][1] * this.CONSTRUCTION_REQUESTS[j][3];
+               }
              }
            }
         }
@@ -1185,4 +1189,13 @@ INVENTORY["MATTER-Waste-CT"] = 100000000;
 INVENTORY["WORLDS-"+"Bot"+"-CT"] = 1
 
 
+var START_WITH_GREENWORLD = true;
+if(START_WITH_GREENWORLD){
+  INVENTORY["STARS-" + "G" +"-CT"] = INVENTORY["STARS-" + "G" +"-CT"] + 1;
+  INVENTORY["MATTER-FreeGreen-CT"] = 1.9885e27;
+  INVENTORY["POWER-FreeGreen-CT"] = 3.828e20;
 
+  INVENTORY["MATTER-Biomass-CT"] = 75000000;
+  INVENTORY["MATTER-Biopwr-CT"] = 25000000;
+  INVENTORY["MATTER-Waste-CT"] = 100000000;
+}

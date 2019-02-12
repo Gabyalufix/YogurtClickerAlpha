@@ -359,8 +359,11 @@ var sliderID = iss.sliderID;
 var sliderIDX = iss.sliderIDX;
 var prod2 = GAME_GLOBAL.calcIndustrialProd(iss);
 
-
-
+var productID = GAME_GLOBAL.INDUSTRY_LIST[i];
+var iss = STATS.INDUSTRY[productID];
+var sliderID = iss.sliderID;
+var sliderIDX = iss.sliderIDX;
+var prod = this.calcIndustrialProd(iss);
 
 */
 
@@ -576,6 +579,7 @@ GAME_GLOBAL.SCIENCE_SUBFIELDS = SCIENCE_SUBFIELDS;
 
 console.log("[all science] is lvl "+(1) + ", next threshold: "+fmtSIintNoPct(Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, (2)) * this.SCIENCE_UNLOCK_THRESH_BASE));
 
+GAME_GLOBAL.SCIENCE_SCALED_UNLOCK_RATE = 1.0;
 
 function TICK_calcScience(){
     for(var i=0;i<this.SCIENCE_TYPES.length;i++){
@@ -598,13 +602,22 @@ function TICK_calcScience(){
               //     var ap1 = availListElem.addMultiProject(projectList[idx1],1,1)
               this.SCIENCE_DISPLAY[sciname].availListElem.addMultiProject(projectList[idx], currLvl + 1)
            }
+         } else if(Math.random() < GAME_GLOBAL.SCIENCE_SCALED_UNLOCK_RATE){
+           console.log("   attempting unlock");
+           var projectList   = this.STATICVAR_HOLDER.SCIENCE.SCALED[sciname];
+           var projectLocked = STATS.SCIENCE_LOCKED["SCALED"][sciname];
+           if(projectLocked.length > 0){
+             var idxidx = Math.floor( getRandomBetween(0,projectLocked.length) );
+             var idx = projectLocked[idxidx];
+             console.log("   attempting SCALED unlock: "+ projectList[idx].projectID);
+             if(Math.random() < projectList[idx].rate){
+                this.SCIENCE_DISPLAY[sciname].availListElem.addScaledProject(projectList[idx], currLvl + 1)
+             }
+           }
          } else {
            console.log("   skipping unlock");
          }
          //do the unlocks:getRandomBetween
-         
-
-         
          
       }
     }

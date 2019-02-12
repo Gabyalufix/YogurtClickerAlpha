@@ -584,55 +584,81 @@ STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3], ["MATTER-Waste-CT",
 
 STATS["INDUSTRY"] = {};
 STATS["INDUSTRY"]["Feedstock"] = { sliderID: "bot", sliderIDX: 0, prodTitle: "Botworld Feedstock", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd: 0.01, 
+                                   baseProd: 0.001, 
                                    baseCost:  [["MATTER-FreeBot-CT",1]],
                                    basePwr:   0.005800,
                                    baseWaste: 0.01}
 STATS["INDUSTRY"]["Botbots"] = { sliderID: "bot", sliderIDX: 1, prodTitle: "Robotic Fabricator Construction", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd: 0.012, 
+                                   baseProd: 0.0012, 
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.331000,
                                    baseWaste: 0.3}
 
 STATS["INDUSTRY"]["Botpwr"] =   { sliderID: "bot", sliderIDX: 6, prodTitle: "Solar Array Construction", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd: 0.005, 
+                                   baseProd: 0.0005, 
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.077200,
                                    baseWaste: 0.2}
 STATS["INDUSTRY"]["Ship"] = { sliderID: "bot", sliderIDX: 4, prodTitle: "Shipyard Construction", inventoryType: "BUFFER", scitype: "eng",
-                                   baseProd: 0.001, 
+                                   baseProd: 0.0001, 
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.138000,
                                    baseWaste: 0.25}
 
 STATS["INDUSTRY"]["Compute"] = { sliderID: "bot", sliderIDX: 5, prodTitle: "Computronium Fabrication", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd: 0.012, 
+                                   baseProd: 0.0012, 
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.255000,
                                    baseWaste: 0.3}
 
 STATS["INDUSTRY"]["Digested"] = { sliderID: "green", sliderIDX: 5, prodTitle: "Matter Digestion", inventoryType: "MATTER", scitype: "bio",
-                                   baseProd: 0.057, 
+                                   baseProd: 0.0057, 
                                    baseCost:  [["MATTER-FreeGreen-CT",1]],
                                    basePwr:   0.007000,
                                    baseWaste: 0.01}
 STATS["INDUSTRY"]["Biopwr"] = { sliderID: "green", sliderIDX: 6, prodTitle: "Chloroplast Replication", inventoryType: "MATTER", scitype: "bio",
-                                   baseProd: 0.15, 
+                                   baseProd: 0.015, 
                                    baseCost:  [["MATTER-Digested-CT",1]],
-                                   basePwr:   0.015300,
+                                   basePwr:   0,
                                    baseWaste: 1}
 STATS["INDUSTRY"]["Yogurt"] = { sliderID: "green", sliderIDX: 1, prodTitle: "Yogosynthesis", inventoryType: "MATTER", scitype: "bio",
-                                   baseProd: 0.0075, 
+                                   baseProd: 0.00075, 
                                    baseCost:  [["MATTER-Digested-CT",1]],
                                    basePwr:   0.287000,
                                    baseWaste: 0.2}
 STATS["INDUSTRY"]["Biomass"] = { sliderID: "green", sliderIDX: 4, prodTitle: "Biomass Division", inventoryType: "MATTER", scitype: "bio",
-                                   baseProd: 0.0157, 
+                                   baseProd: 0.00157, 
                                    baseCost:  [["MATTER-Digested-CT",1]],
                                    basePwr:   0.177000,
                                    baseWaste: 0.1}
 
-GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass"]
+
+STATS["INDUSTRY"]["WasteReprocess"] = { sliderID: "bot", sliderIDX: 3, prodTitle: "Waste Reprocessing", inventoryType: "MATTER", scitype: "eng",
+                                   baseProd:  0.001, 
+                                   baseCost:  [["MATTER-Waste-CT",1]],
+                                   basePwr:   0.177000,
+                                   baseWaste: 0, lockKey: "WASTEREPROCESS"}
+STATS["INDUSTRY"]["WasteFerment"] = { sliderID: "bio", sliderIDX: 3, prodTitle: "Waste Reprocessing", inventoryType: "MATTER", scitype: "eng",
+                                   baseProd:  0.001, 
+                                   baseCost:  [["MATTER-Waste-CT",1]],
+                                   basePwr:   0.177000,
+                                   baseWaste: 0, lockKey: "COMPOST"}
+STATS["INDUSTRY"]["Bioweapons"] = { sliderID: "bio", sliderIDX: 2, prodTitle: "Grow Bioweapons", inventoryType: "MATTER", scitype: "bio",
+                                   baseProd:  0.000157, 
+                                   baseCost:  [["MATTER-Digested-CT",1]],
+                                   basePwr:   0.177000,
+                                   baseWaste: 0, lockKey: "BIOWEAPONS"}
+STATS["INDUSTRY"]["TransmuteYogurt"] = { sliderID: "bot", sliderIDX: 3, prodTitle: "Transmute Yogurt", inventoryType: "MATTER", scitype: "eng",
+                                   baseProd:  0.00005, 
+                                   baseCost:  [["MATTER-Feedstock-CT",1]],
+                                   basePwr:   0.177000,
+                                   baseWaste: 0, lockKey: "TRANSMUTEYOGURT"}
+
+
+
+//LOCKHIDE_BIOWEAPONS
+ 
+GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass","TransmuteYogurt","Bioweapons","WasteFerment","WasteReprocess"]
 STATS["PRODUCTION-CURR"] = {};
 STATS["PRODUCTION-REQ"] = {};
 for(var i=0; i < GAME_GLOBAL.INDUSTRY_LIST.length; i++){
@@ -825,7 +851,7 @@ think:*/
 function calcIndustrialProd(xx){
   var xid = xx.sliderID+"_"+xx.sliderIDX;
   //this.STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][0]
-  return this.STATS["PRODUCTIVITY_MULT"][xid] * xx.baseProd * this.STATS["PRODUCTIVITY_RATING"][xx.sliderID] * this.SETTINGS["bot_FRACTION"][xx.sliderIDX]
+  return this.STATS["PRODUCTIVITY_MULT"][xid] * xx.baseProd * this.STATS["PRODUCTIVITY_RATING"][xx.sliderID] * this.SETTINGS[xx.sliderID+"_FRACTION"][xx.sliderIDX]
 }
 function calcIndustrialCost(xx){
   var xid = xx.sliderID+"_"+xx.sliderIDX;
@@ -1128,22 +1154,105 @@ STATICVAR_HOLDER.SCIENCE.PROGRESS = {
 //These generally unlock new abilities or provide a large boost to
 //       one specific ability.
 STATICVAR_HOLDER.SCIENCE.SCALED = {
-  bio:[],
-  eng:[],
+  bio:[
+          {projectTitle:"Compost Fermentation",projectID:"SCALED_COMPOST",projectType:"SCALED", 
+           costField:["bio_SCIENCE_FREE","bio1_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           effect:function(){
+             var iix = STATS["INDUSTRY"]["WasteFerment"];
+             var elem = document.getElementById("LOCKHIDE_"+iix.lockKey);
+             elem.style.display = "block";
+           },
+           desc:"Develop a new method to compost waste material into Yogurt." , 
+           descShort:"Develop a new method to compost waste material into Yogurt"},
+          {projectTitle:"Bioweapons",projectID:"SCALED_BIOWEAPONS",projectType:"SCALED", 
+           costField:["bio_SCIENCE_FREE","bio2_SCIENCE_FREE","eng1_SCIENCE_FREE"], costMult:[1,1,1], rate:1,
+           effect:function(){
+             var iix = STATS["INDUSTRY"]["Bioweapons"];
+             var elem = document.getElementById("LOCKHIDE_"+iix.lockKey);
+             elem.style.display = "block";
+           },
+           desc:"Develop horrific diseases to inflict on hostile populations." , 
+           descShort:"Develop horrific diseases to inflict on hostile populations."}
+  ],
+  eng:[
+          {projectTitle:"Waste Reprocessing",projectID:"SCALED_WASTEREPROCESS",projectType:"SCALED",
+           costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           effect:function(){
+             var iix = STATS["INDUSTRY"]["WasteReprocess"];
+             var elem = document.getElementById("LOCKHIDE_"+iix.lockKey);
+             elem.style.display = "block";
+           },
+           desc:"Develop a new method to reprocess and recycle waste material into raw feedstock." , 
+           descShort:"Develop a new method to reprocess and recycle waste material into raw feedstock."},
+          {projectTitle:"YogurtMatter Transmutation",projectID:"SCALED_TRANSMUTEYOGURT",projectType:"SCALED", 
+           costField:["eng_SCIENCE_FREE","bio1_SCIENCE_FREE"], costMult:[2,2], rate:1,
+           effect:function(){
+             var iix = STATS["INDUSTRY"]["TransmuteYogurt"];
+             var elem = document.getElementById("LOCKHIDE_"+iix.lockKey);
+             elem.style.display = "block";
+           },
+           desc:"Develop a new method to reprocess and recycle waste material into raw feedstock." , 
+           descShort:"Develop a new method to reprocess and recycle waste material into raw feedstock."}
+  ],
   psy:[],
   sum:[]
 }
-
+for(var i=0; i<SCIENCE_TYPES.length; i++){
+   var sciname = SCIENCE_TYPES[i];
+   for(var j=0; j < STATICVAR_HOLDER.SCIENCE.SCALED[sciname].length; j++){
+      STATICVAR_HOLDER.SCIENCE.SCALED[sciname][j].idx = j;
+      STATICVAR_HOLDER.SCIENCE.SCALED[sciname][j].scitype = sciname;
+   }
+}
 
 //Science projects that can appear at any point in the tech progression 
 //       and can be researched more than once.
 //These generally provide a small boost to one specific ability.
 
 
-/*STATICVAR_HOLDER.SCIENCE.MULTI_BASE = {
-   bio:[
-      
-   ]
+/*
+
+STATS["INDUSTRY"]["WasteReprocess"] = { sliderID: "bot", sliderIDX: 3, prodTitle: "Waste Reprocessing", inventoryType: "MATTER", scitype: "eng",
+                                   baseProd:  0.001, 
+                                   baseCost:  [["MATTER-Waste-CT",1]],
+                                   basePwr:   0.177000,
+                                   baseWaste: 0, lockKey: "WASTEREPROCESS"}
+STATS["INDUSTRY"]["WasteFerment"] = { sliderID: "bio", sliderIDX: 3, prodTitle: "Waste Reprocessing", inventoryType: "MATTER", scitype: "eng",
+                                   baseProd:  0.001, 
+                                   baseCost:  [["MATTER-Waste-CT",1]],
+                                   basePwr:   0.177000,
+                                   baseWaste: 0, lockKey: "COMPOST"}
+STATS["INDUSTRY"]["Bioweapons"] = { sliderID: "bio", sliderIDX: 2, prodTitle: "Grow Bioweapons", inventoryType: "MATTER", scitype: "bio",
+                                   baseProd:  0.000157, 
+                                   baseCost:  [["MATTER-Digested-CT",1]],
+                                   basePwr:   0.177000,
+                                   baseWaste: 0, lockKey: "BIOWEAPONS"}
+STATS["INDUSTRY"]["TransmuteYogurt"] = { sliderID: "bot", sliderIDX: 3, prodTitle: "Transmute Yogurt", inventoryType: "MATTER", scitype: "eng",
+                                   baseProd:  0.00005, 
+                                   baseCost:  [["MATTER-Feedstock-CT",1]],
+                                   basePwr:   0.177000,
+                                   baseWaste: 0, lockKey: "TRANSMUTEYOGURT"}
+
+
+document.getElementById("botSliderDisplayPct4").IS_LOCKED = true
+document.getElementById("botSliderDisplayPct4").LOCKER = document.getElementById("LOCKHIDE_TRANSMUTEYOGURT")
+
+document.getElementById("thinkSliderDisplayPct3").IS_LOCKED = true
+document.getElementById("thinkSliderDisplayPct3").LOCKER = document.getElementById("LOCKHIDE_HACKING")
+
+//document.getElementById("soulSliderDisplayPct2").IS_LOCKED = true
+//document.getElementById("soulSliderDisplayPct2").LOCKER = document.getElementById("LOCKHIDE_ESPIONAGE")
+
+document.getElementById("botSliderDisplayPct3").IS_LOCKED = true
+document.getElementById("botSliderDisplayPct3").LOCKER = document.getElementById("LOCKHIDE_WASTEREPROCESS")
+
+document.getElementById("greenSliderDisplayPct3").IS_LOCKED = true
+document.getElementById("greenSliderDisplayPct3").LOCKER = document.getElementById("LOCKHIDE_BIOWEAPONS")
+
+document.getElementById("greenSliderDisplayPct4").IS_LOCKED = true
+document.getElementById("greenSliderDisplayPct4").LOCKER = document.getElementById("LOCKHIDE_COMPOST")
+
+
 }*/
 
 /*
@@ -1399,9 +1508,9 @@ function getProjectCost(costField, techlvl, costMult){
 GAME_GLOBAL.getProjectCost=getProjectCost;
 
 
-function addMultiProject(pp, techlvl, plvl){
+function addMultiProject(pp, techlvl){
   var plvl = this.GAME.STATS.SCIENCE_MULTICT[ pp.projectID ] + 1;
-  var ap = { uid : pp.projectID+"_"+techlvl+"_"+plvl,projectID : pp.projectID, desc : pp.desc, effect : pp.effect}
+  var ap = { uid : pp.projectID+"_"+techlvl+"_"+plvl,projectID : pp.projectID, desc : pp.desc}
   if(plvl == -1){
     ap.projectTitle = pp.projectTitle
   } else {
@@ -1414,6 +1523,19 @@ function addMultiProject(pp, techlvl, plvl){
   return ap;
   //ap.cost = 
 }
+function addScaledProject(pp, techlvl){
+  var ap = { uid : pp.projectID, projectTitle : pp.projectTitle,projectID : pp.projectID, desc : pp.desc, effect : pp.effect, scitype : pp.scitype}
+  ap.projectType = pp.projectType;
+  ap.cost = this.GAME.getProjectCost(pp.costField,techlvl,pp.costMult);
+  var lockArray = STATS.SCIENCE_LOCKED["SCALED"][pp.scitype];
+  var idx = lockArray.indexOf( pp.idx );
+  lockArray.splice(idx,1);
+  this.addNewProject(ap);
+  return ap;
+  //ap.cost = 
+}
+
+GAME_GLOBAL.addScaledProject = addScaledProject;
 
 GAME_GLOBAL.addMultiProject = addMultiProject;
 
