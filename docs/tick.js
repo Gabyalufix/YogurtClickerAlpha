@@ -308,10 +308,24 @@ function TICK_calcIndustry(){
        this.ELEMS[pc+"pwr_POWER_DISPLAY"].innerHTML = pwrFmt1[0];
        this.ELEMS[pc+"pwr_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt1[1];
        
-       
+       var pp = ELEMS["POWER_PRODDISPLAY"][pc];
+      
+      /*this.ELEMS["POWER_AVAIL"][pp] = document.getElementById(pp+"_POWER_AVAIL");
+      this.ELEMS["POWER_THERMAL"][pp] = document.getElementById(pp+"_POWER_THERMAL");
+      this.ELEMS["POWER_COLLECT"][pp] = document.getElementById(pp+"_POWER_COLLECT");
+      this.ELEMS["POWER_OUTPUT"][pp] = document.getElementById(pp+"_POWER_OUTPUT");
+      this.ELEMS["POWER_CAPACITY"][pp] = document.getElementById(pp+"_POWER_CAPACITY");*/
+      //this.INVENTORY["POWER-Free"+worldType+"-CT"]
+      
+      //pp.powerAVAIL   = fmtSIflat(   this.INVENTORY["POWER-Free"+worldType+"-CT"] );
+      //pp.powerTHERMAL = fmtSIflat( this.INVENTORY["POWER-Free"+worldType+"-CT"] );
+      //pp.powerCOLLECT = fmtSIflat( this.INVENTORY["POWER-Free"+worldType+"-CT"] );
+      this.INVENTORY["POWERGEN-"+pc+""] = this.INVENTORY["POWER-"+pc+""]
+      pp.powerCAPACITY.innerHTML = pwrFmt1[0]+pwrFmt1[1];
     }
     
-    
+    this.INVENTORY["POWERGEN-Hawk"] = 0;
+    //console.log("HAWKENER = "+ this.INVENTORY["POWERGEN-Hawk"])
     //this.STATS["PRODUCTIVITY_RATING"]["BiopwrGen"] = this.INVENTORY["MATTER-Biopwr-CT"] * this.STATS["PRODUCTIVITY_MULT"]["BiopwrGen"] * this.STATS["CONVERSIONS"]["pwrFromBiopwrPerProdPerTick"] * this.STATS["PRODUCTIVITY_MULT"]["green"];
 
     //this.INVENTORY["POWER"] = this.STATS["PRODUCTIVITY_RATING"]["BotpwrGen"] + this.STATS["PRODUCTIVITY_RATING"]["BiopwrGen"]
@@ -582,6 +596,52 @@ GAME_GLOBAL.SCIENCE_SUBFIELDS = SCIENCE_SUBFIELDS;
        this.ELEMS["DEMAND_POWER_DISPLAY"].innerHTML = pwrFmt6[0];
        this.ELEMS["DEMAND_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt6[1];
     
+    var pwrUsage = this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"];
+    var pwrUsageLeft = pwrUsage;
+    //console.log("HAWKENER = "+ this.INVENTORY["POWERGEN-Hawk"])
+    //TODO: sort by priority!
+    for(var i=0; i < this.STATICVAR_HOLDER.POWER_SOURCE_LIST.length; i++){
+      var ppid = this.STATICVAR_HOLDER.POWER_SOURCE_LIST[i];
+      var pp = ELEMS["POWER_PRODDISPLAY"][ppid];
+      var worldType = pp.powerWorld
+      var genCapacity = this.INVENTORY["POWERGEN-"+ppid+""]
+      var worldPwrUsage = genCapacity;
+      //console.log("["+ppid+"]"+"genCapacity:"+genCapacity +", pwrUsageLeft:"+pwrUsageLeft +", worldPwrUsage:"+worldPwrUsage);
+      if(genCapacity < pwrUsageLeft){
+        pwrUsageLeft = pwrUsageLeft - genCapacity
+      } else {
+        //pwrUsageLeft = 0;
+        worldPwrUsage = pwrUsageLeft;
+        pwrUsageLeft = 0;
+      }
+      //console.log("    "+"genCapacity:"+genCapacity +", pwrUsageLeft:"+pwrUsageLeft +", worldPwrUsage:"+worldPwrUsage);
+      
+      /*this.ELEMS["POWER_AVAIL"][pp] = document.getElementById(pp+"_POWER_AVAIL");
+      this.ELEMS["POWER_THERMAL"][pp] = document.getElementById(pp+"_POWER_THERMAL");
+      this.ELEMS["POWER_COLLECT"][pp] = document.getElementById(pp+"_POWER_COLLECT");
+      this.ELEMS["POWER_OUTPUT"][pp] = document.getElementById(pp+"_POWER_OUTPUT");
+      this.ELEMS["POWER_CAPACITY"][pp] = document.getElementById(pp+"_POWER_CAPACITY");
+      STATS["ENERGYRATE_MULT"]["BotpwrGen"] = 0.70
+      STATS["ENERGYRATE_MULT"]["BiopwrGen"] = 0.30
+STATS["ENERGYRATE_MULT"]["HawkpwrGen"]   = 0.95
+      
+      */
+      //this.INVENTORY["POWER-Free"+worldType+"-CT"]
+      
+      pp.powerAVAIL.innerHTML   = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * 1000000 );
+      pp.powerTHERMAL.innerHTML = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * 1000000 );
+      //console.log("worldPwrUsage["+ppid+"] = "+worldPwrUsage)
+      //console.log("genCapacity["+ppid+"] = "+genCapacity)
+      //console.log("INVENTORYCAP["+ppid+"] = "+this.INVENTORY["POWERGEN-"+pc+""])
+      var worldPowerCollected = worldPwrUsage / STATS["ENERGYRATE_MULT"][ppid+"pwrGen"];
+      pp.powerCOLLECT.innerHTML = fmtSIflat( Math.round( worldPowerCollected ) * 1000000 );
+      pp.powerOUTPUT.innerHTML = fmtSIflat( Math.round( worldPwrUsage ) * 1000000 );
+      //pp.powerCAPACITY.innerHTML = fmtSIflat( Math.round( genCapacity ) * 1000000 );
+      //pp.powerCOLLECT = fmtSIflat( this.INVENTORY["POWER-Free"+worldType+"-CT"] );
+      //pp.powerCAPACITY = fmtSIflat( this.INVENTORY["POWER-Free"+worldType+"-CT"] );
+    }
+
+
 }
 
 

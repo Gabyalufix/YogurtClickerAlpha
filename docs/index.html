@@ -629,7 +629,7 @@
 
         <div class="COLLAPSE_MODE2">
 
-        <div class="contentUnitHolder">
+        <div class="contentUnitHolder" style="display:none;">
 	    <h5><span class="INFO_TEXT_STATIC">Power Sources: </span></h5>
 	    <div class="contentGrid3x2Hz">
 		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Botworld: </span></div>
@@ -641,44 +641,48 @@
         </div></div>
 
         <div class="contentUnitHolder">
-	    <h5><span class="INFO_TEXT_STATIC">Energy Stats: </span></h5>
+	    <br><h5><span class="INFO_TEXT_STATIC">Energy Stats: </span></h5>
 	    <div id="ENERGY_STAT_TABLE">
 		<div class="contentGridItem contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> POWER: </span></div>
 		<div class="contentGridItem contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> Bot: </span></div>
 		<div class="contentGridItem contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> Green: </span></div>
 		<div class="contentGridItem contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> Hawking: </span></div>
 
-		<div class="contentGridItemSIDES contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> AVAIL: </span></div>
-		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
-        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
-        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+		<div class="contentGridItemSIDES contentGridItem1x1"> <h5><span class="INFO_TEXT_STATIC"> THERMAL MAX: </span></h5></div>
+		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> <h5><span id="Botpwr_POWER_AVAIL">   0.0</span>W   </h5> </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> <h5><span id="Biopwr_POWER_AVAIL">   0.0</span>W   </h5>  </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> <h5><span id="Hawkpwr_POWER_AVAIL">  0.0</span>W  </h5> </div>
 
-		<div class="contentGridItemSIDES contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> THERMAL: </span></div>
-		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
-        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
-        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+		<div class="contentGridItemSIDES contentGridItem1x1"> <h5><span class="INFO_TEXT_STATIC"> THERMAL CURR: </span></h5></div>
+		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv">  <h5><span id="Botpwr_POWER_THERMAL">   0.0</span>W   </h5> </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv">  <h5><span id="Biopwr_POWER_THERMAL">   0.0</span>W  </h5> </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv">  <h5><span id="Hawkpwr_POWER_THERMAL">  0.0</span>W   </h5> </div>
 
-		<div class="contentGridItemSIDES contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> COLLECTED: </span></div>
-		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
-        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
-        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+		<div class="contentGridItemSIDES contentGridItem1x1"> <h5><span class="INFO_TEXT_STATIC"> COLLECTED: </span></h5></div>
+		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv">   <h5><span id="Botpwr_POWER_COLLECT">   0.0</span>W    </h5>   </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv">   <h5><span id="Biopwr_POWER_COLLECT">   0.0</span>W     </h5>  </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv">   <h5><span id="Hawkpwr_POWER_COLLECT">  0.0</span>W    </h5>   </div>
 
-		<div class="contentGridItemSIDES contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> OUTPUT: </span></div>
-		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
-        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
-        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+		<div class="contentGridItemSIDES contentGridItem1x1"> <h5><span class="INFO_TEXT_STATIC"> OUTPUT CURR: </span></h5></div>
+		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv">   <h5> <span id="Botpwr_POWER_OUTPUT">   0.0</span>W   </h5>  </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv">   <h5> <span id="Biopwr_POWER_OUTPUT">   0.0</span>W   </h5>  </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv">   <h5> <span id="Hawkpwr_POWER_OUTPUT">  0.0</span>W   </h5>  </div>
+
+		<div class="contentGridItemSIDES contentGridItem1x1"> <h5><span class="INFO_TEXT_STATIC"> OUTPUT MAX: </span></h5></div>
+		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv">   <h5> <span id="Botpwr_POWER_CAPACITY">   0.0</span>W  </h5>   </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv">   <h5> <span id="Biopwr_POWER_CAPACITY">   0.0</span>W  </h5>   </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv">   <h5> <span id="Hawkpwr_POWER_CAPACITY">  0.0</span>W  </h5>   </div>
+
 	    </div></div>
 
         <BR>
 
         <div class="contentUnitHolder" style="padding: 0px; margin:0px;">
+			<button class="collapsibleTHIN collapsible">
+			   <h2><span class="INFO_TEXT_STATIC">Botworld Solar Collectors</span></h2>
+			</button>
+			<div class="contentLV3">
 
-			<div class="SliderSetHolder">
-
-				<div class="tooltipHolder ttSEC2">
-				  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> .... </span> </span>
-				  <h5><span class="INFO_TEXT_STATIC">Botworld Solar Collectors </span><span class="valueDisplayDiv" id="botPowerLimiter_DIV"><span id="botPowerLimiterSliderDisplay"></span></span></h5>
-				</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="10000" class="slider" id="botPowerLimiter">
@@ -1696,6 +1700,8 @@ Stellar pop:
 
 <script type="text/javascript" src="fitty.min.js"></script>
 <script type="text/javascript" src="variables.js"></script>
+<script type="text/javascript" src="science.js"></script>
+
 <script type="text/javascript" src="textData.js"></script>
 <script type="text/javascript" src="util.js"></script>
 <script type="text/javascript" src="stars.js"></script>
