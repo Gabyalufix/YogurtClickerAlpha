@@ -1076,15 +1076,19 @@ h5 {
 */
 
 .pctCheckContainer {
-  grid-area: span 1 / span 1;
-  padding-left: 35px;
-  margin-top: 1px;
+
   cursor: pointer;
-  font-size: 22px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.pctCheckContainerGRID1x1 {
+  grid-area: span 1 / span 1;
+  padding-left: 35px;
+  margin-top: 1px;
+  font-size: 22px;
 }
 
 /* Hide the browser's default checkbox */

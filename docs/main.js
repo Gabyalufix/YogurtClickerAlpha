@@ -211,6 +211,20 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
     }
 }
 
+function powerLimiterInput(){
+   var d = this.displayElem;
+   d.innerHTML = roundTo(parseFloat(this.value) / 100,1) + "%"
+}
+
+for(var i=0; i < STATICVAR_HOLDER.POWER_SOURCEWORLD_LIST.length; i++){
+  var worldType = STATICVAR_HOLDER.POWER_SOURCEWORLD_LIST[i];
+  var ppid = STATICVAR_HOLDER.POWER_SOURCE_LIST[i]
+  
+  ELEMS[worldType+"PowerLimiter"].onchangeFcn = powerLimiterInput
+  ELEMS[worldType+"PowerLimiter"].oninput = powerLimiterInput
+  ELEMS[worldType+"PowerLimiter"].onchange = powerLimiterInput
+  ELEMS[worldType+"PowerLimiter"].onchangeFcn()
+}
 
 for( var i = 0; i < SHIP_TYPE_LIST.length; i++){
   var shipType = SHIP_TYPE_LIST[i];

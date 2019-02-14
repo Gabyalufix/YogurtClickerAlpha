@@ -1026,6 +1026,7 @@ ELEMS["POWER_PRODDISPLAY"] = {};
 
 for(var i=0; i < STATICVAR_HOLDER.POWER_SOURCE_LIST.length; i++){
   var pp = STATICVAR_HOLDER.POWER_SOURCE_LIST[i];
+  var worldType = STATICVAR_HOLDER.POWER_SOURCEWORLD_LIST[i]
   ELEMS["POWER_PRODDISPLAY"][pp] = {};
   ELEMS["POWER_PRODDISPLAY"][pp].powerSource   = pp;
   ELEMS["POWER_PRODDISPLAY"][pp].powerWorld    = STATICVAR_HOLDER.POWER_SOURCEWORLD_LIST[i];
@@ -1034,10 +1035,34 @@ for(var i=0; i < STATICVAR_HOLDER.POWER_SOURCE_LIST.length; i++){
   ELEMS["POWER_PRODDISPLAY"][pp].powerCOLLECT  = document.getElementById(pp+"pwr_POWER_COLLECT");
   ELEMS["POWER_PRODDISPLAY"][pp].powerOUTPUT   = document.getElementById(pp+"pwr_POWER_OUTPUT");
   ELEMS["POWER_PRODDISPLAY"][pp].powerCAPACITY = document.getElementById(pp+"pwr_POWER_CAPACITY");
+  
+  if(document.getElementById(worldType+"PowerLimiter") != null){
+    ELEMS["POWER_PRODDISPLAY"][pp].powerLimiter = document.getElementById(worldType+"PowerLimiter")
+    ELEMS["POWER_PRODDISPLAY"][pp].powerLimiter.displayElem = document.getElementById(worldType+"PowerLimiterSliderDisplay")
+    ELEMS["POWER_PRODDISPLAY"][pp].priorityDisplay = document.getElementById(worldType+"_POWER_PRIORITY_DISPLAY")
+    
+    ELEMS["POWER_PRODDISPLAY"][pp].priorityUp = document.getElementById("button_"+worldType+"_PowerPriorityUP")
+    ELEMS["POWER_PRODDISPLAY"][pp].priorityDn = document.getElementById("button_"+worldType+"_PowerPriorityDN")
+    
+    ELEMS["POWER_PRODDISPLAY"][pp].prodDisplay = document.getElementById(worldType+"PowerProductivityDisplay")
+    ELEMS["POWER_PRODDISPLAY"][pp].effDisplay = document.getElementById(worldType+"PowerEfficiencyDisplay")
+
+    ELEMS["POWER_PRODDISPLAY"][pp].upgradeProd = document.getElementById("button_"+worldType+"PowerCapacityUpgrade")
+    ELEMS["POWER_PRODDISPLAY"][pp].upgradeEff = document.getElementById("button_"+worldType+"PowerEfficiencyUpgrade")
+    ELEMS["POWER_PRODDISPLAY"][pp].upgradeProdCostDisplay = document.getElementById(""+worldType+"PowerEfficiencyUpgradeCost")
+    ELEMS["POWER_PRODDISPLAY"][pp].upgradeEffCostDisplay = document.getElementById(""+worldType+"PowerEfficiencyUpgradeCost")
+    
+  }
 
 }
 
 
+ELEMS["Bot"+"PowerLimiter"] = document.getElementById("Bot"+"PowerLimiter");
+ELEMS["Bot"+"PowerLimiter"].displayElem = document.getElementById("BotPowerLimiterSliderDisplay");
 
 
+ELEMS["Green"+"PowerLimiter"] = document.getElementById("Green"+"PowerLimiter");
+ELEMS["Green"+"PowerLimiter"].displayElem = document.getElementById("GreenPowerLimiterSliderDisplay");
 
+ELEMS["Hawk"+"PowerLimiter"] = document.getElementById("Bot"+"PowerLimiter");
+ELEMS["Hawk"+"PowerLimiter"].displayElem = document.getElementById("BotPowerLimiterSliderDisplay");

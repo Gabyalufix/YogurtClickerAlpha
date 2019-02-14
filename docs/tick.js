@@ -107,6 +107,15 @@ function TICK_readUserInputs(){
       updatePctSliderDisplay(this.PCTSLIDERS[fid]["sliderElem"][j])
     }
   }
+  
+  
+    for(var i=0; i < STATICVAR_HOLDER.POWER_SOURCEWORLD_LIST.length; i++){
+      var worldType = STATICVAR_HOLDER.POWER_SOURCEWORLD_LIST[i];
+      var ppid = STATICVAR_HOLDER.POWER_SOURCE_LIST[i]
+      this.SETTINGS[ppid+"_POWERLIMITFRAC"] = parseFloat(ELEMS[worldType+"PowerLimiter"].value) / 10000
+    }
+
+  
 }
 function TICK_setUserInputs(){
   //Percent sliders:
@@ -300,8 +309,9 @@ function TICK_calcIndustry(){
        var dy = dysonSrc[z];
        this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"] = this.STATS["PRODUCTIVITY_MULT"][pc+"pwrGen"] * this.STATS["CONVERSIONS"]["pwrFrom"+pc+"pwrPerProdPerTick"] * this.STATS["PRODUCTIVITY_MULT"][dy];
        
-       this.INVENTORY["POWER-"+pc+"-CAP"] = this.INVENTORY["MATTER-"+pc+"pwr-CT"] * this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"]
-       this.INVENTORY["POWER-"+pc+""] = Math.min(this.INVENTORY["POWER-"+pc+"-CAP"],this.INVENTORY["POWER-Free"+dysonSrcCap[z]+"-CT"]);
+       this.INVENTORY["POWER-"+pc+"-CAP"] = this.INVENTORY["MATTER-"+pc+"pwr-CT"] * this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"] * this.SETTINGS[pc+"_POWERLIMITFRAC"];
+       this.INVENTORY["POWER-"+pc+""] = Math.min(this.INVENTORY["POWER-"+pc+"-CAP"] / STATS["ENERGYRATE_MULT"][pc+"pwrGen"],this.INVENTORY["POWER-Free"+dysonSrcCap[z]+"-CT"]) * STATS["ENERGYRATE_MULT"][pc+"pwrGen"];
+       
        this.INVENTORY["POWER"] = this.INVENTORY["POWER"] + this.INVENTORY["POWER-"+pc]
        
        var pwrFmt1 = fmtSIunits( Math.round( this.INVENTORY["POWER-"+pc+""]) * 1000000)
@@ -322,6 +332,11 @@ function TICK_calcIndustry(){
       //pp.powerCOLLECT = fmtSIflat( this.INVENTORY["POWER-Free"+worldType+"-CT"] );
       this.INVENTORY["POWERGEN-"+pc+""] = this.INVENTORY["POWER-"+pc+""]
       pp.powerCAPACITY.innerHTML = pwrFmt1[0]+pwrFmt1[1];
+      //STATS["ENERGYRATE_MULT"][ppid+"pwrGen"]
+      pp.effDisplay.innerHTML = roundTo(100*STATS["ENERGYRATE_MULT"][pc+"pwrGen"],1)
+      //this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"]
+      pp.prodDisplay.innerHTML = fmtSIflat(this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"] * 1000000)+"W/t"
+      
     }
     
     this.INVENTORY["POWERGEN-Hawk"] = 0;
