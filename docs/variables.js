@@ -1066,3 +1066,17 @@ ELEMS["Green"+"PowerLimiter"].displayElem = document.getElementById("GreenPowerL
 
 ELEMS["Hawk"+"PowerLimiter"] = document.getElementById("Bot"+"PowerLimiter");
 ELEMS["Hawk"+"PowerLimiter"].displayElem = document.getElementById("BotPowerLimiterSliderDisplay");
+
+
+STATICVAR_HOLDER.WATTAGE_MULTIPLIER = 5000000000
+
+
+/*
+
+standard current-tech solar panels range: 100-1.4 kg / kW
+
+0.01-0.71 kW / kg
+1000 kg / t
+710 kW / t
+
+*/

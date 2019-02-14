@@ -284,22 +284,12 @@ function TICK_scoutSystems(){
 
 function TICK_calcIndustry(){
 
-
+    var wattMult = this.STATICVAR_HOLDER.WATTAGE_MULTIPLIER
     /*
      * POWER PRODUCTION:
      
-        <div class="valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Total Power: </span>           <span id="POWER_DISPLAY">0.0W</span> </div>
-
-        this.INVENTORY["MATTER-Free"+worldType+"-CT"] = this.INVENTORY["MATTER-Free"+worldType+"-CT"] + (starInfo[2] * 1.9885e27);
-        this.INVENTORY["POWER-Free"+worldType+"-CT"] = this.INVENTORY["POWER-Free"+worldType+"-CT"] + (starInfo[3] * 3.828e20);
-        SETTINGS["POWER-PriorityList"]
-        
-        STATS["ENERGYRATE_MULT"]["BotpwrGen"] = 0.70
-        STATS["ENERGYRATE_MULT"]["BiopwrGen"] = 0.30
-        STATS["ENERGYRATE_MULT"]["HawkpwrGen"]   = 0.95
         
      */
-    //this.STATS["PRODUCTIVITY_RATING"]["HawkingGen"] = 0;
     var pwrSrc = ["Bot","Bio"];
     var dysonSrc = ["bot","green"]
     var dysonSrcCap = ["Bot","Green"]
@@ -314,28 +304,19 @@ function TICK_calcIndustry(){
        
        this.INVENTORY["POWER"] = this.INVENTORY["POWER"] + this.INVENTORY["POWER-"+pc]
        
-       var pwrFmt1 = fmtSIunits( Math.round( this.INVENTORY["POWER-"+pc+""]) * 1000000)
+       var pwrFmt1 = fmtSIunits( Math.round( this.INVENTORY["POWER-"+pc+""]) * wattMult)
        this.ELEMS[pc+"pwr_POWER_DISPLAY"].innerHTML = pwrFmt1[0];
        this.ELEMS[pc+"pwr_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt1[1];
        
        var pp = ELEMS["POWER_PRODDISPLAY"][pc];
       
-      /*this.ELEMS["POWER_AVAIL"][pp] = document.getElementById(pp+"_POWER_AVAIL");
-      this.ELEMS["POWER_THERMAL"][pp] = document.getElementById(pp+"_POWER_THERMAL");
-      this.ELEMS["POWER_COLLECT"][pp] = document.getElementById(pp+"_POWER_COLLECT");
-      this.ELEMS["POWER_OUTPUT"][pp] = document.getElementById(pp+"_POWER_OUTPUT");
-      this.ELEMS["POWER_CAPACITY"][pp] = document.getElementById(pp+"_POWER_CAPACITY");*/
-      //this.INVENTORY["POWER-Free"+worldType+"-CT"]
-      
-      //pp.powerAVAIL   = fmtSIflat(   this.INVENTORY["POWER-Free"+worldType+"-CT"] );
-      //pp.powerTHERMAL = fmtSIflat( this.INVENTORY["POWER-Free"+worldType+"-CT"] );
-      //pp.powerCOLLECT = fmtSIflat( this.INVENTORY["POWER-Free"+worldType+"-CT"] );
+
       this.INVENTORY["POWERGEN-"+pc+""] = this.INVENTORY["POWER-"+pc+""]
       pp.powerCAPACITY.innerHTML = pwrFmt1[0]+pwrFmt1[1];
       //STATS["ENERGYRATE_MULT"][ppid+"pwrGen"]
       pp.effDisplay.innerHTML = roundTo(100*STATS["ENERGYRATE_MULT"][pc+"pwrGen"],1)
       //this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"]
-      pp.prodDisplay.innerHTML = fmtSIflat(this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"] * 1000000)+"W/t"
+      pp.prodDisplay.innerHTML = fmtSIflat(this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"] * wattMult)+"W/t"
       
     }
     
@@ -346,59 +327,6 @@ function TICK_calcIndustry(){
     //this.INVENTORY["POWER"] = this.STATS["PRODUCTIVITY_RATING"]["BotpwrGen"] + this.STATS["PRODUCTIVITY_RATING"]["BiopwrGen"]
     this.INVENTORY["POWERGEN"] = this.INVENTORY["POWER"] 
     
-    
-    /*
-    //var xpwr = ["POWER_DISPLAY","Botpwr_POWER_DISPLAY","Biopwr_POWER_DISPLAY","Hawking_POWER_DISPLAY"]
-    var xpwr = ["POWER_DISPLAY","Botpwr_POWER_DISPLAY","Biopwr_POWER_DISPLAY"]
-    var xpwrAmt = ["POWER","BotpwrGen","BiopwrGen"]
-    
-       var pwrFmt = fmtSIunits( Math.round( this.INVENTORY["POWER"]) * 1000000 )
-       this.ELEMS["POWER_DISPLAY"].innerHTML = pwrFmt[0];
-       this.ELEMS["POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt[1];
-       var pwrFmt1 = fmtSIunits( Math.round( this.STATS["PRODUCTIVITY_RATING"]["BotpwrGen"]) * 1000000)
-       this.ELEMS["Botpwr_POWER_DISPLAY"].innerHTML = pwrFmt1[0];
-       this.ELEMS["Botpwr_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt1[1];
-       var pwrFmt2 = fmtSIunits( Math.round(this.STATS["PRODUCTIVITY_RATING"]["BiopwrGen"]) * 1000000)
-       this.ELEMS["Biopwr_POWER_DISPLAY"].innerHTML = pwrFmt2[0];
-       this.ELEMS["Biopwr_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt2[1];
-       
-       */
-    
-/*
-
-STATS["PRODUCTIVITY_MULT"]["BotpwrGen"] = 1
-STATS["PRODUCTIVITY_MULT"]["BiopwrGen"] = 1
-STATS["PRODUCTIVITY_RATING"]["BotpwrGen"] = 1
-STATS["PRODUCTIVITY_RATING"]["BiopwrGen"] = 1
-
-STATS["CONVERSIONS"]["pwrFromBotpwrPerProdPerTick"] = 1271
-STATS["CONVERSIONS"]["pwrFromBiopwrPerProdPerTick"] =  187
-
-i=0;
-productID = GAME_GLOBAL.INDUSTRY_LIST[i]
-var iss = STATS.INDUSTRY[productID];
-var sliderID = iss.sliderID;
-var sliderIDX = iss.sliderIDX;
-var prod = GAME_GLOBAL.calcIndustrialProd(iss);
-
-i=0;
-productID = GAME_GLOBAL.INDUSTRY_LIST[i]
-var iss = STATS.INDUSTRY[productID];
-var sliderID = iss.sliderID;
-var sliderIDX = iss.sliderIDX;
-var prod2 = GAME_GLOBAL.calcIndustrialProd(iss);
-
-var productID = GAME_GLOBAL.INDUSTRY_LIST[i];
-var iss = STATS.INDUSTRY[productID];
-var sliderID = iss.sliderID;
-var sliderIDX = iss.sliderIDX;
-var prod = this.calcIndustrialProd(iss);
-
-*/
-
-//MATTER-Botbots-CT
-//MATTER-Biomass-CT
-//MATTER-Compute-CT
 
 
     //GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass"]
@@ -413,63 +341,10 @@ var prod = this.calcIndustrialProd(iss);
        this.addConstructionRequest(iss.inventoryType+"-"+productID+"-CT",
                                    prod,
                                    this.calcIndustrialCost(iss));
-       //if(productID == "Feedstock"){
-       //   console.log(this.calcIndustrialProd(iss))
-       //}
     }
     
 
-    //console.log("A:"+this.calcIndustrialProd(this.STATS.INDUSTRY["Feedstock"]))
-    //console.log("B:"+(this.STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][0]) )
-    //console.log("A:"+this.calcIndustrialCost(this.STATS.INDUSTRY["Feedstock"]));
-    //console.log("B:"+this.STATS["COST-MATTER-Feedstock"]);
-    
-    /*
-    STATS["INDUSTRY"]["Biomass"] = { sliderID: "green", sliderIDX: 4,
-                                       baseProd: 0.00157, 
-                                       baseCost:  ["MATTER-Digested-CT",1],
-                                       basePwr:   0.177000,
-                                       baseWaste: 0.1}
-    
-    GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass"]
-    GAME_GLOBAL.calcIndustrialProd=calcIndustrialProd;
-    GAME_GLOBAL.calcIndustrialCost=calcIndustrialCost;
 
-    */
-/*
-    this.addConstructionRequest("MATTER-Feedstock-CT",
-                           (this.STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][0]) ,
-                           this.STATS["COST-MATTER-Feedstock"] )
-    this.addConstructionRequest("MATTER-Digested-CT",
-                           (this.STATS["CONVERSIONS"]["DigestedPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][5]) ,
-                           this.STATS["COST-MATTER-Digested"] )
-
-    this.addConstructionRequest("MATTER-Botbots-CT",
-                           (this.STATS["CONVERSIONS"]["BotbotsPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][1]) ,
-                           this.STATS["COST-MATTER-Botbots"] )
-    this.addConstructionRequest("MATTER-Biomass-CT",
-                           (this.STATS["CONVERSIONS"]["BiomassPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][4]) ,
-                           this.STATS["COST-MATTER-Biomass"] )
-
-    this.addConstructionRequest("MATTER-Compute-CT",
-                           (this.STATS["CONVERSIONS"]["ComputePerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][5]) ,
-                           this.STATS["COST-MATTER-Compute"] )
-
-    this.addConstructionRequest("MATTER-Yogurt-CT",
-                           (this.STATS["CONVERSIONS"]["YogurtPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][1]) ,
-                           this.STATS["COST-MATTER-Yogurt"] )
-
-    this.addConstructionRequest("SHIP-CONSTRUCT-BUFFER",
-                           (this.STATS["CONVERSIONS"]["ShipPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][4]) ,
-                           this.STATS["COST-MATTER-Ship"])
-
-    this.addConstructionRequest("MATTER-Biopwr-CT",
-                           (this.STATS["CONVERSIONS"]["BiopwrPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][6]) ,
-                           this.STATS["COST-MATTER-Biopwr"] )
-    this.addConstructionRequest("MATTER-Botpwr-CT",
-                           (this.STATS["CONVERSIONS"]["BotpwrPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][6]) ,
-                           this.STATS["COST-MATTER-Botpwr"] )
-*/
     this.executeAllConstructionRequests()
 
 //CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt]
@@ -499,9 +374,6 @@ var prod = this.calcIndustrialProd(iss);
     }
     this.INVENTORY["SHIP-CONSTRUCT-BUFFER"] = 0;
 
-    //STATS["CONVERSIONS"]["bufferPerShip-scout"]
-    //STATS["CONVERSIONS"]["bufferPerShip-battleplate"]
-    //STATS["CONVERSIONS"]["bufferPerShip-seedship"]
 
   //update displays:
    this["SHIPCONSTRUCTBUFFER_DISPLAY_DIV"].innerHTML = this.INVENTORY["SHIP-CONSTRUCT-BUFFER"]
@@ -566,48 +438,23 @@ var prod = this.calcIndustrialProd(iss);
         this.RESEARCH_BUTTONS[i].canAffordTest()
     }
 
-/*
-GAME_GLOBAL.SCIENCE_DISPLAY   = SCIENCE_DISPLAY;
-GAME_GLOBAL.SCIENCE_TYPES     = SCIENCE_TYPES;
-GAME_GLOBAL.SCIENCE_SUBFIELDS = SCIENCE_SUBFIELDS;
-*/
 
-
-
-
-    /*
-    STATS["CONVERSIONS"]["gramPerSunShip"]
-    INVENTORY["SHIP-CONSTRUCT-BUFFER"]
-    STATS["CONVERSIONS"]["shipPerSunPerTick"]
-    INVENTORY[]
-    addConstructionRequest(inventoryItemName, requestCt, unitCost)
-    MATTER_TYPE_LIST = ["Discovered","Collected","Processed","Waste","Heat","Yogurt"]
-
-
-    STATS["CONVERSIONS"]["collectPerSunPerTick"]
-    STATS["CONVERSIONS"]["processPerSunPerTick"]
-    */
-    /*var matterCollected = STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]
-    matterCollected = Math.min( INVENTORY["MATTER-Raw-CT"] );
-    INVENTORY["MATTER-Collected-CT"] = INVENTORY["MATTER-Collected-CT"] + matterCollected;
-    var matterProcessed = STATS["CONVERSIONS"]["collectPerSunPerTick"] * STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][0]*/
-    
     /*
      POWER USAGE:
     */
-       var pwrFmt5 = fmtSIunits( Math.round(this.INVENTORY["POWERGEN"]) * 1000000 )
+       var pwrFmt5 = fmtSIunits( Math.round(this.INVENTORY["POWERGEN"]) * wattMult )
        this.ELEMS["POWER_DISPLAY"].innerHTML = pwrFmt5[0];
        this.ELEMS["POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt5[1];
        
-       var pwrFmt3 = fmtSIunits( Math.round(this.INVENTORY["POWER"]) * 1000000 )
+       var pwrFmt3 = fmtSIunits( Math.round(this.INVENTORY["POWER"]) * wattMult )
        this.ELEMS["SURPLUS_POWER_DISPLAY"].innerHTML = pwrFmt3[0];
        this.ELEMS["SURPLUS_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt3[1];
     
-       var pwrFmt4 = fmtSIunits( Math.round((this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"]))* 1000000 )
+       var pwrFmt4 = fmtSIunits( Math.round((this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"]))* wattMult )
        this.ELEMS["USAGE_POWER_DISPLAY"].innerHTML = pwrFmt4[0];
        this.ELEMS["USAGE_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt4[1];
     
-       var pwrFmt6 = fmtSIunits( Math.round(this.STATS["CURR_POWER_DEMAND"]) * 1000000 )
+       var pwrFmt6 = fmtSIunits( Math.round(this.STATS["CURR_POWER_DEMAND"]) * wattMult )
        this.ELEMS["DEMAND_POWER_DISPLAY"].innerHTML = pwrFmt6[0];
        this.ELEMS["DEMAND_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt6[1];
     
@@ -629,31 +476,17 @@ GAME_GLOBAL.SCIENCE_SUBFIELDS = SCIENCE_SUBFIELDS;
         worldPwrUsage = pwrUsageLeft;
         pwrUsageLeft = 0;
       }
-      //console.log("    "+"genCapacity:"+genCapacity +", pwrUsageLeft:"+pwrUsageLeft +", worldPwrUsage:"+worldPwrUsage);
+
       
-      /*this.ELEMS["POWER_AVAIL"][pp] = document.getElementById(pp+"_POWER_AVAIL");
-      this.ELEMS["POWER_THERMAL"][pp] = document.getElementById(pp+"_POWER_THERMAL");
-      this.ELEMS["POWER_COLLECT"][pp] = document.getElementById(pp+"_POWER_COLLECT");
-      this.ELEMS["POWER_OUTPUT"][pp] = document.getElementById(pp+"_POWER_OUTPUT");
-      this.ELEMS["POWER_CAPACITY"][pp] = document.getElementById(pp+"_POWER_CAPACITY");
-      STATS["ENERGYRATE_MULT"]["BotpwrGen"] = 0.70
-      STATS["ENERGYRATE_MULT"]["BiopwrGen"] = 0.30
-STATS["ENERGYRATE_MULT"]["HawkpwrGen"]   = 0.95
-      
-      */
-      //this.INVENTORY["POWER-Free"+worldType+"-CT"]
-      
-      pp.powerAVAIL.innerHTML   = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * 1000000 );
-      pp.powerTHERMAL.innerHTML = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * 1000000 );
+      pp.powerAVAIL.innerHTML   = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult );
+      pp.powerTHERMAL.innerHTML = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult );
       //console.log("worldPwrUsage["+ppid+"] = "+worldPwrUsage)
       //console.log("genCapacity["+ppid+"] = "+genCapacity)
       //console.log("INVENTORYCAP["+ppid+"] = "+this.INVENTORY["POWERGEN-"+pc+""])
       var worldPowerCollected = worldPwrUsage / STATS["ENERGYRATE_MULT"][ppid+"pwrGen"];
-      pp.powerCOLLECT.innerHTML = fmtSIflat( Math.round( worldPowerCollected ) * 1000000 );
-      pp.powerOUTPUT.innerHTML = fmtSIflat( Math.round( worldPwrUsage ) * 1000000 );
-      //pp.powerCAPACITY.innerHTML = fmtSIflat( Math.round( genCapacity ) * 1000000 );
-      //pp.powerCOLLECT = fmtSIflat( this.INVENTORY["POWER-Free"+worldType+"-CT"] );
-      //pp.powerCAPACITY = fmtSIflat( this.INVENTORY["POWER-Free"+worldType+"-CT"] );
+      pp.powerCOLLECT.innerHTML = fmtSIflat( Math.round( worldPowerCollected ) * wattMult );
+      pp.powerOUTPUT.innerHTML = fmtSIflat( Math.round( worldPwrUsage ) * wattMult );
+
     }
 
 
