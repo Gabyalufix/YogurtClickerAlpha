@@ -276,7 +276,7 @@
 
 		  <p><span class="INFO_TEXT_STATIC"> Science text goes here </span></p>
 
-      <div class="contentUnitHolder">
+      <div class="contentUnitHolder THEME_bio">
 			<button class="collapsibleTHIN collapsible">
 
 			   <h2><span class="INFO_TEXT_STATIC">BIO:</span></h2>
@@ -336,7 +336,7 @@
 =================================================
 ------------------------------ ENGINEERING
 -->
-      <div class="contentUnitHolder">
+      <div class="contentUnitHolder THEME_eng">
 			<button class="collapsibleTHIN  collapsible">
 			   <h2><span class="INFO_TEXT_STATIC">ENGINEERING:</span></h2>
 			</button>
@@ -385,7 +385,7 @@
 =================================================
 ------------------------------ Social Science
 -->
-      <div class="contentUnitHolder">
+      <div class="contentUnitHolder THEME_psy">
 			<button class="collapsibleTHIN  collapsible">
 			   <h2><span class="INFO_TEXT_STATIC">Social Science:</span></h2>
 			</button>
@@ -614,17 +614,22 @@
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC"> ENERGY </span></h1></button>
 		<div class="content">
 
+        <div class="contentUnitHolder">
 	    <h5><span class="INFO_TEXT_STATIC">Power Supply: </span></h5>
-	    <div class="contentGrid3x2Hz">
-		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Total Power Generated: </span></div>
+	    <div class="contentGrid4x2Hz">
+		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Total Capacity: </span></div>
 		<div class="contentGridItemHzB valueDisplayDiv"> <span id="POWER_DISPLAY">0.0W</span>         <span id="POWER_DISPLAY_UNITS"></span>W </div>
-
-		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Power Usage: </span></div>
+		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Demand: </span></div>
+		<div class="contentGridItemHzB valueDisplayDiv"> <span id="DEMAND_POWER_DISPLAY">0.0W</span> <span id="DEMAND_POWER_DISPLAY_UNITS"></span>W</div>
+		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Usage: </span></div>
 		<div class="contentGridItemHzB valueDisplayDiv"> <span id="USAGE_POWER_DISPLAY">0.0W</span> <span id="USAGE_POWER_DISPLAY_UNITS"></span>W</div>
-		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Surplus: </span></div>
+		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Surplus Capacity: </span></div>
 		<div class="contentGridItemHzB valueDisplayDiv"><span id="SURPLUS_POWER_DISPLAY">0.0W</span> <span id="SURPLUS_POWER_DISPLAY_UNITS"></span>W</div>
-        </div>
+        </div></div>
 
+        <div class="COLLAPSE_MODE2">
+
+        <div class="contentUnitHolder">
 	    <h5><span class="INFO_TEXT_STATIC">Power Sources: </span></h5>
 	    <div class="contentGrid3x2Hz">
 		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Botworld: </span></div>
@@ -633,9 +638,101 @@
 		<div class="contentGridItemHzB valueDisplayDiv"><span id="Biopwr_POWER_DISPLAY">0.0</span>  <span id="Biopwr_POWER_DISPLAY_UNITS"></span>W</div>
 		<div class="contentGridItemHzT valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Hawking Reactors: </span></div>
 		<div class="contentGridItemHzB valueDisplayDiv"><span id="Hawking_POWER_DISPLAY">0.0</span> <span id="Hawking_POWER_DISPLAY_UNITS"></span>W</div>
+        </div></div>
+
+        <div class="contentUnitHolder">
+	    <h5><span class="INFO_TEXT_STATIC">Energy Stats: </span></h5>
+	    <div id="ENERGY_STAT_TABLE">
+		<div class="contentGridItem contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> POWER: </span></div>
+		<div class="contentGridItem contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> Bot: </span></div>
+		<div class="contentGridItem contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> Green: </span></div>
+		<div class="contentGridItem contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> Hawking: </span></div>
+
+		<div class="contentGridItemSIDES contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> AVAIL: </span></div>
+		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+
+		<div class="contentGridItemSIDES contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> THERMAL: </span></div>
+		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+
+		<div class="contentGridItemSIDES contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> COLLECTED: </span></div>
+		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+
+		<div class="contentGridItemSIDES contentGridItem1x1"> <span class="INFO_TEXT_STATIC"> OUTPUT: </span></div>
+		<div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+        <div class="contentGridItemSIDES contentGridItem1x1 valueDisplayDiv"> 0.0   </div>
+	    </div></div>
+
+        <BR>
+
+        <div class="contentUnitHolder" style="padding: 0px; margin:0px;">
+
+			<div class="SliderSetHolder">
+
+				<div class="tooltipHolder ttSEC2">
+				  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> .... </span> </span>
+				  <h5><span class="INFO_TEXT_STATIC">Botworld Solar Collectors </span><span class="valueDisplayDiv" id="botPowerLimiter_DIV"><span id="botPowerLimiterSliderDisplay"></span></span></h5>
+				</div>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						  <input type="range" min="0" max="10000" value="10000" class="slider" id="botPowerLimiter">
+						  <span id="botPowerLimiterSliderDisplay"> 100% </span>
+					</div>
+				</div>
+					<div style="display: grid; grid-template-columns: 70% 20% 10%; grid-template-rows:30px">
+					  <div class="INFO_TEXT_STATIC contentGridItem contentGridItem1x1"> Catalyze Overfusion:
+					  					<label class="pctCheckContainer" style="position:relative">
+					  					  <input type="checkbox"  id = "bot_overfusion">
+					  					  <span class="checkmark"></span>
+										</label>
+					  </div>
+					  <div class="INFO_TEXT_STATIC contentGridItem contentGridItem1x1"> Priority: <span id="Botpwr_PRIORITY_DISPLAY"> 1 </span> </div>
+					  <div style="display: grid; grid-template-columns: 100%; grid-template-rows:15px 15px">
+				<button class = "button3" id ="button_BotpwrPriorityUP" > &#8963; </button>
+				<button class = "button3" id ="button_BotpwrPriorityDN" > &#8964; </button>
+					  </div>
+
+					</div>
+
+					<div class="contentGrid4">
+					    <div class="INFO_TEXT_STATIC contentGridItem1x2 contentGridItemHzT"> PRODUCTIVITY </div>
+					    <div class="contentGridItem1x1 contentGridItemHzT" > <span id="valueDisplayDiv botPowerCapacityDisplay"> 0</span>W/t </div>
+					    <div class="contentGridItem1x1 contentGridItemHzT">
+					         <button class = "button2" id ="button_botPowerCapacityUpgrade" > UPGRADE </button>
+					    </div>
+					    <div class="contentGridItem1x4 contentGridItemHzB">
+					       <span class="valueDisplayDiv" id="botPowerCapacityUpgradeCost"> Upgrade cost goes here <br> ...etc etc. </span>
+					    </div>
+					    <div class="INFO_TEXT_STATIC contentGridItem1x2 contentGridItemHzT"> EFFICIENCY </div>
+					    <div class="valueDisplayDiv contentGridItem1x1 contentGridItemHzT" > <span class="valueDisplayDiv" id="botPowerEfficiencyDisplay"> 0</span>% </div>
+					    <div class="valueDisplayDiv contentGridItem1x1 contentGridItemHzT">
+					         <button class = "button2" id ="button_botPowerEfficiencyUpgrade" > UPGRADE </button>
+					    </div>
+					    <div class="valueDisplayDiv contentGridItem1x4 contentGridItemHzB">
+					       <span class="valueDisplayDiv" id="botPowerEfficiencyUpgradeCost"> Upgrade cost goes here <br> ...etc etc. </span>
+					    </div>
+
+					    <div class="INFO_TEXT_STATIC contentGridItem1x2 contentGridItemHzT HIDDENPANEL_MINIATURIZATION" style="display:none"> EFFICIENCY </div>
+					    <div class="contentGridItem1x1 contentGridItemHzT HIDDENPANEL_MINIATURIZATION"  style="display:none"> <span  class="valueDisplayDiv"  id="botPowerEfficiencyDisplay"> 0</span>% </div>
+					    <div class="contentGridItem1x1 contentGridItemHzT HIDDENPANEL_MINIATURIZATION" style="display:none">
+					         <button class = "button2" id ="button_botPowerEfficiencyUpgrade" > UPGRADE </button>
+					    </div>
+					    <div class="contentGridItem1x4 contentGridItemHzB HIDDENPANEL_MINIATURIZATION" style="display:none">
+					       <span class="valueDisplayDiv" id="botPowerEfficiencyUpgradeCost"> Upgrade cost goes here <br> ...etc etc. </span>
+					    </div>
+					</div>
+			</div>
+
+
+		</div>
+
         </div>
-
-
 </div>
 </div>
 
@@ -696,7 +793,7 @@
 				<button class = "button3" id ="button_wfOmniDN" > &#8964; </button>
 			   </div>
 
-			   <div class="buildCtrlPanel  buildCtrlPanel5B">
+			   <div class="buildCtrlPanel  buildCtrlPanel5B THEME_Bot">
 			   <div class="ctrlPanelTopLine">
 			     <h5><span class="INFO_TEXT_STATIC">Botworlds: </span><span class="valueDisplayDiv" id="Bot_CT_DIV"><span id="Bot_CT"></span><span id="Bot_CT_UNITS"></span></span></h5>
 			     <button class="buildCancelButton" id="button_wfBotCancel"> &#x274C; </button>
@@ -711,7 +808,7 @@
 				<button class = "button3" id ="button_wfBotUPGRADE" > UPGRADE </button>
 			   </div>
 
-			   <div class="buildCtrlPanel  buildCtrlPanel5B">
+			   <div class="buildCtrlPanel  buildCtrlPanel5B THEME_Green">
 			   <div class="ctrlPanelTopLine">
 			     <h5><span class="INFO_TEXT_STATIC">Greenworlds: </span><span class="valueDisplayDiv" id="Green_CT_DIV"><span id="Green_CT"></span><span id="Green_CT_UNITS"></span></span></h5>
 			     <button class="buildCancelButton" id="button_wfGreenCancel"> &#x274C; </button>
@@ -727,7 +824,7 @@
 			   </div>
 
 
-			   <div class="buildCtrlPanel  buildCtrlPanel5B">
+			   <div class="buildCtrlPanel  buildCtrlPanel5B  THEME_Hawk">
 			   <div class="ctrlPanelTopLine">
 			     <h5><span class="INFO_TEXT_STATIC">Hawking Reactors: </span><span class="valueDisplayDiv" id="Hawk_CT_DIV"><span id="Hawk_CT"></span><span id="Hawk_CT_UNITS"></span></span></h5>
 			     <button class="buildCancelButton" id="button_wfHawkCancel"> &#x274C; </button>
@@ -798,7 +895,7 @@
 =================================================
 ------------------------------ BOTWORLDS
 -->
-<div class="contentUnitHolder">
+<div class="contentUnitHolder THEME_Bot">
 			<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">INDUSTRY:</span></h1></button>
 			<div class="content">
   			<p><span class="INFO_TEXT_STATIC"> Your industrial base: a vast network of van-neumann construction robots built around a captive sun. </span></p>
@@ -920,7 +1017,7 @@
 			 </div>
 </div>
 
-<div class="contentUnitHolder">
+<div class="contentUnitHolder THEME_Green">
 			<button class="collapsible">
 			   <h1><span class="INFO_TEXT_STATIC">AGRICULTURE:</span></h1>
 			</button>
@@ -1166,26 +1263,29 @@
 			</button>
 			<div class="contentLV3">
 
+            <div "THEME_bio">
 			<h5><span class="INFO_TEXT_STATIC">Biology: </span> <span id="bio_TOTAL_DISPLAY"></span>  (<span id="bio_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>)  </h5>
-	        <div class="contentGrid3">
+	        <div class="contentGrid3 THEME_bio">
 			<div class="contentGridItem1x1 contentGridItem" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">biowarfare </span></h6><div class="valueDisplayDiv displaySm" id="bio1_TOTAL_DISPLAYDIV"><span id="bio1_TOTAL_DISPLAY"></span><span id="bio1_TOTAL_DISPLAY_UNITS"></span></div>       (<span id="bio1_FREE_DISPLAY">0</span>)</div>
 			<div class="contentGridItem1x1 contentGridItem" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Yogosynthesis </span></h6><div class="valueDisplayDiv displaySm" id="bio2_TOTAL_DISPLAYDIV"><span id="bio2_TOTAL_DISPLAY"></span><span id="bio2_TOTAL_DISPLAY_UNITS"></span></div>    (<span id="bio2_FREE_DISPLAY">0</span>)</div>
 			<div class="contentGridItem1x1 contentGridItem" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">bioengineering </span></h6><div class="valueDisplayDiv displaySm" id="bio3_TOTAL_DISPLAYDIV"><span id="bio3_TOTAL_DISPLAY"></span><span id="bio3_TOTAL_DISPLAY_UNITS"></span></div>   (<span id="bio3_FREE_DISPLAY">0</span>)</div>
-			</div>
+			</div></div>
 
+            <div "THEME_eng">
 			<h5><span class="INFO_TEXT_STATIC">Engineering: </span> <span id="eng_TOTAL_DISPLAY"></span>  (<span id="eng_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </h5>
-	        <div class="contentGrid3">
+	        <div class="contentGrid3 THEME_eng">
 			<div class="contentGridItem1x1 contentGridItem" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">World Building </span></h6><div class="valueDisplayDiv displaySm" id="eng1_TOTAL_DISPLAYDIV"><span id="eng1_TOTAL_DISPLAY"></span><span id="eng1_TOTAL_DISPLAY_UNITS"></span></div>     (<span id="eng1_FREE_DISPLAY">0</span>)</div>
 			<div class="contentGridItem1x1 contentGridItem" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Weapons & War </span></h6><div class="valueDisplayDiv displaySm" id="eng2_TOTAL_DISPLAYDIV"><span id="eng2_TOTAL_DISPLAY"></span><span id="eng2_TOTAL_DISPLAY_UNITS"></span></div>      (<span id="eng2_FREE_DISPLAY">0</span>)</div>
 			<div class="contentGridItem1x1 contentGridItem" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Matter & Energy </span></h6><div class="valueDisplayDiv displaySm" id="eng3_TOTAL_DISPLAYDIV"><span id="eng3_TOTAL_DISPLAY"></span><span id="eng3_TOTAL_DISPLAY_UNITS"></span></div>    (<span id="eng3_FREE_DISPLAY">0</span>)</div>
-			</div>
+			</div></div>
 
+            <div "THEME_eng">
 			<h5><span class="INFO_TEXT_STATIC">Social Science: </span> <span id="psy_TOTAL_DISPLAY"></span>  (<span id="psy_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>)</h5>
-	        <div class="contentGrid3">
+	        <div class="contentGrid3 THEME_psy">
 			<div class="contentGridItem1x1 contentGridItem" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Cognition </span></h6><div class="valueDisplayDiv displaySm" id="psy1_TOTAL_DISPLAYDIV"><span id="psy1_TOTAL_DISPLAY"></span><span id="psy1_TOTAL_DISPLAY_UNITS"></span></div>        (<span id="psy1_FREE_DISPLAY">0</span>)</div>
 			<div class="contentGridItem1x1 contentGridItem" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Manipulation </span></h6><div class="valueDisplayDiv displaySm" id="psy2_TOTAL_DISPLAYDIV"><span id="psy2_TOTAL_DISPLAY"></span><span id="psy2_TOTAL_DISPLAY_UNITS"></span></div>     (<span id="psy2_FREE_DISPLAY">0</span>)</div>
 			<div class="contentGridItem1x1 contentGridItem" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Strategy </span></h6><div class="valueDisplayDiv displaySm" id="psy3_TOTAL_DISPLAYDIV"><span id="psy3_TOTAL_DISPLAY"></span><span id="psy3_TOTAL_DISPLAY_UNITS"></span></div>         (<span id="psy3_FREE_DISPLAY">0</span>)</div>
-			</div>
+			</div></div>
 
         </div></div>
 

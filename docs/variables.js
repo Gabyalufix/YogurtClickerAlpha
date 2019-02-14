@@ -1766,6 +1766,7 @@ ELEMS["Biopwr_POWER_DISPLAY"] = document.getElementById("Biopwr_POWER_DISPLAY")
 ELEMS["Hawking_POWER_DISPLAY"] = document.getElementById("Hawking_POWER_DISPLAY")
 ELEMS["USAGE_POWER_DISPLAY"] = document.getElementById("USAGE_POWER_DISPLAY")
 ELEMS["SURPLUS_POWER_DISPLAY"] = document.getElementById("SURPLUS_POWER_DISPLAY")
+ELEMS["DEMAND_POWER_DISPLAY"] = document.getElementById("DEMAND_POWER_DISPLAY")
 
 
 
@@ -1775,6 +1776,7 @@ ELEMS["Biopwr_POWER_DISPLAY"].unitDisp = document.getElementById("Biopwr_POWER_D
 ELEMS["Hawking_POWER_DISPLAY"].unitDisp = document.getElementById("Hawking_POWER_DISPLAY_UNITS")
 ELEMS["USAGE_POWER_DISPLAY"].unitDisp = document.getElementById("USAGE_POWER_DISPLAY_UNITS")
 ELEMS["SURPLUS_POWER_DISPLAY"].unitDisp = document.getElementById("SURPLUS_POWER_DISPLAY_UNITS")
+ELEMS["DEMAND_POWER_DISPLAY"].unitDisp = document.getElementById("DEMAND_POWER_DISPLAY_UNITS")
 
 
 

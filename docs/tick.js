@@ -578,6 +578,9 @@ GAME_GLOBAL.SCIENCE_SUBFIELDS = SCIENCE_SUBFIELDS;
        this.ELEMS["USAGE_POWER_DISPLAY"].innerHTML = pwrFmt4[0];
        this.ELEMS["USAGE_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt4[1];
     
+       var pwrFmt6 = fmtSIunits( Math.round(this.STATS["CURR_POWER_DEMAND"]) * 1000000 )
+       this.ELEMS["DEMAND_POWER_DISPLAY"].innerHTML = pwrFmt6[0];
+       this.ELEMS["DEMAND_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt6[1];
     
 }
 

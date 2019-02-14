@@ -17,7 +17,85 @@
   --bsodBlue: #0000ce;
   --bsodText: #ffffff;
   --consoleBlack: #111111;
+  --greenLT: #a4ba91;
+  --greenMD: #8aa772;
+  --greenDK: #323f27;
+  --botLT: #e7b2b1;
+  --botMD: #c9514f;
+  --botDK: #621f1e;
+  --hawkLT: #b4b7ba;
+  --hawkMD: #95999d;
+  --hawkDK: #494d50;
+  --bioLT: #a4ba91;
+  --bioMD: #8aa772;
+  --bioDK: #323f27;
+  --engLT: #e7b2b1;
+  --engMD: #c9514f;
+  --engDK: #621f1e;
+  --psyLT: #b9b0cf;
+  --psyMD: #8e81b1;
+  --psyDK: #50446f;
 }
+
+
+.THEME_Green, .THEME_bio {
+  --white: #ffffff;
+  --black: #000000;
+  --LT4: #beceb1;
+  --LT3: #a4ba91;
+  --LT2: #97b082;
+  --LT1: #8aa772;
+  --MID: #647d4f;
+  --DK1: #5a7247;	
+  --DK2: #576e45;
+  --DK3: #4b5e3b;
+  --DK4: #3e4e31;
+  --baseBG: #e7b2b1;
+}
+.THEME_Bot, .THEME_eng {
+  --white: #ffffff;
+  --black: #000000;
+  --LT4: #d2adac;
+  --LT3: #c99c9c;
+  --LT2: #b87b7a;
+  --LT1: #af6b6a;
+  --MID: #955251;
+  --DK1: #854847;	
+  --DK2: #743f3e;
+  --DK3: #633636;
+  --DK4: #532d2d;
+  --baseBG: #e7b2b1;
+}
+.THEME_psy {
+  --white: #ffffff;
+  --black: #000000;
+  --LT4: #e3dfec;
+  --LT3: #d5d0e2;
+  --LT2: #c7c0d8;
+  --LT1: #b9b0cf;
+  --MID: #9c90bb;
+  --DK1: #8071a8;	
+  --DK2: #72619e;
+  --DK3: #67578e;
+  --DK4: #50446f;
+  --baseBG: #e7b2b1;
+}
+.THEME_Hawk {
+  --white: #ffffff;
+  --black: #000000;
+  --LT4: #bdbfc2;
+  --LT3: #b4b7ba;
+  --LT2: #a2a6a9;
+  --LT1: #95999d;
+  --MID: #888c91;
+  --DK1: #6e7377;	
+  --DK2: #62666a;
+  --DK3: #56595d;
+  --DK4: #494d50;
+  --baseBG: #e7b2b1;
+}
+
+
 
 .THEME_HOLDER {
    display: none;
@@ -257,6 +335,9 @@ h5 {
   padding: 1px;
 
 }
+
+
+
 .contentGrid5Hz {
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
@@ -293,6 +374,16 @@ h5 {
   grid-auto-flow: column;
   background-color: var(--LT2);
 }
+.contentGrid4x2Hz {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto auto;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+  grid-auto-flow: column;
+  background-color: var(--LT2);
+}
+
 
 .contentGridItem {
   background-color: var(--LT2);
@@ -300,6 +391,21 @@ h5 {
   padding: 5px;
   text-align: left;
 }
+.contentGridItemSIDES {
+  background-color: var(--LT2);
+  border-left: 1px solid var(--DK2);
+  border-right: 1px solid var(--DK2);
+  padding: 5px;
+  text-align: center;
+}
+.contentGridItemHORIZ {
+  background-color: var(--LT2);
+  border-top: 1px solid var(--DK2);
+  border-bottom: 1px solid var(--DK2);
+  padding: 5px;
+  text-align: center;
+}
+
 .contentGridItemHzT {
   background-color: var(--LT2);
   border-style: solid;
@@ -338,8 +444,12 @@ h5 {
 .contentGridItem1x2 {
   grid-area: span 1 / span 2
 }
-
-
+.contentGridItem1x3 {
+  grid-area: span 1 / span 3
+}
+.contentGridItem1x4 {
+  grid-area: span 1 / span 4
+}
 
 
 * {
@@ -514,6 +624,16 @@ h5 {
 ===================================================================================================================
 */
 /* Or make canvas and static fixed? */
+
+#ENERGY_STAT_TABLE {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 34% 22% 22% 22%;
+  /*grid-gap: 5px;*/
+  border: 1px solid var(--DK2);
+
+}
+
 #BACKGROUND_CANVAS {
   height:100%;
   width:100%;

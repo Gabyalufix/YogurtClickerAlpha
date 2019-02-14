@@ -622,15 +622,68 @@ var coll = document.getElementsByClassName("collapsible");
 var i;
 
 for (var i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "none") {
-      content.style.display = "block";
-    } else {
-      content.style.display = "none";
-    }
-  });
+  var cc = coll[i];
+  cc.ELEMS_CONTENT = cc.nextElementSibling;
+  cc.ELEMS_MODE1 = cc.ELEMS_CONTENT.getElementsByClassName("COLLAPSE_MODE1")
+  cc.ELEMS_MODE2 = cc.ELEMS_CONTENT.getElementsByClassName("COLLAPSE_MODE2")
+  
+  if(cc.ELEMS_MODE2.length > 0){
+    cc.MODALITY = "TRIPLE"
+    cc.CURRMODE = "MODE2";
+      cc.addEventListener("click", function() {
+        if(this.CURRMODE == "MODE0"){
+          console.log("MODE 1");
+          this.CURRMODE = "MODE1";
+          this.classList.toggle("active");
+          this.ELEMS_CONTENT.style.display = "block";
+          if(this.ELEMS_MODE1.length > 0){
+            for(var i=0; i < this.ELEMS_MODE1.length;i++){
+               this.ELEMS_MODE1[i].style.display = "block";
+            }
+          }
+        } else if(this.CURRMODE == "MODE1"){
+          console.log("MODE 2");
+          this.CURRMODE = "MODE2"
+          if(this.ELEMS_MODE1.length > 0){
+            for(var i=0; i < this.ELEMS_MODE1.length;i++){
+               this.ELEMS_MODE1[i].style.display = "none";
+            }
+          }
+          if(this.ELEMS_MODE2.length > 0){
+            for(var i=0; i < this.ELEMS_MODE2.length;i++){
+               this.ELEMS_MODE2[i].style.display = "block";
+            }
+          }
+        } else if(this.CURRMODE == "MODE2"){
+          console.log("MODE 0");
+          this.CURRMODE = "MODE0"
+          this.classList.toggle("active");
+          this.ELEMS_CONTENT.style.display = "none";
+          if(this.ELEMS_MODE2.length > 0){
+            for(var i=0; i < this.ELEMS_MODE2.length;i++){
+               this.ELEMS_MODE2[i].style.display = "none";
+            }
+          }
+          
+        } else {
+          console.log("ERROR: Impossible STATE: " +this.CURRMODE)
+        }
+      });
+
+  } else {
+    cc.MODALITY = "SIMPLE"
+      cc.addEventListener("click", function() {
+
+        this.classList.toggle("active");
+        if (this.ELEMS_CONTENT.style.display === "none") {
+          this.ELEMS_CONTENT.style.display = "block";
+        } else {
+          this.ELEMS_CONTENT.style.display = "none";
+        }
+      });
+  }
+  
+
 }
 
 
@@ -929,7 +982,7 @@ function executeAllConstructionRequests(){
         }
   }
   
-  while(iterationCausedChange){
+  //while(iterationCausedChange){
       iterationCausedChange = false;
       
       for(var i=0; i<this.STATICVAR_HOLDER.SHARED_RESOURCE_LIST.length; i++){
@@ -947,6 +1000,10 @@ function executeAllConstructionRequests(){
              }
            }
         }
+        if(rr == "POWER"){
+           this.STATS["CURR_POWER_DEMAND"] = totalResourceRequested;
+        }
+        
         //console.log("    ["+rr+"]"+totalResourceRequested+" vs "+this.INVENTORY[rr]);
         if(this.INVENTORY[rr] <= 0){
           //console.log("    zero["+rr+"]");
@@ -968,7 +1025,7 @@ function executeAllConstructionRequests(){
           }
         }
       }
-  }
+  //}
   
   for(var i=0;i<this.CONSTRUCTION_REQUESTS.length;i++){
     var bb = this.CONSTRUCTION_REQUESTS[i][0];
