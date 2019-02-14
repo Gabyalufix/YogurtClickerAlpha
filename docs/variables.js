@@ -457,6 +457,26 @@ var PCTSLIDERS = {}
 
 MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt","Biopwr","Botpwr"]
 
+RESOURCE_INFO = {
+
+}
+
+RESOURCE_INFO["MATTER-FreeBot-CT"] = {itemTitle:"Unprocessed Matter"}
+RESOURCE_INFO["MATTER-Feedstock-CT"] = {itemTitle:"Feedstock"}
+RESOURCE_INFO["MATTER-Botbots-CT"] = {itemTitle:"Botworld Fabricators"}
+RESOURCE_INFO["MATTER-Compute-CT"] = {itemTitle:"Computronium"}
+RESOURCE_INFO["MATTER-FreeGreen-CT"] = {itemTitle:"Unprocessed Matter"}
+RESOURCE_INFO["MATTER-Digested-CT"] = {itemTitle:"Digested Matter"}
+RESOURCE_INFO["MATTER-Biomass-CT"] = {itemTitle:"Biomass"}
+RESOURCE_INFO["MATTER-Waste-CT"] = {itemTitle:"Waste"}
+RESOURCE_INFO["MATTER-Heat-CT"] = {itemTitle:"Waste Heat"}
+RESOURCE_INFO["MATTER-Yogurt-CT"] = {itemTitle:"Yogurt"}
+RESOURCE_INFO["MATTER-Biopwr-CT"] = {itemTitle:"Chloroplasts"}
+RESOURCE_INFO["MATTER-Botpwr-CT"] = {itemTitle:"Solar Arrays"}
+RESOURCE_INFO["POWER"] = {itemTitle:"Power"}
+
+
+STATICVAR_HOLDER.RESOURCE_INFO = RESOURCE_INFO;
 
 INVENTORY["BUFFER-Ship-CT"] = 0;
 
@@ -634,12 +654,12 @@ STATS["INDUSTRY"]["Biomass"] = { sliderID: "green", sliderIDX: 4, prodTitle: "Bi
 
 
 STATS["INDUSTRY"]["WasteReprocess"] = { sliderID: "bot", sliderIDX: 3, prodTitle: "Waste Reprocessing", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd:  0.001, 
+                                   baseProd:  0.001, productionItem: "Feedstock",
                                    baseCost:  [["MATTER-Waste-CT",1]],
                                    basePwr:   0.177000,
                                    baseWaste: 0, lockKey: "WASTEREPROCESS"}
 STATS["INDUSTRY"]["WasteFerment"] = { sliderID: "green", sliderIDX: 3, prodTitle: "Waste Reprocessing", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd:  0.001, 
+                                   baseProd:  0.001, productionItem: "Yogurt",
                                    baseCost:  [["MATTER-Waste-CT",1]],
                                    basePwr:   0.177000,
                                    baseWaste: 0, lockKey: "COMPOST"}
@@ -649,7 +669,7 @@ STATS["INDUSTRY"]["Bioweapons"] = { sliderID: "green", sliderIDX: 2, prodTitle: 
                                    basePwr:   0.177000,
                                    baseWaste: 0, lockKey: "BIOWEAPONS"}
 STATS["INDUSTRY"]["TransmuteYogurt"] = { sliderID: "bot", sliderIDX: 3, prodTitle: "Transmute Yogurt", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd:  0.00005, 
+                                   baseProd:  0.00005, productionItem: "Yogurt",
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.177000,
                                    baseWaste: 0, lockKey: "TRANSMUTEYOGURT"}
@@ -661,9 +681,15 @@ STATS["INDUSTRY"]["TransmuteYogurt"] = { sliderID: "bot", sliderIDX: 3, prodTitl
 GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass","TransmuteYogurt","Bioweapons","WasteFerment","WasteReprocess"]
 STATS["PRODUCTION-CURR"] = {};
 STATS["PRODUCTION-REQ"] = {};
+STATS["LIMIT-REASON"] = {};
 for(var i=0; i < GAME_GLOBAL.INDUSTRY_LIST.length; i++){
+  var industry = GAME_GLOBAL.INDUSTRY_LIST[i];
+  if(STATS["INDUSTRY"][industry].productionItem == null){
+    STATS["INDUSTRY"][industry].productionItem = industry;
+  }
   STATS["PRODUCTION-CURR"][ GAME_GLOBAL.INDUSTRY_LIST[i] ] = 0;
   STATS["PRODUCTION-REQ"][ GAME_GLOBAL.INDUSTRY_LIST[i] ] = 0;
+  STATS["LIMIT-REASON"][ industry ] = "";
 }
 
 
@@ -1069,7 +1095,8 @@ ELEMS["Hawk"+"PowerLimiter"].displayElem = document.getElementById("BotPowerLimi
 
 
 STATICVAR_HOLDER.WATTAGE_MULTIPLIER = 5000000000
-
+STATICVAR_HOLDER.TRUE_WATTS_SOL_LUMINOSITY = 3.828e26
+STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY = STATICVAR_HOLDER.TRUE_WATTS_SOL_LUMINOSITY / STATICVAR_HOLDER.WATTAGE_MULTIPLIER;
 
 /*
 

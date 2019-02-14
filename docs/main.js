@@ -957,9 +957,10 @@ executeAllConstructionRequests()
 
 */
 
-function addConstructionRequest(inventoryItemName, requestCt, unitCost){
+function addConstructionRequest(inventoryItemName, requestCt, unitCost, industryID){
    //console.log("addConstructionRequest("+inventoryItemName+","+requestCt+","+unitCost)
-   this.CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt] )
+   //console.log(inventoryItemName+"/"+requestCt+"/"+unitCost+"/"+industryID)
+   this.CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt, industryID] )
 }
 
 
@@ -974,7 +975,9 @@ function executeAllConstructionRequests(){
   
   for(var j=0; j < this.CONSTRUCTION_REQUESTS.length;j++){
     var bb = this.CONSTRUCTION_REQUESTS[j][0];
-    this.STATS["PRODUCTION-REQ"][bb] = this.CONSTRUCTION_REQUESTS[j][1];
+    var industryID = this.CONSTRUCTION_REQUESTS[j][4];
+    STATS["LIMIT-REASON"][industryID] = "";
+    this.STATS["PRODUCTION-REQ"][industryID] = this.CONSTRUCTION_REQUESTS[j][1];
   }
   
   var resourceUserList = [];
@@ -1021,8 +1024,11 @@ function executeAllConstructionRequests(){
         //console.log("    ["+rr+"]"+totalResourceRequested+" vs "+this.INVENTORY[rr]);
         if(this.INVENTORY[rr] <= 0){
           //console.log("    zero["+rr+"]");
+          
           for(var j=0; j < userList.length;j++){
             var uu = userList[j];
+            
+            STATS["LIMIT-REASON"][this.CONSTRUCTION_REQUESTS[uu[0]][4]] = rr;
             this.CONSTRUCTION_REQUESTS[uu[0]][3] = 0;
             //console.log("            ZEROING:"+this.CONSTRUCTION_REQUESTS[j][0]);
             //console.log("                  ["+this.CONSTRUCTION_REQUESTS[uu[0]][0]+"]: "+fmtSIflat(this.CONSTRUCTION_REQUESTS[uu[0]][3]));
@@ -1033,8 +1039,9 @@ function executeAllConstructionRequests(){
           //console.log("    Insufficient["+rr+"]: "+frac);
           for(var j=0; j < userList.length;j++){
             var uu = userList[j];
+            STATS["LIMIT-REASON"][this.CONSTRUCTION_REQUESTS[uu[0]][4]] = rr;
             //console.log("                  ["+this.CONSTRUCTION_REQUESTS[uu[0]][0]+"]: "+fmtSIflat(this.CONSTRUCTION_REQUESTS[uu[0]][3])+"=>"+fmtSIflat(this.CONSTRUCTION_REQUESTS[uu[0]][3] * frac))
-
+            
             this.CONSTRUCTION_REQUESTS[uu[0]][3] = this.CONSTRUCTION_REQUESTS[uu[0]][3] * frac;
           }
         }
@@ -1043,6 +1050,7 @@ function executeAllConstructionRequests(){
   
   for(var i=0;i<this.CONSTRUCTION_REQUESTS.length;i++){
     var bb = this.CONSTRUCTION_REQUESTS[i][0];
+    var industryID = this.CONSTRUCTION_REQUESTS[i][4];
     var reqCt = this.CONSTRUCTION_REQUESTS[i][3];
     for(var j=0; j<this.CONSTRUCTION_REQUESTS[i][2].length; j++){
       var ccx = this.CONSTRUCTION_REQUESTS[i][2][j][0];
@@ -1051,7 +1059,7 @@ function executeAllConstructionRequests(){
       this.INVENTORY[ccx] = this.INVENTORY[ccx] - reqCt * uCost;
     }
     this.INVENTORY[bb] = this.INVENTORY[bb] + reqCt;
-    this.STATS["PRODUCTION-CURR"][bb] = reqCt;
+    this.STATS["PRODUCTION-CURR"][industryID] = reqCt;
   }
   this.CONSTRUCTION_REQUESTS = [];
   
@@ -1062,8 +1070,9 @@ function executeAllConstructionRequests_OLD(){
   var costRequests = {};
   for(var i=0;i<this.CONSTRUCTION_REQUESTS.length;i++){
     var bb = this.CONSTRUCTION_REQUESTS[i][0];
+    var industryID = this.CONSTRUCTION_REQUESTS[i][4];
     var reqCt = this.CONSTRUCTION_REQUESTS[i][1];
-    this.STATS["PRODUCTION-REQ"][bb] = reqCt;
+    this.STATS["PRODUCTION-REQ"][industryID] = reqCt;
     for(var j=0; j<this.CONSTRUCTION_REQUESTS[i][2].length; j++){
       var xcc = this.CONSTRUCTION_REQUESTS[i][2][j][0];
       var reqCt = this.CONSTRUCTION_REQUESTS[i][1];
@@ -1099,6 +1108,7 @@ function executeAllConstructionRequests_OLD(){
   }
   for(var i=0;i<this.CONSTRUCTION_REQUESTS.length;i++){
     var bb = this.CONSTRUCTION_REQUESTS[i][0];
+    
     var reqCt = this.CONSTRUCTION_REQUESTS[i][3];
     for(var j=0; j<this.CONSTRUCTION_REQUESTS[i][2].length; j++){
       var ccx = this.CONSTRUCTION_REQUESTS[i][2][j][0];
@@ -1106,7 +1116,7 @@ function executeAllConstructionRequests_OLD(){
       this.INVENTORY[ccx] = this.INVENTORY[ccx] - reqCt * uCost;      
     }
     this.INVENTORY[bb] = this.INVENTORY[bb] + reqCt;
-    this.STATS["PRODUCTION-CURR"][bb] = reqCt;
+    this.STATS["PRODUCTION-CURR"][industryID] = reqCt;
   }
   this.CONSTRUCTION_REQUESTS = [];
 }
@@ -1250,7 +1260,7 @@ window.addEventListener('click',function(event) {
 
 INVENTORY["STARS-" + "G" +"-CT"] = 1;
 INVENTORY["MATTER-FreeBot-CT"] = 1.9885e27;
-INVENTORY["POWER-FreeBot-CT"] = 3.828e20;
+INVENTORY["POWER-FreeBot-CT"] = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY;
 
 INVENTORY["MATTER-Botbots-CT"] = 75000000;
 INVENTORY["MATTER-Botpwr-CT"] = 25000000;
@@ -1263,6 +1273,7 @@ INVENTORY["WORLDS-"+"Bot"+"-CT"] = 1
 var START_WITH_GREENWORLD = true;
 if(START_WITH_GREENWORLD){
   INVENTORY["STARS-" + "G" +"-CT"] = INVENTORY["STARS-" + "G" +"-CT"] + 1;
+  INVENTORY["WORLDS-"+"Green"+"-CT"] = 1
   INVENTORY["MATTER-FreeGreen-CT"] = 1.9885e27;
   INVENTORY["POWER-FreeGreen-CT"] = 3.828e20;
 

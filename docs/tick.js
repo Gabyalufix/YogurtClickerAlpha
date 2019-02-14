@@ -331,18 +331,23 @@ function TICK_calcIndustry(){
 
     //GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass"]
 
+    //console.log("-------------------")
     for(var i=0; i<this.INDUSTRY_LIST.length; i++){
-       var productID = this.INDUSTRY_LIST[i];
-       var iss = this.STATS.INDUSTRY[productID];
+       var industryID = this.INDUSTRY_LIST[i];
+       var iss = this.STATS.INDUSTRY[industryID];
+       var productID = iss.productionItem;
+
        var sliderID = iss.sliderID;
        var sliderIDX = iss.sliderIDX;
        var prod = this.calcIndustrialProd(iss);
        iss.currRequested = prod;
        this.addConstructionRequest(iss.inventoryType+"-"+productID+"-CT",
                                    prod,
-                                   this.calcIndustrialCost(iss));
+                                   this.calcIndustrialCost(iss),
+                                   industryID);
     }
-    
+    //console.log("-------------------")
+
 
 
     this.executeAllConstructionRequests()
@@ -350,18 +355,30 @@ function TICK_calcIndustry(){
 //CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt]
 
     for(var i=0; i<this.INDUSTRY_LIST.length; i++){
-       var productID = this.INDUSTRY_LIST[i];
-       var iss = this.STATS.INDUSTRY[productID];
+       var industryID = this.INDUSTRY_LIST[i];
+
+       var iss = this.STATS.INDUSTRY[industryID];
+       var productID = iss.productionItem ;
        var sd   = iss.sliderID;
        var sdx  = iss.sliderIDX;
-       var reqCt = STATS["PRODUCTION-REQ"][ iss.inventoryType+"-"+productID+"-CT" ] 
-       var currCt = STATS["PRODUCTION-CURR"][ iss.inventoryType+"-"+productID+"-CT" ] 
+       var reqCt = this.STATS["PRODUCTION-REQ"][ industryID ] 
+       var currCt = this.STATS["PRODUCTION-CURR"][ industryID ] 
        if(null == this.PCTSLIDERS[sd].displayElem[sdx].PROD){
           console.log("NULL: "+iss.prodTitle);
           console.log("    ["+sd+" / "+sdx+"]");
           
        }
-       this.PCTSLIDERS[sd].displayElem[sdx].PROD.innerHTML = ( fmtSIflat(currCt)+" / "+fmtSIflat(reqCt) )
+       var limiterString = "";
+       var limiterID = this.STATS["LIMIT-REASON"][industryID]
+       if( limiterID != ""  ){
+          var itemTitle = this.STATICVAR_HOLDER.RESOURCE_INFO[limiterID].itemTitle;
+          limiterString = "    (insufficient "+itemTitle+")";
+       }
+       
+       this.PCTSLIDERS[sd].displayElem[sdx].PROD.innerHTML = ( fmtSIflat(currCt)+" / "+fmtSIflat(reqCt) + limiterString)
+       
+       
+       
     }
 
     var shipBuffer = this.INVENTORY["BUFFER-Ship-CT"];
@@ -646,7 +663,7 @@ function TICK_constructWorlds(){
           this.INVENTORY["STARS-" + sinfo[0] +"-CT"] = this.INVENTORY["STARS-" + sinfo[0] +"-CT"] + sinfo[1];
         }
         this.INVENTORY["MATTER-Free"+worldType+"-CT"] = this.INVENTORY["MATTER-Free"+worldType+"-CT"] + (starInfo[2] * 1.9885e27);
-        this.INVENTORY["POWER-Free"+worldType+"-CT"] = this.INVENTORY["POWER-Free"+worldType+"-CT"] + (starInfo[3] * 3.828e20);
+        this.INVENTORY["POWER-Free"+worldType+"-CT"] = this.INVENTORY["POWER-Free"+worldType+"-CT"] + (starInfo[3] * STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY);
         
         if(nxt == nxtAttempt){
           var nxtbuf = this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()
