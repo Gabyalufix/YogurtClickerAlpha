@@ -381,7 +381,7 @@ for(var tti=0;tti < itsSet.length; tti++){
 
   tt.charCapList = new Set();;
   
-  tt.charCt = itsSet[1].ORIGINAL_PLAINTEXT.length
+  tt.charCt = tt.ORIGINAL_PLAINTEXT.length
   var rawWords = tt.ORIGINAL_PLAINTEXT.split(" ");
   tt.wordIndices = [];
   var currIX = 0;
@@ -419,7 +419,10 @@ function getCrazyHTML(tt){
       }
     }
     for (let cc of tt.charSwapList){
-      out = this.setCharAt(out,cc,(tt.charSwapChar[cc]));
+      var ccm = Math.min(out.length,cc);
+      if(out[cc] != " "){
+        out = this.setCharAt(out,cc,(tt.charSwapChar[cc]));
+      }
     }
     
     for (let cc of tt.wordColorList){
@@ -463,7 +466,14 @@ function getCrazyHTML(tt){
     return out*/
 }
 
+/*
+var textCt = 0;
+for(var i=0; i < 10000; i++){
+   textCt = textCt + getApproxEventCt(10,0.001)
+}
+textCt
 
+*/
 
 
 function getApproxEventCt(testCt, threshold){
