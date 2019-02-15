@@ -85,21 +85,25 @@ INVENTORY["SUPER"+"_SCIENCE_TOTAL"] = 0
 function updatePctSliderDisplayHelper(ss){
   var fid = ss.fid;
   var vv = ss.value
-  var tt = (vv / 10000) * STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid]
+  var tt = (vv / 10000) * this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid]
   var fmtsi = fmtSIunits(tt)
   ss.sdisplay.innerHTML = (vv / 100).toFixed(1) + "% ["+fmtsi[0]
-  ss.sdisplayUnits.innerHTML = fmtsi[1]+PCTSLIDER_DISPLAYUNITS[fid]+"]"
-  ss.sdisplayDiv.title = PCTSLIDER_DISPLAYUNITSEXPLAIN[fid]+"\n"+fmtsi[4]
+  ss.sdisplayUnits.innerHTML = fmtsi[1]+this.PCTSLIDER_DISPLAYUNITS[fid]+"]"
+  ss.sdisplayDiv.title = this.STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITSEXPLAIN[fid]+"\n"+fmtsi[4]
 }
 
 function updatePctSliderDisplay(ss){
   var fid = ss.fid;
   for(var j = 0; j < ss.othrArray.length; j++){
-    updatePctSliderDisplayHelper(ss.othrArray[j])
+    this.updatePctSliderDisplayHelper(ss.othrArray[j])
   }
-  updatePctSliderDisplayHelper(ss)
+  this.updatePctSliderDisplayHelper(ss)
   //PCTSLIDER_DISPLAYUNITS[fid]+"]"
 }
+
+GAME_GLOBAL.updatePctSliderDisplay=updatePctSliderDisplay;
+GAME_GLOBAL.updatePctSliderDisplayHelper=updatePctSliderDisplayHelper;
+
 
 function onInputMultiSliderPct(ss){
       var cval = parseFloat(ss.value)
@@ -126,7 +130,7 @@ function onInputMultiSliderPct(ss){
           }
         }
       }
-      updatePctSliderDisplay(ss)
+      this.GAME.updatePctSliderDisplay(ss)
 }
 
 function onDownMultiSliderPct(ss){
@@ -173,6 +177,7 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
          displayDiv_elem[i] = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_DIV");
          display_elem[i].PROD = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_PROD");
          slider_elem[i].IS_LOCKED = false
+         slider_elem[i].GAME = GAME_GLOBAL
          //console.log("2: "+fid+"SliderCheck"+(i+1))
     }
     PCTSLIDERS[fid] = {checkElem: check_elem, displayElem: display_elem, sliderElem:slider_elem}
@@ -188,24 +193,28 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
         ss.fid = fid;
         ss.ssf = []
         ss.stotal = 0
+        ss.GAME = GAME_GLOBAL;
+        ss.onInputMultiSliderPct = onInputMultiSliderPct;
+        ss.onDownMultiSliderPct = onDownMultiSliderPct;
+
         ss.onmousedown = function() {
-          onDownMultiSliderPct(this)
+          this.onDownMultiSliderPct(this)
         }
         ss.ontouchstart = function() {
-          onDownMultiSliderPct(this)
+          this.onDownMultiSliderPct(this)
         }
         //ss.onmouseup = function() {
           //output.innerHTML = "UP"
         //}
         ss.oninput = function() {
-          onInputMultiSliderPct(this)
+          this.onInputMultiSliderPct(this)
         }
         ss.onchange = function() {
-          onInputMultiSliderPct(this)
+          this.onInputMultiSliderPct(this)
         }
     }
     onDownMultiSliderPct(slider_elem[0])
-    updatePctSliderDisplay(slider_elem[0])
+    GAME_GLOBAL.updatePctSliderDisplay(slider_elem[0])
     if(document.getElementById(fid+"_PRODUCTIVITY_DISPLAY") != null){
       document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fmtSI( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])+PCTSLIDER_DISPLAYUNITS[fid]
     }

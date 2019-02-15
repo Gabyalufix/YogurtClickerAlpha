@@ -27,8 +27,24 @@ STATS["PAUSE"] = false;
 //var bgStatic = document.getElementById("BACKGROUND_STATIC")
 //var vgCanvas = document.getElementById("BACKGROUND_CANVAS")
 //var allContentContainer =
+
+function resizeBackgroundCanvas(){
+        GAME_GLOBAL.bgStatic.style.height = GAME_GLOBAL.ALL_CONTENT_CONTAINER.offsetHeight + "px"
+        GAME_GLOBAL.bgCanvas.style.height = GAME_GLOBAL.ALL_CONTENT_CONTAINER.offsetHeight + "px"
+}
+window.addEventListener('resize', resizeBackgroundCanvas);
+window.addEventListener('load', resizeBackgroundCanvas);
+
+resizeBackgroundCanvas()
+
+
 window.setInterval(function(){
     var GAME = GAME_GLOBAL;
+    if(GAME.STATS["TICK"] < 10){
+      GAME.bgStatic.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
+     // GAME.bgCanvas.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
+    }
+    
     if(! STATS["PAUSE"]){
         TICK_TIMESTAMP = Date.now()
         GAME.STATS["TICK"] = GAME.STATS["TICK"] + 1;
@@ -46,11 +62,11 @@ window.setInterval(function(){
           calculateSlowTick();
         }
         if(GAME.STATS["CRAZY_ON"]){
-           SLOWTICK_makeCrazy(GAME);
+           GAME.SLOWTICK_makeCrazy();
         }
 
-        bgStatic.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
-        bgCanvas.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
+        //GAME.bgStatic.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
+        //GAME.bgCanvas.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
 
         midTimer++;
         if(midTimer >= 5){
@@ -104,7 +120,7 @@ function TICK_readUserInputs(){
     for(var j=0;j<this.PCTSLIDERS[fid]["displayElem"].length;j++){
       this.SETTINGS[fid+"_FRACTION"][j] = parseFloat( this.PCTSLIDERS[fid]["sliderElem"][j].value ) / 10000
       this.SETTINGS[fid+"_LOCKEDBOX"][j] = this.PCTSLIDERS[fid]["sliderElem"][j].lockbox.checked
-      updatePctSliderDisplay(this.PCTSLIDERS[fid]["sliderElem"][j])
+      //this.updatePctSliderDisplay(this.PCTSLIDERS[fid]["sliderElem"][j])
     }
   }
   
@@ -171,7 +187,7 @@ function TICK_updateStats(){
         var fsi = fmtSIunits( this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid])
         document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fsi[0]+" "+fsi[1]+this.PCTSLIDER_DISPLAYUNITS[fid]
       }
-      updatePctSliderDisplay(this.PCTSLIDERS[fid]["sliderElem"][0])
+      //this.updatePctSliderDisplay(this.PCTSLIDERS[fid]["sliderElem"][0])
   }
   this.DEBUG_CRAZY_LEVEL_DISPLAY.innerHTML = this.STATS["CRAZY_LEVEL"]
 
