@@ -181,15 +181,29 @@ function TICK_updateStats(){
    this.STATS["PRODUCTIVITY_RATING"]["battleplate"]   = Math.floor(this.INVENTORY["SHIPS-"+"battleplate"+"-CT"])
    this.STATS["PRODUCTIVITY_RATING"]["seedship"]   = Math.floor(this.INVENTORY["SHIPS-"+"seedship"+"-CT"])
 
+
+
   for(var sfi = 0; sfi < this.PCTSLIDER_FIELDS.length; sfi++){
       var fid = this.PCTSLIDER_FIELDS[sfi]
-      if(document.getElementById(fid+"_PRODUCTIVITY_DISPLAY") != null){
+      if(ELEMS[fid+"_PRODUCTIVITY_DISPLAY"] != null){
         var fsi = fmtSIunits( this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid])
-        document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fsi[0]+" "+fsi[1]+this.PCTSLIDER_DISPLAYUNITS[fid]
+        var makeAnonFunc = function(xfid,xfsi){
+          //console.log("making anon: ["+xfid+"]");
+          return function(){
+            //console.log("setting prodDisplay: ["+xfid+"]");
+            this.GAME.ELEMS[xfid+"_PRODUCTIVITY_DISPLAY"].innerHTML = xfsi[0]+" "+xfsi[1]+this.GAME.PCTSLIDER_DISPLAYUNITS[xfid]
+          }
+        }
+        var anonFunc = makeAnonFunc(fid,fsi)
+        window.requestAnimationFrame(anonFunc)
       }
       //this.updatePctSliderDisplay(this.PCTSLIDERS[fid]["sliderElem"][0])
   }
-  this.DEBUG_CRAZY_LEVEL_DISPLAY.innerHTML = this.STATS["CRAZY_LEVEL"]
+  
+  window.requestAnimationFrame(function(){
+    this.GAME.DEBUG_CRAZY_LEVEL_DISPLAY.innerHTML = this.GAME.STATS["CRAZY_LEVEL"]
+  })
+  
 
   this.DATE_DISPLAY.innerHTML = this.getDateStringFromTick(this.STATS["TICK"])
   this.MOOD_DISPLAY.innerHTML = this.STATS["MOOD"]
@@ -321,18 +335,39 @@ function TICK_calcIndustry(){
        this.INVENTORY["POWER"] = this.INVENTORY["POWER"] + this.INVENTORY["POWER-"+pc]
        
        var pwrFmt1 = fmtSIunits( Math.round( this.INVENTORY["POWER-"+pc+""]) * wattMult)
-       this.ELEMS[pc+"pwr_POWER_DISPLAY"].innerHTML = pwrFmt1[0];
-       this.ELEMS[pc+"pwr_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt1[1];
+       //this.ELEMS[pc+"pwr_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt1[1];
        
        var pp = ELEMS["POWER_PRODDISPLAY"][pc];
       
 
       this.INVENTORY["POWERGEN-"+pc+""] = this.INVENTORY["POWER-"+pc+""]
-      pp.powerCAPACITY.innerHTML = pwrFmt1[0]+pwrFmt1[1];
-      //STATS["ENERGYRATE_MULT"][ppid+"pwrGen"]
-      pp.effDisplay.innerHTML = roundTo(100*STATS["ENERGYRATE_MULT"][pc+"pwrGen"],1)
-      //this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"]
-      pp.prodDisplay.innerHTML = fmtSIflat(this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"] * wattMult)+"W/t"
+      
+      /*
+      
+              var makeAnonFunc = function(xfid,xfsi){
+                //console.log("making anon: ["+xfid+"]");
+                return function(){
+                  //console.log("setting prodDisplay: ["+xfid+"]");
+                  this.GAME.ELEMS[xfid+"_PRODUCTIVITY_DISPLAY"].innerHTML = xfsi[0]+" "+xfsi[1]+this.GAME.PCTSLIDER_DISPLAYUNITS[xfid]
+                }
+              }
+              var anonFunc = makeAnonFunc(fid,fsi)
+        window.requestAnimationFrame(anonFunc)
+      
+      */
+      
+      var makeAnonFunc2 = function(xpwrFmt1,xpp,xpc){
+                return function(){
+                  this.GAME.ELEMS[pc+"pwr_POWER_DISPLAY"].innerHTML = xpwrFmt1[0] + xpwrFmt1[1];
+                  xpp.powerCAPACITY.innerHTML = xpwrFmt1[0]+xpwrFmt1[1];
+                  //STATS["ENERGYRATE_MULT"][ppid+"pwrGen"]
+                  xpp.effDisplay.innerHTML = roundTo(100*this.GAME.STATS["ENERGYRATE_MULT"][xpc+"pwrGen"],1)
+                  //this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"]
+                  xpp.prodDisplay.innerHTML = fmtSIflat(this.GAME.STATS["PRODUCTIVITY_RATING"][xpc+"pwrGen"] * this.GAME.STATICVAR_HOLDER.WATTAGE_MULTIPLIER)+"W/t"
+                }
+      }
+      var anonFunc2 = makeAnonFunc2(pwrFmt1,pp,pc)
+      window.requestAnimationFrame(anonFunc2)
       
     }
     

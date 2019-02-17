@@ -399,6 +399,8 @@ function getCrazyHTML(tt){
     //    out = flipText(out)
     //}
     
+    //if(tt.wordSwapList.size > 0 || tt.wordFlipList.size > 0 || tt.charCapList.size > 0 || tt.charSwapList.size > 0 || tt.wordColorList.size > 0
+    
     for (let cc of tt.wordSwapList){
       var wordIX = tt.wordIndices[cc];
       replaceStringAt(out,wordIX[0],wordIX[1],tt.wordSwapWord[cc])
@@ -544,7 +546,7 @@ function makeCrazyHelper_8_ITS(clvl){
               if( tt.wordFlipList.size > 0 && Math.random() < this.STATICVAR_HOLDER["CRAZY_REV_WORD_FLIPRATE"][clvl]){
                 tt.wordFlipList.clear();
               }
-              if( tt.wordFlipList.size > 0 && Math.random() < this.STATICVAR_HOLDER["CRAZY_REV_WORD_COLORRATE"][clvl]){
+              if( tt.wordColorList.size > 0 && Math.random() < this.STATICVAR_HOLDER["CRAZY_REV_WORD_COLORRATE"][clvl]){
                 tt.wordColorList.clear();
               }
               if( tt.wordSwapList.size > 0 && Math.random() < this.STATICVAR_HOLDER["CRAZY_REV_WORD_SWAPRATE"][clvl]){
@@ -593,8 +595,10 @@ function makeCrazyHelper_8_ITS(clvl){
                    }
                }
             }*/
+            if(tt.wordSwapList.size > 0 || tt.wordFlipList.size > 0 || tt.charCapList.size > 0 || tt.charSwapList.size > 0 || tt.wordColorList.size > 0){
+              tt.innerHTML = this.getCrazyHTML(tt)
+            }
             
-            tt.innerHTML = this.getCrazyHTML(tt)
         }
 }
 

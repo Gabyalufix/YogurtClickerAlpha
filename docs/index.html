@@ -972,11 +972,16 @@
 			<div class="content">
   			<p><span class="INFO_TEXT_STATIC"> Your industrial base: a vast network of van-neumann construction robots built around a captive sun. </span></p>
 
-            <span class="INFO_TEXT_STATIC">Productivity: </span><div class="valueDisplayDiv" id="bot_PRODUCTIVITY_DISPLAY_DIV"><span id="bot_PRODUCTIVITY_DISPLAY"></span><span id="bot_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
 
         <div class="contentUnitHolder" style="padding: 0px; margin:0px;">
 
-			<div class="SliderSetHolder">
+			<div class="SubContentBox">
+
+
+			<div class="SubContentBoxTitle SubContentBoxTitleCtr">
+              <div class="INFO_TEXT_STATIC">Production Control: </div>
+              <div class="INFO_TEXT_STATIC">Industrial Capacity: </span><span class="valueDisplayDiv" id="bot_PRODUCTIVITY_DISPLAY_DIV"><span id="bot_PRODUCTIVITY_DISPLAY"></span><span id="bot_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+            </div><div style="line-height:45px"><br></div>
 
 <!--
 			<div class="tooltipHolder">
@@ -1095,10 +1100,43 @@
 			</button>
 			<div class="content">
 
-<div class="contentUnitHolder">
-			<div class="SliderSetHolder">
+     <div class="contentUnitHolder">
+			<div class="SubContentBox">
 
-            <span class="INFO_TEXT_STATIC">Productivity: </span><span class="valueDisplayDiv" id="green_PRODUCTIVITY_DISPLAY_DIV"><span id="green_PRODUCTIVITY_DISPLAY"></span><span id="green_PRODUCTIVITY_DISPLAY_UNITS"></span></span>
+			<div class="SubContentBoxTitle SubContentBoxTitleCtr">
+              <div class="INFO_TEXT_STATIC">Biomass Control: </div>
+            </div><div style="line-height:30px"><br></div>
+
+            <div style="display: grid; grid-template-columns: 50% 50%;">
+              <div  style="grid-area: span 1 / span 1; text-align:left;">
+                 <h5> <span class="INFO_TEXT_STATIC"> Production: </span> <span id="biomass_PROD_CONTROL_PCT_DISPLAY">75%</span></h5>
+              </div>
+              <div  style="grid-area: span 1 / span 1; text-align:right;">
+                <h5><span class="INFO_TEXT_STATIC"> Photosynthesis: </span><span id="biomass_PWR_CONTROL_PCT_DISPLAY">25%</span></h5>
+              </div>
+            </div>
+
+				<div class="multiPctSliderSuper" style="position:relative">
+					<div class="slidecontainer" style="width:100%;">
+						  <input type="range" min="0" max="10000" value="7500" class="slider" id="biomassSliderPct"  style="width:100%;">
+					</div>
+				</div>
+
+
+            </div>
+
+    </div>
+<br>
+
+<div class="contentUnitHolder">
+			<div class="SubContentBox">
+
+			<div class="SubContentBoxTitle SubContentBoxTitleCtr">
+              <div class="INFO_TEXT_STATIC">Production Control: </div>
+              <span class="INFO_TEXT_STATIC">Industrial Capacity: </span><span class="valueDisplayDiv" id="green_PRODUCTIVITY_DISPLAY_DIV"><span id="green_PRODUCTIVITY_DISPLAY"></span><span id="green_PRODUCTIVITY_DISPLAY_UNITS"></span></span>
+
+            </div><div style="line-height:45px"><br></div>
+
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Activates digestive enzymes in biomass clusters that digests unprocessed greenworld matter into a metabolically-available slurry. This slurry can then be used as a growth medium for more biomass or for yogurt.</span> </span>
@@ -1203,7 +1241,12 @@
 
 			</div>
 			</div>
-				</div>
+
+
+
+
+
+</div>
 </div>
 
 <div class="contentUnitHolder">
@@ -1219,7 +1262,7 @@
              <span class="INFO_TEXT_STATIC">Ship Construction Buffer: </span><div class="valueDisplayDiv" id="SHIPCONSTRUCTBUFFER_DISPLAY_DIV"><span id="SHIPCONSTRUCTBUFFER_DISPLAY"></span><span id="SHIPCONSTRUCTBUFFER_DISPLAY_UNITS"></span></div>
             <span class="INFO_TEXT_STATIC">Construction Productivity: </span><div class="valueDisplayDiv" id="ship_PRODUCTIVITY_DISPLAY_DIV"><span id="ship_PRODUCTIVITY_DISPLAY"></span><span id="ship_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
 
-			<div class="SliderSetHolder">
+			<div class="SubContentBox">
 
 			<h5><span class="INFO_TEXT_STATIC">Scout Probes: </span><div class="valueDisplayDiv" id="shipSliderDisplayPct1_DIV"><span id="shipSliderDisplayPct1"></span><span id="shipSliderDisplayPct1_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
@@ -1385,7 +1428,7 @@
 					<option value="BioProject11">BioProject11</option>-->
 				</select>
 
-				<div class="SliderSetHolder">
+				<div class="SubContentBox">
 				   <span id="CURRENT_AVAIL_PROJECT_DESC_bio"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
 				   <div>
 				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_bio" > RESEARCH </button>
@@ -1408,7 +1451,7 @@
 					<option value="EngineeringProject11">EngineeringProject11</option>-->
 				</select>
 
-				<div class="SliderSetHolder">
+				<div class="SubContentBox">
 				   <span id="CURRENT_AVAIL_PROJECT_DESC_eng"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
 				   <div>
 				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_eng" > RESEARCH </button>
@@ -1431,7 +1474,7 @@
 					<option value="PsychProject11">PsychProject11</option>-->
 				</select>
 
-				<div class="SliderSetHolder">
+				<div class="SubContentBox">
 				   <span id="CURRENT_AVAIL_PROJECT_DESC_psy"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
 				   <div>
 				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_psy" > RESEARCH </button>

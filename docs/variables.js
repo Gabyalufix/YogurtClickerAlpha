@@ -1127,6 +1127,10 @@ for(var i=0; i < STATICVAR_HOLDER.POWER_SOURCE_LIST.length; i++){
 
 }
 
+for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
+    var fid = this.PCTSLIDER_FIELDS[sfi]
+    ELEMS[fid+"_PRODUCTIVITY_DISPLAY"] = document.getElementById(fid+"_PRODUCTIVITY_DISPLAY")
+}
 
 ELEMS["Bot"+"PowerLimiter"] = document.getElementById("Bot"+"PowerLimiter");
 ELEMS["Bot"+"PowerLimiter"].displayElem = document.getElementById("BotPowerLimiterSliderDisplay");
@@ -1152,3 +1156,5 @@ standard current-tech solar panels range: 100-1.4 kg / kW
 710 kW / t
 
 */
+
+window.GAME = GAME_GLOBAL;
