@@ -82,7 +82,7 @@ INVENTORY["SUPER"+"_SCIENCE_TOTAL"] = 0
 
 
 
-function updatePctSliderDisplayHelper(ss){
+function updatePctSliderDisplayHelper_OLD(ss){
   var fid = ss.fid;
   var vv = ss.value
   var tt = (vv / 10000) * this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid]
@@ -91,6 +91,23 @@ function updatePctSliderDisplayHelper(ss){
   ss.sdisplayUnits.innerHTML = fmtsi[1]+this.PCTSLIDER_DISPLAYUNITS[fid]+"]"
   ss.sdisplayDiv.title = this.STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITSEXPLAIN[fid]+"\n"+fmtsi[4]
 }
+
+function updatePctSliderDisplayHelper(ss){
+      var makeAnonFunc = function(){
+                  var fid = ss.fid;
+                  var vv = ss.value
+                  var tt = (vv / 10000) * this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid]
+                  var fmtsi = fmtSIflat(tt / this.STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR)
+                  return function(){
+                      ss.sdisplay.innerHTML = (vv / 100).toFixed(1) + "% ["+fmtsi+this.PCTSLIDER_DISPLAYUNITS[fid]+"]";
+                  }
+      }
+      var anonFunc = makeAnonFunc();
+      window.requestAnimationFrame(anonFunc);
+      
+}
+
+//this.STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR
 
 function updatePctSliderDisplay(ss){
   var fid = ss.fid;
@@ -103,6 +120,8 @@ function updatePctSliderDisplay(ss){
 
 GAME_GLOBAL.updatePctSliderDisplay=updatePctSliderDisplay;
 GAME_GLOBAL.updatePctSliderDisplayHelper=updatePctSliderDisplayHelper;
+
+
 
 
 function onInputMultiSliderPct(ss){
@@ -219,6 +238,9 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
       document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fmtSI( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])+PCTSLIDER_DISPLAYUNITS[fid]
     }
 }
+
+
+
 
 function powerLimiterInput(){
    var d = this.displayElem;
@@ -570,6 +592,21 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
 }
 
 
+
+
+function onInputSoloSliderPct(){
+      var cval = parseFloat(this.value)
+      this.pctDisplayA.innerHTML = roundTo(cval / 100,1)+"%";
+      this.pctDisplayB.innerHTML = roundTo(100 - (cval / 100),1)+"%";
+      this.currValue = cval / 10000
+}
+
+ELEMS["BIOMASS_CONTROL_SLIDER"] = document.getElementById("biomassSliderPct")
+ELEMS["BIOMASS_CONTROL_SLIDER"].pctDisplayA = document.getElementById("biomass_PROD_CONTROL_PCT_DISPLAY")
+ELEMS["BIOMASS_CONTROL_SLIDER"].pctDisplayB = document.getElementById("biomass_PWR_CONTROL_PCT_DISPLAY")
+ELEMS["BIOMASS_CONTROL_SLIDER"].oninput  = onInputSoloSliderPct;
+ELEMS["BIOMASS_CONTROL_SLIDER"].onchange = onInputSoloSliderPct;
+ELEMS["BIOMASS_CONTROL_SLIDER"].currValue = 0.75;
 
 
 CHEATADD_TYPE_LIST = ["Neutral","Hostile"]
@@ -1266,7 +1303,31 @@ window.addEventListener('click',function(event) {
 
 
 //startWorldConstruction("Bot",1)
+//STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR
 
+
+INVENTORY["STARS-" + "G" +"-CT"] = 1;
+INVENTORY["WORLDS-"+"Bot"+"-CT"] = 1
+
+INVENTORY["POWER-FreeBot-CT"] = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY / 2;
+INVENTORY["MATTER-Botbots-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 7;
+INVENTORY["MATTER-Botpwr-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 3;
+INVENTORY["MATTER-Waste-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 119;
+
+INVENTORY["MATTER-FreeBot-CT"] = (STATICVAR_HOLDER.SOLAR_MASS / 2) - INVENTORY["MATTER-Botbots-CT"] - INVENTORY["MATTER-Botpwr-CT"] - (INVENTORY["MATTER-Waste-CT"] / 2);
+
+
+var START_WITH_GREENWORLD = true;
+if(START_WITH_GREENWORLD){
+  INVENTORY["WORLDS-"+"Green"+"-CT"] = 1
+  INVENTORY["POWER-FreeGreen-CT"] = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY / 2;
+  INVENTORY["MATTER-Biomass-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 12;
+  INVENTORY["MATTER-FreeGreen-CT"] = (STATICVAR_HOLDER.SOLAR_MASS / 2) - INVENTORY["MATTER-Biomass-CT"] - (INVENTORY["MATTER-Waste-CT"] / 2);
+}
+
+
+
+/*
 INVENTORY["STARS-" + "G" +"-CT"] = 1;
 INVENTORY["MATTER-FreeBot-CT"] = 1.9885e27;
 INVENTORY["POWER-FreeBot-CT"] = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY;
@@ -1284,9 +1345,10 @@ if(START_WITH_GREENWORLD){
   INVENTORY["STARS-" + "G" +"-CT"] = INVENTORY["STARS-" + "G" +"-CT"] + 1;
   INVENTORY["WORLDS-"+"Green"+"-CT"] = 1
   INVENTORY["MATTER-FreeGreen-CT"] = 1.9885e27;
-  INVENTORY["POWER-FreeGreen-CT"] = 3.828e20;
+  INVENTORY["POWER-FreeGreen-CT"] = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY;
 
-  INVENTORY["MATTER-Biomass-CT"] = 75000000;
-  INVENTORY["MATTER-Biopwr-CT"] = 25000000;
+  INVENTORY["MATTER-Biomass-CT"] = 100000000;
+  //INVENTORY["MATTER-Biopwr-CT"] = 25000000;
   INVENTORY["MATTER-Waste-CT"] = 100000000;
 }
+*/

@@ -37,9 +37,10 @@ window.addEventListener('load', resizeBackgroundCanvas);
 
 resizeBackgroundCanvas()
 
+window.GAME = GAME_GLOBAL;
 
-window.setInterval(function(){
-    var GAME = GAME_GLOBAL;
+function TICK_runFastTick(){
+    var GAME = this.GAME;
     if(GAME.STATS["TICK"] < 10){
       GAME.bgStatic.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
      // GAME.bgCanvas.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
@@ -55,7 +56,17 @@ window.setInterval(function(){
         GAME.TICK_calcWar()
         GAME.TICK_constructWorlds()
         GAME.TICK_updateWorldCounts()
+        
+        
+        GAME.TICK_INDUSTRY_calcPOWERGEN();
+        GAME.TICK_INDUSTRY_addCReqs()
+        GAME.executeAllConstructionRequests()
         GAME.TICK_calcIndustry();
+        GAME.TICK_INDUSTRY_calcScienceGain();
+        GAME.TICK_INDUSTRY_calcPowerUsage();
+        
+        
+        
         secTimer++;
         if (secTimer >= 250){
           secTimer = 0;
@@ -91,8 +102,9 @@ window.setInterval(function(){
       SAVE_GAME_COMMAND_FLAG = []
     }
 
+}
 
-},100);
+window.setInterval(TICK_runFastTick,100);
 
 
 var varNumTicksSoFar = 0
@@ -131,8 +143,10 @@ function TICK_readUserInputs(){
       this.SETTINGS[ppid+"_POWERLIMITFRAC"] = parseFloat(ELEMS[worldType+"PowerLimiter"].value) / 10000
     }
 
-  
+  this.SETTINGS["BIOMASS_PROD_FRAC"] = this.ELEMS["BIOMASS_CONTROL_SLIDER"].currValue;
+  this.SETTINGS["BIOMASS_PWR_FRAC"] = 1 - this.SETTINGS["BIOMASS_PROD_FRAC"]
 }
+
 function TICK_setUserInputs(){
   //Percent sliders:
   for(var i =0; i<this.PCTSLIDER_FIELDS.length; i++){
@@ -166,7 +180,7 @@ function TICK_updateStats(){
 
 */
   this.STATS["PRODUCTIVITY_RATING"]["bot"]   = this.INVENTORY["MATTER-Botbots-CT"] * this.STATS["PRODUCTIVITY_MULT"]["bot"]
-  this.STATS["PRODUCTIVITY_RATING"]["green"]   = this.INVENTORY["MATTER-Biomass-CT"] * this.STATS["PRODUCTIVITY_MULT"]["green"]
+  this.STATS["PRODUCTIVITY_RATING"]["green"]   = this.INVENTORY["MATTER-Biomass-CT"] * this.STATS["PRODUCTIVITY_MULT"]["green"] * this.SETTINGS["BIOMASS_PROD_FRAC"]
   this.STATS["PRODUCTIVITY_RATING"]["comp"]   = this.INVENTORY["MATTER-Compute-CT"] * this.STATS["PRODUCTIVITY_MULT"]["comp"] * this.STATS["CONVERSIONS"]["sunToOp"]
 
   this.STATS["PRODUCTIVITY_RATING"]["ship"]   = this.STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]
@@ -186,7 +200,7 @@ function TICK_updateStats(){
   for(var sfi = 0; sfi < this.PCTSLIDER_FIELDS.length; sfi++){
       var fid = this.PCTSLIDER_FIELDS[sfi]
       if(ELEMS[fid+"_PRODUCTIVITY_DISPLAY"] != null){
-        var fsi = fmtSIunits( this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid])
+        var fsi = fmtSIunits( this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid] / this.STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR)
         var makeAnonFunc = function(xfid,xfsi){
           //console.log("making anon: ["+xfid+"]");
           return function(){
@@ -197,16 +211,22 @@ function TICK_updateStats(){
         var anonFunc = makeAnonFunc(fid,fsi)
         window.requestAnimationFrame(anonFunc)
       }
+      
+      for( var i=0; i < this.PCTSLIDERS[fid]["sliderElem"].length; i++){
+        this.updatePctSliderDisplayHelper( this.PCTSLIDERS[fid]["sliderElem"][i] )
+      }
+      
       //this.updatePctSliderDisplay(this.PCTSLIDERS[fid]["sliderElem"][0])
   }
   
   window.requestAnimationFrame(function(){
     this.GAME.DEBUG_CRAZY_LEVEL_DISPLAY.innerHTML = this.GAME.STATS["CRAZY_LEVEL"]
+    this.GAME.DATE_DISPLAY.innerHTML = this.GAME.getDateStringFromTick(this.STATS["TICK"])
+    this.GAME.MOOD_DISPLAY.innerHTML = this.GAME.STATS["MOOD"]
   })
   
 
-  this.DATE_DISPLAY.innerHTML = this.getDateStringFromTick(this.STATS["TICK"])
-  this.MOOD_DISPLAY.innerHTML = this.STATS["MOOD"]
+
   this["INVENTORY-PREVTICK"] = {};
   for( var i = 0; i < this.MATTER_TYPE_LIST.length; i++){
         var matterType = this.MATTER_TYPE_LIST[i]
@@ -249,15 +269,15 @@ function TICK_updateWorldCounts(){
         if(countDisplay != null){
           countDisplay.innerHTML = worldCountLine
           if(countDisplay.cancelButton != null){
-              if(this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0){
+              if(this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0 && countDisplay.cancelButton.disabled){
                 countDisplay.cancelButton.style.display = "block";
                 countDisplay.cancelButton.disabled = false;
-              } else {
+              } else if(this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] == 0 && (! countDisplay.cancelButton.disabled)) {
                 countDisplay.cancelButton.style.display = "none";
                 countDisplay.cancelButton.disabled = true;
               }
           }
-
+    
         }
     }
     
@@ -268,11 +288,15 @@ function TICK_updateWorldCounts(){
        var ee = ELEMS["STARCT_"+sid] ;
        var ct = this.INVENTORY["STARS-" + sid +"-CT"];
        var ff = fmtSIintNoPct(ct)
-       ee.innerHTML = ff;
+       if(ff != ee.innerHTML){
+       
+       
+         ee.innerHTML = ff;
+       }
     }
     
-}
-
+}   
+    
 function TICK_scoutSystems(){
     var exploreRating = this.STATS["PRODUCTIVITY_RATING"]["scout"] * this.SETTINGS["scout"+"_FRACTION"][0];
     var areaExplored = this.STATS["scout-speed"] * STATS["scout-sensorrange"] * exploreRating;
@@ -311,9 +335,7 @@ function TICK_scoutSystems(){
 //MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt"]
 //WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
 
-
-function TICK_calcIndustry(){
-
+function TICK_INDUSTRY_calcPOWERGEN(){
     var wattMult = this.STATICVAR_HOLDER.WATTAGE_MULTIPLIER
     /*
      * POWER PRODUCTION:
@@ -328,8 +350,11 @@ function TICK_calcIndustry(){
        var pc = pwrSrc[z];
        var dy = dysonSrc[z];
        this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"] = this.STATS["PRODUCTIVITY_MULT"][pc+"pwrGen"] * this.STATS["CONVERSIONS"]["pwrFrom"+pc+"pwrPerProdPerTick"] * this.STATS["PRODUCTIVITY_MULT"][dy];
-       
-       this.INVENTORY["POWER-"+pc+"-CAP"] = this.INVENTORY["MATTER-"+pc+"pwr-CT"] * this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"] * this.SETTINGS[pc+"_POWERLIMITFRAC"];
+       if(pc == "Bio"){
+         this.INVENTORY["POWER-"+pc+"-CAP"] = (this.INVENTORY["MATTER-Biomass-CT"] * this.SETTINGS["BIOMASS_PWR_FRAC"]) * this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"] * this.SETTINGS[pc+"_POWERLIMITFRAC"];
+       } else {
+         this.INVENTORY["POWER-"+pc+"-CAP"] = this.INVENTORY["MATTER-"+pc+"pwr-CT"] * this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"] * this.SETTINGS[pc+"_POWERLIMITFRAC"];
+       }
        this.INVENTORY["POWER-"+pc+""] = Math.min(this.INVENTORY["POWER-"+pc+"-CAP"] / STATS["ENERGYRATE_MULT"][pc+"pwrGen"],this.INVENTORY["POWER-Free"+dysonSrcCap[z]+"-CT"]) * STATS["ENERGYRATE_MULT"][pc+"pwrGen"];
        
        this.INVENTORY["POWER"] = this.INVENTORY["POWER"] + this.INVENTORY["POWER-"+pc]
@@ -378,10 +403,9 @@ function TICK_calcIndustry(){
     //this.INVENTORY["POWER"] = this.STATS["PRODUCTIVITY_RATING"]["BotpwrGen"] + this.STATS["PRODUCTIVITY_RATING"]["BiopwrGen"]
     this.INVENTORY["POWERGEN"] = this.INVENTORY["POWER"] 
     
+}
 
-
-    //GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass"]
-
+function TICK_INDUSTRY_addCReqs(){
     //console.log("-------------------")
     for(var i=0; i<this.INDUSTRY_LIST.length; i++){
        var industryID = this.INDUSTRY_LIST[i];
@@ -398,10 +422,21 @@ function TICK_calcIndustry(){
                                    industryID);
     }
     //console.log("-------------------")
+}
+
+
+GAME_GLOBAL.TICK_INDUSTRY_calcPOWERGEN = TICK_INDUSTRY_calcPOWERGEN;
+GAME_GLOBAL.TICK_INDUSTRY_addCReqs = TICK_INDUSTRY_addCReqs;
 
 
 
-    this.executeAllConstructionRequests()
+
+function TICK_calcIndustry(){
+
+    var wattMult = this.STATICVAR_HOLDER.WATTAGE_MULTIPLIER
+    //GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass"]
+
+    //this.executeAllConstructionRequests()
 
 //CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt]
 
@@ -427,9 +462,6 @@ function TICK_calcIndustry(){
        }
        
        this.PCTSLIDERS[sd].displayElem[sdx].PROD.innerHTML = ( fmtSIflat(currCt)+" / "+fmtSIflat(reqCt) + limiterString)
-       
-       
-       
     }
 
     var shipBuffer = this.INVENTORY["BUFFER-Ship-CT"];
@@ -444,7 +476,8 @@ function TICK_calcIndustry(){
 
 
   //update displays:
-   this["SHIPCONSTRUCTBUFFER_DISPLAY_DIV"].innerHTML = this.INVENTORY["SHIP-CONSTRUCT-BUFFER"]
+   //this["SHIPCONSTRUCTBUFFER_DISPLAY_DIV"].innerHTML = this.INVENTORY["SHIP-CONSTRUCT-BUFFER"]
+   
    for( var i = 0; i < this.MATTER_TYPE_LIST.length; i++){
         var matterType = this.MATTER_TYPE_LIST[i]
         var matterCt = this.INVENTORY["MATTER-"+matterType+"-CT"];
@@ -456,28 +489,35 @@ function TICK_calcIndustry(){
 
         var sdd = this.ELEMS["MATTERDELTA-"+matterType+"-DISPLAY"]
         if( sdd != null){
-        var diff = matterCt - this["INVENTORY-PREVTICK"]["MATTER-"+matterType+"-CT"];
-        var sign = "+";
-        if(diff < 0){
-          diff = -diff
-          sign = "-";
-        }
-        if(sdd == null){
-           console.log("sdd null: "+matterType);
-        }
-        if(sdd.displayUnits == null){
-        console.log("sdd.displayUnits null: "+matterType);
-        }
-        var fmtsid = fmtSIunits(diff);
-        sdd.innerHTML = sign+fmtsid[0];
-        sdd.displayUnits.innerHTML = fmtsid[1]+"t/wk";
+            var diff = matterCt - this["INVENTORY-PREVTICK"]["MATTER-"+matterType+"-CT"];
+            var sign = "+";
+            if(diff < 0){
+              diff = -diff
+              sign = "-";
+            }
+            //if(sdd == null){
+            //   console.log("sdd null: "+matterType);
+            //}
+            //if(sdd.displayUnits == null){
+            //    console.log("sdd.displayUnits null: "+matterType);
+            //}
+            var fmtsid = fmtSIunits(diff);
+            sdd.innerHTML = sign+fmtsid[0];
+            sdd.displayUnits.innerHTML = fmtsid[1]+"t/wk";
         }
 
     }
 
     this.CONSTRUCTION_REQUESTS = [];
+    
+
+}
 
 
+
+
+
+function TICK_INDUSTRY_calcScienceGain(){
     for(var i=0;i<this.SCIENCE_TYPES.length;i++){
       var fid = this.SCIENCE_TYPES[i];
       var subf = this.SCIENCE_SUBFIELDS[fid];
@@ -505,29 +545,46 @@ function TICK_calcIndustry(){
     for(var i=0; i<this.RESEARCH_BUTTONS.length; i++){
         this.RESEARCH_BUTTONS[i].canAffordTest()
     }
-
+}
 
     /*
      POWER USAGE:
     */
-       var pwrFmt5 = fmtSIunits( Math.round(this.INVENTORY["POWERGEN"]) * wattMult )
-       this.ELEMS["POWER_DISPLAY"].innerHTML = pwrFmt5[0];
-       this.ELEMS["POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt5[1];
-       
-       var pwrFmt3 = fmtSIunits( Math.round(this.INVENTORY["POWER"]) * wattMult )
-       this.ELEMS["SURPLUS_POWER_DISPLAY"].innerHTML = pwrFmt3[0];
-       this.ELEMS["SURPLUS_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt3[1];
-    
-       var pwrFmt4 = fmtSIunits( Math.round((this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"]))* wattMult )
-       this.ELEMS["USAGE_POWER_DISPLAY"].innerHTML = pwrFmt4[0];
-       this.ELEMS["USAGE_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt4[1];
-    
-       var pwrFmt6 = fmtSIunits( Math.round(this.STATS["CURR_POWER_DEMAND"]) * wattMult )
-       this.ELEMS["DEMAND_POWER_DISPLAY"].innerHTML = pwrFmt6[0];
-       this.ELEMS["DEMAND_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt6[1];
+
+function TICK_INDUSTRY_calcPowerUsage(){
+    var wattMult = this.STATICVAR_HOLDER.WATTAGE_MULTIPLIER
+
+       //var pwrFmt5 = fmtSIunits( Math.round(this.INVENTORY["POWERGEN"]) * wattMult )
+       //var pwrFmt3 = fmtSIunits( Math.round(this.INVENTORY["POWER"]) * wattMult )
+       //var pwrFmt4 = fmtSIunits( Math.round((this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"]))* wattMult )
+       //var pwrFmt6 = fmtSIunits( Math.round(this.STATS["CURR_POWER_DEMAND"]) * wattMult )
+       //this.ELEMS["POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt5[1];
+       //this.ELEMS["SURPLUS_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt3[1];
+       //this.ELEMS["USAGE_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt4[1];
+       //this.ELEMS["DEMAND_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt6[1];
+
+    var pwrFmt3 = fmtSIflat( Math.round(this.INVENTORY["POWER"]) * wattMult )
+    var pwrFmt4 = fmtSIflat( Math.round((this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"]))* wattMult )
+    var pwrFmt5 = fmtSIflat( Math.round(this.INVENTORY["POWERGEN"]) * wattMult )
+    var pwrFmt6 = fmtSIflat( Math.round(this.STATS["CURR_POWER_DEMAND"]) * wattMult )
+
+    //console.log(pwrFmt3 +"/"+pwrFmt4+"/"+pwrFmt5+"/"+pwrFmt6);
+    var makeAnonFunc = function(xpwrFmt3,xpwrFmt4, xpwrFmt5, xpwrFmt6){
+                return function(){
+                    //console.log(xpwrFmt3 +"/"+xpwrFmt4+"/"+xpwrFmt5+"/"+xpwrFmt6);
+                    this.GAME.ELEMS["SURPLUS_POWER_DISPLAY"].innerHTML = xpwrFmt3;
+                    this.GAME.ELEMS["USAGE_POWER_DISPLAY"].innerHTML = xpwrFmt4;
+                    this.GAME.ELEMS["POWER_DISPLAY"].innerHTML = xpwrFmt5;
+                    this.GAME.ELEMS["DEMAND_POWER_DISPLAY"].innerHTML = xpwrFmt6;
+                    //console.log(this.GAME.ELEMS["DEMAND_POWER_DISPLAY"].innerHTML);
+                }
+    }
+    var anonFunc = makeAnonFunc(pwrFmt3,pwrFmt4,pwrFmt5,pwrFmt6);
+    window.requestAnimationFrame(anonFunc);
     
     var pwrUsage = this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"];
     var pwrUsageLeft = pwrUsage;
+    
     //console.log("HAWKENER = "+ this.INVENTORY["POWERGEN-Hawk"])
     //TODO: sort by priority!
     for(var i=0; i < this.STATICVAR_HOLDER.POWER_SOURCE_LIST.length; i++){
@@ -544,21 +601,40 @@ function TICK_calcIndustry(){
         worldPwrUsage = pwrUsageLeft;
         pwrUsageLeft = 0;
       }
-
+      var worldPowerCollected = worldPwrUsage / STATS["ENERGYRATE_MULT"][ppid+"pwrGen"];
       
+      var makeAnonFunc2 = function(){
+                    var wpAvail = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult )
+                    var wpThermal = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult )
+                    var wpCollect = fmtSIflat( Math.round( worldPowerCollected ) * wattMult )
+                    var wpOutput = fmtSIflat( Math.round( worldPwrUsage ) * wattMult )
+                    var xpp = pp;
+                    return function(){
+                      xpp.powerAVAIL.innerHTML   = wpAvail;
+                      xpp.powerTHERMAL.innerHTML = wpThermal;
+                      xpp.powerCOLLECT.innerHTML = wpCollect;
+                      xpp.powerOUTPUT.innerHTML  = wpOutput;
+                    }
+      }
+      var anonFunc2 = makeAnonFunc2();
+      window.requestAnimationFrame(anonFunc2);
+      
+      
+      /*
       pp.powerAVAIL.innerHTML   = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult );
       pp.powerTHERMAL.innerHTML = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult );
       //console.log("worldPwrUsage["+ppid+"] = "+worldPwrUsage)
       //console.log("genCapacity["+ppid+"] = "+genCapacity)
       //console.log("INVENTORYCAP["+ppid+"] = "+this.INVENTORY["POWERGEN-"+pc+""])
-      var worldPowerCollected = worldPwrUsage / STATS["ENERGYRATE_MULT"][ppid+"pwrGen"];
       pp.powerCOLLECT.innerHTML = fmtSIflat( Math.round( worldPowerCollected ) * wattMult );
       pp.powerOUTPUT.innerHTML = fmtSIflat( Math.round( worldPwrUsage ) * wattMult );
-
+      */
     }
 
-
 }
+
+GAME_GLOBAL.TICK_INDUSTRY_calcPowerUsage = TICK_INDUSTRY_calcPowerUsage;
+GAME_GLOBAL.TICK_INDUSTRY_calcScienceGain = TICK_INDUSTRY_calcScienceGain;
 
 
 console.log("[all science] is lvl "+(1) + ", next threshold: "+fmtSIintNoPct(Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, (2)) * this.SCIENCE_UNLOCK_THRESH_BASE));
@@ -713,8 +789,8 @@ function TICK_constructWorlds(){
           var sinfo = starInfo[1][z];
           this.INVENTORY["STARS-" + sinfo[0] +"-CT"] = this.INVENTORY["STARS-" + sinfo[0] +"-CT"] + sinfo[1];
         }
-        this.INVENTORY["MATTER-Free"+worldType+"-CT"] = this.INVENTORY["MATTER-Free"+worldType+"-CT"] + (starInfo[2] * 1.9885e27);
-        this.INVENTORY["POWER-Free"+worldType+"-CT"] = this.INVENTORY["POWER-Free"+worldType+"-CT"] + (starInfo[3] * STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY);
+        this.INVENTORY["MATTER-Free"+worldType+"-CT"] = this.INVENTORY["MATTER-Free"+worldType+"-CT"] + (starInfo[2] * this.STATICVAR_HOLDER.SOLAR_MASS);
+        this.INVENTORY["POWER-Free"+worldType+"-CT"] = this.INVENTORY["POWER-Free"+worldType+"-CT"] + (starInfo[3] * this.STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY);
         
         if(nxt == nxtAttempt){
           var nxtbuf = this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()

@@ -302,13 +302,57 @@ function fmtSIintNoPct(x){
   }
 }
 
+
+
+//Returns [0]baseNumber, [1]prefixAbbrev, [2]prefixFull, [3]prefixExponent, [4]a string of prefix descriptions
+function fmtSIunits(x){
+  if(x == 0){
+      return [0, "", "", 0,""]
+  } else if(x < 1){
+      var d = -Math.floor(Math.log10(x))
+      var dd = (Math.floor((d-1) / 3))
+      var suffix = SIPREFIXLOW[dd];
+      var rr = x * Math.pow(10,(dd+1)*3)
+      var dp = ((d+2) % 3)
+
+      return [roundTo(rr,dp), suffix,"???",dd,"???"]
+  } else {
+      if(x < 100){
+        return [roundTo(x,1), "","",0,""]
+      } else if(x < 1000){
+        return [Math.round(x), "","",0,""]
+      }
+      var d = Math.floor(Math.log10(x))
+      var dd = Math.floor(d / 3) - 1
+      var ddd = Math.floor(dd / 8)
+      var ddp = dd - ddd * 8
+      var rr = x / Math.pow(10,(dd+1)*3)
+      var dp = 2 - (d - ((dd+1)*3))
+      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      var longSuffix = SIPREFIXLONG[ddp] + "Yotta".repeat(ddd)
+      var suffixExplain = SIPREFIXExplain[ddp]
+      if(ddp != 7 && ddd > 0){
+        suffixExplain = suffixExplain + "<br>"+ SIPREFIXExplain[ddp]
+      }
+      return [roundTo(rr,dp), suffix, longSuffix, (dd+1)*3,suffixExplain]
+  }
+}
+
+
 function fmtSIflat(x){
-  if(x < 100){
-    return ""+Math.floor(x)
+  if(x <= 0){
+    return 0.0;
+  } else if(x < 1){
+      var d = -Math.floor(Math.log10(x))
+      var dd = (Math.floor((d-1) / 3))
+      var suffix = SIPREFIXLOW[dd];
+      var rr = x * Math.pow(10,(dd+1)*3)
+      var dp = ((d+2) % 3)
+      return roundTo(rr,dp)+ suffix
   } else if(x < 100){
-    return ""+Math.floor(x)
+    return ""+roundTo(x,1)
   } else if(x < 1000){
-    return ""+Math.floor(x)
+    return ""+Math.round(x)
   } else {
       var d = Math.floor(Math.log10(x))
       var dd = Math.floor(d / 3) - 1
@@ -355,40 +399,6 @@ function fmtSIlog(x){
   }
 }
 
-
-//Returns [0]baseNumber, [1]prefixAbbrev, [2]prefixFull, [3]prefixExponent, [4]a string of prefix descriptions
-function fmtSIunits(x){
-  if(x == 0){
-      return [0, "", "", 0,""]
-  } else if(x < 1){
-      var d = -Math.floor(Math.log10(x))
-      var dd = (Math.floor((d-1) / 3))
-      var suffix = SIPREFIXLOW[dd];
-      var rr = x * Math.pow(10,(dd+1)*3)
-      var dp = ((d+2) % 3)
-
-      return [roundTo(rr,dp), suffix,"???",dd,"???"]
-  } else {
-      if(x < 100){
-        return [roundTo(x,1), "","",0,""]
-      } else if(x < 1000){
-        return [Math.round(x), "","",0,""]
-      }
-      var d = Math.floor(Math.log10(x))
-      var dd = Math.floor(d / 3) - 1
-      var ddd = Math.floor(dd / 8)
-      var ddp = dd - ddd * 8
-      var rr = x / Math.pow(10,(dd+1)*3)
-      var dp = 2 - (d - ((dd+1)*3))
-      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
-      var longSuffix = SIPREFIXLONG[ddp] + "Yotta".repeat(ddd)
-      var suffixExplain = SIPREFIXExplain[ddp]
-      if(ddp != 7 && ddd > 0){
-        suffixExplain = suffixExplain + "<br>"+ SIPREFIXExplain[ddp]
-      }
-      return [roundTo(rr,dp), suffix, longSuffix, (dd+1)*3,suffixExplain]
-  }
-}
 
 //var SIPREFIXLONG=["kilo","Mega","Giga","Tera","Peta","Exa","Zetta","Yotta"]
 //var SIPREFIXExplain=["kilo: Thousands, 1e3","Mega: Millions, 1e6","Giga: Billions, 1e9","Tera: Trillions, 1e12","Peta: Quadrillions, 1e15","Exa: Quintillions, 1e18","Zetta: Sextillions, 1e21","Yotta: Septillions, 1e24"]

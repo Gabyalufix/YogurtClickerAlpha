@@ -474,15 +474,15 @@ UNLOCKABLE_SLIDERINFO=[["bot",3],["bot",4],["green",3],["think",3],["green",4]]
 
 ////////////////////////////////////
 var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate","comp","strat"]
-var PCTSLIDER_DISPLAYUNITS = {bio:"B/wk",eng:"B/wk",psy:"B/wk",bot:"gI",green:"gI",think:"Hz",soul:"I",ship:"Suns",scout:" Ships",battleplate:" Ships",comp:"Hz",strat:" Ships"}
+var PCTSLIDER_DISPLAYUNITS = {bio:"B/wk",eng:"B/wk",psy:"B/wk",bot:"E",green:"E",think:"Hz",soul:"I",ship:"E",scout:" Ships",battleplate:" Ships",comp:"Hz",strat:" Ships"}
 var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of information. A zero, or a one.",
                                      eng:"Byte: the fundamental unit of information. A zero, or a one.",
                                      psy:"Byte: the fundamental unit of information. A zero, or a one.",
-                                     bot:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades).",
-                                     green:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades)",
+                                     bot:"E: A measure of industrial capacity. 1 Earth is equal to the final industrial capacity of the planet earth (immediately prior to disassembly).",
+                                     green:"E: A measure of industrial capacity. 1 Earth is equal to the final industrial capacity of the planet earth (immediately prior to disassembly).",
                                      think:"Hertz: Compute cycles per second.",
                                      soul:"Identities: Number of distinct thinking entities being simulated inside the soulswarm network.",
-                                     ship:"tI: The industrial productivity of one ton of basic smartmatter (before upgrades)",
+                                     ship:"E: A measure of industrial capacity. 1 Earth is equal to the final industrial capacity of the planet earth (immediately prior to disassembly).",
                                      ships:"Ships: the number of ships assigned a given task.",
                                      scout:"Ships: the number of ships assigned a given task.",
                                      battleplate:"Ships: the number of ships assigned a given task.",
@@ -1146,6 +1146,21 @@ ELEMS["Hawk"+"PowerLimiter"].displayElem = document.getElementById("BotPowerLimi
 STATICVAR_HOLDER.WATTAGE_MULTIPLIER = 5000000000
 STATICVAR_HOLDER.TRUE_WATTS_SOL_LUMINOSITY = 3.828e26
 STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY = STATICVAR_HOLDER.TRUE_WATTS_SOL_LUMINOSITY / STATICVAR_HOLDER.WATTAGE_MULTIPLIER;
+STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR = 3141592000000;
+STATICVAR_HOLDER.SOLAR_MASS = 1.9885e27
+
+
+
+//Factories in china: 1,903,380
+//Factories in USA:     352,619
+// Call it ~3M factories
+//~1MT material can match an entire factory?
+//3,000,000,000,000 tons of factory == 1 earth
+//Make a bit randomy:
+//   3141592000000
+//   
+
+
 
 /*
 
