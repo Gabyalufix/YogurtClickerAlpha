@@ -832,7 +832,7 @@ STATS["CONVERSIONS"]["bufferPerShip-seedship"] =     16000000000000
                                                          
 STATS["CONVERSIONS"]["massPerShip-scout"] =        11800000000000
 STATS["CONVERSIONS"]["massPerShip-battleplate"] = 250000000000000
-STATS["CONVERSIONS"]["massPerShip-seedship"] =     2000000000
+STATS["CONVERSIONS"]["massPerShip-seedship"] =           2000000000
 
 
 /*
