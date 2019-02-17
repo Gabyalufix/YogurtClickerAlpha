@@ -1359,3 +1359,6 @@ if(START_WITH_GREENWORLD){
 for(var i=1;i<25;i++){
   console.log("Cost["+i+"] = "+fmtSI( UPGRADE_COST["Bot"].calc(i)[0][1])+" / "+fmtSI( UPGRADE_COST["Bot"].calc(i)[0][1] / UPGRADE_COST["Bot"].calc(1)[0][1] ) + " ("+ fmtSI( UPGRADE_COST["Bot"].calc(i)[0][1] / UPGRADE_COST["Bot"].calc(i-1)[0][1] ) +")")
 }
+for(var i=1;i<25;i++){
+  console.log("Cost["+i+"] = "+fmtSI( getProjectBaseCost(i) )+" / "+fmtSI( getProjectBaseCost(i) / getProjectBaseCost(1)) )
+}

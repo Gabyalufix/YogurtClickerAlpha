@@ -64,7 +64,7 @@ function TICK_runFastTick(){
         GAME.TICK_calcIndustry();
         GAME.TICK_INDUSTRY_calcScienceGain();
         GAME.TICK_INDUSTRY_calcPowerUsage();
-        
+        TICK_calcScience();
         
         
         secTimer++;
@@ -110,7 +110,7 @@ window.setInterval(TICK_runFastTick,100);
 var varNumTicksSoFar = 0
 function calculateSlowTick(){
     varNumTicksSoFar = varNumTicksSoFar + 1
-    TICK_calcScience();
+    //TICK_calcScience();
     /*printlnToAiConsole("" + varNumTicksSoFar+" secTimer = "+secTimer)*/
 
 }
@@ -649,8 +649,9 @@ function TICK_calcScience(){
       //var subf = SCIENCE_SUBFIELDS[scienceName];
       var currLvl = this.INVENTORY["SCIENCE-LEVEL-"+sciname];
       var currSci = this.INVENTORY[sciname+"_SCIENCE_TOTAL"] + this.INVENTORY["DEEP_SCIENCE_TOTAL"]
-      if( Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, (currLvl + 1)) * this.SCIENCE_UNLOCK_THRESH_BASE < currSci ){
-         console.log("["+sciname+"] is lvl "+(currLvl + 1) + ", next threshold: "+fmtSIintNoPct(Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, (currLvl + 2)) * this.SCIENCE_UNLOCK_THRESH_BASE));
+      var thresh  = getProjectBaseCost(currLvl + 1)
+      if( thresh < currSci ){
+         console.log("("+fmtSI(currSci)+") "+"["+sciname+"] is lvl "+(currLvl + 1) + " ["+fmtSI(thresh)+"] next threshold: "+fmtSI(getProjectBaseCost(currLvl + 2)));
          INVENTORY["SCIENCE-LEVEL-"+sciname] = INVENTORY["SCIENCE-LEVEL-"+sciname] + 1;
          
          if( Math.random() < this.SCIENCE_UNLOCK_RATE ){
