@@ -1,0 +1,1535 @@
+
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --LT4: #f0f1f5;
+  --LT3: #e1e4ea;
+  --LT2: #c3c8d5;
+  --LT1: #a5adc0;
+  --MID: #7883a1;
+  --DK1: #5e6a87;	
+  --DK2: #485167;
+  --DK3: #343b4b;
+  --DK4: #1f232d;
+  --baseBG: #c3c8d5;
+  --consoleGreen: #33FF00;
+  --errorRed: #ce0000;
+  --bsodBlue: #0000ce;
+  --bsodText: #ffffff;
+  --consoleBlack: #111111;
+  --greenLT: #a4ba91;
+  --greenMD: #8aa772;
+  --greenDK: #323f27;
+  --botLT: #e7b2b1;
+  --botMD: #c9514f;
+  --botDK: #621f1e;
+  --hawkLT: #b4b7ba;
+  --hawkMD: #95999d;
+  --hawkDK: #494d50;
+  --bioLT: #a4ba91;
+  --bioMD: #8aa772;
+  --bioDK: #323f27;
+  --engLT: #e7b2b1;
+  --engMD: #c9514f;
+  --engDK: #621f1e;
+  --psyLT: #b9b0cf;
+  --psyMD: #8e81b1;
+  --psyDK: #50446f;
+}
+
+
+.THEME_Green, .THEME_bio {
+  --white: #ffffff;
+  --black: #000000;
+  --LT4: #beceb1;
+  --LT3: #a4ba91;
+  --LT2: #97b082;
+  --LT1: #8aa772;
+  --MID: #647d4f;
+  --DK1: #5a7247;	
+  --DK2: #576e45;
+  --DK3: #4b5e3b;
+  --DK4: #3e4e31;
+  --baseBG: #e7b2b1;
+}
+.THEME_Bot, .THEME_eng {
+  --white: #ffffff;
+  --black: #000000;
+  --LT4: #d2adac;
+  --LT3: #c99c9c;
+  --LT2: #b87b7a;
+  --LT1: #af6b6a;
+  --MID: #955251;
+  --DK1: #854847;	
+  --DK2: #743f3e;
+  --DK3: #633636;
+  --DK4: #532d2d;
+  --baseBG: #e7b2b1;
+}
+.THEME_psy {
+  --white: #ffffff;
+  --black: #000000;
+  --LT4: #e3dfec;
+  --LT3: #d5d0e2;
+  --LT2: #c7c0d8;
+  --LT1: #b9b0cf;
+  --MID: #9c90bb;
+  --DK1: #8071a8;	
+  --DK2: #72619e;
+  --DK3: #67578e;
+  --DK4: #50446f;
+  --baseBG: #e7b2b1;
+}
+.THEME_Hawk {
+  --white: #ffffff;
+  --black: #000000;
+  --LT4: #bdbfc2;
+  --LT3: #b4b7ba;
+  --LT2: #a2a6a9;
+  --LT1: #95999d;
+  --MID: #888c91;
+  --DK1: #6e7377;	
+  --DK2: #62666a;
+  --DK3: #56595d;
+  --DK4: #494d50;
+  --baseBG: #e7b2b1;
+}
+
+
+
+.THEME_HOLDER {
+   display: none;
+}
+
+#THEME_BLOODRED {
+  --white: #ffffff;
+  --black: #000000;
+  --LT4: #f9eceb;
+  --LT3: #f3d8d8;
+  --LT2: #e7b2b1;
+  --LT1: #db8b8a;
+  --MID: #c9514f;
+  --DK1: #bd3d3a;	
+  --DK2: #892c2a;
+  --DK3: #621f1e;
+  --DK4: #4e1918;
+  --baseBG: #e7b2b1;
+}
+#THEME_BLOODRED_INVERT {
+  --white: #000000;
+  --black: #ffffff;
+  --DK4: #f9eceb;
+  --DK3: #f3d8d8;
+  --DK2: #e7b2b1;
+  --DK1: #db8b8a;
+  --MID: #c9514f;
+  --LT1: #bd3d3a;	
+  --LT2: #892c2a;
+  --LT3: #621f1e;
+  --LT4: #4e1918;
+  --baseBG: #892c2a;
+}
+
+#THEME_SLATE_INVERT {
+  --white: #000000;
+  --black: #ffffff;
+  --DK4: #f0f1f5;
+  --DK3: #e1e4ea;
+  --DK2: #c3c8d5;
+  --DK1: #a5adc0;
+  --MID: #7883a1;
+  --LT1: #5e6a87;	
+  --LT2: #485167;
+  --LT3: #343b4b;
+  --LT4: #1f232d;
+  --baseBG: #485167;
+}
+
+#THEME_SLATE {
+  --white: #ffffff;
+  --LT4: #f0f1f5;
+  --LT3: #e1e4ea;
+  --LT2: #c3c8d5;
+  --LT1: #a5adc0;
+  --MID: #7883a1;
+  --DK1: #5e6a87;	
+  --DK2: #485167;
+  --DK3: #343b4b;
+  --DK4: #1f232d;
+  --baseBG: #c3c8d5
+}
+
+.contentUnitHolder{
+  color: var(--black);
+}
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   Default formatting
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
+h2 , h3, h4, h5, h6, p {
+  padding-top: 1px;
+  padding-right: 1px;
+  padding-bottom: 1px;
+  padding-left: 1px;
+  line-height: 1;
+  margin-bottom: 1px;
+  margin-top: 1px;
+
+}
+
+body {
+  overflow: scroll;
+}
+
+.FOOTER {
+  height:300px;
+
+}
+
+h1 {
+  padding-top: 1px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0px;
+  line-height: 1;
+}
+h2 {
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0px;
+  line-height: 1;
+}
+h5 {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+}
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   COLLAPSE BOXES
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
+.collapsible {
+  background-color: var(--DK3);
+  color: var(--white);
+  cursor: pointer;
+  margin-top: 4px;
+  padding-top: 4px;
+  padding-right: 18px;
+  padding-bottom: 4px;
+  padding-left: 18px;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  align-self:start;
+  
+  border-style: outset;
+  border-width: 2px;
+  border-radius: 2px 15px 2px 2px;
+  
+  vertical-align: middle;
+}
+.collapsibleLV2 {
+
+}
+
+.collapsibleTHIN {
+  padding: 2px;
+}
+
+
+.active, .collapsible:hover {
+  background-color: var(--DK4);
+}
+
+.content {
+  padding: 4px 16px 16px 8px;
+  display: block;
+  /*overflow: hidden;*/
+  background-color: var(--LT4);
+  margin: 0px 5px 0px 10px;
+  border-style: solid;
+  border-width: 0 2px 2px 2px;
+  border-radius: 0 0 10px 10px ;
+  border-color:var(--DK4);
+  color: var(--black);
+  /*margin: 0px 5px 0px 10px;
+  border-style: outset;
+  border-width: 0 2px 2px 2px;
+  border-radius: 0 0 10px 10px ;*/
+}
+
+.unlockableHidden {
+  display: none;
+}
+
+.subColumnBox {
+  padding: 0 18px;
+  background-color: var(--LT1);
+}
+.contentLV3 {
+  padding: 18px 18px;
+  display: block;
+  background-color: var(--LT1);
+  margin: 0px 5px 0px 10px;
+  color: var(--black);
+
+  border-style: solid;
+  border-width: 0 2px 2px 2px;
+  border-radius: 0 0 10px 10px ;
+  border-color:var(--DK4);
+  /*border-style: outset;
+  border-width: 0 2px 2px 2px;
+  border-radius: 0 0 10px 10px ;*/
+}
+
+.SubContentBox {
+  position: relative;
+  background-color: var(--LT1);
+  padding: 4px 4px 4px 4px;
+  margin: 0px 4px 0px 4px;
+  border-style: solid;
+  border-width:  2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px ;
+  border-color:var(--DK4); 
+}
+.SubContentBoxTitle {
+  position: absolute;
+  background-color:var(--MID); 
+  border-color:var(--DK4); 
+  /*border-style: solid solid none solid;
+  border-width:  2px 2px 0px 2px;
+  border-radius: 2px 2px 0px 0px ;*/
+  border-style: none;
+  padding: 4px 0px 4px 0px;  
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  /*color: var(--LT4);*/
+  color: var(--DK4);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  font-weight: bold;
+}
+.SubContentBoxTitleCtr {
+  text-align: center;
+}
+
+.contentGrid3 {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+
+}
+.contentGrid4 {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+
+}
+
+
+
+.contentGrid5Hz {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: auto auto;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+  grid-auto-flow: column;
+  background-color: var(--LT2);
+}
+.contentGrid4Hz {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto auto auto;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+  grid-auto-flow: column;
+  background-color: var(--LT2);
+}
+.contentGrid3Hz {
+  display: grid;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  grid-template-rows: auto auto auto;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+  grid-auto-flow: column;
+  background-color: var(--LT2);
+}
+.contentGrid3x2Hz {
+  display: grid;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  grid-template-rows: auto auto;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+  grid-auto-flow: column;
+  background-color: var(--LT2);
+}
+.contentGrid4x2Hz {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto auto;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+  grid-auto-flow: column;
+  background-color: var(--LT2);
+}
+
+
+.contentGridItem {
+  background-color: var(--LT2);
+  border: 1px solid var(--DK2);
+  padding: 5px;
+  text-align: left;
+}
+.contentGridItemSIDES {
+  background-color: var(--LT2);
+  border-left: 1px solid var(--DK2);
+  border-right: 1px solid var(--DK2);
+  padding: 5px;
+  text-align: center;
+}
+.contentGridItemHORIZ {
+  background-color: var(--LT2);
+  border-top: 1px solid var(--DK2);
+  border-bottom: 1px solid var(--DK2);
+  padding: 5px;
+  text-align: center;
+}
+
+.contentGridItemHzT {
+  background-color: var(--LT2);
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+  border-color: var(--DK2);
+  padding: 5px;
+  text-align: center;
+  align-self: start;
+  vertical-align: bottom;
+}
+.contentGridItemHzM {
+  background-color: var(--LT2);
+  border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: var(--DK2);
+  padding: 5px;
+  text-align: center;
+  align-self: end;
+}
+.contentGridItemHzB {
+  background-color: var(--LT2);
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: var(--DK2);
+  padding: 5px;
+  text-align: center;
+  align-self: end;
+}
+
+.contentGridItem1x1 {
+  grid-area: span 1 / span 1
+}
+.contentGridItem2x1 {
+  grid-area: span 2 / span 1
+}
+.contentGridItem1x2 {
+  grid-area: span 1 / span 2
+}
+.contentGridItem1x3 {
+  grid-area: span 1 / span 3
+}
+.contentGridItem1x4 {
+  grid-area: span 1 / span 4
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------  Tabs
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
+
+
+/*
+.collapsible {
+  background-color: var(--DK3);
+  color: var(--white);
+  cursor: pointer;
+  margin-top: 4px;
+  padding-top: 4px;
+  padding-right: 18px;
+  padding-bottom: 4px;
+  padding-left: 18px;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  align-self:start;
+  
+  border-style: outset;
+  border-width: 2px;
+  border-radius: 2px 15px 2px 2px;
+  
+  vertical-align: middle;
+}
+
+*/
+
+
+.projectSelectPanel {
+  width: 100%;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 80%;
+  color: var(--DK4);
+  background-color: var(--LT3);
+  
+}
+
+.projectSelectPanel-selected {
+  background-color: var(--DK3);
+}
+
+.tabbedUL {
+	list-style: none;
+	padding: 0 0 0 10px;
+	
+}
+
+.tabbedUL .tabHolder {
+	float: left;
+	position: relative;
+	height: 20px;
+	border-radius: 7px 15px 0 0;
+	margin-left: -10px;
+	text-shadow: 1px 1px 0 #bbb;
+	box-shadow: 0px 0px 10px rgba(0,0,0,.5);
+	transition: .2s;
+}
+
+.tabHolder .prettyTab {
+	display: block;
+	position: relative;
+	width: 90px;
+	height: 10px;
+	padding: 6px 12px 12px 0;
+	border-radius: 7px 15px 0 0;
+	background: var(--LT2);
+	color: var(--DK2);
+	text-align: center;
+	text-decoration: none;
+	transition: .2s;
+}
+
+.tabHolder .prettyTab:hover {
+	z-index: 1;
+}
+
+.tabHolder .prettyTab:hover .prettyTab {
+	background: var(--LT4);
+	color: var(--DK2);
+}
+
+.selectedTab {
+	z-index: 2;
+}
+
+.selectedTab .prettyTab {
+	z-index: 3;
+	background: var(--LT4);
+	color: var(--DK2);
+	text-shadow: none;
+	font-weight: 500;
+}
+/*
+
+
+
+
+.tabbedUL {
+	list-style: none;
+	padding: 0 0 0 10px;
+	
+}
+
+.tabbedUL .tabHolder {
+	float: left;
+	position: relative;
+	height: 20px;
+	border-radius: 7px 15px 0 0;
+	margin-left: -10px;
+	text-shadow: 1px 1px 0 #bbb;
+	box-shadow: 0px 0px 10px rgba(0,0,0,.5);
+	transition: .2s;
+}
+
+.tabHolder .prettyTab {
+	display: block;
+	position: relative;
+	width: 90px;
+	height: 10px;
+	padding: 6px 6px 12px 0;
+	border-radius: 7px 15px 0 0;
+	background: #999;
+	color: #444;
+	text-align: center;
+	text-decoration: none;
+	transition: .2s;
+}
+
+.tabHolder .prettyTab:hover {
+	z-index: 1;
+}
+
+.tabHolder .prettyTab:hover .prettyTab {
+	background: #ccc;
+	color: #000;
+}
+
+.selectedTab {
+	z-index: 2;
+}
+
+.selectedTab .prettyTab {
+	z-index: 3;
+	background: #fff;
+	color: #000;
+	text-shadow: none;
+	font-weight: 500;
+}
+
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------  SPECIAL:
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+/* Or make canvas and static fixed? */
+
+#ENERGY_STAT_TABLE {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 34% 22% 22% 22%;
+  /*grid-gap: 5px;*/
+  border: 1px solid var(--DK2);
+
+}
+
+#BACKGROUND_CANVAS {
+  height:100%;
+  width:100%;
+  padding:0px;
+  margin:0px;
+  border: 0px solid transparent;
+  position:relative;
+}
+#FOREGROUND_CANVAS {
+  height:100%;
+  width:100%;
+  padding:0px;
+  margin:0px;
+  border: 0px solid transparent;
+  position:fixed;
+  top:0px;
+  left:0px;
+  z-index: 99999; /* Sit on top */
+  pointer-events: none;
+  opacity: 0;
+}
+#BACKGROUND_STATIC {
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height:100%;
+  background-color: var(--baseBG);
+  opacity: 0.95;
+  padding:0px;
+  margin:0px;
+}
+#FOREGROUND_STATIC {
+  position:fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height:100%;
+  background-color: var(--white);
+  opacity: 0;
+  padding:0px;
+  margin:0px;
+  z-index: 9999; /* Sit on top */
+  pointer-events: none;
+}
+
+#DEATH_NOTICE_CONTAINER {
+  position:fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height:100%;
+  background-color: var(--consoleBlack);
+  opacity: 0;
+  padding:0px 10px 50px 10px;
+  margin: 0px;
+  z-index: 99999999; /* Sit on top */
+  pointer-events: none;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y:hidden;
+  
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 2vw;
+  color: var(--consoleGreen);
+  text-indent: 5em hanging;
+}
+
+#CHEAT_DEBUG_PANEL {
+  z-index: 9999999999;
+}
+/*
+#DEATH_NOTICE_CONTAINER {
+  position:fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height:100%;
+  background-color: var(--white);
+  opacity: 0;
+  padding:0px;
+  margin:0px;
+  z-index: 99999999; 
+  pointer-events: none;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}*/
+#DEATH_NOTICE {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 100px;
+  color: var(--consoleGreen)
+  pointer-events: none;
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+}
+#SCARETEXT {
+  position:fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height:100%;
+  margin: 0px;
+  padding: 25% 0% 25% 25%;
+  display: none;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 7vw;
+  line-height: 1;
+  text-align: left;
+  pointer-events: none;
+  z-index:99999999;
+  opacity:0.5;
+}
+
+#ALL_CONTENT_CONTAINER {
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  padding:0px;
+  margin:0px;
+  background-color: transparent;
+  opacity: 1;
+}
+
+.AI_CONSOLE_HOLDER {
+  height:240px;
+  background-color:#626262;
+  padding: 2px 2px;
+  margin: 4px 0px;
+  border-style: outset;
+  border-width: 5px;
+  border-radius: 2px;
+  position: relative;
+
+}
+.AI_CONSOLE {
+  height:186px;
+  border: 1px solid black;
+  background-color:#626262;
+  color:#1AFE01;
+  font-family:Monospace;
+  font-weight:bold;
+  overflow:auto;
+  padding: 0px 0px;
+  margin: 0px 0px;
+  
+}
+.INFOPANEL {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-column-gap: 0px;
+  padding: 0px;
+  margin: 0px 0px;
+  height: 40px;
+  background-color: var(--black);
+  color: var(--LT4);
+}
+.INFOPANEL .INFO_PANEL_ITEM {
+  grid-area: span 1 / span 1;
+  background-color: var(--black);
+  height: 100%;
+  text-align: center;
+  /*font-size: calc(2.5vw  );*/
+  /*font-size: 2.5vw;*/
+  font-size: 16px;
+
+}
+
+.SETTINGS_BUTTON_HOLDER {
+  position: absolute;
+  top:0;
+  right:25px;
+}
+
+.SETTINGS_BUTTON {
+   /*border: 1px solid #1a1a1a;*/
+   padding: 0px 0px;
+   margin: 0px 0px;
+   color: #000000;
+   font-size: 28px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: top;
+   opacity: 0.5;
+   background: transparent;
+   border: none;
+   text-align: right;
+   }
+   
+
+
+.SETTINGS_WINDOW {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  /*overflow: auto;  Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.SETTINGS_WINDOW_CONTENT {
+  display: none; /* Hidden by default */
+  z-index: 2; /* Sit on top */
+  position:relative;
+  top: 0;
+  background-color: var(--LT1);
+  margin: 5% auto; /* 15% from the top and centered */
+  padding: 20px;
+  width: 400px; /* Full width */
+  height: 75%; /* Full height */
+  border: 1px solid #888;
+  overflow: auto;
+}
+
+/* The Close Button */
+.SETTINGS_WINDOW_CLOSE {
+  color: var(--LT4);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.SETTINGS_WINDOW_CLOSE:hover,
+.SETTINGS_WINDOW_CLOSE:focus {
+  color: var(--DK4);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------  COLUMNS
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  height: 10000px; /* Should be removed. Only for demonstration */
+}
+.MAINGRID_CONTAINER {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 250px auto;
+  grid-column-gap: 5px;
+  padding: 8px 4px 8px 4px;
+  background-color: transparent;
+}
+.MAINGRID_LT {
+   grid-column: 1 / 2;
+   grid-row: 1 / 4;
+   align-self:start
+}
+.MAINGRID_RT {
+   grid-column: 3 / 4;
+   grid-row: 1 / 4;
+}
+.MAINGRID_CTR {
+   grid-column: 2 / 3;
+   grid-row: 2 / 4;
+}
+.MAINGRID_CONSOLE {
+   grid-column: 2 / 3;
+   grid-row: 1 / 2;
+   max-height: 260px;
+}
+/* Clear floats after the columns 
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}*/
+
+
+@media only screen and (max-width: 1900px) {
+	.MAINGRID_LT {
+	   grid-column: 1 / 2;
+	   grid-row: 2 / 4;
+	}
+	.MAINGRID_RT {
+	   grid-column: 3 / 4;
+	   grid-row: 1 / 4;
+	}
+	.MAINGRID_CTR {
+	   grid-column: 2 / 3;
+	   grid-row: 2 / 4;
+	}
+	.MAINGRID_CONSOLE {
+	   grid-column: 1 / 3;
+	   grid-row: 1 / 2;
+	}
+}
+@media only screen and (max-width: 1300px) {
+	.MAINGRID_CONTAINER {
+	  display: grid;
+	  grid-template-columns: 50% 50%;
+	}
+	.MAINGRID_LT {
+	   grid-column: 1 / 2;
+	   grid-row: 2 / 4;
+	}
+	.MAINGRID_RT {
+	   grid-column: 2 / 3;
+	   grid-row: 3 / 4;
+	}
+	.MAINGRID_CTR {
+	   grid-column: 2 / 3;
+	   grid-row: 2 / 3;
+	}
+	.MAINGRID_CONSOLE {
+	   grid-column: 1 / 3;
+	   grid-row: 1 / 2;
+	}
+}
+@media only screen and (max-width: 800px) {
+	.MAINGRID_CONTAINER {
+	  display: grid;
+	  grid-template-columns: 100%;
+	}
+	.MAINGRID_LT {
+	   grid-column: 1 / 2;
+	   grid-row: 3 / 4;
+	}
+	.MAINGRID_RT {
+	   grid-column: 1 / 2;
+	   grid-row: 4 / 5;
+	}
+	.MAINGRID_CTR {
+	   grid-column: 1 / 2;
+	   grid-row: 2 / 3;
+	}
+	.MAINGRID_CONSOLE {
+	   grid-column: 1 / 2;
+	   grid-row: 1 / 2;
+	}
+}
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   SLIDER BARS
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
+.slidecontainer {
+  grid-area: span 1 / span 5;
+}
+.slider {
+  -webkit-appearance: none;
+  width: 85%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.sliderFillBar {
+  position: relative;
+  width: 50%;
+  height: 8px;
+  border-radius: 0px;
+  background: #1bba21;
+  outline: none;
+  opacity: 0.7;
+  top: -15px;
+  left: 0;
+  pointer-events: none
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.multiPctSliderSuper {
+  position: relative;
+  display: grid;
+  grid: auto auto auto auto auto auto;
+  width: 100%;
+  padding: 0px;
+
+}
+
+.multiPctSliderBox {
+  width: 90%;
+  padding: 0px;
+  grid-area: span 1 / span 5;
+}
+.multiPctSliderHoldBox {
+  vertical-align: middle;
+  width: 9.9%;
+  padding: 0px;
+  grid-area: span 1 / span 1;
+}
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   CHECK BOXES
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
+.pctCheckContainer {
+
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.pctCheckContainerGRID1x1 {
+  grid-area: span 1 / span 1;
+  padding-left: 35px;
+  margin-top: 1px;
+  font-size: 22px;
+}
+
+/* Hide the browser's default checkbox */
+.pctCheckContainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border: 1px solid var(--DK4);
+}
+
+/* On mouse-over, add a grey background color */
+.pctCheckContainer:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.pctCheckContainer input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.pctCheckContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.pctCheckContainer .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/*
+-----------------------------------   Fake lock checkbox
+*/
+
+.lockedcheckmark {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #ff6060;
+  vertical-align:middle
+  margin: 0
+  padding: 0
+}
+.lockedcheckmark:after {
+  content: "";
+  margin: 0
+}
+
+input[type=numEntry], select {
+  width: 50px;
+  padding: 3px 3px;
+  margin: 2px 0;
+  display: inline;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=unitEntry], select {
+  width: 30px;
+  padding: 3px 3px;
+  margin: 2px 0;
+  display: inline;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   BUTTONS
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
+
+.button2 {
+   border: 1px solid #1a1a1a;
+   background: #666666;
+
+   background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
+   background: -webkit-linear-gradient(top, #ffffff, #888888);
+   background: -moz-linear-gradient(top, #ffffff, #888888);
+   background: -ms-linear-gradient(top, #ffffff, #888888);
+   background: -o-linear-gradient(top, #ffffff, #888888);
+   background-image: -ms-linear-gradient(top, #ffffff 0%, #888888 100%);
+
+   padding: 2px 4px;
+   -webkit-border-radius: 2px;
+   -moz-border-radius: 2px;
+   border-radius: 2px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #cccccc 0 1px 0;
+   color: #000000;
+   font-size: 11px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   outline: none;
+   }
+
+.button2:hover {
+   border: 1px solid #898989;
+   text-shadow: #d4d4d4 0 1px 0;
+   background: #616161;
+
+   background: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#888888));
+   background: -webkit-linear-gradient(top, #f7f7f7, #888888);
+   background: -moz-linear-gradient(top, #f7f7f7, #888888);
+   background: -ms-linear-gradient(top, #f7f7f7, #888888);
+   background: -o-linear-gradient(top, #f7f7f7, #888888);
+   background-image: -ms-linear-gradient(top, #f7f7f7 0%, #888888 100%);
+
+   color: #000000;
+   }
+
+.button2:active {
+   text-shadow: #bfbfbf 0 1px 0;
+   border: 1px solid #2e2e2e;
+
+   background: #d9d9d9;
+   background: -webkit-gradient(linear, left top, left bottom, from(#595959), to(#616161));
+   background: -webkit-linear-gradient(top, #595959, #d9d9d9);
+   background: -moz-linear-gradient(top, #595959, #d9d9d9);
+   background: -ms-linear-gradient(top, #595959, #d9d9d9);
+   background: -o-linear-gradient(top, #595959, #d9d9d9);
+   background-image: -ms-linear-gradient(top, #595959 0%, #d9d9d9 100%);
+
+   color: #444444;
+   }
+
+.button2:disabled {
+   opacity: 0.6;
+   border: 1px solid #ffffff;
+}
+
+
+.button3 {
+   border: 1px solid #1a1a1a;
+   background: #666666;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
+   background: -webkit-linear-gradient(top, #ffffff, #888888);
+   background: -moz-linear-gradient(top, #ffffff, #888888);
+   background: -ms-linear-gradient(top, #ffffff, #888888);
+   background: -o-linear-gradient(top, #ffffff, #888888);
+   background-image: -ms-linear-gradient(top, #ffffff 0%, #888888 100%);
+   padding: 0px 0px;
+   margin: 0px 0px;
+   -webkit-border-radius: 0px;
+   -moz-border-radius: 0px;
+   border-radius: 0px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #cccccc 0 1px 0;
+   color: #000000;
+   font-size: 11px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   outline: none;
+   }
+
+.button3:hover {
+   border: 1px solid #898989;
+   text-shadow: #d4d4d4 0 1px 0;
+   background: #616161;
+
+   background: -webkit-gradient(linear, left top, left bottom, from(#f7f7f7), to(#888888));
+   background: -webkit-linear-gradient(top, #f7f7f7, #888888);
+   background: -moz-linear-gradient(top, #f7f7f7, #888888);
+   background: -ms-linear-gradient(top, #f7f7f7, #888888);
+   background: -o-linear-gradient(top, #f7f7f7, #888888);
+   background-image: -ms-linear-gradient(top, #f7f7f7 0%, #888888 100%);
+
+   color: #000000;
+   }
+
+.button3:active {
+   text-shadow: #bfbfbf 0 1px 0;
+   border: 1px solid #2e2e2e;
+
+   background: #d9d9d9;
+   background: -webkit-gradient(linear, left top, left bottom, from(#595959), to(#616161));
+   background: -webkit-linear-gradient(top, #595959, #d9d9d9);
+   background: -moz-linear-gradient(top, #595959, #d9d9d9);
+   background: -ms-linear-gradient(top, #595959, #d9d9d9);
+   background: -o-linear-gradient(top, #595959, #d9d9d9);
+   background-image: -ms-linear-gradient(top, #595959 0%, #d9d9d9 100%);
+
+   color: #444444;
+   }
+
+.button3:disabled {
+   opacity: 0.6;
+   border: 1px solid #ffffff;
+}
+
+
+/*
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   PLANET CONSTRUCTION CONTROL PANEL
+===================================================================================================================
+===================================================================================================================
+*/
+
+.LVL_DISPLAY {
+   padding: 0px 0px 0px 5px;
+   margin: 0px 0px;
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   background: transparent;
+   color: var(--LT4);
+   border: none;
+   text-decoration: none;
+   font-family: "Courier New", Courier, monospace;
+}
+
+
+.buildCancelButton {
+   display: none;
+   padding: 0px 5px 0px 0px;
+   margin: 0px 0px;
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   background: transparent;
+   color: var(--LT1);
+   border: none;
+   text-decoration: none;
+}
+.buildCancelButton:hover {
+   color: var(--errorRed);
+}
+
+.buildCtrlPanel {
+  position: relative;
+  display: grid;
+  background-color: var(--LT1);
+  padding: 1px;
+  margin: 4px 0px 4px 0px;
+  border-style: solid;
+  border-color: var(--DK4);
+  border-width: 2px;
+  border-radius: 2px;
+  grid-template-rows: 16px 18px 18px;
+}
+
+.buildCtrlPanel7 {
+  grid-template-columns: 25px 25px 25px 25px 25px 25px auto;
+}
+.buildCtrlPanel5 {
+  grid-template-columns: 50px 25px 25px 25px auto;
+}
+.buildCtrlPanel4 {
+  grid-template-columns: 50px 25px 50px auto;
+}
+.buildCtrlPanel5B {
+  grid-template-columns: 50px 25px 50px auto 70px ;
+}
+
+
+.buildCtrlPanel > div {
+  background-color: var(--LT1);
+  text-align: center;
+  padding: 2px 0;
+  font-size: 14px;
+  border: 1px dotted gray;
+  grid-area: span 2 / span 1;
+}
+.buildCtrlPanel .ctrlPanelTopLine {
+  border-width: 0px 0px 1px 0px;
+  border-style: dotted;
+  border-color: var(--DK4);
+  background-color: var(--DK3);
+  padding: 2px 2px;
+  color: var(--LT4);
+}
+.buildCtrlPanel4 .ctrlPanelTopLine {
+  grid-area: span 1 / span 4;
+}
+.buildCtrlPanel5 .ctrlPanelTopLine {
+  grid-area: span 1 / span 5;
+}
+.buildCtrlPanel5B .ctrlPanelTopLine {
+  grid-area: span 1 / span 5;
+}
+.buildCtrlPanel7 .ctrlPanelTopLine {
+  grid-area: span 1 / span 7;
+}
+
+
+.buildCtrlPanel .button2 {
+  grid-area: span 2 / span 1
+}
+.buildCtrlPanel .button3 {
+  grid-area: span 1 / span 1
+}
+.buildCtrlPanel::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/*
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   TOOLTIPS
+===================================================================================================================
+===================================================================================================================
+*/
+
+
+.tooltipHolder {
+  position: relative;
+
+}
+
+.tooltipHolder .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: var(--DK2);
+  color: var(--LT4);
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px 5px;
+  z-index: 100;
+  border: 1px solid var(--DK4);
+  pointer-events: none;
+  margin: 0;
+  
+  position: absolute;
+  top: 0px;
+  left: 105%;
+  pointer-events: none;
+}
+
+.tooltiptext.LT::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+  pointer-events: none;
+}
+.tooltiptext.RT::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+  pointer-events: none;
+}
+.tooltiptext.DN::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent transparent;
+  pointer-events: none;
+}
+
+
+
+/*
+.tooltipHolder:hover .tooltiptext {
+  visibility: visible;
+}
+*/
+
+
+
+
+
+
+
+

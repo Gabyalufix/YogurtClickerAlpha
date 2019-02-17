@@ -1,0 +1,62 @@
+
+
+
+
+              /*
+              
+              var wordCt = 1000;
+              var thresh = 0.0001;
+              var N = 1000000;
+              var obsCt = [];
+              for(var i=0; i<wordCt+1; i++){
+                obsCt[i] = 0;
+              }
+              var anyObsThresh = 1 - Math.pow((1-thresh), wordCt);
+              for(var i=0; i<N; i++){
+                var x = Math.floor( anyObsThresh / Math.random() );
+                var xm = Math.min(x,wordCt);
+                obsCt[xm] = obsCt[xm] + 1;
+              }
+              var obsTotal = 0;
+              for(var i=0; i<wordCt+1; i++){
+                obsTotal = obsTotal + obsCt[i] * i;
+              }
+              ((obsTotal / wordCt) / N)
+
+              
+              
+              4 words:
+              P[0] = (1-p)^4
+              P[1] = 
+              
+              1:R=t
+              2:R=t/2
+              3:R=t/3
+              4:R=t/4
+              */
+              /*
+                var words = tt.CURRENT_PLAINTEXT.split(" ")
+                var out = ""
+                for(var ww = 0; ww < tt.wordCt; ww++){
+                   if( Math.random() < this.STATICVAR_HOLDER["CRAZY_WORD_FLIPRATE"][clvl]){
+                       tt.wordFlip[ww] = !tt.wordFlip[ww];
+                   }
+                   if( Math.random() < this.STATICVAR_HOLDER["CRAZY_WORD_COLORRATE"][clvl]){
+                       tt.wordColor[ww] = CRAZY_randomColor();
+                   }
+                   if( Math.random() < this.STATICVAR_HOLDER["CRAZY_WORD_SWAPRATE"][clvl]){
+                       tt.wordSwap[ww] = CRAZY_randomWord()
+                   }
+                }*/
+                
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
