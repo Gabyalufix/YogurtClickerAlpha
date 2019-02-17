@@ -540,13 +540,13 @@ UPGRADE_COST["Green"] = {};
 UPGRADE_COST["Hawk"] = {};
 
 UPGRADE_COST["Bot"]["calc"] = function(lvl){
-    return [["eng_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
+    return [["eng0_SCIENCE_FREE",Math.pow(50 + (lvl * 10),lvl) * 100e18]];
 }
 UPGRADE_COST["Green"]["calc"] = function(lvl){
-    return [["bio_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
+    return [["bio2_SCIENCE_FREE",Math.pow(50 + (lvl * 10),lvl) * 100e18]];
 }
 UPGRADE_COST["Hawk"]["calc"] = function(lvl){
-    return [["eng_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17],["eng0_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17],["eng2_SCIENCE_FREE",Math.pow(Math.sqrt(10),lvl) * 50e17]];
+    return [["eng2_SCIENCE_FREE",Math.pow(50 + (lvl * 10),lvl) * 100e18]];
 }
 //UPGRADE_COST["Bot"]["curr"] = UPGRADE_COST["Bot"].calc(1)
 //UPGRADE_COST["Green"]["curr"] = UPGRADE_COST["Green"].calc(1)
@@ -668,7 +668,7 @@ STATS["INDUSTRY"]["Ship"] = { sliderID: "bot", sliderIDX: 4, prodTitle: "Shipyar
                                    baseProd: 0.0001, 
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.138000,
-                                   baseWaste: 0.25}
+                                   baseWaste: 100}
 
 STATS["INDUSTRY"]["Compute"] = { sliderID: "bot", sliderIDX: 5, prodTitle: "Computronium Fabrication", inventoryType: "MATTER", scitype: "eng",
                                    baseProd: 0.0012, 

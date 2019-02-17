@@ -1353,3 +1353,9 @@ if(START_WITH_GREENWORLD){
   INVENTORY["MATTER-Waste-CT"] = 100000000;
 }
 */
+
+
+
+for(var i=1;i<25;i++){
+  console.log("Cost["+i+"] = "+fmtSI( UPGRADE_COST["Bot"].calc(i)[0][1])+" / "+fmtSI( UPGRADE_COST["Bot"].calc(i)[0][1] / UPGRADE_COST["Bot"].calc(1)[0][1] ) + " ("+ fmtSI( UPGRADE_COST["Bot"].calc(i)[0][1] / UPGRADE_COST["Bot"].calc(i-1)[0][1] ) +")")
+}
