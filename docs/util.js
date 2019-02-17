@@ -222,7 +222,7 @@ var SIPREFIXLOW=["m","u","n","p","f","a","z","y"]
 var SIPREFIXLONG=["kilo","Mega","Giga","Tera","Peta","Exa","Zetta","Yotta"]
 var SIPREFIXExplain=["kilo: Thousands, 1e3","Mega: Millions, 1e6","Giga: Billions, 1e9","Tera: Trillions, 1e12","Peta: Quadrillions, 1e15","Exa: Quintillions, 1e18","Zetta: Sextillions, 1e21","Yotta: Septillions, 1e24"]
 
-
+/*
 function fmtSI(x){
   if(x == 0){
       return "0.00"
@@ -253,7 +253,7 @@ function fmtSI(x){
       }
       return roundTo(rr,dp)
   }
-}
+}*/
 
 function fmtSIint(x){
   if(x < 100){
@@ -339,6 +339,32 @@ function fmtSIunits(x){
 }
 
 
+function fmtSI(x, delim=""){
+  if(x <= 0){
+    return 0.0;
+  } else if(x < 1){
+      var d = -Math.floor(Math.log10(x))
+      var dd = (Math.floor((d-1) / 3))
+      var suffix = SIPREFIXLOW[dd];
+      var rr = x * Math.pow(10,(dd+1)*3)
+      var dp = ((d+2) % 3)
+      return roundTo(rr,dp)+ suffix
+  } else if(x < 100){
+    return ""+roundTo(x,1)
+  } else if(x < 1000){
+    return ""+Math.round(x)
+  } else {
+      var d = Math.floor(Math.log10(x))
+      var dd = Math.floor(d / 3) - 1
+      var ddd = Math.floor(dd / 8)
+      var ddp = dd - ddd * 8
+      var rr = x / Math.pow(10,(dd+1)*3)
+      var dp = 2 - (d - ((dd+1)*3))
+      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      return roundTo(rr,dp) +delim+ suffix
+  }
+}
+
 function fmtSIflat(x){
   if(x <= 0){
     return 0.0;
@@ -399,6 +425,17 @@ function fmtSIlog(x){
   }
 }
 
+
+
+function fmtSIdelta(x){
+    var sign = "+";
+    if(x < 0){
+      x = -x
+      sign = "-";
+    }
+    return sign + fmtSI(x," ");
+}
+GAME_GLOBAL.fmtSIdelta = fmtSIdelta
 
 //var SIPREFIXLONG=["kilo","Mega","Giga","Tera","Peta","Exa","Zetta","Yotta"]
 //var SIPREFIXExplain=["kilo: Thousands, 1e3","Mega: Millions, 1e6","Giga: Billions, 1e9","Tera: Trillions, 1e12","Peta: Quadrillions, 1e15","Exa: Quintillions, 1e18","Zetta: Sextillions, 1e21","Yotta: Septillions, 1e24"]

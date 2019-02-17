@@ -87,9 +87,9 @@ function updatePctSliderDisplayHelper_OLD(ss){
   var vv = ss.value
   var tt = (vv / 10000) * this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid]
   var fmtsi = fmtSIunits(tt)
-  ss.sdisplay.innerHTML = (vv / 100).toFixed(1) + "% ["+fmtsi[0]
-  ss.sdisplayUnits.innerHTML = fmtsi[1]+this.PCTSLIDER_DISPLAYUNITS[fid]+"]"
-  ss.sdisplayDiv.title = this.STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITSEXPLAIN[fid]+"\n"+fmtsi[4]
+  ss.sdisplay.textContent = (vv / 100).toFixed(1) + "% ["+fmtsi[0]
+  ss.sdisplayUnits.textContent = fmtsi[1]+this.PCTSLIDER_DISPLAYUNITS[fid]+"]"
+  //ss.sdisplayDiv.title = this.STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITSEXPLAIN[fid]+"\n"+fmtsi[4]
 }
 
 function updatePctSliderDisplayHelper(ss){
@@ -99,7 +99,7 @@ function updatePctSliderDisplayHelper(ss){
                   var tt = (vv / 10000) * this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid]
                   var fmtsi = fmtSIflat(tt / this.STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR)
                   return function(){
-                      ss.sdisplay.innerHTML = (vv / 100).toFixed(1) + "% ["+fmtsi+this.PCTSLIDER_DISPLAYUNITS[fid]+"]";
+                      ss.sdisplay.textContent = (vv / 100).toFixed(1) + "% ["+fmtsi+this.PCTSLIDER_DISPLAYUNITS[fid]+"]";
                   }
       }
       var anonFunc = makeAnonFunc();
@@ -235,7 +235,8 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
     onDownMultiSliderPct(slider_elem[0])
     GAME_GLOBAL.updatePctSliderDisplay(slider_elem[0])
     if(document.getElementById(fid+"_PRODUCTIVITY_DISPLAY") != null){
-      document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").innerHTML = fmtSI( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])+PCTSLIDER_DISPLAYUNITS[fid]
+      //console.log( "LOG:"+fmtSI( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid]) )
+      document.getElementById(fid+"_PRODUCTIVITY_DISPLAY").textContent = fmtSI( STATS["PRODUCTIVITY_RATING"][fid] * STATS["PRODUCTIVITY_MULT"][fid])+PCTSLIDER_DISPLAYUNITS[fid]
     }
 }
 
@@ -244,7 +245,7 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
 
 function powerLimiterInput(){
    var d = this.displayElem;
-   d.innerHTML = roundTo(parseFloat(this.value) / 100,1) + "%"
+   d.textContent = roundTo(parseFloat(this.value) / 100,1) + "%"
 }
 
 for(var i=0; i < STATICVAR_HOLDER.POWER_SOURCEWORLD_LIST.length; i++){
@@ -492,7 +493,7 @@ INVENTORY["WORLDS-"+"Secure"+"-CT"] = 0
 for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    var worldType = DYSON_TYPE_LIST[i]
    var multDisplay = document.getElementById(""+worldType+"_wf_AddUnit")
-   multDisplay.innerHTML = "1";
+   multDisplay.textContent = "1";
    var multUp = document.getElementById("button_wf"+worldType+"UP")
    var multDn = document.getElementById("button_wf"+worldType+"DN")
    multUp.disp = multDisplay
@@ -506,12 +507,12 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    multDn.disabled = true;
    multUp.onclick = function(){
      SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] * 10)
-     this.disp.innerHTML = fmtSIflat( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
+     this.disp.textContent = fmtSIflat( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
      this.mdn.disabled = false;
    }
    multDn.onclick = function(){
      SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] / 10)
-     this.disp.innerHTML = fmtSIflat( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
+     this.disp.textContent = fmtSIflat( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
      if(SETTINGS["ADD_MULTIPLIER"][this.worldType] <= 1){
        this.mdn.disabled = true;
      }
@@ -567,13 +568,13 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
         this.GAME.INVENTORY["WORLDS-"+this.worldType+"-LVL"] = lvl
         this.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType] = UPCOST.calc(lvl);
         var costString = this.GAME.makeCostAbbriv(this.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType],", ");
-        this.costDisplayElem.innerHTML = costString;
-        this.lvlDisplayElem.innerHTML = "Lvl-"+lvl;
+        this.costDisplayElem.textContent = costString;
+        this.lvlDisplayElem.textContent = "Lvl-"+lvl;
         UPCOST.effect();
       }
       var currCost = upgradeElem.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType]
       var costString = upgradeElem.GAME.makeCostAbbriv(currCost,", ");
-      upgradeElem.costDisplayElem.innerHTML = costString;
+      upgradeElem.costDisplayElem.textContent = costString;
       
       upgradeElem.canAffordTest = function(){
         //console.log(this.UPCOST);
@@ -596,8 +597,8 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
 
 function onInputSoloSliderPct(){
       var cval = parseFloat(this.value)
-      this.pctDisplayA.innerHTML = roundTo(cval / 100,1)+"%";
-      this.pctDisplayB.innerHTML = roundTo(100 - (cval / 100),1)+"%";
+      this.pctDisplayA.textContent = roundTo(cval / 100,1)+"%";
+      this.pctDisplayB.textContent = roundTo(100 - (cval / 100),1)+"%";
       this.currValue = cval / 10000
 }
 
@@ -627,12 +628,12 @@ for( var i = 0; i < CHEATADD_TYPE_LIST.length; i++){
    multDn.disabled = true;
    multUp.onclick = function(){
      SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] * 10)
-     this.disp.innerHTML = fmtSIflat( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
+     this.disp.textContent = fmtSIflat( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
      this.mdn.disabled = false;
    }
    multDn.onclick = function(){
      SETTINGS["ADD_MULTIPLIER"][this.worldType] = Math.round(SETTINGS["ADD_MULTIPLIER"][this.worldType] / 10)
-     this.disp.innerHTML = fmtSIflat( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
+     this.disp.textContent = fmtSIflat( SETTINGS["ADD_MULTIPLIER"][this.worldType] )
      if(SETTINGS["ADD_MULTIPLIER"][this.worldType] <= 1){
        this.mdn.disabled = true;
      }
@@ -903,13 +904,13 @@ for(var i=0;i<UNLOCKABLES.length;i++){
    document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).onclick = function(){
        if(UNLOCKS[this.unlockid]){
          this.lockhide.style.display = "none"
-         this.innerHTML = "UNLOCK "+ this.unlockid
+         this.textContent = "UNLOCK "+ this.unlockid
          this.ss.value = 0;
          this.ss.lockbox.checked = true;
           document.getElementById("CHEAT_UNLOCK_"+UNLOCKABLES[i]).ss
        } else {
          this.lockhide.style.display = "block"
-         this.innerHTML = "LOCK "+ this.unlockid
+         this.textContent = "LOCK "+ this.unlockid
        }
        UNLOCKS[this.unlockid]= ! UNLOCKS[this.unlockid]
      }

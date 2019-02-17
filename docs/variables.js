@@ -826,11 +826,13 @@ STATS["CONVERSIONS"]["pwrFromHawkpwrPerProdPerTick"] = 1
 
 INVENTORY["MATTER-Hawkpwr-CT"] = 0;
 
-STATS["CONVERSIONS"]["bufferPerShip-scout"] =        118000000
-STATS["CONVERSIONS"]["bufferPerShip-battleplate"] = 2500000000
-STATS["CONVERSIONS"]["bufferPerShip-seedship"] =     160000000
-
-
+STATS["CONVERSIONS"]["bufferPerShip-scout"] =        11800000000000
+STATS["CONVERSIONS"]["bufferPerShip-battleplate"] = 250000000000000
+STATS["CONVERSIONS"]["bufferPerShip-seedship"] =     16000000000000
+                                                         
+STATS["CONVERSIONS"]["massPerShip-scout"] =        11800000000000
+STATS["CONVERSIONS"]["massPerShip-battleplate"] = 250000000000000
+STATS["CONVERSIONS"]["massPerShip-seedship"] =     2000000000
 
 
 /*

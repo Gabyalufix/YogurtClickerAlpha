@@ -386,6 +386,13 @@ h5 {
   grid-auto-flow: column;
   background-color: var(--LT2);
 }
+
+.dataTable {
+  line-height:0.75;
+  font-size:11pt;
+  /*font-family: "Courier New", Courier, monospace;*/
+}
+
 .contentGrid3x2Hz {
   display: grid;
   grid-template-columns: 33.33% 33.33% 33.33%;
@@ -652,7 +659,8 @@ h5 {
   grid-template-columns: 34% 22% 22% 22%;
   /*grid-gap: 5px;*/
   border: 1px solid var(--DK2);
-
+  line-height:0.75;
+  font-size:11pt;
 }
 
 #BACKGROUND_CANVAS {

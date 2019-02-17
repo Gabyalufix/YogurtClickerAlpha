@@ -205,7 +205,7 @@ function TICK_updateStats(){
           //console.log("making anon: ["+xfid+"]");
           return function(){
             //console.log("setting prodDisplay: ["+xfid+"]");
-            this.GAME.ELEMS[xfid+"_PRODUCTIVITY_DISPLAY"].innerHTML = xfsi[0]+" "+xfsi[1]+this.GAME.PCTSLIDER_DISPLAYUNITS[xfid]
+            this.GAME.ELEMS[xfid+"_PRODUCTIVITY_DISPLAY"].textContent =  xfsi[0]+" "+xfsi[1]+this.GAME.PCTSLIDER_DISPLAYUNITS[xfid]
           }
         }
         var anonFunc = makeAnonFunc(fid,fsi)
@@ -220,9 +220,9 @@ function TICK_updateStats(){
   }
   
   window.requestAnimationFrame(function(){
-    this.GAME.DEBUG_CRAZY_LEVEL_DISPLAY.innerHTML = this.GAME.STATS["CRAZY_LEVEL"]
-    this.GAME.DATE_DISPLAY.innerHTML = this.GAME.getDateStringFromTick(this.STATS["TICK"])
-    this.GAME.MOOD_DISPLAY.innerHTML = this.GAME.STATS["MOOD"]
+    this.GAME.DEBUG_CRAZY_LEVEL_DISPLAY.textContent =  this.GAME.STATS["CRAZY_LEVEL"]
+    this.GAME.DATE_DISPLAY.textContent =  this.GAME.getDateStringFromTick(this.STATS["TICK"])
+    this.GAME.MOOD_DISPLAY.textContent =  this.GAME.STATS["MOOD"]
   })
   
 
@@ -267,7 +267,7 @@ function TICK_updateWorldCounts(){
         }
         var countDisplay = this.ELEMS[WORLD_TYPE_LIST[i] + "_CT_DISPLAY"]
         if(countDisplay != null){
-          countDisplay.innerHTML = worldCountLine
+          countDisplay.textContent =  worldCountLine
           if(countDisplay.cancelButton != null){
               if(this.CONSTRUCTION_BUFFER["WORLDS_CONST_CT"][worldType] > 0 && countDisplay.cancelButton.disabled){
                 countDisplay.cancelButton.style.display = "block";
@@ -291,7 +291,7 @@ function TICK_updateWorldCounts(){
        if(ff != ee.innerHTML){
        
        
-         ee.innerHTML = ff;
+         ee.textContent =  ff;
        }
     }
     
@@ -360,7 +360,7 @@ function TICK_INDUSTRY_calcPOWERGEN(){
        this.INVENTORY["POWER"] = this.INVENTORY["POWER"] + this.INVENTORY["POWER-"+pc]
        
        var pwrFmt1 = fmtSIunits( Math.round( this.INVENTORY["POWER-"+pc+""]) * wattMult)
-       //this.ELEMS[pc+"pwr_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt1[1];
+       //this.ELEMS[pc+"pwr_POWER_DISPLAY"].unitDisp.textContent =  pwrFmt1[1];
        
        var pp = ELEMS["POWER_PRODDISPLAY"][pc];
       
@@ -373,7 +373,7 @@ function TICK_INDUSTRY_calcPOWERGEN(){
                 //console.log("making anon: ["+xfid+"]");
                 return function(){
                   //console.log("setting prodDisplay: ["+xfid+"]");
-                  this.GAME.ELEMS[xfid+"_PRODUCTIVITY_DISPLAY"].innerHTML = xfsi[0]+" "+xfsi[1]+this.GAME.PCTSLIDER_DISPLAYUNITS[xfid]
+                  this.GAME.ELEMS[xfid+"_PRODUCTIVITY_DISPLAY"].textContent =  xfsi[0]+" "+xfsi[1]+this.GAME.PCTSLIDER_DISPLAYUNITS[xfid]
                 }
               }
               var anonFunc = makeAnonFunc(fid,fsi)
@@ -383,12 +383,12 @@ function TICK_INDUSTRY_calcPOWERGEN(){
       
       var makeAnonFunc2 = function(xpwrFmt1,xpp,xpc){
                 return function(){
-                  this.GAME.ELEMS[pc+"pwr_POWER_DISPLAY"].innerHTML = xpwrFmt1[0] + xpwrFmt1[1];
-                  xpp.powerCAPACITY.innerHTML = xpwrFmt1[0]+xpwrFmt1[1];
+                  this.GAME.ELEMS[pc+"pwr_POWER_DISPLAY"].textContent =  xpwrFmt1[0] + xpwrFmt1[1];
+                  xpp.powerCAPACITY.textContent =  xpwrFmt1[0]+xpwrFmt1[1];
                   //STATS["ENERGYRATE_MULT"][ppid+"pwrGen"]
-                  xpp.effDisplay.innerHTML = roundTo(100*this.GAME.STATS["ENERGYRATE_MULT"][xpc+"pwrGen"],1)
+                  xpp.effDisplay.textContent =  roundTo(100*this.GAME.STATS["ENERGYRATE_MULT"][xpc+"pwrGen"],1)
                   //this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"]
-                  xpp.prodDisplay.innerHTML = fmtSIflat(this.GAME.STATS["PRODUCTIVITY_RATING"][xpc+"pwrGen"] * this.GAME.STATICVAR_HOLDER.WATTAGE_MULTIPLIER)+"W/t"
+                  xpp.prodDisplay.textContent =  fmtSIflat(this.GAME.STATS["PRODUCTIVITY_RATING"][xpc+"pwrGen"] * this.GAME.STATICVAR_HOLDER.WATTAGE_MULTIPLIER)+"W/t"
                 }
       }
       var anonFunc2 = makeAnonFunc2(pwrFmt1,pp,pc)
@@ -461,7 +461,7 @@ function TICK_calcIndustry(){
           limiterString = "    (insufficient "+itemTitle+")";
        }
        
-       this.PCTSLIDERS[sd].displayElem[sdx].PROD.innerHTML = ( fmtSIflat(currCt)+" / "+fmtSIflat(reqCt) + limiterString)
+       this.PCTSLIDERS[sd].displayElem[sdx].PROD.textContent =  ( fmtSIflat(currCt)+" / "+fmtSIflat(reqCt) + limiterString)
     }
 
     var shipBuffer = this.INVENTORY["BUFFER-Ship-CT"];
@@ -470,40 +470,31 @@ function TICK_calcIndustry(){
         this.INVENTORY["SHIPS-"+shipType+"-CT"] = this.INVENTORY["SHIPS-"+shipType+"-CT"] + ((shipBuffer * this.SETTINGS["ship_FRACTION"][i]) / this.STATS["CONVERSIONS"]["bufferPerShip-"+shipType])
         var sd = this.ELEMS["SHIPS-"+shipType+"-DISPLAY"]
         var fmtsi = fmtSIint(this.INVENTORY["SHIPS-"+shipType+"-CT"])
-        sd.innerHTML = fmtsi
+        sd.textContent =  fmtsi
     }
     this.INVENTORY["SHIP-CONSTRUCT-BUFFER"] = 0;
 
 
   //update displays:
-   //this["SHIPCONSTRUCTBUFFER_DISPLAY_DIV"].innerHTML = this.INVENTORY["SHIP-CONSTRUCT-BUFFER"]
+   //this["SHIPCONSTRUCTBUFFER_DISPLAY_DIV"].textContent =  this.INVENTORY["SHIP-CONSTRUCT-BUFFER"]
+   
+
    
    for( var i = 0; i < this.MATTER_TYPE_LIST.length; i++){
         var matterType = this.MATTER_TYPE_LIST[i]
         var matterCt = this.INVENTORY["MATTER-"+matterType+"-CT"];
-        var fmtsi = fmtSIunits(matterCt)
+        var fmtsi = fmtSI(matterCt," ")
         var sd = this.ELEMS["MATTER-"+matterType+"-DISPLAY"]
-        sd.innerHTML = fmtsi[0]
-        sd.displayUnits.innerHTML = fmtsi[1]+"t"
+        sd.textContent =  fmtsi
+        //sd.displayUnits.textContent = fmtsi+ "t"
         //sd.displayDiv.title = "tons: basic unit of mass\n"+fmtsi[4];
 
         var sdd = this.ELEMS["MATTERDELTA-"+matterType+"-DISPLAY"]
         if( sdd != null){
             var diff = matterCt - this["INVENTORY-PREVTICK"]["MATTER-"+matterType+"-CT"];
-            var sign = "+";
-            if(diff < 0){
-              diff = -diff
-              sign = "-";
-            }
-            //if(sdd == null){
-            //   console.log("sdd null: "+matterType);
-            //}
-            //if(sdd.displayUnits == null){
-            //    console.log("sdd.displayUnits null: "+matterType);
-            //}
-            var fmtsid = fmtSIunits(diff);
-            sdd.innerHTML = sign+fmtsid[0];
-            sdd.displayUnits.innerHTML = fmtsid[1]+"t/wk";
+            var fmtsid = this.fmtSIdelta(diff);
+            sdd.textContent =  fmtsid;
+            //sdd.displayUnits.textContent =  fmtsid[1]+"t/wk";
         }
 
     }
@@ -512,9 +503,6 @@ function TICK_calcIndustry(){
     
 
 }
-
-
-
 
 
 function TICK_INDUSTRY_calcScienceGain(){
@@ -526,18 +514,18 @@ function TICK_INDUSTRY_calcScienceGain(){
       this.INVENTORY[fid+"_SCIENCE_FREE"] = this.INVENTORY[fid+"_SCIENCE_FREE"] + newSci
 
       var fsi = fmtSIunits( this.INVENTORY[fid+"_SCIENCE_TOTAL"] );
-      this.SCIENCE_DISPLAY[fid].total.innerHTML = fsi[0]+" "+fsi[1]+"B"
+      this.SCIENCE_DISPLAY[fid].total.textContent =  fsi[0]+" "+fsi[1]+"B"
       var ffsi = fmtSIunits( this.INVENTORY[fid+"_SCIENCE_FREE"] );
-      this.SCIENCE_DISPLAY[fid].total.free.innerHTML = ffsi[0]+" "+ffsi[1]+"B"
+      this.SCIENCE_DISPLAY[fid].total.free.textContent =  ffsi[0]+" "+ffsi[1]+"B"
 
       for(var j=0;j<subf;j++){
         var newSubSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid] * this.SETTINGS[fid+"_FRACTION"][j];
         this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] = this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] + newSubSci
         this.INVENTORY[fid+j+"_SCIENCE_FREE"]  = this.INVENTORY[fid+j+"_SCIENCE_FREE"]  + newSubSci
         var fssi = fmtSIunits( this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] );
-        this.SCIENCE_DISPLAY[fid][j].innerHTML =  fssi[0]+" "+fssi[1]+"B"
+        this.SCIENCE_DISPLAY[fid][j].textContent =   fssi[0]+" "+fssi[1]+"B"
         var ffssi = fmtSIunits( this.INVENTORY[fid+j+"_SCIENCE_FREE"] );
-        this.SCIENCE_DISPLAY[fid][j].free.innerHTML =  ffssi[0]+" "+ffssi[1]+"B"
+        this.SCIENCE_DISPLAY[fid][j].free.textContent =   ffssi[0]+" "+ffssi[1]+"B"
       }
     }
 
@@ -558,10 +546,10 @@ function TICK_INDUSTRY_calcPowerUsage(){
        //var pwrFmt3 = fmtSIunits( Math.round(this.INVENTORY["POWER"]) * wattMult )
        //var pwrFmt4 = fmtSIunits( Math.round((this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"]))* wattMult )
        //var pwrFmt6 = fmtSIunits( Math.round(this.STATS["CURR_POWER_DEMAND"]) * wattMult )
-       //this.ELEMS["POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt5[1];
-       //this.ELEMS["SURPLUS_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt3[1];
-       //this.ELEMS["USAGE_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt4[1];
-       //this.ELEMS["DEMAND_POWER_DISPLAY"].unitDisp.innerHTML = pwrFmt6[1];
+       //this.ELEMS["POWER_DISPLAY"].unitDisp.textContent =  pwrFmt5[1];
+       //this.ELEMS["SURPLUS_POWER_DISPLAY"].unitDisp.textContent =  pwrFmt3[1];
+       //this.ELEMS["USAGE_POWER_DISPLAY"].unitDisp.textContent =  pwrFmt4[1];
+       //this.ELEMS["DEMAND_POWER_DISPLAY"].unitDisp.textContent =  pwrFmt6[1];
 
     var pwrFmt3 = fmtSIflat( Math.round(this.INVENTORY["POWER"]) * wattMult )
     var pwrFmt4 = fmtSIflat( Math.round((this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"]))* wattMult )
@@ -572,10 +560,10 @@ function TICK_INDUSTRY_calcPowerUsage(){
     var makeAnonFunc = function(xpwrFmt3,xpwrFmt4, xpwrFmt5, xpwrFmt6){
                 return function(){
                     //console.log(xpwrFmt3 +"/"+xpwrFmt4+"/"+xpwrFmt5+"/"+xpwrFmt6);
-                    this.GAME.ELEMS["SURPLUS_POWER_DISPLAY"].innerHTML = xpwrFmt3;
-                    this.GAME.ELEMS["USAGE_POWER_DISPLAY"].innerHTML = xpwrFmt4;
-                    this.GAME.ELEMS["POWER_DISPLAY"].innerHTML = xpwrFmt5;
-                    this.GAME.ELEMS["DEMAND_POWER_DISPLAY"].innerHTML = xpwrFmt6;
+                    this.GAME.ELEMS["SURPLUS_POWER_DISPLAY"].textContent =  xpwrFmt3;
+                    this.GAME.ELEMS["USAGE_POWER_DISPLAY"].textContent =  xpwrFmt4;
+                    this.GAME.ELEMS["POWER_DISPLAY"].textContent =  xpwrFmt5;
+                    this.GAME.ELEMS["DEMAND_POWER_DISPLAY"].textContent =  xpwrFmt6;
                     //console.log(this.GAME.ELEMS["DEMAND_POWER_DISPLAY"].innerHTML);
                 }
     }
@@ -611,10 +599,10 @@ function TICK_INDUSTRY_calcPowerUsage(){
                     var wpOutput = fmtSIflat( Math.round( worldPwrUsage ) * wattMult )
                     var xpp = pp;
                     return function(){
-                      xpp.powerAVAIL.innerHTML   = wpAvail;
-                      xpp.powerTHERMAL.innerHTML = wpThermal;
-                      xpp.powerCOLLECT.innerHTML = wpCollect;
-                      xpp.powerOUTPUT.innerHTML  = wpOutput;
+                      xpp.powerAVAIL.textContent   = wpAvail;
+                      xpp.powerTHERMAL.textContent =  wpThermal;
+                      xpp.powerCOLLECT.textContent =  wpCollect;
+                      xpp.powerOUTPUT.textContent  = wpOutput;
                     }
       }
       var anonFunc2 = makeAnonFunc2();
@@ -623,17 +611,19 @@ function TICK_INDUSTRY_calcPowerUsage(){
       
       /*
       pp.powerAVAIL.innerHTML   = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult );
-      pp.powerTHERMAL.innerHTML = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult );
+      pp.powerTHERMAL.textContent =  fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult );
       //console.log("worldPwrUsage["+ppid+"] = "+worldPwrUsage)
       //console.log("genCapacity["+ppid+"] = "+genCapacity)
       //console.log("INVENTORYCAP["+ppid+"] = "+this.INVENTORY["POWERGEN-"+pc+""])
-      pp.powerCOLLECT.innerHTML = fmtSIflat( Math.round( worldPowerCollected ) * wattMult );
-      pp.powerOUTPUT.innerHTML = fmtSIflat( Math.round( worldPwrUsage ) * wattMult );
+      pp.powerCOLLECT.textContent =  fmtSIflat( Math.round( worldPowerCollected ) * wattMult );
+      pp.powerOUTPUT.textContent =  fmtSIflat( Math.round( worldPwrUsage ) * wattMult );
       */
     }
     var thermalMass = thermalPwr * this.STATICVAR_HOLDER.MASS_PER_POWERTICK
     this.INVENTORY["MATTER-Heat-CT"] = this.INVENTORY["MATTER-Heat-CT"] + thermalMass
     
+    
+    this.ELEMS["MATTERDELTA-Heat-DISPLAY"].textContent = fmtSIdelta(thermalMass)
       /*var makeAnonFunc2 = function(){
                     var thermalString = fmtSIflat(thermalPwr * wattMult);
                     return function(){
@@ -742,11 +732,11 @@ function TICK_captureSystems(){
     this.INVENTORY["seedship-transit-CT"] = this.INVENTORY["seedship-transit-CT"] - landct;
     this.INVENTORY["WORLDS-Neutral-CT"] = this.INVENTORY["WORLDS-Neutral-CT"] - landct;
 
-    this.seedshipsInTransit_SPAN.innerHTML = fmtSIintNoPct(this.INVENTORY["seedship-transit-CT"]);
+    this.seedshipsInTransit_SPAN.textContent =  fmtSIintNoPct(this.INVENTORY["seedship-transit-CT"]);
     if(this.INVENTORY["seedship-transit-buffer"].length > 0){
-       this.timeToNextLanding_SPAN.innerHTML = this.getTimeStringFromTick(this.INVENTORY["seedship-transit-buffer"][0][1] - this.STATS["TICK"])
+       this.timeToNextLanding_SPAN.textContent =  this.getTimeStringFromTick(this.INVENTORY["seedship-transit-buffer"][0][1] - this.STATS["TICK"])
     } else {
-       this.timeToNextLanding_SPAN.innerHTML = "N/A"
+       this.timeToNextLanding_SPAN.textContent =  "N/A"
     }
 
     /*Fallow
