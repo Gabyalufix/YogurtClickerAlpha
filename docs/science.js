@@ -12,48 +12,75 @@ STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY = {};
 BASE_MULTI_PROD_BONUS = 0.25;
 BASE_MULTI_WASTERATE_MULT = 0.9;
 BASE_MULTI_ENERGYRATE_MULT = 0.9;
+BASE_MULTI_INPUTRATE_MULT = 0.975;
+
 
 for(var i=0; i < GAME_GLOBAL.INDUSTRY_LIST.length; i++){
   var productID = GAME_GLOBAL.INDUSTRY_LIST[i];
   var iis = STATS["INDUSTRY"][productID]
   var projectIX = iis.sliderID+"_"+iis.sliderIDX;
   var scitype = iis.scitype;
-  STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-PROD" ] = {
-    projectTitle: iis.prodTitle+" Throughput", scitype : iis.scitype,
-    projectID: "MULTI_STD_PROD_"+productID,
-    projectType: "MULTI",
-    rate: 1,
-    effect: function(){
-             this.STATS["PRODUCTIVITY_MULT"][projectIX] = this.STATS["PRODUCTIVITY_MULT"][projectIX] + BASE_MULTI_PROD_BONUS + 0;
-           },
-    desc:"Increases the rate of "+iis.prodTitle.toLowerCase()+" by "+Math.round((BASE_MULTI_PROD_BONUS+0)*100)+"%." ,
-    descShort:"Increases the rate of "+iis.prodTitle.toLowerCase()+""
+  if(iis.upgradeSet == null){
+     iis.upgradeSet = ["PROD","ENER","WAST"]
   }
-  STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-ENER" ] = {
-    projectTitle: iis.prodTitle+" Efficiency", scitype : iis.scitype,
-    projectID: "MULTI_STD_ENERGY_"+productID,
-    projectType: "MULTI",
-    rate: 1,
-    effect: function(){
-              STATS["ENERGYRATE_MULT"][projectIX] = STATS["ENERGYRATE_MULT"][projectIX] * BASE_MULTI_ENERGYRATE_MULT;
-           },
-    desc:"Decreases energy usage of "+iis.prodTitle.toLowerCase()+" by "+Math.round((1 - BASE_MULTI_ENERGYRATE_MULT*1)*100)+"%." ,
-    descShort:"Decreases energy usage of "+iis.prodTitle.toLowerCase()+""
+  var upgradeSet = iis.upgradeSet;
+  
+  if(upgradeSet.includes("PROD")){
+      STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-PROD" ] = {
+        projectTitle: iis.prodTitle+" Throughput", scitype : iis.scitype,
+        projectID: "MULTI_STD_PROD_"+productID,
+        projectType: "MULTI",
+        rate: 1,
+        effect: function(){
+                 this.STATS["PRODUCTIVITY_MULT"][projectIX] = this.STATS["PRODUCTIVITY_MULT"][projectIX] + BASE_MULTI_PROD_BONUS + 0;
+               },
+        desc:"Increases the rate of "+iis.prodTitle.toLowerCase()+" by "+Math.round((BASE_MULTI_PROD_BONUS+0)*100)+"%." ,
+        descShort:"Increases the rate of "+iis.prodTitle.toLowerCase()+""
+      }
+      STATICVAR_HOLDER.SCIENCE.MULTI[scitype].push( STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-PROD" ] );
   }
-  STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-WAST" ] = {
-    projectTitle: iis.prodTitle+" Waste Reduction", scitype : iis.scitype,
-    projectID: "MULTI_STD_WASTE_"+productID,
-    projectType: "MULTI",
-    rate: 1,
-    effect: function(){
-              STATS["WASTERATE_MULT"][projectIX] = STATS["WASTERATE_MULT"][projectIX] * BASE_MULTI_WASTERATE_MULT;
-           },
-    desc:"Decreases waste matter byproduct production of "+iis.prodTitle.toLowerCase()+" by "+Math.round((1 - BASE_MULTI_WASTERATE_MULT*1)*100)+"%." ,
-    descShort:"Decreases waste matter byproduct production of "+iis.prodTitle.toLowerCase()+""
+  if(upgradeSet.includes("ENER")){
+      STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-ENER" ] = {
+        projectTitle: iis.prodTitle+" Efficiency", scitype : iis.scitype,
+        projectID: "MULTI_STD_ENERGY_"+productID,
+        projectType: "MULTI",
+        rate: 1,
+        effect: function(){
+                  STATS["ENERGYRATE_MULT"][projectIX] = STATS["ENERGYRATE_MULT"][projectIX] * BASE_MULTI_ENERGYRATE_MULT;
+               },
+        desc:"Decreases energy usage of "+iis.prodTitle.toLowerCase()+" by "+Math.round((1 - BASE_MULTI_ENERGYRATE_MULT*1)*100)+"%." ,
+        descShort:"Decreases energy usage of "+iis.prodTitle.toLowerCase()+""
+      }
+      STATICVAR_HOLDER.SCIENCE.MULTI[scitype].push( STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-ENER" ] );
   }
-  STATICVAR_HOLDER.SCIENCE.MULTI[scitype].push( STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-PROD" ] );
-  STATICVAR_HOLDER.SCIENCE.MULTI[scitype].push( STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-ENER" ] );
-  STATICVAR_HOLDER.SCIENCE.MULTI[scitype].push( STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-WAST" ] );
+  if(upgradeSet.includes("WAST")){
+      STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-WAST" ] = {
+        projectTitle: iis.prodTitle+" Waste Reduction", scitype : iis.scitype,
+        projectID: "MULTI_STD_WASTE_"+productID,
+        projectType: "MULTI",
+        rate: 1,
+        effect: function(){
+                  STATS["WASTERATE_MULT"][projectIX] = STATS["WASTERATE_MULT"][projectIX] * BASE_MULTI_WASTERATE_MULT;
+               },
+        desc:"Decreases waste matter byproduct production of "+iis.prodTitle.toLowerCase()+" by "+Math.round((1 - BASE_MULTI_WASTERATE_MULT*1)*100)+"%." ,
+        descShort:"Decreases waste matter byproduct production of "+iis.prodTitle.toLowerCase()+""
+      }
+      STATICVAR_HOLDER.SCIENCE.MULTI[scitype].push( STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-WAST" ] );
+  }
+  if(upgradeSet.includes("INPUT")){
+      STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-INPUT" ] = {
+        projectTitle: iis.prodTitle+" Matter Usage", scitype : iis.scitype,
+        projectID: "MULTI_STD_WASTE_"+productID,
+        projectType: "MULTI",
+        rate: 1,
+        effect: function(){
+                  STATS["WASTERATE_MULT"][projectIX] = STATS["WASTERATE_MULT"][projectIX] * BASE_MULTI_INPUTRATE_MULT;
+               },
+        desc:"Decreases matter usage (and waste production) of "+iis.prodTitle.toLowerCase()+" by "+roundTo((1 - BASE_MULTI_INPUTRATE_MULT*1)*100,1)+"%." ,
+        descShort:"Decreases matter usage (and waste production) of "+iis.prodTitle.toLowerCase()+""
+      }
+      STATICVAR_HOLDER.SCIENCE.MULTI[scitype].push( STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY[ productID + "-INPUT" ] );
+  }
 }
 
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Feedstock-PROD"]["costField"] = ["eng2_SCIENCE_FREE"];
@@ -146,17 +173,13 @@ STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Bioweapons-WAST"]["costMult"] = [1,1];
 
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteFerment-PROD"]["costField"] = ["bio_SCIENCE_FREE"];
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteFerment-ENER"]["costField"] = ["bio_SCIENCE_FREE"];
-STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteFerment-WAST"]["costField"] = ["bio_SCIENCE_FREE"];
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteFerment-PROD"]["costMult"] = [1.5];
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteFerment-ENER"]["costMult"] = [1];
-STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteFerment-WAST"]["costMult"] = [1];
 
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-PROD"]["costField"] = ["eng_SCIENCE_FREE"];
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-ENER"]["costField"] = ["eng_SCIENCE_FREE"];
-STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-WAST"]["costField"] = ["eng_SCIENCE_FREE"];
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-PROD"]["costMult"]  = [1.5];
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-ENER"]["costMult"]  = [1];
-STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-WAST"]["costMult"]  = [1];
 
 
 

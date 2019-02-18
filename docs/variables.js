@@ -648,12 +648,12 @@ STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3], ["MATTER-Waste-CT",
 
 
 STATS["INDUSTRY"] = {};
-STATS["INDUSTRY"]["Feedstock"] = { sliderID: "bot", sliderIDX: 0, prodTitle: "Botworld Feedstock", inventoryType: "MATTER", scitype: "eng",
+STATS["INDUSTRY"]["Feedstock"] = { sliderID: "bot", sliderIDX: 0, prodTitle: "Botworld Feedstock", inventoryType: "MATTER", scitype: "eng", scifield: "eng2",
                                    baseProd: 0.00274, 
                                    baseCost:  [["MATTER-FreeBot-CT",1]],
                                    basePwr:   0.005800,
                                    baseWaste: 0.01}
-STATS["INDUSTRY"]["Botbots"] = { sliderID: "bot", sliderIDX: 1, prodTitle: "Robotic Fabricator Construction", inventoryType: "MATTER", scitype: "eng",
+STATS["INDUSTRY"]["Botbots"] = { sliderID: "bot", sliderIDX: 1, prodTitle: "Robotic Fabricator Construction", inventoryType: "MATTER", scitype: "eng", scifield: "eng2",
                                    baseProd: 0.0012, 
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.331000,
@@ -702,12 +702,12 @@ STATS["INDUSTRY"]["WasteReprocess"] = { sliderID: "bot", sliderIDX: 3, prodTitle
                                    baseProd:  0.001, productionItem: "Feedstock",
                                    baseCost:  [["MATTER-Waste-CT",1]],
                                    basePwr:   0.177000,
-                                   baseWaste: 0, lockKey: "WASTEREPROCESS"}
+                                   baseWaste: 0, lockKey: "WASTEREPROCESS",upgradeSet : ["PROD","ENER"]}
 STATS["INDUSTRY"]["WasteFerment"] = { sliderID: "green", sliderIDX: 3, prodTitle: "Waste Reprocessing", inventoryType: "MATTER", scitype: "eng",
                                    baseProd:  0.001, productionItem: "Yogurt",
                                    baseCost:  [["MATTER-Waste-CT",1]],
                                    basePwr:   0.177000,
-                                   baseWaste: 0, lockKey: "COMPOST"}
+                                   baseWaste: 0, lockKey: "COMPOST",       upgradeSet : ["PROD","ENER"]}
 STATS["INDUSTRY"]["Bioweapons"] = { sliderID: "green", sliderIDX: 2, prodTitle: "Grow Bioweapons", inventoryType: "MATTER", scitype: "bio",
                                    baseProd:  0.000157, 
                                    baseCost:  [["MATTER-Digested-CT",1]],
@@ -723,7 +723,8 @@ STATS["INDUSTRY"]["BioResearch"] = { sliderID: "green", sliderIDX: 1, prodTitle:
                                    baseProd:  0.00005, productionItem: "bio",
                                    baseCost:  [["MATTER-Feedstock-CT",0]],
                                    basePwr:   0.219000,
-                                   baseWaste: 1}
+                                   baseWaste: 1,
+                                   upgradeSet: ["ENER","INPUT"]}
 
 
 
@@ -752,65 +753,18 @@ for(var i=0; i < GAME_GLOBAL.INDUSTRY_LIST.length; i++){
   STATS["IndustryInputDemand"][industry] = 0;
   STATS["IndustryPowerDemand"][industry] = 0;
   
+  var iis = STATS["INDUSTRY"][industry]
+  if(iis.upgradeSet == null){
+     iis.upgradeSet = ["PROD","ENER","WAST"]
+  }
+  
   //ELEMS["IndustryInputDemandDisplay"] = document.getElementById()
 }
-
-
+  
 /*
 GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass"]
 
-
-STATICVAR_HOLDER.SCIENCE.MULTI_BASE = {
-   bio:[
-                   STATS["WASTERATE_MULT"]["green_5"] = STATS["WASTERATE_MULT"]["green_5"] * BASE_MULTI_WASTERATE_MULT;
-                 },
-                 desc:"Decreases the amount of waste byproduct produced by matter digestion by "+Math.round((1 - BASE_MULTI_WASTERATE_MULT*1)*100)+"%.", 
-                 descShort:"Decreases the amount of waste byproduct produced by matter digestion."},
-                
-                {projectTitle:"Digestion Efficiency",projectID:"MULTI_Bio5_ENERGY",projectType:"MULTI",
-                 costField:["bio_SCIENCE_FREE"], costMult:[1], rate:1,
-                 effect:function(){
-                  
-           },
-   ]
-}*/
-
-/*
-STATICVAR_HOLDER.SCIENCE.MULTI = {
-  bio:[
-  
-          {projectTitle:"Digestion Throughput",projectID:"MULTI_Bio5_PROD",projectType:"MULTI",
-           costField:["bio_SCIENCE_FREE"], costMult:[1], rate:1,
-           effect:function(){
-             this.STATS["PRODUCTIVITY_MULT"]["green_5"] = this.STATS["PRODUCTIVITY_MULT"]["green_5"] + BASE_MULTI_PROD_BONUS + 0;
-           },
-           desc:"Increases the rate at which greenworlds digest matter by "+Math.round((BASE_MULTI_PROD_BONUS+0)*100)+"%." , 
-           descShort:"Increases the rate at which botworld factories generate Digestion."},
-
-/*
-bot:
-   1-Feedstock         (3x)
-   2-Botbot            (3x)
-   3-Reprocess Waste   (prod+energy)
-   4-Transmute Yogurt  (3x)
-   5-StarshipConstruct (3x)
-   6-Computronium      (3x)
-   7-Solar             (3x)
-green:
-   1-Bioresearch          (energy)
-   2-Yogurt               (3x)
-   3-Bioweapons           (3x)
-   4-Compost Fermentation (prod+energy)
-   5-Biomass              (3x)
-   6-Digest               (3x)
-   7-Photosynth           (3x)
-
-         STATS["PRODUCTIVITY_MULT"][fid+"_"+i] = 1;
-         STATS["WASTERATE_MULT"][fid+"_"+i] = 1;
-         STATS["ENERGYRATE_MULT"][fid+"_"+i] = 1;
-
-
-think:*/
+*/
 
 
 
