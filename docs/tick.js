@@ -481,8 +481,8 @@ function TICK_calcIndustry(){
         // console.log(sd +" / "+sdx+":"+industryID);
          //sd = "bot"; sdx = 1; industryID = "Botbots"
        
-         var inputLim = ""+fmtSI(this.STATS["IndustryInputDemand"][industryID]);
-         var powerLim = ""+fmtSI(this.STATS["IndustryPowerDemand"][industryID]);
+         var inputLim = ""+fmtSI(this.STATS["IndustryInputDemand"][industryID])+"t";
+         var powerLim = ""+fmtSI(this.STATS["IndustryPowerDemand"][industryID])+"W";
          //var inputLimRed = false;
          //var powerLimRed = false;
          
@@ -527,7 +527,7 @@ function TICK_calcIndustry(){
          this.STATS["IndustryInputDemand"][industryID] = "0.0";
          this.STATS["IndustryPowerDemand"][industryID] = "0.0";
        }
-       this.PCTSLIDERS[sd].displayElem[sdx].PROD.textContent =  ( fmtSIflat(currCt)+" / "+fmtSIflat(reqCt) + limiterString)
+       this.PCTSLIDERS[sd].displayElem[sdx].PROD.textContent =  ( fmtSI(currCt)+" / "+fmtSI(reqCt)+"" + limiterString)
        this.PCTSLIDERS[sd].displayElem[sdx].limitingResource = limiterID;
        
        /*        this.STATS["IndustryPowerDemand"][industryID] = this.CONSTRUCTION_REQUESTS[j][2][ii][1]
@@ -564,7 +564,13 @@ function TICK_INDUSTRY_calcScienceGain(){
     for(var i=0;i<this.SCIENCE_TYPES.length;i++){
       var fid = this.SCIENCE_TYPES[i];
       var subf = this.SCIENCE_SUBFIELDS[fid];
+
+      
       var newSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid]
+      if(fid == "bio"){
+        //do the special bio stuff
+        
+      }
       this.INVENTORY[fid+"_SCIENCE_TOTAL"] = this.INVENTORY[fid+"_SCIENCE_TOTAL"] + newSci
       this.INVENTORY[fid+"_SCIENCE_FREE"] = this.INVENTORY[fid+"_SCIENCE_FREE"] + newSci
 

@@ -649,7 +649,7 @@ STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3], ["MATTER-Waste-CT",
 
 STATS["INDUSTRY"] = {};
 STATS["INDUSTRY"]["Feedstock"] = { sliderID: "bot", sliderIDX: 0, prodTitle: "Botworld Feedstock", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd: 0.001, 
+                                   baseProd: 0.00274, 
                                    baseCost:  [["MATTER-FreeBot-CT",1]],
                                    basePwr:   0.005800,
                                    baseWaste: 0.01}
@@ -665,16 +665,16 @@ STATS["INDUSTRY"]["Botpwr"] =   { sliderID: "bot", sliderIDX: 6, prodTitle: "Sol
                                    basePwr:   0.077200,
                                    baseWaste: 0.2}
 STATS["INDUSTRY"]["Ship"] = { sliderID: "bot", sliderIDX: 4, prodTitle: "Shipyard Construction", inventoryType: "BUFFER", scitype: "eng",
-                                   baseProd: 0.0001, 
+                                   baseProd: 0.000000001 / 3.14, 
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.138000,
-                                   baseWaste: 100}
+                                   baseWaste: 3140000}
 
 STATS["INDUSTRY"]["Compute"] = { sliderID: "bot", sliderIDX: 5, prodTitle: "Computronium Fabrication", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd: 0.0012, 
+                                   baseProd: 0.000679, 
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.255000,
-                                   baseWaste: 0.3}
+                                   baseWaste: 2.3}
 
 STATS["INDUSTRY"]["Digested"] = { sliderID: "green", sliderIDX: 5, prodTitle: "Matter Digestion", inventoryType: "MATTER", scitype: "bio",
                                    baseProd: 0.0057, 
@@ -718,6 +718,12 @@ STATS["INDUSTRY"]["TransmuteYogurt"] = { sliderID: "bot", sliderIDX: 3, prodTitl
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.177000,
                                    baseWaste: 0, lockKey: "TRANSMUTEYOGURT"}
+
+STATS["INDUSTRY"]["BioResearch"] = { sliderID: "green", sliderIDX: 1, prodTitle: "Biological Research", inventoryType: "BUFFER", scitype: "bio",
+                                   baseProd:  0.00005, productionItem: "bio",
+                                   baseCost:  [["MATTER-Feedstock-CT",0]],
+                                   basePwr:   0.219000,
+                                   baseWaste: 1}
 
 
 
@@ -838,9 +844,14 @@ STATS["CONVERSIONS"]["pwrFromHawkpwrPerProdPerTick"] = 1
 
 INVENTORY["MATTER-Hawkpwr-CT"] = 0;
 
-STATS["CONVERSIONS"]["bufferPerShip-scout"] =        11800000000000
-STATS["CONVERSIONS"]["bufferPerShip-battleplate"] = 250000000000000
-STATS["CONVERSIONS"]["bufferPerShip-seedship"] =     16000000000000
+STATS["CONVERSIONS"]["bufferPerShip-scout"] =            6210000000
+STATS["CONVERSIONS"]["bufferPerShip-battleplate"] =    739600000000
+STATS["CONVERSIONS"]["bufferPerShip-seedship"] =        20000000000 //20000 megatons
+
+
+//STATS["CONVERSIONS"]["bufferPerShip-scout"] =        11800000000000
+//STATS["CONVERSIONS"]["bufferPerShip-battleplate"] = 250000000000000
+//STATS["CONVERSIONS"]["bufferPerShip-seedship"] =     16000000000000
                                                          
 STATS["CONVERSIONS"]["massPerShip-scout"] =        11800000000000
 STATS["CONVERSIONS"]["massPerShip-battleplate"] = 250000000000000
