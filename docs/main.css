@@ -225,6 +225,18 @@ h5 {
   padding-bottom: 0px;
   padding-left: 0px;
 }
+
+.sliderProductivityLine {
+  font-size: 9pt;
+  line-height: 1;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
 /*
 ===================================================================================================================
 ===================================================================================================================
@@ -341,6 +353,8 @@ h5 {
 .SubContentBoxTitleCtr {
   text-align: center;
 }
+
+
 
 
 .contentGrid2 {

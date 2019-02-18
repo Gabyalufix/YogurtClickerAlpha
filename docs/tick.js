@@ -413,8 +413,8 @@ function TICK_INDUSTRY_addCReqs(){
        var iss = this.STATS.INDUSTRY[industryID];
        var productID = iss.productionItem;
 
-       var sliderID = iss.sliderID;
-       var sliderIDX = iss.sliderIDX;
+       //var sliderID = iss.sliderID;
+       //var sliderIDX = iss.sliderIDX;
        var prod = this.calcIndustrialProd(iss);
        iss.currRequested = prod;
        this.addConstructionRequest(iss.inventoryType+"-"+productID+"-CT",
@@ -448,92 +448,104 @@ function TICK_calcIndustry(){
        var productID = iss.productionItem ;
        var sd   = iss.sliderID;
        var sdx  = iss.sliderIDX;
-       var reqCt = this.STATS["PRODUCTION-REQ"][ industryID ] 
-       var currCt = this.STATS["PRODUCTION-CURR"][ industryID ] 
-       if(null == this.PCTSLIDERS[sd].displayElem[sdx].PROD){
-          console.log("NULL: "+iss.prodTitle);
-          console.log("    ["+sd+" / "+sdx+"]");
-          
-       }
-       var limiterString = "";
-       var limiterID = this.STATS["LIMIT-REASON"][industryID]
-       if( limiterID != ""  ){
-          var itemTitle = this.STATICVAR_HOLDER.RESOURCE_INFO[limiterID].itemTitle;
-          //limiterString = "    (insufficient "+itemTitle+")";
-          //limiterString
-       }
-
-
-    var repHtml = function(elm,str){
-                return function(){ elm.innerHTML = str }
-    }
-    var clearColoringFunc = function(elm){
-                return function(){ elm.innerHTML = elm.textContent }
-    }
-    var redColoringFunc = function(elm){
-                return function(){ elm.innerHTML = elm.textContent.fontcolor("red") }
-    }
-    //var anonFunc = makeAnonFunc(pwrFmt3,pwrFmt4,pwrFmt5,pwrFmt6);
-    //window.requestAnimationFrame(anonFunc);
-
-
-       if(this.PCTSLIDERS[sd].displayElem[sdx].PRODINPUT != null){
-        // console.log(sd +" / "+sdx+":"+industryID);
-         //sd = "bot"; sdx = 1; industryID = "Botbots"
-       
-         var inputLim = ""+fmtSI(this.STATS["IndustryInputDemand"][industryID])+"t";
-         var powerLim = ""+fmtSI(this.STATS["IndustryPowerDemand"][industryID])+"W";
-         //var inputLimRed = false;
-         //var powerLimRed = false;
+       if(sdx == null){
+         //???
+         var powerLim = ""+fmtSI(this.STATS["IndustryPowerDemand"][industryID]," ")+"W";
+         var reqCt = ""+fmtSI(this.STATS["PRODUCTION-REQ"][ industryID ] ," ")+"FLOPs"
+         var currCt = ""+fmtSI(this.STATS["PRODUCTION-CURR"][ industryID ] ," ")+"FLOPs"
          
-         var prevInputLimElem = this.PCTSLIDERS[sd].displayElem[sdx].PRODINPUT
-         var prevPowerLimElem = this.PCTSLIDERS[sd].displayElem[sdx].PRODPOWER
-         
+/*
+
+ELEMS["computation-PRODUCTION-REQ-DISPLAY"]  = document.getElementById("computation_PRODREQ")
+ELEMS["computation-PRODUCTION-CURR-DISPLAY"] = document.getElementById("computation_PRODCURR")
+ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computation_PRODPOWER")
+
+*/
+         var pwrLimElem = this.ELEMS["computation-PRODUCTION-PWR-DISPLAY"]
+
+         this.ELEMS["computation-PRODUCTION-REQ-DISPLAY"].textContent = reqCt
+         this.ELEMS["computation-PRODUCTION-CURR-DISPLAY"].textContent = currCt
+         pwrLimElem.textContent = powerLim
+         var limiterID = this.STATS["LIMIT-REASON"][industryID]
          if(limiterID == "POWER"){
-           prevInputLimElem.style.color = null;
-           prevPowerLimElem.style.color = "red";
-         } else if(limiterID != ""){
-           prevInputLimElem.style.color = "red";
-           prevPowerLimElem.style.color = null;
+             pwrLimElem.style.color = "red";
+             pwrLimElem.style["text-decoration-line"]= "underline";
          } else {
-           prevInputLimElem.style.color = null;
-           prevPowerLimElem.style.color = null;
+             pwrLimElem.style.color = null;
+             pwrLimElem.style["text-decoration-line"]= "none";
          }
-         prevInputLimElem.textContent = inputLim
-         prevPowerLimElem.textContent = powerLim
+         
+       } else {
+         var reqCt = this.STATS["PRODUCTION-REQ"][ industryID ] 
+         var currCt = this.STATS["PRODUCTION-CURR"][ industryID ] 
+         if(null == this.PCTSLIDERS[sd].displayElem[sdx].PROD){
+            console.log("NULL: "+iss.prodTitle);
+            console.log("    ["+sd+" / "+sdx+"]");
+          
+         }
+         var limiterString = "";
+         var limiterID = this.STATS["LIMIT-REASON"][industryID]
+         if( limiterID != ""  ){
+            var itemTitle = this.STATICVAR_HOLDER.RESOURCE_INFO[limiterID].itemTitle;
+            //limiterString = "    (insufficient "+itemTitle+")";
+            //limiterString
+         }
 
-         //this.PCTSLIDERS[sd].displayElem[sdx].PRODINPUT.textContent = fmtSI(this.STATS["IndustryInputDemand"][industryID]);
-         //this.PCTSLIDERS[sd].displayElem[sdx].PRODPOWER.textContent = fmtSI(this.STATS["IndustryPowerDemand"][industryID]);
-         /*var prevLimiter = this.PCTSLIDERS[sd].displayElem[sdx].limitingResource
-         if(limiterID == "POWER"){
-           powerLimRed = true;
-           powerLim = powerLim.fontcolor("red");
-         } else if(limiterID != ""){
-           inputLimRed = true;
-           inputLim = inputLim.fontcolor("red");
+
+         var repHtml = function(elm,str){
+                     return function(){ elm.innerHTML = str }
          }
-         if(prevInputLimElem.innerHTML != inputLim){
-           if( prevInputLimElem.isRED || inputLimRed){
-             console.log("INPUTLIM: "+prevInputLimElem.innerHTML+" to "+inputLim + "");
-             window.requestAnimationFrame( repHtml(prevInputLimElem,inputLim) );
-           }
+         var clearColoringFunc = function(elm){
+                     return function(){ elm.innerHTML = elm.textContent }
          }
-         if(prevPowerLimElem.innerHTML != powerLim){
-           if( prevPowerLimElem.isRED || powerLimRed){
-             console.log("POWERLIM: "+prevPowerLimElem.innerHTML+" to "+powerLim + "");
-             window.requestAnimationFrame( repHtml(prevPowerLimElem,powerLim) );
+         var redColoringFunc = function(elm){
+                     return function(){ elm.innerHTML = elm.textContent.fontcolor("red") }
+         }
+         //var anonFunc = makeAnonFunc(pwrFmt3,pwrFmt4,pwrFmt5,pwrFmt6);
+         //window.requestAnimationFrame(anonFunc);
+
+
+         if(this.PCTSLIDERS[sd].displayElem[sdx].PRODINPUT != null){
+          // console.log(sd +" / "+sdx+":"+industryID);
+           //sd = "bot"; sdx = 1; industryID = "Botbots"
+
+           var inputLim = ""+fmtSI(this.STATS["IndustryInputDemand"][industryID])+"t";
+           var powerLim = ""+fmtSI(this.STATS["IndustryPowerDemand"][industryID])+"W";
+           //var inputLimRed = false;
+           //var powerLimRed = false;
+
+           var prevInputLimElem = this.PCTSLIDERS[sd].displayElem[sdx].PRODINPUT
+           var prevPowerLimElem = this.PCTSLIDERS[sd].displayElem[sdx].PRODPOWER
+
+           if(limiterID == "POWER"){
+             prevInputLimElem.style.color = null;
+             prevPowerLimElem.style.color = "red";
+             prevInputLimElem.style["text-decoration-line"]= "none";
+             prevPowerLimElem.style["text-decoration-line"]= "underline";
+           } else if(limiterID != ""){
+             prevInputLimElem.style.color = "red";
+             prevPowerLimElem.style.color = null;
+             prevInputLimElem.style["text-decoration-line"]= "underline";
+             prevPowerLimElem.style["text-decoration-line"]= "none";
+           } else {
+             prevInputLimElem.style.color = null;
+             prevPowerLimElem.style.color = null;
+             prevInputLimElem.style["text-decoration-line"]= "none";
+             prevPowerLimElem.style["text-decoration-line"]= "none";
            }
-         }*/
-         this.STATS["IndustryInputDemand"][industryID] = "0.0";
-         this.STATS["IndustryPowerDemand"][industryID] = "0.0";
-       }
-       this.PCTSLIDERS[sd].displayElem[sdx].PROD.textContent =  ( fmtSI(currCt)+" / "+fmtSI(reqCt)+"" + limiterString)
-       this.PCTSLIDERS[sd].displayElem[sdx].limitingResource = limiterID;
-       
-       /*        this.STATS["IndustryPowerDemand"][industryID] = this.CONSTRUCTION_REQUESTS[j][2][ii][1]
-             } else if( ii == 0 ){
-        this.STATS["IndustryInputDemand"][industryID] = this.CONSTRUCTION_REQUESTS[j][2][ii][1]
-       */
+           prevInputLimElem.textContent = inputLim
+           prevPowerLimElem.textContent = powerLim
+
+           this.STATS["IndustryInputDemand"][industryID] = "0.0";
+           this.STATS["IndustryPowerDemand"][industryID] = "0.0";
+         }
+         this.PCTSLIDERS[sd].displayElem[sdx].PROD.textContent =  ( fmtSI(currCt)+" / "+fmtSI(reqCt)+"" + limiterString)
+         this.PCTSLIDERS[sd].displayElem[sdx].limitingResource = limiterID;
+         }
+         /*        this.STATS["IndustryPowerDemand"][industryID] = this.CONSTRUCTION_REQUESTS[j][2][ii][1]
+               } else if( ii == 0 ){
+          this.STATS["IndustryInputDemand"][industryID] = this.CONSTRUCTION_REQUESTS[j][2][ii][1]
+         */
     }
 
     var shipBuffer = this.INVENTORY["BUFFER-Ship-CT"];

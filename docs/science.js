@@ -182,9 +182,16 @@ STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-PROD"]["costMult"]  = [1
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["WasteReprocess-ENER"]["costMult"]  = [1];
 
 
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Computation-PROD"]["costField"] = ["eng0_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Computation-ENER"]["costField"] = ["eng0_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Computation-PROD"]["costMult"] = [1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["Computation-ENER"]["costMult"] = [1];
 
 
-
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["BioResearch-ENER"]["costField"] = ["eng0_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["BioResearch-INPUT"]["costField"] = ["eng0_SCIENCE_FREE"];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["BioResearch-ENER"]["costMult"] = [1];
+STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["BioResearch-INPUT"]["costMult"] = [1];
 
 
 
@@ -685,7 +692,10 @@ function addMultiProject(pp, techlvl){
     console.log("costfield null!");
     console.log("    pp: "+pp.projectTitle);
   }
-  
+  if(null == pp.costMult){
+    console.log("costMult null!");
+    console.log("    pp: "+pp.projectTitle);
+  }
   ap.cost = this.GAME.getProjectCost(pp.costField,techlvl,pp.costMult);
   this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] = this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] + 1;
   this.addNewProject(ap);

@@ -719,6 +719,10 @@ STATS["INDUSTRY"]["TransmuteYogurt"] = { sliderID: "bot", sliderIDX: 3, prodTitl
                                    basePwr:   0.177000,
                                    baseWaste: 0, lockKey: "TRANSMUTEYOGURT"}
 
+
+
+
+
 STATS["INDUSTRY"]["BioResearch"] = { sliderID: "green", sliderIDX: 1, prodTitle: "Biological Research", inventoryType: "BUFFER", scitype: "bio",
                                    baseProd:  0.00005, productionItem: "bio",
                                    baseCost:  [["MATTER-Feedstock-CT",0]],
@@ -726,11 +730,25 @@ STATS["INDUSTRY"]["BioResearch"] = { sliderID: "green", sliderIDX: 1, prodTitle:
                                    baseWaste: 1,
                                    upgradeSet: ["ENER","INPUT"]}
 
+STATS["INDUSTRY"]["Computation"] = { sliderID: "comp", sliderIDX: null, prodTitle: "Computation", inventoryType: "BUFFER", scitype: "eng",
+                                   baseProd:  0.00005, productionItem: "COMPUTE",
+                                   baseCost:  [],
+                                   basePwr:   0.219000,
+                                   baseWaste: 0,
+                                   upgradeSet: ["PROD","ENER"]}
+
+
+ELEMS["computation-PRODUCTION-REQ-DISPLAY"]  = document.getElementById("computation_PRODREQ")
+ELEMS["computation-PRODUCTION-CURR-DISPLAY"] = document.getElementById("computation_PRODCURR")
+ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computation_PRODPOWER")
 
 
 //LOCKHIDE_BIOWEAPONS
  
-GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass","TransmuteYogurt","Bioweapons","WasteFerment","WasteReprocess"]
+GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute",
+                            "Digested","Biopwr","Yogurt","Biomass","TransmuteYogurt","Bioweapons",
+                            "WasteFerment","WasteReprocess",
+                            "BioResearch","Computation"]
 STATS["PRODUCTION-CURR"] = {};
 STATS["PRODUCTION-REQ"] = {};
 STATS["LIMIT-REASON"] = {};
@@ -770,20 +788,36 @@ GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Di
 
 
 function calcIndustrialProd(xx){
-  var xid = xx.sliderID+"_"+xx.sliderIDX;
-  //this.STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][0]
-  return this.STATS["PRODUCTIVITY_MULT"][xid] * xx.baseProd * this.STATS["PRODUCTIVITY_RATING"][xx.sliderID] * this.SETTINGS[xx.sliderID+"_FRACTION"][xx.sliderIDX]
+  if(xx.sliderIDX == null){
+    return xx.baseProd * this.STATS["PRODUCTIVITY_RATING"][xx.sliderID]
+  } else {
+    var xid = xx.sliderID+"_"+xx.sliderIDX;
+    //this.STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][0]
+    return this.STATS["PRODUCTIVITY_MULT"][xid] * xx.baseProd * 
+           this.STATS["PRODUCTIVITY_RATING"][xx.sliderID] * 
+           this.SETTINGS[xx.sliderID+"_FRACTION"][xx.sliderIDX]
+  }
 }
 function calcIndustrialCost(xx){
+
+
   var xid = xx.sliderID+"_"+xx.sliderIDX;
+  if(xx.sliderIDX == null){
+    xid = xx.sliderID 
+  }
+  
   var out = [];
   //xx.baseCost.slice();
   for(var i=0; i < xx.baseCost.length; i++){
      out[i] = [ xx.baseCost[i][0], xx.baseCost[i][1] ];
   }
-  out.push(["MATTER-Waste-CT", - xx.baseWaste * this.STATS["WASTERATE_MULT"][xid] ] );
-  out[0][1] = out[0][1] + xx.baseWaste * this.STATS["WASTERATE_MULT"][xid];
-  out.push(["POWER",xx.basePwr * this.STATS["ENERGYRATE_MULT"][xid]]);
+  if(xx.baseWaste > 0 && this.STATS["WASTERATE_MULT"][xid] > 0){
+    out.push(["MATTER-Waste-CT", - xx.baseWaste * this.STATS["WASTERATE_MULT"][xid] ] );
+    out[0][1] = out[0][1] + xx.baseWaste * this.STATS["WASTERATE_MULT"][xid];
+  }
+  if(xx.basePwr > 0 && this.STATS["ENERGYRATE_MULT"][xid] > 0){
+    out.push(["POWER",xx.basePwr * this.STATS["ENERGYRATE_MULT"][xid]]);
+  }
   return out;
 }
 GAME_GLOBAL.calcIndustrialProd=calcIndustrialProd;

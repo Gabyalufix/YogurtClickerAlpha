@@ -93,14 +93,52 @@
 
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">COMPUTE CLUSTER</span></h1></button>
 		<div class="content">
+		  <span style="display:none">
           <span class="INFO_TEXT_STATIC">Capacity: </span><div class="valueDisplayDiv" id="comp_PRODUCTIVITY_DISPLAY_DIV"><span id="comp_PRODUCTIVITY_DISPLAY"></span><span id="comp_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+          </span>
 
-           TES TEST TEST
+		   <div class="contentGrid3  sliderProductivityLine">
+             <span class="contentGridItemNoPad  contentGridItem1x1"> <span class="INFO_TEXT_STATIC">Current Speed: </span> </span>
+             <span class="contentGridItemNoPad  contentGridItem1x1"> <span class="INFO_TEXT_STATIC">Max Speed: </span> </span>
+             <span class="contentGridItemNoPad  contentGridItem1x1"> <span class="INFO_TEXT_STATIC">Power Demand: </span> </span>
+             <span class="contentGridItemNoPad  contentGridItem1x1" id="computation_PRODREQ"></span>
+             <span class="contentGridItemNoPad  contentGridItem1x1" id="computation_PRODCURR"></span>
+             <span class="contentGridItemNoPad  contentGridItem1x1" id="computation_PRODPOWER"></span>
+           </div>
 
 
 
-		<button class="collapsible"><h2>Processor Distribution </h2></span></button>
-			<div class="contentLV3">
+
+			<div class="SubContentBox">
+
+			<div class="SubContentBoxTitle SubContentBoxTitleCtr">
+              <div class="INFO_TEXT_STATIC">Processor Distribution: </div>
+            </div><div style="line-height:30px"><br></div>
+
+            <div style="display: grid; grid-template-columns: 50% 50%;">
+
+              <div  style="grid-area: span 1 / span 1; text-align:left;">
+                <h5><span class="INFO_TEXT_STATIC"> Analytic Engine: </span><span id="computation_think_CONTROL_PCT_DISPLAY">75%</span></h5>
+              </div>
+
+              <div  style="grid-area: span 1 / span 1; text-align:right;">
+                 <h5> <span class="INFO_TEXT_STATIC"> Soulswarm: </span> <span id="computation_soul_CONTROL_PCT_DISPLAY">25%</span></h5>
+              </div>
+
+            </div>
+
+				<div class="multiPctSliderSuper" style="position:relative">
+					<div class="slidecontainer" style="width:100%;">
+						  <input type="range" min="0" max="10000" value="2500" class="slider" id="computationSliderPct"  style="width:100%;">
+					</div>
+				</div>
+            </div>
+
+
+		<button class="collapsible" style="display:none;"><h2>Processor Distribution </h2></span></button>
+			<div class="contentLV3" style="display:none;">
+
+
 
 			<h5><span class="INFO_TEXT_STATIC">Analytic Engine </span><div class="valueDisplayDiv" id="compSliderDisplayPct1_DIV"><span id="compSliderDisplayPct1"></span><span id="compSliderDisplayPct1_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
@@ -125,6 +163,8 @@
 				</div>
 
 		    </div>
+
+
 
 		<button class="collapsible"><h2>UPKEEP </h2></span></button>
 			<div class="contentLV3">
@@ -1028,7 +1068,7 @@
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Process raw matter into processed feedstock for your robots to turn into other things.</span> </span>
               <h5><span class="INFO_TEXT_STATIC">Process Matter: </span><span class="valueDisplayDiv" id="botSliderDisplayPct1_DIV"><span id="botSliderDisplayPct1"></span><span id="botSliderDisplayPct1_UNITS"></span></span></h5>
 
-			               <h5><div class="contentGrid2 contentGridNoPad" style="width:85%">
+			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct1_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct1_PRODPOWER">0.0W</span> </span>
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct1_PROD"></span></span>
 			               </div></h5>
@@ -1047,7 +1087,7 @@
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Direct your Van-Neumann factory robots to create more Van-Neumann factory robots. Those new Van-Neumann factory robots can then be directed to do likewise.</span> </span>
 			  <h5><span class="INFO_TEXT_STATIC">Construct More Bots: </span><span class="valueDisplayDiv" id="botSliderDisplayPct2_DIV"><span id="botSliderDisplayPct2"></span><span id="botSliderDisplayPct2_UNITS"></span></span></h5>
 
-			               <h5><div class="contentGrid2 contentGridNoPad" style="width:85%">
+			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct2_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct2_PRODPOWER">0.0W</span> </span>
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct2_PROD"></span></span>
 			               </div></h5>
@@ -1067,7 +1107,7 @@
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Builds starships to explore, secure, and seed new worlds for processing into yogurt.</span> </span>
 			<h5><span class="INFO_TEXT_STATIC">Starship Construction: </span><span class="valueDisplayDiv" id="botSliderDisplayPct5_DIV"><span id="botSliderDisplayPct5"></span><span id="botSliderDisplayPct5_UNITS"></span></span></h5>
 
-			               <h5><div class="contentGrid2 contentGridNoPad" style="width:85%">
+			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct5_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct5_PRODPOWER">0.0W</span> </span>
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct5_PROD"></span></span>
 			               </div></h5>
@@ -1085,10 +1125,10 @@
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> TODO.</span> </span>
 			<h5><span class="INFO_TEXT_STATIC">Assemble Computronium: </span><span class="valueDisplayDiv" id="botSliderDisplayPct6_DIV"><span id="botSliderDisplayPct6"></span><span id="botSliderDisplayPct6_UNITS"></span></span></h5>
-			               <h5><div class="contentGrid2 contentGridNoPad" style="width:85%">
+			               <div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct6_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct6_PRODPOWER">0.0W</span> </span>
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct6_PROD"></span></span>
-			               </div></h5>
+			               </div>
 			               </div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -1102,7 +1142,7 @@
 
 			<div class="unlockableHidden" id="LOCKHIDE_WASTEREPROCESS">
 			<h5><span class="INFO_TEXT_STATIC">Reprocess Waste: </span><span class="valueDisplayDiv" id="botSliderDisplayPct3_DIV"><span id="botSliderDisplayPct3"></span><span id="botSliderDisplayPct3_UNITS"></span></span></h5>
-			               <h5><div class="contentGrid2 contentGridNoPad" style="width:85%">
+			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct3_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct3_PRODPOWER">0.0W</span> </span>
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct3_PROD"></span></span>
 			               </div></h5>				<div class="multiPctSliderSuper">
@@ -1118,10 +1158,11 @@
 
 			<div class="unlockableHidden" id="LOCKHIDE_TRANSMUTEYOGURT">
 			<h5><span class="INFO_TEXT_STATIC">Transmute Yogurt: </span><span class="valueDisplayDiv" id="botSliderDisplayPct4_DIV"><span id="botSliderDisplayPct4"></span><span id="botSliderDisplayPct4_UNITS"></span></span></h5>
-			               <h5><div class="contentGrid2 contentGridNoPad" style="width:85%">
+			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct4_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct4_PRODPOWER">0.0W</span> </span>
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct4_PROD"></span></span>
-			               </div></h5>				<div class="multiPctSliderSuper">
+			               </div></h5>
+			          <div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="0" class="slider" id="botSliderPct4" >
 					</div>
@@ -1135,7 +1176,7 @@
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Build vast solar arrays for collecting energy </span> </span>
 			  <h5><span class="INFO_TEXT_STATIC">Construct Solar Arrays </span><span class="valueDisplayDiv" id="botSliderDisplayPct7_DIV"><span id="botSliderDisplayPct7"></span><span id="botSliderDisplayPct7_UNITS"></span></span></h5>
-			               <h5><div class="contentGrid2 contentGridNoPad" style="width:85%">
+			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct7_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct7_PRODPOWER">0.0W</span> </span>
 			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct7_PROD"></span></span>
 			               </div></h5>
@@ -1205,7 +1246,13 @@
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Activates digestive enzymes in biomass clusters that digests unprocessed greenworld matter into a metabolically-available slurry. This slurry can then be used as a growth medium for more biomass or for yogurt.</span> </span>
-              <h5><span class="INFO_TEXT_STATIC">Digest Matter: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct6_DIV"><span id="greenSliderDisplayPct6"></span><span id="greenSliderDisplayPct6_UNITS"></span></span><div id="greenSliderDisplayPct6_PROD"></div></h5>
+              <h5><span class="INFO_TEXT_STATIC">Digest Matter: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct6_DIV"><span id="greenSliderDisplayPct6"></span><span id="greenSliderDisplayPct6_UNITS"></span></span> </h5>
+			               <div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="greenSliderDisplayPct6_PRODINPUT">0.0t</span>, <span id="greenSliderDisplayPct6_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="greenSliderDisplayPct6_PROD"></span></span>
+			               </div>
+
+
 			</div>
 
 				<div class="multiPctSliderSuper">
@@ -1220,7 +1267,12 @@
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Directs the growth of specialized biomass clusters: vast balls of bioengineered, artifically-evolved algae sludge that can be controlled and directed to perform specialized biological processes on demand.</span> </span>
-			  <h5><span class="INFO_TEXT_STATIC">Grow Biomass: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct5_DIV"><span id="greenSliderDisplayPct5"></span><span id="greenSliderDisplayPct5_UNITS"></span></span><div id="greenSliderDisplayPct5_PROD"></div></h5>
+			  <h5><span class="INFO_TEXT_STATIC">Grow Biomass: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct5_DIV"><span id="greenSliderDisplayPct5"></span><span id="greenSliderDisplayPct5_UNITS"></span></span></h5>
+			               <div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="greenSliderDisplayPct5_PRODINPUT">0.0t</span>, <span id="greenSliderDisplayPct5_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="greenSliderDisplayPct5_PROD"></span></span>
+			               </div>
+
 			</div>
 
 
@@ -1236,7 +1288,11 @@
 
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Activate specialized enzymes and synthetically-designed biologic processes in greenworld biomass clusters to convert digested slurry into fresh and delicious yogurt. This is the fundamental reason for the universe. All else is ancillary. And fleeting. Soon all will be yogurt.</span> </span>
-			  <h5><span class="INFO_TEXT_STATIC">Ferment Yogurt: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct2_DIV"><span id="greenSliderDisplayPct2"></span><span id="greenSliderDisplayPct2_UNITS"></span></span><div id="greenSliderDisplayPct2_PROD"></div></h5>
+			  <h5><span class="INFO_TEXT_STATIC">Ferment Yogurt: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct2_DIV"><span id="greenSliderDisplayPct2"></span><span id="greenSliderDisplayPct2_UNITS"></span></span></h5>
+			               <div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="greenSliderDisplayPct2_PRODINPUT">0.0t</span>, <span id="greenSliderDisplayPct2_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="greenSliderDisplayPct2_PROD"></span></span>
+			               </div>
 			</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -1252,7 +1308,11 @@
 
 			<div class="tooltipHolder ttSEC2">
 			    <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Biological Research includes biomedical science, biochemistry, organic chemistry, genetic engineering, and bioinformatics.</span> </span>
-			    <h5><span class="INFO_TEXT_STATIC">Biological Research: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct1_DIV"><span id="greenSliderDisplayPct1"></span><span id="greenSliderDisplayPct1_UNITS"></span></span><div id="greenSliderDisplayPct1_PROD"></div></h5>
+			    <h5><span class="INFO_TEXT_STATIC">Biological Research: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct1_DIV"><span id="greenSliderDisplayPct1"></span><span id="greenSliderDisplayPct1_UNITS"></span></span></h5>
+			               <div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="greenSliderDisplayPct1_PRODINPUT">0.0t</span>, <span id="greenSliderDisplayPct1_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="greenSliderDisplayPct1_PROD"></span></span>
+			               </div>
 			</div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -1265,7 +1325,11 @@
 				</div>
 
 			<div class="unlockableHidden" id="LOCKHIDE_BIOWEAPONS">
-			<h5><span class="INFO_TEXT_STATIC">Grow Bioweapons: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct3_DIV"><span id="greenSliderDisplayPct3"></span><span id="greenSliderDisplayPct3_UNITS"></span></span><div id="greenSliderDisplayPct3_PROD"></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Grow Bioweapons: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct3_DIV"><span id="greenSliderDisplayPct3"></span><span id="greenSliderDisplayPct3_UNITS"></span></span></h5>
+			               <div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="greenSliderDisplayPct3_PRODINPUT">0.0t</span>, <span id="greenSliderDisplayPct3_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="greenSliderDisplayPct3_PROD"></span></span>
+			               </div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="0" class="slider" id="greenSliderPct3">
@@ -1277,7 +1341,11 @@
 				</div>
 			</div>
 			<div class="unlockableHidden" id="LOCKHIDE_COMPOST">
-			<h5><span class="INFO_TEXT_STATIC">Compost Fermentation: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct4_DIV"><span id="greenSliderDisplayPct4"></span><span id="greenSliderDisplayPct4_UNITS"></span></span><div id="greenSliderDisplayPct4_PROD"></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Compost Fermentation: </span><span class="valueDisplayDiv" id="greenSliderDisplayPct4_DIV"><span id="greenSliderDisplayPct4"></span><span id="greenSliderDisplayPct4_UNITS"></span></span></h5>
+			               <div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="greenSliderDisplayPct4_PRODINPUT">0.0t</span>, <span id="greenSliderDisplayPct4_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="greenSliderDisplayPct4_PROD"></span></span>
+			               </div>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="0" class="slider" id="greenSliderPct4" >
@@ -1292,7 +1360,11 @@
             <div class="unlockableHidden" id="LOCKHIDE_BIOWEAPONS">
 			<div class="tooltipHolder ttSEC2">
 			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Creates synthetic chloroplasts which can derive energy from the system's sun. Provides power. Less efficient than solar arrays, but easier to make.</span> </span>
-              <h5><span class="INFO_TEXT_STATIC">Synthesize Chloroplasts </span><span class="valueDisplayDiv" id="greenSliderDisplayPct7_DIV"><span id="greenSliderDisplayPct7"></span><span id="greenSliderDisplayPct7_UNITS"></span></span><div id="greenSliderDisplayPct7_PROD"></div></h5>
+              <h5><span class="INFO_TEXT_STATIC">Synthesize Chloroplasts </span><span class="valueDisplayDiv" id="greenSliderDisplayPct7_DIV"><span id="greenSliderDisplayPct7"></span><span id="greenSliderDisplayPct7_UNITS"></span></span></h5>
+			               <div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="greenSliderDisplayPct7_PRODINPUT">0.0t</span>, <span id="greenSliderDisplayPct7_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="greenSliderDisplayPct7_PROD"></span></span>
+			               </div>
 			</div>
 
 				<div class="multiPctSliderSuper">
@@ -1879,12 +1951,14 @@ Stellar pop:
 ####################################################################################################
 -->
 
+
 <script type="text/javascript" src="fitty.min.js"></script>
 <script type="text/javascript" src="variables.js"></script>
+<script type="text/javascript" src="util.js"></script>
+
 <script type="text/javascript" src="science.js"></script>
 
 <script type="text/javascript" src="textData.js"></script>
-<script type="text/javascript" src="util.js"></script>
 <script type="text/javascript" src="stars.js"></script>
 <script type="text/javascript" src="starBatch.js"></script>
 

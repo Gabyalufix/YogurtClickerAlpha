@@ -617,6 +617,15 @@ ELEMS["BIOMASS_CONTROL_SLIDER"].onchange = onInputSoloSliderPct;
 ELEMS["BIOMASS_CONTROL_SLIDER"].currValue = 0.75;
 
 
+ELEMS["computation_CONTROL_SLIDER"] = document.getElementById("computationSliderPct")
+ELEMS["computation_CONTROL_SLIDER"].pctDisplayA = document.getElementById("computation_soul_CONTROL_PCT_DISPLAY")
+ELEMS["computation_CONTROL_SLIDER"].pctDisplayB = document.getElementById("computation_think_CONTROL_PCT_DISPLAY")
+ELEMS["computation_CONTROL_SLIDER"].oninput  = onInputSoloSliderPct;
+ELEMS["computation_CONTROL_SLIDER"].onchange = onInputSoloSliderPct;
+ELEMS["computation_CONTROL_SLIDER"].currValue = 0.75;
+
+
+
 CHEATADD_TYPE_LIST = ["Neutral","Hostile"]
 
 
@@ -1032,9 +1041,11 @@ function executeAllConstructionRequests(){
     var industryID = this.CONSTRUCTION_REQUESTS[j][4];
     STATS["LIMIT-REASON"][industryID] = "";
     this.STATS["PRODUCTION-REQ"][industryID] = this.CONSTRUCTION_REQUESTS[j][1];
-    
+    //console.log( "constReq "+industryID+", costLen="+this.CONSTRUCTION_REQUESTS[j][2].length)
+
     for(var ii=0; ii < this.CONSTRUCTION_REQUESTS[j][2].length; ii++){
       if(this.CONSTRUCTION_REQUESTS[j][2][ii][0] == "POWER"){
+        //console.log( "IndustryPowerDemand-"+industryID+": "+ (this.CONSTRUCTION_REQUESTS[j][2][ii][1] * this.CONSTRUCTION_REQUESTS[j][1]))
         this.STATS["IndustryPowerDemand"][industryID] = this.CONSTRUCTION_REQUESTS[j][2][ii][1] * this.CONSTRUCTION_REQUESTS[j][1]
       } else if( ii == 0 ){
         this.STATS["IndustryInputDemand"][industryID] = this.CONSTRUCTION_REQUESTS[j][2][ii][1] * this.CONSTRUCTION_REQUESTS[j][1]
