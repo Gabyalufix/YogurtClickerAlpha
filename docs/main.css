@@ -342,6 +342,14 @@ h5 {
   text-align: center;
 }
 
+
+.contentGrid2 {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+
+}
 .contentGrid3 {
   display: grid;
   grid-template-columns: 33% 33% 33%;
@@ -483,6 +491,21 @@ h5 {
 * {
   box-sizing: border-box;
 }
+
+.contentGridItemNoPad {
+  padding: 0pt;
+  border: 0pt;
+  margin: 0pt;
+}
+
+.contentGridNoPad {
+  grid-gap: 0;
+  padding: 0px;
+  margin: 0px;
+}
+
+
+
 
 /*
 ===================================================================================================================

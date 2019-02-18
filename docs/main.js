@@ -195,6 +195,13 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
          displayUnits_elem[i] = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_UNITS");
          displayDiv_elem[i] = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_DIV");
          display_elem[i].PROD = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_PROD");
+         display_elem[i].PRODINPUT = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_PRODINPUT");
+         display_elem[i].PRODPOWER = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_PRODPOWER");
+         display_elem[i].limitingResource = "";
+         if(display_elem[i].PRODINPUT != null){
+           display_elem[i].PRODINPUT.isRED = false;
+           display_elem[i].PRODPOWER.isRED = false;
+         }
          slider_elem[i].IS_LOCKED = false
          slider_elem[i].GAME = GAME_GLOBAL
          //console.log("2: "+fid+"SliderCheck"+(i+1))
@@ -1025,6 +1032,14 @@ function executeAllConstructionRequests(){
     var industryID = this.CONSTRUCTION_REQUESTS[j][4];
     STATS["LIMIT-REASON"][industryID] = "";
     this.STATS["PRODUCTION-REQ"][industryID] = this.CONSTRUCTION_REQUESTS[j][1];
+    
+    for(var ii=0; ii < this.CONSTRUCTION_REQUESTS[j][2].length; ii++){
+      if(this.CONSTRUCTION_REQUESTS[j][2][ii][0] == "POWER"){
+        this.STATS["IndustryPowerDemand"][industryID] = this.CONSTRUCTION_REQUESTS[j][2][ii][1] * this.CONSTRUCTION_REQUESTS[j][1]
+      } else if( ii == 0 ){
+        this.STATS["IndustryInputDemand"][industryID] = this.CONSTRUCTION_REQUESTS[j][2][ii][1] * this.CONSTRUCTION_REQUESTS[j][1]
+      }//4311061963.9400425
+    }
   }
   
   var resourceUserList = [];
@@ -1111,6 +1126,7 @@ function executeAllConstructionRequests(){
   this.CONSTRUCTION_REQUESTS = [];
   
 }
+
 
 function executeAllConstructionRequests_OLD(){
   var costResourceSet = new Set();
