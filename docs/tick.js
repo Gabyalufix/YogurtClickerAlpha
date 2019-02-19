@@ -45,7 +45,7 @@ function TICK_runFastTick(){
       GAME.bgStatic.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
      // GAME.bgCanvas.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
     }
-    
+
     if(! STATS["PAUSE"]){
         TICK_TIMESTAMP = Date.now()
         GAME.STATS["TICK"] = GAME.STATS["TICK"] + 1;
@@ -56,8 +56,8 @@ function TICK_runFastTick(){
         GAME.TICK_calcWar()
         GAME.TICK_constructWorlds()
         GAME.TICK_updateWorldCounts()
-        
-        
+
+
         GAME.TICK_INDUSTRY_calcPOWERGEN();
         GAME.TICK_INDUSTRY_addCReqs()
         GAME.executeAllConstructionRequests()
@@ -67,8 +67,8 @@ function TICK_runFastTick(){
         GAME.TICK_INDUSTRY_calcComputation();
         GAME.TICK_calcScience();
         GAME.TICK_INDUSTRY_calcDeltas()
-        
-        
+
+
         secTimer++;
         if (secTimer >= 250){
           secTimer = 0;
@@ -137,8 +137,8 @@ function TICK_readUserInputs(){
       //this.updatePctSliderDisplay(this.PCTSLIDERS[fid]["sliderElem"][j])
     }
   }
-  
-  
+
+
     for(var i=0; i < STATICVAR_HOLDER.POWER_SOURCEWORLD_LIST.length; i++){
       var worldType = STATICVAR_HOLDER.POWER_SOURCEWORLD_LIST[i];
       var ppid = STATICVAR_HOLDER.POWER_SOURCE_LIST[i]
@@ -217,14 +217,14 @@ function TICK_updateStats(){
         var anonFunc = makeAnonFunc(fid,fsi)
         window.requestAnimationFrame(anonFunc)
       }
-      
+
       for( var i=0; i < this.PCTSLIDERS[fid]["sliderElem"].length; i++){
         this.updatePctSliderDisplayHelper( this.PCTSLIDERS[fid]["sliderElem"][i] )
       }
-      
+
       //this.updatePctSliderDisplay(this.PCTSLIDERS[fid]["sliderElem"][0])
   }
-  
+
   //window.requestAnimationFrame(function(){
     this.DEBUG_CRAZY_LEVEL_DISPLAY.textContent =  this.STATS["CRAZY_LEVEL"]
     //this.GAME.DATE_DISPLAY.textContent =  this.GAME.getDateStringFromTick(this.STATS["TICK"])
@@ -232,7 +232,7 @@ function TICK_updateStats(){
     this.ELEMS.DATE_WEEK_DISPLAY.textContent =  this.getWeekStringFromTick(this.STATS["TICK"])
     this.MOOD_DISPLAY.textContent =  this.STATS["MOOD"]
   //})
-  
+
 
 
   this["INVENTORY-PREVTICK"] = {};
@@ -243,11 +243,11 @@ function TICK_updateStats(){
 
 
     this.ELEMS["soul_IDENT_CT"].textContent = fmtSI( INVENTORY["soul_IDENT_CT"]," ")
-    //ELEMS["soul_COMPUTE_RESOURCES"]   
+    //ELEMS["soul_COMPUTE_RESOURCES"]
     this.ELEMS["soul_IDENT_DIVERSITY"].textContent = fmtSI(INVENTORY["soul_DIVERSITY_CT"]," ")
 
-           
-    //INVENTORY["soul_DIVERSITY_CT"]    
+
+    //INVENTORY["soul_DIVERSITY_CT"]
     //INVENTORY["soul_DIVERSITY_RATING"]
 
 
@@ -313,26 +313,26 @@ function TICK_updateWorldCounts(){
                 countDisplay.cancelButton.disabled = true;
               }
           }
-    
+
         }
     }
-    
+
     //this.INVENTORY["STARS-" + sinfo[0] +"-CT"]
-    
+
     for( var i=0; i < this.STAR_TYPE_SET.length; i++){
        var sid = this.STAR_TYPE_SET[i].sid;
        var ee = ELEMS["STARCT_"+sid] ;
        var ct = this.INVENTORY["STARS-" + sid +"-CT"];
        var ff = fmtSIintNoPct(ct)
        if(ff != ee.innerHTML){
-       
-       
+
+
          ee.textContent =  ff;
        }
     }
-    
-}   
-    
+
+}
+
 function TICK_scoutSystems(){
     var exploreRating = this.STATS["PRODUCTIVITY_RATING"]["scout"] * this.SETTINGS["scout"+"_FRACTION"][0];
     var areaExplored = this.STATS["scout-speed"] * STATS["scout-sensorrange"] * exploreRating;
@@ -375,8 +375,8 @@ function TICK_INDUSTRY_calcPOWERGEN(){
     var wattMult = this.STATICVAR_HOLDER.WATTAGE_MULTIPLIER
     /*
      * POWER PRODUCTION:
-     
-        
+
+
      */
     var pwrSrc = ["Bot","Bio"];
     var dysonSrc = ["bot","green"]
@@ -392,19 +392,19 @@ function TICK_INDUSTRY_calcPOWERGEN(){
          this.INVENTORY["POWER-"+pc+"-CAP"] = this.INVENTORY["MATTER-"+pc+"pwr-CT"] * this.STATS["PRODUCTIVITY_RATING"][pc+"pwrGen"] * this.SETTINGS[pc+"_POWERLIMITFRAC"];
        }
        this.INVENTORY["POWER-"+pc+""] = Math.min(this.INVENTORY["POWER-"+pc+"-CAP"] / STATS["ENERGYRATE_MULT"][pc+"pwrGen"],this.INVENTORY["POWER-Free"+dysonSrcCap[z]+"-CT"]) * STATS["ENERGYRATE_MULT"][pc+"pwrGen"];
-       
+
        this.INVENTORY["POWER"] = this.INVENTORY["POWER"] + this.INVENTORY["POWER-"+pc]
-       
+
        var pwrFmt1 = fmtSIunits( Math.round( this.INVENTORY["POWER-"+pc+""]) * wattMult)
        //this.ELEMS[pc+"pwr_POWER_DISPLAY"].unitDisp.textContent =  pwrFmt1[1];
-       
+
        var pp = ELEMS["POWER_PRODDISPLAY"][pc];
-      
+
 
       this.INVENTORY["POWERGEN-"+pc+""] = this.INVENTORY["POWER-"+pc+""]
-      
+
       /*
-      
+
               var makeAnonFunc = function(xfid,xfsi){
                 //console.log("making anon: ["+xfid+"]");
                 return function(){
@@ -414,9 +414,9 @@ function TICK_INDUSTRY_calcPOWERGEN(){
               }
               var anonFunc = makeAnonFunc(fid,fsi)
         window.requestAnimationFrame(anonFunc)
-      
+
       */
-      
+
       var makeAnonFunc2 = function(xpwrFmt1,xpp,xpc){
                 return function(){
                   this.GAME.ELEMS[pc+"pwr_POWER_DISPLAY"].textContent =  xpwrFmt1[0] + xpwrFmt1[1];
@@ -429,22 +429,22 @@ function TICK_INDUSTRY_calcPOWERGEN(){
       }
       var anonFunc2 = makeAnonFunc2(pwrFmt1,pp,pc)
       window.requestAnimationFrame(anonFunc2)
-      
+
     }
-    
+
     this.INVENTORY["POWERGEN-Hawk"] = 0;
     //console.log("HAWKENER = "+ this.INVENTORY["POWERGEN-Hawk"])
     //this.STATS["PRODUCTIVITY_RATING"]["BiopwrGen"] = this.INVENTORY["MATTER-Biopwr-CT"] * this.STATS["PRODUCTIVITY_MULT"]["BiopwrGen"] * this.STATS["CONVERSIONS"]["pwrFromBiopwrPerProdPerTick"] * this.STATS["PRODUCTIVITY_MULT"]["green"];
 
     //this.INVENTORY["POWER"] = this.STATS["PRODUCTIVITY_RATING"]["BotpwrGen"] + this.STATS["PRODUCTIVITY_RATING"]["BiopwrGen"]
-    this.INVENTORY["POWERGEN"] = this.INVENTORY["POWER"] 
-    
+    this.INVENTORY["POWERGEN"] = this.INVENTORY["POWER"]
+
 }
 
 function TICK_INDUSTRY_addCReqs(){
     INVENTORY["BUFFER-bio-CT"] = 0;
     INVENTORY["BUFFER-COMPUTE-CT"] = 0;
-    
+
     //console.log("-------------------")
     for(var i=0; i<this.INDUSTRY_LIST.length; i++){
        var industryID = this.INDUSTRY_LIST[i];
@@ -491,14 +491,6 @@ function TICK_calcIndustry(){
          var powerLim = ""+fmtSI(this.STATS["IndustryPowerDemand"][industryID] * this.STATICVAR_HOLDER.WATTAGE_MULTIPLIER," ")+"W";
          var reqCt = ""+fmtSI(this.STATS["PRODUCTION-REQ"][ industryID ] * this.STATICVAR_HOLDER.FLOPS_MULTIPLIER," ")+"FLOPs"
          var currCt = ""+fmtSI(this.STATS["PRODUCTION-CURR"][ industryID ] * this.STATICVAR_HOLDER.FLOPS_MULTIPLIER ," ")+"FLOPs"
-         
-/*
-
-ELEMS["computation-PRODUCTION-REQ-DISPLAY"]  = document.getElementById("computation_PRODREQ")
-ELEMS["computation-PRODUCTION-CURR-DISPLAY"] = document.getElementById("computation_PRODCURR")
-ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computation_PRODPOWER")
-
-*/
          var pwrLimElem = this.ELEMS["computation-PRODUCTION-PWR-DISPLAY"]
 
          this.ELEMS["computation-PRODUCTION-REQ-DISPLAY"].textContent = reqCt
@@ -509,18 +501,18 @@ ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computat
              pwrLimElem.style.color = "red";
              pwrLimElem.style["text-decoration-line"]= "underline";
          } else {
-             
+
              pwrLimElem.style.color = null;
              pwrLimElem.style["text-decoration-line"]= "none";
          }
-         
+
        } else {
-         var reqCt = this.STATS["PRODUCTION-REQ"][ industryID ] 
-         var currCt = this.STATS["PRODUCTION-CURR"][ industryID ] 
+         var reqCt = this.STATS["PRODUCTION-REQ"][ industryID ]
+         var currCt = this.STATS["PRODUCTION-CURR"][ industryID ]
          if(null == this.PCTSLIDERS[sd].displayElem[sdx].PROD){
             console.log("NULL: "+iss.prodTitle);
             console.log("    ["+sd+" / "+sdx+"]");
-          
+
          }
          var limiterString = "";
          var limiterID = this.STATS["LIMIT-REASON"][industryID]
@@ -544,7 +536,7 @@ ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computat
          //var anonFunc = makeAnonFunc(pwrFmt3,pwrFmt4,pwrFmt5,pwrFmt6);
          //window.requestAnimationFrame(anonFunc);
          //console.log( "PWR: "+industryID+ " [" +fmtSI(this.STATS["IndustryPowerDemand"][industryID])+"]")
-         
+
          if(this.PCTSLIDERS[sd].displayElem[sdx].PRODINPUT != null){
           // console.log(sd +" / "+sdx+":"+industryID);
            //sd = "bot"; sdx = 1; industryID = "Botbots"
@@ -577,6 +569,25 @@ ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computat
            prevInputLimElem.textContent = inputLim
            prevPowerLimElem.textContent = powerLim
 
+           if(this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR != null){
+
+			   var setPct = this.SETTINGS[sd+"_FRACTION"][sdx];
+			   var yieldPct = currCt / reqCt;
+			   if(reqCt == 0){
+				   yieldPct = 0;
+			   }
+			   var finalPct = setPct * yieldPct * 100
+			   //console.log("INDUSTRY: "+industryID + " / "+roundTo(this.SETTINGS[sd+"_FRACTION"][sdx]*100,2) + " / finalPct = "+roundTo(finalPct,3));
+			   this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR.style.width = finalPct + "%";
+			   if(yieldPct < 0.25){
+				   this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR.style["background-color"] = "var(--subduedWarnRed)"
+			   } else if(yieldPct < 1){
+				   this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR.style["background-color"] = "var(--subduedWarnYellow)"
+			   } else {
+				   this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR.style["background-color"] = "var(--subduedWarnGreen)"
+			   }
+		   }
+
            this.STATS["IndustryInputDemand"][industryID] = "0.0";
            this.STATS["IndustryPowerDemand"][industryID] = "0.0";
          }
@@ -602,13 +613,13 @@ ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computat
 
   //update displays:
    //this["SHIPCONSTRUCTBUFFER_DISPLAY_DIV"].textContent =  this.INVENTORY["SHIP-CONSTRUCT-BUFFER"]
-   
 
-   
+
+
 
 
     this.CONSTRUCTION_REQUESTS = [];
-    
+
 
 }
 STATS["MODIFIERS"] = {};
@@ -625,27 +636,27 @@ function TICK_INDUSTRY_calcComputation(){
   //this.INVENTORY["BUFFER-bio-CT"]
   this.STATS["PRODUCTIVITY_RATING"]["think"] = this.INVENTORY["BUFFER-COMPUTE-CT"] * this.SETTINGS["COMPUTE_think_FRAC"] * this.STATS["MODIFIERS"]["sanityComputeFactor"]
   this.STATS["PRODUCTIVITY_RATING"]["soul"] =  this.INVENTORY["BUFFER-COMPUTE-CT"] * this.SETTINGS["COMPUTE_soul_FRAC"]  * this.STATS["MODIFIERS"]["sanityComputeFactor"] * this.STATS["MODIFIERS"]["swarmDiversityFactor"]
-  
+
   this.ELEMS["soul_COMPUTE_RESOURCES"].textContent = fmtSI(this.INVENTORY["BUFFER-COMPUTE-CT"] * this.SETTINGS["COMPUTE_soul_FRAC"] * this.STATICVAR_HOLDER.FLOPS_MULTIPLIER," ")+"";
   this.ELEMS["soul_OVERALL_PROD"].textContent = fmtSI( this.STATS["PRODUCTIVITY_RATING"]["soul"] / STATICVAR_HOLDER.SOULPROD_RATING_FACTOR )
-  
+
   this.STATS["PRODUCTIVITY_RATING"]["bio"] = this.INVENTORY["BUFFER-bio-CT"] * this.STATICVAR_HOLDER.BYTES_PER_TON_BIOMASS
   this.STATS["PRODUCTIVITY_RATING"]["eng"] = this.STATS["PRODUCTIVITY_RATING"]["think"] * this.SETTINGS["think_FRACTION"][1] * this.STATICVAR_HOLDER.BYTES_PER_COMPUTEWEEK
   this.STATS["PRODUCTIVITY_RATING"]["psy"] = this.STATS["PRODUCTIVITY_RATING"]["soul"]  * this.SETTINGS["soul_FRACTION"][0]  * this.STATICVAR_HOLDER.BYTES_PER_COMPUTEWEEK
   //STATICVAR_HOLDER.BYTES_PER_COMPUTEWEEK
-  
+
   this.STATS["PRODUCTIVITY_RATING"]["soul"] = this.STATS["PRODUCTIVITY_RATING"]["soul"] / STATICVAR_HOLDER.SOULPROD_RATING_FACTOR
 
   //ELEMS["bio_GAIN_RATE"]
   //ELEMS["eng_GAIN_RATE"]
   //ELEMS["psy_GAIN_RATE"]
-  
-  
+
+
   //this.SETTINGS["COMPUTE_think_FRAC"] = this.ELEMS["computation_CONTROL_SLIDER"].currValue;
   //this.SETTINGS["COMPUTE_soul_FRAC"] = 1 - this.SETTINGS["COMPUTE_think_FRAC"]
   //    INVENTORY["BUFFER-bio-CT"] = 0;
   //   = 0;
-  
+
 }
 GAME_GLOBAL.TICK_INDUSTRY_calcComputation = TICK_INDUSTRY_calcComputation;
 
@@ -662,11 +673,11 @@ function TICK_INDUSTRY_calcScienceGain(){
       var fid = this.SCIENCE_TYPES[i];
       var subf = this.SCIENCE_SUBFIELDS[fid];
 
-      
+
       var newSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid] * STATS["MODIFIERS"]["sanityScienceFactor"]
-      
+
       this.ELEMS[fid+"_GAIN_RATE"].textContent = ""+ fmtSI(newSci," ");
-      
+
       this.INVENTORY[fid+"_SCIENCE_TOTAL"] = this.INVENTORY[fid+"_SCIENCE_TOTAL"] + newSci
       this.INVENTORY[fid+"_SCIENCE_FREE"] = this.INVENTORY[fid+"_SCIENCE_FREE"] + newSci
 
@@ -726,11 +737,11 @@ function TICK_INDUSTRY_calcPowerUsage(){
     }
     var anonFunc = makeAnonFunc(pwrFmt3,pwrFmt4,pwrFmt5,pwrFmt6);
     window.requestAnimationFrame(anonFunc);
-    
+
     var pwrUsage = this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"];
     var pwrUsageLeft = pwrUsage;
     var thermalPwr = 0;
-    
+
     //console.log("HAWKENER = "+ this.INVENTORY["POWERGEN-Hawk"])
     //TODO: sort by priority!
     for(var i=0; i < this.STATICVAR_HOLDER.POWER_SOURCE_LIST.length; i++){
@@ -750,7 +761,7 @@ function TICK_INDUSTRY_calcPowerUsage(){
       var worldPowerCollected = worldPwrUsage / STATS["ENERGYRATE_MULT"][ppid+"pwrGen"];
       thermalPwr = thermalPwr + this.INVENTORY["POWER-Free"+worldType+"-CT"];
       var currThermalMass = (this.INVENTORY["POWER-Free"+worldType+"-CT"] * this.STATICVAR_HOLDER.MASS_PER_POWERTICK)
-      
+
       var makeAnonFunc2 = function(){
                     var wpAvail = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult )
                     var wpThermal = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult )
@@ -766,10 +777,10 @@ function TICK_INDUSTRY_calcPowerUsage(){
       }
       var anonFunc2 = makeAnonFunc2();
       window.requestAnimationFrame(anonFunc2);
-      
+
       //console.log("thermal["+worldType+"]: "+fmtSI(this.INVENTORY["MATTER-Free"+worldType+"-CT"]) + " / "+fmtSI(currThermalMass));
       this.INVENTORY["MATTER-Free"+worldType+"-CT"] = this.INVENTORY["MATTER-Free"+worldType+"-CT"] - currThermalMass
-      
+
       /*
       pp.powerAVAIL.innerHTML   = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult );
       pp.powerTHERMAL.textContent =  fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult );
@@ -782,8 +793,8 @@ function TICK_INDUSTRY_calcPowerUsage(){
     }
     var thermalMass = thermalPwr * this.STATICVAR_HOLDER.MASS_PER_POWERTICK
     this.INVENTORY["MATTER-Heat-CT"] = this.INVENTORY["MATTER-Heat-CT"] + thermalMass
-    
-    
+
+
     this.ELEMS["MATTERDELTA-Heat-DISPLAY"].textContent = fmtSIdelta(thermalMass)
       /*var makeAnonFunc2 = function(){
                     var thermalString = fmtSIflat(thermalPwr * wattMult);
@@ -806,7 +817,7 @@ function TICK_INDUSTRY_calcDeltas(){
           sd.textContent =  fmtsi
           //sd.displayUnits.textContent = fmtsi+ "t"
           //sd.displayDiv.title = "tons: basic unit of mass\n"+fmtsi[4];
-  
+
           var sdd = this.ELEMS["MATTERDELTA-"+matterType+"-DISPLAY"]
           if( sdd != null){
               var diff = matterCt - this["INVENTORY-PREVTICK"]["MATTER-"+matterType+"-CT"];
@@ -835,7 +846,7 @@ function TICK_calcScience(){
       if( thresh < currSci ){
          console.log("("+fmtSI(currSci)+") "+"["+sciname+"] is lvl "+(currLvl + 1) + " ["+fmtSI(thresh)+"] next threshold: "+fmtSI(getProjectBaseCost(currLvl + 2)));
          INVENTORY["SCIENCE-LEVEL-"+sciname] = INVENTORY["SCIENCE-LEVEL-"+sciname] + 1;
-         
+
          if( Math.random() < this.SCIENCE_UNLOCK_RATE ){
            console.log("   attempting unlock");
            var projectList   = this.STATICVAR_HOLDER.SCIENCE.MULTI[sciname];
@@ -863,7 +874,7 @@ function TICK_calcScience(){
            console.log("   skipping unlock");
          }
          //do the unlocks:getRandomBetween
-         
+
       }
     }
 
@@ -968,16 +979,16 @@ function TICK_constructWorlds(){
       if(  this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][1] < Date.now() ){
         var nxtAttempt = this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType][0][0]
         var nxt = this.buildFromCost("WORLDS-"+worldType+"-CT",nxtAttempt,this.STATS["COST-WORLDBUILD-"+worldType]);
-        
+
         var starInfo = this.STAR_TYPE_SET.getRandStarBatch(nxt,0.5)
-        
+
         for( var z=0; z < starInfo[1].length; z++){
           var sinfo = starInfo[1][z];
           this.INVENTORY["STARS-" + sinfo[0] +"-CT"] = this.INVENTORY["STARS-" + sinfo[0] +"-CT"] + sinfo[1];
         }
         this.INVENTORY["MATTER-Free"+worldType+"-CT"] = this.INVENTORY["MATTER-Free"+worldType+"-CT"] + (starInfo[2] * this.STATICVAR_HOLDER.SOLAR_MASS);
         this.INVENTORY["POWER-Free"+worldType+"-CT"] = this.INVENTORY["POWER-Free"+worldType+"-CT"] + (starInfo[3] * this.STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY);
-        
+
         if(nxt == nxtAttempt){
           var nxtbuf = this.CONSTRUCTION_BUFFER["WORLDS_CONST"][worldType].shift()
         } else {

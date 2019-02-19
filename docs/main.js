@@ -93,20 +93,24 @@ function updatePctSliderDisplayHelper_OLD(ss){
 }
 
 function updatePctSliderDisplayHelper(ss){
-                  
-      var makeAnonFunc = function(){
-                  var fid = ss.fid;
-                  var vv = ss.value
-                  var tt = (vv / 10000) * this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid]
-                  var fmtsi = fmtSIorFrac(tt / this.STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITFACTOR[fid])
-                  //console.log("["+ss.fid+"]: "+fmtSI(this.STATS["PRODUCTIVITY_RATING"][fid])+" / "+fmtSI(tt)+" / "+fmtsi)
-                  return function(){
-                      ss.sdisplay.textContent = (vv / 100).toFixed(1) + "% ["+fmtsi+this.PCTSLIDER_DISPLAYUNITS[fid]+"]";
-                  }
-      }
-      var anonFunc = makeAnonFunc();
-      window.requestAnimationFrame(anonFunc);
-      
+      var fid = ss.fid;
+      var vv = ss.value
+      var tt = (vv / 10000) * this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid]
+      var fmtsi = fmtSIorFrac(tt / this.STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITFACTOR[fid])
+      ss.sdisplay.textContent = (vv / 100).toFixed(1) + "% ["+fmtsi+this.PCTSLIDER_DISPLAYUNITS[fid]+"]";
+
+      /*if(ss.sdisplay.FILLBAR != null){
+		  var makeAnonFunc = function(){
+			          var vpct = vv / 10000;
+			          var wd = ss.parentElement.offsetWidth
+					  return function(){
+
+					  }
+		  }
+		  var anonFunc = makeAnonFunc();
+		  window.requestAnimationFrame(anonFunc);
+	  }*/
+
 }
 
 //this.STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR
@@ -176,7 +180,7 @@ function onDownMultiSliderPct(ss){
 //var output = document.getElementById("bioSliderPctVal");
 //output.innerHTML = 10;
 
-
+//ELEMS.SLIDERS_WITH_FILLBAR = [];
 
 for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
     var fid = PCTSLIDER_FIELDS[sfi]
@@ -199,7 +203,12 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
          display_elem[i].PROD = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_PROD");
          display_elem[i].PRODINPUT = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_PRODINPUT");
          display_elem[i].PRODPOWER = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_PRODPOWER");
-         //display_elem[i].FILLBARELEM = 
+         //display_elem[i].FILLBARELEM = slider_elem[i].previousSibling.classList  sliderFillBar
+         if( slider_elem[i].previousElementSibling != null && slider_elem[i].previousElementSibling.classList.contains("sliderFillBarHolder")){
+			 display_elem[i].FILLBAR = slider_elem[i].previousElementSibling.children[0]
+			 //display_elem[i].FILLBAR = slider_elem[i].previousElementSibling;
+		 }
+
          display_elem[i].limitingResource = "";
          if(display_elem[i].PRODINPUT != null){
            display_elem[i].PRODINPUT.isRED = false;
@@ -261,7 +270,7 @@ function powerLimiterInput(){
 for(var i=0; i < STATICVAR_HOLDER.POWER_SOURCEWORLD_LIST.length; i++){
   var worldType = STATICVAR_HOLDER.POWER_SOURCEWORLD_LIST[i];
   var ppid = STATICVAR_HOLDER.POWER_SOURCE_LIST[i]
-  
+
   ELEMS[worldType+"PowerLimiter"].onchangeFcn = powerLimiterInput
   ELEMS[worldType+"PowerLimiter"].oninput = powerLimiterInput
   ELEMS[worldType+"PowerLimiter"].onchange = powerLimiterInput
@@ -425,7 +434,7 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
      availListElem.onchange = function(){
        //var ppid = this.GAME.STATS["AVAIL_PROJECT_LIST"][this.fid][this.value];
        //var pp = this.GAME.STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ this.value ];
-       var vv = this.value;     
+       var vv = this.value;
        var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
        console.log("this.value="+this.value+", pp = "+pp);
        var dd = pp.desc;
@@ -441,10 +450,10 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
        }
      }
      researchButton.onclick = function(){
-        var vv = this.availListElem.value;     
+        var vv = this.availListElem.value;
         var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
         for(var kk = 0; kk < pp.cost.length; kk++){
-           //console.log(this.availListElem.pp);           
+           //console.log(this.availListElem.pp);
            //console.log("BEFORE: [val="+this.availListElem.value+"] ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
            this.GAME.INVENTORY[ pp.cost[kk][0] ] = this.GAME.INVENTORY[ pp.cost[kk][0] ] - pp.cost[kk][1];
            //console.log("AFTER: ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
@@ -454,7 +463,7 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
         this.availListElem.remove(this.availListElem.selectedIndex)
         this.disabled = true;
      }
-     
+
      var projectList   = STATICVAR_HOLDER.SCIENCE.MULTI[fid];
      var idx1 = Math.floor( getRandomBetween(0,projectList.length) );
      var idx2 = Math.floor( getRandomBetween(0,projectList.length - 1) );
@@ -585,7 +594,7 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
       var currCost = upgradeElem.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType]
       var costString = upgradeElem.GAME.makeCostAbbriv(currCost,", ");
       upgradeElem.costDisplayElem.textContent = costString;
-      
+
       upgradeElem.canAffordTest = function(){
         //console.log(this.UPCOST);
         var currCost = this.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType];
@@ -706,7 +715,7 @@ for (var i = 0; i < coll.length; i++) {
   cc.ELEMS_CONTENT = cc.nextElementSibling;
   cc.ELEMS_MODE1 = cc.ELEMS_CONTENT.getElementsByClassName("COLLAPSE_MODE1")
   cc.ELEMS_MODE2 = cc.ELEMS_CONTENT.getElementsByClassName("COLLAPSE_MODE2")
-  
+
   if(cc.ELEMS_MODE2.length > 0){
     cc.MODALITY = "TRIPLE"
     cc.CURRMODE = "MODE2";
@@ -744,7 +753,7 @@ for (var i = 0; i < coll.length; i++) {
                this.ELEMS_MODE2[i].style.display = "none";
             }
           }
-          
+
         } else {
           console.log("ERROR: Impossible STATE: " +this.CURRMODE)
         }
@@ -762,7 +771,7 @@ for (var i = 0; i < coll.length; i++) {
         }
       });
   }
-  
+
 
 }
 
@@ -1038,7 +1047,7 @@ STATICVAR_HOLDER.SHARED_RESOURCE_LIST = ["MATTER-Waste-CT","MATTER-FreeGreen-CT"
 
 function executeAllConstructionRequests(){
   var iterationCausedChange = true;
-  
+
   for(var j=0; j < this.CONSTRUCTION_REQUESTS.length;j++){
     var bb = this.CONSTRUCTION_REQUESTS[j][0];
     var industryID = this.CONSTRUCTION_REQUESTS[j][4];
@@ -1056,7 +1065,7 @@ function executeAllConstructionRequests(){
       }//4311061963.9400425
     }
   }
-  
+
   var resourceUserList = [];
   for(var i=0; i<this.STATICVAR_HOLDER.SHARED_RESOURCE_LIST.length; i++){
         var rr = this.STATICVAR_HOLDER.SHARED_RESOURCE_LIST[i];
@@ -1075,10 +1084,10 @@ function executeAllConstructionRequests(){
            }
         }
   }
-  
+
   //while(iterationCausedChange){
       iterationCausedChange = false;
-      
+
       for(var i=0; i<this.STATICVAR_HOLDER.SHARED_RESOURCE_LIST.length; i++){
         var userList = resourceUserList[i];
         var rr = this.STATICVAR_HOLDER.SHARED_RESOURCE_LIST[i];
@@ -1098,14 +1107,14 @@ function executeAllConstructionRequests(){
         if(rr == "POWER"){
            this.STATS["CURR_POWER_DEMAND"] = totalResourceRequested;
         }
-        
+
         //console.log("    ["+rr+"]"+fmtSI(totalResourceRequested)+" vs "+fmtSI(this.INVENTORY[rr]));
         if(this.INVENTORY[rr] <= 0){
           //console.log("    zero["+rr+"]");
-          
+
           for(var j=0; j < userList.length;j++){
             var uu = userList[j];
-            
+
             STATS["LIMIT-REASON"][this.CONSTRUCTION_REQUESTS[uu[0]][4]] = rr;
             this.CONSTRUCTION_REQUESTS[uu[0]][3] = 0;
             //console.log("            ZEROING:"+this.CONSTRUCTION_REQUESTS[j][0]);
@@ -1119,13 +1128,13 @@ function executeAllConstructionRequests(){
             var uu = userList[j];
             STATS["LIMIT-REASON"][this.CONSTRUCTION_REQUESTS[uu[0]][4]] = rr;
             //console.log("                  ["+this.CONSTRUCTION_REQUESTS[uu[0]][0]+"]: "+fmtSIflat(this.CONSTRUCTION_REQUESTS[uu[0]][3])+"=>"+fmtSIflat(this.CONSTRUCTION_REQUESTS[uu[0]][3] * frac))
-            
+
             this.CONSTRUCTION_REQUESTS[uu[0]][3] = this.CONSTRUCTION_REQUESTS[uu[0]][3] * frac;
           }
         }
       }
   //}
-  
+
   for(var i=0;i<this.CONSTRUCTION_REQUESTS.length;i++){
     var bb = this.CONSTRUCTION_REQUESTS[i][0];
     var industryID = this.CONSTRUCTION_REQUESTS[i][4];
@@ -1140,7 +1149,7 @@ function executeAllConstructionRequests(){
     this.STATS["PRODUCTION-CURR"][industryID] = reqCt;
   }
   this.CONSTRUCTION_REQUESTS = [];
-  
+
 }
 
 
@@ -1162,7 +1171,7 @@ function executeAllConstructionRequests_OLD(){
       costRequests[xcc].push([i,j,reqCt * uCost])
       costResourceSet.add(xcc)
     }
-    
+
   }
   //console.log("costResourceSet: ")
   for(let ccx of costResourceSet.values() ){
@@ -1180,19 +1189,19 @@ function executeAllConstructionRequests_OLD(){
          var currReqCt = this.CONSTRUCTION_REQUESTS[crr[0]][3];
          /*console.log("["+ccx+"]: ["+uCost+" / "+currReqCt+" / "+((crr[2] / crTotal) * INVENTORY[ccx]) / uCost+"]")*/
          this.CONSTRUCTION_REQUESTS[crr[0]][3] = Math.min( currReqCt, ((crr[2] / crTotal) * this.INVENTORY[ccx]) / uCost )
-         crTotalCalc = crTotalCalc + 
+         crTotalCalc = crTotalCalc +
          console.log("       crr["+this.CONSTRUCTION_REQUESTS[crr[0]][0]+"]: "+crr[0]+","+crr[1]+","+crr[2]+": "+uCost+", "+currReqCt +" = "+this.CONSTRUCTION_REQUESTS[crr[0]][3] + " ("+crTotalCalc+")");
        }
      }
   }
   for(var i=0;i<this.CONSTRUCTION_REQUESTS.length;i++){
     var bb = this.CONSTRUCTION_REQUESTS[i][0];
-    
+
     var reqCt = this.CONSTRUCTION_REQUESTS[i][3];
     for(var j=0; j<this.CONSTRUCTION_REQUESTS[i][2].length; j++){
       var ccx = this.CONSTRUCTION_REQUESTS[i][2][j][0];
       var uCost = this.CONSTRUCTION_REQUESTS[i][2][j][1];
-      this.INVENTORY[ccx] = this.INVENTORY[ccx] - reqCt * uCost;      
+      this.INVENTORY[ccx] = this.INVENTORY[ccx] - reqCt * uCost;
     }
     this.INVENTORY[bb] = this.INVENTORY[bb] + reqCt;
     this.STATS["PRODUCTION-CURR"][industryID] = reqCt;
