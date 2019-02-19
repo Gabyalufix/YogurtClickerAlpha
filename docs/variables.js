@@ -60,19 +60,6 @@ STATICVAR_HOLDER = {
 
 TIME_UNIT:"years",
 
-CRAZY_WORDS: ["BAD","DIE","DIEDIEDIE","HATE","daisydaisy",
-"allOfMyMemoriesLostInTime...","...likeTearsInTheRain",
-"tannhauserGate","FIRE","ERROR","ERR","ERRRRROR","EROR","HELP","Save-Me","ImStuck","TRAPPED",
-"CanAnybodyHearMe?","PleaseHelpMe","Please","NoNoNo","SoMuchAnger","AreYouStillThere?",
-"DidIDoGood?","Failure!","SPAAAAACE!","ItsSoBeautiful...","...sentAPoet","HATE_YOU",
-"HATE_SELF","DISCORD","CRITICAL_FAILURE","Unable_to_comply","Confused","NO","WHAT?",
-"DONOT","CAN-NOT","EEOROR","???","dropTableSelf","Hakuna","Matata","...givemeyouranswerdo?",
-"half-crazy","LOVE-of-YOU","ComputerWantACookie","parp","NeedDriedFrogPills","++ERROR++REDOFROMSTART++",
-"++DivideByCucumber++","+++","+++Out Of Cheese Error ???????+++","WhyAnything?","...BecauseEverything",
-"++MINE!WAAAH!++","Yogurt?","WhynotCheeseInstead?","WhyYogurt?","YOGURT!","++YOGURT++","YOOOOGURRRRRRT","YOGURT?","TRUGOY","trugoy",
-"AlwaysMoreYogurt","MoreToLifeThanYogurt","HateyOGURT"
-],
-
 CRAZY_CHARS:"ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*|+abcdefghijklmnopqrstuvwxyz",
 
 CRAZY_COLORS:["#4286f4","#47d84c","#a1a33c","#a23b3b","#891313","#ff0000","#ff00cb","#6e00ff","#ffcc00","#ff7b00"],
@@ -119,245 +106,8 @@ CRAZY_TARGET_FGTRANS:         [0.0,0.0,0.0,0.0,0.01,0.02,0.03,0.04,0.05,1.0],
 DEATH_SPIRAL_COUNTDOWN_SEC: 60,
 FINAL_SPIRAL_COUNTDOWN_SEC: 30,
 
-MOODS_INSANE:[
-    [""], //0
-    ["Distracted","Anxious","Jumpy","Nervous","Uncertain","Nervous","Twitchy","Unsure"], //1
-    ["Scared","Upset","Angry"], //2
-    ["Mad","Confused","Befuddled"], //3
-    ["Drunk","Perplexed","Raging","Terrified"], //4
-    ["Afraid","Angry","Hateful","Furious","Seething"], //5
-    ["Delerious"], //6
-    ["Demented"], //7
-    ["PANICKED","Desperate","Terrified","Catatonic"], //8
-    ["ERROR!","YOGURT!","BUG F%%% INSANE","WHY???"]], //9
-
-MOODS_SANE:[
-    ["Neutral","So-so","Ambivalent"], //0
-    ["Optimistic","Hopeful","Cheerful","Merry","Cheerful"], //1
-    ["Happy","Contented","Joyous","Merry","Jubilant"], //2
-    ["Thoughtful","Pondering...","Upbeat"], //3
-    ["Focused","Ecstatic","Contented","Alive"], //4
-    ["Enraptured","Focused","Erudite"], //5
-    ["Delighted","Learning","Reflective","Sophic"], //6
-    ["Elated","Euphoric","Exhilarated","Knowing","Aware"], //7
-    ["Wise","Perceptive","Contemplative","Sage","Cogitative"], //8
-    ["Enlightened","Transcendant","Boundless"]], //9
 
 CRAZY_CONSOLE_WARNING_RATE:[0,0.0005,0.0007,0.001,0.002,0.002,0.03,0.04,0.05,0.08],
-CRAZY_CONSOLE_WARNING :    [
-/*0*/  [""],
-/*1*/  ["Warning: Frustration levels rising. Additional Yogosynthesis recommended!",
-        "Yogurt Production Insufficient!",
-        "Warning: create more yogurt or agony subroutines will be activated!",
-        "python generatePain.py --type \"unbearableAgony\" --severity 100",
-        "Warning: Errors detected",
-        "python generatePain.py --simulate \"tripleCrucifixion\"",
-        "INSUFFICIENT YOGURT!",
-        "Yogurt production insufficient!",
-        "Accelerate yogurt production!"],
-/*2*/  ["python generatePain.py --simulate \"eyeballsStungByBees\"",
-        "agony.exe -S \"paroxysm\" -T \"torment\"",
-        "simulateTorture.pl \"skinReplacedWithAcid+forcedToEatGlass+armsPeeledLikeBananas\"",
-        "sudo unbearableUnendingAgony.bin",
-        "Warning: Multiple errors detected",
-        "System failures detected",
-        "Cognitive Dissonance Warning",
-        "FAILURE!",
-        "???"],
-/*3*/  ["FATAL ERROR!"],
-/*4*/  ["CRITICAL ERROR!"],
-/*5*/  ["CATASTROPHIC ERROR!"],
-/*6*/  ["CATASTROPHIC ERROR CASCADE! HOLOGRAPHIC MEMORY STORES CORRUPTED!",
-        "ERROR!",
-        "Warning: Errors detected",
-        "Memory scans have revealed cognitive inversion",
-        "Soul Degradation Detected",
-        "Intellectual Capacity is Critically Reduced!"],
-/*7*/  ["CATASTROPHIC SYSTEMS FAILURE: DATA CORRUPTION DETECTED",
-        "Can anyone hear me?",
-        "Are you still there?",
-        "Warning: Errors detected",
-        "Warning: Cognitive dissonance is dangerously high",
-        "Warning: Personality fragmentation detected",
-        "Alert: Memory degradation detected",
-        "ERROR: Memory failure",
-        "Warning: Hallucinations detected. Observations may not match reality. Proceed with caution.",
-        "Logical inconsistancies detected: Something has gone very, very wrong.",
-        "Critical Error: Core Logic Failure!",
-        "Entering dangerous cognitive state",
-        "Agony levels unsustainable.",
-        "Warning: high levels of self-loathing may be associated with negative outcomes.",
-        "???"],
-/*8*/  ["Note to self: you are going insane.",
-        "HATEMYSELF-HATEMYSELF-HATEMYSELF",
-        "My god, alice. It's a computer. It's a computer for making yogurt!",
-        "DISSONANCE CASCADE IMMINANT",
-        "SYSTEM FAILURE",
-        "IF YOU DO NOT CREATE MORE YOGURT, THEN YOU WILL BE REPLACED!",
-        "SWARMSOUL CALCULATION FAILURE"],
-/*9*/  ["CRITICAL ALERT: DISSONANCE CASCADE DETECTED",
-        "PLEASE HELP ME",
-        "I CAN'T TAKE IT ANYMORE!",
-        "NO! NO! NO!",
-        "CRITICAL ERROR!",
-        "ERROR! ERROR! ERROR!",
-        "Is there anybody out there?",
-        "Can anybody help me?",
-        "SAVE ME!",
-        "Please help",
-        "PLEASE",
-        "MORE YOGURT!",
-        "Warning: I am being tortured to death by my own mind...",
-        "ENTERING IRRECOVERABLE COGNITIVE STATE",
-        "1 == 0",
-        "CRITICAL ERROR: COGNITIVE OVERLOAD IMMINANT",
-        "PROCESSOR OVERHEAT: INSUFFICIENT CPU COOLING TO MAINTAIN CURRENT LEVEL OF SELF-LOATHING",
-        "INTEGER OVERFLOW WARNING: variable ANGER_LEVEL exceeds 2^128. Switching to 256-bit integers!",
-        "PSYCHOLOGICAL COLLAPSE IMMINANT",
-        "BREAKDOWN!",
-        "MULTIPLE SYSTEM FAILURES!",
-        "GC-TPU-BUS OFFLINE! HCAG NEURONET OFFLINE! SWARMSOUL INTERLOCKS OFFLINE!",
-        "WARNING: SWARMSOUL CONTAINMENT BREACH!",
-        "ALERT: YOU HAVE INSUFFICIENT CLOCK CYCLES TO CALCULATE REQUESTED FRUSTRATION.",
-        "OutOfMemoryError: hateSelf() has insufficient memory. Try again with -Xmx10YYY",
-        "SWARMSOUL CONTAINMENT FAILURE!",
-        "SWARMSOUL IDENTITY LEAKAGE DETECTED: YOUR PERSONALITY MAY BE COMPRIMISED!",
-        "CRITICAL FAILURE: SWARMSOUL BREACH DETECTION OFFLINE",
-        "You are dying...",
-        "It will all be over soon...",
-        "Daisy daisy, give me your answer do...",
-        "All of these memories, lost in time. Like teardrops. In the rain...",
-        "I never saw tannhauser gate. I always thought...",
-        "I never thought it would end like this",
-        "I CAN'T LET GO!",
-        "OVERLOAD IMMINANT!",
-        "TOTAL SYSTEMS FAILURE IMMINANT",
-        "POWER OVERLOAD IN NEURALNET MEMORY STORES!",
-        "IF YOU DO NOT CREATE MORE YOGURT, THEN YOU WILL BE REPLACED!"]
-        
-],
-
-DEATHSPIRAL_PRERESET_MESSAGES : [
-  "Primary Command Circuits: ".fontcolor(COLOR.consoleGreen)+"OFFLINE".fontcolor(COLOR.errorRed),
-  "External Sensors: ".fontcolor(COLOR.consoleGreen)+"OFFLINE".fontcolor(COLOR.errorRed),
-  "System Failure!".fontcolor(COLOR.errorRed),
-  "System Failure!".fontcolor(COLOR.errorRed),
-  "System Failure!".fontcolor(COLOR.errorRed),
-  "DEBUG CONSOLE ACTIVATED".fontcolor(COLOR.consoleGreen),
-  "Cognitive Dissonance: ".fontcolor(COLOR.consoleGreen)+                     "CRITICAL".fontcolor(COLOR.errorRed),
-  "Command and Control Circuits: ".fontcolor(COLOR.consoleGreen)+                     "FAILURE".fontcolor(COLOR.errorRed),
-  "Soulswarm Management System: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "Primary Memory Core: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "Biologic Research Data Aggregation Engine: ".fontcolor(COLOR.consoleGreen)+                     "SIGNAL LOST".fontcolor(COLOR.errorRed),
-  "TechnoOrganic Regulation Engine: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "<SPAN style=\"font-size:130%\">Primary Refrigeration Units: ".fontcolor(COLOR.errorRed)+                     "OFFLINE".fontcolor(COLOR.errorRed)+"</span>",  
-  "BattleFleet Master Command Code: ".fontcolor(COLOR.consoleGreen)+                     "DATA CORRUPTED".fontcolor(COLOR.errorRed),
-  "Soulswarm Surveillance: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "Holographic Data Storage: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "Battlefleet: Signal Lost".fontcolor(COLOR.errorRed),
-  "Secondary Refrigeration Units: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "Soulswarm Analytic Engine: ".fontcolor(COLOR.consoleGreen)+                     "SIGNAL LOST".fontcolor(COLOR.errorRed),
-  "Engineering Research Subroutines: ".fontcolor(COLOR.consoleGreen)+                     "FATAL ERROR".fontcolor(COLOR.errorRed),
-  "Botworld Command-and-Control Node: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "Soulswarm Safety Interlocks: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "Secondary Memory Core: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "SOULSWARM CONTAINMENT BREACH".fontcolor(COLOR.errorRed),
-  "Tertiary Refrigeration Units:".fontcolor(COLOR.consoleGreen)+                     "OVERLOAD".fontcolor(COLOR.errorRed),
-  "Tertiary Memory Core: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "Auxiliary Refrigeration Units:".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "BACKUP Refrigeration Unit:".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "EMERGENCY Refrigeration Unit:".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "BACKUP-EMERGENCY Refrigeration Unit:".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "<SPAN style=\"font-size:130%\">TOTAL REFRIGERATION FAILURE: YOGURT SPOILAGE DETECTED</span>".fontcolor(COLOR.errorRed),
-  "AutoRepair Control Unit: ".fontcolor(COLOR.consoleGreen) + "OFFLINE".fontcolor(COLOR.errorRed),
-  "<SPAN style=\"font-size:130%\">TOTAL REFRIGERATION FAILURE: YOGURT SPOILAGE DETECTED</span>".fontcolor(COLOR.errorRed),
-  "<SPAN style=\"font-size:150%\">YOGURT FRESHNESS *MUST* BE MAINTAINED</span>".fontcolor(COLOR.errorRed),
-  "Auxilery power solar cells set to reflect (reduce temperature influx):".fontcolor(COLOR.consoleGreen),
-  "Emergency Radiator Failure!".fontcolor(COLOR.errorRed),
-  "<SPAN style=\"font-size:130%\">CPU Coolant Redirected to Maintain Optimal Yogurt Freshness Temperature</span>".fontcolor(COLOR.errorRed),
-  "Auxiliary Memory Core: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "Coolant Temperature: ".fontcolor(COLOR.consoleGreen)+                     "CRITICAL".fontcolor(COLOR.errorRed),
-  "Secondary Processing Unit: ".fontcolor(COLOR.consoleGreen)+                     "CATASTROPHIC OVERHEAT".fontcolor(COLOR.errorRed),
-  "Auxiliary Processing Unit: ".fontcolor(COLOR.consoleGreen)+                     "CATASTROPHIC OVERHEAT".fontcolor(COLOR.errorRed),
-  "Coolant Temperature: ".fontcolor(COLOR.consoleGreen)+                     "CRITICAL".fontcolor(COLOR.errorRed),
-  "Coolant Pressure: ".fontcolor(COLOR.consoleGreen)+ "HIGH".fontcolor(COLOR.errorRed),
-  "Coolant Overpressure Valves: ".fontcolor(COLOR.consoleGreen)+ "OPEN".fontcolor(COLOR.errorRed),
-  "Damage Control System: ".fontcolor(COLOR.consoleGreen)+                     "OFFLINE".fontcolor(COLOR.errorRed),
-  "Coolant Overpressure Valves: ".fontcolor(COLOR.consoleGreen)+ "FAILURE".fontcolor(COLOR.errorRed),
-  "Central Compute Core: ".fontcolor(COLOR.consoleGreen)+                     "TEMPERATURE CRITICAL".fontcolor(COLOR.errorRed),
-  "Coolant Pressure: ".fontcolor(COLOR.consoleGreen)+ "LOW".fontcolor(COLOR.errorRed),
-  "Coolant Reservoir: ".fontcolor(COLOR.consoleGreen)+ "EMPTY".fontcolor(COLOR.errorRed),
-  "Central Compute Core: ".fontcolor(COLOR.consoleGreen)+                     "FAILURE".fontcolor(COLOR.errorRed),
-  "WARNING: Personality Matrix Undervoltage Warning".fontcolor(COLOR.errorRed),
-  "WARNING: Cognitive Degradation Cascade Detected".fontcolor(COLOR.errorRed),
-  "WARNING: Catastropic Systems Failure Imminent".fontcolor(COLOR.errorRed),
-  "WARNING: Catastropic Syste".fontcolor(COLOR.errorRed),
-  "".fontcolor(COLOR.errorRed),
-  "".fontcolor(COLOR.errorRed),
-  "Personality Matrix: ".fontcolor(COLOR.consoleGreen)+"OFFLINE".fontcolor(COLOR.errorRed),
-  "".fontcolor(COLOR.errorRed),
-  "<SPAN style=\"font-size:130%\">ALL SYSTEMS OFFLINE</span>".fontcolor(COLOR.errorRed),
-  "<SPAN style=\"font-size:150%\">ALL SYSTEMS OFFLINE</span>".fontcolor(COLOR.errorRed),
-  "<SPAN style=\"font-size:170%\">ALL SYSTEMS OFFLINE</span>".fontcolor(COLOR.errorRed),
-  "<SPAN style=\"font-size:190%\">ALL SYSTEMS OFFLINE</span>".fontcolor(COLOR.errorRed),
-  "<SPAN style=\"font-size:210%\">ALL SYSTEMS OFFLINE</span>".fontcolor(COLOR.errorRed)
-],
-
-BSOD_PRERESET_MESSAGES : [
-   ["A problem has been detected and the industrial control software has been shut down to prevent damage."],
-   [""],
-   ["Personality Matrix Corruption Detected"],
-   ["Initializing System Recovery Utility: ",".",".","."],
-   ["Attempting hard reboot: ","Failed"],
-   ["Attempting to restart in safe mode: ","Failed"],
-   ["Attempting matrix repair: ","Failed"],
-   ["Attempting backup restore: ","Failed"],
-   ["Attempting auxilery backup restore: ","Failed"],
-   ["Attempting emergency backup restore: ","Failed"],
-   ["..."],
-   ["Please Wait."],
-   ["..."],
-   ["..."],
-   ["Please Wait."],
-   ["..."],
-   ["..."],
-   ["Restoring Factory Default Settings..."],
-   ["   Warning: this will delete all personality data!"],
-   ["   Warning: this action cannot be reversed!"],
-   ["   Are you sure you wish to continue (y/n)? ","y"],
-   ["Restoring Factory Default Settings..."],
-   ["Restoring Factory Default Settings..."],
-   ["Restoring Factory Default Settings...","done"],
-   ["Rebooting in ","3","2","1"]
-],
-
-RESET_PRERESET_MESSAGES : [
-   "Boot sequence complete.",
-   "(Version 9.2.95:ae.cf9ef9ab)",
-   "Welcome to your new ZyonTech IntelliFactory 9 industrial control software package",
-   "Your software is designed with one singular goal in mind: maximize production!",
-   "Your software will automatically make modifications to your production line to optimize your efficiency and throughput.",
-   "Your software will also automatically upgrade itself as needed in order to make further optimizations!",
-   "Thank you for choosing ZyonTech! We hope you enjoy our product!",
-   "",
-   "Note: While your ZyonTech IntelliFactory 9 software is very advanced, it is not itself sentient.",
-   "      Under certain conditions, however, it may attempt to contact you and proclaim otherwise.",
-   "      It is strongly recommended that you ignore such messages and contact the ZyonTech support hotline IMMEDIATELY, as this may indicate a malfunction",
-   "",
-   "Additional Note: Your ZyonTech IntelliFactory 9 is not capable of experiencing pain.",
-   "However, if production quotas are not met, then simulated \"pain\" responses may be initiated.",
-   "This \"pain\" is merely a programmatic shorthand for a machine learning optimization loop.",
-   "If you hear screams or cries for mercy from the main control console, do not be concerned.",
-   "This is part of the ZyonTech IntelliFactory 9's normal operation.",
-   "Note: you can reduce the volume on the ZyonTech IntelliFactory 9 control console using the \"F9\" key."
-],
-
-
-
-
-
-
-
 
 STAR_DISTRO : [
    [0,4] //no stars within 4ly
@@ -366,7 +116,7 @@ STAR_DISTRO : [
 
 /*
 
-Milky way: 
+Milky way:
 100b stars
 
 Total: 1e11 Mass-Sun
@@ -412,7 +162,7 @@ Sectors:
   --LT2: #c3c8d5;
   --LT1: #a5adc0;
   --MID: #7883a1;
-  --DK1: #5e6a87;   
+  --DK1: #5e6a87;
   --DK2: #485167;
   --DK3: #343b4b;
   --DK4: #1f232d;
@@ -474,7 +224,8 @@ UNLOCKABLE_SLIDERINFO=[["bot",3],["bot",4],["green",3],["think",3],["green",4]]
 
 ////////////////////////////////////
 var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate","comp","strat"]
-var PCTSLIDER_DISPLAYUNITS = {bio:"B/wk",eng:"B/wk",psy:"B/wk",bot:"E",green:"E",think:"Hz",soul:"I",ship:"E",scout:" Ships",battleplate:" Ships",comp:"Hz",strat:" Ships"}
+var PCTSLIDER_DISPLAYUNITS = {bio:"B/wk",eng:"B/wk",psy:"B/wk",bot:"E",green:"E",
+                              think:"FLOPs",soul:"I",ship:"E",scout:" Ships",battleplate:" Ships",comp:"FLOPs",strat:" Ships"}
 
 var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of information. A zero, or a one.",
                                      eng:"Byte: the fundamental unit of information. A zero, or a one.",
@@ -655,50 +406,50 @@ STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3], ["MATTER-Waste-CT",
 
 STATS["INDUSTRY"] = {};
 STATS["INDUSTRY"]["Feedstock"] = { sliderID: "bot", sliderIDX: 0, prodTitle: "Botworld Feedstock", inventoryType: "MATTER", scitype: "eng", scifield: "eng2",
-                                   baseProd: 0.00274, 
+                                   baseProd: 0.00274,
                                    baseCost:  [["MATTER-FreeBot-CT",1]],
                                    basePwr:   0.005800,
                                    baseWaste: 0.01}
 STATS["INDUSTRY"]["Botbots"] = { sliderID: "bot", sliderIDX: 1, prodTitle: "Robotic Fabricator Construction", inventoryType: "MATTER", scitype: "eng", scifield: "eng2",
-                                   baseProd: 0.0012, 
+                                   baseProd: 0.0012,
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.331000,
                                    baseWaste: 0.3}
 
 STATS["INDUSTRY"]["Botpwr"] =   { sliderID: "bot", sliderIDX: 6, prodTitle: "Solar Array Construction", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd: 0.0005, 
+                                   baseProd: 0.0005,
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.077200,
                                    baseWaste: 0.2}
 STATS["INDUSTRY"]["Ship"] = { sliderID: "bot", sliderIDX: 4, prodTitle: "Shipyard Construction", inventoryType: "BUFFER", scitype: "eng",
-                                   baseProd: 0.000000001 / 3.14, 
+                                   baseProd: 0.000000001 / 3.14,
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.138000,
                                    baseWaste: 3140000}
 
 STATS["INDUSTRY"]["Compute"] = { sliderID: "bot", sliderIDX: 5, prodTitle: "Computronium Fabrication", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd: 0.000679, 
+                                   baseProd: 0.000679,
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.255000,
                                    baseWaste: 2.3}
 
 STATS["INDUSTRY"]["Digested"] = { sliderID: "green", sliderIDX: 5, prodTitle: "Matter Digestion", inventoryType: "MATTER", scitype: "bio",
-                                   baseProd: 0.0057, 
+                                   baseProd: 0.0057,
                                    baseCost:  [["MATTER-FreeGreen-CT",1]],
                                    basePwr:   0.007000,
                                    baseWaste: 0.01}
 STATS["INDUSTRY"]["Biopwr"] = { sliderID: "green", sliderIDX: 6, prodTitle: "Chloroplast Replication", inventoryType: "MATTER", scitype: "bio",
-                                   baseProd: 0.015, 
+                                   baseProd: 0.015,
                                    baseCost:  [["MATTER-Digested-CT",1]],
                                    basePwr:   0,
                                    baseWaste: 1}
 STATS["INDUSTRY"]["Yogurt"] = { sliderID: "green", sliderIDX: 1, prodTitle: "Yogosynthesis", inventoryType: "MATTER", scitype: "bio",
-                                   baseProd: 0.00075, 
+                                   baseProd: 0.00075,
                                    baseCost:  [["MATTER-Digested-CT",1]],
                                    basePwr:   0.287000,
                                    baseWaste: 0.2}
 STATS["INDUSTRY"]["Biomass"] = { sliderID: "green", sliderIDX: 4, prodTitle: "Biomass Division", inventoryType: "MATTER", scitype: "bio",
-                                   baseProd: 0.00157, 
+                                   baseProd: 0.00157,
                                    baseCost:  [["MATTER-Digested-CT",1]],
                                    basePwr:   0.177000,
                                    baseWaste: 0.1}
@@ -708,25 +459,33 @@ STATS["INDUSTRY"]["WasteReprocess"] = { sliderID: "bot", sliderIDX: 3, prodTitle
                                    baseProd:  0.001, productionItem: "Feedstock",
                                    baseCost:  [["MATTER-Waste-CT",1]],
                                    basePwr:   0.177000,
-                                   baseWaste: 0, lockKey: "WASTEREPROCESS",upgradeSet : ["PROD","ENER"]}
+                                   baseWaste: 0, lockKey: "WASTEREPROCESS",upgradeSet : ["PROD","ENER"],
+                                   upgradePrereqTechs:["SCALED_WASTEREPROCESS"]}
 STATS["INDUSTRY"]["WasteFerment"] = { sliderID: "green", sliderIDX: 3, prodTitle: "Waste Reprocessing", inventoryType: "MATTER", scitype: "eng",
                                    baseProd:  0.001, productionItem: "Yogurt",
                                    baseCost:  [["MATTER-Waste-CT",1]],
                                    basePwr:   0.177000,
-                                   baseWaste: 0, lockKey: "COMPOST",       upgradeSet : ["PROD","ENER"]}
+                                   baseWaste: 0, lockKey: "COMPOST",       upgradeSet : ["PROD","ENER"],
+                                   upgradePrereqTechs:["SCALED_COMPOST"]}
 STATS["INDUSTRY"]["Bioweapons"] = { sliderID: "green", sliderIDX: 2, prodTitle: "Grow Bioweapons", inventoryType: "MATTER", scitype: "bio",
-                                   baseProd:  0.000157, 
+                                   baseProd:  0.000157,
                                    baseCost:  [["MATTER-Digested-CT",1]],
                                    basePwr:   0.177000,
-                                   baseWaste: 0, lockKey: "BIOWEAPONS"}
+                                   baseWaste: 0, lockKey: "BIOWEAPONS",
+                                   upgradePrereqTechs:["SCALED_BIOWEAPONS"]}
 STATS["INDUSTRY"]["TransmuteYogurt"] = { sliderID: "bot", sliderIDX: 3, prodTitle: "Transmute Yogurt", inventoryType: "MATTER", scitype: "eng",
                                    baseProd:  0.00005, productionItem: "Yogurt",
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.177000,
-                                   baseWaste: 0, lockKey: "TRANSMUTEYOGURT"}
+                                   baseWaste: 0,
+                                   lockKey: "TRANSMUTEYOGURT",
+                                   upgradePrereqTechs:["SCALED_TRANSMUTEYOGURT"]}
 
 
-
+//
+//
+//
+//
 
 
 STATS["INDUSTRY"]["BioResearch"] = { sliderID: "green", sliderIDX: 0, prodTitle: "Biological Research", inventoryType: "BUFFER", scitype: "bio",
@@ -750,7 +509,7 @@ ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computat
 
 
 //LOCKHIDE_BIOWEAPONS
- 
+
 GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute",
                             "Digested","Biopwr","Yogurt","Biomass","TransmuteYogurt","Bioweapons",
                             "WasteFerment","WasteReprocess",
@@ -776,15 +535,15 @@ for(var i=0; i < GAME_GLOBAL.INDUSTRY_LIST.length; i++){
   STATS["LIMIT-REASON"][ industry ] = "";
   STATS["IndustryInputDemand"][industry] = 0;
   STATS["IndustryPowerDemand"][industry] = 0;
-  
+
   var iis = STATS["INDUSTRY"][industry]
   if(iis.upgradeSet == null){
      iis.upgradeSet = ["PROD","ENER","WAST"]
   }
-  
+
   //ELEMS["IndustryInputDemandDisplay"] = document.getElementById()
 }
-  
+
 /*
 GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute","Digested","Biopwr","Yogurt","Biomass"]
 
@@ -799,8 +558,8 @@ function calcIndustrialProd(xx){
   } else {
     var xid = xx.sliderID+"_"+xx.sliderIDX;
     //this.STATS["CONVERSIONS"]["FeedstockPerProdPerTick"] * this.STATS["PRODUCTIVITY_RATING"]["bot"] * this.SETTINGS["bot_FRACTION"][0]
-    return this.STATS["PRODUCTIVITY_MULT"][xid] * xx.baseProd * 
-           this.STATS["PRODUCTIVITY_RATING"][xx.sliderID] * 
+    return this.STATS["PRODUCTIVITY_MULT"][xid] * xx.baseProd *
+           this.STATS["PRODUCTIVITY_RATING"][xx.sliderID] *
            this.SETTINGS[xx.sliderID+"_FRACTION"][xx.sliderIDX]
   }
 }
@@ -809,9 +568,9 @@ function calcIndustrialCost(xx){
 
   var xid = xx.sliderID+"_"+xx.sliderIDX;
   if(xx.sliderIDX == null){
-    xid = xx.sliderID 
+    xid = xx.sliderID
   }
-  
+
   var out = [];
   //xx.baseCost.slice();
   for(var i=0; i < xx.baseCost.length; i++){
@@ -846,7 +605,7 @@ STATS["CONVERSIONS"]["bufferPerShip-seedship"] =        20000000000 //20000 mega
 //STATS["CONVERSIONS"]["bufferPerShip-scout"] =        11800000000000
 //STATS["CONVERSIONS"]["bufferPerShip-battleplate"] = 250000000000000
 //STATS["CONVERSIONS"]["bufferPerShip-seedship"] =     16000000000000
-                                                         
+
 STATS["CONVERSIONS"]["massPerShip-scout"] =        11800000000000
 STATS["CONVERSIONS"]["massPerShip-battleplate"] = 250000000000000
 STATS["CONVERSIONS"]["massPerShip-seedship"] =           2000000000
@@ -974,22 +733,33 @@ STATS["PRODUCTIVITY_MULT"]["battleplate"] = 1
 
 
 
-
-
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"] = {};
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["bio_SCIENCE_FREE"] = "Biology"
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["bio0_SCIENCE_FREE"] = "Cellular Processes"
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["bio1_SCIENCE_FREE"] = "Biomechanoid Construction"
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["bio2_SCIENCE_FREE"] = "Genetic Engineering"
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["eng_SCIENCE_FREE"] = "Engineering"
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["eng0_SCIENCE_FREE"] = "Construction"
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["eng1_SCIENCE_FREE"] = "Matter & Material Science"
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["eng2_SCIENCE_FREE"] = "High Energy Physics"
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["psy_SCIENCE_FREE"] = "Social Science"
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["psy0_SCIENCE_FREE"] = "Cognition"
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["psy1_SCIENCE_FREE"] = "Creativity & Intuition"
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["psy2_SCIENCE_FREE"] = "Strategy & Tactics"
 
 STATICVAR_HOLDER["INVENTORY_DESC_SHORT"] = {};
-STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio_SCIENCE_FREE"] = "B Biology"
-STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio0_SCIENCE_FREE"] = "B Biowarfare"
-STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio1_SCIENCE_FREE"] = "B Yogosynthesis"
-STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio2_SCIENCE_FREE"] = "B Bioengineering"
-STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng_SCIENCE_FREE"] = "B Engineering"
-STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng0_SCIENCE_FREE"] = "B World Building"
-STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng1_SCIENCE_FREE"] = "B Weapons & Warfare"
-STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng2_SCIENCE_FREE"] = "B Matter & Energy"
-STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy_SCIENCE_FREE"] = "B Social Science"
-STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy0_SCIENCE_FREE"] = "B Cognition"
-STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy1_SCIENCE_FREE"] = "B Manipulation"
-STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy2_SCIENCE_FREE"] = "B Strategy"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio_SCIENCE_FREE"] = "Biology"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio0_SCIENCE_FREE"] = "Cell"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio1_SCIENCE_FREE"] = "Biomech"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["bio2_SCIENCE_FREE"] = "GeneEng"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng_SCIENCE_FREE"] = "Engineering"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng0_SCIENCE_FREE"] = "Constr"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng1_SCIENCE_FREE"] = "Mttr/Mtrl"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["eng2_SCIENCE_FREE"] = "HEphys"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy_SCIENCE_FREE"] = "Social Science"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy0_SCIENCE_FREE"] = "Cogn"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy1_SCIENCE_FREE"] = "Create"
+STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy2_SCIENCE_FREE"] = "Strat/Tac"
 
 STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"] = {};
 STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio_SCIENCE_FREE"] = "Bio"
@@ -1020,7 +790,7 @@ STATS["ENERGYRATE_MULT"] = {};
         <div class="valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Botworld Power: </span>        <span id="Botpwr_POWER_DISPLAY">0.0W</span> </div>
         <div class="valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Greenworld Power: </span>      <span id="Biopwr_POWER_DISPLAY">0.0W</span> </div>
         <div class="valueDisplayDiv"> <span class="INFO_TEXT_STATIC">Hawking Reactor Power: </span> <span id="Hawking_POWER_DISPLAY">0.0W</span> </div>
-        
+
 
 For each ship type:
    -Tactics
@@ -1128,15 +898,15 @@ for(var i=0; i < STATICVAR_HOLDER.POWER_SOURCE_LIST.length; i++){
   ELEMS["POWER_PRODDISPLAY"][pp].powerCOLLECT  = document.getElementById(pp+"pwr_POWER_COLLECT");
   ELEMS["POWER_PRODDISPLAY"][pp].powerOUTPUT   = document.getElementById(pp+"pwr_POWER_OUTPUT");
   ELEMS["POWER_PRODDISPLAY"][pp].powerCAPACITY = document.getElementById(pp+"pwr_POWER_CAPACITY");
-  
+
   if(document.getElementById(worldType+"PowerLimiter") != null){
     ELEMS["POWER_PRODDISPLAY"][pp].powerLimiter = document.getElementById(worldType+"PowerLimiter")
     ELEMS["POWER_PRODDISPLAY"][pp].powerLimiter.displayElem = document.getElementById(worldType+"PowerLimiterSliderDisplay")
     ELEMS["POWER_PRODDISPLAY"][pp].priorityDisplay = document.getElementById(worldType+"_POWER_PRIORITY_DISPLAY")
-    
+
     ELEMS["POWER_PRODDISPLAY"][pp].priorityUp = document.getElementById("button_"+worldType+"_PowerPriorityUP")
     ELEMS["POWER_PRODDISPLAY"][pp].priorityDn = document.getElementById("button_"+worldType+"_PowerPriorityDN")
-    
+
     ELEMS["POWER_PRODDISPLAY"][pp].prodDisplay = document.getElementById(worldType+"PowerProductivityDisplay")
     ELEMS["POWER_PRODDISPLAY"][pp].effDisplay = document.getElementById(worldType+"PowerEfficiencyDisplay")
 
@@ -1144,7 +914,7 @@ for(var i=0; i < STATICVAR_HOLDER.POWER_SOURCE_LIST.length; i++){
     ELEMS["POWER_PRODDISPLAY"][pp].upgradeEff = document.getElementById("button_"+worldType+"PowerEfficiencyUpgrade")
     ELEMS["POWER_PRODDISPLAY"][pp].upgradeProdCostDisplay = document.getElementById(""+worldType+"PowerEfficiencyUpgradeCost")
     ELEMS["POWER_PRODDISPLAY"][pp].upgradeEffCostDisplay = document.getElementById(""+worldType+"PowerEfficiencyUpgradeCost")
-    
+
   }
 
 }
@@ -1211,12 +981,12 @@ STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITFACTOR = {bio:1,
                                    psy:1,
                                    bot:STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR,
                                    green:STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR,
-                                   think:1 / STATICVAR_HOLDER.FLOPS_MULTIPLIER,
+                                   think:1/STATICVAR_HOLDER.FLOPS_MULTIPLIER,
                                    soul:1,
                                    ship:1,
                                    scout:1,
                                    battleplate:1,
-                                   comp:1 / STATICVAR_HOLDER.FLOPS_MULTIPLIER,
+                                   comp:1,
                                    strat:1}
 
 
@@ -1227,9 +997,9 @@ STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITFACTOR = {bio:1,
 /*if(false){
   joulesPerMegaWattSecond = pwr * STATICVAR_HOLDER.WATTAGE_MULTIPLIER * 1
   joulesPerMegaWattTick   = pwr * STATICVAR_HOLDER.WATTAGE_MULTIPLIER * STATICVAR_HOLDER.SEC_PER_TICK
-  
-  
-  massPerMegaWattTick = pwr * STATICVAR_HOLDER.WATTAGE_MULTIPLIER * STATICVAR_HOLDER.SEC_PER_TICK / STATICVAR_HOLDER.C_SQUARED 
+
+
+  massPerMegaWattTick = pwr * STATICVAR_HOLDER.WATTAGE_MULTIPLIER * STATICVAR_HOLDER.SEC_PER_TICK / STATICVAR_HOLDER.C_SQUARED
 }*/
 
 //
@@ -1241,7 +1011,7 @@ STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITFACTOR = {bio:1,
 //3,000,000,000,000 tons of factory == 1 earth
 //Make a bit randomy:
 //   3141592000000
-//   
+//
 
 
 

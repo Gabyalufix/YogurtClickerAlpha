@@ -401,6 +401,7 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
      var elem = document.createElement("option");
      pp.listElem = elem;
      elem.value = pp.uid;
+     this.GAME.INVENTORY.SCIENCE_DISCOVERED.push( pp.uid );
      elem.appendChild( document.createTextNode( pp.projectTitle ) );
      this.appendChild(elem);
    }
@@ -419,7 +420,16 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
        var vv = this.availListElem.value;
        var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
        if(pp != null){
-         if( this.GAME.canAfford(pp.cost) ){
+		 var prereqs = pp.upgradePrereqTechs;
+		 var meetsPrereqs = true;
+		 if(prereqs != null){
+			 for( var i=0; i < prereqs.length; i++){
+				 if( ! this.GAME.INVENTORY.SCIENCE_RESEARCHED.includes( prereqs[i] ) ){
+					 meetsPrereqs = false;
+				 }
+			 }
+		 }
+         if( this.GAME.canAfford(pp.cost) && meetsPrereqs ){
              this.disabled = false;
              return true;
          } else {
@@ -440,7 +450,7 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
        var dd = pp.desc;
        for(var k=0; k < pp.cost.length;k++){
           var ccc = fmtSIunits(pp.cost[k][1]);
-          dd = dd + "<br> &nbsp&nbsp&nbsp"+ccc[0]+ccc[1]+ this.GAME.STATICVAR_HOLDER["INVENTORY_DESC_SHORT"][pp.cost[k][0]]
+          dd = dd + "<br> &nbsp&nbsp&nbsp"+ccc[0]+ccc[1]+"B "+ this.GAME.STATICVAR_HOLDER["INVENTORY_DESC_FULL"][pp.cost[k][0]]
        }
        this.descElem.innerHTML = dd
        if( this.GAME.canAfford(pp.cost) ){
@@ -460,6 +470,7 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
         }
         this.GAME.currentResearchEffect = this.GAME.STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ pp.projectID ].effect;
         this.GAME.currentResearchEffect();
+        this.GAME.INVENTORY.SCIENCE_RESEARCHED.push(pp.uid);
         this.availListElem.remove(this.availListElem.selectedIndex)
         this.disabled = true;
      }

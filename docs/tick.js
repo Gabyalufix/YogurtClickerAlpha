@@ -185,12 +185,12 @@ function TICK_updateStats(){
 */
   this.STATS["PRODUCTIVITY_RATING"]["bot"]   = this.INVENTORY["MATTER-Botbots-CT"] * this.STATS["PRODUCTIVITY_MULT"]["bot"]
   this.STATS["PRODUCTIVITY_RATING"]["green"]   = this.INVENTORY["MATTER-Biomass-CT"] * this.STATS["PRODUCTIVITY_MULT"]["green"] * this.SETTINGS["BIOMASS_PROD_FRAC"]
-  this.STATS["PRODUCTIVITY_RATING"]["comp"]   = this.INVENTORY["MATTER-Compute-CT"] * this.STATS["PRODUCTIVITY_MULT"]["comp"] * this.STATS["CONVERSIONS"]["sunToOp"]
+  //this.STATS["PRODUCTIVITY_RATING"]["comp"]   = this.INVENTORY["MATTER-Compute-CT"] * this.STATS["PRODUCTIVITY_MULT"]["comp"] * this.STATS["CONVERSIONS"]["sunToOp"]
   this.STATS["PRODUCTIVITY_RATING"]["computation"]   = this.INVENTORY["MATTER-Compute-CT"] * this.STATS["PRODUCTIVITY_MULT"]["computation"]
 
 
   this.STATS["PRODUCTIVITY_RATING"]["ship"]   = this.STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]
-  this.STATS["PRODUCTIVITY_RATING"]["think"] = this.STATS["PRODUCTIVITY_RATING"]["comp"] * this.SETTINGS["comp_FRACTION"][0]
+  //this.STATS["PRODUCTIVITY_RATING"]["think"] = this.STATS["PRODUCTIVITY_RATING"]["comp"] * this.SETTINGS["comp_FRACTION"][0]
   ///this.STATS["PRODUCTIVITY_RATING"]["soul"] = this.STATS["PRODUCTIVITY_RATING"]["comp"] * this.SETTINGS["comp_FRACTION"][1] * this.STATS["CONVERSIONS"]["opToSoul"]
 
   //this.STATS["PRODUCTIVITY_RATING"]["bio"]   = this.STATS["CONVERSIONS"]["sunToByte"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][0]
@@ -638,7 +638,7 @@ function TICK_INDUSTRY_calcComputation(){
   this.STATS["PRODUCTIVITY_RATING"]["soul"] =  this.INVENTORY["BUFFER-COMPUTE-CT"] * this.SETTINGS["COMPUTE_soul_FRAC"]  * this.STATS["MODIFIERS"]["sanityComputeFactor"] * this.STATS["MODIFIERS"]["swarmDiversityFactor"]
 
   this.ELEMS["soul_COMPUTE_RESOURCES"].textContent = fmtSI(this.INVENTORY["BUFFER-COMPUTE-CT"] * this.SETTINGS["COMPUTE_soul_FRAC"] * this.STATICVAR_HOLDER.FLOPS_MULTIPLIER," ")+"";
-  this.ELEMS["soul_OVERALL_PROD"].textContent = fmtSI( this.STATS["PRODUCTIVITY_RATING"]["soul"] / STATICVAR_HOLDER.SOULPROD_RATING_FACTOR )
+  this.ELEMS["soul_OVERALL_PROD"].textContent = fmtSIorFrac( this.STATS["PRODUCTIVITY_RATING"]["soul"] / STATICVAR_HOLDER.SOULPROD_RATING_FACTOR )
 
   this.STATS["PRODUCTIVITY_RATING"]["bio"] = this.INVENTORY["BUFFER-bio-CT"] * this.STATICVAR_HOLDER.BYTES_PER_TON_BIOMASS
   this.STATS["PRODUCTIVITY_RATING"]["eng"] = this.STATS["PRODUCTIVITY_RATING"]["think"] * this.SETTINGS["think_FRACTION"][1] * this.STATICVAR_HOLDER.BYTES_PER_COMPUTEWEEK
@@ -836,6 +836,39 @@ console.log("[all science] is lvl "+(1) + ", next threshold: "+fmtSIintNoPct(Mat
 
 GAME_GLOBAL.SCIENCE_SCALED_UNLOCK_RATE = 1.0;
 
+function unlockRandomMulti(sciname, currLvl){
+           console.log("   attempting unlock");
+           var projectList   = this.STATICVAR_HOLDER.SCIENCE.MULTI[sciname];
+           var projectCts    = this.STATS.SCIENCE_MULTICT;
+           var idx = Math.floor( getRandomBetween(0,projectList.length) );
+           var prereqFailed = true;
+           while(prereqFailed){
+			   idx = Math.floor( getRandomBetween(0,projectList.length) );
+			   var prt = projectList[idx].prereqTechs
+			   prereqFailed = false;
+			   console.log("Testing "+projectList[idx].projectID);
+			   if( prt != null){
+				   for(var zz = 0; zz < prt.length; zz++){
+					   console.log("   Prereq: " + prt[zz]);
+					   if(! this.INVENTORY.SCIENCE_DISCOVERED.includes( prt[zz] ) ){
+						   prereqFailed = true;
+					   }
+				   }
+			   }
+			   if(prereqFailed){
+				   console.log("Skipping "+projectList[idx].projectID+" because prereqs not met! len="+prt.length+" / "+prt);
+			   } else {
+				   console.log("Keeping "+projectList[idx].projectID+" because prereqs met! prereqlen = "+ prt);
+			   }
+		   }
+           console.log("   attempting unlock: "+ projectList[idx].projectID);
+           if(Math.random() < projectList[idx].rate){
+              console.log("   unlocking: "+ projectList[idx].projectID);
+              //     var ap1 = availListElem.addMultiProject(projectList[idx1],1,1)
+              this.SCIENCE_DISPLAY[sciname].availListElem.addMultiProject(projectList[idx], currLvl + 1)
+           }
+}
+GAME_GLOBAL.unlockRandomMulti = unlockRandomMulti;
 function TICK_calcScience(){
     for(var i=0;i<this.SCIENCE_TYPES.length;i++){
       var sciname = this.SCIENCE_TYPES[i];
@@ -849,15 +882,7 @@ function TICK_calcScience(){
 
          if( Math.random() < this.SCIENCE_UNLOCK_RATE ){
            console.log("   attempting unlock");
-           var projectList   = this.STATICVAR_HOLDER.SCIENCE.MULTI[sciname];
-           var projectCts    = this.STATS.SCIENCE_MULTICT;
-           var idx = Math.floor( getRandomBetween(0,projectList.length) );
-           console.log("   attempting unlock: "+ projectList[idx].projectID);
-           if(Math.random() < projectList[idx].rate){
-              console.log("   unlocking: "+ projectList[idx].projectID);
-              //     var ap1 = availListElem.addMultiProject(projectList[idx1],1,1)
-              this.SCIENCE_DISPLAY[sciname].availListElem.addMultiProject(projectList[idx], currLvl + 1)
-           }
+           this.unlockRandomMulti(sciname,currLvl);
          } else if(Math.random() < GAME_GLOBAL.SCIENCE_SCALED_UNLOCK_RATE){
            console.log("   attempting unlock");
            var projectList   = this.STATICVAR_HOLDER.SCIENCE.SCALED[sciname];
