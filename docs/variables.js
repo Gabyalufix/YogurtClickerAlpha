@@ -491,6 +491,7 @@ var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of informat
                                      strat:"Ships: the number of ships assigned a given task."}
 
 
+
 var PCTSLIDER_SUBFIELDCT = [3,3,3,7,7,3,3,3,3,3,2,3]
 var PCTSLIDERS = {}
 
@@ -1201,6 +1202,22 @@ ELEMS["soul_OVERALL_PROD"] = document.getElementById("soul_OVERALL_PROD");
 INVENTORY["soul_IDENT_CT"]         = 71685023612
 INVENTORY["soul_DIVERSITY_CT"]     =   291850236
 INVENTORY["soul_DIVERSITY_RATING"] = INVENTORY["soul_DIVERSITY_CT"] / INVENTORY["soul_IDENT_CT"]
+
+
+
+
+STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITFACTOR = {bio:1,
+                                   eng:1,
+                                   psy:1,
+                                   bot:STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR,
+                                   green:STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR,
+                                   think:1 / STATICVAR_HOLDER.FLOPS_MULTIPLIER,
+                                   soul:1,
+                                   ship:1,
+                                   scout:1,
+                                   battleplate:1,
+                                   comp:1 / STATICVAR_HOLDER.FLOPS_MULTIPLIER,
+                                   strat:1}
 
 
 //STATICVAR_HOLDER.MASS_PER_POWERTICK = 604800

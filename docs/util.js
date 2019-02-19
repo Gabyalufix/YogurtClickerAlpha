@@ -365,6 +365,32 @@ function fmtSI(x, delim=""){
   }
 }
 
+function fmtSIorFrac(x, delim=""){
+  if(x <= 0){
+    return "0.000";
+  } else if(x <= 0.01){
+     return ""+roundTo(x,3)
+  } else if(x <= 0.1){
+     return ""+roundTo(x,2)
+  } else if(x <= 1){
+     return ""+roundTo(x,2)
+  } else if(x < 100){
+    return ""+roundTo(x,1)
+  } else if(x < 1000){
+    return ""+Math.round(x)
+  } else {
+      var d = Math.floor(Math.log10(x))
+      var dd = Math.floor(d / 3) - 1
+      var ddd = Math.floor(dd / 8)
+      var ddp = dd - ddd * 8
+      var rr = x / Math.pow(10,(dd+1)*3)
+      var dp = 2 - (d - ((dd+1)*3))
+      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      return roundTo(rr,dp) +delim+ suffix
+  }
+}
+
+
 function fmtSIflat(x){
   if(x <= 0){
     return 0.0;

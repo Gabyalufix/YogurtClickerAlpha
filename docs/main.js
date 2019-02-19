@@ -93,11 +93,13 @@ function updatePctSliderDisplayHelper_OLD(ss){
 }
 
 function updatePctSliderDisplayHelper(ss){
+                  
       var makeAnonFunc = function(){
                   var fid = ss.fid;
                   var vv = ss.value
                   var tt = (vv / 10000) * this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid]
-                  var fmtsi = fmtSIflat(tt / this.STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR)
+                  var fmtsi = fmtSIorFrac(tt / this.STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITFACTOR[fid])
+                  //console.log("["+ss.fid+"]: "+fmtSI(this.STATS["PRODUCTIVITY_RATING"][fid])+" / "+fmtSI(tt)+" / "+fmtsi)
                   return function(){
                       ss.sdisplay.textContent = (vv / 100).toFixed(1) + "% ["+fmtsi+this.PCTSLIDER_DISPLAYUNITS[fid]+"]";
                   }
