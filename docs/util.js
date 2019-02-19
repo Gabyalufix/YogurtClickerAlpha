@@ -425,6 +425,15 @@ function fmtSIlog(x){
   }
 }
 
+function fmtSIreal(x){
+    var sign = "";
+    if(x < 0){
+      x = -x
+      sign = "-";
+    }
+    return sign + fmtSI(x," ");
+
+}
 
 
 function fmtSIdelta(x){

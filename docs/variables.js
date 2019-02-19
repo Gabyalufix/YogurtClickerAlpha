@@ -723,11 +723,11 @@ STATS["INDUSTRY"]["TransmuteYogurt"] = { sliderID: "bot", sliderIDX: 3, prodTitl
 
 
 
-STATS["INDUSTRY"]["BioResearch"] = { sliderID: "green", sliderIDX: 1, prodTitle: "Biological Research", inventoryType: "BUFFER", scitype: "bio",
+STATS["INDUSTRY"]["BioResearch"] = { sliderID: "green", sliderIDX: 0, prodTitle: "Biological Research", inventoryType: "BUFFER", scitype: "bio",
                                    baseProd:  0.00005, productionItem: "bio",
-                                   baseCost:  [["MATTER-Feedstock-CT",0]],
-                                   basePwr:   0.219000,
-                                   baseWaste: 1,
+                                   baseCost:  [["MATTER-Digested-CT",0]],
+                                   basePwr:   5.83,
+                                   baseWaste: 26.1,
                                    upgradeSet: ["ENER","INPUT"]}
 
 STATS["INDUSTRY"]["Computation"] = { sliderID: "computation", sliderIDX: null, prodTitle: "Computation", inventoryType: "BUFFER", scitype: "eng",
@@ -1081,6 +1081,9 @@ strat:
 */
 
 
+ELEMS["bio_GAIN_RATE"] = document.getElementById("bio_GAIN_RATE");
+ELEMS["eng_GAIN_RATE"] = document.getElementById("eng_GAIN_RATE");
+ELEMS["psy_GAIN_RATE"] = document.getElementById("psy_GAIN_RATE");
 
 
 ELEMS["POWER_DISPLAY"] = document.getElementById("POWER_DISPLAY")
@@ -1171,7 +1174,10 @@ STATICVAR_HOLDER.FLOPS_MULTIPLIER = 895275210000000
 STATICVAR_HOLDER.BYTES_PER_COMPUTEWEEK = 2.238188e+19
 
 STATICVAR_HOLDER.SOULSperFLOP           =   (0.000000001)
-STATICVAR_HOLDER.BYTES_PER_TON_BIOMASS  = 1000;
+STATICVAR_HOLDER.BYTES_PER_TON_BIOMASS  = 6.42e+18;
+
+
+
 
 STATICVAR_HOLDER.TRUE_WATTS_SOL_LUMINOSITY = 3.828e26
 STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY = STATICVAR_HOLDER.TRUE_WATTS_SOL_LUMINOSITY / STATICVAR_HOLDER.WATTAGE_MULTIPLIER;

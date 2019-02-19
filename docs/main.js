@@ -1044,6 +1044,7 @@ function executeAllConstructionRequests(){
     //console.log( "constReq "+industryID+", costLen="+this.CONSTRUCTION_REQUESTS[j][2].length)
 
     for(var ii=0; ii < this.CONSTRUCTION_REQUESTS[j][2].length; ii++){
+      //console.log( "     "+industryID+"-REQ ["+this.CONSTRUCTION_REQUESTS[j][2][ii][0]+"]: "+ fmtSIreal(this.CONSTRUCTION_REQUESTS[j][2][ii][1] * this.CONSTRUCTION_REQUESTS[j][1]))
       if(this.CONSTRUCTION_REQUESTS[j][2][ii][0] == "POWER"){
         //console.log( "IndustryPowerDemand-"+industryID+": "+ (this.CONSTRUCTION_REQUESTS[j][2][ii][1] * this.CONSTRUCTION_REQUESTS[j][1]))
         this.STATS["IndustryPowerDemand"][industryID] = this.CONSTRUCTION_REQUESTS[j][2][ii][1] * this.CONSTRUCTION_REQUESTS[j][1]

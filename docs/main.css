@@ -447,15 +447,16 @@ h5 {
   background-color: var(--LT2);
 }
 
+
 .contentGridBG {
   background-color: var(--LT2);
   border: 1px solid var(--DK2);
+  grid-gap: 0px;
+  padding: 0px;
 }
 
-.contentGridItemNoBorders {
-  background-color: var(--LT2);
-  padding: 5px;
-}
+
+
 
 .contentGridItem {
   background-color: var(--LT2);
@@ -540,7 +541,22 @@ h5 {
   margin: 0px;
 }
 
+.contentGridItemNoBorders {
+  padding: 5px;
+}
+.bgLT3 {
+  background-color: var(--LT3);
+}
+.bgLT2 {
+  background-color: var(--LT2);
+}
+.bgMID {
+  background-color: var(--MID);
+}
 
+.bgLT1 {
+  background-color: var(--LT1);
+}
 
 
 /*

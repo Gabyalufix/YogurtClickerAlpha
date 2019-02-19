@@ -479,6 +479,7 @@ ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computat
              pwrLimElem.style.color = "red";
              pwrLimElem.style["text-decoration-line"]= "underline";
          } else {
+             
              pwrLimElem.style.color = null;
              pwrLimElem.style["text-decoration-line"]= "none";
          }
@@ -498,6 +499,7 @@ ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computat
             //limiterString = "    (insufficient "+itemTitle+")";
             //limiterString
          }
+         //console.log("["+industryID+"] limited: "+limiterID)
 
 
          var repHtml = function(elm,str){
@@ -531,6 +533,7 @@ ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computat
              prevInputLimElem.style["text-decoration-line"]= "none";
              prevPowerLimElem.style["text-decoration-line"]= "underline";
            } else if(limiterID != ""){
+             //console.log("["+industryID+"] RED INPUT!")
              prevInputLimElem.style.color = "red";
              prevPowerLimElem.style.color = null;
              prevInputLimElem.style["text-decoration-line"]= "underline";
@@ -598,6 +601,11 @@ function TICK_INDUSTRY_calcComputation(){
   this.STATS["PRODUCTIVITY_RATING"]["psy"] = this.STATS["PRODUCTIVITY_RATING"]["soul"]  * this.SETTINGS["soul_FRACTION"][0]  * this.STATICVAR_HOLDER.BYTES_PER_COMPUTEWEEK
   //STATICVAR_HOLDER.BYTES_PER_COMPUTEWEEK
 
+  //ELEMS["bio_GAIN_RATE"]
+  //ELEMS["eng_GAIN_RATE"]
+  //ELEMS["psy_GAIN_RATE"]
+  
+  
   //this.SETTINGS["COMPUTE_think_FRAC"] = this.ELEMS["computation_CONTROL_SLIDER"].currValue;
   //this.SETTINGS["COMPUTE_soul_FRAC"] = 1 - this.SETTINGS["COMPUTE_think_FRAC"]
   //    INVENTORY["BUFFER-bio-CT"] = 0;
@@ -621,10 +629,9 @@ function TICK_INDUSTRY_calcScienceGain(){
 
       
       var newSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid] * STATS["MODIFIERS"]["sanityScienceFactor"]
-      if(fid == "bio"){
-        //do the special bio stuff
-        
-      }
+      
+      this.ELEMS[fid+"_GAIN_RATE"].textContent = ""+ fmtSI(newSci," ");
+      
       this.INVENTORY[fid+"_SCIENCE_TOTAL"] = this.INVENTORY[fid+"_SCIENCE_TOTAL"] + newSci
       this.INVENTORY[fid+"_SCIENCE_FREE"] = this.INVENTORY[fid+"_SCIENCE_FREE"] + newSci
 
