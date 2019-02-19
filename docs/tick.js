@@ -64,6 +64,7 @@ function TICK_runFastTick(){
         GAME.TICK_calcIndustry();
         GAME.TICK_INDUSTRY_calcScienceGain();
         GAME.TICK_INDUSTRY_calcPowerUsage();
+        GAME.TICK_INDUSTRY_calcComputation();
         GAME.TICK_calcScience();
         GAME.TICK_INDUSTRY_calcDeltas()
         
@@ -146,6 +147,8 @@ function TICK_readUserInputs(){
 
   this.SETTINGS["BIOMASS_PROD_FRAC"] = this.ELEMS["BIOMASS_CONTROL_SLIDER"].currValue;
   this.SETTINGS["BIOMASS_PWR_FRAC"] = 1 - this.SETTINGS["BIOMASS_PROD_FRAC"]
+  this.SETTINGS["COMPUTE_think_FRAC"] = this.ELEMS["computation_CONTROL_SLIDER"].currValue;
+  this.SETTINGS["COMPUTE_soul_FRAC"] = 1 - this.SETTINGS["COMPUTE_think_FRAC"]
 }
 
 function TICK_setUserInputs(){
@@ -190,9 +193,9 @@ function TICK_updateStats(){
   this.STATS["PRODUCTIVITY_RATING"]["think"] = this.STATS["PRODUCTIVITY_RATING"]["comp"] * this.SETTINGS["comp_FRACTION"][0]
   this.STATS["PRODUCTIVITY_RATING"]["soul"] = this.STATS["PRODUCTIVITY_RATING"]["comp"] * this.SETTINGS["comp_FRACTION"][1] * this.STATS["CONVERSIONS"]["opToSoul"]
 
-  this.STATS["PRODUCTIVITY_RATING"]["bio"]   = this.STATS["CONVERSIONS"]["sunToByte"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][0]
-  this.STATS["PRODUCTIVITY_RATING"]["eng"]   = this.STATS["CONVERSIONS"]["opToByte"]  * this.STATS["PRODUCTIVITY_RATING"]["think"] * this.SETTINGS["think_FRACTION"][1]
-  this.STATS["PRODUCTIVITY_RATING"]["psy"]   =  this.STATS["PRODUCTIVITY_RATING"]["soul"] * this.SETTINGS["soul_FRACTION"][0]
+  //this.STATS["PRODUCTIVITY_RATING"]["bio"]   = this.STATS["CONVERSIONS"]["sunToByte"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][0]
+  //this.STATS["PRODUCTIVITY_RATING"]["eng"]   = this.STATS["CONVERSIONS"]["opToByte"]  * this.STATS["PRODUCTIVITY_RATING"]["think"] * this.SETTINGS["think_FRACTION"][1]
+  //this.STATS["PRODUCTIVITY_RATING"]["psy"]   =  this.STATS["PRODUCTIVITY_RATING"]["soul"] * this.SETTINGS["soul_FRACTION"][0]
 
    this.STATS["PRODUCTIVITY_RATING"]["scout"]   = Math.floor(this.INVENTORY["SHIPS-"+"scout"+"-CT"])
    this.STATS["PRODUCTIVITY_RATING"]["battleplate"]   = Math.floor(this.INVENTORY["SHIPS-"+"battleplate"+"-CT"])
@@ -409,6 +412,9 @@ function TICK_INDUSTRY_calcPOWERGEN(){
 }
 
 function TICK_INDUSTRY_addCReqs(){
+    INVENTORY["BUFFER-bio-CT"] = 0;
+    INVENTORY["BUFFER-COMPUTE-CT"] = 0;
+    
     //console.log("-------------------")
     for(var i=0; i<this.INDUSTRY_LIST.length; i++){
        var industryID = this.INDUSTRY_LIST[i];
@@ -505,7 +511,7 @@ ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computat
          }
          //var anonFunc = makeAnonFunc(pwrFmt3,pwrFmt4,pwrFmt5,pwrFmt6);
          //window.requestAnimationFrame(anonFunc);
-         console.log( "PWR: "+industryID+ " [" +fmtSI(this.STATS["IndustryPowerDemand"][industryID])+"]")
+         //console.log( "PWR: "+industryID+ " [" +fmtSI(this.STATS["IndustryPowerDemand"][industryID])+"]")
          
          if(this.PCTSLIDERS[sd].displayElem[sdx].PRODINPUT != null){
           // console.log(sd +" / "+sdx+":"+industryID);
@@ -572,15 +578,49 @@ ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computat
     
 
 }
+STATS["MODIFIERS"] = {};
+STATS["MODIFIERS"]["swarmDiversityFactor"] = 1;
+STATS["MODIFIERS"]["sanityScienceFactor"] = 1;
+STATS["MODIFIERS"]["sanityComputeFactor"] = 1;
 
+//STATS["MODIFIERS"]["sanityScienceFactor"] = 1;
+
+
+function TICK_INDUSTRY_calcComputation(){
+
+  //console.log( "computeBuffer: "+fmtSI(INVENTORY["BUFFER-COMPUTE-CT"]))
+  //this.INVENTORY["BUFFER-bio-CT"]
+  this.STATS["PRODUCTIVITY_RATING"]["think"] = this.INVENTORY["BUFFER-COMPUTE-CT"] * this.SETTINGS["COMPUTE_think_FRAC"] * this.STATS["MODIFIERS"]["sanityComputeFactor"]
+  this.STATS["PRODUCTIVITY_RATING"]["soul"] =  this.INVENTORY["BUFFER-COMPUTE-CT"] * this.SETTINGS["COMPUTE_soul_FRAC"]  * this.STATS["MODIFIERS"]["sanityComputeFactor"] * this.STATS["MODIFIERS"]["swarmDiversityFactor"]
+  
+  this.STATS["PRODUCTIVITY_RATING"]["bio"] = this.INVENTORY["BUFFER-bio-CT"] * this.STATICVAR_HOLDER.BYTES_PER_TON_BIOMASS
+  this.STATS["PRODUCTIVITY_RATING"]["eng"] = this.STATS["PRODUCTIVITY_RATING"]["think"] * this.SETTINGS["think_FRACTION"][1] * this.STATICVAR_HOLDER.BYTES_PER_COMPUTEWEEK
+  this.STATS["PRODUCTIVITY_RATING"]["psy"] = this.STATS["PRODUCTIVITY_RATING"]["soul"]  * this.SETTINGS["soul_FRACTION"][0]  * this.STATICVAR_HOLDER.BYTES_PER_COMPUTEWEEK
+  //STATICVAR_HOLDER.BYTES_PER_COMPUTEWEEK
+
+  //this.SETTINGS["COMPUTE_think_FRAC"] = this.ELEMS["computation_CONTROL_SLIDER"].currValue;
+  //this.SETTINGS["COMPUTE_soul_FRAC"] = 1 - this.SETTINGS["COMPUTE_think_FRAC"]
+  //    INVENTORY["BUFFER-bio-CT"] = 0;
+  //   = 0;
+  
+}
+GAME_GLOBAL.TICK_INDUSTRY_calcComputation = TICK_INDUSTRY_calcComputation;
 
 function TICK_INDUSTRY_calcScienceGain(){
+
+  //this.STATS["PRODUCTIVITY_RATING"]["bio"]   = this.STATS["CONVERSIONS"]["sunToByte"] * this.STATS["PRODUCTIVITY_RATING"]["green"] * this.SETTINGS["green_FRACTION"][0]
+  //this.STATS["PRODUCTIVITY_RATING"]["eng"]   = this.STATS["CONVERSIONS"]["opToByte"]  * this.STATS["PRODUCTIVITY_RATING"]["think"] * this.SETTINGS["think_FRACTION"][1]
+  //this.STATS["PRODUCTIVITY_RATING"]["psy"]   =  this.STATS["PRODUCTIVITY_RATING"]["soul"] * this.SETTINGS["soul_FRACTION"][0]
+
+   //this.INVENTORY["BUFFER-bio-CT"]
+   //this.INVENTORY["BUFFER-bio-CT"]
+
     for(var i=0;i<this.SCIENCE_TYPES.length;i++){
       var fid = this.SCIENCE_TYPES[i];
       var subf = this.SCIENCE_SUBFIELDS[fid];
 
       
-      var newSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid]
+      var newSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid] * STATS["MODIFIERS"]["sanityScienceFactor"]
       if(fid == "bio"){
         //do the special bio stuff
         
@@ -597,10 +637,10 @@ function TICK_INDUSTRY_calcScienceGain(){
         var newSubSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid] * this.SETTINGS[fid+"_FRACTION"][j];
         this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] = this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] + newSubSci
         this.INVENTORY[fid+j+"_SCIENCE_FREE"]  = this.INVENTORY[fid+j+"_SCIENCE_FREE"]  + newSubSci
-        var fssi = fmtSIunits( this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] );
-        this.SCIENCE_DISPLAY[fid][j].textContent =   fssi[0]+" "+fssi[1]+"B"
+        //var fssi = fmtSIunits( this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] );
+        //this.SCIENCE_DISPLAY[fid][j].textContent =   fssi[0]+" "+fssi[1]+"B"
         var ffssi = fmtSIunits( this.INVENTORY[fid+j+"_SCIENCE_FREE"] );
-        this.SCIENCE_DISPLAY[fid][j].free.textContent =   ffssi[0]+" "+ffssi[1]+"B"
+        this.SCIENCE_DISPLAY[fid][j].textContent =   ffssi[0]+" "+ffssi[1]+"B"
       }
     }
 

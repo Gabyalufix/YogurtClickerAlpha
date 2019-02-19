@@ -366,7 +366,7 @@ h5 {
 }
 .contentGrid3 {
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 33% 34% 33%;
   /*grid-gap: 5px;*/
   padding: 1px;
 
@@ -378,7 +378,20 @@ h5 {
   padding: 1px;
 
 }
+.contentGrid5 {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  /*grid-gap: 5px;*/
+  padding: 1px;
 
+}
+.contentGrid6 {
+  display: grid;
+  grid-template-columns: 16.7% 16.6% 16.7% 16.7% 16.6% 16.7%;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+
+}
 
 
 .contentGrid5Hz {
@@ -434,6 +447,15 @@ h5 {
   background-color: var(--LT2);
 }
 
+.contentGridBG {
+  background-color: var(--LT2);
+  border: 1px solid var(--DK2);
+}
+
+.contentGridItemNoBorders {
+  background-color: var(--LT2);
+  padding: 5px;
+}
 
 .contentGridItem {
   background-color: var(--LT2);
