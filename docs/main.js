@@ -199,6 +199,7 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
          display_elem[i].PROD = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_PROD");
          display_elem[i].PRODINPUT = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_PRODINPUT");
          display_elem[i].PRODPOWER = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_PRODPOWER");
+         //display_elem[i].FILLBARELEM = 
          display_elem[i].limitingResource = "";
          if(display_elem[i].PRODINPUT != null){
            display_elem[i].PRODINPUT.isRED = false;

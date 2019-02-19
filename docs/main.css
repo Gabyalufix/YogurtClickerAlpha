@@ -1115,7 +1115,8 @@ h5 {
 
 .slidecontainer {
   grid-area: span 1 / span 4;
-  padding: 2px 0px 2px 0px;
+  padding: 0px 0px 0px 0px;
+  margin: 0px;
 }
 
 .sliderBG {
@@ -1125,13 +1126,14 @@ h5 {
   padding: 0px;
   margin: 0px;
   position: relative;
-  border: solid 1px transparent;
+  border: solid 0px transparent;
   height: 15px;  
+  width: 100%
 }
 
 .slider {
   -webkit-appearance: none;
-  width: 88%;
+  width: 100%;
   height: 15px;
   border: solid 1px black;
   border-radius: 2px;
@@ -1141,7 +1143,7 @@ h5 {
   -webkit-transition: .2s;
   transition: opacity .2s;
   position: absolute;
-  top: 1px;
+  top: -2px;
   left: -2px;
 }
 
@@ -1152,11 +1154,11 @@ h5 {
   background: #1bba21;
   outline: none;
   opacity: 0.7;
-  top: 8px;
+  top: 5.5px;
   left: 1px;
   padding: 0px;
   margin: 0px;
-  border: solid 1px transparent;
+  border: solid 0px transparent;
   pointer-events: none
 }
 
