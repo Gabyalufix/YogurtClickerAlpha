@@ -262,14 +262,33 @@
 <div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">SOULSWARM</span></h1></button>
 	<div class="content">
+			<div class="contentGrid4 dataTable">
+			  <span class="contentGridItem1x2"> <h5> <span class="INFO_TEXT_STATIC">Status: </span><span id="SOULSWARM_STATE">Nominal</span> </h5></span>
+			  <span class="contentGridItem1x2" style="text-align:right"> <h5> <span class="INFO_TEXT_STATIC">Mood:   </span><span id="SOULSWARM_MOOD">Irrelevant</span> </h5></span>
+            </div>
 
-        <span class="INFO_TEXT_STATIC">Capacity: </span><div class="valueDisplayDiv" id="soul_PRODUCTIVITY_DISPLAY_DIV"><span id="soul_PRODUCTIVITY_DISPLAY"></span><span id="soul_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+			<div class="contentGrid3x3Hz dataTable">
+
+			<div class="contentGridItemHzT ">   <span class="INFO_TEXT_STATIC">Compute Resources:</span></div>
+			<div class="contentGridItemHzB"> <span id="soul_COMPUTE_RESOURCES">0.0</span>FLOPs </div>
+
+            <div class="contentGridItemHzB contentGridItem1x3"> <span class="INFO_TEXT_STATIC">Productivity Rating:</span>  <span id="soul_OVERALL_PROD">0.0</span></div>
+
+			<div class="contentGridItemHzT ">   <span class="INFO_TEXT_STATIC"># Distinct Entities:</span></div>
+			<div class="contentGridItemHzB"> <span id="soul_IDENT_CT">0.0</span> </div>
+
+			<div class="contentGridItemHzT ">   <span class="INFO_TEXT_STATIC">Cognitive Diversity:</span></div>
+			<div class="contentGridItemHzB"> <span id="soul_IDENT_DIVERSITY">0.0</span> </div>
+
+			</div>
+
+        <span style="display:none;"><span class="INFO_TEXT_STATIC" >Compute Resources: </span><span id="soul_PRODUCTIVITY_DISPLAY"></span></span>
 
         <div class="contentUnitHolder">
 		<button class="collapsible"><span class="INFO_TEXT_STATIC"><h2>Task Distribution </h2></span></button>
 			<div class="contentLV3">
 
-			<h5><span class="INFO_TEXT_STATIC">Social Science: </span><div class="valueDisplayDiv" id="soulSliderDisplayPct1_DIV"><span id="soulSliderDisplayPct1"></span><span id="soulSliderDisplayPct1_UNITS"></span></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Social Science: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct1_DIV"><span id="soulSliderDisplayPct1"></span></span></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="5000" class="slider" id="soulSliderPct1">
@@ -281,7 +300,7 @@
 				</div>
 
 
-			<h5><span class="INFO_TEXT_STATIC">Combat Sim: </span><div class="valueDisplayDiv" id="soulSliderDisplayPct3_DIV"><span id="soulSliderDisplayPct3"></span><span id="soulSliderDisplayPct3_UNITS"></span></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Combat Sim: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct3_DIV"><span id="soulSliderDisplayPct3"></span></span></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="5000" class="slider" id="soulSliderPct3">
@@ -292,7 +311,7 @@
 					</label>
 				</div>
 
-			<h5><span class="INFO_TEXT_STATIC">Espionage: </span><div class="valueDisplayDiv" id="soulSliderDisplayPct2_DIV"><span id="soulSliderDisplayPct2"></span><span id="soulSliderDisplayPct2_UNITS"></span></div></h5>
+			<h5><span class="INFO_TEXT_STATIC">Espionage: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct2_DIV"><span id="soulSliderDisplayPct2"></span></span></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						  <input type="range" min="0" max="10000" value="0" class="slider" id="soulSliderPct2">

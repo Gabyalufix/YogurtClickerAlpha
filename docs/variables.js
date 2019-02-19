@@ -475,6 +475,7 @@ UNLOCKABLE_SLIDERINFO=[["bot",3],["bot",4],["green",3],["think",3],["green",4]]
 ////////////////////////////////////
 var PCTSLIDER_FIELDS = ["bio","eng","psy","bot","green","think","soul","ship","scout","battleplate","comp","strat"]
 var PCTSLIDER_DISPLAYUNITS = {bio:"B/wk",eng:"B/wk",psy:"B/wk",bot:"E",green:"E",think:"Hz",soul:"I",ship:"E",scout:" Ships",battleplate:" Ships",comp:"Hz",strat:" Ships"}
+
 var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of information. A zero, or a one.",
                                      eng:"Byte: the fundamental unit of information. A zero, or a one.",
                                      psy:"Byte: the fundamental unit of information. A zero, or a one.",
@@ -1151,7 +1152,6 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
 ELEMS["Bot"+"PowerLimiter"] = document.getElementById("Bot"+"PowerLimiter");
 ELEMS["Bot"+"PowerLimiter"].displayElem = document.getElementById("BotPowerLimiterSliderDisplay");
 
-
 ELEMS["Green"+"PowerLimiter"] = document.getElementById("Green"+"PowerLimiter");
 ELEMS["Green"+"PowerLimiter"].displayElem = document.getElementById("GreenPowerLimiterSliderDisplay");
 
@@ -1161,6 +1161,7 @@ ELEMS["Hawk"+"PowerLimiter"].displayElem = document.getElementById("BotPowerLimi
 
 STATICVAR_HOLDER.WATTAGE_MULTIPLIER = 5000000000
 STATICVAR_HOLDER.FLOPS_MULTIPLIER = 895275210000000
+STATICVAR_HOLDER.SOULPROD_RATING_FACTOR = 27000000 * 6
 
 
 // 1 gigahertz for 1 week generates: 25 terabytes of data
@@ -1188,8 +1189,14 @@ STATICVAR_HOLDER.SPEED_OF_LIGHT = 299792000
 STATICVAR_HOLDER.C_SQUARED = Math.pow(299792000,2)
 STATICVAR_HOLDER.MASS_PER_POWERTICK =  (STATICVAR_HOLDER.WATTAGE_MULTIPLIER * STATICVAR_HOLDER.SEC_PER_TICK / STATICVAR_HOLDER.C_SQUARED) / 1000
 
+ELEMS["soul_IDENT_CT"]             =  document.getElementById("soul_IDENT_CT");
+ELEMS["soul_COMPUTE_RESOURCES"]    =  document.getElementById("soul_COMPUTE_RESOURCES");
+ELEMS["soul_IDENT_DIVERSITY"]      =  document.getElementById("soul_IDENT_DIVERSITY");
+ELEMS["soul_OVERALL_PROD"] = document.getElementById("soul_OVERALL_PROD");
 
-
+INVENTORY["soul_IDENT_CT"]         = 71685023612
+INVENTORY["soul_DIVERSITY_CT"]     =   291850236
+INVENTORY["soul_DIVERSITY_RATING"] = INVENTORY["soul_DIVERSITY_CT"] / INVENTORY["soul_IDENT_CT"]
 
 
 //STATICVAR_HOLDER.MASS_PER_POWERTICK = 604800

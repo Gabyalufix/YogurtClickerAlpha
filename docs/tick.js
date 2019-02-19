@@ -147,8 +147,8 @@ function TICK_readUserInputs(){
 
   this.SETTINGS["BIOMASS_PROD_FRAC"] = this.ELEMS["BIOMASS_CONTROL_SLIDER"].currValue;
   this.SETTINGS["BIOMASS_PWR_FRAC"] = 1 - this.SETTINGS["BIOMASS_PROD_FRAC"]
-  this.SETTINGS["COMPUTE_think_FRAC"] = this.ELEMS["computation_CONTROL_SLIDER"].currValue;
-  this.SETTINGS["COMPUTE_soul_FRAC"] = 1 - this.SETTINGS["COMPUTE_think_FRAC"]
+  this.SETTINGS["COMPUTE_soul_FRAC"] = this.ELEMS["computation_CONTROL_SLIDER"].currValue;
+  this.SETTINGS["COMPUTE_think_FRAC"] = 1 - this.SETTINGS["COMPUTE_soul_FRAC"]
 }
 
 function TICK_setUserInputs(){
@@ -238,6 +238,18 @@ function TICK_updateStats(){
         var matterType = this.MATTER_TYPE_LIST[i]
         this["INVENTORY-PREVTICK"]["MATTER-"+matterType+"-CT"] = this.INVENTORY["MATTER-"+matterType+"-CT"]
   }
+
+
+    this.ELEMS["soul_IDENT_CT"].textContent = fmtSI( INVENTORY["soul_IDENT_CT"]," ")
+    //ELEMS["soul_COMPUTE_RESOURCES"]   
+    this.ELEMS["soul_IDENT_DIVERSITY"].textContent = fmtSI(INVENTORY["soul_DIVERSITY_CT"]," ")
+
+           
+    //INVENTORY["soul_DIVERSITY_CT"]    
+    //INVENTORY["soul_DIVERSITY_RATING"]
+
+
+
 
 }
 function getTimeStringFromTick(tt){
@@ -595,6 +607,9 @@ function TICK_INDUSTRY_calcComputation(){
   //this.INVENTORY["BUFFER-bio-CT"]
   this.STATS["PRODUCTIVITY_RATING"]["think"] = this.INVENTORY["BUFFER-COMPUTE-CT"] * this.SETTINGS["COMPUTE_think_FRAC"] * this.STATS["MODIFIERS"]["sanityComputeFactor"]
   this.STATS["PRODUCTIVITY_RATING"]["soul"] =  this.INVENTORY["BUFFER-COMPUTE-CT"] * this.SETTINGS["COMPUTE_soul_FRAC"]  * this.STATS["MODIFIERS"]["sanityComputeFactor"] * this.STATS["MODIFIERS"]["swarmDiversityFactor"]
+  
+  this.ELEMS["soul_COMPUTE_RESOURCES"].textContent = fmtSI(this.INVENTORY["BUFFER-COMPUTE-CT"] * this.SETTINGS["COMPUTE_soul_FRAC"] * this.STATICVAR_HOLDER.FLOPS_MULTIPLIER," ")+"";
+  this.ELEMS["soul_OVERALL_PROD"].textContent = fmtSI( this.STATS["PRODUCTIVITY_RATING"]["soul"] / STATICVAR_HOLDER.SOULPROD_RATING_FACTOR )
   
   this.STATS["PRODUCTIVITY_RATING"]["bio"] = this.INVENTORY["BUFFER-bio-CT"] * this.STATICVAR_HOLDER.BYTES_PER_TON_BIOMASS
   this.STATS["PRODUCTIVITY_RATING"]["eng"] = this.STATS["PRODUCTIVITY_RATING"]["think"] * this.SETTINGS["think_FRACTION"][1] * this.STATICVAR_HOLDER.BYTES_PER_COMPUTEWEEK
