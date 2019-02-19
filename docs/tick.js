@@ -225,11 +225,13 @@ function TICK_updateStats(){
       //this.updatePctSliderDisplay(this.PCTSLIDERS[fid]["sliderElem"][0])
   }
   
-  window.requestAnimationFrame(function(){
-    this.GAME.DEBUG_CRAZY_LEVEL_DISPLAY.textContent =  this.GAME.STATS["CRAZY_LEVEL"]
-    this.GAME.DATE_DISPLAY.textContent =  this.GAME.getDateStringFromTick(this.STATS["TICK"])
-    this.GAME.MOOD_DISPLAY.textContent =  this.GAME.STATS["MOOD"]
-  })
+  //window.requestAnimationFrame(function(){
+    this.DEBUG_CRAZY_LEVEL_DISPLAY.textContent =  this.STATS["CRAZY_LEVEL"]
+    //this.GAME.DATE_DISPLAY.textContent =  this.GAME.getDateStringFromTick(this.STATS["TICK"])
+    this.ELEMS.DATE_DISPLAY.textContent =  this.getYearStringFromTick(this.STATS["TICK"])+","
+    this.ELEMS.DATE_WEEK_DISPLAY.textContent =  this.getWeekStringFromTick(this.STATS["TICK"])
+    this.MOOD_DISPLAY.textContent =  this.STATS["MOOD"]
+  //})
   
 
 
@@ -263,6 +265,22 @@ function getDateStringFromTick(tt){
   var wk = tt - y / STATS["CONVERSIONS"]["yearPerTick"];
   return (y + STATS["CONVERSIONS"]["timeAtZero"])+ ", wk"+Math.floor(wk)
 }
+function getYearStringFromTick(tt){
+  var y =  Math.floor( tt * STATS["CONVERSIONS"]["yearPerTick"] );
+  var wk = tt - y / STATS["CONVERSIONS"]["yearPerTick"];
+  return (y + STATS["CONVERSIONS"]["timeAtZero"])+""
+}
+function getWeekStringFromTick(tt){
+  var y =  Math.floor( tt * STATS["CONVERSIONS"]["yearPerTick"] );
+  var wk = Math.floor(tt - y / STATS["CONVERSIONS"]["yearPerTick"]);
+  if(wk <= 9){
+    return "wk0"+wk
+  } else {
+    return "wk"+wk
+  }
+}
+GAME_GLOBAL.getYearStringFromTick = getYearStringFromTick
+GAME_GLOBAL.getWeekStringFromTick = getWeekStringFromTick
 
 for( var i = 0; i < this.WORLD_TYPE_LIST.length; i++){
    ELEMS[WORLD_TYPE_LIST[i] + "_CT_DISPLAY"] = document.getElementById(WORLD_TYPE_LIST[i] + "_CT");
