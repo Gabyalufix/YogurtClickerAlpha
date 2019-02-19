@@ -1085,8 +1085,9 @@ function executeAllConstructionRequests(){
            for(var k=0; k < this.CONSTRUCTION_REQUESTS[j][2].length; k++){
              if(rr == this.CONSTRUCTION_REQUESTS[j][2][k][0]){
                userList.push([j,k]);
-               //console.log("            [:"+this.CONSTRUCTION_REQUESTS[j][0]+"] uses "+rr);
                totalResourceRequested = totalResourceRequested + this.CONSTRUCTION_REQUESTS[j][2][k][1] * this.CONSTRUCTION_REQUESTS[j][3];
+               console.log("            [:"+this.CONSTRUCTION_REQUESTS[j][0]+"] uses "+rr +fmtSI(this.CONSTRUCTION_REQUESTS[j][2][k][1] * this.CONSTRUCTION_REQUESTS[j][3])+ "("+fmtSI(totalResourceRequested)+")");
+
              }
            }
         }
@@ -1094,7 +1095,7 @@ function executeAllConstructionRequests(){
            this.STATS["CURR_POWER_DEMAND"] = totalResourceRequested;
         }
         
-        //console.log("    ["+rr+"]"+totalResourceRequested+" vs "+this.INVENTORY[rr]);
+        console.log("    ["+rr+"]"+fmtSI(totalResourceRequested)+" vs "+fmtSI(this.INVENTORY[rr]));
         if(this.INVENTORY[rr] <= 0){
           //console.log("    zero["+rr+"]");
           

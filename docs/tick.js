@@ -183,6 +183,8 @@ function TICK_updateStats(){
   this.STATS["PRODUCTIVITY_RATING"]["bot"]   = this.INVENTORY["MATTER-Botbots-CT"] * this.STATS["PRODUCTIVITY_MULT"]["bot"]
   this.STATS["PRODUCTIVITY_RATING"]["green"]   = this.INVENTORY["MATTER-Biomass-CT"] * this.STATS["PRODUCTIVITY_MULT"]["green"] * this.SETTINGS["BIOMASS_PROD_FRAC"]
   this.STATS["PRODUCTIVITY_RATING"]["comp"]   = this.INVENTORY["MATTER-Compute-CT"] * this.STATS["PRODUCTIVITY_MULT"]["comp"] * this.STATS["CONVERSIONS"]["sunToOp"]
+  this.STATS["PRODUCTIVITY_RATING"]["computation"]   = this.INVENTORY["MATTER-Compute-CT"] * this.STATS["PRODUCTIVITY_MULT"]["computation"]
+
 
   this.STATS["PRODUCTIVITY_RATING"]["ship"]   = this.STATS["PRODUCTIVITY_RATING"]["bot"] * SETTINGS["bot_FRACTION"][4]
   this.STATS["PRODUCTIVITY_RATING"]["think"] = this.STATS["PRODUCTIVITY_RATING"]["comp"] * this.SETTINGS["comp_FRACTION"][0]
@@ -450,9 +452,9 @@ function TICK_calcIndustry(){
        var sdx  = iss.sliderIDX;
        if(sdx == null){
          //???
-         var powerLim = ""+fmtSI(this.STATS["IndustryPowerDemand"][industryID]," ")+"W";
-         var reqCt = ""+fmtSI(this.STATS["PRODUCTION-REQ"][ industryID ] ," ")+"FLOPs"
-         var currCt = ""+fmtSI(this.STATS["PRODUCTION-CURR"][ industryID ] ," ")+"FLOPs"
+         var powerLim = ""+fmtSI(this.STATS["IndustryPowerDemand"][industryID] * this.STATICVAR_HOLDER.WATTAGE_MULTIPLIER," ")+"W";
+         var reqCt = ""+fmtSI(this.STATS["PRODUCTION-REQ"][ industryID ] * this.STATICVAR_HOLDER.FLOPS_MULTIPLIER," ")+"FLOPs"
+         var currCt = ""+fmtSI(this.STATS["PRODUCTION-CURR"][ industryID ] * this.STATICVAR_HOLDER.FLOPS_MULTIPLIER ," ")+"FLOPs"
          
 /*
 
@@ -503,14 +505,14 @@ ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computat
          }
          //var anonFunc = makeAnonFunc(pwrFmt3,pwrFmt4,pwrFmt5,pwrFmt6);
          //window.requestAnimationFrame(anonFunc);
-
-
+         console.log( "PWR: "+industryID+ " [" +fmtSI(this.STATS["IndustryPowerDemand"][industryID])+"]")
+         
          if(this.PCTSLIDERS[sd].displayElem[sdx].PRODINPUT != null){
           // console.log(sd +" / "+sdx+":"+industryID);
            //sd = "bot"; sdx = 1; industryID = "Botbots"
 
            var inputLim = ""+fmtSI(this.STATS["IndustryInputDemand"][industryID])+"t";
-           var powerLim = ""+fmtSI(this.STATS["IndustryPowerDemand"][industryID])+"W";
+           var powerLim = ""+fmtSI(this.STATS["IndustryPowerDemand"][industryID] * this.STATICVAR_HOLDER.WATTAGE_MULTIPLIER)+"W";
            //var inputLimRed = false;
            //var powerLimRed = false;
 

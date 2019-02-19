@@ -730,7 +730,7 @@ STATS["INDUSTRY"]["BioResearch"] = { sliderID: "green", sliderIDX: 1, prodTitle:
                                    baseWaste: 1,
                                    upgradeSet: ["ENER","INPUT"]}
 
-STATS["INDUSTRY"]["Computation"] = { sliderID: "comp", sliderIDX: null, prodTitle: "Computation", inventoryType: "BUFFER", scitype: "eng",
+STATS["INDUSTRY"]["Computation"] = { sliderID: "computation", sliderIDX: null, prodTitle: "Computation", inventoryType: "BUFFER", scitype: "eng",
                                    baseProd:  0.00005, productionItem: "COMPUTE",
                                    baseCost:  [],
                                    basePwr:   0.219000,
@@ -919,7 +919,7 @@ STATS["COST-WORLDDECON-Slag"] = [["WORLDS-Fallow-CT",-1]];
 STATS["COST-WORLDDECON-Seedres"] = [["WORLDS-Fallow-CT",-1]];
 
 
-PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","comp","think","soul","ship","hawk"]
+PRODUCTIVITY_STATS = ["bot","green","bio","eng","psy","comp","think","soul","ship","hawk","computation"]
 STATS["PRODUCTIVITY_RATING"] = {}
 STATS["PRODUCTIVITY_MULT"] = {}
 STATS["WASTERATE_MULT"] = {};
@@ -1157,6 +1157,8 @@ ELEMS["Hawk"+"PowerLimiter"].displayElem = document.getElementById("BotPowerLimi
 
 
 STATICVAR_HOLDER.WATTAGE_MULTIPLIER = 5000000000
+STATICVAR_HOLDER.FLOPS_MULTIPLIER = 5000000
+
 STATICVAR_HOLDER.TRUE_WATTS_SOL_LUMINOSITY = 3.828e26
 STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY = STATICVAR_HOLDER.TRUE_WATTS_SOL_LUMINOSITY / STATICVAR_HOLDER.WATTAGE_MULTIPLIER;
 STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR = 3141592000000;
