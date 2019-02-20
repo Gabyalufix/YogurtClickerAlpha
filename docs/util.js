@@ -22,17 +22,23 @@ function generateProceduralTextPrintFail(err, ss, SSVAR,soFar){
   console.log("ERROR: generateProceduralText."+err+": [ss=\""+ss+"\",soFar = \""+soFar+"\"]");
 }
 
+//generateProceduralText(STATICVAR_HOLDER.PROCTEXT.STAR_NAME,{},"",true)
+//generateProceduralText(STATICVAR_HOLDER.PROCTEXT.SCRAMBLE_SYLLABLE_WORD,{},"",true)
+//genProcText(STATICVAR_HOLDER.PROCTEXT.STAR_NAME)
+function genProcText(ss){
+  return generateProceduralText(ss,{},verbose=false);
+}
 
 function generateProceduralText(ss, SSVAR, verbose){
-  return generateProceduralTextMain(ss,SSVAR,soFar="",verbose, 1)
+  return generateProceduralTextMain(ss,SSVAR,soFar="",verbose=verbose, 1)
 }
 
 
 function generateProceduralTextMain(ssin, SSVAR = {}, soFar = "", verbose = true, lvl = 1){
    var ss = ssin.slice()
-   if(ss.length == 0){
+   if(ss.length == 0 && verbose){
      console.log("|  ".repeat(lvl)+"Starting on: []; sofar=\""+soFar+"\" (Lvl="+lvl+")");
-   } else {
+   } else if(verbose) {
      console.log("|  ".repeat(lvl)+"Starting on: [["+ss[0] + "],...]; sofar=\""+soFar+"\" (Lvl="+lvl+")");
    }
 

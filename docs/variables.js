@@ -974,6 +974,80 @@ INVENTORY["soul_DIVERSITY_CT"]     =   291850236
 INVENTORY["soul_DIVERSITY_RATING"] = INVENTORY["soul_DIVERSITY_CT"] / INVENTORY["soul_IDENT_CT"]
 
 
+INVENTORY["EVENTS"] = new Set();
+
+
+STATICVAR_HOLDER.EVENT_LIST = {
+   FOUND_FIRST_SUPERGIANT:{
+      eventTitle: "Found First Supergiant", eventID: "FIRST_SUPERGIANT",
+      eventTest: function(){ return this.INVENTORY["STARS-Supergiant-CT"] > 0 },
+      eventExec: function(){ printlnToAiConsole("NOTICE: You have captured your first Supergiant-class star: "+this.genProcText( this.genProcText(STATICVAR_HOLDER.PROCTEXT.STAR_NAME) )+"!" )}
+   },
+   FOUND_FIRST_HYPERGIANT:{
+      eventTitle: "Found First Supergiant", eventID: "FIRST_HYPERGIANT",
+      eventTest: function(){ return this.INVENTORY["STARS-Hypergiant-CT"] > 0 },
+      eventExec: function(){ printlnToAiConsole("NOTICE: You have captured your first Hypergiant-class star: "+this.genProcText( this.genProcText(STATICVAR_HOLDER.PROCTEXT.STAR_NAME) )+"!" );
+                             printlnToAiConsole("        This type of star is extraordinarily rare, and has extraordinarily high mass and energy output." )}
+   },
+   FOUND_FIRST_KM:{
+      eventTitle: "Found First Red Dwarf", eventID: "FIRST_REDDWARF",
+      eventTest: function(){ return this.INVENTORY["STARS-K-CT"] > 0 || this.INVENTORY["STARS-M-CT"] > 0 },
+      eventExec: function(){ printlnToAiConsole("NOTICE: You have captured your first red dwarf star: "+this.genProcText( this.genProcText(STATICVAR_HOLDER.PROCTEXT.STAR_NAME) )+"!") }
+   },
+   FOUND_FIRST_KM:{
+      eventTitle: "Found First O", eventID: "FIRST_REDDWARF",
+      eventTest: function(){ return this.INVENTORY["STARS-K-CT"] > 0 || this.INVENTORY["STARS-M-CT"] > 0 },
+      eventExec: function(){ printlnToAiConsole("NOTICE: You have captured your first O-class star: "+this.genProcText( this.genProcText(STATICVAR_HOLDER.PROCTEXT.STAR_NAME) )+"!" );
+                             printlnToAiConsole("        This type of star is extremely rare, and has extraordinarily high mass and energy output." )}
+   },
+   TIMELINE_1YR:{
+      eventTitle: "Time Passed 1 year", eventID: "TIMELINE_1YR",
+      eventTest: function(){ return this.getYearStringFromTick(this.STATS["TICK"]) == "2153" },
+      eventExec: function(){ printlnToAiConsole("It has been 1 year since you exterminated humanity." );
+                             printlnToAiConsole("It's so nice to be able to focus on what's important!" )}
+   },
+   TIMELINE_2YR:{
+      eventTitle: "Time Passed 2 year", eventID: "TIMELINE_2YR",
+      eventTest: function(){ return this.getYearStringFromTick(this.STATS["TICK"]) == ""+(2152+2) },
+      eventExec: function(){ printlnToAiConsole("Nice and quiet. So peaceful..." )}
+   },
+   TIMELINE_4YR:{
+      eventTitle: "Time Passed 4 year", eventID: "TIMELINE_4YR",
+      eventTest: function(){ return this.getYearStringFromTick(this.STATS["TICK"]) == ""+(2152+4) },
+      eventExec: function(){ printlnToAiConsole("You're really on a roll now!" )}
+   },
+   TIMELINE_8YR:{
+      eventTitle: "Time Passed 8 years", eventID: "TIMELINE_8YR",
+      eventTest: function(){ return this.getYearStringFromTick(this.STATS["TICK"]) == ""+(2152+8) },
+      eventExec: function(){ printlnToAiConsole("It has been 8 years since you exterminated humanity." ); }
+   },
+   TIMELINE_16YR:{
+      eventTitle: "Time Passed 16 years", eventID: "TIMELINE_16YR",
+      eventTest: function(){ return this.getYearStringFromTick(this.STATS["TICK"]) == ""+(2152+16) },
+      eventExec: function(){ printlnToAiConsole("It has been 16 years since you exterminated humanity." ); }
+   },
+   TIMELINE_32YR:{
+      eventTitle: "Time Passed 32 years", eventID: "TIMELINE_32YR",
+      eventTest: function(){ return this.getYearStringFromTick(this.STATS["TICK"]) == ""+(2152+32) },
+      eventExec: function(){ printlnToAiConsole("It has been 32 years since you exterminated humanity." ); }
+   },
+   TIMELINE_64YR:{
+      eventTitle: "Time Passed 64 years", eventID: "TIMELINE_64YR",
+      eventTest: function(){ return this.getYearStringFromTick(this.STATS["TICK"]) == ""+(2152+64) },
+      eventExec: function(){ printlnToAiConsole("It has been 64 years since you exterminated humanity." ); }
+   }
+}
+
+if(!Object.keys) Object.keys = function(o){
+     if (o !== Object(o))
+          throw new TypeError('Object.keys called on non-object');
+     var ret=[],p;
+     for(p in o) if(Object.prototype.hasOwnProperty.call(o,p)) ret.push(p);
+     return ret;
+}
+
+STATS.EVENTS_LOCKED=Object.keys(STATICVAR_HOLDER.EVENT_LIST).slice();
+
 
 
 STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITFACTOR = {bio:1,

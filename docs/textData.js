@@ -23,11 +23,23 @@ var PROCTEXT = {
    SCRAMBLE_SYLLABLE_WORD_LONG:[["#GLOBAL.GET","SCRAMBLE_SYLLABLE"],
                            ["#GLOBAL.GET","SCRAMBLE_SYLLABLE"],
                            ["#RANDOR","0.85",["#GLOBAL.GET","SCRAMBLE_SYLLABLE_WORD_LONG"],[""]]],
-   NATION_NAME:["Augustus-1","Naovi"]
-
+   NATION_NAME:["Augustus-1","Naovi"],
+   
+   
+   
+   STAR_NAME_BASE:[["#RAND","Draconis","Bharani","Canopus","Perseii","Castor","Celaeno","Cervantes","Athebyne","Asellus","Felis","Elnath","Ginan","Kornephoros","Libertas","Pherkad","Procyon","Velorum","Expecto","Rigel","Sagittarii","Leonis","Eridani","Canis","Aquarii","Cygnus","Orionis","Pegasi","Cassiopeiae","Tauri","Saggitae","Virginis","Delphini","Acquilae","Hydrae","Andromedae","Phoenicis","Pheonix","Fenix","Aiur","Vulcan","Dorsai","Arrakis","Dune","Aldaraan","Korhal","M6-117","Osiris","Caprica","Aerilon","Aquaria","Canceron","Gemenon","Leonis","Libran","Picon","Sagittaron","Scorpia","Tauron","Virgon","Kobol","Coruscant","Cyteen","We Made It","Crashland","Gallifrey","Gaia","Terra-2","Magrathea","Minerva","Amazonia","Nessus","Pern","Reverie","Daedalus","Penglai","DjinnsBane","Zeus","Ghost","BlueStar","RedStar","Kaldasa","Georgia","Redsun","Heinlein","RedPheonix","Murphy","Elphame","QinShi","Rubicon","Miranda","Burnham","Lux","Santo","Pelorum","Genge","Motherlode","Bernadette","Ariel","Valentine","Londunium","Bellerophon","Althion","Persephone","Greenleaf","Jubilee","Paquin","Silverfold","Lazerus","Harvest","Aesir","Valhalla","Meadow","Fury"]],
+   STAR_NAME_PREFIX:[["#RANDOR","0.8",["#RAND","Alpha","Beta","Delta","Eta","Zeta","Epsilon","Gamma","Omicron"],[""]]],
+   STAR_NAME_SUFFIX:[["#RAND"," I"," II"," III"," IV"," V"," VI"," VII"," IX"," XI"," Secundus"," Tertius"," Prime"," "," Patronum"]],
+   STAR_NAME_SUFSUFFIX:[["#RANDOR","0.5",["#RAND","1","2","3","4","9","A","B","C","X","Y","Z","a","c","e","m"],[""]],["#RANDOR","0.5",["#GLOBAL.GET","STAR_NAME_SUFSUFFIX"],[""]]],
+   STAR_NAME_FINALSUFFIX:[["#RANDOR","0.25",["#RAND","(i)","(ii)","(iii)"],[""]]],
+   STAR_NAME:[["#RANDOR","0.7",["#GLOBAL.GET","STAR_NAME_PREFIX"],[""]]," ",
+                               ["#GLOBAL.GET","STAR_NAME_BASE"],"",
+                               ["#GLOBAL.GET","STAR_NAME_SUFFIX"],
+                               ["#GLOBAL.GET","STAR_NAME_SUFSUFFIX"],
+                               ["#GLOBAL.GET","STAR_NAME_FINALSUFFIX"]]
 }
 
-
+STATICVAR_HOLDER.PROCTEXT = PROCTEXT;
 
 STATICVAR_HOLDER.CRAZY_WORDS = ["BAD","DIE","DIEDIEDIE","HATE","daisydaisy",
 "allOfMyMemoriesLostInTime...","...likeTearsInTheRain",

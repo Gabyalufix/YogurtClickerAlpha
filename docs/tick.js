@@ -67,7 +67,7 @@ function TICK_runFastTick(){
         GAME.TICK_INDUSTRY_calcComputation();
         GAME.TICK_calcScience();
         GAME.TICK_INDUSTRY_calcDeltas()
-
+        GAME.TICK_calcEvents();
 
         secTimer++;
         if (secTimer >= 250){
@@ -571,22 +571,22 @@ function TICK_calcIndustry(){
 
            if(this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR != null){
 
-			   var setPct = this.SETTINGS[sd+"_FRACTION"][sdx];
-			   var yieldPct = currCt / reqCt;
-			   if(reqCt == 0){
-				   yieldPct = 0;
-			   }
-			   var finalPct = setPct * yieldPct * 100
-			   //console.log("INDUSTRY: "+industryID + " / "+roundTo(this.SETTINGS[sd+"_FRACTION"][sdx]*100,2) + " / finalPct = "+roundTo(finalPct,3));
-			   this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR.style.width = finalPct + "%";
-			   if(yieldPct < 0.25){
-				   this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR.style["background-color"] = "var(--subduedWarnRed)"
-			   } else if(yieldPct < 1){
-				   this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR.style["background-color"] = "var(--subduedWarnYellow)"
-			   } else {
-				   this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR.style["background-color"] = "var(--subduedWarnGreen)"
-			   }
-		   }
+               var setPct = this.SETTINGS[sd+"_FRACTION"][sdx];
+               var yieldPct = currCt / reqCt;
+               if(reqCt == 0){
+                   yieldPct = 0;
+               }
+               var finalPct = setPct * yieldPct * 100
+               //console.log("INDUSTRY: "+industryID + " / "+roundTo(this.SETTINGS[sd+"_FRACTION"][sdx]*100,2) + " / finalPct = "+roundTo(finalPct,3));
+               this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR.style.width = finalPct + "%";
+               if(yieldPct < 0.25){
+                   this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR.style["background-color"] = "var(--subduedWarnRed)"
+               } else if(yieldPct < 1){
+                   this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR.style["background-color"] = "var(--subduedWarnYellow)"
+               } else {
+                   this.PCTSLIDERS[sd].displayElem[sdx].FILLBAR.style["background-color"] = "var(--subduedWarnGreen)"
+               }
+           }
 
            this.STATS["IndustryInputDemand"][industryID] = "0.0";
            this.STATS["IndustryPowerDemand"][industryID] = "0.0";
@@ -843,24 +843,24 @@ function unlockRandomMulti(sciname, currLvl){
            var idx = Math.floor( getRandomBetween(0,projectList.length) );
            var prereqFailed = true;
            while(prereqFailed){
-			   idx = Math.floor( getRandomBetween(0,projectList.length) );
-			   var prt = projectList[idx].prereqTechs
-			   prereqFailed = false;
-			   console.log("Testing "+projectList[idx].projectID);
-			   if( prt != null){
-				   for(var zz = 0; zz < prt.length; zz++){
-					   console.log("   Prereq: " + prt[zz]);
-					   if(! this.INVENTORY.SCIENCE_DISCOVERED.includes( prt[zz] ) ){
-						   prereqFailed = true;
-					   }
-				   }
-			   }
-			   if(prereqFailed){
-				   console.log("Skipping "+projectList[idx].projectID+" because prereqs not met! len="+prt.length+" / "+prt);
-			   } else {
-				   console.log("Keeping "+projectList[idx].projectID+" because prereqs met! prereqlen = "+ prt);
-			   }
-		   }
+               idx = Math.floor( getRandomBetween(0,projectList.length) );
+               var prt = projectList[idx].prereqTechs
+               prereqFailed = false;
+               console.log("Testing "+projectList[idx].projectID);
+               if( prt != null){
+                   for(var zz = 0; zz < prt.length; zz++){
+                       console.log("   Prereq: " + prt[zz]);
+                       if(! this.INVENTORY.SCIENCE_DISCOVERED.includes( prt[zz] ) ){
+                           prereqFailed = true;
+                       }
+                   }
+               }
+               if(prereqFailed){
+                   console.log("Skipping "+projectList[idx].projectID+" because prereqs not met! len="+prt.length+" / "+prt);
+               } else {
+                   console.log("Keeping "+projectList[idx].projectID+" because prereqs met! prereqlen = "+ prt);
+               }
+           }
            console.log("   attempting unlock: "+ projectList[idx].projectID);
            if(Math.random() < projectList[idx].rate){
               console.log("   unlocking: "+ projectList[idx].projectID);
@@ -1037,9 +1037,23 @@ function TICK_constructWorlds(){
   }
 }
 
+function TICK_calcEvents(){
+  for(var i=0; i < STATS.EVENTS_LOCKED.length; i++){
+    var tt = STATS.EVENTS_LOCKED[i]
+    var tx = STATICVAR_HOLDER.EVENT_LIST[tt];
+    //console.log("EL: "+STATS.EVENTS_LOCKED);
+    if( tx.eventTest.call(this.GAME) ){
+      console.log("UNLOCKING: "+tt);
+      tx.eventExec.call(this.GAME);
+      STATS.EVENTS_LOCKED.splice(i,1);
+      i = i - 1;
+       console.log("PL: "+STATS.EVENTS_LOCKED);
+    }
+    
+  }
+}
 
-
-
+GAME_GLOBAL.TICK_calcEvents = TICK_calcEvents;
 
 
 //MATTER-FreeBot-CT

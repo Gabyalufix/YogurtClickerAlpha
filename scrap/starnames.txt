@@ -1,0 +1,423 @@
+| [[Eridanus (constellation)|Eridanus]] 	 [[Theta Eridani|?¹ Eridani A]] 	 Acamar 	 
+| [[Eridanus (constellation)|Eridanus]] 	 a Eridani A 	 [[Achernar]] 	 
+|[[Cassiopeia (constellation)|Cassiopeia]] 	 [[Eta Cassiopeiae|? Cassiopeiae A]] 	 Achird 	 Apparently first applied to Eta Cassiopeiae in the [[Skalnate Pleso Atlas of the Heavens]] published in 1950, but is not known prior to that.<ref name="hr">{{cite journal | bibcode=1995yCat.5050....0H | title=VizieR Online Data Catalog: Bright Star Catalogue, 5th Revised Ed. (Hoffleit+, 1991) | journal=VizieR On-line Data Catalog: V/50.  Originally published in: 1964BS....C......0H | volume=5050 | author1=Hoffleit | first1=D. | last2=Warren | first2=W. H. | year=1995 }}</ref>
+| [[Scorpius]] 	 [[Beta Scorpii|ß Scorpii Aa]] 	 Acrab 	 The traditional names of the ß Scorpii system included Akrab and Elakrab, derived (like Acrab) from [[Arabic]] ??????  ''al-‘aqrab'', "the scorpion", and ''graffias'', which is [[Italian language|Italian]] for "claws" and which was also applied to [[Xi Scorpii]].<ref name="graffias">R. G. Aitken Publications of the Astronomical Society of the Pacific Vol. 36, No. 211 (June, 1924), pp. 124–130 {{JSTOR|40692425}}</ref><ref name="allen1963" />{{rp|p367}}
+| [[Crux]] 	 [[Alpha Crucis|a Crucis Aa]] 	 Acrux 	 ''Acrux'' is a modern contraction of the [[Bayer designation]], coined in the 19th century, but which entered into common use only by the mid 20th century.<ref>''Memoirs of the Rev. Walter M. Lowrie: missionary to China'' (1849), p. 93. Described as an "Americanism" in ''The Geographical Journal'', vol. 92, Royal Geographical Society, 1938.</ref>
+| [[Cancer (constellation)|Cancer]] 	 [[Alpha Cancri|a Cancri Aa]] 	 Acubens 	 The name was originally Arabic  {{lang|ar| ???????|rtl=yes}}  ''al-zubana'', "the claws".
+| [[Leo (constellation)|Leo]] 	 [[Zeta Leonis|? Leonis Aa]] 	 Adhafera 	 Also called Aldhafera.
+| Canis Major 	 [[Epsilon Canis Majoris|e Canis Majoris A]] 	 Adhara 	
+| [[Andromeda (constellation)|Andromeda]] 	 [[Xi Andromedae|? Andromedae]] 	 Adhil 	 The name was originally Arabic  {{lang|ar| ?????|rtl=yes}} að-ðayl, 'the [[train (clothing)|train]]' (lit. 'the tail')
+| [[Taurus (constellation)|Taurus]] 	 [[Epsilon Tauri|e Tauri Aa1]] 	 Ain 	
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[Nu1 Sagittarii|?¹ Sagittarii A]] 	 Ainalrami 	
+| [[Lyra]] 	 [[Eta Lyrae|? Lyrae Aa]] 	 Aladfar 	
+| Andromeda 	 [[Gamma Andromedae|? Andromedae]] 	 Alamak † 	
+| [[Lyra]] 	 [[Mu Lyrae|µ Lyrae]] 	 Alathfar † 	
+| Sagittarius 	 [[Pi Sagittarii|p Sagittarii A]] 	 Albaldah 	
+| [[Aquarius (constellation)|Aquarius]] 	 [[Epsilon Aquarii|e Aquarii]] 	 Albali 	
+| [[Cygnus (constellation)|Cygnus]] 	 ß¹ Cygni Aa 	 [[Albireo]] 	
+| [[Corvus (constellation)|Corvus]] 	 [[alpha Corvi|a Corvi]] 	 Alchiba 	
+| [[Ursa Major]] 	 80 Ursae Majoris Ca 	 [[Alcor (star)|Alcor]] 	 
+| [[Taurus (constellation)|Taurus]] 	 ? Tauri A 	 [[Alcyone (star)|Alcyone]] 	 
+| [[Taurus (constellation)|Taurus]] 	 a Tauri 	 [[Aldebaran]] 	 
+| Cepheus 	 [[Alpha Cephei|a Cephei]] 	 Alderamin 	 
+| Grus 	 [[Gamma Gruis|? Gruis]] 	 Aldhanab 	 
+| Draco 	 [[Zeta Draconis|? Draconis A]] 	 Aldhibah 	 
+| [[Delphinus]] 	 [[Epsilon Delphini|e Delphini]] 	 Aldulfin 	
+| Cepheus 	 [[Beta Cephei|ß Cephei Aa]] 	 Alfirk 	
+| [[Capricornus]] 	 [[Alpha2 Capricorni|a² Capricorni A]] 	 Algedi 	 Alternative traditional names of Al Giedi, Secunda Giedi and Algiedi Secunda
+| Pegasus 	 [[Gamma Pegasi|? Pegasi]] 	 Algenib 	
+| [[Leo (constellation)|Leo]] 	 [[Gamma Leonis|?¹ Leonis]] 	 Algieba 	
+| Perseus 	 ß Persei Aa1 	 [[Algol]] 	 From Arabic {{lang|ar| ??? ?????|rtl=yes}} ''ra’s al-ghul'', "head of the ogre". In Egyptian,  [[Horus]].<ref>{{cite journal|author=Jetsu, L.|author2=Porceddu, S.|title=Shifting Milestones of Natural Sciences: The Ancient Egyptian Discovery of Algol's Period Confirmed|journal = PLOS One|volume = 10 |issue = 12|date = 2015|pages = e.0144140 (23pp)|doi=10.1371/journal.pone.0144140|url=http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144140|arxiv = 1601.06990 |bibcode = 2015PLoSO..1044140J }}</ref> 
+| Corvus 	 [[Delta Corvi|d Corvi A]] 	 Algorab 	 The traditional name ''Algorab'' is derived from [[Arabic]] ''??????''  ''al-ghurab'', "the crow"). The WGSN re-designated the star as ''Algorab'' in July 2016.<ref>{{Cite web|url=https://www.iau.org/science/scientific_bodies/working_groups/280/|title=International Astronomical Union {{!}} IAU|website=www.iau.org|access-date=2017-03-20}}</ref> 
+| [[Gemini (constellation)|Gemini]] 	 [[Gamma Geminorum|? Geminorum Aa]] 	 Alhena 	Derived from Arabic ?????? ''al-han‘ah'', "the brand" (on the neck of the camel)
+| [[Ursa Major]] 	 [[Epsilon Ursae Majoris|e Ursae Majoris A]] 	 Alioth 	
+| Cygnus 	 [[Epsilon Cygni|e Cygni Aa]] 	 Aljanah 	
+| [[Ursa Major]] 	 [[Eta Ursae Majoris|? Ursae Majoris]] 	 Alkaid 	
+| [[Cepheus (constellation)|Cepheus]] 	 [[Rho2 Cephei|?² Cephei]] 	 Al Kalb al Rai † 	
+| Boötes 	 [[Mu Boötis|µ¹ Boötis Aa]] 	 Alkalurops 	
+| Ursa Major 	 [[Kappa Ursae Majoris|? Ursae Majoris A]] 	 Alkaphrah 	
+| Pegasus 	 [[Upsilon Pegasi|? Pegasi]] 	 Alkarab 	
+| Crater 	 [[Alpha Crateris|a Crateris]] 	 Alkes 	
+| Auriga 	 [[Epsilon Aurigae|e Aurigae]] 	 Almaaz 	 Traditionally also called Haldus.
+| Andromeda 	 [[Gamma Andromedae|? Andromedae A]] 	 Almach 	
+| [[Leo (constellation)|Leo]] 	 [[? Leonis]] 	 Al Minliar al Asad † 	
+| Grus 	 [[Alpha Gruis|a Gruis]] 	 Alnair 	  
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[Gamma2 Sagittarii|?² Sagittarii]] 	 Alnasl 	 From [[Arabic]] ????? ''al-na?l'', "arrowhead".<ref name="ridpath1989">{{citation | first1=Ian | last1=Ridpath | title=Star tales | publisher=James Clarke & Co. | date=1989 | isbn=0-7188-2695-7 | page=113 | url=https://books.google.com/books?id=gFrdcTdeVaEC&pg=RA1-PA13 }}</ref>
+| [[Orion (constellation)|Orion]] 	 e Orionis 	 [[Alnilam]] 	 Middle star in the [[Orion's belt|belt of Orion]]. The traditional name ''Alnilam'' derives from [[Arabic]] ?????? ''al-nilam'', related to the word ''nilam'', "[[sapphire]]"; related spellings are ''Alnihan'' and ''Alnitam''.<ref name="allen1963" />{{rp|pp314-315}}
+| [[Orion (constellation)|Orion]] 	 ? Orionis Aa 	 [[Alnitak]] 	 The traditional name, alternately spelled Al Nitak or Alnitah, is  from [[Arabic]] ?????? ''al-ni?aq'', "the girdle".<ref name="allen1963" />{{rp|pp314-315}}
+| [[Scorpius]] 	 [[Sigma Scorpii|s Scorpii Aa1]] 	 Alniyat 	  The star [[Tau Scorpii]] also bore Alniyat as its traditional name.{{citation needed|date=April 2017}}
+| Hydra 	 a Hydrae 	 [[Alphard]] 	
+| Corona Borealis 	 [[Alpha Coronae Borealis|a Coronae Borealis]] 	 Alphecca 	 The name ''nayyir al-fakkah''   ??? ??????   "bright (star) of the broken (ring of stars)" is found in the [[Al Achsasi al Mouakket]] catalogue (c. 1650).<ref>{{cite journal
+ | last=Knobel | first=E. B.
+ | title=Al Achsasi Al Mouakket, on a catalogue of stars in the Calendarium of Mohammad Al Achsasi Al Mouakket
+ | journal=[[Monthly Notices of the Royal Astronomical Society]]
+ | volume=55 | issue=8
+ | page=429 |date=June 1895
+ | bibcode=1895MNRAS..55..429K | doi=10.1093/mnras/55.8.429}}</ref>
+| Andromeda 	 [[Alpha Andromedae|a Andromedae Aa]] 	 Alpheratz 	
+| [[Pisces (constellation)|Pisces]] 	 [[eta Piscium|? Piscium]] 	 Alpherg 	
+| Draco 	 [[Mu Draconis|µ Draconis A]] 	 Alrakis 	  From [[Arabic]] {{lang|ar| ??????|rtl=yes}} ''al-raqi?'', "the dancer"; also spelled Arrakis and Elrakis.
+| [[Pisces (constellation)|Pisces]] 	 [[Alpha Piscium|a Piscium A]] 	 Alrescha 	
+| Draco 	 [[HD 161693]] 	 Alruba 	
+| Draco 	 [[Sigma Draconis|s Draconis]] 	 Alsafi 	
+| Lynx 	 [[31 Lyncis]] 	 Alsciaukat 	
+| Vela 	 [[Delta Velorum|d Velorum Aa]] 	 Alsephina 	
+| Aquila 	 [[Beta Aquilae|ß Aquilae A]] 	 Alshain 	
+| [[Capricornus]] 	 [[Nu Capricorni|? Capricorni A]] 	 Alshat 	
+| [[Aquila (constellation)|Aquila]] 	 a Aquilae 	 [[Altair]] 	 From Arabic {{lang|ar|????? ??????|rtl=yes}} ''(al-nasr) al-?a’ir'', "the flying (eagle)". 
+| Draco 	 [[delta Draconis|d Draconis]] 	 Altais 	 also Aldib{{citation needed|date=April 2017}}
+| [[Leo (constellation)|Leo]] 	 [[Lambda Leonis|? Leonis]] 	 Alterf 	
+| Canis Major 	 [[eta Canis Majoris|? Canis Majoris]] 	 Aludra 	
+| [[Ursa Major]] 	 [[xi Ursae Majoris|? Ursae Majoris Aa]] 	 Alula Australis 	
+| [[Ursa Major]] 	 [[nu Ursae Majoris|? Ursae Majoris]] 	 Alula Borealis 	
+| Serpens 	 [[theta Serpentis|?¹ Serpentis A]] 	 Alya 	
+| [[Gemini (constellation)|Gemini]] 	 [[xi Geminorum|? Geminorum]] 	 Alzirr 	 alternately spelled Alzir
+| [[Aquarius (constellation)|Aquarius]] 	 [[theta Aquarii|? Aquarii]] 	 Ancha 	
+| [[Eridanus (constellation)|Eridanus]] 	 [[Tau2 Eridani|t² Eridani]] 	 Angetenar 	 
+| Phoenix 	 [[alpha Phoenicis|a Phoenicis]] 	 Ankaa 	
+| Vulpecula 	 [[alpha Vulpeculae|a Vulpeculae]] 	 Anser 	 Alternative traditional name is Lucida Anseris.
+| [[Scorpius]] 	 a Scorpii A 	 [[Antares]] 	 Ancient Greek, ??t????, "against Ares (Mars)". It was known to Persian astrologers as a Royal star: Satevis, Watcher of the West.
+| [[Boötes]] 	 a Boötis 	 [[Arcturus]] 	
+| Sagittarius 	 [[beta Sagittarii|ß² Sagittarii]] 	 Arkab Posterior 	
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[beta Sagittarii|ß¹ Sagittarii A]] 	 Arkab Prior 	
+| Lepus 	 [[alpha Leporis|a Leporis A]] 	 Arneb 	 Traditional name ''Arneb'' is from the Arabic  ???? ''arnab'', 'hare'<ref name="allen1963" />{{rp|p268}} ('Lepus' is [[Latin]] for [[hare]]).
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[zeta Sagittarii|? Sagittarii A]] 	 Ascella 	
+| [[Cancer (constellation)|Cancer]] 	 [[delta Cancri|d Cancri Aa]] 	 Asellus Australis 	
+| [[Cancer (constellation)|Cancer]] 	 [[gamma Cancri|? Cancri Aa]] 	 Asellus Borealis 	
+| Hydra 	 [[Epsilon Hydrae|e Hydrae]] 	 Ashlesha 	
+| [[Boötes]] 	 [[? Bootis|? Boötis]] 	 Asellus Primus † 	[[Latin language|Latin]] for "first [[donkey]] colt"
+| [[Boötes]] 	 [[? Bootis|? Boötis]] 	 Asellus Secundus † 	[[Latin language|Latin]] for "second [[donkey]] colt"
+| [[Boötes]] 	 [[? Bootis|? Boötis]] 	 Asellus Tertius † 	
+| [[Puppis]] 	 [[? Puppis]] 	 Asmidiske † 	
+| Carina 	 [[iota Carinae|? Carinae]] 	 Aspidiske 	
+| [[Taurus (constellation)|Taurus]] 	 21 Tauri A 	 [[Asterope (star)|Asterope]] 	 Member of the [[Pleiades]] [[open cluster|open star cluster]] ([[Messier objects|M45]]). [[Sterope (Pleiad)|Asterope]] was one of the [[Pleiades (Greek mythology)|Pleiades sisters]] in [[Greek mythology]].
+| Draco 	 [[Eta Draconis|? Draconis A]] 	 Athebyne 	
+| Perseus 	 [[Omicron Persei|? Persei A]] 	 Atik 	
+| [[Taurus (constellation)|Taurus]] 	 27 Tauri Aa1 	 [[Atlas (star)|Atlas]] 	 Member of the [[Pleiades]] [[open cluster|open star cluster]] ([[Messier objects|M45]]). [[Atlas (mythology)|Atlas]] was the [[Titan (mythology)|Titan]] god of endurance and astronomy<ref>Stenner, Paul (auth.); Martin, Jack. Slaney, Kathleen L. Sugarman, Jeff. (edit.) ''The Wiley Handbook of Theoretical and Philosophical Psychology: Methods, Approaches, and New Directions for Social Sciences''. John Wiley & Sons, 2015; pg. 311.</ref> and the father of the [[Pleiades (Greek mythology)|Pleiades sisters]] in [[Greek mythology]].
+| Triangulum Australe 	 [[alpha Trianguli Australis|a Trianguli Australis]] 	 Atria 	
+| Carina 	 [[epsilon Carinae|e Carinae A]] 	 Avior 	 Designated 'Avior' by [[His Majesty's Nautical Almanac Office]] for the [[Royal Air Force]] in the 1930s.<ref name="HMNAO">{{cite web | url=http://www.hmnao.com/nao/history/dhs_gaw/nao_perhist_0802_cyh_part_2.pdf | title=A Personal History of H.M. Nautical Almanac Office |page=48| first=Donald H. | last=Sadler | date=2008 | work=[[United Kingdom Hydrographic Office]] | accessdate=2016-08-02}}</ref>
+| [[Cygnus (constellation)|Cygnus]] 	 [[pi1 Cygni|p¹ Cygni]] 	 Azelfafage 	 Variously reported as from Arabic {{lang|ar|????????|rtl=yes}} ''al-sula?fah'' "turtle", {{lang|ar| ????? ?????|rtl=yes}} ''al-?ilf al-faras'', "horse track", or {{lang|ar|  ?????????? |rtl=yes}} ''al-?azal al-dajajah'', "the tail of the hen" <ref name="allen1963" />{{rp|pp192-197}}
+|[[Eridanus (constellation)|Eridanus]] 	 [[Eta Eridani|? Eridani]] 	 Azha 	 
+| Puppis 	 [[xi Puppis|? Puppis]] 	 Azmidi 	
+| Ophiuchus 	 GJ 699 	 [[Barnard's Star]] 	 Named after the American astronomer [[Edward Emerson Barnard|E E Barnard]], the first to measure its high proper motion.
+| Cetus 	 [[zeta Ceti|? Ceti Aa]] 	 Baten Kaitos 	
+| [[Eridanus (constellation)|Eridanus]] 	 [[upsilon3 Eridani|?³ Eridani]] 	 Beemim 	
+| [[Eridanus (constellation)|Eridanus]] 	 [[Omicron1 Eridani|?¹ Eridani]] 	 Beid 	 
+| [[Orion (constellation)|Orion]] 	 ? Orionis 	 [[Bellatrix]] 	 [[Latin (language)|Latin]] for "female warrior"; applied to this star in the 15th century.<ref name="Kunitzsch86">{{cite journal|last=Kunitzsch|first=Paul|date=1986|title=The Star Catalogue Commonly Appended to the Alfonsine Tables|journal=Journal for the History of Astronomy|volume=17|issue=49|pages=89–98|url=http://adsabs.harvard.edu/full/1986JHA....17...89K|bibcode = 1986JHA....17...89K }}</ref>
+| [[Orion (constellation)|Orion]] 	 a Orionis Aa 	 [[Betelgeuse]] 	Derived from Arabic ??? ???????  ''ib? al-jauza’'', "the axilla of Orion", or from  ?? ??????? ''yad al-jauza’'', "the hand of Orion". 
+| Aries 	 [[41 Arietis|41 Arietis Aa]] 	 Bharani 	
+| Pegasus 	 [[theta Pegasi|? Pegasi]] 	 Biham 	
+| [[Aries (constellation)|Aries]] 	 [[delta Arietis|d Arietis]] 	 Botein 	
+| [[Libra (constellation)|Libra]] 	 [[sigma Librae|s Librae A]] 	 Brachium 	
+| [[Aquarius (constellation)|Aquarius]] 	 [[xi Aquarii|? Aquarii]] 	 Bunda 	
+| [[Carina (constellation)|Carina]] 	 a Carinae A 	 [[Canopus]] 	 Ptolemy's {{lang|grc| ????ß??}}, after [[Canopus (mythology)|Canopus]] (''Kanopos, Kanobos''), a pilot from Greek mythology, whose name is itself of uncertain etymology.
+| Auriga 	 a Aurigae Aa 	 [[Capella]] 	 The traditional name ''Capella'' (English: ''small female goat'') is from [[Latin language|Latin]], and is a diminutive of the Latin ''Capra'' (English: ''female goat'').<ref name="allen1963" />{{rp|p86}}
+| [[Cassiopeia (constellation)|Cassiopeia]] 	 [[Beta Cassiopeiae|ß Cassiopeiae A]] 	 Caph 	 * The name is originally Arabic {{lang|ar| ?? |rtl=yes}} ''kaf'', "palm", a residue of an old name of Cassiopeia, ' al-kaff al-khadib'', "the stained hand"; also known as ''al-sanam al-nakah'', "the camel's hump".
+| [[Gemini (constellation)|Gemini]] 	 a Geminorum Aa 	 [[Castor (star)|Castor]] 	
+| [[Cassiopeia (constellation)|Cassiopeia]] 	 [[Upsilon2 Cassiopeiae|?² Cassiopeiae]] 	 Castula 	
+| Ophiuchus 	 [[beta Ophiuchi|ß Ophiuchi]] 	 Cebalrai 	
+| [[Taurus (constellation)|Taurus]] 	 16 Tauri 	 [[Celaeno (star)|Celaeno]] 	 Member of the [[Pleiades]] [[open cluster|open star cluster]] ([[Messier objects|M45]]). Celaeno was one of the [[Pleiades (Greek mythology)|Pleiades sisters]] in [[Greek mythology]].
+| [[Ara (constellation)|Ara]] 	 [[Mu Arae|µ Arae]] 	 Cervantes 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults">{{cite press release |url=http://www.iau.org/news/pressreleases/detail/iau1514/ |title=Final Results of NameExoWorlds Public Vote Released |publisher=IAU.org |date=15 December 2015}}</ref> Named after [[Miguel de Cervantes|Miguel de Cervantes Saavedra]], the Spanish [[author]] of ''[[Don Quixote|El Ingenioso Hidalgo Don Quixote de la Mancha]]''.<ref name="NEWnames">[http://nameexoworlds.iau.org/names NameExoWorlds The Approved Names]</ref>
+| [[Ursa Major]] 	 [[47 Ursae Majoris]] 	 Chalawan 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults" /> Named after a [[Mythology|mythological]] crocodile king from a Thai folktale.<ref name="NEWnames" />
+| Taurus 	 [[Theta Tauri|?² Tauri Aa]] 	 Chamukuy 	
+| Canes Venatici 	 [[beta Canum Venaticorum|ß Canum Venaticorum Aa]] 	 Chara 	
+| [[Leo (constellation)|Leo]] 	 [[theta Leonis|? Leonis]] 	 Chertan 	 Alternative traditional name of Chort.
+| [[Cancer (constellation)|Cancer]] 	 [[55 Cancri|55 Cancri A]] 	 Copernicus 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign<ref name="NEWresults" /> in honor of the astronomer [[Nicolaus Copernicus]].<ref name="NEWnames" />
+| Canes Venatici 	 a Canum Venaticorum Aa 	 [[Cor Caroli]] 	 Named after [[Charles I of England]] by [[Sir Charles Scarborough]]<ref name="allen1963" /><ref>Robert Burnham, Jr. ''Burnham's Celestial Handbook'', Volume 1, p. 359.</ref><ref>[http://www.ianridpath.com/startales/canesvenatici.htm Ian Ridpath: "Star Tales", Canes Venatici]. See also Deborah J. Warner, ''The Sky Explored: Celestial Cartography 1500–1800''.</ref>
+| Hercules 	 [[Omega Herculis|? Herculis A]] 	 Cujam 	 Traditional name, variously spelled Kajam.
+| [[Eridanus (constellation)|Eridanus]] 	 [[Beta Eridani|ß Eridani]] 	 Cursa 	 
+| [[Capricornus]] 	 [[beta Capricorni|ß¹ Capricorni Aa]] 	 Dabih 	
+| [[Fornax]] 	 [[Alpha Fornacis|a Fornacis A]] 	 Dalim 	
+| [[Cygnus (constellation)|Cygnus]] 	 a Cygni 	 [[Deneb]] 	 The name is originally from Arabic {{lang|ar| ??? ??????? |rtl=yes}} ''ðanab al-dajajah<sup>h</sup>''}}. In Chinese, Deneb is part of ?? "Magpie bridge" in the Qi Xi love story. Deneb is one of the vertices of the Summer Triangle.
+| [[Capricornus]] 	 [[delta Capricorni|d Capricorni Aa]] 	 Deneb Algedi 	
+| [[Leo (constellation)|Leo]] 	 ß Leonis 	 [[Denebola]] 	
+| Coma Berenices 	 [[alpha Comae Berenices|a Comae Berenices A]] 	 Diadem 	
+| Cetus 	 [[beta Ceti|ß Ceti]] 	 Diphda 	 Alternatively Deneb Kaitos.{{citation needed|date=April 2017}}
+| [[Scorpius]] 	 [[Delta Scorpii|d Scorpii A]] 	 Dschubba 	
+| [[Ursa Major]] 	 [[alpha Ursae Majoris|a Ursae Majoris A]] 	 Dubhe 	
+| Draco 	 [[Psi1 Draconis|?¹ Draconis A]] 	 Dziban 	 From the traditional name of ''Dziban'' or ''Dsiban'' for ?¹ Draconis, derived from [[Arabic]] ''al-dhi’ban'', meaning "the two wolves" or "The two jackals".<ref name="allen1963" />{{rp|p212}}
+| Draco 	 [[iota Draconis|? Draconis]] 	 Edasich 	 Common name reviewed and adopted by the IAU Executive Committee WG Public Naming of Planets and Planetary Satellites.<ref name="IAU-LSN" />
+| [[Taurus (constellation)|Taurus]] 	 17 Tauri 	 [[Electra (star)|Electra]] 	 Member of the [[Pleiades]] [[open cluster|open star cluster]] ([[Messier objects|M45]]). [[Electra (Pleiad)|Electra]] was one of the [[Pleiades (Greek mythology)|Pleiades sisters]] in [[Greek mythology]].
+| [[Virgo (constellation)|Virgo]] 	 [[Phi Virginis|f Virginis]] 	 Elgafar 	
+| Columba 	 [[Theta Columbae|? Columbae]] 	 Elkurud 	
+| [[Taurus (constellation)|Taurus]] 	 [[beta Tauri|ß Tauri Aa]] 	 Elnath 	 Variously ''El Nath'' or ''Alnath'', from Arabic  ?????'' ''an-na??'', meaning "the butting" (i.e. "the bull's horns").
+| [[Draco (constellation)|Draco]] 	 [[gamma Draconis|? Draconis]] 	 Eltanin 	 Alternative traditional name of Etamin; both originally from the Arabic  constellation name {{lang|ar|??????|rtl=yes}} ''al-tinnin'', "the great serpent". ? Dra was also one of the "Five Camels", ''Quinque Dromedarii'', in Arabic ''al-?awaïd''.
+| Pegasus 	 [[epsilon Pegasi|e Pegasi]] 	 Enif 	
+| Cepheus 	 [[gamma Cephei|? Cephei Aa]] 	 Errai 	 Common name reviewed and adopted by the IAU Executive Committee WG Public Naming of Planets and Planetary Satellites.<ref name="IAU-LSN" />
+| [[Draco (constellation)|Draco]] 	 [[42 Draconis|42 Draconis A]] 	 Fafnir 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults" /> Named after a [[Norse mythology|Norse mythological]] dwarf who turned into a dragon.<ref name="NEWnames" />
+| Scorpius 	 [[Pi Scorpii|p Scorpii Aa]] 	 Fang 	 From [[Chinese star names|Chinese name]] ? (''Fáng'', "Room").
+| [[Cygnus (constellation)|Cygnus]] 	 [[Delta Cygni|d Cygni]] 	 Fawaris 	
+| Hydra 	 [[HD 85951]] 	 Felis 	
+| [[Piscis Austrinus]] 	 a Piscis Austrini A 	 [[Fomalhaut]] 	 The name is originally from Arabic {{lang|ar| ?? ????? |rtl=yes}}  ''fum al-?awt'', "mouth of the fish". To Persian astrologers this was a Royal star: Haftorang, Watcher of the South. The name was reviewed and adopted by the IAU Executive Committee WG Public Naming of Planets and Planetary Satellites.<ref name="IAU-LSN" />
+| Cassiopeia 	 [[Zeta Cassiopeiae|? Cassiopeiae]] 	 Fulu 	 From [[Chinese star names|Chinese name]] ?? (''Fù Lù'', Auxiliary Road).
+| [[Pisces (constellation)|Pisces]] 	 [[Beta Piscium|ß Piscium]] 	 Fumalsamakah 	
+| Canis Major 	 [[zeta Canis Majoris|? Canis Majoris Aa]] 	 Furud 	
+| Scorpius 	 [[G Scorpii]] 	 Fuyue 	 From [[Chinese star names|Chinese name]] [[Fu Yue]].
+| [[Crux]] 	 [[? Crucis]] 	 Gacrux 	 The name "Gacrux" is a contraction of the Bayer designation, coined by astronomer Elijah Hinsdale Burritt (1794–1838).<ref>{{cite web|title=Gacrux/Gamma Crucis 2?|url=http://www.solstation.com/stars2/gacrux2.htm|publisher=SolStation.com|accessdate=2011-11-03}}</ref><ref>{{cite web|last=Lesikar|first=Arnold V.|title=Gacrux|url=http://domeofthesky.com/clicks/gacrux.html|publisher=Dome Of The Sky|accessdate=2011-11-03|deadurl=yes|archiveurl=https://web.archive.org/web/20110928143206/http://domeofthesky.com/clicks/gacrux.html|archivedate=2011-09-28|df=}}</ref>
+| Cepheus 	 [[mu Cephei|µ Cephei]] 	 Garnet Star † 	 Its colour was described as "garnet" by [[William Herschel]]. Following Herschel, it was called ''garnet sidus'' by [[Giuseppe Piazzi]]
+| Draco 	 [[lambda Draconis|? Draconis]] 	 Giausar 	 Traditional name, variously spelled Gianfar.
+| Corvus 	 [[gamma Corvi|? Corvi A]] 	 Gienah 	 Also known as Gienah Gurab; the star [[epsilon Cygni|e Cygni]] is also traditionally known as Gienah.{{citation needed|date=April 2017}}
+| Crux 	 [[epsilon Crucis|e Crucis]] 	 Ginan 	 Traditional name in the culture of the [[Wardaman people]] of the [[Northern territory]] of [[Australia]].<ref name="iau1707">{{cite press release |url=https://www.iau.org/news/pressreleases/detail/iau1707/ |title=IAU Approves 86 New Star Names From Around the World |publisher=IAU.org |date=11 December 2017}}</ref>
+| Canis Minor 	 [[beta Canis Minoris|ß Canis Minoris A]] 	 Gomeisa 	
+| Scorpius 	 [[Xi Scorpii|? Scorpii]] 	 Graffias † 	 [[Italian language|Italian]] for "claws"; also once applied to [[Beta Scorpii|ß Scorpii]].<ref name="graffias" /><ref name="allen1963" />{{rp|p367}}
+| Draco 	 [[xi Draconis|? Draconis A]] 	 Grumium 	
+| Serpens 	 [[Kappa Serpentis|? Serpentis]] 	 Gudja 	
+| Ophiuchus 	 [[36 Ophiuchi]] 	 Guniibuu 	
+| Centaurus 	 [[beta Centauri|ß Centauri Aa]] 	 Hadar 	
+| [[Auriga (constellation)|Auriga]] 	 [[Eta Aurigae|? Aurigae]] 	 Haedus 	
+|[[Aries (constellation)|Aries]] 	 a Arietis 	 [[Hamal]] 	 Traditional name (also written ''Hemal'', ''Hamul'', or ''Ras Hammel''), derived from Arabic {{lang|ar|??? ?????|rtl=yes}}  ''ras al-?amal'', "head of the ram", in turn from the name for the constellation as a whole, ''al ?amal'', "the ram".<ref name="allen1963" />{{rp|pp78,80}}
+| Auriga 	 [[iota Aurigae|? Aurigae]] 	 Hassaleh 	
+| Orion 	 [[Iota Orionis|? Orionis Aa]] 	 Hatysa 	
+| [[Pegasus (constellation)|Pegasus]] 	 [[51 Pegasi]] 	 Helvetios 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults" /> [[Latin (language)|Latin]] for 'the [[Helveti]]an' and refers to the [[Celts|Celtic]] tribe that lived in Switzerland during antiquity.<ref name="NEWnames" />
+| [[Virgo (constellation)|Virgo]] 	 [[Zeta Virginis|? Virginis]] 	 Heze 	
+| Pegasus 	 [[zeta Pegasi|? Pegasi A]] 	 Homam 	
+| Scorpius 	 [[Rho Scorpii|? Scorpii Aa]] 	 Iklil 	
+| Crux 	 [[Delta Crucis|d Crucis]] 	 Imai 	
+| [[Ursa Major]] 	 [[41 Lyncis]] 	 Intercrus 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults" /> Intercrus means "between the legs" in [[Latin (language)|Latin]] style, referring to the star's position in the constellation Ursa Major.<ref name="NEWnames" />
+|[[Boötes]] 	 [[Epsilon Boötis|e Boötis A]] 	 Izar 	 Originally from Arabic {{lang|ar|???? |rtl=yes}} ''izar'', "veil". In the ''Calendarium of Al Achsasi Al Mouakket'' designated {{lang|ar|????? ????? |rtl=yes}} ''mintaqah al-‘awwa‘'', translated into Latin as ''Cingulum Latratoris'', "belt of barker". Named ''Pulcherrima'' (most beautiful) by Otto Struve.<ref>Norton's Star Atlas, publ. Gall & Inglis, Edinburgh, 2nd Ed., 1959</ref>
+| [[Scorpius]] 	 [[nu Scorpii|? Scorpii Aa]] 	 Jabbah 	
+| Gemini 	 [[Omicron Geminorum|? Geminorum]] 	 Jishui 	
+| Cetus 	 [[Gamma Ceti|? Ceti A]] 	 Kaffaljidhma 	
+| Virgo 	 [[Kappa Virginis|? Virginis]] 	 Kang 	 From [[Chinese star names|Chinese name]] ? (''Kàng'', Neck).
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[Epsilon Sagittarii|e Sagittarii A]] 	 Kaus Australis 	
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[Lambda Sagittarii|? Sagittarii]] 	 Kaus Borealis 	
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[delta Sagittarii|d Sagittarii]] 	 Kaus Media 	
+| [[Eridanus (constellation)|Eridanus]] 	 [[40 Eridani A]] 	 Keid 	 The name is originally from Arabic {{lang|ar|????? |rtl=yes}} ''al-qay?'', "the broken egg-shells".
+| Virgo 	 [[Lambda Virginis|? Virginis A]] 	 Khambalia 	
+| Equuleus 	 [[alpha Equulei|a Equulei A]] 	 Kitalpha 	
+| Ursa Minor 	 [[beta Ursae Minoris|ß Ursae Minoris]] 	 Kochab 	
+| Hercules 	 [[beta Herculis|ß Herculis Aa]] 	 Kornephoros 	
+| [[Corvus]] 	 [[Beta Corvi|ß Corvi]] 	 Kraz 	
+| [[Draco (constellation)|Draco]] 	 [[? Draconis]] 	 Kuma † 	
+| Cepheus 	 [[Xi Cephei|? Cephei Aa]] 	 Kurhah 	
+| Canes Venatici 	 Y Canum Venaticorum 	 [[La Superba]] 	 A modern (19th century) name, due to [[Angelo Secchi]].
+| Scorpius 	 [[epsilon Scorpii|e Scorpii]] 	 Larawag 	 Traditional name in the culture of the [[Wardaman people]] of the [[Northern territory]] of [[Australia]].<ref name="iau1707"/>
+| [[Scorpius]] 	 [[upsilon Scorpii|? Scorpii]] 	 Lesath 	
+| [[Aquila (constellation)|Aquila]] 	 [[Xi Aquilae|? Aquilae A]] 	 Libertas 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults" /> [[Latin (language)|Latin]] for 'liberty' ('Aquila' is Latin for '[[eagle]]', a popular symbol of liberty).<ref name="NEWnames" />
+| Virgo 	 [[PSR B1257+12]] 	 Lich 	 A [[neutron star]] and [[pulsar]] with [[planet]]s. Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults" /> A [[lich]] is a [[Fantasy fiction|fictional]] [[undead]] creature known for controlling other undead creatures with [[Magic (paranormal)|magic]].<ref name="NEWnames" />
+| Aries 	 [[39 Arietis]] 	 Lilii Borea 	
+| Hercules 	 [[lambda Herculis|? Herculis]] 	 Maasym 	
+| Auriga 	 [[theta Aurigae|? Aurigae A]] 	 Mahasim 	
+| [[Taurus (constellation)|Taurus]] 	 20 Tauri 	 [[Maia (star)|Maia]] 	 Member of the [[Pleiades]] [[open cluster|open star cluster]] ([[Messier objects|M45]]). Maia was one of the [[Pleiades (Greek mythology)|Pleiades sisters]] in [[Greek mythology]].
+| |[[Cassiopeia (constellation)|Cassiopeia]] 	 [[Theta Cassiopeiae|? Cassiopeiae]] 	 Marfark † 	 
+| Ophiuchus 	 [[lambda Ophiuchi|? Ophiuchi A]] 	 Marfik 	
+| Pegasus 	 [[Alpha Pegasi|a Pegasi]] 	 Markab 	
+| Vela 	 [[Kappa Velorum|? Velorum]] 	 Markeb 	
+| Hercules 	 [[Kappa Herculis|? Herculis A]] 	 Marsic 	
+| Pegasus 	 [[eta Pegasi|? Pegasi Aa]] 	 Matar 	
+| [[Gemini (constellation)|Gemini]] 	 [[epsilon Geminorum|e Geminorum]] 	 Mebsuta 	
+| [[Ursa Major]] 	 [[delta Ursae Majoris|d Ursae Majoris]] 	 Megrez 	
+| [[Orion (constellation)|Orion]] 	 ? Orionis A 	 [[Meissa]] 	 Traditional name deriving from [[Arabic]] ''al-maisan'',  "The Shining One".
+| [[Gemini (constellation)|Gemini]] 	 [[zeta Geminorum|? Geminorum Aa]] 	 Mekbuda 	
+| Cancer 	 [[Epsilon Cancri|e Cancri Aa]] 	 Meleph 	
+| Auriga 	 [[beta Aurigae|ß Aurigae Aa]] 	 Menkalinan 	
+| Cetus 	 [[alpha Ceti|a Ceti]] 	 Menkar 	 Derived from [[Arabic]] ???? ''man?ar'', "nostril", or ''al-minhar'', "nose" (of Cetus).<ref name="kalerAC">{{citation | first1=James B. | last1=Kaler | work=Stars | publisher=University of Illinois | title=MENKAR (Alpha Ceti) | url=http://stars.astro.illinois.edu/sow/menkar.html | accessdate=2011-12-24 }}</ref><ref name="allen1963" />{{rp|p162}}
+| Centaurus 	 [[theta Centauri|? Centauri]] 	 Menkent 	
+| Perseus 	 [[xi Persei|? Persei]] 	 Menkib 	 
+| [[Ursa Major]] 	 [[beta Ursae Majoris|ß Ursae Majoris]] 	 Merak 	
+| Boötes 	 [[38 Boötis]] 	 Merga 	
+| [[Corona Australis]] 	 [[a Coronae Australis]] 	 Meridiana 	
+| [[Taurus (constellation)|Taurus]] 	 23 Tauri Aa 	 [[Merope (star)|Merope]] 	 Member of the [[Pleiades]] [[open cluster|open star cluster]] ([[Messier objects|M45]]). Merope was one of the [[Pleiades (Greek mythology)|Pleiades sisters]] in [[Greek mythology]].
+| [[Aries (constellation)|Aries]] 	 [[gamma Arietis|?² Arietis A]] 	 Mesarthim 	
+| Carina 	 [[beta Carinae|ß Carinae]] 	 Miaplacidus 	
+| [[Crux]] 	[[Beta Crucis|ß Crucis]] 	 Mimosa 	 Also bore the alternative historical name ''Becrux'', a modern contraction of the Bayer designation.<ref name="bs">{{cite book|bibcode=1991bsc..book.....H|title=The Bright star catalogue|journal=New Haven|author1=Hoffleit|first1=Dorrit|last2=Jaschek|first2=Carlos|year=1991}}</ref>
+| Hydra 	 [[sigma Hydrae|s Hydrae]] 	 Minchir 	
+| [[Virgo (constellation)|Virgo]] 	 [[delta Virginis|d Virginis]] 	 Minelauva 	 alternately spelled Minelava
+| [[Orion (constellation)|Orion]] 	 d Orionis Aa 	 [[Mintaka]] 	 Right-most star in the [[Orion's belt|belt of Orion]]. The name ''Mintaka'' itself is derived from [[Arabic language|Arabic]] ?????  ''man?aqah'',  "belt".<ref name="allen1963" />{{rp|pp314-315}}
+| Cetus 	 ? Ceti Aa 	 [[Mira]] 	 [[Latin language|Latin]] for "wonderful" or "astonishing"; named by [[Johannes Hevelius]] in his ''Historiola Mirae Stellae'' (1662).
+| Andromeda 	 [[beta Andromedae|ß Andromedae]] 	 Mirach 	
+| Perseus 	 [[eta Persei|? Persei A]] 	 Miram 	
+| Perseus 	 [[alpha Persei|a Persei]] 	 Mirfak 	
+| Canis Major 	 [[beta Canis Majoris|ß Canis Majoris]] 	 Mirzam 	
+| Perseus 	 [[kappa Persei|? Persei Aa]] 	 Misam 	
+| [[Ursa Major]] 	 [[Zeta Ursae Majoris|? Ursae Majoris Aa]] 	 [[Mizar (star)|Mizar]] 	 
+| Triangulum 	 [[alpha Trianguli|a Trianguli]] 	 Mothallah 	
+| Canis Major 	 [[Gamma Canis Majoris|? Canis Majoris]] 	 Muliphein 	
+| Boötes 	 [[eta Boötis|? Boötis Aa]] 	 Muphrid 	 Alternative traditional spelling of "Mufrid".
+| [[Ursa Major]] 	 [[omicron Ursae Majoris|? Ursae Majoris A]] 	 Muscida 	
+| [[Delphinus]] 	 [[18 Delphini]] 	 Musica 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults" /> [[Latin (language)|Latin]] for 'music' (the ancient Greek musician [[Arion]]'s life was saved at sea by [[dolphin]]s (Latin: 'delphinus') after attracting their attention by playing his [[Cithara|kithara]].<ref name="NEWnames" />
+| Cancer 	 [[Xi Cancri|? Cancri]] 	 Nahn 	
+| [[Puppis]] 	 [[zeta Puppis|? Puppis]] 	 Naos 	
+| [[Capricornus]] 	 [[gamma Capricorni|? Capricorni A]] 	 Nashira 	
+| |[[Cassiopeia (constellation)|Cassiopeia]] 	 [[Gamma Cassiopeiae|? Cassiopeia]] 	 Navi † 	 "Navi" is a modern name, due to [[Gus Grissom]] (his middle name "Ivan" spelled backward). In Chinese astronomy, it is known as {{lang|zh|?}} {{lang|pny|cè}} "the whip".
+| Boötes 	 [[beta Boötis|ß Boötis]] 	 Nekkar 	
+| [[Andromeda (constellation)|Andromeda]] 	 [[51 Andromedae]] 	 Nembus 	
+| Lepus 	 [[beta Leporis|ß Leporis A]] 	 Nihal 	
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[sigma Sagittarii|s Sagittarii Aa]] 	 Nunki 	
+| Corona Borealis 	 [[beta Coronae Borealis|ß Coronae Borealis A]] 	 Nusakan 	
+| [[Hercules (constellation)|Hercules]] 	 [[HD 149026]] 	 Ogma 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults" /> Named after [[Ogma]], a deity in [[Celtic mythology]].<ref name="NEWnames" />
+| Aquila 	 [[zeta Aquilae|? Aquilae]] 	 Okab 	
+| Scorpius 	 [[Tau Scorpii|t Scorpii]] 	 Paikauhale 	
+| [[Pavo (constellation)|Pavo]] 	 [[alpha Pavonis|a Pavonis Aa]] 	 Peacock 	 Designated "Peacock" (after the constellation) by [[His Majesty's Nautical Almanac Office]] for the [[Royal Air Force]] in the 1930s.<ref name="HMNAO" />
+| Columba 	 [[alpha Columbae|a Columbae]] 	 Phact 	
+| [[Ursa Major]] 	 [[gamma Ursae Majoris|? Ursae Majoris Aa]] 	 Phecda 	 Alternative traditional names Phekda or Phad.
+| Ursa Minor 	 [[gamma Ursae Minoris|? Ursae Minoris]] 	 Pherkad 	
+| Cancer 	 [[Lambda Cancri|? Cancri A]] 	 Piautos 	
+| Scorpius 	 [[Mu2 Scorpii|µ² Scorpii A]] 	 Pipirima 	
+| [[Taurus (constellation)|Taurus]] 	 28 Tauri Aa 	 [[Pleione (star)|Pleione]] 	 Member of the [[Pleiades]] [[open cluster|open star cluster]] ([[Messier objects|M45]]). Pleione was the mother of the [[Pleiades (Greek mythology)|Pleiades sisters]] in [[Greek mythology]].
+| [[Ursa Minor]] 	 a Ursae Minoris 	 [[Polaris]] 	 Became known as ''stella polaris'' ("polar star") during the [[Renaissance]].<ref name="Kunitzsch">{{cite book |last=Kunitzsch |first=Paul |author2= Smart, Tim |date = 2006 |title = A Dictionary of Modern star Names: A Short Guide to 254 Star Names and Their Derivations |edition = 2nd rev. |publisher = [[Sky Publishing Corporation]] |location = Cambridge, Massachusetts |isbn = 978-1-931559-44-7 |page = 23}}</ref> see [[polar star]] for other names based on its position close to the celestial pole. 
+| Octans 	 [[sigma Octantis|s Octantis Aa]] 	 Polaris Australis 	 see [[South Star]]
+| Sagittarius 	 [[Mu Sagittarii|µ Sagittarii Aa]] 	 Polis 	
+| [[Gemini (constellation)|Gemini]] 	 ß Geminorum 	 [[Pollux (star)|Pollux]] 	
+| [[Virgo (constellation)|Virgo]] 	 [[gamma Virginis|? Virginis A]] 	 Porrima 	
+| Leo Minor 	 [[46 Leonis Minoris]] 	 Praecipua 	
+| Taurus 	 [[Gamma Tauri|? Tauri A]] 	 Prima Hyadum 	
+| [[Canis Minor]] 	 a Canis Minoris A 	 [[Procyon]] 	 Greek {{lang|grc|p??????}} "preceding the Dog (viz. [[Sirius]])"; Latinized as ''Antecanis''.
+| [[Gemini (constellation)|Gemini]] 	 [[eta Geminorum|? Geminorum A]] 	 Propus 	
+| [[Centaurus]] 	 a Centauri C 	 [[Proxima Centauri]] 	 Nearest star to the sun.
+| [[Eridanus (constellation)|Eridanus]] 	 [[Epsilon Eridani|e Eridani]] 	 Ran 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults" /> Named after the [[Rán|Norse goddess of the sea]].<ref name="NEWnames" />
+| [[Eridanus (constellation)|Eridanus]] 	 [[d Eridani]] 	 Rana † 	
+| [[Leo (constellation)|Leo]] 	 [[mu Leonis|µ Leonis]] 	 Rasalas 	
+| Hercules 	 [[alpha Herculis|a¹ Herculis Aa]] 	 Rasalgethi 	 also Ras Algethi.
+| Ophiuchus 	 [[alpha Ophiuchi|a Ophiuchi A]] 	 Rasalhague 	 also Ras Alhgue.
+| Draco 	 [[beta Draconis|ß Draconis A]] 	 Rastaban 	
+| Vela 	 [[gamma Velorum|? Velorum]] 	 Regor †{{citation needed|date=April 2017}} 	 Also known as Suhail and Suhail al Muhlif, which also apply to [[lambda Velorum]]{{citation needed|date=April 2017}}
+| [[Leo (constellation)|Leo]] 	 a Leonis A 	 [[Regulus]] 	 Latin for "prince" or "little king". Regulus was known to Persian astrologers as the Royal Star Venant, Watcher of the North.
+| Pisces 	 [[Zeta Piscium|? Piscium A]] 	 Revati 	
+| [[Orion (constellation)|Orion]] 	 ß Orionis A 	 [[Rigel]] 	 Traditional name first recorded in the [[Alfonsine Tables]] of 1252 and derived from the Arabic name ''rijl jauzah al uusra'', "the left leg (foot) of Jauzah" (''rijl'' meaning "leg, foot").<ref name="allen1963" />{{rp|pp312-313}}
+| [[Centaurus]] 	 [[Alpha Centauri|a Centauri A]] 	 Rigil Kentaurus 	 The name is originally from Arabic {{lang|ar| ??? ?????? |rtl=yes}} ''rijl qanturiš'', "foot of the centaur".
+| Delphinus 	 [[beta Delphini|ß Delphini A]] 	 Rotanev 	 The name appeared in the Piazzi's Palermo Star Catalogue in 1814, added by [[Niccolo Cacciatore]] as a prank along with '''Sualocin''' (alpha Delphini);  Rotanev is '''Venator''', Latin for "Hunter", spelt backwards. Cacciatore is Italian for "Hunter".
+| |[[Cassiopeia (constellation)|Cassiopeia]] 	 [[Delta Cassiopeiae|d Cassiopeiae Aa]] 	 Ruchbah 	 Derived from [[Arabic]] ???? ''rukbah'', "knee".<ref name="bakich1995">{{citation | first1=Michael E. | last1=Bakich | title=The Cambridge guide to the constellations | publisher=Cambridge University Press | year=1995 | isbn=0-521-44921-9 | page=170 | url=https://books.google.com/books?id=tLMXiFhTnRYC&pg=PA170 }}</ref> Alternative historical name ''Ksora'' appeared in a 1951 publication, ''Atlas Coeli'' ([[Skalnate Pleso Atlas of the Heavens]]) by Czech astronomer [[Antonín Becvár]]; Professor Paul Kunitzch has been unable to find any clues as to the origin of the name.<ref>{{cite book| last1=Kunitzch|first1=Paul|last2=Smart|first2=Tim | title=A Dictionary of Modern Star Names: A Short Guide to 254 Star Names and Their Derivations |year=2006 | publisher=Sky Publishing Corporation |location=Cambridge, Massachusetts |isbn=978-1-931559-44-7 | origyear=1986|page=62}}</ref>
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[alpha Sagittarii|a Sagittarii]] 	 Rukbat 	
+| Ophiuchus 	 [[eta Ophiuchi|? Ophiuchi A]] 	 Sabik 	
+| Auriga 	 [[Zeta Aurigae|? Aurigae A]] 	 Saclateni 	
+| [[Aquarius (constellation)|Aquarius]] 	 [[gamma Aquarii|? Aquarii Aa]] 	 Sadachbia 	
+| Pegasus 	 [[mu Pegasi|µ Pegasi]] 	 Sadalbari 	
+| [[Aquarius (constellation)|Aquarius]] 	 [[alpha Aquarii|a Aquarii A]] 	 Sadalmelik 	
+| [[Aquarius (constellation)|Aquarius]] 	 [[beta Aquarii|ß Aquarii A]] 	 Sadalsuud 	
+| [[Cygnus (constellation)|Cygnus]] 	 [[gamma Cygni|? Cygni A]] 	 Sadr 	
+| [[Orion (constellation)|Orion]] 	 ? Orionis 	 [[Saiph]] 	 Traditional name from [[Arabic]] ??? ???????  ''sayf al-jabbar'', literally ''[[saif|sword]] of the [[giant (mythology)|giant]]''.<ref name="kalerKO">{{citation | first1=James B. | last1=Kaler | work=Stars | title=SAIPH (Kappa Orionis) | publisher=University of Illinois | url=http://stars.astro.illinois.edu/sow/saiph.html | accessdate=2012-01-27 }}</ref>
+| Pegasus 	 [[Tau Pegasi|t Pegasi]] 	 Salm 	
+| [[Scorpius]] 	 [[Theta Scorpii|? Scorpii A]] 	 Sargas 	
+| Hercules 	 [[delta Herculis|d Herculis Aa]] 	 Sarin 	
+| [[Ursa Major (constellation)|Ursa Major]] 	 [[theta Ursae Majoris|? Ursae Majoris]] 	 Sarir † 	{{citation needed|date=April 2017}}
+| [[Eridanus (constellation)|Eridanus]] 	 [[53 Eridani|53 Eridani A]] 	 Sceptrum 	 Formerly "p Sceptri", in the constellation of [[Sceptrum Brandenburgicum]]
+| Pegasus 	 [[beta Pegasi|ß Pegasi]] 	 Scheat 	
+| [[Cassiopeia (constellation)|Cassiopeia]] 	 [[Alpha Cassiopeiae|a Cassiopeiae]] 	 Schedar 	 
+| Taurus 	 [[Delta1 Tauri|d¹ Tauri Aa]] 	 Secunda Hyadum 	
+| |[[Cassiopeia (constellation)|Cassiopeia]] 	 [[Epsilon Cassiopeiae|e Cassiopeia]] 	 Segin 	 Probably originates from an erroneous transcription of Seginus, the traditional name for [[? Boötis]], which itself is of uncertain origin.<ref name="simpson">{{cite book|last1=Simpson|first1=Phil|title=Guidebook to the constellations|date=2012|publisher=Springer|location=New York|isbn=9781441969408|chapter=3}}</ref>
+| Boötes 	 [[gamma Boötis|? Boötis Aa]] 	 Seginus 	 Of uncertain origin.<ref name="simpson" />
+| Sagitta 	 [[alpha Sagittae|a Sagittae]] 	 Sham 	
+| [[Scorpius]] 	 [[Lambda Scorpii|? Scorpii Aa]] 	 Shaula 	
+| [[Lyra]] 	 [[beta Lyrae|ß Lyrae Aa1]] 	 Sheliak 	
+| [[Aries (constellation)|Aries]] 	 [[beta Arietis|ß Arietis A]] 	 Sheratan 	
+| [[Canis Major]] 	 a Canis Majoris A 	 [[Sirius]] 	 Greek {{lang|grc| Se?????}} "the scorcher"; in Egyptian ''[[Sopdet]]'', rendered in Greek as S????. As the brightest star in the sky, Sirius has proper names in numerous cultures, including [[Polynesian culture|Polynesian]] (Maori ''Takurua''; Hawaiian ''Ka'ulua'', "Queen of Heaven", among others). Also known as the Dog Star.
+| [[Aquarius (constellation)|Aquarius]] 	 [[kappa Aquarii|? Aquarii A]] 	 Situla 	
+| [[Aquarius (constellation)|Aquarius]] 	 [[delta Aquarii|d Aquarii A]] 	 Skat 	
+| [[Virgo (constellation)|Virgo]] 	 a Virginis Aa 	 [[Spica]] 	 Other traditional names are ''Azimech'', from Arabic ?????? ?????? ''al-simak al-a‘zal'', "the undefended", and ''Alarph'', Arabic for "the grape gatherer"; in Indian astronomy known as ''Chitra'' "the bright one".
+| Delphinus 	 [[alpha Delphini|a Delphini Aa]] 	 Sualocin 	 The name appeared in the Piazzi's Palermo Star Catalogue in 1814, added by [[Niccolo Cacciatore]] as a prank along with '''Rotanev''' (beta Delphini);  Sualocin is '''Nicolaus''', Latin form of "Niccolo" (Nicholas). 
+| [[Leo (constellation)|Leo]] 	 [[omicron Leonis|? Leonis Aa]] 	 Subra 	
+| Vela 	 [[lambda Velorum|? Velorum]] 	 Suhail 	 Traditionally, this name also applied to [[gamma Velorum]], also known as Regor.
+| [[Lyra]] 	 [[gamma Lyrae|? Lyrae]] 	 Sulafat 	
+| [[Virgo (constellation)|Virgo]] 	 [[iota Virginis|? Virginis]] 	 Syrma 	
+| [[Orion (constellation)|Orion]] 	 [[pi3 Orionis|p³ Orionis]] 	 Tabit 	
+| Ursa Major 	 [[Chi Ursae Majoris|? Ursae Majoris]] 	 Taiyangshou 	 From [[Chinese star names|Chinese name]] ??? (''Tài Yáng Shou'', Guard of the Sun).
+| Draco 	 [[8 Draconis]] 	 Taiyi 	 From [[Chinese star names|Chinese name]] ?? (''Tài Yi'') or ?? (''Tài Yi'', the Great One), both of which refer to [[Tao]].
+| [[Ursa Major (constellation)|Ursa Major]] 	 [[iota Ursae Majoris|? Ursae Majoris Aa]] 	 Talitha 	 or  Talitha Borealis, as Talitha originally referred to ? UMa and  ? UMa together{{citation needed|date=April 2017}}
+| [[Ursa Major (constellation)|Ursa Major]] 	 [[mu Ursae Majoris|µ Ursae Majoris A]] 	 Tania Australis 	
+| [[Ursa Major (constellation)|Ursa Major]] 	 [[lambda Ursae Majoris|? Ursae Majoris A]] 	 Tania Borealis 	
+| Aquila 	 [[gamma Aquilae|? Aquilae]] 	 Tarazed 	 Alternative traditional spelling of Tarazet
+| Cancer 	 [[Beta Cancri|ß Cancri]] 	 Tarf 	
+| [[Taurus (constellation)|Taurus]] 	 19 Tauri Aa 	 [[Taygeta]] 	 Member of the [[Pleiades]] [[open cluster|open star cluster]] ([[Messier objects|M45]]). [[Taygete]] was one of the [[Pleiades (Greek mythology)|Pleiades sisters]] in [[Greek mythology]].
+| [[Cancer (constellation)|Cancer]] 	 [[zeta Cancri|?¹ Cancri A]] 	 Tegmine 	 Alternative traditional name of Tegmen.
+| [[Gemini (constellation)|Gemini]] 	 [[mu Geminorum|µ Geminorum Aa]] 	 Tejat 	 Traditional name, also called Tejat Posterior.
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[Omega Sagittarii|? Sagittarii A]] 	 Terebellum 	 From Ptolemy's tet??p?e????, a quadrangle of stars of which ? Sag is the brightest{{citation needed|date=April 2017}}
+| [[Orion (constellation)|Orion]] 	 [[? Orionis]] 	 Thabit † 	
+| [[Eridanus (constellation)|Eridanus]] 	 [[upsilon2 Eridani|?² Eridani]] 	 Theemin 	 Also written as Theemim or Beemin.
+| Draco 	 a Draconis A 	 [[Thuban]] 	
+| Grus 	 [[Beta Gruis|ß Gruis]] 	 Tiaki 	
+| [[Taurus (constellation)|Taurus]] 	 [[Zeta Tauri|? Tauri A]] 	 Tianguan 	 
+| Draco 	 [[7 Draconis]] 	 Tianyi 	 From [[Chinese star names|Chinese name]] ?? (''Tian Yi'') or ?? (''Tian Yi'', the Celestial Great One), a deity in Taoism.
+| [[Andromeda (constellation)|Andromeda]] 	 [[upsilon Andromedae|? Andromedae A]] 	 Titawin 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults" /> Named after the settlement in northern Morocco and [[UNESCO]] [[World Heritage Site]] now known as the [[Medina quarter|medina]] (old town) of [[Tétouan]].<ref name="NEWnames" />
+| Centaurus 	 [[Alpha Centauri|a Centauri B]] 	 Toliman 	
+| [[Camelopardalis]] 	 [[HD 104985]] 	 Tonatiuh 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults" /> Named after the [[Aztec mythology|Aztec god]] of the Sun.<ref name="NEWnames" />
+| [[Pisces (constellation)|Pisces]] 	 [[omicron Piscium|? Piscium A]] 	 Torcular 	
+| Puppis 	 [[Rho Puppis|? Puppis A]] 	 Tureis 	
+| [[Hydra (constellation)|Hydra]] 	 [[Iota Hydrae|? Hydrae]] 	 Ukdah 	
+| Serpens 	 [[alpha Serpentis|a Serpentis]] 	 Unukalhai 	  Arabic ??? ?????? ''‘unuq al-?ayyati'', "the Serpent's Neck", in Latin ''Cor Serpentis'', "Heart of the Serpent".
+| Canis Major 	 [[Sigma Canis Majoris|s Canis Majoris]] 	 Unurgunite 	
+|[[Lyra]] 	 a Lyrae 	 [[Vega]] 	 The name is originally from Arabic ''an-nasr al-waqi‘'', "the alighting vulture", also translated as ''vulture cadens'' (see also [[Aetos Dios]], [[Stymphalian birds]]). As the second brightest star in the northern sky, Vega has names in numerous cultures. In Chinese it is known as ?? "weaving girl" from the Qi Xi love story. Vega is one of the vertices of the Summer Triangle.
+| [[Andromeda (constellation)|Andromeda]] 	 [[14 Andromedae|14 Andromedae A]] 	 Veritate 	 Name adopted by the IAU following the 2015 NameExoWorlds campaign.<ref name="NEWresults" /> [[Latin]] for 'where there is truth'.<ref name="NEWnames" />
+|[[Virgo (constellation)|Virgo]] 	 [[Epsilon Virginis|e Virginis]] 	 Vindemiatrix 	 ''Vindemiatrix'' is Latin for "grape gatherer"
+| [[Gemini (constellation)|Gemini]] 	 [[delta Geminorum|d Geminorum Aa]] 	 Wasat 	
+| Columba 	 [[beta Columbae|ß Columbae]] 	 Wazn 	
+| Canis Major 	 [[delta Canis Majoris|d Canis Majoris Aa]] 	 Wezen 	
+| Phoenix 	 [[Zeta Phoenicis|? Phoenicis Aa]] 	 Wurren 	 Traditional name in the culture of the [[Wardaman people]] of the [[Northern territory]] of [[Australia]].<ref name="iau1707"/>
+| Scorpius 	 [[Mu1 Scorpii|µ¹ Scorpii Aa]] 	 Xamidimura 	
+| Boötes 	 [[Lambda Boötis|? Boötis]] 	 Xuange 	 From [[Chinese star names|Chinese name]] ?? (''Xuán Ge'', Sombre Lance).
+| Ophiuchus 	 [[epsilon Ophiuchi|e Ophiuchi]] 	 Yed Posterior 	
+| Ophiuchus 	 [[delta Ophiuchi|d Ophiuchi]] 	 Yed Prior 	
+| Ursa Minor 	 [[delta Ursae Minoris|d Ursae Minoris]] 	 Yildun 	
+| [[Virgo (constellation)|Virgo]] 	 [[eta Virginis|? Virginis Aa]] 	 Zaniah 	
+| [[Eridanus (constellation)|Eridanus]] 	 [[Gamma Eridani|? Eridani]] 	 Zaurak 	 Traditional name, alternatively spelled Zaurac; originally from Arabic {{lang|ar| ???? |rtl=yes}} ''zawraq'', "boat".<ref name="allen1963" />{{rp|p218}}
+| [[Virgo (constellation)|Virgo]] 	 [[beta Virginis|ß Virginis]] 	 Zavijava 	 also known as Alaraph{{citation needed|date=April 2017}}
+| Hydra 	 [[Upsilon1 Hydrae|?¹ Hydrae A]] 	 Zhang 	 From [[Chinese star names|Chinese name]] ? (''Zhang'', Extended Net).
+| Eridanus 	 [[Zeta Eridani|? Eridani Aa]] 	 Zibal 	
+| [[Leo (constellation)|Leo]] 	 [[delta Leonis|d Leonis]] 	 Zosma 	
+| [[Libra (constellation)|Libra]] 	 [[alpha Librae|a² Librae Aa]] 	 Zubenelgenubi 	 also  Lanx Australis{{citation needed|date=April 2017}}, Zubeneschamali{{citation needed|date=April 2017}}
+| Libra 	 [[Gamma Librae|? Librae A]] 	 Zubenelhakrabi 	
+| Libra 	 [[Beta Librae|ß Librae]] 	 Zubeneschamali 	
+|}
+| [[Capricornus]] 	 [[delta Capricorni|d Capricorni]] 	 Scheddi † 	
+| [[Leo (constellation)|Leo]] 	 [[epsilon Leonis|e Leonis]] 	 Ras Elased Australis † 	
+| [[Eridanus (constellation)|Eridanus]] 	 [[Delta Eridani|d Eridani]] 	 Rana † 	 ''Rana'' is [[Latin]] for "frog".  
+| [[Virgo (constellation)|Virgo]] 	 [[mu Virginis|µ Virginis]] 	 Rijl al Awwa † 	
+| [[Cygnus (constellation)|Cygnus]] 	 [[omega2 Cygni|?² Cygni]] 	 Ruchba † 	
+| Auriga 	 [[zeta Aurigae|? Aurigae]] 	 Sadatoni † 	
+| Ophiuchus 	 [[nu Ophiuchi|? Ophiuchi]] 	 Sinistra † 	
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[delta Sagittarii|d Sagittarii]] 	 Media † 	
+| Cetus 	 [[alpha Ceti|a Ceti]] 	 Menkab † 	
+| Corvus 	 [[epsilon Corvi|e Corvi]] 	 Minkar † 	
+| Canis Major 	 [[beta Canis Majoris|ß Canis Majoris]] 	 Murzim † 	
+| [[Ursa Major]] 	 [[pi Ursae Majoris|p Ursae Majoris]] 	 Muscida † 	
+| [[Orion (constellation)|Orion]] 	 [[iota Orionis|? Orionis]] 	 Nair Al Saif † 	
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[gamma2 Sagittarii|?² Sagittarii]] 	 Nash † 	
+| Andromeda 	 [[51 Andromedae]] 	 Nembus † 	
+| [[Capricornus]] 	 [[pi Capricorni|p Capricorni]] 	 Okul † 	
+| [[Capricornus]] 	 [[alpha Capricorni|a Capricorni]] 	 Giedi † 	
+| [[Scorpius]] 	 [[Kappa Scorpii|? Scorpii]] 	 Girtab † 	
+| Perseus 	 [[rho Persei|? Persei]] 	 Gorgonea Tertia † 	
+| Auriga 	 [[zeta Aurigae|? Aurigae]] 	 Haedus † 	
+| [[Orion (constellation)|Orion]] 	 ? Orionis 	 [[Meissa|Heka]] † 	
+| Auriga 	 [[zeta Aurigae|? Aurigae]] 	 Hoedus (I) † 	
+| Auriga 	 [[eta Aurigae|? Aurigae]] 	 Hoedus II † 	
+| Hydra 	 [[zeta Hydrae|? Hydrae]] 	 Hydrobius † 	
+| Auriga 	 [[iota Aurigae|? Aurigae]] 	 Kabdhilinan † 	
+| [[Capricornus]] 	 [[epsilon Capricorni|e Capricorni]] 	 Kastra † 	
+| Draco 	 [[nu Draconis|? Draconis]] 	 Kuma † 	
+| [[Ursa Major]] 	 [[iota Ursae Majoris|? Ursae Majoris]] 	 Dnoces † 	
+| [[Leo (constellation)|Leo]] 	 [[delta Leonis|d Leonis]] 	 Duhr † 	
+| Triangulum 	 [[alpha Trianguli|a Trianguli]] 	 Elmuthalleth † 	
+| [[Pisces (constellation)|Pisces]] 	 [[beta Piscium|ß Piscium]] 	 Fum al Samakah † 	
+| Triangulum Australe 	 [[gamma Trianguli Australis|? Trianguli Australis]] 	 Gatria † 	
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[zeta Sagittarii|? Sagittarii]] 	 Askella † 	
+| Canes Venatici 	 [[beta Canum Venaticorum|ß Canum Venaticorum]] 	 Asterion † 	
+| [[Virgo (constellation)|Virgo]] 	 [[delta Virginis|d Virginis]] 	 Auva † 	
+| Auriga 	 [[zeta Aurigae|? Aurigae]] 	 Azaleh † 	
+| Pegasus 	 [[theta Pegasi|? Pegasi]] 	 Baham † 	
+| [[Ursa Major]] 	 [[eta Ursae Majoris|? Ursae Majoris]] 	 Benetnasch † 	
+| Triangulum Australe 	 [[beta Trianguli Australis|ß Trianguli Australis]] 	 Betria † 	
+| Canes Venatici 	 a² Canum Venaticorum 	 [[Cor Caroli|Chara]] † 	
+| Ophiuchus 	 ß Ophiuchi 	 [[beta Ophiuchi|Cheleb]] † 	
+| Serpens 	 [[beta Serpentis|ß Serpentis]] 	 Chow † 	
+| Delphinus 	 [[epsilon Delphini|e Delphini]] 	 Deneb Dulfim † 	
+| Cetus 	 [[iota Ceti|? Ceti]] 	 Deneb Kaitos Schemali † 	
+| Cetus 	 [[eta Ceti|? Ceti]] 	 Dheneb † 	
+| Aquila 	 [[iota Aquilae|? Aquilae]] 	 Al Thalimain † 	
+| Aquila 	 [[lambda Aquilae|? Aquilae]] 	 Al Thalimain † 	
+| [[Virgo (constellation)|Virgo]] 	 [[gamma Virginis|? Virginis]] 	 Arich † 	
+| [[Capricornus]] 	 [[eta Capricorni|? Capricorni]] 	 Armus † 	
+| Boötes 	 [[theta Boötis|? Boötis]] 	 Asellus Primus † 	
+| Boötes 	 [[iota Boötis|? Boötis]] 	 Asellus Secundus † 	
+| Boötes 	 [[kappa Boötis|? Boötis]] 	 Asellus Tertius † 	
+| Corona Australis 	 [[Alpha Coronae Australis|a Coronae Australis]] 	 Alfecca Meridiana † 	
+| Cepheus 	 [[Rho2 Cephei|?² Cephei]] 	 Al Kalb al Rai † 	
+| Cepheus 	 [[Xi Cephei|? Cephei]] 	 Alkurah † 	
+| [[Leo (constellation)|Leo]] 	 [[Kappa Leonis|? Leonis]] 	 Al Minliar al Asad † 	
+| Cepheus 	 [[Gamma Cephei|? Cephei]] 	 Alrai † 	
+| [[Sagittarius (constellation)|Sagittarius]] 	 [[Alpha Sagittarii|a Sagittarii]] 	 Alrami † 	
+| [[Gemini (constellation)|Gemini]] 	 [[eta Geminorum|? Geminorum]] 	 Tejat Prior † 	
+| [[Orion (constellation)|Orion]] 	 [[upsilon Orionis|? Orionis]] 	 Thabit † 	
+| Draco 	 [[epsilon Draconis|e Draconis]] 	 Tyl † 	
+| [[Libra (constellation)|Libra]] 	 [[gamma Librae|? Librae]] 	 Zuben-el-Akrab † 	
+| [[Libra (constellation)|Libra]] 	 [[delta Librae|d Librae]] 	 Zuben-el-Akribi † 	
