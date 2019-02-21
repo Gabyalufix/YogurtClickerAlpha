@@ -101,3 +101,10 @@ for(var i=0; i < STAR_TYPE_SET.length; i++){
    ELEMS["STARCT_"+sid] = document.getElementById("STARTYPE_"+sid+"_DIV")
    //STARTYPE_RedGiant_DIV
 }
+
+
+
+
+
+
+

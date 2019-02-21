@@ -1,3 +1,11 @@
+
+fmtsci <- function(s){
+  format(s,sci=T);
+}
+
+
+
+
 sphereVol <- function(r){
   (4/3) * pi * (r^3)
 }
@@ -71,6 +79,15 @@ abline(v=which(breaks > 520000000)[1],col="blue",lty=3)
 (diffs[1:N0] / breaks[1:N0])
 
 
+core.rad <- 6000;
+core.dist <- 27000
+disk.height <- 250;
+idx.localEnd  <- which(breaks > disk.height)[1]
+idx.coreEntry <- which(breaks > core.dist-core.rad)[1]
+idx.coreExit  <- which(breaks > core.dist+core.rad)[1]
+idx.coreCtr   <- which(breaks > core.dist)[1]
+idx.end       <- which(breaks > 75000)[1]
+MW <- 1:idx.end;
 
 
 breaks[(974-50):(974+50)]
@@ -108,6 +125,112 @@ total.MW.area <- shellArea(0,75000)
 #Total mass 1e12
 #Dropoff is exponential with distance from ctr
 #num s total: 1e11 to 4e11
+
+
+
+
+
+
+
+growth.mod <- 3.26 * 890
+density.exponential.P <- exp(- (str.areas$outerRad[MW] / growth.mod) )
+density.adjust.factor <- density.exponential.P[idx.coreCtr] / 0.004
+getLocalDensity <- function(r){
+   ifelse(r > 75000,0,
+     exp(- (r / growth.mod)  ) / density.adjust.factor
+   );
+}
+fmtsci( sum( getLocalDensity( str.areas$outerRad[MW] ) * str.areas$filledVol[MW] ) )
+
+coreDensity <- 1e11 / (shellArea(0,6000) * 250)
+
+getLocalCoreDensity <- function(r){
+   ifelse(r < core.rad,coreDensity,0);
+}
+fmtsci( sum( getLocalCoreDensity( str.areas$outerRad[MW] ) * str.areas$filledVol[MW] ) )
+
+
+getLocalDensity(27000)
+getLocalCoreDensity(27000)
+getLocalCoreDensity(34000)
+
+dd <- str.areas[,1:7]
+
+dd$localDensity <- NA
+dd$localDensity[1:idx.localEnd] <- 0.004
+
+dd$localDensity[idx.localEnd:MW.radpt] <- sapply(idx.localEnd:MW.radpt,function(i){
+  r <- dd$outerRad[i];
+  dists <- sapply( 1:(pi * 100) / 100, function(theta){
+    sqrt( (core.dist + r * cos(theta))^2 + (r * sin(theta))^2 )
+  })
+  mean( getLocalDensity(dists) + getLocalCoreDensity(dists) )
+})
+dd[MW,]
+
+dd$filledVol <- NA;
+dd$filledVol[1:idx.localEnd]        <- dd$vol[1:idx.localEnd]
+dd$filledVol[idx.localEnd:idx.end ] <- dd$area[idx.localEnd:idx.end ] * disk.height
+
+dd$CT <- NA;
+dd$CT[MW] <- dd$localDensity[MW] * dd$filledVol[MW]
+
+fmtsci(sum(dd$CT[MW]))
+
+fmtsci( sum( getLocalCoreDensity( str.areas$outerRad[MW] ) * str.areas$filledVol[MW] ) )
+
+
+dd[MW,]
+
+out <- data.frame(IR = floor(dd$innerRad),OR = floor(dd$outerRad), thickness = floor(dd$thickness),CT = floor(dd$CT));
+write.table(out[1:idx.end,],file="GitHub/YogurtClickerAlpha/scrap/starDistro.table.txt");
+
+
++ getLocalCoreDensity(dists)
+
+
+
+sin(pi / 2)
+
+sin(pi)
+cos(pi)
+
+str.areas$localDensity <- NA
+str.areas$localDensity[1:idx.localEnd] <- 0.004
+
+str.areas$filledVol <- NA;
+str.areas$filledVol[1:idx.localEnd]        <- str.areas$vol[1:idx.localEnd]
+str.areas$filledVol[idx.localEnd:idx.end ] <- str.areas$area[idx.localEnd:idx.end ] * 250
+
+str.areas$localDensity[idx.localEnd:(idx.coreCtr-1) ] <- sapply(idx.localEnd:(idx.coreCtr-1),function(ii){
+  mean(c(getLocalDensity(27000 - str.areas$outerRad[ii]),getLocalDensity(27000 - str.areas$outerRad[ii]), getLocalDensity(27000 + str.areas$outerRad[ii])));
+})
+str.areas$localDensity[idx.coreCtr:idx.end ] <- sapply(idx.coreCtr:idx.end,function(ii){
+  mean(c(getLocalDensity(str.areas$outerRad[ii] - 27000),getLocalDensity(str.areas$outerRad[ii] - 27000), getLocalDensity(27000 + str.areas$outerRad[ii])));
+})
+
+fmtsci(sum(str.areas$filledVol[MW] * str.areas$localDensity[MW]))
+
+
+
+############################################################################
+############################################################################
+############################################################################
+############################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #guesses:
@@ -263,51 +386,6 @@ format(xt,sci=T)
 
 
 (main.MW.areaDensity / 1000)* shellVolr(0,50)
-
-
-
-fmtsci <- function(s){
-  format(s,sci=T);
-}
-
-
-
-density.exponential.P <- exp(- (str.areas$outerRad[MW] / 3.260) / 1350 )
-density.adjust.factor <- density.exponential.P[idx.ctr] / 0.004
-
-
-getLocalDensity <- function(r){
-   ifelse(r > 75000,0,
-     exp(- (r / 3.260) / 3000 ) / density.adjust.factor
-   );
-}
-
-fmtsci( sum( getLocalDensity( str.areas$outerRad[MW] ) * str.areas$filledVol[MW] ) )
-
-idx.localEnd  <- which(breaks > 250)[1]
-idx.coreEntry <- which(breaks > 27000-core.rad)[1]
-idx.coreExit  <- which(breaks > 27000+core.rad)[1]
-idx.coreCtr   <- which(breaks > 27000)[1]
-idx.end       <- which(breaks > 75000)[1]
-
-
-str.areas <- str.areas.old[,1:7]
-
-str.areas$localDensity <- NA
-str.areas$localDensity[1:idx.localEnd] <- 0.004
-
-str.areas$filledVol <- NA;
-str.areas$filledVol[1:idx.localEnd]        <- str.areas$vol[1:idx.localEnd]
-str.areas$filledVol[idx.localEnd:idx.end ] <- str.areas$area[idx.localEnd:idx.end ] * 250
-
-str.areas$localDensity[idx.localEnd:(idx.coreCtr-1) ] <- sapply(idx.localEnd:(idx.coreCtr-1),function(ii){
-  mean(c(getLocalDensity(27000 - str.areas$outerRad[ii]),getLocalDensity(27000 - str.areas$outerRad[ii]), getLocalDensity(27000 + str.areas$outerRad[ii])));
-})
-str.areas$localDensity[idx.coreCtr:idx.end ] <- sapply(idx.coreCtr:idx.end,function(ii){
-  mean(c(getLocalDensity(str.areas$outerRad[ii] - 27000),getLocalDensity(str.areas$outerRad[ii] - 27000), getLocalDensity(27000 + str.areas$outerRad[ii])));
-})
-
-fmtsci(sum(str.areas$filledVol[MW] * str.areas$localDensity[MW]))
 
 
 
