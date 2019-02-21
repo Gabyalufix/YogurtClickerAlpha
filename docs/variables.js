@@ -140,6 +140,12 @@ Sectors:
 
 }
 
+
+STATICVAR_HOLDER["GREEK_LETTERS"] = {
+    CHARCODES:["&#03B1","&#03B2","&#03B3","&#03B4","&#03B5","&#03B6","&#03B7","&#03B8","&#03B9","&#03BA","&#03BB","&#03BC","&#03BD","&#03BE","&#03BF","&#03C0","&#03C1","&#03C3","&#03C4","&#03C5","&#03C6","&#03C7","&#03C8","&#03C9"],
+    CHARNAMES:["Alpha","Beta","Gamma","Delta","Epsilon","Zeta","Eta","Theta","Iota","Kappa","Lambda","Mu","Nu","Xi","Omicron","Pi","Rho","Sigma","Tau","Upsilon","Phi","Chi","Psi","Omega"]
+}
+
 /*
 ,
         "",
@@ -284,7 +290,7 @@ var WORLD_TYPE_DYSON = [false,false,true,true,true,true,true,false,false,false,t
 var DYSON_TYPE_LIST = ["Omni","Bot","Green","Comp","Hub","Slag","Seedres","Hawk"]
 var CONSTRUCTION_REQUESTS=[];
 var SHIP_TYPE_LIST = ["scout","battleplate","seedship"]
-
+STATICVAR_HOLDER.SHIP_TYPE_LIST = SHIP_TYPE_LIST
 ////////////////////////////////////
 
 UPGRADE_COST = {};
@@ -638,8 +644,6 @@ INVENTORY["seedship-transit-CT"] = 0;
 
 
 STATS["seedship-distToNextStar"] = 1.219;
-
-
 
 
 ///////////////////////////////
@@ -1063,6 +1067,78 @@ STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITFACTOR = {bio:1,
                                    comp:1,
                                    strat:1}
 
+
+
+
+STATS.SHIPSTATS = {
+    scout: {
+        speed:0.458,
+        toughness: 0.1,
+        sensorRange:1,
+        endurance:25,
+        warpMod:2,
+        warpRating: 0
+    },
+    battleplate: {
+        speed:0.1,
+        toughness: 1,
+        sensorRange: 1,
+        endurance: 15,
+        warpMod: 0,
+        warpRating: 0,
+        speedString:"0"
+    },
+    seedship: {
+        speed:0.1,
+        toughness: 0.1,
+        warpMod: 0,
+        warpRating: 0,
+        speedString:"0"
+    },
+    sneakship: {
+        speed:0.323,
+        toughness: 1,
+        sensorRange: 1,
+        endurance: 25,
+        warpMod:1,
+        warpRating: 0,
+        speedString:"0"
+    }
+}
+/*
+STATICVAR_HOLDER["BASE_WARP_MODIFIER"] = {
+    scout: 2,
+    battleplate: 0,
+    seedship: 0,
+    sneakship: 1
+}
+STATS["WARP_MODIFIER_SHIP"] = {};*/
+for(var i=0; i < STATICVAR_HOLDER.SHIP_TYPE_LIST.length; i++){
+    var sid = this.STATICVAR_HOLDER.SHIP_TYPE_LIST[i]
+    STATS.SHIPSTATS[sid]["speedWk"] = STATS.SHIPSTATS[sid]["speed"] / 52;
+}
+
+INVENTORY["WARP_RATING_BASE"] = 0.1;
+INVENTORY["WARP_RATING_SHIP"] = {};
+INVENTORY["WARP_SPEED_SHIP"] = {};
+INVENTORY["WARP_SPEED_SHIP_STRING"] = {};
+
+function calcShipSpeeds(){
+  if(this.INVENTORY["WARP_RATING_BASE"] < 1){
+    for(var i=0; i < this.STATICVAR_HOLDER.SHIP_TYPE_LIST.length; i++){
+        var sid = this.STATICVAR_HOLDER.SHIP_TYPE_LIST[i]
+        STATS.SHIPSTATS[sid].speed  = 1 - ( (1-this.INVENTORY["WARP_RATING_BASE"]) / ((this.STATS["WARP_MODIFIER_SHIP"][sid]/3) + 1));
+    }
+  } else {
+    for(var i=0; i < this.STATICVAR_HOLDER.SHIP_TYPE_LIST.length; i++){
+        var sid = this.STATICVAR_HOLDER.SHIP_TYPE_LIST[i]
+        this.STATS.SHIPSTATS[sid].warpRating = this.INVENTORY["WARP_RATING_BASE"] + this.STATS["WARP_MODIFIER_SHIP"][sid];
+        this.STATS.SHIPSTATS[sid].speed  = Math.pow(2,this.STATS.SHIPSTATS[sid].warpRating-1)
+    }
+  }
+  STATS.SHIPSTATS[sid].speedWk = STATS.SHIPSTATS[sid].speed / 52;
+  STATS.SHIPSTATS[sid].speedString = roundTo( STATS.SHIPSTATS[sid].speed,2)+"c"
+}
 
 //STATICVAR_HOLDER.MASS_PER_POWERTICK = 604800
 // Math.log10( ((INVENTORY["POWER-FreeBot-CT"]*STATICVAR_HOLDER.WATTAGE_MULTIPLIER *  STATICVAR_HOLDER.SEC_PER_TICK) / STATICVAR_HOLDER.C_SQUARED ) / 1000 )
