@@ -651,7 +651,7 @@ function getProjectCostWithBase(costInfo, baseCost){
        if(idx >= 0){
            //buffer = buffer + costInfo.sciFields[idx][1];
            idxSet.add(idx);
-           cost.push( [ costInfo.sciFields[idx][0]+"_SCIENCE_FREE", baseCost / (1+i) ] );
+           cost.push(  [costInfo.sciFields[idx][0]+"_SCIENCE_FREE", baseCost / (1+i)] );
        }
      }
      return cost;
