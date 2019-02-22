@@ -293,19 +293,27 @@ var SHIP_TYPE_LIST = ["scout","battleplate","seedship"]
 STATICVAR_HOLDER.SHIP_TYPE_LIST = SHIP_TYPE_LIST
 ////////////////////////////////////
 
+statCostScalingFcn = function(lvl){
+   return Math.pow(50 + ((1.5) * lvl * 10),lvl) * 100e26
+}
+
+stdCostScalingFcn = function(lvl){
+   return Math.pow(50 + ((1 + Math.random()) * lvl * 10),lvl) * 100e26
+}
+
 UPGRADE_COST = {};
 UPGRADE_COST["Bot"] = {};
 UPGRADE_COST["Green"] = {};
 UPGRADE_COST["Hawk"] = {};
 
 UPGRADE_COST["Bot"]["calc"] = function(lvl){
-    return [["eng0_SCIENCE_FREE",Math.pow(50 + (lvl * 10),lvl) * 100e18]];
+    return [["eng0_SCIENCE_FREE",statCostScalingFcn(lvl)/10]];
 }
 UPGRADE_COST["Green"]["calc"] = function(lvl){
-    return [["bio2_SCIENCE_FREE",Math.pow(50 + (lvl * 10),lvl) * 100e18]];
+    return [["bio2_SCIENCE_FREE",statCostScalingFcn(lvl)/10]];
 }
 UPGRADE_COST["Hawk"]["calc"] = function(lvl){
-    return [["eng2_SCIENCE_FREE",Math.pow(50 + (lvl * 10),lvl) * 100e18]];
+    return [["eng2_SCIENCE_FREE",statCostScalingFcn(lvl)/10]];
 }
 //UPGRADE_COST["Bot"]["curr"] = UPGRADE_COST["Bot"].calc(1)
 //UPGRADE_COST["Green"]["curr"] = UPGRADE_COST["Green"].calc(1)
@@ -321,9 +329,6 @@ UPGRADE_COST["Hawk"]["effect"] = function(){
 }
 
 
-stdCostScalingFcn = function(lvl){
-   return Math.pow(50 + ((1 + Math.random()) * lvl * 10),lvl) * 100e18
-}
 
 /*
    {itemID:"HawkingEfficiency",itemTitle:"HawkingEfficiency",
@@ -361,8 +366,8 @@ STATICVAR_HOLDER.UPGRADABLES = [
        costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
        ELEM_COSTDISPLAY: document.getElementById("GreenPowerEfficiencyUpgradeCost"),
        ELEM_BUTTON:      document.getElementById("button_GreenPowerEfficiencyUpgrade"),
-       ELEM_DISPLAY:      document.getElementById("GreenPowerEfficiencyDisplay")
-       
+       ELEM_DISPLAY:      document.getElementById("GreenPowerEfficiencyDisplay"),
+       ELEM_LVL:      document.getElementById("GreenPowerEfficiencyLevel")
 
    },
    {itemID:"BiopwrProductivity",itemTitle:"BiopwrProductivity",
@@ -374,7 +379,8 @@ STATICVAR_HOLDER.UPGRADABLES = [
        costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
        ELEM_COSTDISPLAY: document.getElementById("GreenPowerCapacityUpgradeCost"),
        ELEM_BUTTON:      document.getElementById("button_GreenPowerCapacityUpgrade"),
-       ELEM_DISPLAY:      document.getElementById("GreenPowerProductivityDisplay")
+       ELEM_DISPLAY:      document.getElementById("GreenPowerProductivityDisplay"),
+       ELEM_LVL:      document.getElementById("GreenPowerProductivityLevel")
    },
    {itemID:"BotpwrEfficiency",itemTitle:"BotpwrEfficiency",
        effect : function(lvl){
@@ -385,7 +391,8 @@ STATICVAR_HOLDER.UPGRADABLES = [
        costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
        ELEM_COSTDISPLAY: document.getElementById("BotPowerEfficiencyUpgradeCost"),
        ELEM_BUTTON:      document.getElementById("button_BotPowerEfficiencyUpgrade"),
-       ELEM_DISPLAY:      document.getElementById("BotPowerEfficiencyDisplay")
+       ELEM_DISPLAY:      document.getElementById("BotPowerEfficiencyDisplay"),
+       ELEM_LVL:      document.getElementById("BotPowerEfficiencyLevel")
    },
    {itemID:"BotpwrProductivity",itemTitle:"BotpwrProductivity",
        effect : function(lvl){
@@ -396,7 +403,8 @@ STATICVAR_HOLDER.UPGRADABLES = [
        costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
        ELEM_COSTDISPLAY: document.getElementById("BotPowerCapacityUpgradeCost"),
        ELEM_BUTTON:      document.getElementById("button_BotPowerCapacityUpgrade"),
-       ELEM_DISPLAY:      document.getElementById("BotPowerProductivityDisplay")
+       ELEM_DISPLAY:      document.getElementById("BotPowerProductivityDisplay"),
+       ELEM_LVL:      document.getElementById("BotPowerProductivityLevel")
        
 
    },

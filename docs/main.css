@@ -391,6 +391,7 @@ h5 {
 .contentGrid5 {
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-gap: 0px;
   /*grid-gap: 5px;*/
   padding: 1px;
 
@@ -433,7 +434,7 @@ h5 {
 }
 
 .dataTable {
-  line-height:0.75;
+  line-height:1;
   font-size:11pt;
   /*font-family: "Courier New", Courier, monospace;*/
 }
@@ -529,6 +530,8 @@ h5 {
   align-self: end;
 }
 
+
+
 .contentGridItem1x1 {
   grid-area: span 1 / span 1
 }
@@ -579,7 +582,10 @@ h5 {
   background-color: var(--LT1);
 }
 
-
+.contentGridItemNarrowVertPadding {
+  padding: 1px 5px 1px 5px;
+  margin: 0px;
+}
 /*
 ===================================================================================================================
 ===================================================================================================================
@@ -755,7 +761,7 @@ h5 {
   grid-template-columns: 34% 22% 22% 22%;
   /*grid-gap: 5px;*/
   border: 1px solid var(--DK2);
-  line-height:0.75;
+  line-height:1;
   font-size:11pt;
 }
 

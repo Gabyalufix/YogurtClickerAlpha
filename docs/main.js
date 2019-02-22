@@ -1179,24 +1179,30 @@ for(var i=0; i < STATICVAR_HOLDER.UPGRADABLES.length; i++){
     var cost = getProjectCostWithBase( this.ELEMS.costInfo, this.ELEMS.costScalingFunction( lvl + 1 ));
     this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["lvl"] = lvl + 1;
     this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["cost"] = cost;
-    this.ELEMS.ELEM_COSTDISPLAY.innerHTML = makeFittedCostString(cost);
+    this.updateDisplay();
+  }
+  xx.ELEM_BUTTON.updateDisplay = function(){
+    this.ELEMS.ELEM_COSTDISPLAY.innerHTML = makeFittedCostString(this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["cost"]);
     this.ELEMS.ELEM_DISPLAY.innerHTML = this.ELEMS.getDisplayString();
+    this.ELEMS.ELEM_LVL.textContent = this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["lvl"]
   }
   
-  
       xx.ELEM_BUTTON.canAffordTest = function(){
-        //console.log(this.UPCOST);
+        //console.log("can Afford: "+this.ELEMS.itemID);
         var currCost = this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID].cost;
+        //console.log("    cost: "+this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID].cost);
         if( this.GAME.canAfford(currCost) ){
+            //console.log("    TRUE")
             this.disabled = false;
             return true;
         } else {
+            //console.log("    FALSE")
             this.disabled = true;
             return false;
         }
       }
-      RESEARCH_BUTTONS.push(upgradeElem);
-  
+      RESEARCH_BUTTONS.push(xx.ELEM_BUTTON);
+  xx.ELEM_BUTTON.updateDisplay();
 }
 
 
