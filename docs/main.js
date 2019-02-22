@@ -1183,6 +1183,20 @@ for(var i=0; i < STATICVAR_HOLDER.UPGRADABLES.length; i++){
     this.ELEMS.ELEM_DISPLAY.innerHTML = this.ELEMS.getDisplayString();
   }
   
+  
+      xx.ELEM_BUTTON.canAffordTest = function(){
+        //console.log(this.UPCOST);
+        var currCost = this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID].cost;
+        if( this.GAME.canAfford(currCost) ){
+            this.disabled = false;
+            return true;
+        } else {
+            this.disabled = true;
+            return false;
+        }
+      }
+      RESEARCH_BUTTONS.push(upgradeElem);
+  
 }
 
 
