@@ -1582,7 +1582,50 @@
 				<button class = "button3" id ="button_wfHostileDN" > &#8964; </button>
 			   </div>
 		</p>
+
+			   <div class="buildCtrlPanel  buildCtrlPanel5B">
+			   <div class="ctrlPanelTopLine">
+			     <h5><span class="INFO_TEXT_STATIC">Seedships: </span></h5>
+               </div>
+			    <div class="buildInfoPanel1"><div class="valueDisplayDiv"><span id="seedship_CHEAT_AddUnit"></span><span id="seedship_CHEAT_AddUnit_UNITS"></span></div></div>
+				<button class = "button3" id ="button_cheatseedshipUP" > &#8963; </button>
+				<button class = "button2" id ="button_cheatseedshipF" > BUILD </button>
+			    <div class="buildInfoPanel2">BEEP BEEP BEEP <br>  </div>
+			    <span></span>
+				<button class = "button3" id ="button_cheatseedshipDN" > &#8964; </button>
+			   </div>
+
+			   <div class="buildCtrlPanel  buildCtrlPanel5B">
+			   <div class="ctrlPanelTopLine">
+			     <h5><span class="INFO_TEXT_STATIC">Scouts: </span></h5>
+               </div>
+			    <div class="buildInfoPanel1"><div class="valueDisplayDiv"><span id="scout_CHEAT_AddUnit"></span><span id="scout_CHEAT_AddUnit_UNITS"></span></div></div>
+				<button class = "button3" id ="button_cheatscoutUP" > &#8963; </button>
+				<button class = "button2" id ="button_cheatscoutF" > BUILD </button>
+			    <div class="buildInfoPanel2">BEEP BEEP BEEP <br> </div>
+			    <span></span>
+				<button class = "button3" id ="button_cheatscoutDN" > &#8964; </button>
+			   </div>
+
+
+
+ 			   <div class="buildCtrlPanel  buildCtrlPanel5B">
+ 			   <div class="ctrlPanelTopLine">
+ 			     <h5><span class="INFO_TEXT_STATIC">Time Control / Execute Ticks: </span></h5>
+                </div>
+ 			    <div class="buildInfoPanel1"><div class="valueDisplayDiv"><span id="cheatTick_AddUnit"></span></div></div>
+ 				<button class = "button3" id ="button_cheatTickUP" > &#8963; </button>
+ 				<button class = "button2" id ="button_cheatTickF" > BUILD </button>
+ 			    <div class="buildInfoPanel2"> <button class = "button2" id ="button_PAUSE" > PAUSE </button> </div>
+ 			    <span></span>
+ 				<button class = "button3" id ="button_cheatTickDN" > &#8964; </button>
+			   </div>
+
+
 		</div>
+
+
+
 </div>
 
 <!--
@@ -2012,7 +2055,101 @@ Stellar pop:
 		<div class="content">
   			<p><span class="INFO_TEXT_STATIC">This area will contain information on the territory you have captured. Sun types, etc.</span></p>
 
-  			    <h5> <span class="INFO_TEXT_STATIC">Captured Systems:</span> </h5>
+       <div class="contentUnitHolder">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC">Exploration:</span></h2>
+			</button>
+			<div class="contentLV3">
+
+				<div class="contentGrid4" style="text-size:8pt">
+
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Travel Dist: </span> <BR><span id="valueDisplay_EXPLORE_travelDist"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Travel Frac: </span>     <span id="valueDisplay_EXPLORE_travelFrac"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Trip Dist: </span>     <span id="valueDisplay_EXPLORE_tripDistance"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> speed: </span>     <span id="valueDisplay_SHIPSTATS_scout_SPEED"></span></div>
+
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> endurance: </span>     <span id="valueDisplay_SHIPSTATS_scout_ENDURANCE"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Sensor Area: </span>     <span id="valueDisplay_SHIPSTATS_scout_sensorArea"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Vol / Wk: </span>     <span id="valueDisplay_EXPLORE_volExploredThisTick"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Stars / Wk: </span>     <span id="valueDisplay_EXPLORE_starsFoundThisTick"></span></div>
+
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Trip Duration: </span>     <span id="valueDisplay_EXPLORE_tripDuration"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Explored per Trip: </span>     <span id="valueDisplay_volExploredPerTrip"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Explored per Ship Per Week: </span>     <span id="valueDisplay_exploreVolumePerShipPerTick"></span></div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Explore Rating: </span>     <span id="valueDisplay_exploreRating"></span></div>
+
+
+
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">  </span> Seeded Radius:    <span id="valueDisplay_EXPLORE_SEEDCAPT_RADIUS"></span> </div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">  </span>  Scout Radius:   <span id="valueDisplay_EXPLORE_EXPLORE_RADIUS"></span> </div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">Volume Explored: </span>     <span id="valueDisplay_EXPLORE_totalVolExplored"></span> </div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Stars Found: </span>     <span id="valueDisplay_EXPLORE_totalStarsFound"></span> </div>
+
+
+			    </div>
+
+				<div class="contentGrid4">
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> CAPT CSPAN:</span>     <span id="valueDisplay_EXPLORE_SEEDCAPT_CURRENTSPAN"></span> </div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> CAPT CLEFT:</span>     <span id="valueDisplay_EXPLORE_SEEDCAPT_CURRENTLEFT"></span> </div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> SENT CSPAN:</span>     <span id="valueDisplay_EXPLORE_SEEDSENT_CURRENTSPAN"></span> </div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> SENT CLEFT:</span>     <span id="valueDisplay_EXPLORE_SEEDSENT_CURRENTLEFT"></span> </div>
+
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> EXPLORE CSPAN: </span>     <span id="valueDisplay_EXPLORE_EXPLORE_CURRENTSPAN" ></span> </div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> EXPLORE CLEFT: </span>     <span id="valueDisplay_EXPLORE_EXPLORE_CURRENTLEFT" ></span> </div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Launched/wk: </span>     <span id="valueDisplay_seedLaunchThisTick" ></span> </div>
+			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC"> Landed/wk: </span>     <span id="valueDisplay_seedLandThisTick" ></span> </div>
+
+			    </div>
+
+
+<!--
+
+
+STATS["SEEDCAPT"] = {};
+STATS.SEEDCAPT.CURRENT_SPAN = 0;
+STATS.SEEDCAPT.CURRENT_LEFT = STATICVAR_HOLDER.STAR_TABLE[STATS.SEEDED.CURRENT_SPAN][4];
+
+STATS["SEEDSENT"] = {};
+STATS.SEEDSENT.CURRENT_SPAN = 0;
+STATS.SEEDSENT.CURRENT_LEFT = STATICVAR_HOLDER.STAR_TABLE[STATS.SEEDED.CURRENT_SPAN][4];
+
+STATS["ScoutedWorldBuffer"] = [ [0,0] ];
+
+STATS["EXPLORE"] = {};
+STATS.EXPLORE.CURRENT_SPAN = 0;
+//STATS.EXPLORE.CURRENT_EXPL = 0;
+STATS.EXPLORE.CURRENT_LEFT = STATICVAR_HOLDER.STAR_TABLE[STATS.EXPLORE.CURRENT_SPAN][4];
+
+
+
+    this.STATS["EXPLORE"]["travelDist"]              = travelDist;
+    this.STATS["EXPLORE"]["travelFrac"]              = tripFractionSpentScouting;
+    this.STATS["EXPLORE"]["volExploredPerTrip"]      = (this.SHIPSTATS.scout["sensorRange"] ^ 2) * this.SHIPSTATS.scout["endurance"];
+    this.STATS["EXPLORE"]["tripDistance"]            = tripDistanceTravelled;
+    this.STATS["EXPLORE"]["tripDuration"]            = tripDistanceTravelled / this.STATS.SHIPSTATS.scout["speed"];
+    this.STATS["EXPLORE"]["volExploredThisTick"]     = avgAreaExplored;
+    this.STATS["EXPLORE"]["starsFoundThisTick"]      = starsExploredPotential;
+    this.STATS["EXPLORE"].totalVolExplored           = this.STATS["EXPLORE"].totalVolExplored + areaExplored
+
+    this.STATS["EXPLORE"].totalStarsFound            = this.STATS["EXPLORE"].totalStarsFound  + starsExplored
+INVENTORY["WORLDS-Neutral-CT"]
+INVENTORY["seedship-transit-CT"]
+
+
+
+-->
+
+
+			</div>
+		  </div>
+
+	  <br>
+
+       <div class="contentUnitHolder">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC">Captured Systems:</span></h2>
+			</button>
+			<div class="contentLV3">
 
   			    <h5> <span class="INFO_TEXT_STATIC">Main-Sequence:</span> </h5>
 				<div class="contentGrid4">
@@ -2040,7 +2177,8 @@ Stellar pop:
 			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >    <span class="INFO_TEXT_STATIC">Neutron Stars:</span>        <span id="STARTYPE_neutron_DIV"></span></div>
 			    <div class="contentGridItem contentGridItem1x1 valueDisplayDiv" >  <span class="INFO_TEXT_STATIC">Black Holes:</span>          <span id="STARTYPE_blackHole_DIV"></span></div>
                 </div>
-
+			</div>
+		  </div>
 
 		</div>
 </div>
@@ -2065,6 +2203,8 @@ Stellar pop:
 <script type="text/javascript" src="textData.js"></script>
 <script type="text/javascript" src="stars.js"></script>
 <script type="text/javascript" src="starBatch.js"></script>
+<script type="text/javascript" src="starDistroTable.js"></script>
+<script type="text/javascript" src="starTravel.js"></script>
 
 <script type="text/javascript" src="tvstatic.js"></script>
 <script type="text/javascript" src="main.js"></script>

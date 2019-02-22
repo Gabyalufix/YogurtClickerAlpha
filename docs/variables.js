@@ -1175,4 +1175,23 @@ standard current-tech solar panels range: 100-1.4 kg / kW
 
 */
 
+
+/*
+<span id="Seedship_CHEAT_AddUnit"></span><span id="Seedship_CHEAT_AddUnit_UNITS"></span></div></div>
+                <button class = "button3" id ="button_cheatSeedshipUP" > &#8963; </button>
+                <button class = "button2" id ="button_cheatSeedshipF" > BUILD </button>
+                <div class="buildInfoPanel2">BEEP BEEP BEEP <br> <span id="wfUPGRADE_Bot_COST"></span> </div>
+                <span></span>
+                <button class = "button3" id ="button_cheatSeedshipDN" > &#8964; </button>
+*/
+
+
+
+
+
+
+
+
+
+
 window.GAME = GAME_GLOBAL;

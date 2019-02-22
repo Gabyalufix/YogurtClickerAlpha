@@ -46,13 +46,19 @@ function TICK_runFastTick(){
      // GAME.bgCanvas.style.height = GAME.ALL_CONTENT_CONTAINER.offsetHeight + "px"
     }
 
-    if(! STATS["PAUSE"]){
+    if((! STATS["PAUSE"]) || (STATS["RUN_MANUAL_TICKS"] > 0)){
+        if(STATS["RUN_MANUAL_TICKS"] > 0){
+          STATS["RUN_MANUAL_TICKS"] = STATS["RUN_MANUAL_TICKS"] -1;
+        }
         TICK_TIMESTAMP = Date.now()
         GAME.STATS["TICK"] = GAME.STATS["TICK"] + 1;
         GAME.TICK_readUserInputs()
         GAME.TICK_updateStats()
-        GAME.TICK_scoutSystems()
-        GAME.TICK_captureSystems()
+        //GAME.TICK_scoutSystems()
+        //GAME.TICK_captureSystems()
+        GAME.TICKHELPER_scoutSystems();
+        GAME.TICKHELPER_updateExploreStats();
+        GAME.TICKHELPER_seedShipCalcs();
         GAME.TICK_calcWar()
         GAME.TICK_constructWorlds()
         GAME.TICK_updateWorldCounts()

@@ -100,16 +100,16 @@ function updatePctSliderDisplayHelper(ss){
       ss.sdisplay.textContent = (vv / 100).toFixed(1) + "% ["+fmtsi+this.PCTSLIDER_DISPLAYUNITS[fid]+"]";
 
       /*if(ss.sdisplay.FILLBAR != null){
-		  var makeAnonFunc = function(){
-			          var vpct = vv / 10000;
-			          var wd = ss.parentElement.offsetWidth
-					  return function(){
+          var makeAnonFunc = function(){
+                      var vpct = vv / 10000;
+                      var wd = ss.parentElement.offsetWidth
+                      return function(){
 
-					  }
-		  }
-		  var anonFunc = makeAnonFunc();
-		  window.requestAnimationFrame(anonFunc);
-	  }*/
+                      }
+          }
+          var anonFunc = makeAnonFunc();
+          window.requestAnimationFrame(anonFunc);
+      }*/
 
 }
 
@@ -205,9 +205,9 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
          display_elem[i].PRODPOWER = document.getElementById(fid+"SliderDisplayPct"+(i+1)+"_PRODPOWER");
          //display_elem[i].FILLBARELEM = slider_elem[i].previousSibling.classList  sliderFillBar
          if( slider_elem[i].previousElementSibling != null && slider_elem[i].previousElementSibling.classList.contains("sliderFillBarHolder")){
-			 display_elem[i].FILLBAR = slider_elem[i].previousElementSibling.children[0]
-			 //display_elem[i].FILLBAR = slider_elem[i].previousElementSibling;
-		 }
+             display_elem[i].FILLBAR = slider_elem[i].previousElementSibling.children[0]
+             //display_elem[i].FILLBAR = slider_elem[i].previousElementSibling;
+         }
 
          display_elem[i].limitingResource = "";
          if(display_elem[i].PRODINPUT != null){
@@ -420,15 +420,15 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
        var vv = this.availListElem.value;
        var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
        if(pp != null){
-		 var prereqs = pp.upgradePrereqTechs;
-		 var meetsPrereqs = true;
-		 if(prereqs != null){
-			 for( var i=0; i < prereqs.length; i++){
-				 if( ! this.GAME.INVENTORY.SCIENCE_RESEARCHED.includes( prereqs[i] ) ){
-					 meetsPrereqs = false;
-				 }
-			 }
-		 }
+         var prereqs = pp.upgradePrereqTechs;
+         var meetsPrereqs = true;
+         if(prereqs != null){
+             for( var i=0; i < prereqs.length; i++){
+                 if( ! this.GAME.INVENTORY.SCIENCE_RESEARCHED.includes( prereqs[i] ) ){
+                     meetsPrereqs = false;
+                 }
+             }
+         }
          if( this.GAME.canAfford(pp.cost) && meetsPrereqs ){
              this.disabled = false;
              return true;
@@ -501,8 +501,97 @@ UPGRADE_COST_FCN["Bot"] = function(lvl){
 UPGRADE_COST_FCN["Green"] = function(lvl){
     [["bio_SCIENCE_FREE",Math.pow(1.6,lvl) * 50e17]];
 }*/
+/*
+ELEMS["CHEAT_Seedship_UNITS"]  = document.getElementById("Seedship_CHEAT_AddUnit")
+ELEMS["CHEAT_Seedship_UP"]  = document.getElementById("button_cheatSeedshipUP")
+ELEMS["CHEAT_Seedship_DN"]  = document.getElementById("button_cheatSeedshipF")
+ELEMS["CHEAT_Seedship_ADD"] = document.getElementById("button_cheatSeedshipDN")
+*/
 
 
+
+
+for( var i = 0; i < STATICVAR_HOLDER.SHIP_TYPE_LIST.length; i++){
+  var sid = STATICVAR_HOLDER.SHIP_TYPE_LIST[i];
+  if(document.getElementById("button_cheat"+sid+"UP") != null){
+      ELEMS["CHEATPANEL_"+sid] = {
+        sid:sid,
+        multUp: document.getElementById("button_cheat"+sid+"UP"),
+        multDn: document.getElementById("button_cheat"+sid+"DN"),
+        cheatAdd: document.getElementById("button_cheat"+sid+"F"),
+        currUnit: 1,
+        unitElem:document.getElementById(sid+"_CHEAT_AddUnit")
+      }
+      ELEMS["CHEATPANEL_"+sid].multUp.cheatPanel   = ELEMS["CHEATPANEL_"+sid]
+      ELEMS["CHEATPANEL_"+sid].multDn.cheatPanel   = ELEMS["CHEATPANEL_"+sid]
+      ELEMS["CHEATPANEL_"+sid].cheatAdd.cheatPanel = ELEMS["CHEATPANEL_"+sid]
+
+      ELEMS["CHEATPANEL_"+sid].multUp.onclick = function(){
+        console.log("multUp: " +this.cheatPanel.sid);
+        this.cheatPanel.currUnit = this.cheatPanel.currUnit * 10;
+        this.cheatPanel.unitElem.textContent = fmtSIflat( this.cheatPanel.currUnit );
+        this.cheatPanel.multDn.disabled = false;
+      }
+      ELEMS["CHEATPANEL_"+sid].multDn.onclick = function(){
+        console.log("multDn: " +this.cheatPanel.sid);
+        this.cheatPanel.currUnit = this.cheatPanel.currUnit / 10;
+        this.cheatPanel.unitElem.textContent = fmtSIflat( this.cheatPanel.currUnit );
+        if(this.cheatPanel.currUnit <= 1){
+          this.disabled = true;
+        }
+      }
+      ELEMS["CHEATPANEL_"+sid].cheatAdd.onclick = function(){
+        console.log("add: " +this.cheatPanel.sid);
+        INVENTORY["SHIPS-"+this.cheatPanel.sid+"-CT"] = INVENTORY["SHIPS-"+this.cheatPanel.sid+"-CT"] + this.cheatPanel.currUnit
+      }
+  }
+  
+}
+
+STATS["RUN_MANUAL_TICKS"] = 0;
+
+      ELEMS["CHEATPANEL_TIME"] = {
+        sid:"TIME",
+        multUp: document.getElementById("button_cheatTickUP"),
+        multDn: document.getElementById("button_cheatTickDN"),
+        cheatAdd: document.getElementById("button_cheatTickF"),
+        currUnit: 1,
+        unitElem:document.getElementById("cheatTick_AddUnit")
+      }
+      ELEMS["CHEATPANEL_"+"TIME"].multUp.cheatPanel   = ELEMS["CHEATPANEL_"+"TIME"]
+      ELEMS["CHEATPANEL_"+"TIME"].multDn.cheatPanel   = ELEMS["CHEATPANEL_"+"TIME"]
+      ELEMS["CHEATPANEL_"+"TIME"].cheatAdd.cheatPanel = ELEMS["CHEATPANEL_"+"TIME"]
+
+      ELEMS["CHEATPANEL_"+"TIME"].multUp.onclick = function(){
+        console.log("multUp: " +this.cheatPanel.sid);
+        this.cheatPanel.currUnit = this.cheatPanel.currUnit * 10;
+        this.cheatPanel.unitElem.textContent = fmtSIflat( this.cheatPanel.currUnit );
+        this.cheatPanel.multDn.disabled = false;
+      }
+      ELEMS["CHEATPANEL_"+"TIME"].multDn.onclick = function(){
+        console.log("multDn: " +this.cheatPanel.sid);
+        this.cheatPanel.currUnit = this.cheatPanel.currUnit / 10;
+        this.cheatPanel.unitElem.textContent = fmtSIflat( this.cheatPanel.currUnit );
+        if(this.cheatPanel.currUnit <= 1){
+          this.disabled = true;
+        }
+      }
+      ELEMS["CHEATPANEL_"+"TIME"].cheatAdd.onclick = function(){
+        console.log("add: " +this.cheatPanel.sid);
+        STATS["PAUSE"] = true;
+        STATS["RUN_MANUAL_TICKS"] = STATS["RUN_MANUAL_TICKS"] + this.cheatPanel.currUnit;
+      }
+      document.getElementById("button_PAUSE").onclick = function(){
+        if(STATS["PAUSE"]){
+          STATS["PAUSE"] = false
+          this.textContent = "Click to PAUSE";
+        } else {
+          STATS["PAUSE"] = true
+          this.textContent = "Click to UNPAUSE";
+        }
+        
+      }
+      
 
 for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
     var worldType = WORLD_TYPE_LIST[i]

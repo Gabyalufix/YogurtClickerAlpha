@@ -408,7 +408,7 @@ function fmtSIflat(x){
       var dp = ((d+2) % 3)
       return roundTo(rr,dp)+ suffix
   } else if(x < 100){
-    return ""+roundTo(x,1)
+    return ""+Math.round(x)
   } else if(x < 1000){
     return ""+Math.round(x)
   } else {
@@ -501,91 +501,91 @@ function getPrefixSI(x){
 
 
 function ExactLargeNumber( varray ){
-	var maxExact = 1000000000000000
-	var digitCt  = 15;
-	
-	this.getFullString = function(){
-		//var out = ""+varray[length(varray)-1];
-		var out = ""
-		for(var i=0; i < length(varray)-1; i++){
-			var xx = ""+varray[i]
-			out = "0".repeat( digitCt-xx.length ) + xx + out;
-		}
-		out = varray[length(varray)-1] + out
-		return out;
-	}
-	this.add = function(x){
-		var carryDigit = 0;
-		for(var i=0; i < Math.max( varray.length,x.length) ; i++){
+    var maxExact = 1000000000000000
+    var digitCt  = 15;
+    
+    this.getFullString = function(){
+        //var out = ""+varray[length(varray)-1];
+        var out = ""
+        for(var i=0; i < length(varray)-1; i++){
+            var xx = ""+varray[i]
+            out = "0".repeat( digitCt-xx.length ) + xx + out;
+        }
+        out = varray[length(varray)-1] + out
+        return out;
+    }
+    this.add = function(x){
+        var carryDigit = 0;
+        for(var i=0; i < Math.max( varray.length,x.length) ; i++){
            if(i < x.length && i < varray.length){
-			   var currsum = varray[i] + carryDigit + x[i];
-			   if(currsum >= maxExact){
-				   varray[i] = currsum - maxExact;
-				   carryDigit = 1;
-			   } else {
-				   varray[i] = currsum
-				   carryDigit = 0;
-			   }
-		   } else if(i < x.length){
-			   varray[i] = x[i] + carryDigit
-			   carryDigit = 0;
-		   } else {
-			   varray[i] = varray[i] + carryDigit
-			   carryDigit = 0;
-		   }
-	    }
-	}
-	this.gt = function(x){
-		if(varray.length == x.length){
-		    for(var i=length(varray)-1; i >= 0; i--){
-				if(varray[i] < x[i]){
-					return false;
-				} else if(varray[i] > x[i]){
-					return true;
-				}
-			}
-			return false;
-		} else if(varray.length < x.length){
-			return false;
-		} else {
-			return true;
-		}
-	}
-	this.eq = function(x){
-		if(varray.length == x.length){
-		    for(var i=length(varray)-1; i >= 0; i--){
-				if(varray[i] != x[i]){
-					return false;
-				}
-			}
-			return true;
-		} else {
-			return true;
-		}
-	}
-	this.subtract = function(x){
-		var pullDigit = 0;
-		for(var i=0; i < varray.length ; i++){
+               var currsum = varray[i] + carryDigit + x[i];
+               if(currsum >= maxExact){
+                   varray[i] = currsum - maxExact;
+                   carryDigit = 1;
+               } else {
+                   varray[i] = currsum
+                   carryDigit = 0;
+               }
+           } else if(i < x.length){
+               varray[i] = x[i] + carryDigit
+               carryDigit = 0;
+           } else {
+               varray[i] = varray[i] + carryDigit
+               carryDigit = 0;
+           }
+        }
+    }
+    this.gt = function(x){
+        if(varray.length == x.length){
+            for(var i=length(varray)-1; i >= 0; i--){
+                if(varray[i] < x[i]){
+                    return false;
+                } else if(varray[i] > x[i]){
+                    return true;
+                }
+            }
+            return false;
+        } else if(varray.length < x.length){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    this.eq = function(x){
+        if(varray.length == x.length){
+            for(var i=length(varray)-1; i >= 0; i--){
+                if(varray[i] != x[i]){
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return true;
+        }
+    }
+    this.subtract = function(x){
+        var pullDigit = 0;
+        for(var i=0; i < varray.length ; i++){
            if(i < x.length){
-			   var currsum = varray[i] - pullDigit - x[i];
-			   if(currsum >= 0){
-				   varray[i] = currsum;
-				   pullDigit = 0;
-			   } else {
-				   varray[i] = currsum + maxExact
-				   pullDigit = 1;
-			   }
-		   } else {
-			   if(varray[i] == 0){
-				   varray[i] = maxExact - pullDigit;
-				   pullDigit = 1;
-			   } else {
-				   varray[i] = varray[i] - pullDigit
-				   pullDigit = 0;
-			   }
-		   }
-	    }
-	}
+               var currsum = varray[i] - pullDigit - x[i];
+               if(currsum >= 0){
+                   varray[i] = currsum;
+                   pullDigit = 0;
+               } else {
+                   varray[i] = currsum + maxExact
+                   pullDigit = 1;
+               }
+           } else {
+               if(varray[i] == 0){
+                   varray[i] = maxExact - pullDigit;
+                   pullDigit = 1;
+               } else {
+                   varray[i] = varray[i] - pullDigit
+                   pullDigit = 0;
+               }
+           }
+        }
+    }
 }
 
 
