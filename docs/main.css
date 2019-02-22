@@ -41,6 +41,10 @@
   --bioTextDK: #26301d;
   --engTextDK: #3b1312;
   --psyTextDK: #221d2f;
+  
+  --LT4WASHOUT: #e4e5e7;
+  --LT3WASHOUT: #c9cbcf;
+  --LT2WASHOUT: #aeb1b7;
 }
 /*
 
@@ -55,7 +59,7 @@
 .THEME_Green, .THEME_Bio {
   --white: #ffffff;
   --black: #000000;
-  --LT4: #beceb1;
+  --LT4: #d8e2d0;
   --LT3: #a4ba91;
   --LT2: #97b082;
   --LT1: #8aa772;
@@ -72,7 +76,7 @@
 .THEME_Bot, .THEME_eng {
   --white: #ffffff;
   --black: #000000;
-  --LT4: #d2adac;
+  --LT4: #e4cecd;
   --LT3: #c99c9c;
   --LT2: #b87b7a;
   --LT1: #af6b6a;
@@ -89,7 +93,7 @@
 .THEME_Psy {
   --white: #ffffff;
   --black: #000000;
-  --LT4: #e3dfec;
+  --LT4: #d5cfe2;
   --LT3: #d5d0e2;
   --LT2: #c7c0d8;
   --LT1: #b9b0cf;
@@ -106,7 +110,7 @@
 .THEME_Hawk {
   --white: #ffffff;
   --black: #000000;
-  --LT4: #bdbfc2;
+  --LT4: #d7d8da;
   --LT3: #b4b7ba;
   --LT2: #a2a6a9;
   --LT1: #95999d;
@@ -119,9 +123,11 @@
 }
 .SCICOST_TEXT_LT {
   color: var(--costTextLT);
+  font-weight: bold;
 }
 .SCICOST_TEXT_DK {
   color: var(--costTextDK);
+  font-weight: bold;
 }
 
 .THEME_HOLDER {
@@ -1596,7 +1602,7 @@ input[type=unitEntry], select {
 .buildCtrlPanel {
   position: relative;
   display: grid;
-  background-color: var(--LT1);
+  background-color: var(--LT3);
   padding: 1px;
   margin: 4px 0px 4px 0px;
   border-style: solid;
@@ -1621,7 +1627,7 @@ input[type=unitEntry], select {
 
 
 .buildCtrlPanel > div {
-  background-color: var(--LT1);
+  background-color: var(--LT3);
   text-align: center;
   padding: 2px 0;
   font-size: 14px;
