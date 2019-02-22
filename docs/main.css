@@ -35,20 +35,24 @@
   --psyLT: #b9b0cf;
   --psyMD: #8e81b1;
   --psyDK: #50446f;
-  
   --subduedWarnRed:    #e23232;
   --subduedWarnYellow: #e29532;
   --subduedWarnGreen:  #1bba21;
+  --bioTextDK: #26301d;
+  --engTextDK: #3b1312;
+  --psyTextDK: #221d2f;
 }
 /*
-  --subduedWarnRed:    #bb1b36;
-  --subduedWarnYellow: #bba31b;
-#e2c732
-#e2c732
-#e29532
-*/
 
-.THEME_Green, .THEME_bio {
+  --bioTextLT: #a4ba91;
+  --engTextLT: #e7b2b1;
+  --psyTextLT: #b9b0cf;
+  --bioTextDK: #323f27;
+  --engTextDK: #621f1e;
+  --psyTextDK: #50446f;
+
+*/
+.THEME_Green, .THEME_Bio {
   --white: #ffffff;
   --black: #000000;
   --LT4: #beceb1;
@@ -61,6 +65,9 @@
   --DK3: #4b5e3b;
   --DK4: #3e4e31;
   --baseBG: #e7b2b1;
+  
+  --costTextLT: #beceb1;
+  --costTextDK: #4b5e3b;
 }
 .THEME_Bot, .THEME_eng {
   --white: #ffffff;
@@ -75,8 +82,11 @@
   --DK3: #633636;
   --DK4: #532d2d;
   --baseBG: #e7b2b1;
+  
+  --costTextLT: #d2adac;
+  --costTextDK: #633636;
 }
-.THEME_psy {
+.THEME_Psy {
   --white: #ffffff;
   --black: #000000;
   --LT4: #e3dfec;
@@ -89,6 +99,9 @@
   --DK3: #67578e;
   --DK4: #50446f;
   --baseBG: #e7b2b1;
+  
+  --costTextLT: #e3dfec;
+  --costTextDK: #67578e;
 }
 .THEME_Hawk {
   --white: #ffffff;
@@ -104,8 +117,12 @@
   --DK4: #494d50;
   --baseBG: #e7b2b1;
 }
-
-
+.SCICOST_TEXT_LT {
+  color: var(--costTextLT);
+}
+.SCICOST_TEXT_DK {
+  color: var(--costTextDK);
+}
 
 .THEME_HOLDER {
    display: none;
@@ -342,6 +359,10 @@ h5 {
   border-radius: 2px 2px 2px 2px ;
   border-color:var(--DK4); 
 }
+.SubContentBoxLT3 {
+  background-color: var(--LT3);
+}
+
 .SubContentBoxTitle {
   position: absolute;
   background-color:var(--MID); 

@@ -39,6 +39,91 @@ function makeCostString(cc,delim){
 }
 GAME_GLOBAL.makeCostString = makeCostString
 
+function makeColoredScienceOLD(ss, sciDescSet, isLT = false){
+    console.log("   coloring: "+ss[0] +" / "+ss[1]);
+    var out = fmtSI(ss[1]) +"B "+sciDescSet[ss[0]];
+    if(ss[0].startsWith("bio")){
+        console.log("   BIO color found for: "+ss[0])
+        if(isLT){
+            console.log("    LT!")
+            out = out.fontcolor("var(--bioTextLT)")
+        } else {
+            console.log("    DK!")
+            out = out.fontcolor("var(--bioTextDK)")
+        }
+    } else if(ss[0].startsWith("eng")){
+        console.log("   ENG color found for: "+ss[0])
+        if(isLT){
+            out = out.fontcolor("var(--engTextLT)")
+        } else {
+            out = out.fontcolor("var(--engTextDK)")
+        }
+    } else if(ss[0].startsWith("psy")){
+        console.log("   PSY color found for: "+ss[0])
+        if(isLT){
+            out = out.fontcolor("var(--psyTextLT)")
+        } else {
+            out = out.fontcolor("var(--psyTextDK)")
+        }
+    } else {
+        console.log("   No color found for: "+ss[0])
+    }
+    return out;
+}
+
+function makeColoredScience(ss, sciDescSet, isLT = false){
+    console.log("   coloring: "+ss[0] +" / "+ss[1]);
+    var out = fmtSI(ss[1]) +"B "+sciDescSet[ss[0]];
+    if(ss[0].startsWith("bio")){
+        console.log("   BIO color found for: "+ss[0])
+        if(isLT){
+            console.log("    LT!")
+            out = "<SPAN class=\"THEME_Bio SCICOST_TEXT_LT\">"+out+"</SPAN>"
+        } else {
+            console.log("    DK!")
+            out = "<SPAN class=\"THEME_Bio SCICOST_TEXT_DK\">"+out+"</SPAN>"
+        }
+    } else if(ss[0].startsWith("eng")){
+        console.log("   ENG color found for: "+ss[0])
+        if(isLT){
+            out = "<SPAN class=\"THEME_Bot SCICOST_TEXT_LT\">"+out+"</SPAN>"
+        } else {
+            out = "<SPAN class=\"THEME_Bot SCICOST_TEXT_DK\">"+out+"</SPAN>"
+        }
+    } else if(ss[0].startsWith("psy")){
+        console.log("   PSY color found for: "+ss[0])
+        if(isLT){
+            out = "<SPAN class=\"THEME_Psy SCICOST_TEXT_LT\">"+out+"</SPAN>"
+        } else {
+            out = "<SPAN class=\"THEME_Psy SCICOST_TEXT_DK\">"+out+"</SPAN>"
+        }
+    } else {
+        console.log("   No color found for: "+ss[0])
+    }
+    return out;
+}
+
+
+function makeAdvCostString(cc,delim1=", ",delim2=",<BR>", compressThresh = 2, isLT=false){
+    console.log("advString input: "+cc);
+   var costDesc = STATICVAR_HOLDER["INVENTORY_DESC_FULL"]
+   var delim = delim2;
+   if(cc.length > compressThresh){
+     costDesc = STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]
+     delim=delim1;
+   }
+   var out = makeColoredScience(cc[0],costDesc, isLT);
+   if(cc.length > 1){
+      for(var i=1; i<cc.length;i++){
+          out = out + delim + makeColoredScience(cc[i],costDesc,isLT);
+      }
+   }
+   console.log("advString: "+out);
+   return out;
+}
+GAME_GLOBAL.makeAdvCostString = makeAdvCostString
+
+GAME_GLOBAL.makeFittedCostString = makeFittedCostString
 
 function makeFittedCostString(cc,delim1=", ",delim2=",<BR>"){
    if(cc.length <= 2){
@@ -49,6 +134,11 @@ function makeFittedCostString(cc,delim1=", ",delim2=",<BR>"){
 }
 GAME_GLOBAL.makeFittedCostString = makeFittedCostString
 
+/*
+
+document.getElementById("wfUPGRADE_Bot_COST")
+
+*/
 ///////////////////////////////
 ////Initialize starting stats
 
@@ -470,10 +560,11 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
        var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
        console.log("this.value="+this.value+", pp = "+pp);
        var dd = pp.desc;
-       for(var k=0; k < pp.cost.length;k++){
+       /*for(var k=0; k < pp.cost.length;k++){
           var ccc = fmtSIunits(pp.cost[k][1]);
           dd = dd + "<br> &nbsp&nbsp&nbsp"+ccc[0]+ccc[1]+"B "+ this.GAME.STATICVAR_HOLDER["INVENTORY_DESC_FULL"][pp.cost[k][0]]
-       }
+       }*/
+       dd = dd + "<BR> &nbsp&nbsp&nbsp" + makeAdvCostString(pp.cost,delim1=", ",delim2="<BR> &nbsp&nbsp&nbsp", compressThresh = 5, isLT=false)
        this.descElem.innerHTML = dd
        if( this.GAME.canAfford(pp.cost) ){
          this.researchButton.disabled = false;
@@ -707,14 +798,14 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
         var lvl = this.GAME.INVENTORY["WORLDS-"+this.worldType+"-LVL"] + 1;
         this.GAME.INVENTORY["WORLDS-"+this.worldType+"-LVL"] = lvl
         this.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType] = UPCOST.calc(lvl);
-        var costString = this.GAME.makeFittedCostString(this.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType],", ");
-        this.costDisplayElem.textContent = costString;
+        var costString = this.GAME.makeAdvCostString(this.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType],", ");
+        this.costDisplayElem.innerHTML = costString;
         this.lvlDisplayElem.textContent = "Lvl-"+lvl;
         UPCOST.effect();
       }
       var currCost = upgradeElem.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType]
-      var costString = upgradeElem.GAME.makeFittedCostString(currCost,", ");
-      upgradeElem.costDisplayElem.textContent = costString;
+      var costString = upgradeElem.GAME.makeAdvCostString(currCost,", ");
+      upgradeElem.costDisplayElem.innerHTML = costString;
 
       upgradeElem.canAffordTest = function(){
         //console.log(this.UPCOST);

@@ -8,6 +8,7 @@ COLOR["consoleGreen"] = bodyComputedStyle.getPropertyValue("--consoleGreen")
 COLOR["bsodBlue"] = bodyComputedStyle.getPropertyValue("--bsodBlue")
 COLOR["bsodText"] = bodyComputedStyle.getPropertyValue("--bsodText")
 
+var getMainThemeVars = getComputedStyle(document.body);
 
 
 //var itsSet = document.getElementsByClassName("INFO_TEXT_STATIC");
