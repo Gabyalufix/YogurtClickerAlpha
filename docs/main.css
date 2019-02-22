@@ -881,6 +881,7 @@ h5 {
 
 #ALL_CONTENT_CONTAINER {
   position:absolute;
+  max-width: 100vw;
   top: 0px;
   left: 0px;
   padding:0px;

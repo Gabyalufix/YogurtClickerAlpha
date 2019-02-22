@@ -14,18 +14,40 @@ function canAfford(c){
 GAME_GLOBAL.canAfford = canAfford
 
 function makeCostAbbriv(cc,delim){
-   var ccc = fmtSIunits(cc[0][1]);
-   var costString = ccc[0] + ccc[1] +"B "+ STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[0][0]];
+   var ccc = fmtSI(cc[0][1]);
+   var costString = ccc +"B "+ STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[0][0]];
    if(cc.length > 1){
      for(var i=1; i<cc.length;i++){
-       var c3 = fmtSIunits(cc[i][1]);
-       costString = costString + delim + c3[0] + c3[1] +"B "+ STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[i][0]];
+       var c3 = fmtSI(cc[i][1]);
+       costString = costString + delim + c3 +"B "+ STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[i][0]];
      }
    }
    return costString;
 }
 GAME_GLOBAL.makeCostAbbriv = makeCostAbbriv
 
+function makeCostString(cc,delim){
+   var ccc = fmtSI(cc[0][1]);
+   var costString = ccc +"B "+ STATICVAR_HOLDER["INVENTORY_DESC_FULL"][cc[0][0]];
+   if(cc.length > 1){
+     for(var i=1; i<cc.length;i++){
+       var c3 = fmtSI(cc[i][1]);
+       costString = costString + delim + c3 +"B "+ STATICVAR_HOLDER["INVENTORY_DESC_FULL"][cc[i][0]];
+     }
+   }
+   return costString;
+}
+GAME_GLOBAL.makeCostString = makeCostString
+
+
+function makeFittedCostString(cc,delim1=", ",delim2=",<BR>"){
+   if(cc.length <= 2){
+     return makeCostString(cc,delim2)
+   } else {
+     return makeCostAbbriv(cc,delim1)
+   }
+}
+GAME_GLOBAL.makeFittedCostString = makeFittedCostString
 
 ///////////////////////////////
 ////Initialize starting stats
@@ -668,7 +690,6 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    }
    var upgradeElem =  document.getElementById("button_wf"+worldType+"UPGRADE")
    if(upgradeElem != null){
-
       upgradeElem.worldType = worldType;
       upgradeElem.GAME = GAME_GLOBAL;
       //upgradeElem.UPCOST = UPGRADE_COST[worldType];
@@ -686,13 +707,13 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
         var lvl = this.GAME.INVENTORY["WORLDS-"+this.worldType+"-LVL"] + 1;
         this.GAME.INVENTORY["WORLDS-"+this.worldType+"-LVL"] = lvl
         this.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType] = UPCOST.calc(lvl);
-        var costString = this.GAME.makeCostAbbriv(this.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType],", ");
+        var costString = this.GAME.makeFittedCostString(this.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType],", ");
         this.costDisplayElem.textContent = costString;
         this.lvlDisplayElem.textContent = "Lvl-"+lvl;
         UPCOST.effect();
       }
       var currCost = upgradeElem.GAME.STATS["CURRENT_UPGRADE_COST"][this.worldType]
-      var costString = upgradeElem.GAME.makeCostAbbriv(currCost,", ");
+      var costString = upgradeElem.GAME.makeFittedCostString(currCost,", ");
       upgradeElem.costDisplayElem.textContent = costString;
 
       upgradeElem.canAffordTest = function(){
@@ -710,6 +731,7 @@ for( var i = 0; i < DYSON_TYPE_LIST.length; i++){
    }
 
 }
+
 
 
 
@@ -1101,7 +1123,58 @@ document.getElementById("ENABLE_CHEATS_CHECKBOX").oninput = function(){
 
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+multiList[j].costInfo.sciFieldsCS = [];
+var sumSoFar = 0;
+for(var k=0; k < multiList[j].costInfo.sciFields.length; k++){
+  var sf = multiList[j].costInfo.sciFields[k];
+  multiList[j].costInfo.sciFieldsCS.push([sumSoFar, sf[1] + sumSoFar]);
+  sumSoFar = sumSoFar + sf[1]
+}
+multiList[j].costInfo.sciCtDistroCS = [];
+sumSoFar = 0;
+for(var k=0; k < multiList[j].costInfo.sciCtDistro.length; k++){
+    multiList[j].costInfo.sciCtDistroCS.push( multiList[j].costInfo.sciCtDistro[k] + sumSoFar)
+    sumSoFar = sumSoFar + multiList[j].costInfo.sciCtDistro[k]
+}
+
+STATS["UPGRADABLES"] = {};
+for(var i=0; i < STATICVAR_HOLDER.UPGRADABLES.length; i++){
+  var xx = STATICVAR_HOLDER.UPGRADABLES[i];
+  xx.costInfo.sciFieldsCS = [];
+  var sumSoFar = 0;
+  for(var k=0; k < xx.costInfo.sciFields.length; k++){
+    var sf = xx.costInfo.sciFields[k];
+    xx.costInfo.sciFieldsCS.push([sumSoFar, sf[1] + sumSoFar]);
+    sumSoFar = sumSoFar + sf[1]
+  }
+  xx.costInfo.sciCtDistroCS = [];
+  sumSoFar = 0;
+  for(var k=0; k < xx.costInfo.sciCtDistro.length; k++){
+    xx.costInfo.sciCtDistroCS.push( xx.costInfo.sciCtDistro[k] + sumSoFar)
+    sumSoFar = sumSoFar + xx.costInfo.sciCtDistro[k]
+  }
+
+  STATS["UPGRADABLES"][xx.itemID] = {};
+  STATS["UPGRADABLES"][xx.itemID]["lvl"] = 1
+  STATS["UPGRADABLES"][xx.itemID]["cost"] = getProjectCostWithBase(xx.costInfo, xx.costScalingFunction(1) )
+  
+  xx.ELEM_BUTTON.ELEMS = xx;
+  xx.ELEM_BUTTON.GAME = GAME_GLOBAL;
+  xx.ELEM_BUTTON.onclick = function(){
+    console.log("upgrading :"+this.ELEMS.itemTitle);
+    this.ELEMS.effect();
+    var lvl = this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["lvl"]
+    var cost = getProjectCostWithBase( this.ELEMS.costInfo, this.ELEMS.costScalingFunction( lvl + 1 ));
+    this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["lvl"] = lvl + 1;
+    this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["cost"] = cost;
+    this.ELEMS.ELEM_COSTDISPLAY.innerHTML = makeFittedCostString(cost);
+    this.ELEMS.ELEM_DISPLAY.innerHTML = this.ELEMS.getDisplayString();
+  }
+  
+}
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

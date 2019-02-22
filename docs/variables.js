@@ -321,6 +321,114 @@ UPGRADE_COST["Hawk"]["effect"] = function(){
 }
 
 
+stdCostScalingFcn = function(lvl){
+   return Math.pow(50 + ((1 + Math.random()) * lvl * 10),lvl) * 100e18
+}
+
+/*
+   {itemID:"HawkingEfficiency",itemTitle:"HawkingEfficiency",
+       effect : function(lvl){
+          STATS["ENERGYRATE_MULT"]["Hawk"+"pwrGen"] = 1 - (1 - STATS["ENERGYRATE_MULT"]["Hawk"+"pwrGen"])*0.95
+       },
+       costScalingFunction : stdCostScalingFcn,
+       costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
+       ELEM_COSTDISPLAY: document.getElementById(""),
+       ELEM_BUTTON:      document.getElementById("")
+       ELEM_DISPLAY:      document.getElementById("")
+   },
+   {itemID:"HawkingProductivity",itemTitle:"HawkingProductivity",
+       effect : function(lvl){
+          this.STATS["PRODUCTIVITY_MULT"]["Hawk"+"pwrGen"] = this.STATS["PRODUCTIVITY_MULT"]["Hawk"+"pwrGen"] * 1.05
+       },
+       costScalingFunction : stdCostScalingFcn,
+       costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
+       ELEM_COSTDISPLAY: document.getElementById(""),
+       ELEM_BUTTON:      document.getElementById("")
+       ELEM_DISPLAY:      document.getElementById("")
+    },
+*/
+
+
+STATICVAR_HOLDER.UPGRADABLES = [
+   {itemID:"BiopwrEfficiency",itemTitle:"BiopwrEfficiency",
+       effect : function(lvl){
+          STATS["ENERGYRATE_MULT"]["Bio"+"pwrGen"] = 1 - (1 - STATS["ENERGYRATE_MULT"]["Bio"+"pwrGen"])*0.95
+       },
+       getDisplayString : function(){ STATS["ENERGYRATE_MULT"]["Bio"+"pwrGen"] },
+       costScalingFunction : stdCostScalingFcn,
+       costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
+       ELEM_COSTDISPLAY: document.getElementById("GreenPowerEfficiencyUpgradeCost"),
+       ELEM_BUTTON:      document.getElementById("button_GreenPowerEfficiencyUpgrade"),
+       ELEM_DISPLAY:      document.getElementById("GreenPowerEfficiencyDisplay")
+       
+
+   },
+   {itemID:"BiopwrProductivity",itemTitle:"BiopwrProductivity",
+       effect : function(lvl){
+          this.STATS["PRODUCTIVITY_MULT"]["Bio"+"pwrGen"] = this.STATS["PRODUCTIVITY_MULT"]["Bio"+"pwrGen"] * 1.05
+       },
+       getDisplayString : function(){ "?" },
+       costScalingFunction : stdCostScalingFcn,
+       costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
+       ELEM_COSTDISPLAY: document.getElementById("GreenPowerCapacityUpgradeCost"),
+       ELEM_BUTTON:      document.getElementById("button_GreenPowerCapacityUpgrade"),
+       ELEM_DISPLAY:      document.getElementById("GreenPowerProductivityDisplay")
+   },
+   {itemID:"BotpwrEfficiency",itemTitle:"BotpwrEfficiency",
+       effect : function(lvl){
+          STATS["ENERGYRATE_MULT"]["Bot"+"pwrGen"] = 1 - (1 - STATS["ENERGYRATE_MULT"]["Bot"+"pwrGen"])*0.95
+       },
+       getDisplayString : function(){ STATS["ENERGYRATE_MULT"]["Bot"+"pwrGen"] },
+       costScalingFunction : stdCostScalingFcn,
+       costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
+       ELEM_COSTDISPLAY: document.getElementById("BotPowerEfficiencyUpgradeCost"),
+       ELEM_BUTTON:      document.getElementById("button_BotPowerEfficiencyUpgrade"),
+       ELEM_DISPLAY:      document.getElementById("BotPowerEfficiencyDisplay")
+   },
+   {itemID:"BotpwrProductivity",itemTitle:"BotpwrProductivity",
+       effect : function(lvl){
+          this.STATS["PRODUCTIVITY_MULT"]["Bot"+"pwrGen"] = this.STATS["PRODUCTIVITY_MULT"]["Bot"+"pwrGen"] * 1.05
+       },
+       getDisplayString : function(){ "?" },
+       costScalingFunction : stdCostScalingFcn,
+       costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
+       ELEM_COSTDISPLAY: document.getElementById("BotPowerCapacityUpgradeCost"),
+       ELEM_BUTTON:      document.getElementById("button_BotPowerCapacityUpgrade"),
+       ELEM_DISPLAY:      document.getElementById("BotPowerProductivityDisplay")
+       
+
+   },
+];
+
+/*
+
+
+
+
+
+
+
+
+
+BotPowerMiniDisplay
+button_botPowerMiniUpgrade
+BotPowerMiniUpgradeCost
+
+GreenPowerMiniDisplay
+button_GreenPowerMiniUpgrade
+GreenPowerMiniUpgradeCost
+
+
+
+
+
+
+
+
+
+
+*/
+
 
 //STATS["UPGRADE_COST"] = UPGRADE_COST;
 STATS["CURRENT_UPGRADE_COST"] = {};
@@ -765,19 +873,7 @@ STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy0_SCIENCE_FREE"] = "Cogn"
 STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy1_SCIENCE_FREE"] = "Create"
 STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy2_SCIENCE_FREE"] = "Strat/Tac"
 
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"] = {};
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio_SCIENCE_FREE"] = "Bio"
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio0_SCIENCE_FREE"] = "Biowar"
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio1_SCIENCE_FREE"] = "Yogosyn"
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["bio2_SCIENCE_FREE"] = "Bioengi"
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["eng_SCIENCE_FREE"] = "Eng"
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["eng0_SCIENCE_FREE"] = "WrldBldg"
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["eng1_SCIENCE_FREE"] = "Wpns&War"
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["eng2_SCIENCE_FREE"] = "Mtr&Enrgy"
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["psy_SCIENCE_FREE"] = "SocSci"
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["psy0_SCIENCE_FREE"] = "Cogntn"
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["psy1_SCIENCE_FREE"] = "Manip"
-STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]["psy2_SCIENCE_FREE"] = "Strat"
+STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"] = STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]
 
 ///////////////////////////////
 ////Starting Projects:

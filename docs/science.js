@@ -532,23 +532,23 @@ SCIENCEMULTI_PSY = [
 STATICVAR_HOLDER.SCIENCE.MULTI["psy"] = STATICVAR_HOLDER.SCIENCE.MULTI["psy"].concat( SCIENCEMULTI_PSY );
 
 for(var i=0; i < SCIENCE_TYPES.length; i++){
-	var scitype = SCIENCE_TYPES[i];
-	var multiList = STATICVAR_HOLDER.SCIENCE.MULTI[scitype];
-	for(var j=0; j < multiList.length; j++){
-		multiList[j].costInfo.sciFieldsCS = [];
-		var sumSoFar = 0;
-		for(var k=0; k < multiList[j].costInfo.sciFields.length; k++){
-	      var sf = multiList[j].costInfo.sciFields[k];
+    var scitype = SCIENCE_TYPES[i];
+    var multiList = STATICVAR_HOLDER.SCIENCE.MULTI[scitype];
+    for(var j=0; j < multiList.length; j++){
+        multiList[j].costInfo.sciFieldsCS = [];
+        var sumSoFar = 0;
+        for(var k=0; k < multiList[j].costInfo.sciFields.length; k++){
+          var sf = multiList[j].costInfo.sciFields[k];
           multiList[j].costInfo.sciFieldsCS.push([sumSoFar, sf[1] + sumSoFar]);
           sumSoFar = sumSoFar + sf[1]
-		}
-		multiList[j].costInfo.sciCtDistroCS = [];
-		sumSoFar = 0;
-		for(var k=0; k < multiList[j].costInfo.sciCtDistro.length; k++){
+        }
+        multiList[j].costInfo.sciCtDistroCS = [];
+        sumSoFar = 0;
+        for(var k=0; k < multiList[j].costInfo.sciCtDistro.length; k++){
             multiList[j].costInfo.sciCtDistroCS.push( multiList[j].costInfo.sciCtDistro[k] + sumSoFar)
             sumSoFar = sumSoFar + multiList[j].costInfo.sciCtDistro[k]
-		}
-	}
+        }
+    }
 }
 
 //{sciFields:[["eng0",1],["eng1",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.5,0.45,0.05]}
@@ -598,33 +598,65 @@ function getProjectCostAdv(costInfo, techlvl){
      var rr = Math.random();
      var nn = 0;
      while(nn < costInfo.sciCtDistroCS.length && rr >= costInfo.sciCtDistroCS[nn]){
-		 nn++;
-	 }
-	 nn++;
+         nn++;
+     }
+     nn++;
 
 
      var idxSet = new Set();
      for(var i=0; i < nn; i++){
-	   var rx = Math.random();
-	   var idx = -1;
-	   var buffer = 0;
+       var rx = Math.random();
+       var idx = -1;
+       var buffer = 0;
        for( var k=0; k < costInfo.sciFieldsCS.length; k++){
-		   if( idxSet.has(k) ){
-			   buffer = buffer + costInfo.sciFields[k][1];
-		   } else if( costInfo.sciFieldsCS[k][0] - buffer <= rx && rx < costInfo.sciFieldsCS[k][1] - buffer ){
-			   idx = k;
-		   }
-	   }
-	   if(idx >= 0){
-		   //buffer = buffer + costInfo.sciFields[idx][1];
-		   idxSet.add(idx);
-		   cost.push( [ costInfo.sciFields[idx][0]+"_SCIENCE_FREE", getRandomBaseCost(techlvl) / (1+i) ] );
-	   }
+           if( idxSet.has(k) ){
+               buffer = buffer + costInfo.sciFields[k][1];
+           } else if( costInfo.sciFieldsCS[k][0] - buffer <= rx && rx < costInfo.sciFieldsCS[k][1] - buffer ){
+               idx = k;
+           }
+       }
+       if(idx >= 0){
+           //buffer = buffer + costInfo.sciFields[idx][1];
+           idxSet.add(idx);
+           cost.push( [ costInfo.sciFields[idx][0]+"_SCIENCE_FREE", getRandomBaseCost(techlvl) / (1+i) ] );
+       }
      }
      return cost;
 }
 GAME_GLOBAL.getProjectCostAdv=getProjectCostAdv;
 
+function getProjectCostWithBase(costInfo, baseCost){
+     var cost = [];
+
+     var rr = Math.random();
+     var nn = 0;
+     while(nn < costInfo.sciCtDistroCS.length && rr >= costInfo.sciCtDistroCS[nn]){
+         nn++;
+     }
+     nn++;
+
+
+     var idxSet = new Set();
+     for(var i=0; i < nn; i++){
+       var rx = Math.random();
+       var idx = -1;
+       var buffer = 0;
+       for( var k=0; k < costInfo.sciFieldsCS.length; k++){
+           if( idxSet.has(k) ){
+               buffer = buffer + costInfo.sciFields[k][1];
+           } else if( costInfo.sciFieldsCS[k][0] - buffer <= rx && rx < costInfo.sciFieldsCS[k][1] - buffer ){
+               idx = k;
+           }
+       }
+       if(idx >= 0){
+           //buffer = buffer + costInfo.sciFields[idx][1];
+           idxSet.add(idx);
+           cost.push( [ costInfo.sciFields[idx][0]+"_SCIENCE_FREE", baseCost / (1+i) ] );
+       }
+     }
+     return cost;
+}
+GAME_GLOBAL.getProjectCostWithBase=getProjectCostWithBase;
 
 
 function addMultiProject(pp, techlvl){
@@ -637,7 +669,7 @@ function addMultiProject(pp, techlvl){
   }
   ap.projectType = pp.projectType;
   if(pp.costInfo == null){
-	  console.log("costinfo null!");
+      console.log("costinfo null!");
     console.log("    pp: "+pp.projectTitle);
 
   }
