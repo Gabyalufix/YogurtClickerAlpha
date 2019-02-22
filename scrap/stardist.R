@@ -182,8 +182,10 @@ fmtsci( sum( getLocalCoreDensity( str.areas$outerRad[MW] ) * str.areas$filledVol
 
 dd[MW,]
 
-out <- data.frame(IR = floor(dd$innerRad),OR = floor(dd$outerRad), thickness = floor(dd$thickness),CT = floor(dd$CT));
-write.table(out[1:idx.end,],file="GitHub/YogurtClickerAlpha/scrap/starDistro.table.txt");
+out <- data.frame(IR = floor(dd$innerRad),OR = floor(dd$outerRad), thickness = floor(dd$thickness), filledVol = floor(dd$filledVol),CT = floor(dd$CT));
+
+write.table((out[1:idx.end,]),file="GitHub/YogurtClickerAlpha/docs/starDistroTable.js",sep=",",row.names=F,col.names=F,quote=F);
+write.table(t(out[1:idx.end,]),file="GitHub/YogurtClickerAlpha/docs/starDistroTable.js",sep=",",row.names=T,col.names=F,quote=F);
 
 
 + getLocalCoreDensity(dists)

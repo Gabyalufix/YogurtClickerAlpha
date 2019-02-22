@@ -1171,7 +1171,7 @@ for(var i=0; i < STATICVAR_HOLDER.UPGRADABLES.length; i++){
     console.log("cost:"+prevCost)
     console.log("costlen:"+prevCost.length)
 
-    for(var i=0; i < prevCost; i++){
+    for(var i=0; i < prevCost.length; i++){
       console.log("cost:"+prevCost[i][0] + " / "+prevCost[i][1])
       INVENTORY[prevCost[i][0]] = INVENTORY[prevCost[i][0]] - prevCost[i][1]
     }
