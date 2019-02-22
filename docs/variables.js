@@ -349,10 +349,12 @@ stdCostScalingFcn = function(lvl){
 */
 
 
+
+
 STATICVAR_HOLDER.UPGRADABLES = [
    {itemID:"BiopwrEfficiency",itemTitle:"BiopwrEfficiency",
        effect : function(lvl){
-          STATS["ENERGYRATE_MULT"]["Bio"+"pwrGen"] = 1 - (1 - STATS["ENERGYRATE_MULT"]["Bio"+"pwrGen"])*0.95
+          STATS["ENERGYRATE_MULT"]["Bio"+"pwrGen"] = 1 - (1 - STATS["ENERGYRATE_MULT"]["Bio"+"pwrGen"])*0.9
        },
        getDisplayString : function(){ STATS["ENERGYRATE_MULT"]["Bio"+"pwrGen"] },
        costScalingFunction : stdCostScalingFcn,
@@ -365,7 +367,7 @@ STATICVAR_HOLDER.UPGRADABLES = [
    },
    {itemID:"BiopwrProductivity",itemTitle:"BiopwrProductivity",
        effect : function(lvl){
-          this.STATS["PRODUCTIVITY_MULT"]["Bio"+"pwrGen"] = this.STATS["PRODUCTIVITY_MULT"]["Bio"+"pwrGen"] * 1.05
+          STATS["PRODUCTIVITY_MULT"]["Bio"+"pwrGen"] = STATS["PRODUCTIVITY_MULT"]["Bio"+"pwrGen"] * 1.2
        },
        getDisplayString : function(){ "?" },
        costScalingFunction : stdCostScalingFcn,
@@ -376,7 +378,7 @@ STATICVAR_HOLDER.UPGRADABLES = [
    },
    {itemID:"BotpwrEfficiency",itemTitle:"BotpwrEfficiency",
        effect : function(lvl){
-          STATS["ENERGYRATE_MULT"]["Bot"+"pwrGen"] = 1 - (1 - STATS["ENERGYRATE_MULT"]["Bot"+"pwrGen"])*0.95
+          STATS["ENERGYRATE_MULT"]["Bot"+"pwrGen"] = 1 - (1 - STATS["ENERGYRATE_MULT"]["Bot"+"pwrGen"])*0.9
        },
        getDisplayString : function(){ STATS["ENERGYRATE_MULT"]["Bot"+"pwrGen"] },
        costScalingFunction : stdCostScalingFcn,
@@ -387,7 +389,7 @@ STATICVAR_HOLDER.UPGRADABLES = [
    },
    {itemID:"BotpwrProductivity",itemTitle:"BotpwrProductivity",
        effect : function(lvl){
-          this.STATS["PRODUCTIVITY_MULT"]["Bot"+"pwrGen"] = this.STATS["PRODUCTIVITY_MULT"]["Bot"+"pwrGen"] * 1.05
+          STATS["PRODUCTIVITY_MULT"]["Bot"+"pwrGen"] = STATS["PRODUCTIVITY_MULT"]["Bot"+"pwrGen"] * 1.2
        },
        getDisplayString : function(){ "?" },
        costScalingFunction : stdCostScalingFcn,
