@@ -1273,7 +1273,7 @@ for(var i=0; i < STATICVAR_HOLDER.UPGRADABLES.length; i++){
     this.updateDisplay();
   }
   xx.ELEM_BUTTON.updateDisplay = function(){
-    this.ELEMS.ELEM_COSTDISPLAY.innerHTML = makeFittedCostString(this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["cost"]);
+    this.ELEMS.ELEM_COSTDISPLAY.innerHTML = makeAdvCostString(this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["cost"]);
     this.ELEMS.ELEM_DISPLAY.innerHTML = this.ELEMS.getDisplayString();
     this.ELEMS.ELEM_LVL.textContent = this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["lvl"]
   }

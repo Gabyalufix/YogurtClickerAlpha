@@ -364,7 +364,7 @@ STATICVAR_HOLDER.UPGRADABLES = [
        },
        getDisplayString : function(){ STATS["ENERGYRATE_MULT"]["Bio"+"pwrGen"] },
        costScalingFunction : stdCostScalingFcn,
-       costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
+       costInfo: {sciFields:[["bio0",0.5],["bio1",0.25],["bio2",0.25],["eng2",0.25],["eng1",0.25],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.75,0.15,0.1]},
        ELEM_COSTDISPLAY: document.getElementById("GreenPowerEfficiencyUpgradeCost"),
        ELEM_BUTTON:      document.getElementById("button_GreenPowerEfficiencyUpgrade"),
        ELEM_DISPLAY:      document.getElementById("GreenPowerEfficiencyDisplay"),
@@ -377,7 +377,7 @@ STATICVAR_HOLDER.UPGRADABLES = [
        },
        getDisplayString : function(){ "?" },
        costScalingFunction : stdCostScalingFcn,
-       costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
+       costInfo: {sciFields:[["bio0",0.5],["bio1",0.25],["bio2",0.25],["eng2",0.25],["eng1",0.25],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.75,0.15,0.1]},
        ELEM_COSTDISPLAY: document.getElementById("GreenPowerCapacityUpgradeCost"),
        ELEM_BUTTON:      document.getElementById("button_GreenPowerCapacityUpgrade"),
        ELEM_DISPLAY:      document.getElementById("GreenPowerProductivityDisplay"),
@@ -389,7 +389,7 @@ STATICVAR_HOLDER.UPGRADABLES = [
        },
        getDisplayString : function(){ STATS["ENERGYRATE_MULT"]["Bot"+"pwrGen"] },
        costScalingFunction : stdCostScalingFcn,
-       costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
+       costInfo: {sciFields:[["eng2",0.8],["eng1",0.2],["eng0",0.2],["bio1",0.2],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.75,0.20,0.05]},
        ELEM_COSTDISPLAY: document.getElementById("BotPowerEfficiencyUpgradeCost"),
        ELEM_BUTTON:      document.getElementById("button_BotPowerEfficiencyUpgrade"),
        ELEM_DISPLAY:      document.getElementById("BotPowerEfficiencyDisplay"),
@@ -401,7 +401,7 @@ STATICVAR_HOLDER.UPGRADABLES = [
        },
        getDisplayString : function(){ "?" },
        costScalingFunction : stdCostScalingFcn,
-       costInfo: {sciFields:[["eng1",1],["eng0",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.9,0.05,0.05]},
+       costInfo: {sciFields:[["eng2",0.8],["eng1",0.2],["eng0",0.2],["bio1",0.2],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.75,0.20,0.05]},
        ELEM_COSTDISPLAY: document.getElementById("BotPowerCapacityUpgradeCost"),
        ELEM_BUTTON:      document.getElementById("button_BotPowerCapacityUpgrade"),
        ELEM_DISPLAY:      document.getElementById("BotPowerProductivityDisplay"),
@@ -859,7 +859,7 @@ STATS["PRODUCTIVITY_MULT"]["battleplate"] = 1
 STATICVAR_HOLDER["INVENTORY_DESC_FULL"] = {};
 STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["bio_SCIENCE_FREE"] = "Biology"
 STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["bio0_SCIENCE_FREE"] = "Cellular Processes"
-STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["bio1_SCIENCE_FREE"] = "Biomechanoid Construction"
+STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["bio1_SCIENCE_FREE"] = "Biomechanoid Augmentation"
 STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["bio2_SCIENCE_FREE"] = "Genetic Engineering"
 STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["eng_SCIENCE_FREE"] = "Engineering"
 STATICVAR_HOLDER["INVENTORY_DESC_FULL"]["eng0_SCIENCE_FREE"] = "Construction"

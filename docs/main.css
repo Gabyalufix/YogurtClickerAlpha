@@ -55,6 +55,9 @@
   --engTextDK: #621f1e;
   --psyTextDK: #50446f;
 
+4b5e3b
+633636
+67578e
 */
 .THEME_Green, .THEME_Bio {
   --white: #ffffff;
@@ -71,7 +74,7 @@
   --baseBG: #e7b2b1;
   
   --costTextLT: #beceb1;
-  --costTextDK: #4b5e3b;
+  --costTextDK: #2B5F00;
 }
 .THEME_Bot, .THEME_eng {
   --white: #ffffff;
@@ -88,7 +91,7 @@
   --baseBG: #e7b2b1;
   
   --costTextLT: #d2adac;
-  --costTextDK: #633636;
+  --costTextDK: #940000;
 }
 .THEME_Psy {
   --white: #ffffff;
@@ -105,7 +108,7 @@
   --baseBG: #e7b2b1;
   
   --costTextLT: #e3dfec;
-  --costTextDK: #67578e;
+  --costTextDK: #5328C0;
 }
 .THEME_Hawk {
   --white: #ffffff;
@@ -915,6 +918,7 @@ h5 {
 #ALL_CONTENT_CONTAINER {
   position:absolute;
   max-width: 100vw;
+  width: 100%;
   top: 0px;
   left: 0px;
   padding:0px;
@@ -1052,6 +1056,8 @@ h5 {
 }
 .MAINGRID_CONTAINER {
   display: grid;
+  width: 100%;
+  max-width: 100vw;
   grid-template-columns: 33% 33% 33%;
   grid-template-rows: 250px auto;
   grid-column-gap: 5px;
@@ -1059,19 +1065,28 @@ h5 {
   background-color: transparent;
 }
 .MAINGRID_LT {
+  width: 100%;
+  max-width: 100vw;
+
    grid-column: 1 / 2;
    grid-row: 1 / 4;
    align-self:start
 }
 .MAINGRID_RT {
+  width: 100%;
+  max-width: 100vw;
    grid-column: 3 / 4;
    grid-row: 1 / 4;
 }
 .MAINGRID_CTR {
+  width: 100%;
+  max-width: 100vw;
    grid-column: 2 / 3;
    grid-row: 2 / 4;
 }
 .MAINGRID_CONSOLE {
+  width: 100%;
+  max-width: 100vw;
    grid-column: 2 / 3;
    grid-row: 1 / 2;
    max-height: 260px;
