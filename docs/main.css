@@ -1099,81 +1099,6 @@ h5 {
 }*/
 
 
-@media only screen and (max-width: 1900px) {
-	.MAINGRID_LT {
-	   grid-column: 1 / 2;
-	   grid-row: 2 / 4;
-	}
-	.MAINGRID_RT {
-	   grid-column: 3 / 4;
-	   grid-row: 1 / 4;
-	}
-	.MAINGRID_CTR {
-	   grid-column: 2 / 3;
-	   grid-row: 2 / 4;
-	}
-	.MAINGRID_CONSOLE {
-	   grid-column: 1 / 3;
-	   grid-row: 1 / 2;
-	}
-}
-@media only screen and (max-width: 1300px) {
-	.MAINGRID_CONTAINER {
-	  display: grid;
-	  grid-template-columns: 50% 50%;
-	}
-	.MAINGRID_LT {
-	   grid-column: 1 / 2;
-	   grid-row: 2 / 4;
-	}
-	.MAINGRID_RT {
-	   grid-column: 2 / 3;
-	   grid-row: 3 / 4;
-	}
-	.MAINGRID_CTR {
-	   grid-column: 2 / 3;
-	   grid-row: 2 / 3;
-	}
-	.MAINGRID_CONSOLE {
-	   grid-column: 1 / 3;
-	   grid-row: 1 / 2;
-	}
-}
-@media only screen and (max-width: 800px) {
-	.MAINGRID_CONTAINER {
-	  display: grid;
-	  grid-template-columns: 100%;
-	}
-	.MAINGRID_LT {
-	   grid-column: 1 / 2;
-	   grid-row: 3 / 4;
-	}
-	.MAINGRID_RT {
-	   grid-column: 1 / 2;
-	   grid-row: 4 / 5;
-	}
-	.MAINGRID_CTR {
-	   grid-column: 1 / 2;
-	   grid-row: 2 / 3;
-	}
-	.MAINGRID_CONSOLE {
-	   grid-column: 1 / 2;
-	   grid-row: 1 / 2;
-	}
-}
-
-@media only screen and (max-width: 640px) {
-   #CHEAT_TIMECONTROL_PANEL {
-     display:grid; 
-     grid-template-columns: 11% 5.5% 11% 16% auto 11% 11% 11%; 
-     grid-auto-flow: column; 
-     width: 100%; 
-     padding: 0px; 
-     background-color: var(--DK3)
-   }
-}
-
-
 /*
 ===================================================================================================================
 ===================================================================================================================
@@ -1466,7 +1391,6 @@ input[type=unitEntry], select {
 .button2 {
    border: 1px solid #1a1a1a;
    background: #666666;
-
    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
    background: -webkit-linear-gradient(top, #ffffff, #888888);
    background: -moz-linear-gradient(top, #ffffff, #888888);
@@ -1474,7 +1398,7 @@ input[type=unitEntry], select {
    background: -o-linear-gradient(top, #ffffff, #888888);
    background-image: -ms-linear-gradient(top, #ffffff 0%, #888888 100%);
 
-   padding: 2px 4px;
+   padding: 0px 0px;
    -webkit-border-radius: 2px;
    -moz-border-radius: 2px;
    border-radius: 2px;
@@ -1774,6 +1698,127 @@ input[type=unitEntry], select {
 
 
 
+#CHEAT_SHIPBUILD_PANEL{
+	display:grid; 
+	grid-template-columns: 50px 25px 50px auto 50px 25px 50px auto 50px 25px 50px; 
+	grid-auto-flow: column; 
+	grid-template-rows: auto auto auto; 
+	grid-gap: 0; 
+	margin: 0px; 
+	width:100%; 
+	background-color: var(--DK2); 
+	padding: 0px; 
+	max-width: calc(100vw - 16px);
+}
+
+
+#CHEAT_TIMECONTROL_PANEL{
+  display:grid; 
+  grid-template-columns: 50px 25px 50px 75px auto 50px 50px 50px; 
+  grid-auto-flow: column;
+  width: 100%; 
+  padding: 0px; 
+  background-color: var(--DK3);
+  max-width: calc(100vc - 20px);
+}
+
+/*
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+-----------------------------------   SCREENSIZE OVERRIDES:
+===================================================================================================================
+===================================================================================================================
+===================================================================================================================
+*/
+
+@media only screen and (max-width: 1900px) {
+	.MAINGRID_LT {
+	   grid-column: 1 / 2;
+	   grid-row: 2 / 4;
+	}
+	.MAINGRID_RT {
+	   grid-column: 3 / 4;
+	   grid-row: 1 / 4;
+	}
+	.MAINGRID_CTR {
+	   grid-column: 2 / 3;
+	   grid-row: 2 / 4;
+	}
+	.MAINGRID_CONSOLE {
+	   grid-column: 1 / 3;
+	   grid-row: 1 / 2;
+	}
+}
+@media only screen and (max-width: 1300px) {
+	.MAINGRID_CONTAINER {
+	  display: grid;
+	  grid-template-columns: 50% 50%;
+	}
+	.MAINGRID_LT {
+	   grid-column: 1 / 2;
+	   grid-row: 2 / 4;
+	}
+	.MAINGRID_RT {
+	   grid-column: 2 / 3;
+	   grid-row: 3 / 4;
+	}
+	.MAINGRID_CTR {
+	   grid-column: 2 / 3;
+	   grid-row: 2 / 3;
+	}
+	.MAINGRID_CONSOLE {
+	   grid-column: 1 / 3;
+	   grid-row: 1 / 2;
+	}
+}
+@media only screen and (max-width: 800px) {
+	.MAINGRID_CONTAINER {
+	  display: grid;
+	  grid-template-columns: 100%;
+	}
+	.MAINGRID_LT {
+	   grid-column: 1 / 2;
+	   grid-row: 3 / 4;
+	}
+	.MAINGRID_RT {
+	   grid-column: 1 / 2;
+	   grid-row: 4 / 5;
+	}
+	.MAINGRID_CTR {
+	   grid-column: 1 / 2;
+	   grid-row: 2 / 3;
+	}
+	.MAINGRID_CONSOLE {
+	   grid-column: 1 / 2;
+	   grid-row: 1 / 2;
+	}
+}
+
+@media only screen and (max-width: 640px) {
+   #CHEAT_TIMECONTROL_PANEL {
+     display:grid; 
+     grid-template-columns: 11% 5.5% 11% 16% 19% 11% 11% 11%; 
+     grid-auto-flow: column; 
+     width: 100%; 
+     max-width: calc(100vc - 20px);
+     padding: 0px; 
+     background-color: var(--DK3)
+   }
+   #CHEAT_SHIPBUILD_PANEL{
+	display:grid; 
+	grid-template-columns: 10%   5%  10%   10%  10%  5%   10% 10%   10%   5%  10%;
+	grid-auto-flow: column; 
+	grid-template-rows: auto auto auto; 
+	grid-gap: 0; 
+	margin: 0px; 
+	width:100%; 
+	background-color: var(--DK2); 
+	padding: 0px; 
+	max-width: calc(100vw - 16px);
+	}
+   
+}
 
 
 

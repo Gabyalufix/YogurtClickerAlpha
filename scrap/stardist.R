@@ -179,7 +179,8 @@ fmtsci(sum(dd$CT[MW]))
 
 fmtsci( sum( getLocalCoreDensity( str.areas$outerRad[MW] ) * str.areas$filledVol[MW] ) )
 
-
+11+ 5.5+ 11+ 16+ 19+ 11+ 11+ 11
+ 
 dd[MW,]
 
 out <- data.frame(IR = floor(dd$innerRad),OR = floor(dd$outerRad), thickness = floor(dd$thickness), filledVol = floor(dd$filledVol),CT = floor(dd$CT));
