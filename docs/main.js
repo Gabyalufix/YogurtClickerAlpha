@@ -871,16 +871,17 @@ ELEMS["BIOMASS_CONTROL_SLIDER"].pctDisplayA = document.getElementById("biomass_P
 ELEMS["BIOMASS_CONTROL_SLIDER"].pctDisplayB = document.getElementById("biomass_PWR_CONTROL_PCT_DISPLAY")
 ELEMS["BIOMASS_CONTROL_SLIDER"].oninput  = onInputSoloSliderPct;
 ELEMS["BIOMASS_CONTROL_SLIDER"].onchange = onInputSoloSliderPct;
-ELEMS["BIOMASS_CONTROL_SLIDER"].currValue = 0.75;
+ELEMS["BIOMASS_CONTROL_SLIDER"].currValue = 0
 
+ELEMS["BIOMASS_CONTROL_SLIDER"].onchange();
 
 ELEMS["computation_CONTROL_SLIDER"] = document.getElementById("computationSliderPct")
 ELEMS["computation_CONTROL_SLIDER"].pctDisplayA = document.getElementById("computation_soul_CONTROL_PCT_DISPLAY")
 ELEMS["computation_CONTROL_SLIDER"].pctDisplayB = document.getElementById("computation_think_CONTROL_PCT_DISPLAY")
 ELEMS["computation_CONTROL_SLIDER"].oninput  = onInputSoloSliderPct;
 ELEMS["computation_CONTROL_SLIDER"].onchange = onInputSoloSliderPct;
-ELEMS["computation_CONTROL_SLIDER"].currValue = 0.75;
-
+ELEMS["computation_CONTROL_SLIDER"].currValue = 0
+ELEMS["computation_CONTROL_SLIDER"].onchange()
 
 
 CHEATADD_TYPE_LIST = ["Neutral","Hostile"]

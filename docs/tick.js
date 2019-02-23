@@ -164,6 +164,8 @@ function TICK_readUserInputs(){
   this.SETTINGS["BIOMASS_PWR_FRAC"] = 1 - this.SETTINGS["BIOMASS_PROD_FRAC"]
   this.SETTINGS["COMPUTE_soul_FRAC"] = this.ELEMS["computation_CONTROL_SLIDER"].currValue;
   this.SETTINGS["COMPUTE_think_FRAC"] = 1 - this.SETTINGS["COMPUTE_soul_FRAC"]
+  
+  
 }
 
 function TICK_setUserInputs(){
