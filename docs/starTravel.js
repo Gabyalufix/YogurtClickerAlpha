@@ -126,7 +126,7 @@ function TICKHELPER_updateExploreStats(){
   ELEMS["valueDisplay_volExploredPerTrip"].textContent = fmtSI(this.STATS["EXPLORE"]["exploreVolumePerTrip"])
   ELEMS["valueDisplay_exploreVolumePerShipPerTick"].textContent = fmtSI(this.STATS["EXPLORE"]["exploreVolumePerShipPerTick"])
   ELEMS["valueDisplay_SHIPSTATS_scout_sensorArea"].textContent = fmtSI(this.STATS.SHIPSTATS.scout["sensorRange"] ^ 2)
-  ELEMS["valueDisplay_SHIPSTATS_scout_SPEED"].textContent = fmtSI(this.STATS.SHIPSTATS.scout["speedWk"])
+  ELEMS["valueDisplay_SHIPSTATS_scout_SPEED"].textContent = fmtSI(this.STATS.SHIPSTATS.scout["speedWk"])+"/wk, ("+roundTo(this.STATS.SHIPSTATS.scout["speed"],3)+"c)"
 
   
   ELEMS["valueDisplay_SHIPSTATS_scout_ENDURANCE"].textContent =   fmtSI(  this.STATS.SHIPSTATS.scout["endurance"])

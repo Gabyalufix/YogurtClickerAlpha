@@ -669,11 +669,42 @@ STATS["RUN_MANUAL_TICKS"] = 0;
         multDn: document.getElementById("button_cheatTickDN"),
         cheatAdd: document.getElementById("button_cheatTickF"),
         currUnit: 1,
-        unitElem:document.getElementById("cheatTick_AddUnit")
+        unitElem:document.getElementById("cheatTick_AddUnit"),
+        speedDisplay: document.getElementById("cheatTick_CURRSPEED"),
+        speedUp: document.getElementById("button_cheatFAST"),
+        speedDn: document.getElementById("button_cheatSLOW")
       }
       ELEMS["CHEATPANEL_"+"TIME"].multUp.cheatPanel   = ELEMS["CHEATPANEL_"+"TIME"]
       ELEMS["CHEATPANEL_"+"TIME"].multDn.cheatPanel   = ELEMS["CHEATPANEL_"+"TIME"]
       ELEMS["CHEATPANEL_"+"TIME"].cheatAdd.cheatPanel = ELEMS["CHEATPANEL_"+"TIME"]
+
+      ELEMS["CHEATPANEL_"+"TIME"].speedUp.cheatPanel   = ELEMS["CHEATPANEL_"+"TIME"]
+      ELEMS["CHEATPANEL_"+"TIME"].speedDn.cheatPanel   = ELEMS["CHEATPANEL_"+"TIME"]
+      
+      ELEMS["CHEATPANEL_"+"TIME"].getTimeString = function(tf){
+        if(tf == 1){
+          return "1x"
+        } else if(tf > 1){
+          return "1/"+tf+"x"
+        } else {
+          return "???"
+        }
+      }
+      
+      ELEMS["CHEATPANEL_"+"TIME"].speedUp.onclick = function(){
+        STATS["TICK_SPEEDFACTOR"] = STATS["TICK_SPEEDFACTOR"] + 1;
+        this.cheatPanel.speedDisplay.textContent = this.cheatPanel.getTimeString(STATS["TICK_SPEEDFACTOR"])
+        this.cheatPanel.speedDn.disabled = false;
+      }
+      ELEMS["CHEATPANEL_"+"TIME"].speedDn.onclick = function(){
+        STATS["TICK_SPEEDFACTOR"] = STATS["TICK_SPEEDFACTOR"] - 1;
+        this.cheatPanel.speedDisplay.textContent = this.cheatPanel.getTimeString(STATS["TICK_SPEEDFACTOR"])
+        if( STATS["TICK_SPEEDFACTOR"] == 1 ){
+          this.cheatPanel.speedDn.disabled = true;
+        }
+        
+      }
+
 
       ELEMS["CHEATPANEL_"+"TIME"].multUp.onclick = function(){
         console.log("multUp: " +this.cheatPanel.sid);
@@ -692,6 +723,7 @@ STATS["RUN_MANUAL_TICKS"] = 0;
       ELEMS["CHEATPANEL_"+"TIME"].cheatAdd.onclick = function(){
         console.log("add: " +this.cheatPanel.sid);
         STATS["PAUSE"] = true;
+        document.getElementById("button_PAUSE").textContent = "Click to UNPAUSE";
         STATS["RUN_MANUAL_TICKS"] = STATS["RUN_MANUAL_TICKS"] + this.cheatPanel.currUnit;
       }
       document.getElementById("button_PAUSE").onclick = function(){

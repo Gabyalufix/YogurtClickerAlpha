@@ -39,6 +39,9 @@ resizeBackgroundCanvas()
 
 window.GAME = GAME_GLOBAL;
 
+STATS["TICK_SPEEDFACTOR"] = 1;
+STATS["TICK_FACTORCOUNTER"] = 1;
+
 function TICK_runFastTick(){
     var GAME = this.GAME;
     if(GAME.STATS["TICK"] < 10){
@@ -47,9 +50,15 @@ function TICK_runFastTick(){
     }
 
     if((! STATS["PAUSE"]) || (STATS["RUN_MANUAL_TICKS"] > 0)){
+    
+      if(STATS["TICK_FACTORCOUNTER"] < STATS["TICK_SPEEDFACTOR"]){
+        STATS["TICK_FACTORCOUNTER"] = STATS["TICK_FACTORCOUNTER"] + 1;
+      } else {
+        STATS["TICK_FACTORCOUNTER"] = 1;
         if(STATS["RUN_MANUAL_TICKS"] > 0){
           STATS["RUN_MANUAL_TICKS"] = STATS["RUN_MANUAL_TICKS"] -1;
         }
+        
         TICK_TIMESTAMP = Date.now()
         GAME.STATS["TICK"] = GAME.STATS["TICK"] + 1;
         GAME.TICK_readUserInputs()
@@ -98,7 +107,7 @@ function TICK_runFastTick(){
 
 
         /*staticCanvas(bgCanvas)*/
-    }
+    }}
 
     if(SAVE_GAME_COMMAND_FLAG.length > 0){
       if( SAVE_GAME_COMMAND_FLAG[0] == "SAVE"){

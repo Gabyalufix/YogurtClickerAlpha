@@ -1181,9 +1181,9 @@ STATS.SHIPSTATS = {
     scout: {
         speed:0.458,
         toughness: 0.1,
-        sensorRange:1,
+        sensorRange:10,
         endurance:25,
-        warpMod:2,
+        warpMod:4,
         warpRating: 0
     },
     battleplate: {
@@ -1207,7 +1207,7 @@ STATS.SHIPSTATS = {
         toughness: 1,
         sensorRange: 1,
         endurance: 25,
-        warpMod:1,
+        warpMod:2,
         warpRating: 0,
         speedString:"0"
     }
@@ -1230,22 +1230,33 @@ INVENTORY["WARP_RATING_SHIP"] = {};
 INVENTORY["WARP_SPEED_SHIP"] = {};
 INVENTORY["WARP_SPEED_SHIP_STRING"] = {};
 
+function roundTo(value, decimals) {
+  return Number(Math.round(value+'e'+decimals)+'e-'+decimals).toFixed(decimals);
+}
+
+
 function calcShipSpeeds(){
   if(this.INVENTORY["WARP_RATING_BASE"] < 1){
     for(var i=0; i < this.STATICVAR_HOLDER.SHIP_TYPE_LIST.length; i++){
         var sid = this.STATICVAR_HOLDER.SHIP_TYPE_LIST[i]
-        STATS.SHIPSTATS[sid].speed  = 1 - ( (1-this.INVENTORY["WARP_RATING_BASE"]) / ((this.STATS["WARP_MODIFIER_SHIP"][sid]/3) + 1));
+        STATS.SHIPSTATS[sid].speed  = 1 - ( (1-this.INVENTORY["WARP_RATING_BASE"]) / ((this.STATS.SHIPSTATS[sid].warpMod/2) + 1));
     }
   } else {
     for(var i=0; i < this.STATICVAR_HOLDER.SHIP_TYPE_LIST.length; i++){
         var sid = this.STATICVAR_HOLDER.SHIP_TYPE_LIST[i]
-        this.STATS.SHIPSTATS[sid].warpRating = this.INVENTORY["WARP_RATING_BASE"] + this.STATS["WARP_MODIFIER_SHIP"][sid];
+        this.STATS.SHIPSTATS[sid].warpRating = this.INVENTORY["WARP_RATING_BASE"] + this.STATS.SHIPSTATS[sid].warpMod;
         this.STATS.SHIPSTATS[sid].speed  = Math.pow(2,this.STATS.SHIPSTATS[sid].warpRating-1)
     }
   }
-  STATS.SHIPSTATS[sid].speedWk = STATS.SHIPSTATS[sid].speed / 52;
-  STATS.SHIPSTATS[sid].speedString = roundTo( STATS.SHIPSTATS[sid].speed,2)+"c"
+  for(var i=0; i < this.STATICVAR_HOLDER.SHIP_TYPE_LIST.length; i++){
+    var sid = this.STATICVAR_HOLDER.SHIP_TYPE_LIST[i]
+    STATS.SHIPSTATS[sid].speedWk = STATS.SHIPSTATS[sid].speed / 52;
+    STATS.SHIPSTATS[sid].speedString = roundTo( STATS.SHIPSTATS[sid].speed,2)+"c"
+    console.log("speed."+sid+":"+STATS.SHIPSTATS[sid].speed+ " / "+STATS.SHIPSTATS[sid].speedWk);
+  }
 }
+calcShipSpeeds();
+
 
 //STATICVAR_HOLDER.MASS_PER_POWERTICK = 604800
 // Math.log10( ((INVENTORY["POWER-FreeBot-CT"]*STATICVAR_HOLDER.WATTAGE_MULTIPLIER *  STATICVAR_HOLDER.SEC_PER_TICK) / STATICVAR_HOLDER.C_SQUARED ) / 1000 )
