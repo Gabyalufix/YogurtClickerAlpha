@@ -5,6 +5,11 @@
 
 STATICVAR_HOLDER.SCIENCE = {};
 SCIENCE_PROJECT_TYPES = ["PROGRESS","SCALED","STATICLEVEL","MULTI"]
+
+RANDOM_SCIENCE_TYPES =                              ["SCALED","MULTI","SUPER","HYPER"]
+STATICVAR_HOLDER.RANDOM_SCIENCE_TYPES_PROBS_BASE =  [1,        1.5,   0.02,    0.001];
+STATS.RANDOM_SCIENCE_TYPES_PROBS = STATICVAR_HOLDER.RANDOM_SCIENCE_TYPES_PROBS_BASE.slice();
+
 STATICVAR_HOLDER.SCIENCE.MULTI = {bio:[],eng:[],psy:[]};
 STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY = {};
 
@@ -13,6 +18,136 @@ BASE_MULTI_PROD_BONUS = 0.25;
 BASE_MULTI_WASTERATE_MULT = 0.9;
 BASE_MULTI_ENERGYRATE_MULT = 0.9;
 BASE_MULTI_INPUTRATE_MULT = 0.975;
+
+
+function drawRandomScienceProject(sciname,currLvl){
+     var typeIdx = drawFromRandomDistro(this.STATS.RANDOM_SCIENCE_TYPES_PROBS ,"yes",0)
+     var proType = RANDOM_SCIENCE_TYPES[typeIdx];
+     if(proType == "MULTI"){
+       this.unlockRandomMulti(sciname,currLvl);
+     } else if(proType == "SCALED"){
+       this.unlockRandomScaled(sciname,currLvl);
+     } else if(proType == "SUPER"){
+       console.log("UNLOCK SUPERTECH!")
+     } else if(proType == "HYPER"){
+       console.log("UNLOCK HYPERTECH!")
+     }
+}
+
+GAME_GLOBAL.drawRandomScienceProject = drawRandomScienceProject;
+
+
+GAME_GLOBAL.SCIENCE_SCALED_UNLOCK_RATE = 1.0;
+
+function unlockRandomMulti(sciname, currLvl){
+   console.log("   attempting unlock MULTI");
+   var projectList   = this.STATICVAR_HOLDER.SCIENCE.MULTI[sciname];
+   var projectCts    = this.STATS.SCIENCE_MULTICT;
+   var idx = Math.floor( getRandomBetween(0,projectList.length) );
+   var prereqFailed = true;
+   while(prereqFailed){
+       idx = Math.floor( getRandomBetween(0,projectList.length) );
+       var prt = projectList[idx].prereqTechs
+       prereqFailed = false;
+       console.log("Testing "+projectList[idx].projectID);
+       if( prt != null){
+           for(var zz = 0; zz < prt.length; zz++){
+               console.log("   Prereq: " + prt[zz]);
+               if(! this.INVENTORY.SCIENCE_DISCOVERED.includes( prt[zz] ) ){
+                   prereqFailed = true;
+               }
+           }
+       }
+       var pfcn = projectList[idx].prereqFcn;
+       if((! prereqFailed) && pfcn != null){
+         if(! pfcn()){
+           prereqFailed = true;
+         }
+       }
+       if(prereqFailed){
+           console.log("Skipping "+projectList[idx].projectID+" because prereqs not met! len="+prt.length+" / "+prt);
+       } else {
+           console.log("Keeping "+projectList[idx].projectID+" because prereqs met! prereqlen = "+ prt);
+       }
+   }
+   console.log("   attempting unlock: "+ projectList[idx].projectID);
+   if(Math.random() < projectList[idx].rate){
+      console.log("   unlocking: "+ projectList[idx].projectID);
+      //     var ap1 = availListElem.addMultiProject(projectList[idx1],1,1)
+      this.SCIENCE_DISPLAY[sciname].availListElem.addMultiProject(projectList[idx], currLvl)
+   }
+}
+GAME_GLOBAL.unlockRandomMulti = unlockRandomMulti;
+
+function unlockRandomScaled(sciname,currLvl){
+   console.log("   attempting unlock SCALED");
+   var projectList   = this.STATICVAR_HOLDER.SCIENCE.SCALED[sciname];
+   var projectLocked = STATS.SCIENCE_LOCKED["SCALED"][sciname];
+   if(projectLocked.length > 0){
+       var lockIdx = Math.floor( getRandomBetween(0,projectLocked.length) );
+       var prereqFailed = true;
+       while(prereqFailed){
+           lockIdx = Math.floor( getRandomBetween(0,projectLocked.length) );
+           var idx = projectLocked[lockIdx];
+           var prt = projectList[idx].prereqTechs
+           prereqFailed = false;
+           //console.log("Testing "+projectList[idx].projectID);
+           if( prt != null){
+               for(var zz = 0; zz < prt.length; zz++){
+                   //console.log("   Prereq: " + prt[zz]);
+                   if(! this.INVENTORY.SCIENCE_DISCOVERED.includes( prt[zz] ) ){
+                       prereqFailed = true;
+                   }
+               }
+           }
+           var pfcn = projectList[idx].prereqFcn;
+           if((! prereqFailed) && pfcn != null){
+             if(! pfcn()){
+               prereqFailed = true;
+             }
+           }
+
+           if(prereqFailed){
+               //console.log("Skipping "+projectList[idx].projectID+" because prereqs not met! len="+prt.length+" / "+prt);
+           } else {
+               //console.log("Keeping "+projectList[idx].projectID+" because prereqs met! prereqlen = "+ prt);
+           }
+       }
+       console.log("   attempting unlock: "+ projectList[idx].projectID);
+       if(Math.random() < projectList[idx].rate){
+          //console.log("   unlocking: "+ projectList[idx].projectID);
+          //     var ap1 = availListElem.addMultiProject(projectList[idx1],1,1)
+          this.SCIENCE_DISPLAY[sciname].availListElem.addScaledProject(projectList[idx], currLvl)
+       }
+   }
+}
+GAME_GLOBAL.unlockRandomScaled = unlockRandomScaled;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -320,6 +455,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
   bio:[
           {projectTitle:"Compost Fermentation",projectID:"SCALED_COMPOST",projectType:"SCALED",
            costField:["bio_SCIENCE_FREE","bio1_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              var iix = STATS["INDUSTRY"]["WasteFerment"];
              var elem = document.getElementById("LOCKHIDE_"+iix.lockKey);
@@ -329,6 +465,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:"Develop a new method to compost waste material into Yogurt"},
           {projectTitle:"Bioweapons",projectID:"SCALED_BIOWEAPONS",projectType:"SCALED",
            costField:["bio_SCIENCE_FREE","bio2_SCIENCE_FREE","eng1_SCIENCE_FREE"], costMult:[1,1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              var iix = STATS["INDUSTRY"]["Bioweapons"];
              var elem = document.getElementById("LOCKHIDE_"+iix.lockKey);
@@ -340,6 +477,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
   eng:[
           {projectTitle:"Waste Reprocessing",projectID:"SCALED_WASTEREPROCESS",projectType:"SCALED",
            costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              var iix = STATS["INDUSTRY"]["WasteReprocess"];
              var elem = document.getElementById("LOCKHIDE_"+iix.lockKey);
@@ -349,6 +487,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:"Develop a new method to reprocess and recycle waste material into raw feedstock."},
           {projectTitle:"YogurtMatter Transmutation",projectID:"SCALED_TRANSMUTEYOGURT",projectType:"SCALED",
            costField:["eng_SCIENCE_FREE","bio1_SCIENCE_FREE"], costMult:[2,2], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              var iix = STATS["INDUSTRY"]["TransmuteYogurt"];
              var elem = document.getElementById("LOCKHIDE_"+iix.lockKey);
@@ -360,6 +499,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
   psy:[
           {projectTitle:"Soul Synthesis",projectID:"SCALED_SOULSYNTHESIS",projectType:"SCALED",
            costField:["psy_SCIENCE_FREE","psy0_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              console.log("project not yet implemented!")
            },
@@ -367,6 +507,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:""},
           {projectTitle:"Misdirection-Counterdetection Technology",projectID:"SCALED_STEALTHTECH",projectType:"SCALED",
            costField:["psy_SCIENCE_FREE"], costMult:[1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              console.log("project not yet implemented!")
            },
@@ -374,6 +515,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:""},
           {projectTitle:"Bioterrorism",projectID:"SCALED_BIOTERROR",projectType:"SCALED",
            costField:["psy_SCIENCE_FREE","psy1_SCIENCE_FREE","bio0_SCIENCE_FREE"], costMult:[1,1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              console.log("project not yet implemented!")
            },
@@ -381,6 +523,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:""},
           {projectTitle:"Battleplate Training Regimen",projectID:"SCALED_BPTRAIN",projectType:"SCALED",
            costField:["psy_SCIENCE_FREE","psy2_SCIENCE_FREE","eng1_SCIENCE_FREE"], costMult:[1,1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              console.log("project not yet implemented!")
            },
@@ -388,6 +531,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:""},
           {projectTitle:"Technology Theft",projectID:"SCALED_TECHSTEAL",projectType:"SCALED",
            costField:["psy_SCIENCE_FREE","psy1_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              console.log("project not yet implemented!")
            },
@@ -395,6 +539,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:""},
           {projectTitle:"Sabotage",projectID:"SCALED_SABOTAGE",projectType:"SCALED",
            costField:["psy_SCIENCE_FREE","psy1_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              console.log("project not yet implemented!")
            },
@@ -402,6 +547,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:""},
           {projectTitle:"Sabotage",projectID:"SCALED_SABOTAGE",projectType:"SCALED",
            costField:["psy_SCIENCE_FREE","psy1_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              console.log("project not yet implemented!")
            },
@@ -409,6 +555,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:""},
           {projectTitle:"Counterintelligence",projectID:"SCALED_COINTEL",projectType:"SCALED",
            costField:["psy_SCIENCE_FREE","psy1_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              console.log("project not yet implemented!")
            },
@@ -416,6 +563,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:""},
           {projectTitle:"Tactical Doctrine: High Risk, High Reward",projectID:"SCALED_STRATHIGHRISK",projectType:"SCALED",
            costField:["psy_SCIENCE_FREE","psy2_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              console.log("project not yet implemented!")
            },
@@ -423,6 +571,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:""},
           {projectTitle:"Tactical Doctrine: Conservative",projectID:"SCALED_STRATLOWRISK",projectType:"SCALED",
            costField:["psy_SCIENCE_FREE","psy2_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              console.log("project not yet implemented!")
            },
@@ -430,6 +579,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:""},
           {projectTitle:"Tactical Doctrine: Max Kill Ratio",projectID:"SCALED_STRATRATIO",projectType:"SCALED",
            costField:["psy_SCIENCE_FREE","psy2_SCIENCE_FREE"], costMult:[1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              console.log("project not yet implemented!")
            },
@@ -437,6 +587,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:""},
           {projectTitle:"Battlemind",projectID:"SCALED_BATTLEMIND",projectType:"SCALED",
            costField:["psy_SCIENCE_FREE","psy2_SCIENCE_FREE","eng1_SCIENCE_FREE"], costMult:[1,1,1], rate:1,
+           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              console.log("project not yet implemented!")
            },
@@ -592,33 +743,60 @@ function getRandomBaseCost(techlvl){
 
 //getProjectCostAdv(STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["BioResearch-ENER"]["costInfo"],1)
 
-function getProjectCostAdv(costInfo, techlvl){
+function drawFromRandomDistro(xx,normalize = "yes", defaultResult=-1, debugNote = ""){
+   //options for normalize are yes, no, ifLow, ifHigh
+   if(xx == null){
+     console.log("xx == null: "+debugNote);
+   }
+   //console.log("xx == "+xx);
+
+   var xlo = [];
+   var xhi = [];
+   var total = 0;
+   for(var i=0; i < xx.length; i++){
+       xlo[i] = total;
+       xhi[i] = total + xx[i];
+       total = total + xx[i];
+   }
+   if( total != 1 ){
+     if(normalize = "yes" || (normalize == "ifLow" && total < 1) || (normalize == "ifHigh" && total > 1) ){
+       for(var i=0; i < xx.length; i++){
+           xlo[i] = xlo[i] / total;
+           xhi[i] = xhi[i] / total;
+       }
+     }
+   }
+   var rr = Math.random();
+   for(var i=0; i < xx.length; i++){
+     if( rr <= xhi[i] && rr >= xlo[i] ){
+       return i;
+     }
+   }
+   return defaultResult;
+}
+
+function getProjectCostAdv(costInfo, techlvl, debugInfo = ""){
      var cost = [];
 
-     var rr = Math.random();
-     var nn = 0;
-     while(nn < costInfo.sciCtDistroCS.length && rr >= costInfo.sciCtDistroCS[nn]){
-         nn++;
-     }
-     nn++;
-
+     var nn = drawFromRandomDistro(costInfo.sciCtDistro,"yes",0,"getProjectCostAdv.chooseNN "+debugInfo + " ["+costInfo+"]") + 1;
 
      var idxSet = new Set();
      for(var i=0; i < nn; i++){
-       var rx = Math.random();
-       var idx = -1;
-       var buffer = 0;
-       for( var k=0; k < costInfo.sciFieldsCS.length; k++){
-           if( idxSet.has(k) ){
-               buffer = buffer + costInfo.sciFields[k][1];
-           } else if( costInfo.sciFieldsCS[k][0] - buffer <= rx && rx < costInfo.sciFieldsCS[k][1] - buffer ){
-               idx = k;
-           }
+       var costIdxProb = [];
+       var costIdxIdx = [];
+       for( var k=0; k < costInfo.sciFields.length; k++){
+         if(!idxSet.has(k)){
+           costIdxIdx.push( k )
+           costIdxProb.push( costInfo.sciFields[k][1] )
+         }
        }
-       if(idx >= 0){
+       var idxIdx = drawFromRandomDistro(costIdxProb,"ifLow",0,"getProjectCostAdv.chooseIdxIdx "+debugInfo);
+
+       if(idxIdx >= 0){
            //buffer = buffer + costInfo.sciFields[idx][1];
-           idxSet.add(idx);
-           cost.push( [ costInfo.sciFields[idx][0]+"_SCIENCE_FREE", getRandomBaseCost(techlvl) / (1+i) ] );
+           var idx = costIdxIdx[idxIdx];
+           idxSet.add( idx  );
+           cost.push( [ costInfo.sciFields[idx][0]+"_SCIENCE_FREE", getRandomBaseCost(techlvl) / Math.pow(i+1,2) ] );
        }
      }
      return cost;
@@ -682,7 +860,7 @@ function addMultiProject(pp, techlvl){
     console.log("    pp: "+pp.projectTitle);
   }
   //ap.cost = this.GAME.getProjectCost(pp.costField,techlvl,pp.costMult);
-  ap.cost = this.GAME.getProjectCostAdv(pp.costInfo,techlvl);
+  ap.cost = this.GAME.getProjectCostAdv(pp.costInfo,techlvl, "[MULTI."+pp.projectTitle+"]");
   this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] = this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] + 1;
   this.addNewProject(ap);
   return ap;
@@ -691,7 +869,7 @@ function addMultiProject(pp, techlvl){
 function addScaledProject(pp, techlvl){
   var ap = { uid : pp.projectID, projectTitle : pp.projectTitle,projectID : pp.projectID, desc : pp.desc, effect : pp.effect, scitype : pp.scitype}
   ap.projectType = pp.projectType;
-  ap.cost = this.GAME.getProjectCost(pp.costField,techlvl,pp.costMult);
+  ap.cost = this.GAME.getProjectCostAdv(pp.costInfo,techlvl, "[SCALED."+pp.projectTitle+"]");
   var lockArray = STATS.SCIENCE_LOCKED["SCALED"][pp.scitype];
   var idx = lockArray.indexOf( pp.idx );
   lockArray.splice(idx,1);

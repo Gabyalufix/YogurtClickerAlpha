@@ -540,6 +540,7 @@ h5 {
   text-align: center;
   align-self: start;
   vertical-align: bottom;
+  height: 100%
 }
 .contentGridItemHzM {
   background-color: var(--LT2);
@@ -549,6 +550,7 @@ h5 {
   padding: 5px;
   text-align: center;
   align-self: end;
+  height: 100%
 }
 .contentGridItemHzB {
   background-color: var(--LT2);
@@ -558,8 +560,8 @@ h5 {
   padding: 5px;
   text-align: center;
   align-self: end;
+  height: 100%
 }
-
 
 
 .contentGridItem1x1 {
@@ -615,6 +617,19 @@ h5 {
 .contentGridItemNarrowVertPadding {
   padding: 1px 5px 1px 5px;
   margin: 0px;
+}
+
+.contentGridWithInnerVerts {
+  padding: 0px;
+  margin: 0px;
+  grid-gap: 0px 1px;
+  background-color: var(--DK2);
+}
+
+.contentGridItemSubtleSides {
+  border-left:  1px solid var(--MID);
+  border-right:  1px  solid var(--MID);
+
 }
 /*
 ===================================================================================================================
@@ -1398,7 +1413,7 @@ input[type=unitEntry], select {
    background: -o-linear-gradient(top, #ffffff, #888888);
    background-image: -ms-linear-gradient(top, #ffffff 0%, #888888 100%);
 
-   padding: 0px 0px;
+   padding: 2px 4px;
    -webkit-border-radius: 2px;
    -moz-border-radius: 2px;
    border-radius: 2px;

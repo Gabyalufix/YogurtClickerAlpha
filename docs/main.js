@@ -72,26 +72,26 @@ function makeColoredScienceOLD(ss, sciDescSet, isLT = false){
 }
 
 function makeColoredScience(ss, sciDescSet, isLT = false){
-    console.log("   coloring: "+ss[0] +" / "+ss[1]);
+    //console.log("   coloring: "+ss[0] +" / "+ss[1]);
     var out = fmtSI(ss[1]) +"B "+sciDescSet[ss[0]];
     if(ss[0].startsWith("bio")){
-        console.log("   BIO color found for: "+ss[0])
+        //console.log("   BIO color found for: "+ss[0])
         if(isLT){
-            console.log("    LT!")
+            //console.log("    LT!")
             out = "<SPAN class=\"THEME_Bio SCICOST_TEXT_LT\">"+out+"</SPAN>"
         } else {
-            console.log("    DK!")
+            //console.log("    DK!")
             out = "<SPAN class=\"THEME_Bio SCICOST_TEXT_DK\">"+out+"</SPAN>"
         }
     } else if(ss[0].startsWith("eng")){
-        console.log("   ENG color found for: "+ss[0])
+        //console.log("   ENG color found for: "+ss[0])
         if(isLT){
             out = "<SPAN class=\"THEME_Bot SCICOST_TEXT_LT\">"+out+"</SPAN>"
         } else {
             out = "<SPAN class=\"THEME_Bot SCICOST_TEXT_DK\">"+out+"</SPAN>"
         }
     } else if(ss[0].startsWith("psy")){
-        console.log("   PSY color found for: "+ss[0])
+        //console.log("   PSY color found for: "+ss[0])
         if(isLT){
             out = "<SPAN class=\"THEME_Psy SCICOST_TEXT_LT\">"+out+"</SPAN>"
         } else {
@@ -105,7 +105,7 @@ function makeColoredScience(ss, sciDescSet, isLT = false){
 
 
 function makeAdvCostString(cc,delim1=", ",delim2=",<BR>", compressThresh = 2, isLT=false){
-    console.log("advString input: "+cc);
+    //console.log("advString input: "+cc);
    var costDesc = STATICVAR_HOLDER["INVENTORY_DESC_FULL"]
    var delim = delim2;
    if(cc.length > compressThresh){
@@ -118,7 +118,7 @@ function makeAdvCostString(cc,delim1=", ",delim2=",<BR>", compressThresh = 2, is
           out = out + delim + makeColoredScience(cc[i],costDesc,isLT);
       }
    }
-   console.log("advString: "+out);
+   //console.log("advString: "+out);
    return out;
 }
 GAME_GLOBAL.makeAdvCostString = makeAdvCostString
@@ -558,7 +558,7 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
        //var pp = this.GAME.STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ this.value ];
        var vv = this.value;
        var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
-       console.log("this.value="+this.value+", pp = "+pp);
+       //console.log("this.value="+this.value+", pp = "+pp);
        var dd = pp.desc;
        /*for(var k=0; k < pp.cost.length;k++){
           var ccc = fmtSIunits(pp.cost[k][1]);
@@ -658,7 +658,7 @@ for( var i = 0; i < STATICVAR_HOLDER.SHIP_TYPE_LIST.length; i++){
         INVENTORY["SHIPS-"+this.cheatPanel.sid+"-CT"] = INVENTORY["SHIPS-"+this.cheatPanel.sid+"-CT"] + this.cheatPanel.currUnit
       }
   }
-  
+
 }
 
 STATS["RUN_MANUAL_TICKS"] = 0;
@@ -680,7 +680,7 @@ STATS["RUN_MANUAL_TICKS"] = 0;
 
       ELEMS["CHEATPANEL_"+"TIME"].speedUp.cheatPanel   = ELEMS["CHEATPANEL_"+"TIME"]
       ELEMS["CHEATPANEL_"+"TIME"].speedDn.cheatPanel   = ELEMS["CHEATPANEL_"+"TIME"]
-      
+
       ELEMS["CHEATPANEL_"+"TIME"].getTimeString = function(tf){
         if(tf == 1){
           return "1x"
@@ -690,7 +690,7 @@ STATS["RUN_MANUAL_TICKS"] = 0;
           return "???"
         }
       }
-      
+
       ELEMS["CHEATPANEL_"+"TIME"].speedUp.onclick = function(){
         STATS["TICK_SPEEDFACTOR"] = STATS["TICK_SPEEDFACTOR"] + 1;
         this.cheatPanel.speedDisplay.textContent = this.cheatPanel.getTimeString(STATS["TICK_SPEEDFACTOR"])
@@ -702,7 +702,7 @@ STATS["RUN_MANUAL_TICKS"] = 0;
         if( STATS["TICK_SPEEDFACTOR"] == 1 ){
           this.cheatPanel.speedDn.disabled = true;
         }
-        
+
       }
 
 
@@ -734,9 +734,9 @@ STATS["RUN_MANUAL_TICKS"] = 0;
           STATS["PAUSE"] = true
           this.textContent = "Click to UNPAUSE";
         }
-        
+
       }
-      
+
 
 for( var i = 0; i < WORLD_TYPE_LIST.length; i++){
     var worldType = WORLD_TYPE_LIST[i]
@@ -1284,7 +1284,7 @@ for(var i=0; i < STATICVAR_HOLDER.UPGRADABLES.length; i++){
   STATS["UPGRADABLES"][xx.itemID] = {};
   STATS["UPGRADABLES"][xx.itemID]["lvl"] = 1
   STATS["UPGRADABLES"][xx.itemID]["cost"] = getProjectCostWithBase(xx.costInfo, xx.costScalingFunction(1) )
-  
+
   xx.ELEM_BUTTON.ELEMS = xx;
   xx.ELEM_BUTTON.GAME = GAME_GLOBAL;
   xx.ELEM_BUTTON.onclick = function(){
@@ -1299,7 +1299,7 @@ for(var i=0; i < STATICVAR_HOLDER.UPGRADABLES.length; i++){
       console.log("cost:"+prevCost[i][0] + " / "+prevCost[i][1])
       INVENTORY[prevCost[i][0]] = INVENTORY[prevCost[i][0]] - prevCost[i][1]
     }
-    
+
     var cost = getProjectCostWithBase( this.ELEMS.costInfo, this.ELEMS.costScalingFunction( lvl + 1 ));
     this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["lvl"] = lvl + 1;
     this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["cost"] = cost;
@@ -1310,7 +1310,7 @@ for(var i=0; i < STATICVAR_HOLDER.UPGRADABLES.length; i++){
     this.ELEMS.ELEM_DISPLAY.innerHTML = this.ELEMS.getDisplayString();
     this.ELEMS.ELEM_LVL.textContent = this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID]["lvl"]
   }
-  
+
       xx.ELEM_BUTTON.canAffordTest = function(){
         //console.log("can Afford: "+this.ELEMS.itemID);
         var currCost = this.GAME.STATS.UPGRADABLES[this.ELEMS.itemID].cost;

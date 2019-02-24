@@ -71,7 +71,7 @@ function TICKHELPER_scoutSystems(){
     var exploreRating = this.STATS["PRODUCTIVITY_RATING"]["scout"] * this.SETTINGS["scout"+"_FRACTION"][0];
     var avgAreaExplored = exploreVolumePerShipPerTick * exploreRating;
     var varAreaExplored = avgAreaExplored * exploreVar
-    
+
 //  tripDistanceTravelled / this.STATS.SHIPSTATS.scout["speed"]
     //Randomly determine total volume explored:
     var areaExplored = avgAreaExplored + getRandomBetween(-varAreaExplored,varAreaExplored);
@@ -81,7 +81,7 @@ function TICKHELPER_scoutSystems(){
     var starsRemaining         = this.STATS.EXPLORE.CURRENT_LEFT-starsExploredPotential; //this.STATS.EXPLORE.CURRENT_LEFT - starsExplored;
 
     //add scouted worlds to buffer:
-    this.STATS.ScoutedWorldBuffer[this.STATS.ScoutedWorldBuffer.length - 1][1] = 
+    this.STATS.ScoutedWorldBuffer[this.STATS.ScoutedWorldBuffer.length - 1][1] =
              this.STATS.ScoutedWorldBuffer[this.STATS.ScoutedWorldBuffer.length - 1][1] + starsExplored;
 
     //increment span, if span is finished:
@@ -109,7 +109,7 @@ function TICKHELPER_scoutSystems(){
     this.STATS["EXPLORE"]["exploreRating"]     = exploreRating;
 
     this.INVENTORY["WORLDS-Neutral-CT"] = this.INVENTORY["WORLDS-Neutral-CT"] + starsExplored;
-    
+
     return starsExplored;
 }
 
@@ -122,32 +122,32 @@ function TICKHELPER_updateExploreStats(){
   ELEMS["valueDisplay_EXPLORE_travelDist"].textContent =     fmtSI( this.STATS["EXPLORE"]["travelDist"]     )
   ELEMS["valueDisplay_EXPLORE_travelFrac"].textContent =      fmtSI(this.STATS["EXPLORE"]["travelFrac"]       )
   ELEMS["valueDisplay_EXPLORE_tripDistance"].textContent =     fmtSI( this.STATS["EXPLORE"]["tripDistance"]    )
-  
+
   ELEMS["valueDisplay_volExploredPerTrip"].textContent = fmtSI(this.STATS["EXPLORE"]["exploreVolumePerTrip"])
   ELEMS["valueDisplay_exploreVolumePerShipPerTick"].textContent = fmtSI(this.STATS["EXPLORE"]["exploreVolumePerShipPerTick"])
   ELEMS["valueDisplay_SHIPSTATS_scout_sensorArea"].textContent = fmtSI(this.STATS.SHIPSTATS.scout["sensorRange"] ^ 2)
   ELEMS["valueDisplay_SHIPSTATS_scout_SPEED"].textContent = fmtSI(this.STATS.SHIPSTATS.scout["speedWk"])+"/wk, ("+roundTo(this.STATS.SHIPSTATS.scout["speed"],3)+"c)"
 
-  
+
   ELEMS["valueDisplay_SHIPSTATS_scout_ENDURANCE"].textContent =   fmtSI(  this.STATS.SHIPSTATS.scout["endurance"])
   ELEMS["valueDisplay_EXPLORE_tripDuration"].textContent =     fmtSI(  this.STATS["EXPLORE"]["tripDuration"]   )
   ELEMS["valueDisplay_EXPLORE_volExploredThisTick"].textContent =  fmtSI( this.STATS["EXPLORE"]["volExploredThisTick"])
   ELEMS["valueDisplay_EXPLORE_starsFoundThisTick"].textContent =   fmtSI( this.STATS["EXPLORE"]["starsFoundThisTick"] )
-  
+
   ELEMS["valueDisplay_EXPLORE_SEEDCAPT_RADIUS"].textContent  =   fmtSI(this.STATICVAR_HOLDER.STAR_TABLE[this.STATS["SEEDCAPT"]["CURRENT_SPAN"]][1])
-  ELEMS["valueDisplay_EXPLORE_EXPLORE_RADIUS"].textContent   =  fmtSI( this.STATICVAR_HOLDER.STAR_TABLE[this.STATS["EXPLORE"]["CURRENT_SPAN"]][1]  )  
+  ELEMS["valueDisplay_EXPLORE_EXPLORE_RADIUS"].textContent   =  fmtSI( this.STATICVAR_HOLDER.STAR_TABLE[this.STATS["EXPLORE"]["CURRENT_SPAN"]][1]  )
   ELEMS["valueDisplay_EXPLORE_totalVolExplored"].textContent  =  fmtSI(this.STATS["EXPLORE"].totalVolExplored )
   ELEMS["valueDisplay_EXPLORE_totalStarsFound"].textContent  =   fmtSI(this.STATS["EXPLORE"].totalStarsFound  )
-  
+
   ELEMS["valueDisplay_EXPLORE_SEEDCAPT_CURRENTSPAN"].textContent =  fmtSI(this.STATS["SEEDCAPT"]["CURRENT_SPAN"])
   ELEMS["valueDisplay_EXPLORE_SEEDCAPT_CURRENTLEFT"].textContent =  fmtSI(this.STATS["SEEDCAPT"]["CURRENT_LEFT"])
   ELEMS["valueDisplay_EXPLORE_SEEDSENT_CURRENTSPAN"].textContent =  fmtSI(this.STATS["SEEDSENT"]["CURRENT_SPAN"])
   ELEMS["valueDisplay_EXPLORE_SEEDSENT_CURRENTLEFT"].textContent =  fmtSI(this.STATS["SEEDSENT"]["CURRENT_LEFT"])
   ELEMS["valueDisplay_EXPLORE_EXPLORE_CURRENTSPAN"].textContent =   fmtSI(this.STATS["EXPLORE"]["CURRENT_SPAN"])
   ELEMS["valueDisplay_EXPLORE_EXPLORE_CURRENTLEFT"].textContent =   fmtSI(this.STATS["EXPLORE"]["CURRENT_LEFT"])
-  ELEMS["valueDisplay_seedLandThisTick"].textContent =  fmtSI(this.STATS["seedLandThisWeek"]      )    
+  ELEMS["valueDisplay_seedLandThisTick"].textContent =  fmtSI(this.STATS["seedLandThisWeek"]      )
   ELEMS["valueDisplay_seedLaunchThisTick"].textContent =  fmtSI(this.STATS["seedLaunchThisWeek"])
-  
+
 }
 GAME_GLOBAL.TICKHELPER_updateExploreStats = TICKHELPER_updateExploreStats;
 GAME_GLOBAL.TICKHELPER_scoutSystems = TICKHELPER_scoutSystems;
@@ -190,7 +190,7 @@ ELEMS["valueDisplay_seedLandThisTick"]=             document.getElementById("val
     //this.STATS["seedLandThisWeek"]   = 0;
     //this.STATS["seedLaunchThisWeek"]   = 0;
 
- id="valueDisplay_seedLaunchThisTick" 
+ id="valueDisplay_seedLaunchThisTick"
 d="valueDisplay_seedLandThisTick" ></s
 
 
@@ -209,7 +209,7 @@ d="valueDisplay_seedLandThisTick" ></s
                 <span id="valueDisplay_EXPLORE_EXPLORE_RADIUS                           "></span> </div>
                 <span id="valueDisplay_EXPLORE_totalStarsFound                           "></span> </div>
                 <span id="valueDisplay_EXPLORE_totalStarsFound                           "></span> </div>
-                
+
                 <span id="valueDisplay_EXPLORE_SEEDCAPT_CURRENTSPAN                           "></span> </div>
                 <span id="valueDisplay_EXPLORE_SEEDCAPT_CURRENTLEFT                           "></span> </div>
                 <span id="valueDisplay_EXPLORE_SEEDSENT_CURRENTSPAN                           "></span> </div>
@@ -243,7 +243,7 @@ function TICKHELPER_seedShipCalcs(){
     ////////////////////////////////////////////////////
     //Pull landings:
     var landct = 0;
-    while(this.INVENTORY["seedship-transit-buffer"].length > 0 && 
+    while(this.INVENTORY["seedship-transit-buffer"].length > 0 &&
           this.INVENTORY["seedship-transit-buffer"][0][1] <= this.STATS["TICK"] ){
       landct = landct + this.INVENTORY["seedship-transit-buffer"].shift()[0];
     }
@@ -255,7 +255,7 @@ function TICKHELPER_seedShipCalcs(){
         var currSpanWd = STATICVAR_HOLDER.STAR_TABLE[STATS.SEEDCAPT.CURRENT_SPAN][2];
         STATS.SEEDCAPT.CURRENT_SPAN = STATS.SEEDCAPT.CURRENT_SPAN + 1;
         STATS.SEEDCAPT.CURRENT_LEFT = STATICVAR_HOLDER.STAR_TABLE[STATS.SEEDCAPT.CURRENT_SPAN][4];
-        
+
         //EDIT TIMELEFT TO REFLECT NEW CAPTURE:
         //Set timeleft to time taken to arrive at destination from current startpoint, (if that would be shorter)
         var ix = this.INVENTORY["seedship-transit-buffer"].length - 1;
@@ -278,7 +278,7 @@ function TICKHELPER_seedShipCalcs(){
     this.INVENTORY["WORLDS-Fallow-CT"] = this.INVENTORY["WORLDS-Fallow-CT"] + landct;
     this.INVENTORY["seedship-transit-CT"] = this.INVENTORY["seedship-transit-CT"] - landct;
     this.INVENTORY["WORLDS-Neutral-CT"] = this.INVENTORY["WORLDS-Neutral-CT"] - landct;
-    
+
     ////////////////////////////////////////////////////
     //LAUNCH:
     //
@@ -292,20 +292,26 @@ function TICKHELPER_seedShipCalcs(){
     if(this.STATS.ScoutedWorldBuffer.length > 0){
       var shipsAvail = Math.floor(this.INVENTORY["SHIPS-"+"seedship"+"-CT"]);
       var worldsAvail = Math.floor(this.STATS.ScoutedWorldBuffer[0][1])
-      var ssct = Math.min(shipsAvail, worldsAvail);
-      if(shipsAvail > 0 && worldsAvail > 0){
-        console.log("LAUNCHING: "+ssct+"!");
-        //STATICVAR_HOLDER.STAR_TABLE[STATS.SEEDCAPT.CURRENT_SPAN]
-        var cspan = this.STATS.ScoutedWorldBuffer[0][0];
-        var dist = STATICVAR_HOLDER.STAR_TABLE[cspan][2] / 2;
-        for(var i=STATS.SEEDCAPT.CURRENT_SPAN; i < cspan; i++){
-              dist = dist + this.STATICVAR_HOLDER.STAR_TABLE[i];
-        }
-        this.STATS["seedLaunchThisWeek"] = ssct;
-        var arriveTime = Math.ceil( dist / this.STATS.SHIPSTATS.seedship["speedWk"] ) + this.STATS["TICK"]
-        this.INVENTORY["seedship-transit-CT"] = this.INVENTORY["seedship-transit-CT"] + ssct;
-        this.INVENTORY["seedship-transit-buffer"].push([ssct,arriveTime,this.STATS["TICK"]]);
-        this.INVENTORY["SHIPS-"+"seedship"+"-CT"] = this.INVENTORY["SHIPS-"+"seedship"+"-CT"] - ssct;
+      if(worldsAvail <= 0){
+          if( this.STATS.ScoutedWorldBuffer.length > 1){
+            this.STATS.ScoutedWorldBuffer.shift();
+          }
+      } else {
+          var ssct = Math.min(shipsAvail, worldsAvail);
+          if(shipsAvail > 0){
+            console.log("LAUNCHING: "+ssct+"!");
+            //STATICVAR_HOLDER.STAR_TABLE[STATS.SEEDCAPT.CURRENT_SPAN]
+            var cspan = this.STATS.ScoutedWorldBuffer[0][0];
+            var dist = STATICVAR_HOLDER.STAR_TABLE[cspan][2] / 2;
+            for(var i=STATS.SEEDCAPT.CURRENT_SPAN; i < cspan; i++){
+                  dist = dist + this.STATICVAR_HOLDER.STAR_TABLE[i];
+            }
+            this.STATS["seedLaunchThisWeek"] = ssct;
+            var arriveTime = Math.ceil( dist / this.STATS.SHIPSTATS.seedship["speedWk"] ) + this.STATS["TICK"]
+            this.INVENTORY["seedship-transit-CT"] = this.INVENTORY["seedship-transit-CT"] + ssct;
+            this.INVENTORY["seedship-transit-buffer"].push([ssct,arriveTime,this.STATS["TICK"]]);
+            this.INVENTORY["SHIPS-"+"seedship"+"-CT"] = this.INVENTORY["SHIPS-"+"seedship"+"-CT"] - ssct;
+          }
       }
     }
     this.seedshipsInTransit_SPAN.textContent =  fmtSIintNoPct(this.INVENTORY["seedship-transit-CT"]);

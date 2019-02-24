@@ -50,7 +50,7 @@ function TICK_runFastTick(){
     }
 
     if((! STATS["PAUSE"]) || (STATS["RUN_MANUAL_TICKS"] > 0)){
-    
+
       if(STATS["TICK_FACTORCOUNTER"] < STATS["TICK_SPEEDFACTOR"]){
         STATS["TICK_FACTORCOUNTER"] = STATS["TICK_FACTORCOUNTER"] + 1;
       } else {
@@ -58,7 +58,7 @@ function TICK_runFastTick(){
         if(STATS["RUN_MANUAL_TICKS"] > 0){
           STATS["RUN_MANUAL_TICKS"] = STATS["RUN_MANUAL_TICKS"] -1;
         }
-        
+
         TICK_TIMESTAMP = Date.now()
         GAME.STATS["TICK"] = GAME.STATS["TICK"] + 1;
         GAME.TICK_readUserInputs()
@@ -164,8 +164,8 @@ function TICK_readUserInputs(){
   this.SETTINGS["BIOMASS_PWR_FRAC"] = 1 - this.SETTINGS["BIOMASS_PROD_FRAC"]
   this.SETTINGS["COMPUTE_soul_FRAC"] = this.ELEMS["computation_CONTROL_SLIDER"].currValue;
   this.SETTINGS["COMPUTE_think_FRAC"] = 1 - this.SETTINGS["COMPUTE_soul_FRAC"]
-  
-  
+
+
 }
 
 function TICK_setUserInputs(){
@@ -851,41 +851,7 @@ GAME_GLOBAL.TICK_INDUSTRY_calcScienceGain = TICK_INDUSTRY_calcScienceGain;
 
 console.log("[all science] is lvl "+(1) + ", next threshold: "+fmtSIintNoPct(Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, (2)) * this.SCIENCE_UNLOCK_THRESH_BASE));
 
-GAME_GLOBAL.SCIENCE_SCALED_UNLOCK_RATE = 1.0;
 
-function unlockRandomMulti(sciname, currLvl){
-           console.log("   attempting unlock");
-           var projectList   = this.STATICVAR_HOLDER.SCIENCE.MULTI[sciname];
-           var projectCts    = this.STATS.SCIENCE_MULTICT;
-           var idx = Math.floor( getRandomBetween(0,projectList.length) );
-           var prereqFailed = true;
-           while(prereqFailed){
-               idx = Math.floor( getRandomBetween(0,projectList.length) );
-               var prt = projectList[idx].prereqTechs
-               prereqFailed = false;
-               console.log("Testing "+projectList[idx].projectID);
-               if( prt != null){
-                   for(var zz = 0; zz < prt.length; zz++){
-                       console.log("   Prereq: " + prt[zz]);
-                       if(! this.INVENTORY.SCIENCE_DISCOVERED.includes( prt[zz] ) ){
-                           prereqFailed = true;
-                       }
-                   }
-               }
-               if(prereqFailed){
-                   console.log("Skipping "+projectList[idx].projectID+" because prereqs not met! len="+prt.length+" / "+prt);
-               } else {
-                   console.log("Keeping "+projectList[idx].projectID+" because prereqs met! prereqlen = "+ prt);
-               }
-           }
-           console.log("   attempting unlock: "+ projectList[idx].projectID);
-           if(Math.random() < projectList[idx].rate){
-              console.log("   unlocking: "+ projectList[idx].projectID);
-              //     var ap1 = availListElem.addMultiProject(projectList[idx1],1,1)
-              this.SCIENCE_DISPLAY[sciname].availListElem.addMultiProject(projectList[idx], currLvl + 1)
-           }
-}
-GAME_GLOBAL.unlockRandomMulti = unlockRandomMulti;
 function TICK_calcScience(){
     for(var i=0;i<this.SCIENCE_TYPES.length;i++){
       var sciname = this.SCIENCE_TYPES[i];
@@ -896,26 +862,10 @@ function TICK_calcScience(){
       if( thresh < currSci ){
          console.log("("+fmtSI(currSci)+") "+"["+sciname+"] is lvl "+(currLvl + 1) + " ["+fmtSI(thresh)+"] next threshold: "+fmtSI(getProjectBaseCost(currLvl + 2)));
          INVENTORY["SCIENCE-LEVEL-"+sciname] = INVENTORY["SCIENCE-LEVEL-"+sciname] + 1;
-
+//
          if( Math.random() < this.SCIENCE_UNLOCK_RATE ){
-           console.log("   attempting unlock");
-           this.unlockRandomMulti(sciname,currLvl);
-         } else if(Math.random() < GAME_GLOBAL.SCIENCE_SCALED_UNLOCK_RATE){
-           console.log("   attempting unlock");
-           var projectList   = this.STATICVAR_HOLDER.SCIENCE.SCALED[sciname];
-           var projectLocked = STATS.SCIENCE_LOCKED["SCALED"][sciname];
-           if(projectLocked.length > 0){
-             var idxidx = Math.floor( getRandomBetween(0,projectLocked.length) );
-             var idx = projectLocked[idxidx];
-             console.log("   attempting SCALED unlock: "+ projectList[idx].projectID);
-             if(Math.random() < projectList[idx].rate){
-                this.SCIENCE_DISPLAY[sciname].availListElem.addScaledProject(projectList[idx], currLvl + 1)
-             }
-           }
-         } else {
-           console.log("   skipping unlock");
+            this.drawRandomScienceProject(sciname,currLvl)
          }
-         //do the unlocks:getRandomBetween
 
       }
     }
@@ -1066,7 +1016,7 @@ function TICK_calcEvents(){
       i = i - 1;
        console.log("PL: "+STATS.EVENTS_LOCKED);
     }
-    
+
   }
 }
 
