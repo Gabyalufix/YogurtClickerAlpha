@@ -195,6 +195,70 @@ function unsetElementTheme(tt){
   tt.THEME = "";
 }
 
+
+
+THEMES_FOR_SUBTLE=["Green","Bot","Psy"]
+THEME_PROPERTIES_TO_TRANSPARENT=["--LT4", "--LT3", "--LT2", "--LT1"]
+THEME_PROPERTIES_TO_DESAT=["--DK4", "--DK3", "--DK2", "--DK1"]
+
+for(var i=0; i < THEMES_FOR_SUBTLE.length; i++){
+  var sid = THEMES_FOR_SUBTLE[i];
+  var ss = document.querySelectorAll(".THEME_SUBTLE_"+sid);
+  console.log("Making theme subtle: "+sid);
+  for(var j=0; j<ss.length; j++){
+     var ssj = ss[j];
+     console.log("making object subtle: "+ssj)
+     var ssSty = getComputedStyle(ssj);
+     //console.log("    bgcol: "+ssSty.getPropertyValue("background-color") );
+
+     //var bgcol = tinycolor( ssSty.getPropertyValue("background-color"))
+     //console.log("    bg: "+bgcol.toHex8String() );
+     //bgcol.setAlpha(0.2)
+     //console.log("    bg: "+bgcol.toHex8String() );
+
+     //ssj.style.setProperty("background-color",bgcol.toHex8String());
+     for(var k=0; k < THEME_PROPERTIES_TO_TRANSPARENT.length; k++){
+         var pid = THEME_PROPERTIES_TO_TRANSPARENT[k];
+         //console.log("    ["+pid+"]: "+ssSty.getPropertyValue(pid)+" > "+tinycolor( ssSty.getPropertyValue(pid) ).setAlpha(0.1).toHex8String() );
+         ssj.style.setProperty(pid, tinycolor( ssSty.getPropertyValue(pid) ).setAlpha(0.2).desaturate(15).toHex8String() )   
+     }
+     /*
+     for(var k=0; k < THEME_PROPERTIES.length; k++){
+         var pid = THEME_PROPERTIES[k];
+         ssj.style.setProperty(pid, tinycolor( ssSty.getPropertyValue(pid) ).desaturate(10).toHexString )   
+     }*/
+  }
+  var ss = document.querySelectorAll(".THEME_DESAT_"+sid);
+  console.log("Making theme desat: "+sid);
+  for(var j=0; j<ss.length; j++){
+     var ssj = ss[j];
+     console.log("making object desat: "+ssj)
+     var ssSty = getComputedStyle(ssj);
+     //console.log("    bgcol: "+ssSty.getPropertyValue("background-color") );
+
+     //var bgcol = tinycolor( ssSty.getPropertyValue("background-color"))
+     //console.log("    bg: "+bgcol.toHex8String() );
+     //bgcol.setAlpha(0.2)
+     //console.log("    bg: "+bgcol.toHex8String() );
+
+     //ssj.style.setProperty("background-color",bgcol.toHex8String());
+     for(var k=0; k < THEME_PROPERTIES.length; k++){
+         var pid = THEME_PROPERTIES[k];
+         ssj.style.setProperty(pid, tinycolor( ssSty.getPropertyValue(pid) ).desaturate(10).toHex8String() )   
+     }
+     /*
+     for(var k=0; k < THEME_PROPERTIES.length; k++){
+         var pid = THEME_PROPERTIES[k];
+         ssj.style.setProperty(pid, tinycolor( ssSty.getPropertyValue(pid) ).desaturate(10).toHexString )   
+     }*/
+  }
+/*
+  for(var j=0; j < THEME_PROPERTIES.length; j++){
+    var pid = THEME_PROPERTIES[j];
+    themeProps.style.setProperty(pid, tinycolor( themeProps.getPropertyValue(pid) ).desaturate(10).toHexString )
+  }*/
+}
+
 //
 //Subtle themes:
 /*THEMES_FOR_SUBTLE=["Green","Bot","Psy"]
