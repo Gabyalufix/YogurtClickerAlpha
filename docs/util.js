@@ -212,6 +212,63 @@ function roundTo(value, decimals) {
 }
 
 
+function supText(srcText){
+  var out = '';
+  var chArray = srcText.split('');
+  var supHash = {
+    'a': '\u1D43', 'A':'\u1D2C',
+    'b': '\u1D47', 'B':'\u1D2D',
+    'c': '\u1D9C', 'C':'?',
+    'd': '\u1D48', 'D':'\u1D30',
+    'e': '\u1D49', 'E':'\u1D31',
+    'f': '\u1DA0', 'F':'?',
+    'g': '\u1D4D', 'G':'\u1D33',
+    'h': '\u02B0', 'H':'\u1D34',
+    'i': '\u2071', 'I':'\u1D35',
+    'j': '\u02B2', 'J':'\u1D36',
+    'k': '\u1D4F', 'K':'\u1D37',
+    'l': '\u02E1', 'L':'\u1D38',
+    'm': '\u1D50', 'M':'\u1D39',
+    'n': '\u207F', 'N':'\u1D3A',
+    'o': '\u1D52', 'O':'\u1D3C',
+    'p': '\u1D56', 'P':'\u1D3E',
+    'q': '?',      'Q':'?',
+    'r': '\u02B3', 'R':'\u1D3F',
+    's': '\u02E2', 'S':'?',
+    't': '\u1D57', 'T':'\u1D40',
+    'u': '\u1D58', 'U':'\u1D41',
+    'v': '\u1D5B', 'V':'\u2C7D',
+    'w': '\u02B7', 'W':'\u1D42',
+    'x': '\u02E3', 'Y':'?',
+    'y': '\u02B8', 'X':'?',
+    'z': '\u1DBB', 'Z':'?',
+    '0': '\u2070',
+    '1': '\u00B9',
+    '2': '\u00B2',
+    '3': '\u00B3',
+    '4': '\u2074',
+    '5': '\u2075',
+    '6': '\u2076',
+    '7': '\u2077',
+    '8': '\u2078',
+    '9': '\u2079',
+    '+': '\u207A', '(':'\u207D',
+    '-': '\u207B', ')':'\u207E'
+
+  };
+  var ch = '';
+  for( var i in chArray ) {
+    ch = chArray[i]
+    if( supHash[ch] ) {
+      out += supHash[ch];
+    } else {
+      out += ch;
+    }
+  }
+  return out;
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -260,8 +317,8 @@ function fmtSI(x){
       return roundTo(rr,dp)
   }
 }*/
-
-function fmtSIint(x){
+var yottaCtThreshold = 3
+function fmtSIint(x, yottaCtThreshold = 2){
   if(x < 100){
     if(x == Math.floor(x)){
       return ""+Math.floor(x)
@@ -280,14 +337,18 @@ function fmtSIint(x){
       var d = Math.floor(Math.log10(x))
       var dd = Math.floor(d / 3) - 1
       var ddd = Math.floor(dd / 8)
+      var dddString = "Y".repeat(ddd)
+      if(ddd >= yottaCtThreshold){
+         dddString="Y"+supText(""+ddd)
+      }
       var ddp = dd - ddd * 8
       var rr = x / Math.pow(10,(dd+1)*3)
       var dp = 2 - (d - ((dd+1)*3))
-      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      var suffix = SIPREFIX[ddp] + dddString
       return roundTo(rr,dp) + suffix
   }
 }
-function fmtSIintNoPct(x){
+function fmtSIintNoPct(x, yottaCtThreshold = 2){
   if(x < 0){
     return 0;
   } else if(x < 100){
@@ -300,10 +361,14 @@ function fmtSIintNoPct(x){
       var d = Math.floor(Math.log10(x))
       var dd = Math.floor(d / 3) - 1
       var ddd = Math.floor(dd / 8)
+      var dddString = "Y".repeat(ddd)
+      if(ddd >= yottaCtThreshold){
+         dddString="Y"+supText(""+ddd)
+      }
       var ddp = dd - ddd * 8
       var rr = x / Math.pow(10,(dd+1)*3)
       var dp = 2 - (d - ((dd+1)*3))
-      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      var suffix = SIPREFIX[ddp] + dddString
       return roundTo(rr,dp) + suffix
   }
 }
@@ -311,7 +376,7 @@ function fmtSIintNoPct(x){
 
 
 //Returns [0]baseNumber, [1]prefixAbbrev, [2]prefixFull, [3]prefixExponent, [4]a string of prefix descriptions
-function fmtSIunits(x){
+function fmtSIunits(x, yottaCtThreshold = 2){
   if(x == 0){
       return [0, "", "", 0,""]
   } else if(x < 1){
@@ -331,10 +396,14 @@ function fmtSIunits(x){
       var d = Math.floor(Math.log10(x))
       var dd = Math.floor(d / 3) - 1
       var ddd = Math.floor(dd / 8)
+      var dddString = "Y".repeat(ddd)
+      if(ddd >= yottaCtThreshold){
+         dddString="Y"+supText(""+ddd)
+      }
       var ddp = dd - ddd * 8
       var rr = x / Math.pow(10,(dd+1)*3)
       var dp = 2 - (d - ((dd+1)*3))
-      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      var suffix = SIPREFIX[ddp] + dddString
       var longSuffix = SIPREFIXLONG[ddp] + "Yotta".repeat(ddd)
       var suffixExplain = SIPREFIXExplain[ddp]
       if(ddp != 7 && ddd > 0){
@@ -345,7 +414,7 @@ function fmtSIunits(x){
 }
 
 
-function fmtSI(x, delim=""){
+function fmtSI(x, delim="", yottaCtThreshold = 2){
   if(x <= 0){
     return 0.0;
   } else if(x < 1){
@@ -363,15 +432,19 @@ function fmtSI(x, delim=""){
       var d = Math.floor(Math.log10(x))
       var dd = Math.floor(d / 3) - 1
       var ddd = Math.floor(dd / 8)
+      var dddString = "Y".repeat(ddd)
+      if(ddd >= yottaCtThreshold){
+         dddString="Y"+supText(""+ddd)
+      }
       var ddp = dd - ddd * 8
       var rr = x / Math.pow(10,(dd+1)*3)
       var dp = 2 - (d - ((dd+1)*3))
-      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      var suffix = SIPREFIX[ddp] + dddString
       return roundTo(rr,dp) +delim+ suffix
   }
 }
 
-function fmtSIorFrac(x, delim=""){
+function fmtSIorFrac(x, delim="", yottaCtThreshold = 2){
   if(x <= 0){
     return "0.000";
   } else if(x <= 0.01){
@@ -388,16 +461,20 @@ function fmtSIorFrac(x, delim=""){
       var d = Math.floor(Math.log10(x))
       var dd = Math.floor(d / 3) - 1
       var ddd = Math.floor(dd / 8)
+      var dddString = "Y".repeat(ddd)
+      if(ddd >= yottaCtThreshold){
+         dddString="Y"+supText(""+ddd)
+      }
       var ddp = dd - ddd * 8
       var rr = x / Math.pow(10,(dd+1)*3)
       var dp = 2 - (d - ((dd+1)*3))
-      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      var suffix = SIPREFIX[ddp] + dddString
       return roundTo(rr,dp) +delim+ suffix
   }
 }
 
 
-function fmtSIflat(x){
+function fmtSIflat(x, yottaCtThreshold = 2){
   if(x <= 0){
     return 0.0;
   } else if(x < 1){
@@ -415,10 +492,14 @@ function fmtSIflat(x){
       var d = Math.floor(Math.log10(x))
       var dd = Math.floor(d / 3) - 1
       var ddd = Math.floor(dd / 8)
+      var dddString = "Y".repeat(ddd)
+      if(ddd >= yottaCtThreshold){
+         dddString="Y"+supText(""+ddd)
+      }
       var ddp = dd - ddd * 8
       var rr = x / Math.pow(10,(dd+1)*3)
       var dp = 2 - (d - ((dd+1)*3))
-      var suffix = SIPREFIX[ddp] + "Y".repeat(ddd)
+      var suffix = SIPREFIX[ddp] + dddString
       return Math.round(rr) + suffix
   }
 }
@@ -503,7 +584,7 @@ function getPrefixSI(x){
 function ExactLargeNumber( varray ){
     var maxExact = 1000000000000000
     var digitCt  = 15;
-    
+
     this.getFullString = function(){
         //var out = ""+varray[length(varray)-1];
         var out = ""

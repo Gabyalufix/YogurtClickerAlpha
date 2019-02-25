@@ -274,7 +274,11 @@ function TICK_updateStats(){
 function getTimeStringFromTick(tt){
   var y =  Math.floor( tt * STATS["CONVERSIONS"]["yearPerTick"] );
   var wk = tt - y / STATS["CONVERSIONS"]["yearPerTick"];
-  return (y)+ " years, "+Math.floor(wk) +" weeks"
+  if(isNaN(tt)){
+    return "-"
+  } else {
+    return (y)+ "yr, "+Math.floor(wk) +"wk"
+  }
 }
 
 function getDateStringFromTick(tt){

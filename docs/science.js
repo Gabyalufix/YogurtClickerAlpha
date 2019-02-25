@@ -455,7 +455,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
   bio:[
           {projectTitle:"Compost Fermentation",projectID:"SCALED_COMPOST",projectType:"SCALED",
            costField:["bio_SCIENCE_FREE","bio1_SCIENCE_FREE"], costMult:[1,1], rate:1,
-           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
+           costInfo:{sciFields:[["bio0",0.8],["bio2",0.5],["eng1",0.25],["psy1",0.1],["psy0",0.05]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              var iix = STATS["INDUSTRY"]["WasteFerment"];
              var elem = document.getElementById("LOCKHIDE_"+iix.lockKey);
@@ -465,7 +465,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:"Develop a new method to compost waste material into Yogurt"},
           {projectTitle:"Bioweapons",projectID:"SCALED_BIOWEAPONS",projectType:"SCALED",
            costField:["bio_SCIENCE_FREE","bio2_SCIENCE_FREE","eng1_SCIENCE_FREE"], costMult:[1,1,1], rate:1,
-           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
+           costInfo:{sciFields:[["bio2",0.75],["bio1",0.5],["bio2",0.5],["psy1",0.5],["psy0",0.05]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              var iix = STATS["INDUSTRY"]["Bioweapons"];
              var elem = document.getElementById("LOCKHIDE_"+iix.lockKey);
@@ -477,7 +477,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
   eng:[
           {projectTitle:"Waste Reprocessing",projectID:"SCALED_WASTEREPROCESS",projectType:"SCALED",
            costField:["eng_SCIENCE_FREE"], costMult:[1], rate:1,
-           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
+           costInfo:{sciFields:[["eng1",0.75],["eng0",0.5],["bio1",0.5],["psy1",0.15],["psy0",0.05]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              var iix = STATS["INDUSTRY"]["WasteReprocess"];
              var elem = document.getElementById("LOCKHIDE_"+iix.lockKey);
@@ -487,7 +487,7 @@ STATICVAR_HOLDER.SCIENCE.SCALED = {
            descShort:"Develop a new method to reprocess and recycle waste material into raw feedstock."},
           {projectTitle:"YogurtMatter Transmutation",projectID:"SCALED_TRANSMUTEYOGURT",projectType:"SCALED",
            costField:["eng_SCIENCE_FREE","bio1_SCIENCE_FREE"], costMult:[2,2], rate:1,
-           costInfo:{sciFields:[["psy2",1],["psy1",0.75],["psy0",0.25]], sciCtDistro:[0.5,0.45,0.05]},
+           costInfo:{sciFields:[["eng1",1],["bio0",0.5],["eng2",0.25],["bio1",0.5],["psy1",0.15],["psy0",0.05]], sciCtDistro:[0.5,0.45,0.05]},
            effect:function(){
              var iix = STATS["INDUSTRY"]["TransmuteYogurt"];
              var elem = document.getElementById("LOCKHIDE_"+iix.lockKey);
