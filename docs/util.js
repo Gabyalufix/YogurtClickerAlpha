@@ -210,6 +210,34 @@ for(var i=0; i < THEMES_FOR_SUBTLE.length; i++){
     themeProps.style.setProperty(pid, tinycolor( themeProps.getPropertyValue(pid) ).desaturate(10).toHexString )
   }
 }
+
+var ss = document.querySelectorAll('.THEME_SUBTLE_Green');
+for(var i=0; i<ss.length; i++){
+
+i=0;
+
+  var ssi = ss[i];
+  var compStyle = getComputedStyle(ssi);
+  for(var j=0; j < THEME_PROPERTIES.length; j++){
+    var pid = THEME_PROPERTIES[j];
+    ssi.style.setProperty(pid,tinycolor(compStyle.getPropertyValue(pid)).desaturate(20).toHexString());
+  }
+
+
+}
+
+var ss = document.querySelectorAll('.THEME_SUBTLE_Green');
+
+i=0;
+
+  var ssi = ss[i];
+  var compStyle = getComputedStyle(ssi);
+  for(var j=0; j < THEME_PROPERTIES.length; j++){
+    var pid = THEME_PROPERTIES[j];
+    ssi.style.setProperty(pid,tinycolor(compStyle.getPropertyValue(pid)).desaturate(20).toHexString());
+  }
+
+
 */
 
 
