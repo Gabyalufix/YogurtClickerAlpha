@@ -63,6 +63,7 @@ function TICK_runFastTick(){
         GAME.STATS["TICK"] = GAME.STATS["TICK"] + 1;
         GAME.TICK_readUserInputs()
         GAME.TICK_updateStats()
+        GAME.TICK_copyDisplayCopies();
         //GAME.TICK_scoutSystems()
         //GAME.TICK_captureSystems()
         GAME.TICKHELPER_scoutSystems();
@@ -138,6 +139,18 @@ function calculateSlowTick(){
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //TICK FUNCTIONS:
+
+function TICK_copyDisplayCopies(){
+   var copyElemList = document.getElementsByClassName("COPY_VALUEDISPLAY_ELEMENT");
+
+   for(var i=0; i < copyElemList.length;i++){
+     var elemCopyFromId = copyElemList[i].id.split(".")[0]
+     var elemCopyFrom = document.getElementById( elemCopyFromId );
+     copyElemList[i].textContent = elemCopyFrom.textContent;
+   }
+}
+
+GAME_GLOBAL.TICK_copyDisplayCopies = TICK_copyDisplayCopies;
 
 //SETTINGS["bot"+"_FRACTION"]
 function TICK_readUserInputs(){

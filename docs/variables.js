@@ -406,7 +406,7 @@ STATICVAR_HOLDER.UPGRADABLES = [
        ELEM_BUTTON:      document.getElementById("button_BotPowerCapacityUpgrade"),
        ELEM_DISPLAY:      document.getElementById("BotPowerProductivityDisplay"),
        ELEM_LVL:      document.getElementById("BotPowerProductivityLevel")
-       
+
 
    },
 ];
@@ -531,7 +531,7 @@ STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3], ["MATTER-Waste-CT",
 
 STATS["INDUSTRY"] = {};
 STATS["INDUSTRY"]["Feedstock"] = { sliderID: "bot", sliderIDX: 0, prodTitle: "Botworld Feedstock", inventoryType: "MATTER", scitype: "eng", scifield: "eng2",
-                                   baseProd: 0.00274,
+                                   baseProd: 0.00827,
                                    baseCost:  [["MATTER-FreeBot-CT",1]],
                                    basePwr:   0.005800,
                                    baseWaste: 0.01}
@@ -542,7 +542,7 @@ STATS["INDUSTRY"]["Botbots"] = { sliderID: "bot", sliderIDX: 1, prodTitle: "Robo
                                    baseWaste: 0.3}
 
 STATS["INDUSTRY"]["Botpwr"] =   { sliderID: "bot", sliderIDX: 6, prodTitle: "Solar Array Construction", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd: 0.0005,
+                                   baseProd: 0.00209,
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.077200,
                                    baseWaste: 0.2}

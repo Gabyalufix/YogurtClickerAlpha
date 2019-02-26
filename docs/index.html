@@ -88,9 +88,20 @@
 <div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">RESEARCH PROJECTS</span></h1></button>
 		<div class="content">
-  			<p><span class="INFO_TEXT_STATIC">This area will contain controls for controlling which research projects to research. Science is discovered by accumulating data. Deepthought will allow you to predict future discoveries and options further in advance. Extremely high levels of euphoria will unlock special supertechs that are otherwise unavailable. Euphoria is gain by producing yogurt in excess of your quote. </span></p>
 
-         <br>
+  		<!--	<p><span class="INFO_TEXT_STATIC">This area will contain controls for controlling which research projects to research. Science is discovered by accumulating data. Deepthought will allow you to predict future discoveries and options further in advance. Extremely high levels of euphoria will unlock special supertechs that are otherwise unavailable. Euphoria is gain by producing yogurt in excess of your quote. </span></p> <br>-->
+
+
+
+        <div class="contentUnitHolder">
+            <div class="contentGrid6 bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
+				<div class="contentGridItem1x2 contentGridItem bgLT3 THEME_Green" style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Biology </span></h6>         <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
+				<div class="contentGridItem1x2 contentGridItem bgLT3 THEME_eng"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Engineering </span></h6>     <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
+				<div class="contentGridItem1x2 contentGridItem bgLT3 THEME_Psy"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Social Science </span></h6>  <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
+
+            </div>
+        </div>
+
         <div class="contentUnitHolder">
 			<button class="collapsibleTHIN  collapsible">
 			   <h2><span class="INFO_TEXT_STATIC"> Databanks </span></h2>
@@ -133,6 +144,65 @@
 					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC"> Strategy & Tactics </span></h6><div class="valueDisplayDiv displaySm" id="psy3_TOTAL_DISPLAYDIV"><span id="psy3_TOTAL_DISPLAY"></span><span id="psy3_TOTAL_DISPLAY_UNITS"></span></div>         <span id="psy3_FREE_DISPLAY"></span></div>
 				</div>
 			</div>
+
+        </div></div>
+
+
+        <div class="contentUnitHolder">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC"> Available Projects (Work In Progress) </span></h2>
+			</button>
+			<div class="contentLV3">
+
+            <div id="ProjectSelectorBG"><div id="ProjectSelector">
+                <button class="PROJECT_BUTTON"> Example Project 1 </button>
+                <button class="PROJECT_BUTTON"> Example Project 2 </button>
+                <button class="PROJECT_BUTTON"> Example Project 3 </button>
+                <button class="PROJECT_BUTTON"> Example Project 4 </button>
+                <button class="PROJECT_BUTTON"> Example Project 1 </button>
+                <button class="PROJECT_BUTTON"> Example Project 2 </button>
+                <button class="PROJECT_BUTTON"> Example Project 3 </button>
+                <button class="PROJECT_BUTTON"> Example Project 4 </button>
+            </div></div>
+				<div class="SubContentBox SubContentBoxLT3" style="padding-bottom: 0px; margin-bottom: 0px;">
+				   <span id="CURRENT_AVAIL_PROJECT_DESC"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
+				   <div>
+				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT" > RESEARCH </button>
+				   </div>
+
+					<button class="collapsibleExtraTHIN collapsible">&#8964;&#8964;&#8964; FILTERS &#8964;&#8964;&#8964;</button>
+					<span class="contentLV4">
+                        <span style="line-height: 2;">
+                       <label style="white-space: nowrap;">Biology: <input type="checkbox"  id = "bioProjectFilter" checked=true> </label>
+                       <label style="white-space: nowrap;">Engineering: <input type="checkbox"  id = "engProjectFilter" checked=true> </label>
+                       <label style="white-space: nowrap;">Social Science: <input type="checkbox"  id = "psyProjectFilter" checked=true> </label>
+                       <label style="white-space: nowrap;">Show Avail: <input type="checkbox"  id = "availProjectFilter" checked=true> </label>
+                       <label style="white-space: nowrap;">Show Completed: <input type="checkbox"  id = "finishedProjectFilter"> </label>
+                        </span>
+<!--
+						<div style="display: grid; grid-template-columns: auto auto auto auto auto auto ;">
+						<div><h5> Biology: </h5></div>
+						<label class="pctCheckContainer pctCheckContainerGRID1x1" style="position:relative">
+						  <input type="checkbox"  id = "shipSliderCheck3">
+						  <span class="checkmark"></span>
+						</label>
+						<div><h5> Engineering: </h5></div>
+						<label class="pctCheckContainer pctCheckContainerGRID1x1" style="position:relative">
+						  <input type="checkbox"  id = "shipSliderCheck3">
+						  <span class="checkmark"></span>
+						</label>
+						<div><h5> Social Sci: </h5></div>
+						<label class="pctCheckContainer pctCheckContainerGRID1x1" style="position:relative">
+						  <input type="checkbox"  id = "shipSliderCheck3">
+						  <span class="checkmark"></span>
+						</label>
+						</div>-->
+
+					</span>
+				</div>
+
+
+
 
         </div></div>
 
@@ -223,15 +293,6 @@
 
         </div></div>
 
-        <div class="contentUnitHolder">
-			<button class="collapsibleTHIN  collapsible">
-			   <h2><span class="INFO_TEXT_STATIC"> Anticipated Projects </span></h2>
-			</button>
-			<div class="contentLV3">
-
-            stuff goes here.
-
-        </div></div>
 
 
 
@@ -748,27 +809,20 @@
 
 <div class="MAINGRID_CTR">
 
+
+
 <!--
 =================================================
------------------------------- WORLDFORGE
+------------------------------ BOTWORLDS
 -->
+<div class="contentUnitHolder ">
+			<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">INDUSTRY:</span></h1></button>
+			<div class="content">
+  			<!--<p><span class="INFO_TEXT_STATIC"> Your industrial base: a vast network of van-neumann construction robots built around a captive sun. </span></p>-->
 
 
-
-<div class="contentUnitHolder">
-<button class="collapsible"><h1><span class="INFO_TEXT_STATIC"> MATTER </span></h1></button>
-		<div class="content">
-
-        <div class="contentUnitHolder">
-
-	<h5> <span class="INFO_TEXT_STATIC">Botworlds</span> </h5>
-	<div class="contentGrid4Hz dataTable THEME_SUBTLE_Bot">
-
-	<!--
-	<div class="contentGridItem1x1 contentGridItemHzT" style="border-right-width: 1px; border-right-style: dashed; border-right-color: var(--MID)"> <span class="INFO_TEXT_STATIC">Bot</span></div>
-    <div class="contentGridItem1x1 contentGridItemHzB" style="border-right-width: 1px; border-right-style: dashed; border-right-color: var(--MID)"> <span class="INFO_TEXT_STATIC">Worlds</span></div>
-    -->
-
+	<!--<h5> <span class="INFO_TEXT_STATIC">Botworlds</span> </h5>-->
+	<div class="contentGrid3Hz dataTable THEME_SUBTLE_Bot">
     <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Bot" id="FreeBot_MATTER_DIV">     <span class="INFO_TEXT_STATIC">Free:</span></div>
                        <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_FreeBot">0.0</span><span id="FreeBot_MATTER_UNITS">t</span></div>
                        <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_FreeBot">0.0</span><span id="FreeBot_MATTERDELTA_UNITS">t</span></div>
@@ -778,117 +832,7 @@
     <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Bot" id="Botbots_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Bots:</span></div>
                        <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_Botbots">0.0</span><span id="Botbots_MATTER_UNITS">t</span></div>
                        <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_Botbots">0.0</span><span id="Botbots_MATTERDELTA_UNITS">t</span></div>
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Bot" id="Botpwr_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Solar:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_Botpwr">0.0</span><span id="Botpwr_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_Botpwr">0.0</span><span id="Botpwr_MATTERDELTA_UNITS">t</span></div>
-	</div>
-
-
-    <h5> <span class="INFO_TEXT_STATIC">Greenworlds</span> </h5>
-	<div class="contentGrid3Hz dataTable THEME_SUBTLE_Green">
-	<!--
-	<div class="contentGridItem1x1 contentGridItemHzT" style="border-right-width: 1px; border-right-style: dashed; border-right-color: var(--MID)"> <span class="INFO_TEXT_STATIC">Green</span></div>
-    <div class="contentGridItem1x1 contentGridItemHzB" style="border-right-width: 1px; border-right-style: dashed; border-right-color: var(--MID)"> <span class="INFO_TEXT_STATIC">Worlds</span></div>
-    -->
-
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Green" id="FreeGreen_MATTER_DIV">     <span class="INFO_TEXT_STATIC">Free:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_FreeGreen">0.0</span><span id="FreeGreen_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_FreeGreen">0.0</span><span id="FreeGreen_MATTERDELTA_UNITS">t</span></div>
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Green" id="Digested_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Digested:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_Digested">0.0</span><span id="Digested_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_Digested">0.0</span><span id="Digested_MATTERDELTA_UNITS">t</span></div>
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Green" id="Biomass_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Biomass:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_Biomass">0.0</span><span id="Biomass_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_Biomass">0.0</span><span id="Biomass_MATTERDELTA_UNITS">t</span></div>
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Green" id="Biopwr_MATTER_DIV" style="display:none">   <span class="INFO_TEXT_STATIC">Photosynth:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding" style="display:none"><span id="RESOURCE_DISPLAY_MATTER_Biopwr">0.0</span><span id="Biopwr_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding" style="display:none"><span id="RESOURCE_DISPLAY_MATTERDELTA_Biopwr">0.0</span><span id="Biopwr_MATTERDELTA_UNITS">t</span></div>
-
-	</div>
-
-	<h5> <span class="INFO_TEXT_STATIC">Finished Products:</span> </h5>
-	<div class="contentGrid3Hz dataTable">
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="Ships_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Starships:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTER_Ships">0.0</span><span id="Ships_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTERDELTA_Ships">0.0</span><span id="Ships_MATTERDELTA_UNITS">t</span></div>
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="Compute_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Compute:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTER_Compute">0.0</span><span id="Compute_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTERDELTA_Compute">0.0</span><span id="Compute_MATTERDELTA_UNITS">t</span></div>
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="Yogurt_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Yogurt:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTER_Yogurt">0.0</span><span id="Yogurt_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTERDELTA_Yogurt">0.0</span><span id="Yogurt_MATTERDELTA_UNITS">t</span></div>
-
-	</div>
-
-	<h5> <span class="INFO_TEXT_STATIC">Waste:</span> </h5>
-	<div class="contentGrid3Hz dataTable">
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="Lost_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Lost Matter:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTER_Lost">0.0</span><span id="Lost_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTERDELTA_Lost">0.0</span><span id="Lost_MATTERDELTA_UNITS">t</span></div>
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="CWaste_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Waste Matter:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTER_Waste">0.0</span><span id="Waste_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTERDELTA_Waste">0.0</span><span id="Waste_MATTERDELTA_UNITS">t</span></div>
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="Heat_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Waste Heat:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTER_Heat">0.0</span><span id="Heat_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTERDELTA_Heat">0.0</span><span id="Heat_MATTERDELTA_UNITS">t</span></div>
-
-	</div>
-
-<!--
-
-
-
-	<div class="contentGrid5Hz">
-	<div class="contentGridItem1x1 contentGridItemHzT"> <span class="INFO_TEXT_STATIC">Green<BR>World</span></div>
-	<div class="contentGridItem1x1 contentGridItemHzT"><div class="valueDisplayDiv" id="FreeBot_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Free Matter:</span><br><span class="contentGridItemHzB" id="RESOURCE_DISPLAY_MATTER_Available">0.0</span> <span id="Available_MATTER_UNITS">g</span></div>
-	<div class="contentGridItem1x1 contentGridItemHzT"><div class="valueDisplayDiv" id="Digested_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Digested:</span><br><span class="contentGridItemHzB" id="RESOURCE_DISPLAY_MATTER_Available">0.0</span> <span id="Available_MATTER_UNITS">g</span></div>
-	<div class="contentGridItem1x1 contentGridItemHzT"><div class="valueDisplayDiv" id="Processed_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Biomass:</span><br><span class="contentGridItemHzB" id="RESOURCE_DISPLAY_MATTER_Available">0.0</span> <span id="Available_MATTER_UNITS">g</span></div>
-	<div class="contentGridItem1x1 contentGridItemHzT"><div class="valueDisplayDiv" id="Processed_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Yogurt:</span><br><span class="contentGridItemHzB" id="RESOURCE_DISPLAY_MATTER_Available">0.0</span> <span id="Available_MATTER_UNITS">g</span></div>
-	</div>
--->
-
-<!--
-    <br>
-    <h5><span class="INFO_TEXT_STATIC">Other Matter: </span></h5>
-	<div class="contentGrid4">
-		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Ships_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Starships:</span><br><span id="RESOURCE_DISPLAY_MATTER_Ships">0.0</span> <span id="Ships_MATTER_UNITS">g</span></div></div>
-		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Waste_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Waste Matter:</span><br><span id="RESOURCE_DISPLAY_MATTER_Waste">0.0</span> <span id="Waste_MATTER_UNITS">g</span></div></div>
-		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Heat_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Waste Heat:</span><br><span id="RESOURCE_DISPLAY_MATTER_Heat">0.0</span> <span id="Heat_MATTER_UNITS">g</span></div></div>
-		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Total_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Total Matter:</span><br><span id="RESOURCE_DISPLAY_MATTER_Total">0.0</span> <span id="Total_MATTER_UNITS">g</span></div></div>
-	</div>
--->
-<!--
-	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Collected_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Collected Matter: </span><br><span id="RESOURCE_DISPLAY_MATTER_Collected"></span>  <span id="Collected_MATTER_UNITS"></span></div></div>
-	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Processed_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Processed Matter: </span><br><span id="RESOURCE_DISPLAY_MATTER_Processed"></span>  <span id="Processed_MATTER_UNITS"></span></div></div>
-	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Waste_MATTER_DIV">       <span class="INFO_TEXT_STATIC">Waste Matter: </span>    <br><span id="RESOURCE_DISPLAY_MATTER_Waste"></span>      <span id="Waste_MATTER_UNITS"></span></div></div>
-	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Heat_MATTER_DIV">        <span class="INFO_TEXT_STATIC">Waste Heat: </span>      <br><span id="RESOURCE_DISPLAY_MATTER_Heat"></span>       <span id="Heat_MATTER_UNITS"></span></div></div>
-	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Yogurt_MATTER_DIV">      <span class="INFO_TEXT_STATIC">Yogurt: </span>          <br><span id="RESOURCE_DISPLAY_MATTER_Yogurt"></span>     <span id="Yogurt_MATTER_UNITS"></span></div></div>
-	<div class="contentGridItem1x1 contentGridItem" style="display:none"><div class="valueDisplayDiv" id="Discovered_MATTER_DIV">  <span class="INFO_TEXT_STATIC">Discovered Matter:</span><br><span id="RESOURCE_DISPLAY_MATTER_Discovered"></span> <span id="Discovered_MATTER_UNITS"></span></div></div>
--->
-
-
-
-
-
-
-
-	</div>
-
-   <br>
-
-
-</div>
-</div>
-
-<!--
-=================================================
------------------------------- BOTWORLDS
--->
-<div class="contentUnitHolder ">
-			<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">INDUSTRY:</span></h1></button>
-			<div class="content">
-  			<p><span class="INFO_TEXT_STATIC"> Your industrial base: a vast network of van-neumann construction robots built around a captive sun. </span></p>
-
+	</div><br>
 
         <div class="contentUnitHolder" style="padding: 0px; margin:0px;">
 
@@ -1062,6 +1006,24 @@
 			   <h1><span class="INFO_TEXT_STATIC">AGRICULTURE:</span></h1>
 			</button>
 			<div class="content">
+
+     <div class="contentUnitHolder">
+
+    <!--<h5> <span class="INFO_TEXT_STATIC">Greenworlds</span> </h5>-->
+	<div class="contentGrid3Hz dataTable THEME_SUBTLE_Green">
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Green" id="FreeGreen_MATTER_DIV">     <span class="INFO_TEXT_STATIC">Free:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_FreeGreen">0.0</span><span id="FreeGreen_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_FreeGreen">0.0</span><span id="FreeGreen_MATTERDELTA_UNITS">t</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Green" id="Digested_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Digested:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_Digested">0.0</span><span id="Digested_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_Digested">0.0</span><span id="Digested_MATTERDELTA_UNITS">t</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Green" id="Biomass_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Biomass:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_Biomass">0.0</span><span id="Biomass_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_Biomass">0.0</span><span id="Biomass_MATTERDELTA_UNITS">t</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Green" id="Biopwr_MATTER_DIV" style="display:none">   <span class="INFO_TEXT_STATIC">Photosynth:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding" style="display:none"><span id="RESOURCE_DISPLAY_MATTER_Biopwr">0.0</span><span id="Biopwr_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding" style="display:none"><span id="RESOURCE_DISPLAY_MATTERDELTA_Biopwr">0.0</span><span id="Biopwr_MATTERDELTA_UNITS">t</span></div>
+	</div></div><br>
 
      <div class="contentUnitHolder">
 			<div class="SubContentBox">
@@ -1629,7 +1591,95 @@
 </div>
 
 
+<!--
+=================================================
+------------------------------ WORLDFORGE
+-->
 
+
+
+<div class="contentUnitHolder">
+<button class="collapsible"><h1><span class="INFO_TEXT_STATIC"> MATTER </span></h1></button>
+		<div class="content">
+
+        <div class="contentUnitHolder">
+
+
+	<h5> <span class="INFO_TEXT_STATIC">Finished Products:</span> </h5>
+	<div class="contentGrid4Hz dataTable">
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="Ships_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Starships:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTER_Ships">0.0</span><span id="Ships_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTERDELTA_Ships">0.0</span><span id="Ships_MATTERDELTA_UNITS">t</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="Compute_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Compute:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTER_Compute">0.0</span><span id="Compute_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTERDELTA_Compute">0.0</span><span id="Compute_MATTERDELTA_UNITS">t</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="Yogurt_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Yogurt:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTER_Yogurt">0.0</span><span id="Yogurt_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTERDELTA_Yogurt">0.0</span><span id="Yogurt_MATTERDELTA_UNITS">t</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="Botpwr_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Solar:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_Botpwr">0.0</span><span id="Botpwr_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_Botpwr">0.0</span><span id="Botpwr_MATTERDELTA_UNITS">t</span></div>
+
+	</div>
+
+	<h5> <span class="INFO_TEXT_STATIC">Waste:</span> </h5>
+	<div class="contentGrid3Hz dataTable">
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="Lost_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Lost Matter:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTER_Lost">0.0</span><span id="Lost_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTERDELTA_Lost">0.0</span><span id="Lost_MATTERDELTA_UNITS">t</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="CWaste_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Waste Matter:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTER_Waste">0.0</span><span id="Waste_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTERDELTA_Waste">0.0</span><span id="Waste_MATTERDELTA_UNITS">t</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding" id="Heat_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Waste Heat:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTER_Heat">0.0</span><span id="Heat_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"> <span id="RESOURCE_DISPLAY_MATTERDELTA_Heat">0.0</span><span id="Heat_MATTERDELTA_UNITS">t</span></div>
+
+	</div>
+
+<!--
+
+
+
+	<div class="contentGrid5Hz">
+	<div class="contentGridItem1x1 contentGridItemHzT"> <span class="INFO_TEXT_STATIC">Green<BR>World</span></div>
+	<div class="contentGridItem1x1 contentGridItemHzT"><div class="valueDisplayDiv" id="FreeBot_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Free Matter:</span><br><span class="contentGridItemHzB" id="RESOURCE_DISPLAY_MATTER_Available">0.0</span> <span id="Available_MATTER_UNITS">g</span></div>
+	<div class="contentGridItem1x1 contentGridItemHzT"><div class="valueDisplayDiv" id="Digested_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Digested:</span><br><span class="contentGridItemHzB" id="RESOURCE_DISPLAY_MATTER_Available">0.0</span> <span id="Available_MATTER_UNITS">g</span></div>
+	<div class="contentGridItem1x1 contentGridItemHzT"><div class="valueDisplayDiv" id="Processed_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Biomass:</span><br><span class="contentGridItemHzB" id="RESOURCE_DISPLAY_MATTER_Available">0.0</span> <span id="Available_MATTER_UNITS">g</span></div>
+	<div class="contentGridItem1x1 contentGridItemHzT"><div class="valueDisplayDiv" id="Processed_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Yogurt:</span><br><span class="contentGridItemHzB" id="RESOURCE_DISPLAY_MATTER_Available">0.0</span> <span id="Available_MATTER_UNITS">g</span></div>
+	</div>
+-->
+
+<!--
+    <br>
+    <h5><span class="INFO_TEXT_STATIC">Other Matter: </span></h5>
+	<div class="contentGrid4">
+		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Ships_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Starships:</span><br><span id="RESOURCE_DISPLAY_MATTER_Ships">0.0</span> <span id="Ships_MATTER_UNITS">g</span></div></div>
+		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Waste_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Waste Matter:</span><br><span id="RESOURCE_DISPLAY_MATTER_Waste">0.0</span> <span id="Waste_MATTER_UNITS">g</span></div></div>
+		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Heat_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Waste Heat:</span><br><span id="RESOURCE_DISPLAY_MATTER_Heat">0.0</span> <span id="Heat_MATTER_UNITS">g</span></div></div>
+		<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Total_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Total Matter:</span><br><span id="RESOURCE_DISPLAY_MATTER_Total">0.0</span> <span id="Total_MATTER_UNITS">g</span></div></div>
+	</div>
+-->
+<!--
+	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Collected_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Collected Matter: </span><br><span id="RESOURCE_DISPLAY_MATTER_Collected"></span>  <span id="Collected_MATTER_UNITS"></span></div></div>
+	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Processed_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Processed Matter: </span><br><span id="RESOURCE_DISPLAY_MATTER_Processed"></span>  <span id="Processed_MATTER_UNITS"></span></div></div>
+	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Waste_MATTER_DIV">       <span class="INFO_TEXT_STATIC">Waste Matter: </span>    <br><span id="RESOURCE_DISPLAY_MATTER_Waste"></span>      <span id="Waste_MATTER_UNITS"></span></div></div>
+	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Heat_MATTER_DIV">        <span class="INFO_TEXT_STATIC">Waste Heat: </span>      <br><span id="RESOURCE_DISPLAY_MATTER_Heat"></span>       <span id="Heat_MATTER_UNITS"></span></div></div>
+	<div class="contentGridItem1x1 contentGridItem"><div class="valueDisplayDiv" id="Yogurt_MATTER_DIV">      <span class="INFO_TEXT_STATIC">Yogurt: </span>          <br><span id="RESOURCE_DISPLAY_MATTER_Yogurt"></span>     <span id="Yogurt_MATTER_UNITS"></span></div></div>
+	<div class="contentGridItem1x1 contentGridItem" style="display:none"><div class="valueDisplayDiv" id="Discovered_MATTER_DIV">  <span class="INFO_TEXT_STATIC">Discovered Matter:</span><br><span id="RESOURCE_DISPLAY_MATTER_Discovered"></span> <span id="Discovered_MATTER_UNITS"></span></div></div>
+-->
+
+
+
+
+
+
+
+	</div>
+
+
+
+</div>
+</div>
 
 <!--
 #################################################
@@ -1681,9 +1731,6 @@ Stellar pop:
 <div class="contentUnitHolder">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">FLEET REPORT</span></h1></button>
 		<div class="content">
-
-  			<p><span class="INFO_TEXT_STATIC"> This area contains controls for your fleet. </span></p>
-
 
     <h5><span class="INFO_TEXT_STATIC">Fleet composition: </span></h5>
 	<div class="contentGrid4x3Hz contentGridWithInnerVerts">
@@ -1739,18 +1786,20 @@ Stellar pop:
 
 	</div>
 
-      <div class="contentUnitHolder">
-			<button class="collapsibleTHIN  collapsible">
-			   <h2><span class="INFO_TEXT_STATIC"> scouts </span></h2>
-			</button>
-			<div class="contentLV3">
 
+
+      <div class="COLLAPSE_MODE2">
+   <br>
+      <div class="contentUnitHolder">
+			<div class="SubContentBox">
+			<div class="SubContentBoxTitle SubContentBoxTitleCtr"> <h5><span class="INFO_TEXT_STATIC">PROBES</span></h5> </div>
+            <div style="line-height:0.85"><BR><BR></div>
 
 			<h5><span class="INFO_TEXT_STATIC">Explore: </span><span class="valueDisplayDiv" id="scoutSliderDisplayPct1_DIV"><span id="scoutSliderDisplayPct1"></span><span id="scoutSliderDisplayPct1_UNITS"></span></span></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 											   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="scoutSliderPct1"></div>
+						  <input type="range" min="0" max="10000" value="5000" class="slider" id="scoutSliderPct1"></div>
 					</div>
 					<label class="pctCheckContainer pctCheckContainerGRID1x1">
 					  <input type="checkbox"  id = "scoutSliderCheck1">
@@ -1758,24 +1807,25 @@ Stellar pop:
 					</label>
 				</div>
 
-
+			<!--<div class="unlockableHidden" id="LOCKHIDE_Scout2">-->
 			<h5><span class="INFO_TEXT_STATIC">Recon: </span><span class="valueDisplayDiv" id="scoutSliderDisplayPct2_DIV"><span id="scoutSliderDisplayPct2"></span><span id="scoutSliderDisplayPct2_UNITS"></span></span></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="scoutSliderPct2"></div>
+						  <input type="range" min="0" max="10000" value="2500" class="slider" id="scoutSliderPct2"></div>
 					</div>
 					<label class="pctCheckContainer pctCheckContainerGRID1x1">
 					  <input type="checkbox"  id = "scoutSliderCheck2">
 					  <span class="checkmark"></span>
 					</label>
 				</div>
+		    <!--</div>-->
 
 			<h5><span class="INFO_TEXT_STATIC">Train: </span><span class="valueDisplayDiv" id="scoutSliderDisplayPct3_DIV"><span id="scoutSliderDisplayPct3"></span><span id="scoutSliderDisplayPct3_UNITS"></span></span></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 						   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="scoutSliderPct3"></div>
+						  <input type="range" min="0" max="10000" value="2500" class="slider" id="scoutSliderPct3"></div>
 					</div>
 					<label class="pctCheckContainer pctCheckContainerGRID1x1">
 					  <input type="checkbox"  id = "scoutSliderCheck3">
@@ -1800,18 +1850,19 @@ Stellar pop:
 
             </div>
       </div>
+             <div style="line-height:1"><BR></div>
+
       <div class="contentUnitHolder">
-			<button class="collapsibleTHIN  collapsible">
-			   <h2><span class="INFO_TEXT_STATIC"> Battleplates </span></h2>
-			</button>
-			<div class="contentLV3">
+			<div class="SubContentBox">
+			<div class="SubContentBoxTitle SubContentBoxTitleCtr"> <h5><span class="INFO_TEXT_STATIC">BATTLEPLATES</span></h5> </div>
+            <div style="line-height:0.85"><BR><BR></div>
 
 
-			<h5><span class="INFO_TEXT_STATIC">Fleet Assault: </span><span class="valueDisplayDiv" id="battleplateSliderDisplayPct1_DIV"><span id="battleplateSliderDisplayPct1"></span><span id="battleplateSliderDisplayPct1_UNITS"></span></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Active Duty: </span><span class="valueDisplayDiv" id="battleplateSliderDisplayPct1_DIV"><span id="battleplateSliderDisplayPct1"></span><span id="battleplateSliderDisplayPct1_UNITS"></span></span></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 											   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="battleplateSliderPct1"></div>
+						  <input type="range" min="0" max="10000" value="8000" class="slider" id="battleplateSliderPct1"></div>
 					</div>
 					<label class="pctCheckContainer pctCheckContainerGRID1x1">
 					  <input type="checkbox"  id = "battleplateSliderCheck1">
@@ -1820,7 +1871,7 @@ Stellar pop:
 				</div>
 
 
-			<h5><span class="INFO_TEXT_STATIC">Seedship Escort: </span><span class="valueDisplayDiv" id="battleplateSliderDisplayPct2_DIV"><span id="battleplateSliderDisplayPct2"></span><span id="battleplateSliderDisplayPct2_UNITS"></span></span></h5>
+			<h5><span class="INFO_TEXT_STATIC">Training Reserve: </span><span class="valueDisplayDiv" id="battleplateSliderDisplayPct2_DIV"><span id="battleplateSliderDisplayPct2"></span><span id="battleplateSliderDisplayPct2_UNITS"></span></span></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 											   <div class="sliderBG">
@@ -1832,32 +1883,38 @@ Stellar pop:
 					</label>
 				</div>
 
+			<div class="unlockableHidden" id="LOCKHIDE_BP4">
 			<h5><span class="INFO_TEXT_STATIC">Strategic Bombing: </span><span class="valueDisplayDiv" id="battleplateSliderDisplayPct4_DIV"><span id="battleplateSliderDisplayPct4"></span><span id="battleplateSliderDisplayPct4_UNITS"></span></span></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 											   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="battleplateSliderPct4"></div>
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="battleplateSliderPct4"></div>
 					</div>
 					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "battleplateSliderCheck4">
+					  <input type="checkbox"  id = "battleplateSliderCheck4" checked=true>>
 					  <span class="checkmark"></span>
 					</label>
 				</div>
+				</div>
 
+			<div class="unlockableHidden" id="LOCKHIDE_BP3">
 			<h5><span class="INFO_TEXT_STATIC">Train: </span><span class="valueDisplayDiv" id="battleplateSliderDisplayPct3_DIV"><span id="battleplateSliderDisplayPct3"></span><span id="battleplateSliderDisplayPct3_UNITS"></span></span></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 											   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="battleplateSliderPct3"></div>
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="battleplateSliderPct3"></div>
 					</div>
 					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "battleplateSliderCheck3">
+					  <input type="checkbox"  id = "battleplateSliderCheck3" checked=true>
 					  <span class="checkmark"></span>
 					</label>
 				</div>
-
+				</div>
             </div>
+
+
       </div>
+
       <div class="contentUnitHolder" style="display:none;">
 			<button class="collapsibleTHIN  collapsible">
 			   <h2><span class="INFO_TEXT_STATIC"> Seedships </span></h2>
@@ -1885,6 +1942,60 @@ Stellar pop:
       </div>
 
 		</div>
+</div>
+
+
+<div class="contentUnitHolder">
+<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">STRATEGIC COMMAND</span></h1></button>
+		<div class="content">
+
+
+      <div class="contentUnitHolder">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC">Assault Strategy</span></h2>
+			</button>
+			<div class="contentLV3">
+
+			<h5><span class="INFO_TEXT_STATIC">Seek & Destroy: </span><div class="valueDisplayDiv" id="stratSliderDisplayPct1_DIV"><span id="stratSliderDisplayPct1"></span><span id="stratSliderDisplayPct1_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+											   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="8000" class="slider" id="stratSliderPct1"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "stratSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Exterminate: </span><div class="valueDisplayDiv" id="stratSliderDisplayPct2_DIV"><span id="stratSliderDisplayPct2"></span><span id="stratSliderDisplayPct2_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+											   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="stratSliderPct2"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "stratSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Interdiction: </span><div class="valueDisplayDiv" id="stratSliderDisplayPct3_DIV"><span id="stratSliderDisplayPct3"></span><span id="stratSliderDisplayPct3_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+											   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="stratSliderPct3"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "stratSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			</div>
+		  </div>
+
+</div>
 </div>
 
 
@@ -1962,50 +2073,6 @@ Stellar pop:
 
 
 
-      <div class="contentUnitHolder">
-			<button class="collapsibleTHIN  collapsible">
-			   <h2><span class="INFO_TEXT_STATIC">Assault Strategy</span></h2>
-			</button>
-			<div class="contentLV3">
-
-			<h5><span class="INFO_TEXT_STATIC">Seek & Destroy: </span><div class="valueDisplayDiv" id="stratSliderDisplayPct1_DIV"><span id="stratSliderDisplayPct1"></span><span id="stratSliderDisplayPct1_UNITS"></span></div></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-											   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="8000" class="slider" id="stratSliderPct1"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "stratSliderCheck1">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<h5><span class="INFO_TEXT_STATIC">Exterminate: </span><div class="valueDisplayDiv" id="stratSliderDisplayPct2_DIV"><span id="stratSliderDisplayPct2"></span><span id="stratSliderDisplayPct2_UNITS"></span></div></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-											   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="stratSliderPct2"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "stratSliderCheck2">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<h5><span class="INFO_TEXT_STATIC">Interdiction: </span><div class="valueDisplayDiv" id="stratSliderDisplayPct3_DIV"><span id="stratSliderDisplayPct3"></span><span id="stratSliderDisplayPct3_UNITS"></span></div></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-											   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="0" class="slider" id="stratSliderPct3"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "stratSliderCheck3">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			</div>
-		  </div>
 
 	  </div>
 </div>
