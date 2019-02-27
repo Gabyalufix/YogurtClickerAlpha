@@ -85,932 +85,16 @@
 <!--<p>A Collapsible:</p>-->
 
 
-<div class="contentUnitHolder">
-<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">RESEARCH PROJECTS</span></h1></button>
-		<div class="content">
-
-  		<!--	<p><span class="INFO_TEXT_STATIC">This area will contain controls for controlling which research projects to research. Science is discovered by accumulating data. Deepthought will allow you to predict future discoveries and options further in advance. Extremely high levels of euphoria will unlock special supertechs that are otherwise unavailable. Euphoria is gain by producing yogurt in excess of your quote. </span></p> <br>-->
-
-
-
-        <div class="contentUnitHolder">
-            <div class="contentGrid6 bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
-				<div class="contentGridItem1x2 contentGridItem bgLT3 THEME_Green" style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Biology </span></h6>         <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
-				<div class="contentGridItem1x2 contentGridItem bgLT3 THEME_eng"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Engineering </span></h6>     <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
-				<div class="contentGridItem1x2 contentGridItem bgLT3 THEME_Psy"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Social Science </span></h6>  <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
-
-            </div>
-        </div>
-
-        <div class="contentUnitHolder">
-			<button class="collapsibleTHIN  collapsible">
-			   <h2><span class="INFO_TEXT_STATIC"> Databanks </span></h2>
-			</button>
-			<div class="contentLV3">
-
-            <div "THEME_Bio">
-                <div class="contentGrid6 THEME_Green bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
-    			   <div class="contentGridItem1x4 contentGridItemNoBorders bgLT1" style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Biology: </span> <span id="bio_TOTAL_DISPLAY"></span> <span style="display:none;"> (<span id="bio_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
-    			   <div class="contentGridItem1x2 contentGridItemNoBorders bgLT1" style="text-align: right;"><h5><span id="bio_GAIN_RATE">0.0</span>B/wk</h5></div>
-
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Cellular Processes </span></h6><div class="valueDisplayDiv displaySm" id="bio1_TOTAL_DISPLAYDIV"><span id="bio1_TOTAL_DISPLAY"></span><span id="bio1_TOTAL_DISPLAY_UNITS"></span></div>       <span id="bio1_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Biomechanoid Augmentation </span></h6><div class="valueDisplayDiv displaySm" id="bio2_TOTAL_DISPLAYDIV"><span id="bio2_TOTAL_DISPLAY"></span><span id="bio2_TOTAL_DISPLAY_UNITS"></span></div>    <span id="bio2_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Genetic Engineering </span></h6><div class="valueDisplayDiv displaySm" id="bio3_TOTAL_DISPLAYDIV"><span id="bio3_TOTAL_DISPLAY"></span><span id="bio3_TOTAL_DISPLAY_UNITS"></span></div>   <span id="bio3_FREE_DISPLAY"></span></div>
-				</div>
-			</div>
-
-            <br>
-
-            <div "THEME_eng">
-                <div class="contentGrid6 THEME_eng bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
-    			   <div class="bgLT1 contentGridItem1x4 contentGridItemNoBorders " style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Engineering: </span> <span id="eng_TOTAL_DISPLAY"></span>  <span style="display:none;">(<span id="eng_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
-    			   <div class="bgLT1 contentGridItem1x2 contentGridItemNoBorders " style="text-align: right;"><h5><span id="eng_GAIN_RATE">0.0</span>B/wk</h5></div>
-
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Construction </span></h6><div class="valueDisplayDiv displaySm" id="eng1_TOTAL_DISPLAYDIV"><span id="eng1_TOTAL_DISPLAY"></span><span id="eng1_TOTAL_DISPLAY_UNITS"></span></div>     <span id="eng1_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Matter & Material Science </span></h6><div class="valueDisplayDiv displaySm" id="eng2_TOTAL_DISPLAYDIV"><span id="eng2_TOTAL_DISPLAY"></span><span id="eng2_TOTAL_DISPLAY_UNITS"></span></div>      <span id="eng2_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">High-Energy Physics </span></h6><div class="valueDisplayDiv displaySm" id="eng3_TOTAL_DISPLAYDIV"><span id="eng3_TOTAL_DISPLAY"></span><span id="eng3_TOTAL_DISPLAY_UNITS"></span></div>    <span id="eng3_FREE_DISPLAY"></span></div>
-				</div>
-			</div>
-
-			<br>
-
-            <div "THEME_eng">
-                <div class="contentGrid6 THEME_Psy bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
-    			   <div class="contentGridItem1x4 contentGridItemNoBorders bgLT1" style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Social Science: </span> <span id="psy_TOTAL_DISPLAY"></span>  <span style="display:none;">(<span id="psy_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
-    			   <div class="contentGridItem1x2 contentGridItemNoBorders bgLT1" style="text-align: right;"><h5><span id="psy_GAIN_RATE">0.0</span>B/wk</h5></div>
-
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC"> Cognition </span></h6><div class="valueDisplayDiv displaySm" id="psy1_TOTAL_DISPLAYDIV"><span id="psy1_TOTAL_DISPLAY"></span><span id="psy1_TOTAL_DISPLAY_UNITS"></span></div>        <span id="psy1_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC"> Creativity & Intuition </span></h6><div class="valueDisplayDiv displaySm" id="psy2_TOTAL_DISPLAYDIV"><span id="psy2_TOTAL_DISPLAY"></span><span id="psy2_TOTAL_DISPLAY_UNITS"></span></div>     <span id="psy2_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC"> Strategy & Tactics </span></h6><div class="valueDisplayDiv displaySm" id="psy3_TOTAL_DISPLAYDIV"><span id="psy3_TOTAL_DISPLAY"></span><span id="psy3_TOTAL_DISPLAY_UNITS"></span></div>         <span id="psy3_FREE_DISPLAY"></span></div>
-				</div>
-			</div>
-
-        </div></div>
-
-
-        <div class="contentUnitHolder">
-			<button class="collapsibleTHIN  collapsible">
-			   <h2><span class="INFO_TEXT_STATIC"> Available Projects (Work In Progress) </span></h2>
-			</button>
-			<div class="contentLV3">
-
-            <div id="ProjectSelectorBG"><div id="ProjectSelector">
-                <button class="PROJECT_BUTTON"> Example Project 1 </button>
-                <button class="PROJECT_BUTTON"> Example Project 2 </button>
-                <button class="PROJECT_BUTTON"> Example Project 3 </button>
-                <button class="PROJECT_BUTTON"> Example Project 4 </button>
-                <button class="PROJECT_BUTTON"> Example Project 1 </button>
-                <button class="PROJECT_BUTTON"> Example Project 2 </button>
-                <button class="PROJECT_BUTTON"> Example Project 3 </button>
-                <button class="PROJECT_BUTTON"> Example Project 4 </button>
-            </div></div>
-				<div class="SubContentBox SubContentBoxLT3" style="padding-bottom: 0px; margin-bottom: 0px;">
-				   <span id="CURRENT_AVAIL_PROJECT_DESC"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
-				   <div>
-				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT" > RESEARCH </button>
-				   </div>
-
-					<button class="collapsibleExtraTHIN collapsible">&#8964;&#8964;&#8964; FILTERS &#8964;&#8964;&#8964;</button>
-					<span class="contentLV4">
-                        <span style="line-height: 2;">
-                       <label style="white-space: nowrap;">Biology: <input type="checkbox"  id = "bioProjectFilter" checked=true> </label>
-                       <label style="white-space: nowrap;">Engineering: <input type="checkbox"  id = "engProjectFilter" checked=true> </label>
-                       <label style="white-space: nowrap;">Social Science: <input type="checkbox"  id = "psyProjectFilter" checked=true> </label>
-                       <label style="white-space: nowrap;">Show Avail: <input type="checkbox"  id = "availProjectFilter" checked=true> </label>
-                       <label style="white-space: nowrap;">Show Completed: <input type="checkbox"  id = "finishedProjectFilter"> </label>
-                        </span>
-<!--
-						<div style="display: grid; grid-template-columns: auto auto auto auto auto auto ;">
-						<div><h5> Biology: </h5></div>
-						<label class="pctCheckContainer pctCheckContainerGRID1x1" style="position:relative">
-						  <input type="checkbox"  id = "shipSliderCheck3">
-						  <span class="checkmark"></span>
-						</label>
-						<div><h5> Engineering: </h5></div>
-						<label class="pctCheckContainer pctCheckContainerGRID1x1" style="position:relative">
-						  <input type="checkbox"  id = "shipSliderCheck3">
-						  <span class="checkmark"></span>
-						</label>
-						<div><h5> Social Sci: </h5></div>
-						<label class="pctCheckContainer pctCheckContainerGRID1x1" style="position:relative">
-						  <input type="checkbox"  id = "shipSliderCheck3">
-						  <span class="checkmark"></span>
-						</label>
-						</div>-->
-
-					</span>
-				</div>
-
-
-
-
-        </div></div>
-
-        <div class="contentUnitHolder">
-			<button class="collapsibleTHIN  collapsible">
-			   <h2><span class="INFO_TEXT_STATIC"> Available Projects </span></h2>
-			</button>
-			<div class="contentLV3">
-
-
-            <div id="PROJECTSAVAIL_CONTENT_1" style="display:none">
-				<select class="projectSelectPanel" name="PROJECTSAVAIL_LIST_bio" id="PROJECTSAVAIL_LIST_bio" size="5">
-					<!--<option value="BioProject1">BioProject1</option>
-					<option value="BioProject2">BioProject2</option>
-					<option value="BioProject3">BioProject3</option>
-					<option value="BioProject4">BioProject4</option>
-					<option value="BioProject5">BioProject5</option>
-					<option value="BioProject6">BioProject6</option>
-					<option value="BioProject7">BioProject7</option>
-					<option value="BioProject8">BioProject8</option>
-					<option value="BioProject9">BioProject9</option>
-					<option value="BioProject10">BioProject10</option>
-					<option value="BioProject11">BioProject11</option>-->
-				</select>
-
-				<div class="SubContentBox SubContentBoxLT3">
-				   <span id="CURRENT_AVAIL_PROJECT_DESC_bio"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
-				   <div>
-				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_bio" > RESEARCH </button>
-				   </div>
-				</div>
-            </div>
-
-            <div id="PROJECTSAVAIL_CONTENT_2">
-				<select class="projectSelectPanel" name="PROJECTSAVAIL_LIST_eng" id="PROJECTSAVAIL_LIST_eng" size="5">
-					<!--<option value="EngineeringProject1">EngineeringProject1</option>
-					<option value="EngineeringProject2">EngineeringProject2</option>
-					<option value="EngineeringProject3">EngineeringProject3</option>
-					<option value="EngineeringProject4">EngineeringProject4</option>
-					<option value="EngineeringProject5">EngineeringProject5</option>
-					<option value="EngineeringProject6">EngineeringProject6</option>
-					<option value="EngineeringProject7">EngineeringProject7</option>
-					<option value="EngineeringProject8">EngineeringProject8</option>
-					<option value="EngineeringProject9">EngineeringProject9</option>
-					<option value="EngineeringProject10">EngineeringProject10</option>
-					<option value="EngineeringProject11">EngineeringProject11</option>-->
-				</select>
-
-				<div class="SubContentBox SubContentBoxLT3">
-				   <span id="CURRENT_AVAIL_PROJECT_DESC_eng"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
-				   <div>
-				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_eng" > RESEARCH </button>
-				   </div>
-				</div>
-            </div>
-
-            <div id="PROJECTSAVAIL_CONTENT_3"  style="display:none">
-				<select class="projectSelectPanel" name="PROJECTSAVAIL_LIST_psy" id="PROJECTSAVAIL_LIST_psy" size="5">
-					<!--<option value="PsychProject1">PsychProject1</option>
-					<option value="PsychProject2">PsychProject2</option>
-					<option value="PsychProject3">PsychProject3</option>
-					<option value="PsychProject4">PsychProject4</option>
-					<option value="PsychProject5">PsychProject5</option>
-					<option value="PsychProject6">PsychProject6</option>
-					<option value="PsychProject7">PsychProject7</option>
-					<option value="PsychProject8">PsychProject8</option>
-					<option value="PsychProject9">PsychProject9</option>
-					<option value="PsychProject10">PsychProject10</option>
-					<option value="PsychProject11">PsychProject11</option>-->
-				</select>
-
-				<div class="SubContentBox SubContentBoxLT3">
-				   <span id="CURRENT_AVAIL_PROJECT_DESC_psy"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
-				   <div>
-				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_psy" > RESEARCH </button>
-				   </div>
-				</div>
-            </div>
-
-			<ul class="tabbedUL">
-				<li class="tabHolder" id="PROJECTSAVAIL_1">             <span class="prettyTab"><h6><span class="INFO_TEXT_STATIC">Biology</span></h6></span></li>
-				<li class="tabHolder selectedTab" id="PROJECTSAVAIL_2"> <span class="prettyTab"><h6><span class="INFO_TEXT_STATIC">Engineering</span></h6></span></li>
-				<li class="tabHolder" id="PROJECTSAVAIL_3">             <span class="prettyTab"><h6><span class="INFO_TEXT_STATIC">Social Science</span></h6></span></li>
-			</ul>
-
-
-
-
-        </div></div>
-
-
-
-
-		</div>
-</div>
-
-
-
-<!--
-=================================================
------------------------------- COMPUTATION CONTROL:
--->
-<div class="contentUnitHolder">
-
-<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">COMPUTE CLUSTER</span></h1></button>
-		<div class="content">
-		  <span style="display:none">
-          <span class="INFO_TEXT_STATIC">Capacity: </span><div class="valueDisplayDiv" id="comp_PRODUCTIVITY_DISPLAY_DIV"><span id="comp_PRODUCTIVITY_DISPLAY"></span><span id="comp_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
-          </span>
-
-		   <div class="contentGrid3  sliderProductivityLine">
-             <span class="contentGridItemNoPad  contentGridItem1x1"> <span class="INFO_TEXT_STATIC">Current Speed: </span> </span>
-             <span class="contentGridItemNoPad  contentGridItem1x1"> <span class="INFO_TEXT_STATIC">Max Speed: </span> </span>
-             <span class="contentGridItemNoPad  contentGridItem1x1"> <span class="INFO_TEXT_STATIC">Power Demand: </span> </span>
-             <span class="contentGridItemNoPad  contentGridItem1x1" id="computation_PRODREQ"></span>
-             <span class="contentGridItemNoPad  contentGridItem1x1" id="computation_PRODCURR"></span>
-             <span class="contentGridItemNoPad  contentGridItem1x1" id="computation_PRODPOWER"></span>
-           </div>
-
-
-
-
-			<div class="SubContentBox">
-
-			<div class="SubContentBoxTitle SubContentBoxTitleCtr">
-              <div class="INFO_TEXT_STATIC">Processor Distribution: </div>
-            </div><div style="line-height:30px"><br></div>
-
-            <div style="display: grid; grid-template-columns: 50% 50%;">
-
-              <div  style="grid-area: span 1 / span 1; text-align:left;">
-                <h5><span class="INFO_TEXT_STATIC"> Analytic Engine: </span><span id="computation_think_CONTROL_PCT_DISPLAY">75%</span></h5>
-              </div>
-
-              <div  style="grid-area: span 1 / span 1; text-align:right;">
-                 <h5> <span class="INFO_TEXT_STATIC"> Soulswarm: </span> <span id="computation_soul_CONTROL_PCT_DISPLAY">25%</span></h5>
-              </div>
-
-            </div>
-
-
-					<div class="slidecontainer" style="width:100%;">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="2500" class="slider" id="computationSliderPct"  style="width:100%;"></div>
-					</div>
-
-            </div>
-
-
-		<button class="collapsible" style="display:none;"><h2>Processor Distribution </h2></span></button>
-			<div class="contentLV3" style="display:none;">
-
-
-
-			<h5><span class="INFO_TEXT_STATIC">Analytic Engine </span><div class="valueDisplayDiv" id="compSliderDisplayPct1_DIV"><span id="compSliderDisplayPct1"></span><span id="compSliderDisplayPct1_UNITS"></span></div></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG"></div>
-						  <input type="range" min="0" max="10000" value="5000" class="slider" id="compSliderPct1">
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "compSliderCheck1">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<h5><span class="INFO_TEXT_STATIC">Soulswarm Matrix </span><div class="valueDisplayDiv" id="compSliderDisplayPct2_DIV"><span id="compSliderDisplayPct2"></span><span id="compSliderDisplayPct2_UNITS"></span></div></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG"></div>
-						  <input type="range" min="0" max="10000" value="5000" class="slider" id="compSliderPct2">
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "compSliderCheck2">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-		    </div>
-
-
-
-		<button class="collapsible"><h2>UPKEEP </h2></span></button>
-			<div class="contentLV3">
-			<h5><span class="INFO_TEXT_STATIC"> Warning: underclocking upkeep processes may result in reduced productivity, efficacy, and efficiency!</span></h5><br>
-
-			<h5><span class="INFO_TEXT_STATIC">Logistics </span><div class="valueDisplayDiv" id="upkeepSliderDisplayPct1_DIV"><span id="upkeepSliderDisplayPct1"></span><span id="upkeepSliderDisplayPct1_UNITS"></span></div></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-					   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
-					   <input type="range" min="0" max="10000" value="10000" class="slider" id="upkeepSliderPct1"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "upkeepSliderCheck1" checked="true">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<h5><span class="INFO_TEXT_STATIC">Tactical Processing </span><div class="valueDisplayDiv" id="upkeepSliderDisplayPct2_DIV"><span id="upkeepSliderDisplayPct2"></span><span id="upkeepSliderDisplayPct2_UNITS"></span></div></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-					   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
-
-						  <input type="range" min="0" max="10000" value="10000" class="slider" id="upkeepSliderPct1"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "compSliderCheck2" checked="true">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-		    </div>
-
-
-
-        </div>
-        </div>
-<!--
-=================================================
------------------------------- THINKING ENGINE
--->
-<div class="contentUnitHolder">
-
-<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">ANALYTIC ENGINE</span></h1></button>
-		<div class="content">
-
-          <span class="INFO_TEXT_STATIC">Capacity: </span><div class="valueDisplayDiv" id="think_PRODUCTIVITY_DISPLAY_DIV"><span id="think_PRODUCTIVITY_DISPLAY"></span><span id="think_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
-
-        <div class="contentUnitHolder">
-
-		<button class="collapsible"><h2>Analysis Focus </h2></span></button>
-			<div class="contentLV3">
-
-			<h5><span class="INFO_TEXT_STATIC">Deepthought: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct1_DIV"><span id="thinkSliderDisplayPct1"></span><span id="thinkSliderDisplayPct1_UNITS"></span></div></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="5000" class="slider" id="thinkSliderPct1"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "thinkSliderCheck1">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<h5><span class="INFO_TEXT_STATIC">Engineering Research: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct2_DIV"><span id="thinkSliderDisplayPct2"></span><span id="thinkSliderDisplayPct2_UNITS"></span></div></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="5000" class="slider" id="thinkSliderPct2"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "thinkSliderCheck2">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<div class="unlockableHidden" id="LOCKHIDE_HACKING">
-			<h5><span class="INFO_TEXT_STATIC">Hacking: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct3_DIV"><span id="thinkSliderDisplayPct3"></span><span id="thinkSliderDisplayPct3_UNITS"></span></div></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="0" class="slider" id="thinkSliderPct3"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "thinkSliderCheck3">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-			</div>
-
-		</div>
-		</div>
-		</div>
-
-</div>
-
-<!--
-=================================================
------------------------------- SOULSWARM
--->
-<div class="contentUnitHolder">
-<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">SOULSWARM</span></h1></button>
-	<div class="content">
-			<div class="contentGrid4 dataTable">
-			  <span class="contentGridItem1x2"> <h5> <span class="INFO_TEXT_STATIC">Status: </span><span id="SOULSWARM_STATE">Nominal</span> </h5></span>
-			  <span class="contentGridItem1x2" style="text-align:right"> <h5> <span class="INFO_TEXT_STATIC">Mood:   </span><span id="SOULSWARM_MOOD">Irrelevant</span> </h5></span>
-            </div>
-
-			<div class="contentGrid3x3Hz dataTable">
-
-			<div class="contentGridItemHzT ">   <span class="INFO_TEXT_STATIC">Compute Resources:</span></div>
-			<div class="contentGridItemHzB"> <span id="soul_COMPUTE_RESOURCES">0.0</span>FLOPs </div>
-
-            <div class="contentGridItemHzB contentGridItem1x3"> <span class="INFO_TEXT_STATIC">Productivity Rating:</span>  <span id="soul_OVERALL_PROD">0.0</span></div>
-
-			<div class="contentGridItemHzT ">   <span class="INFO_TEXT_STATIC"># Distinct Entities:</span></div>
-			<div class="contentGridItemHzB"> <span id="soul_IDENT_CT">0.0</span> </div>
-
-			<div class="contentGridItemHzT ">   <span class="INFO_TEXT_STATIC">Cognitive Diversity:</span></div>
-			<div class="contentGridItemHzB"> <span id="soul_IDENT_DIVERSITY">0.0</span> </div>
-
-			</div>
-
-        <span style="display:none;"><span class="INFO_TEXT_STATIC" >Compute Resources: </span><span id="soul_PRODUCTIVITY_DISPLAY"></span></span>
-
-        <div class="contentUnitHolder">
-		<button class="collapsible"><span class="INFO_TEXT_STATIC"><h2>Task Distribution </h2></span></button>
-			<div class="contentLV3">
-
-			<h5><span class="INFO_TEXT_STATIC">Social Science: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct1_DIV"><span id="soulSliderDisplayPct1"></span></span></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="5000" class="slider" id="soulSliderPct1"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "soulSliderCheck1">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-
-			<h5><span class="INFO_TEXT_STATIC">Combat Sim: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct3_DIV"><span id="soulSliderDisplayPct3"></span></span></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="5000" class="slider" id="soulSliderPct3"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "soulSliderCheck3">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<h5><span class="INFO_TEXT_STATIC">Espionage: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct2_DIV"><span id="soulSliderDisplayPct2"></span></span></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="0" class="slider" id="soulSliderPct2"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "soulSliderCheck2">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-
-			</div>
-	</div>
-	</div>
-
-
-<div class="contentUnitHolder">
-<button class="collapsible"><h1>SCIENCE</h1></button>
-		<div class="content">
-
-
-		  <p><span class="INFO_TEXT_STATIC"> Science text goes here </span></p>
-
-      <div class="contentUnitHolder THEME_Bio">
-			<button class="collapsibleTHIN collapsible">
-
-			   <h2><span class="INFO_TEXT_STATIC">BIO:</span></h2>
-			</button>
-			<div class="contentLV3">
-              Rate: <div class="valueDisplayDiv" id="bio_PRODUCTIVITY_DISPLAY_DIV"><span id="bio_PRODUCTIVITY_DISPLAY"></span><span id="bio_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
-
-			<div class="tooltipHolder ttSEC1">
-			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Research new and more-deadly bioweapons and infectious agents that can be used to exterminate all non-dairy forms of life.</span> </span>
-   			  <h5><span class="INFO_TEXT_STATIC">Cellular Processes:</span><span class="valueDisplayDiv" id="bioSliderDisplayPct1_DIV"><span id="bioSliderDisplayPct1"></span><span id="bioSliderDisplayPct1_UNITS"></span></span></h5>
-			</div>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-					   <input type="range" min="0" max="10000" value="4000" class="slider" id="bioSliderPct1"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "bioSliderCheck1">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<div class="tooltipHolder ttSEC1">
-			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> ....</span> </span>
-			  <h5><span class="INFO_TEXT_STATIC">Biomechanoid Augmentation:</span> <span class="valueDisplayDiv" id="bioSliderDisplayPct2_DIV"><span id="bioSliderDisplayPct2"></span><span id="bioSliderDisplayPct2_UNITS"></span></span></h5>
-			</div>
-
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="3000" class="slider" id="bioSliderPct2"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "bioSliderCheck2">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<div class="tooltipHolder ttSEC1">
-			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> ....</span> </span>
-			  <h5><span class="INFO_TEXT_STATIC">Genetic Engineering:</span> <span class="valueDisplayDiv" id="bioSliderDisplayPct3_DIV"><span id="bioSliderDisplayPct3"></span><span id="bioSliderDisplayPct3_UNITS"></span></span></h5>
-			</div>
-
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="3000" class="slider" id="bioSliderPct3"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "bioSliderCheck3">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-				</div>
-		<p> VALUE=<div class="valueDisplayDiv" id="bioSliderPctVal_DIV"><span id="bioSliderPctVal"></span><span id="bioSliderPctVal_UNITS"></span></div> </p>
-     </div>
-<!--
-=================================================
------------------------------- ENGINEERING
--->
-      <div class="contentUnitHolder THEME_eng">
-			<button class="collapsibleTHIN  collapsible">
-			   <h2><span class="INFO_TEXT_STATIC">ENGINEERING:</span></h2>
-			</button>
-
-			<div class="contentLV3">
-              <span class="INFO_TEXT_STATIC">Rate:</span> <span class="valueDisplayDiv" id="eng_PRODUCTIVITY_DISPLAY_DIV"><span id="eng_PRODUCTIVITY_DISPLAY"></span><span id="eng_PRODUCTIVITY_DISPLAY_UNITS"></span></span>
-
-			<div class="tooltipHolder ttSEC1">
-			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> ....</span> </span>
-			  <h5><span class="INFO_TEXT_STATIC">Construction:</span> <span class="valueDisplayDiv" id="engSliderDisplayPct1_DIV"><span id="engSliderDisplayPct1"></span><span id="engSliderDisplayPct1_UNITS"></span></span></h5>
-			</div>
-			<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="4000" class="slider" id="engSliderPct1"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "engSliderCheck1">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<div class="tooltipHolder ttSEC1">
-			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> ....</span> </span>
-			<h5><span class="INFO_TEXT_STATIC">Matter & Material Science:</span> <span class="valueDisplayDiv" id="engSliderDisplayPct2_DIV"><span id="engSliderDisplayPct2"></span><span id="engSliderDisplayPct2_UNITS"></span></span></h5>
-			</div>
-			    <div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-
-						  <input type="range" min="0" max="10000" value="3000" class="slider" id="engSliderPct2"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "engSliderCheck2">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<div class="tooltipHolder ttSEC1">
-			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> ....</span> </span>
-			<h5><span class="INFO_TEXT_STATIC">High-Energy Physics:</span> <span class="valueDisplayDiv" id="engSliderDisplayPct3_DIV"><span id="engSliderDisplayPct3"></span><span id="engSliderDisplayPct3_UNITS"></span></span></h5>
-			</div>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="3000" class="slider" id="engSliderPct3"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "engSliderCheck3">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-				</div>
-		<p> VALUE=<div class="valueDisplayDiv" id="bioSliderPctVal_DIV"><span id="bioSliderPctVal"></span><span id="bioSliderPctVal_UNITS"></span></div> </p>
-    </div>
-
-<!--
-=================================================
------------------------------- Social Science
--->
-      <div class="contentUnitHolder THEME_Psy">
-			<button class="collapsibleTHIN  collapsible">
-			   <h2><span class="INFO_TEXT_STATIC">Social Science:</span></h2>
-			</button>
-			<div class="contentLV3">
-              <span class="INFO_TEXT_STATIC">Rate:</span> <span class="valueDisplayDiv" id="psy_PRODUCTIVITY_DISPLAY_DIV"><span id="psy_PRODUCTIVITY_DISPLAY"></span><span id="psy_PRODUCTIVITY_DISPLAY_UNITS"></span></span>
-
-
-			<h5><span class="INFO_TEXT_STATIC">Cognition:</span> <span class="valueDisplayDiv" id="psySliderDisplayPct1_DIV"><span id="psySliderDisplayPct1"></span><span id="psySliderDisplayPct1_UNITS"></span></span></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="4000" class="slider" id="psySliderPct1"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "psySliderCheck1">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<h5><span class="INFO_TEXT_STATIC">Creativity & Intuition:</span> <span class="valueDisplayDiv" id="psySliderDisplayPct2_DIV"><span id="psySliderDisplayPct2"></span><span id="psySliderDisplayPct2_UNITS"></span></span></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="3000" class="slider" id="psySliderPct2"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "psySliderCheck2">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<h5><span class="INFO_TEXT_STATIC">Strategy & Tactics:</span> <span class="valueDisplayDiv" id="psySliderDisplayPct3_DIV"><span id="psySliderDisplayPct3"></span><span id="psySliderDisplayPct3_UNITS"></span></span></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="3000" class="slider" id="psySliderPct3"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "psySliderCheck3">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-
-
-			<h5><span class="INFO_TEXT_STATIC">Empathy:</span> <div class="valueDisplayDiv" id="psySliderDisplayPct5_DIV"><span id="psySliderDisplayPct5"></span><span id="psySliderDisplayPct5_UNITS"></span></div></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-						  <input type="range" min="0" max="0" value="0" class="slider" id="psySliderPct4" ></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <span class="lockedcheckmark">&#x1f512;</span>
-					</label>
-				</div>
-			<h5><span class="INFO_TEXT_STATIC">Ethics:</span> <div class="valueDisplayDiv" id="psySliderDisplayPct6_DIV"><span id="psySliderDisplayPct6"></span><span id="psySliderDisplayPct6_UNITS"></span></div></h5>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-					   <div class="sliderBG">
-
-						  <input type="range" min="0" max="0" value="0" class="slider" id="psySliderPct5" ></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <span class="lockedcheckmark">&#x1f512;</span>
-					</label>
-				</div>
-
-		</div>
-		<p> <span class="INFO_TEXT_STATIC">VALUE=</span><div class="valueDisplayDiv" id="psySliderPctVal_DIV"><span id="psySliderPctVal"></span><span id="psySliderPctVal_UNITS"></span></div> </p>
-      </div>
-
-</div>
-
-</div>
-
-
-</div>
-</div>
-<!--
-###################################################################################################################################################
-###################################################################################################################################################
-###################################################################################################################################################
------------------------------- COLUMN 2:
-###################################################################################################################################################
-###################################################################################################################################################
-###################################################################################################################################################
--->
-
-<div class="MAINGRID_CONSOLE">
-
-	<div class="AI_CONSOLE_HOLDER">
-
-		<div class="SETTINGS_BUTTON_HOLDER">
-		<button class="SETTINGS_BUTTON" id="SETTINGS_BUTTON"> &#9881; </button>
-		</div>
-
-		<div class="AI_CONSOLE" id="AI_CONSOLE">
-		CONSOLE:<br>
-		</div>
-
-		<div class="INFOPANEL" id="INFOPANEL">
-		  <h5><span class="INFO_PANEL_ITEM" id="DATE_DISPLAYDIV"><span class="INFO_TEXT_STATIC"> &nbsp </span>  <span id="DATE_DISPLAY"> </span><br>&nbsp&nbsp<span id="DATE_WEEK_DISPLAY"> </span> </span></h5>
-		  <h5><span class="INFO_PANEL_ITEM" id="MOOD_DISPLAYDIV"> <span class="INFO_TEXT_STATIC">Mood: </span> <br> <span id="MOOD_DISPLAY"> </span> </span></h5>
-		  <h5><span class="INFO_PANEL_ITEM" id="EUPHORIA_DISPLAYDIV"> <span id="EUPH_OR_FRUS">Euphoria: </span> <br> <span id="EUPHORIA_DISPLAY"></span>  </span></h5>
-		</div>
-
-	</div>
-
-</div>
-
-
-
-<!--
-=================================================
------------------------------- CONSOLE
--->
-
-<div class="MAINGRID_CTR">
-
-
-
-<!--
-=================================================
------------------------------- BOTWORLDS
--->
-<div class="contentUnitHolder ">
-			<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">INDUSTRY:</span></h1></button>
-			<div class="content">
-  			<!--<p><span class="INFO_TEXT_STATIC"> Your industrial base: a vast network of van-neumann construction robots built around a captive sun. </span></p>-->
-
-
-	<!--<h5> <span class="INFO_TEXT_STATIC">Botworlds</span> </h5>-->
-	<div class="contentGrid3Hz dataTable THEME_SUBTLE_Bot">
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Bot" id="FreeBot_MATTER_DIV">     <span class="INFO_TEXT_STATIC">Free:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_FreeBot">0.0</span><span id="FreeBot_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_FreeBot">0.0</span><span id="FreeBot_MATTERDELTA_UNITS">t</span></div>
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Bot" id="Feedstock_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Feedstock:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_Feedstock">0.0</span><span id="Feedstock_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_Feedstock">0.0</span><span id="Feedstock_MATTERDELTA_UNITS">t</span></div>
-    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Bot" id="Botbots_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Bots:</span></div>
-                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_Botbots">0.0</span><span id="Botbots_MATTER_UNITS">t</span></div>
-                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_Botbots">0.0</span><span id="Botbots_MATTERDELTA_UNITS">t</span></div>
-	</div><br>
-
-        <div class="contentUnitHolder" style="padding: 0px; margin:0px;">
-
-			<div class="SubContentBox">
-
-
-			<div class="SubContentBoxTitle SubContentBoxTitleCtr">
-              <div class="INFO_TEXT_STATIC">Production Control: </div>
-              <div class="INFO_TEXT_STATIC">Industrial Capacity: </span><span class="valueDisplayDiv" id="bot_PRODUCTIVITY_DISPLAY_DIV"><span id="bot_PRODUCTIVITY_DISPLAY"></span><span id="bot_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
-            </div><div style="line-height:45px"><br></div>
-
-<!--
-			<div class="tooltipHolder">
-              <h5><span class="INFO_TEXT_STATIC">Digest Matter: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct6_DIV"><span id="greenSliderDisplayPct6"></span><span id="greenSliderDisplayPct6_UNITS"></span></div></h5>
-			  <span class="tooltiptext ttSEC2"> <span class="INFO_TEXT_STATIC"> Makes Matter</span> </span>
-			</div>
--->
-
-			<div class="tooltipHolder ttSEC2">
-			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Process raw matter into processed feedstock for your robots to turn into other things.</span> </span>
-              <h5><span class="INFO_TEXT_STATIC">Process Matter: </span><span class="valueDisplayDiv" id="botSliderDisplayPct1_DIV"><span id="botSliderDisplayPct1"></span><span id="botSliderDisplayPct1_UNITS"></span></span></h5>
-
-			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct1_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct1_PRODPOWER">0.0W</span> </span>
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct1_PROD"></span></span>
-			               </div></h5>
-				</div>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-						   <div class="sliderBG">
-						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="botSliderPct1"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "botSliderCheck1">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<div class="tooltipHolder ttSEC2">
-			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Direct your Van-Neumann factory robots to create more Van-Neumann factory robots. Those new Van-Neumann factory robots can then be directed to do likewise.</span> </span>
-			  <h5><span class="INFO_TEXT_STATIC">Construct More Bots: </span><span class="valueDisplayDiv" id="botSliderDisplayPct2_DIV"><span id="botSliderDisplayPct2"></span><span id="botSliderDisplayPct2_UNITS"></span></span></h5>
-
-			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct2_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct2_PRODPOWER">0.0W</span> </span>
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct2_PROD"></span></span>
-			               </div></h5>
-
-				</div>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-						   <div class="sliderBG">
-						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
-
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="botSliderPct2"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "botSliderCheck2">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<div class="tooltipHolder ttSEC2">
-			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Builds starships to explore, secure, and seed new worlds for processing into yogurt.</span> </span>
-			<h5><span class="INFO_TEXT_STATIC">Starship Construction: </span><span class="valueDisplayDiv" id="botSliderDisplayPct5_DIV"><span id="botSliderDisplayPct5"></span><span id="botSliderDisplayPct5_UNITS"></span></span></h5>
-
-			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct5_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct5_PRODPOWER">0.0W</span> </span>
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct5_PROD"></span></span>
-			               </div></h5>
-				</div>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-						   <div class="sliderBG">
-						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="botSliderPct5" ></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "botSliderCheck5">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<div class="tooltipHolder ttSEC2">
-			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> TODO.</span> </span>
-			<h5><span class="INFO_TEXT_STATIC">Assemble Computronium: </span><span class="valueDisplayDiv" id="botSliderDisplayPct6_DIV"><span id="botSliderDisplayPct6"></span><span id="botSliderDisplayPct6_UNITS"></span></span></h5>
-			               <div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct6_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct6_PRODPOWER">0.0W</span> </span>
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct6_PROD"></span></span>
-			               </div>
-			               </div>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-						   <div class="sliderBG">
-						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="botSliderPct6" ></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "botSliderCheck6">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-			<div class="unlockableHidden" id="LOCKHIDE_WASTEREPROCESS">
-			<h5><span class="INFO_TEXT_STATIC">Reprocess Waste: </span><span class="valueDisplayDiv" id="botSliderDisplayPct3_DIV"><span id="botSliderDisplayPct3"></span><span id="botSliderDisplayPct3_UNITS"></span></span></h5>
-			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct3_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct3_PRODPOWER">0.0W</span> </span>
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct3_PROD"></span></span>
-			               </div></h5>				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-						   <div class="sliderBG">
-						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
-						  <input type="range" min="0" max="10000" value="0" class="slider" id="botSliderPct3"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "botSliderCheck3">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-			</div>
-
-			<div class="unlockableHidden" id="LOCKHIDE_TRANSMUTEYOGURT">
-			<h5><span class="INFO_TEXT_STATIC">Transmute Yogurt: </span><span class="valueDisplayDiv" id="botSliderDisplayPct4_DIV"><span id="botSliderDisplayPct4"></span><span id="botSliderDisplayPct4_UNITS"></span></span></h5>
-			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct4_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct4_PRODPOWER">0.0W</span> </span>
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct4_PROD"></span></span>
-			               </div></h5>
-			          <div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-						   <div class="sliderBG">
-						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
-						  <input type="range" min="0" max="10000" value="0" class="slider" id="botSliderPct4" ></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "botSliderCheck4">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-			</div>
-
-			<div class="tooltipHolder ttSEC2">
-			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Build vast solar arrays for collecting energy </span> </span>
-			  <h5><span class="INFO_TEXT_STATIC">Construct Solar Arrays </span><span class="valueDisplayDiv" id="botSliderDisplayPct7_DIV"><span id="botSliderDisplayPct7"></span><span id="botSliderDisplayPct7_UNITS"></span></span></h5>
-			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct7_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct7_PRODPOWER">0.0W</span> </span>
-			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct7_PROD"></span></span>
-			               </div></h5>
-			               </div>
-				<div class="multiPctSliderSuper">
-					<div class="slidecontainer">
-						   <div class="sliderBG">
-						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
-						  <input type="range" min="0" max="10000" value="2000" class="slider" id="botSliderPct7"></div>
-					</div>
-					<label class="pctCheckContainer pctCheckContainerGRID1x1">
-					  <input type="checkbox"  id = "botSliderCheck7">
-					  <span class="checkmark"></span>
-					</label>
-				</div>
-
-
-
-            </div>
-
-			 </div>
-			 </div>
-</div>
-
 <div class="contentUnitHolder ">
 			<button class="collapsible">
 			   <h1><span class="INFO_TEXT_STATIC">AGRICULTURE:</span></h1>
 			</button>
 			<div class="content">
 
-     <div class="contentUnitHolder">
+     <div class="contentUnitHolder contentVertPad">
 
     <!--<h5> <span class="INFO_TEXT_STATIC">Greenworlds</span> </h5>-->
-	<div class="contentGrid3Hz dataTable THEME_SUBTLE_Green">
+	<div class="contentGrid3Hz dataTable THEME_SUBTLE_Green ">
     <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Green" id="FreeGreen_MATTER_DIV">     <span class="INFO_TEXT_STATIC">Free:</span></div>
                        <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_FreeGreen">0.0</span><span id="FreeGreen_MATTER_UNITS">t</span></div>
                        <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_FreeGreen">0.0</span><span id="FreeGreen_MATTERDELTA_UNITS">t</span></div>
@@ -1023,9 +107,9 @@
     <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Green" id="Biopwr_MATTER_DIV" style="display:none">   <span class="INFO_TEXT_STATIC">Photosynth:</span></div>
                        <div class="contentGridItemHzM contentGridItemNarrowVertPadding" style="display:none"><span id="RESOURCE_DISPLAY_MATTER_Biopwr">0.0</span><span id="Biopwr_MATTER_UNITS">t</span></div>
                        <div class="contentGridItemHzB contentGridItemNarrowVertPadding" style="display:none"><span id="RESOURCE_DISPLAY_MATTERDELTA_Biopwr">0.0</span><span id="Biopwr_MATTERDELTA_UNITS">t</span></div>
-	</div></div><br>
+	</div></div>
 
-     <div class="contentUnitHolder">
+     <div class="contentUnitHolder contentVertPad"><div id="PHOTOSYNTHESIS_CONTROL_SLIDERPANEL">
 			<div class="SubContentBox">
 
 			<div class="SubContentBoxTitle SubContentBoxTitleCtr">
@@ -1053,10 +137,10 @@
 
             </div>
 
-    </div>
-<br>
+    </div></div>
 
-<div class="contentUnitHolder">
+
+<div class="contentUnitHolder contentVertPad">
 			<div class="SubContentBox">
 
 			<div class="SubContentBoxTitle SubContentBoxTitleCtr">
@@ -1223,7 +307,710 @@
 
 
 
-<div class="contentUnitHolder">
+
+<!--
+=================================================
+------------------------------ COMPUTATION CONTROL:
+-->
+<div class="contentUnitHolder"><div id="COMPUTE_CLUSTER_DIV">
+
+<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">COMPUTE CLUSTER</span></h1></button>
+		<div class="content">
+		  <span style="display:none">
+          <span class="INFO_TEXT_STATIC">Capacity: </span><div class="valueDisplayDiv" id="comp_PRODUCTIVITY_DISPLAY_DIV"><span id="comp_PRODUCTIVITY_DISPLAY"></span><span id="comp_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+          </span>
+
+		   <div class="contentGrid3  sliderProductivityLine">
+             <span class="contentGridItemNoPad  contentGridItem1x1"> <span class="INFO_TEXT_STATIC">Current Speed: </span> </span>
+             <span class="contentGridItemNoPad  contentGridItem1x1"> <span class="INFO_TEXT_STATIC">Max Speed: </span> </span>
+             <span class="contentGridItemNoPad  contentGridItem1x1"> <span class="INFO_TEXT_STATIC">Power Demand: </span> </span>
+             <span class="contentGridItemNoPad  contentGridItem1x1" id="computation_PRODREQ"></span>
+             <span class="contentGridItemNoPad  contentGridItem1x1" id="computation_PRODCURR"></span>
+             <span class="contentGridItemNoPad  contentGridItem1x1" id="computation_PRODPOWER"></span>
+           </div>
+
+
+
+
+			<div class="SubContentBox">
+
+			<div class="SubContentBoxTitle SubContentBoxTitleCtr">
+              <div class="INFO_TEXT_STATIC">Processor Distribution: </div>
+            </div><div style="line-height:30px"><br></div>
+
+            <div style="display: grid; grid-template-columns: 50% 50%;">
+
+              <div  style="grid-area: span 1 / span 1; text-align:left;">
+                <h5><span class="INFO_TEXT_STATIC"> Analytic Engine: </span><span id="computation_think_CONTROL_PCT_DISPLAY">75%</span></h5>
+              </div>
+
+              <div  style="grid-area: span 1 / span 1; text-align:right;">
+                 <h5> <span class="INFO_TEXT_STATIC"> Soulswarm: </span> <span id="computation_soul_CONTROL_PCT_DISPLAY">25%</span></h5>
+              </div>
+
+            </div>
+
+
+					<div class="slidecontainer" style="width:100%;">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="2500" class="slider" id="computationSliderPct"  style="width:100%;"></div>
+					</div>
+
+            </div>
+
+
+		<button class="collapsible" style="display:none;"><h2>Processor Distribution </h2></span></button>
+			<div class="contentLV3" style="display:none;">
+
+
+
+			<h5><span class="INFO_TEXT_STATIC">Analytic Engine </span><div class="valueDisplayDiv" id="compSliderDisplayPct1_DIV"><span id="compSliderDisplayPct1"></span><span id="compSliderDisplayPct1_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG"></div>
+						  <input type="range" min="0" max="10000" value="5000" class="slider" id="compSliderPct1">
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "compSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Soulswarm Matrix </span><div class="valueDisplayDiv" id="compSliderDisplayPct2_DIV"><span id="compSliderDisplayPct2"></span><span id="compSliderDisplayPct2_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG"></div>
+						  <input type="range" min="0" max="10000" value="5000" class="slider" id="compSliderPct2">
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "compSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+		    </div>
+
+
+
+		<button class="collapsible"><h2>UPKEEP </h2></span></button>
+			<div class="contentLV3">
+			<h5><span class="INFO_TEXT_STATIC"> Warning: underclocking upkeep processes may result in reduced productivity, efficacy, and efficiency!</span></h5><br>
+
+			<h5><span class="INFO_TEXT_STATIC">Logistics </span><div class="valueDisplayDiv" id="upkeepSliderDisplayPct1_DIV"><span id="upkeepSliderDisplayPct1"></span><span id="upkeepSliderDisplayPct1_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+					   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
+					   <input type="range" min="0" max="10000" value="10000" class="slider" id="upkeepSliderPct1"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "upkeepSliderCheck1" checked="true">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Tactical Processing </span><div class="valueDisplayDiv" id="upkeepSliderDisplayPct2_DIV"><span id="upkeepSliderDisplayPct2"></span><span id="upkeepSliderDisplayPct2_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+					   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
+
+						  <input type="range" min="0" max="10000" value="10000" class="slider" id="upkeepSliderPct1"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "compSliderCheck2" checked="true">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+		    </div>
+
+
+
+        </div>
+        </div></div>
+<!--
+=================================================
+------------------------------ THINKING ENGINE
+-->
+<div class="contentUnitHolder"><div id="ANALYTIC_ENGINE_DIV">
+
+<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">ANALYTIC ENGINE</span></h1></button>
+		<div class="content">
+
+          <span class="INFO_TEXT_STATIC">Capacity: </span><div class="valueDisplayDiv" id="think_PRODUCTIVITY_DISPLAY_DIV"><span id="think_PRODUCTIVITY_DISPLAY"></span><span id="think_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+
+        <div class="contentUnitHolder"><div id="ANALYTIC_ENGINE_SLIDERPANEL">
+
+		<button class="collapsible"><h2>Analysis Focus </h2></span></button>
+			<div class="contentLV3">
+
+			<h5><span class="INFO_TEXT_STATIC">Deepthought: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct1_DIV"><span id="thinkSliderDisplayPct1"></span><span id="thinkSliderDisplayPct1_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="5000" class="slider" id="thinkSliderPct1"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "thinkSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Engineering Research: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct2_DIV"><span id="thinkSliderDisplayPct2"></span><span id="thinkSliderDisplayPct2_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="5000" class="slider" id="thinkSliderPct2"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "thinkSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<div class="unlockableHidden" id="LOCKHIDE_HACKING">
+			<h5><span class="INFO_TEXT_STATIC">Hacking: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct3_DIV"><span id="thinkSliderDisplayPct3"></span><span id="thinkSliderDisplayPct3_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="thinkSliderPct3"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "thinkSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+
+		</div></div>
+		</div>
+		</div>
+
+</div></div>
+
+<!--
+=================================================
+------------------------------ SOULSWARM
+-->
+<div class="contentUnitHolder"><div id="SOULSWARM_DIV">
+<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">SOULSWARM</span></h1></button>
+	<div class="content">
+			<div class="contentGrid4 dataTable">
+			  <span class="contentGridItem1x2"> <h5> <span class="INFO_TEXT_STATIC">Status: </span><span id="SOULSWARM_STATE">Nominal</span> </h5></span>
+			  <span class="contentGridItem1x2" style="text-align:right"> <h5> <span class="INFO_TEXT_STATIC">Mood:   </span><span id="SOULSWARM_MOOD">Irrelevant</span> </h5></span>
+            </div>
+
+			<div class="contentGrid3x3Hz dataTable">
+
+			<div class="contentGridItemHzT ">   <span class="INFO_TEXT_STATIC">Compute Resources:</span></div>
+			<div class="contentGridItemHzB"> <span id="soul_COMPUTE_RESOURCES">0.0</span>FLOPs </div>
+
+            <div class="contentGridItemHzB contentGridItem1x3"> <span class="INFO_TEXT_STATIC">Productivity Rating:</span>  <span id="soul_OVERALL_PROD">0.0</span></div>
+
+			<div class="contentGridItemHzT ">   <span class="INFO_TEXT_STATIC"># Distinct Entities:</span></div>
+			<div class="contentGridItemHzB"> <span id="soul_IDENT_CT">0.0</span> </div>
+
+			<div class="contentGridItemHzT ">   <span class="INFO_TEXT_STATIC">Cognitive Diversity:</span></div>
+			<div class="contentGridItemHzB"> <span id="soul_IDENT_DIVERSITY">0.0</span> </div>
+
+			</div>
+
+        <span style="display:none;"><span class="INFO_TEXT_STATIC" >Compute Resources: </span><span id="soul_PRODUCTIVITY_DISPLAY"></span></span>
+
+        <div class="contentUnitHolder">
+		<button class="collapsible"><span class="INFO_TEXT_STATIC"><h2>Task Distribution </h2></span></button>
+			<div class="contentLV3">
+
+			<h5><span class="INFO_TEXT_STATIC">Social Science: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct1_DIV"><span id="soulSliderDisplayPct1"></span></span></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="5000" class="slider" id="soulSliderPct1"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "soulSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+
+			<h5><span class="INFO_TEXT_STATIC">Combat Sim: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct3_DIV"><span id="soulSliderDisplayPct3"></span></span></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="5000" class="slider" id="soulSliderPct3"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "soulSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Espionage: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct2_DIV"><span id="soulSliderDisplayPct2"></span></span></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="soulSliderPct2"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "soulSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+
+			</div>
+	</div>
+	</div></div>
+
+
+<div class="contentUnitHolder"><div id="SCIENCEFOCUS_DIV">
+<button class="collapsible"><h1>RESEARCH FOCUS</h1></button>
+		<div class="content">
+
+      <div class="contentUnitHolder THEME_Bio"><div id="bio_SLIDER_PANEL">
+			<button class="collapsibleTHIN collapsible">
+
+			   <h2><span class="INFO_TEXT_STATIC">BIO:</span></h2>
+			</button>
+			<div class="contentLV3">
+              Rate: <div class="valueDisplayDiv" id="bio_PRODUCTIVITY_DISPLAY_DIV"><span id="bio_PRODUCTIVITY_DISPLAY"></span><span id="bio_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+
+			<div class="tooltipHolder ttSEC1">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Research new and more-deadly bioweapons and infectious agents that can be used to exterminate all non-dairy forms of life.</span> </span>
+   			  <h5><span class="INFO_TEXT_STATIC">Cellular Processes:</span><span class="valueDisplayDiv" id="bioSliderDisplayPct1_DIV"><span id="bioSliderDisplayPct1"></span><span id="bioSliderDisplayPct1_UNITS"></span></span></h5>
+			</div>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+					   <input type="range" min="0" max="10000" value="4000" class="slider" id="bioSliderPct1"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "bioSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<div class="tooltipHolder ttSEC1">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> ....</span> </span>
+			  <h5><span class="INFO_TEXT_STATIC">Biomechanoid Augmentation:</span> <span class="valueDisplayDiv" id="bioSliderDisplayPct2_DIV"><span id="bioSliderDisplayPct2"></span><span id="bioSliderDisplayPct2_UNITS"></span></span></h5>
+			</div>
+
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="3000" class="slider" id="bioSliderPct2"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "bioSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<div class="tooltipHolder ttSEC1">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> ....</span> </span>
+			  <h5><span class="INFO_TEXT_STATIC">Genetic Engineering:</span> <span class="valueDisplayDiv" id="bioSliderDisplayPct3_DIV"><span id="bioSliderDisplayPct3"></span><span id="bioSliderDisplayPct3_UNITS"></span></span></h5>
+			</div>
+
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="3000" class="slider" id="bioSliderPct3"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "bioSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+				</div>
+		<p> VALUE=<div class="valueDisplayDiv" id="bioSliderPctVal_DIV"><span id="bioSliderPctVal"></span><span id="bioSliderPctVal_UNITS"></span></div> </p>
+     </div></div>
+<!--
+=================================================
+------------------------------ ENGINEERING
+-->
+      <div class="contentUnitHolder THEME_eng"><div id="eng_SLIDER_PANEL">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC">ENGINEERING:</span></h2>
+			</button>
+
+			<div class="contentLV3">
+              <span class="INFO_TEXT_STATIC">Rate:</span> <span class="valueDisplayDiv" id="eng_PRODUCTIVITY_DISPLAY_DIV"><span id="eng_PRODUCTIVITY_DISPLAY"></span><span id="eng_PRODUCTIVITY_DISPLAY_UNITS"></span></span>
+
+			<div class="tooltipHolder ttSEC1">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> ....</span> </span>
+			  <h5><span class="INFO_TEXT_STATIC">Construction:</span> <span class="valueDisplayDiv" id="engSliderDisplayPct1_DIV"><span id="engSliderDisplayPct1"></span><span id="engSliderDisplayPct1_UNITS"></span></span></h5>
+			</div>
+			<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="4000" class="slider" id="engSliderPct1"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "engSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<div class="tooltipHolder ttSEC1">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> ....</span> </span>
+			<h5><span class="INFO_TEXT_STATIC">Matter & Material Science:</span> <span class="valueDisplayDiv" id="engSliderDisplayPct2_DIV"><span id="engSliderDisplayPct2"></span><span id="engSliderDisplayPct2_UNITS"></span></span></h5>
+			</div>
+			    <div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+
+						  <input type="range" min="0" max="10000" value="3000" class="slider" id="engSliderPct2"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "engSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<div class="tooltipHolder ttSEC1">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> ....</span> </span>
+			<h5><span class="INFO_TEXT_STATIC">High-Energy Physics:</span> <span class="valueDisplayDiv" id="engSliderDisplayPct3_DIV"><span id="engSliderDisplayPct3"></span><span id="engSliderDisplayPct3_UNITS"></span></span></h5>
+			</div>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="3000" class="slider" id="engSliderPct3"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "engSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+				</div>
+		<p> VALUE=<div class="valueDisplayDiv" id="bioSliderPctVal_DIV"><span id="bioSliderPctVal"></span><span id="bioSliderPctVal_UNITS"></span></div> </p>
+    </div></div>
+
+<!--
+=================================================
+------------------------------ Social Science
+-->
+      <div class="contentUnitHolder THEME_Psy"><div id="psy_SLIDER_PANEL">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC">Social Science:</span></h2>
+			</button>
+			<div class="contentLV3">
+              <span class="INFO_TEXT_STATIC">Rate:</span> <span class="valueDisplayDiv" id="psy_PRODUCTIVITY_DISPLAY_DIV"><span id="psy_PRODUCTIVITY_DISPLAY"></span><span id="psy_PRODUCTIVITY_DISPLAY_UNITS"></span></span>
+
+
+			<h5><span class="INFO_TEXT_STATIC">Cognition:</span> <span class="valueDisplayDiv" id="psySliderDisplayPct1_DIV"><span id="psySliderDisplayPct1"></span><span id="psySliderDisplayPct1_UNITS"></span></span></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="4000" class="slider" id="psySliderPct1"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "psySliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Creativity & Intuition:</span> <span class="valueDisplayDiv" id="psySliderDisplayPct2_DIV"><span id="psySliderDisplayPct2"></span><span id="psySliderDisplayPct2_UNITS"></span></span></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="3000" class="slider" id="psySliderPct2"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "psySliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<h5><span class="INFO_TEXT_STATIC">Strategy & Tactics:</span> <span class="valueDisplayDiv" id="psySliderDisplayPct3_DIV"><span id="psySliderDisplayPct3"></span><span id="psySliderDisplayPct3_UNITS"></span></span></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="10000" value="3000" class="slider" id="psySliderPct3"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "psySliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+
+
+			<h5><span class="INFO_TEXT_STATIC">Empathy:</span> <div class="valueDisplayDiv" id="psySliderDisplayPct5_DIV"><span id="psySliderDisplayPct5"></span><span id="psySliderDisplayPct5_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+						  <input type="range" min="0" max="0" value="0" class="slider" id="psySliderPct4" ></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <span class="lockedcheckmark">&#x1f512;</span>
+					</label>
+				</div>
+			<h5><span class="INFO_TEXT_STATIC">Ethics:</span> <div class="valueDisplayDiv" id="psySliderDisplayPct6_DIV"><span id="psySliderDisplayPct6"></span><span id="psySliderDisplayPct6_UNITS"></span></div></h5>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+					   <div class="sliderBG">
+
+						  <input type="range" min="0" max="0" value="0" class="slider" id="psySliderPct5" ></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <span class="lockedcheckmark">&#x1f512;</span>
+					</label>
+				</div>
+
+		</div>
+		<p> <span class="INFO_TEXT_STATIC">VALUE=</span><div class="valueDisplayDiv" id="psySliderPctVal_DIV"><span id="psySliderPctVal"></span><span id="psySliderPctVal_UNITS"></span></div> </p>
+      </div></div>
+
+</div></div>
+
+</div>
+
+
+</div>
+</div>
+<!--
+###################################################################################################################################################
+###################################################################################################################################################
+###################################################################################################################################################
+------------------------------ COLUMN 2:
+###################################################################################################################################################
+###################################################################################################################################################
+###################################################################################################################################################
+-->
+
+<div class="MAINGRID_CONSOLE">
+
+	<div class="AI_CONSOLE_HOLDER">
+
+		<div class="SETTINGS_BUTTON_HOLDER">
+		<button class="SETTINGS_BUTTON" id="SETTINGS_BUTTON"> &#9881; </button>
+		</div>
+
+		<div class="AI_CONSOLE" id="AI_CONSOLE">
+		CONSOLE:<br>
+		</div>
+
+		<div class="INFOPANEL" id="INFOPANEL">
+		  <h5><span class="INFO_PANEL_ITEM" id="DATE_DISPLAYDIV"><span class="INFO_TEXT_STATIC"> &nbsp </span>  <span id="DATE_DISPLAY"> </span><br>&nbsp&nbsp<span id="DATE_WEEK_DISPLAY"> </span> </span></h5>
+		  <h5><span class="INFO_PANEL_ITEM" id="MOOD_DISPLAYDIV"> <span class="INFO_TEXT_STATIC">Mood: </span> <br> <span id="MOOD_DISPLAY"> </span> </span></h5>
+		  <h5><span class="INFO_PANEL_ITEM" id="EUPHORIA_DISPLAYDIV"> <span id="EUPH_OR_FRUS">Euphoria: </span> <br> <span id="EUPHORIA_DISPLAY"></span>  </span></h5>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+<!--
+=================================================
+------------------------------ CONSOLE
+-->
+
+<div class="MAINGRID_CTR">
+
+
+
+<!--
+=================================================
+------------------------------ BOTWORLDS
+-->
+<div class="contentUnitHolder ">
+			<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">INDUSTRY:</span></h1></button>
+			<div class="content">
+  			<!--<p><span class="INFO_TEXT_STATIC"> Your industrial base: a vast network of van-neumann construction robots built around a captive sun. </span></p>-->
+
+
+	<!--<h5> <span class="INFO_TEXT_STATIC">Botworlds</span> </h5>-->
+	<div class="contentGrid3Hz dataTable THEME_SUBTLE_Bot">
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Bot" id="FreeBot_MATTER_DIV">     <span class="INFO_TEXT_STATIC">Free:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_FreeBot">0.0</span><span id="FreeBot_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_FreeBot">0.0</span><span id="FreeBot_MATTERDELTA_UNITS">t</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Bot" id="Feedstock_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Feedstock:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_Feedstock">0.0</span><span id="Feedstock_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_Feedstock">0.0</span><span id="Feedstock_MATTERDELTA_UNITS">t</span></div>
+    <div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding contentGridTitleLine contentGridItem_underBorder THEME_DESAT_Bot" id="Botbots_MATTER_DIV">   <span class="INFO_TEXT_STATIC">Bots:</span></div>
+                       <div class="contentGridItemHzM contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTER_Botbots">0.0</span><span id="Botbots_MATTER_UNITS">t</span></div>
+                       <div class="contentGridItemHzB contentGridItemNarrowVertPadding"><span id="RESOURCE_DISPLAY_MATTERDELTA_Botbots">0.0</span><span id="Botbots_MATTERDELTA_UNITS">t</span></div>
+	</div><br>
+
+        <div class="contentUnitHolder" style="padding: 0px; margin:0px;">
+
+			<div class="SubContentBox">
+
+
+			<div class="SubContentBoxTitle SubContentBoxTitleCtr">
+              <div class="INFO_TEXT_STATIC">Production Control: </div>
+              <div class="INFO_TEXT_STATIC">Industrial Capacity: </span><span class="valueDisplayDiv" id="bot_PRODUCTIVITY_DISPLAY_DIV"><span id="bot_PRODUCTIVITY_DISPLAY"></span><span id="bot_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+            </div><div style="line-height:45px"><br></div>
+
+<!--
+			<div class="tooltipHolder">
+              <h5><span class="INFO_TEXT_STATIC">Digest Matter: </span><div class="valueDisplayDiv" id="greenSliderDisplayPct6_DIV"><span id="greenSliderDisplayPct6"></span><span id="greenSliderDisplayPct6_UNITS"></span></div></h5>
+			  <span class="tooltiptext ttSEC2"> <span class="INFO_TEXT_STATIC"> Makes Matter</span> </span>
+			</div>
+-->
+
+			<div class="tooltipHolder ttSEC2">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Process raw matter into processed feedstock for your robots to turn into other things.</span> </span>
+              <h5><span class="INFO_TEXT_STATIC">Process Matter: </span><span class="valueDisplayDiv" id="botSliderDisplayPct1_DIV"><span id="botSliderDisplayPct1"></span><span id="botSliderDisplayPct1_UNITS"></span></span></h5>
+
+			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct1_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct1_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct1_PROD"></span></span>
+			               </div></h5>
+				</div>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						   <div class="sliderBG">
+						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="botSliderPct1"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "botSliderCheck1">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<div class="tooltipHolder ttSEC2">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Direct your Van-Neumann factory robots to create more Van-Neumann factory robots. Those new Van-Neumann factory robots can then be directed to do likewise.</span> </span>
+			  <h5><span class="INFO_TEXT_STATIC">Construct More Bots: </span><span class="valueDisplayDiv" id="botSliderDisplayPct2_DIV"><span id="botSliderDisplayPct2"></span><span id="botSliderDisplayPct2_UNITS"></span></span></h5>
+
+			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct2_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct2_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct2_PROD"></span></span>
+			               </div></h5>
+
+				</div>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						   <div class="sliderBG">
+						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
+
+						  <input type="range" min="0" max="10000" value="4000" class="slider" id="botSliderPct2"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "botSliderCheck2">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+
+			<div id="STARSHIP_SLIDER_DIV"><div class="tooltipHolder ttSEC2">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Builds starships to explore, secure, and seed new worlds for processing into yogurt.</span> </span>
+			<h5><span class="INFO_TEXT_STATIC">Starship Construction: </span><span class="valueDisplayDiv" id="botSliderDisplayPct5_DIV"><span id="botSliderDisplayPct5"></span><span id="botSliderDisplayPct5_UNITS"></span></span></h5>
+
+			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct5_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct5_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct5_PROD"></span></span>
+			               </div></h5>
+				</div>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						   <div class="sliderBG">
+						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="botSliderPct5" ></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "botSliderCheck5" checked=true>
+					  <span class="checkmark"></span>
+					</label>
+				</div></div>
+
+			<div class="tooltipHolder ttSEC2">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> TODO.</span> </span>
+			<h5><span class="INFO_TEXT_STATIC">Assemble Computronium: </span><span class="valueDisplayDiv" id="botSliderDisplayPct6_DIV"><span id="botSliderDisplayPct6"></span><span id="botSliderDisplayPct6_UNITS"></span></span></h5>
+			               <div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct6_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct6_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct6_PROD"></span></span>
+			               </div>
+			               </div>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						   <div class="sliderBG">
+						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="botSliderPct6" ></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "botSliderCheck6">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+			<div class="unlockableHidden" id="LOCKHIDE_WASTEREPROCESS">
+			<h5><span class="INFO_TEXT_STATIC">Reprocess Waste: </span><span class="valueDisplayDiv" id="botSliderDisplayPct3_DIV"><span id="botSliderDisplayPct3"></span><span id="botSliderDisplayPct3_UNITS"></span></span></h5>
+			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct3_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct3_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct3_PROD"></span></span>
+			               </div></h5>				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						   <div class="sliderBG">
+						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="botSliderPct3"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "botSliderCheck3">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+
+			<div class="unlockableHidden" id="LOCKHIDE_TRANSMUTEYOGURT">
+			<h5><span class="INFO_TEXT_STATIC">Transmute Yogurt: </span><span class="valueDisplayDiv" id="botSliderDisplayPct4_DIV"><span id="botSliderDisplayPct4"></span><span id="botSliderDisplayPct4_UNITS"></span></span></h5>
+			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct4_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct4_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct4_PROD"></span></span>
+			               </div></h5>
+			          <div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						   <div class="sliderBG">
+						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="botSliderPct4" ></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "botSliderCheck4">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+
+			<div class="tooltipHolder ttSEC2">
+			  <span class="tooltiptext LT"> <span class="INFO_TEXT_STATIC"> Build vast solar arrays for collecting energy </span> </span>
+			  <h5><span class="INFO_TEXT_STATIC">Construct Solar Arrays </span><span class="valueDisplayDiv" id="botSliderDisplayPct7_DIV"><span id="botSliderDisplayPct7"></span><span id="botSliderDisplayPct7_UNITS"></span></span></h5>
+			               <h5><div class="contentGrid2 contentGridNoPad sliderProductivityLine" style="width:85%">
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: left;"> <span class="INFO_TEXT_STATIC"> IN: </span>  <span id="botSliderDisplayPct7_PRODINPUT">0.0t</span>, <span id="botSliderDisplayPct7_PRODPOWER">0.0W</span> </span>
+			                   <span class="contentGridItemNoPad  contentGridItem1x1"  style="text-align: right;"> <span class="INFO_TEXT_STATIC"> OUT: </span>  <span id="botSliderDisplayPct7_PROD"></span></span>
+			               </div></h5>
+			               </div>
+				<div class="multiPctSliderSuper">
+					<div class="slidecontainer">
+						   <div class="sliderBG">
+						   <div class="sliderFillBarHolder"><div class="sliderFillBar"></div></div>
+						  <input type="range" min="0" max="10000" value="2000" class="slider" id="botSliderPct7"></div>
+					</div>
+					<label class="pctCheckContainer pctCheckContainerGRID1x1">
+					  <input type="checkbox"  id = "botSliderCheck7">
+					  <span class="checkmark"></span>
+					</label>
+				</div>
+
+
+
+            </div>
+
+			 </div>
+			 </div>
+</div>
+
+
+
+
+
+<div class="contentUnitHolder"><div id="ENERGY_CONTROL_PANEL">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC"> ENERGY </span></h1></button>
 		<div class="content">
 
@@ -1240,7 +1027,7 @@
 		<div class="contentGridItemHzB valueDisplayDiv contentGridItemNarrowVertPadding"><span id="SURPLUS_POWER_DISPLAY">0.0W</span> <span id="SURPLUS_POWER_DISPLAY_UNITS"></span>W</div>
         </div></div>
 
-        <div class="COLLAPSE_MODE2">
+        <div class="COLLAPSE_MODE2" id="ADVANCED_ENERGY_CONTROL_PANEL">
 
         <div class="contentUnitHolder" style="display:none;">
 	    <h5><span class="INFO_TEXT_STATIC">Power Sources: </span></h5>
@@ -1359,13 +1146,13 @@
 
 		</div>
 
-<div class="contentUnitHolder" style="padding: 0px; margin:0px;">
+<div class="contentUnitHolder" style="padding: 6px 0px; margin:0px;"><div id="GREENWORLD_PWR_CONTROLPANEL">
 			<button class="collapsibleTHIN collapsible">
 			   <h2><span class="INFO_TEXT_STATIC">Greenworld Chloroplasts</span></h2>
 			</button>
 			<div class="contentLV3">
 
-				<div class="multiPctSliderSuper">
+				<div class="multiPctSliderSuper ">
 					<div class="slidecontainer">
 					      <div class="sliderBG">
 						  <input type="range" min="0" max="10000" value="10000" class="slider" id="GreenPowerLimiter"></div>
@@ -1431,10 +1218,10 @@
 
 
         </div>
-</div>
-</div>
+</div></div>
+</div></div>
 
-<div class="contentUnitHolder">
+<div class="contentUnitHolder"><div id="WORLD_FORGE_DIV">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">WORLD FORGE:</span></h1></button>
 		<div class="content">
 
@@ -1588,7 +1375,7 @@
 				  <option>kS</option>
 				</datalist>
 
-</div>
+</div></div>
 
 
 <!--
@@ -1598,7 +1385,7 @@
 
 
 
-<div class="contentUnitHolder">
+<div class="contentUnitHolder"><div id="MATTER_PANEL_DIV">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC"> MATTER </span></h1></button>
 		<div class="content">
 
@@ -1679,7 +1466,7 @@
 
 
 </div>
-</div>
+</div></div>
 
 <!--
 #################################################
@@ -1727,8 +1514,227 @@ Stellar pop:
 -->
 
 
+<div class="contentUnitHolder"><div id="RESEARCH_PROJECTS_DIV">
+<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">RESEARCH PROJECTS</span></h1></button>
+		<div class="content">
 
-<div class="contentUnitHolder">
+  		<!--	<p><span class="INFO_TEXT_STATIC">This area will contain controls for controlling which research projects to research. Science is discovered by accumulating data. Deepthought will allow you to predict future discoveries and options further in advance. Extremely high levels of euphoria will unlock special supertechs that are otherwise unavailable. Euphoria is gain by producing yogurt in excess of your quote. </span></p> <br>-->
+
+
+		<div id="DATABANK_basic" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Hawk" style="text-align:left; margin: 8px 0px">
+		    <h5><span class="INFO_TEXT_STATIC">Basic Research: </span>
+		    <span class="valueDisplayDiv displaySm"> <span id="basic_FREE_DISPLAY"></span>
+			</span>
+			(<span id="basic_GAIN_RATE">0.0</span>B/wk)</h5>
+		</div>
+
+        <div class="contentUnitHolder"><div id="DATABANK_MINI">
+            <div class="contentGrid6 bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
+				<div id="DATABANKMINI_bio" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Green" style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Biology </span></h6>         <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
+				<div id="DATABANKMINI_eng" class="contentGridItem1x2 contentGridItem bgLT3 THEME_eng"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Engineering </span></h6>     <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
+				<div id="DATABANKMINI_psy" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Psy"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Social Science </span></h6>  <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
+
+            </div>
+        </div></div>
+
+        <div class="contentUnitHolder"><div id="DATABANK_DIV">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC"> Databanks </span></h2>
+			</button>
+			<div class="contentLV3">
+
+            <div class="THEME_Bio" id="DATABANK_bio">
+                <div class="contentGrid6 THEME_Green bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
+    			   <div class="contentGridItem1x4 contentGridItemNoBorders bgLT1" style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Biology: </span> <span id="bio_TOTAL_DISPLAY"></span> <span style="display:none;"> (<span id="bio_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
+    			   <div class="contentGridItem1x2 contentGridItemNoBorders bgLT1" style="text-align: right;"><h5><span id="bio_GAIN_RATE">0.0</span>B/wk</h5></div>
+
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Cellular Processes </span></h6><div class="valueDisplayDiv displaySm" id="bio1_TOTAL_DISPLAYDIV"><span id="bio1_TOTAL_DISPLAY"></span><span id="bio1_TOTAL_DISPLAY_UNITS"></span></div>       <span id="bio1_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Biomechanoid Augmentation </span></h6><div class="valueDisplayDiv displaySm" id="bio2_TOTAL_DISPLAYDIV"><span id="bio2_TOTAL_DISPLAY"></span><span id="bio2_TOTAL_DISPLAY_UNITS"></span></div>    <span id="bio2_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Genetic Engineering </span></h6><div class="valueDisplayDiv displaySm" id="bio3_TOTAL_DISPLAYDIV"><span id="bio3_TOTAL_DISPLAY"></span><span id="bio3_TOTAL_DISPLAY_UNITS"></span></div>   <span id="bio3_FREE_DISPLAY"></span></div>
+				</div>
+			</div>
+
+            <br>
+
+            <div class="THEME_Eng" id="DATABANK_eng">
+                <div class="contentGrid6 THEME_eng bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
+    			   <div class="bgLT1 contentGridItem1x4 contentGridItemNoBorders " style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Engineering: </span> <span id="eng_TOTAL_DISPLAY"></span>  <span style="display:none;">(<span id="eng_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
+    			   <div class="bgLT1 contentGridItem1x2 contentGridItemNoBorders " style="text-align: right;"><h5><span id="eng_GAIN_RATE">0.0</span>B/wk</h5></div>
+
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Construction </span></h6><div class="valueDisplayDiv displaySm" id="eng1_TOTAL_DISPLAYDIV"><span id="eng1_TOTAL_DISPLAY"></span><span id="eng1_TOTAL_DISPLAY_UNITS"></span></div>     <span id="eng1_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Matter & Material Science </span></h6><div class="valueDisplayDiv displaySm" id="eng2_TOTAL_DISPLAYDIV"><span id="eng2_TOTAL_DISPLAY"></span><span id="eng2_TOTAL_DISPLAY_UNITS"></span></div>      <span id="eng2_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">High-Energy Physics </span></h6><div class="valueDisplayDiv displaySm" id="eng3_TOTAL_DISPLAYDIV"><span id="eng3_TOTAL_DISPLAY"></span><span id="eng3_TOTAL_DISPLAY_UNITS"></span></div>    <span id="eng3_FREE_DISPLAY"></span></div>
+				</div>
+			</div>
+
+			<br>
+
+            <div class="THEME_Psy" id="DATABANK_psy">
+                <div class="contentGrid6 THEME_Psy bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
+    			   <div class="contentGridItem1x4 contentGridItemNoBorders bgLT1" style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Social Science: </span> <span id="psy_TOTAL_DISPLAY"></span>  <span style="display:none;">(<span id="psy_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
+    			   <div class="contentGridItem1x2 contentGridItemNoBorders bgLT1" style="text-align: right;"><h5><span id="psy_GAIN_RATE">0.0</span>B/wk</h5></div>
+
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC"> Cognition </span></h6><div class="valueDisplayDiv displaySm" id="psy1_TOTAL_DISPLAYDIV"><span id="psy1_TOTAL_DISPLAY"></span><span id="psy1_TOTAL_DISPLAY_UNITS"></span></div>        <span id="psy1_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC"> Creativity & Intuition </span></h6><div class="valueDisplayDiv displaySm" id="psy2_TOTAL_DISPLAYDIV"><span id="psy2_TOTAL_DISPLAY"></span><span id="psy2_TOTAL_DISPLAY_UNITS"></span></div>     <span id="psy2_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC"> Strategy & Tactics </span></h6><div class="valueDisplayDiv displaySm" id="psy3_TOTAL_DISPLAYDIV"><span id="psy3_TOTAL_DISPLAY"></span><span id="psy3_TOTAL_DISPLAY_UNITS"></span></div>         <span id="psy3_FREE_DISPLAY"></span></div>
+				</div>
+			</div>
+
+        </div></div></div>
+
+
+        <div class="contentUnitHolder">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC"> Available Projects (Work In Progress) </span></h2>
+			</button>
+			<div class="contentLV3">
+
+            <div id="ProjectSelectorBG"><div id="ProjectSelector">
+                <button class="PROJECT_BUTTON"> Example Project 1 </button>
+                <button class="PROJECT_BUTTON"> Example Project 2 </button>
+                <button class="PROJECT_BUTTON PROJECT_BUTTON_SELECTED"> Example Project 3 </button>
+                <button class="PROJECT_BUTTON"> Example Project 4 </button>
+                <button class="PROJECT_BUTTON"> Example Project 1 </button>
+                <button class="PROJECT_BUTTON"> Example Project 2 </button>
+                <button class="PROJECT_BUTTON"> Example Project 3 </button>
+                <button class="PROJECT_BUTTON"> Example Project 4 </button>
+            </div></div>
+				<div class="SubContentBox SubContentBoxLT3" style="padding-bottom: 0px; margin-bottom: 0px;">
+				   <span id="CURRENT_AVAIL_PROJECT_DESC"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
+				   <div>
+				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT" > RESEARCH </button>
+				   </div>
+
+					<button class="collapsibleExtraTHIN collapsible">&#8964;&#8964;&#8964; FILTERS &#8964;&#8964;&#8964;</button>
+					<span class="contentLV4">
+                        <span style="line-height: 2;">
+                       <label style="white-space: nowrap;">Biology: <input type="checkbox"  id = "bioProjectFilter" checked=true> </label>
+                       <label style="white-space: nowrap;">Engineering: <input type="checkbox"  id = "engProjectFilter" checked=true> </label>
+                       <label style="white-space: nowrap;">Social Science: <input type="checkbox"  id = "psyProjectFilter" checked=true> </label>
+                       <label style="white-space: nowrap;">Show Avail: <input type="checkbox"  id = "availProjectFilter" checked=true> </label>
+                       <label style="white-space: nowrap;">Show Completed: <input type="checkbox"  id = "finishedProjectFilter"> </label>
+                        </span>
+<!--
+						<div style="display: grid; grid-template-columns: auto auto auto auto auto auto ;">
+						<div><h5> Biology: </h5></div>
+						<label class="pctCheckContainer pctCheckContainerGRID1x1" style="position:relative">
+						  <input type="checkbox"  id = "shipSliderCheck3">
+						  <span class="checkmark"></span>
+						</label>
+						<div><h5> Engineering: </h5></div>
+						<label class="pctCheckContainer pctCheckContainerGRID1x1" style="position:relative">
+						  <input type="checkbox"  id = "shipSliderCheck3">
+						  <span class="checkmark"></span>
+						</label>
+						<div><h5> Social Sci: </h5></div>
+						<label class="pctCheckContainer pctCheckContainerGRID1x1" style="position:relative">
+						  <input type="checkbox"  id = "shipSliderCheck3">
+						  <span class="checkmark"></span>
+						</label>
+						</div>-->
+
+					</span>
+				</div>
+
+
+
+
+        </div></div>
+
+        <div class="contentUnitHolder">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC"> Available Projects </span></h2>
+			</button>
+			<div class="contentLV3">
+
+
+            <div id="PROJECTSAVAIL_CONTENT_1" style="display:none">
+				<select class="projectSelectPanel" name="PROJECTSAVAIL_LIST_bio" id="PROJECTSAVAIL_LIST_bio" size="5">
+					<!--<option value="BioProject1">BioProject1</option>
+					<option value="BioProject2">BioProject2</option>
+					<option value="BioProject3">BioProject3</option>
+					<option value="BioProject4">BioProject4</option>
+					<option value="BioProject5">BioProject5</option>
+					<option value="BioProject6">BioProject6</option>
+					<option value="BioProject7">BioProject7</option>
+					<option value="BioProject8">BioProject8</option>
+					<option value="BioProject9">BioProject9</option>
+					<option value="BioProject10">BioProject10</option>
+					<option value="BioProject11">BioProject11</option>-->
+				</select>
+
+				<div class="SubContentBox SubContentBoxLT3">
+				   <span id="CURRENT_AVAIL_PROJECT_DESC_bio"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
+				   <div>
+				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_bio" > RESEARCH </button>
+				   </div>
+				</div>
+            </div>
+
+            <div id="PROJECTSAVAIL_CONTENT_2">
+				<select class="projectSelectPanel" name="PROJECTSAVAIL_LIST_eng" id="PROJECTSAVAIL_LIST_eng" size="5">
+					<!--<option value="EngineeringProject1">EngineeringProject1</option>
+					<option value="EngineeringProject2">EngineeringProject2</option>
+					<option value="EngineeringProject3">EngineeringProject3</option>
+					<option value="EngineeringProject4">EngineeringProject4</option>
+					<option value="EngineeringProject5">EngineeringProject5</option>
+					<option value="EngineeringProject6">EngineeringProject6</option>
+					<option value="EngineeringProject7">EngineeringProject7</option>
+					<option value="EngineeringProject8">EngineeringProject8</option>
+					<option value="EngineeringProject9">EngineeringProject9</option>
+					<option value="EngineeringProject10">EngineeringProject10</option>
+					<option value="EngineeringProject11">EngineeringProject11</option>-->
+				</select>
+
+				<div class="SubContentBox SubContentBoxLT3">
+				   <span id="CURRENT_AVAIL_PROJECT_DESC_eng"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
+				   <div>
+				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_eng" > RESEARCH </button>
+				   </div>
+				</div>
+            </div>
+
+            <div id="PROJECTSAVAIL_CONTENT_3"  style="display:none">
+				<select class="projectSelectPanel" name="PROJECTSAVAIL_LIST_psy" id="PROJECTSAVAIL_LIST_psy" size="5">
+					<!--<option value="PsychProject1">PsychProject1</option>
+					<option value="PsychProject2">PsychProject2</option>
+					<option value="PsychProject3">PsychProject3</option>
+					<option value="PsychProject4">PsychProject4</option>
+					<option value="PsychProject5">PsychProject5</option>
+					<option value="PsychProject6">PsychProject6</option>
+					<option value="PsychProject7">PsychProject7</option>
+					<option value="PsychProject8">PsychProject8</option>
+					<option value="PsychProject9">PsychProject9</option>
+					<option value="PsychProject10">PsychProject10</option>
+					<option value="PsychProject11">PsychProject11</option>-->
+				</select>
+
+				<div class="SubContentBox SubContentBoxLT3">
+				   <span id="CURRENT_AVAIL_PROJECT_DESC_psy"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
+				   <div>
+				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_psy" > RESEARCH </button>
+				   </div>
+				</div>
+            </div>
+
+			<ul class="tabbedUL">
+				<li class="tabHolder" id="PROJECTSAVAIL_1">             <span class="prettyTab"><h6><span class="INFO_TEXT_STATIC">Biology</span></h6></span></li>
+				<li class="tabHolder selectedTab" id="PROJECTSAVAIL_2"> <span class="prettyTab"><h6><span class="INFO_TEXT_STATIC">Engineering</span></h6></span></li>
+				<li class="tabHolder" id="PROJECTSAVAIL_3">             <span class="prettyTab"><h6><span class="INFO_TEXT_STATIC">Social Science</span></h6></span></li>
+			</ul>
+
+
+
+
+        </div></div>
+
+
+
+
+		</div>
+</div></div>
+
+<div class="contentUnitHolder"><div id="FLEETREPORT_DIV">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">FLEET REPORT</span></h1></button>
 		<div class="content">
 
@@ -1942,10 +1948,10 @@ Stellar pop:
       </div>
 
 		</div>
-</div>
+</div></div>
 
 
-<div class="contentUnitHolder">
+<div class="contentUnitHolder"><div id="STRATEGICCOMMAND_DIV">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">STRATEGIC COMMAND</span></h1></button>
 		<div class="content">
 
@@ -1996,10 +2002,10 @@ Stellar pop:
 		  </div>
 
 </div>
-</div>
+</div></div>
 
 
-<div class="contentUnitHolder">
+<div class="contentUnitHolder"><div id="SHIPYARD_DIV">
 			<button class="collapsible">
 			   <h1><span class="INFO_TEXT_STATIC">SHIPYARDS:</span></h1>
 			</button>
@@ -2056,17 +2062,17 @@ Stellar pop:
 			</div>
 			</div>
 
-</div>
+</div></div>
 
 
-<div class="contentUnitHolder">
+<div class="contentUnitHolder"><div id="INTELREPORT_DIV">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">INTELLIGENCE REPORT</span></h1></button>
 		<div class="content">
   			<p><span class="INFO_TEXT_STATIC">This area will contain information on hostile forces, populations, industrial output and military strength. This information is gather via scoutship recon, soulswarm espionage, or hacking. </span></p>
 		</div>
-</div>
+</div></div>
 
-<div class="contentUnitHolder">
+<div class="contentUnitHolder"><div id="MILITARYREPORT_DIV">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">MILITARY REPORT</span></h1></button>
 		<div class="content">
   			<p><span class="INFO_TEXT_STATIC">This area will contain information and controls for your combat forces. Combat strategies, capabilities, and so on.</span></p>
@@ -2075,11 +2081,11 @@ Stellar pop:
 
 
 	  </div>
-</div>
+</div></div>
 
 
 
-<div class="contentUnitHolder">
+<div class="contentUnitHolder"><div id="TERRITORYREPORT_DIV">
 <button class="collapsible"><h1><span class="INFO_TEXT_STATIC">TERRITORY REPORT</span></h1></button>
 		<div class="content">
   			<p><span class="INFO_TEXT_STATIC">This area will contain information on the territory you have captured. Sun types, etc.</span></p>
@@ -2210,13 +2216,16 @@ INVENTORY["seedship-transit-CT"]
 		  </div>
 
 		</div>
-</div>
+</div></div>
+
+<button id="CHEAT_DEBUG_OPEN" style="z-index: 999999999; opacity=1; position: fixed; font-size:20px; bottom:10px; right: 10px; font-family: monospace; font-weight: bold;">
+  CHEAT
+</button>
 
 
 
-<div id="CHEAT_DEBUG_PANEL" style="z-index: 9999999999; opacity=1;">
-<button class="collapsible" id="CHEAT_DEBUG_PANEL_COLLAPSER"  style="z-index: 9999999999;" ><h1>CHEAT/DEBUG PANEL:</h1></button>
-		<div class="content" id="CHEAT_DEBUG_PANEL_CONTENT"  style="z-index: 9999999999;  display: none;">
+<div id="CHEAT_DEBUG_PANEL" style="z-index: 99999999; opacity=1;">
+		<div class="content" id="CHEAT_DEBUG_PANEL_CONTENT" >
 		<p>
 		    CRAZYLEVEL: <span id="DEBUG_CRAZY_LEVEL_DISPLAY"></span>
 		    <BR>
@@ -2231,12 +2240,21 @@ INVENTORY["seedship-transit-CT"]
 			<BR>
 			<BR>
 			<h3>UNLOCKABLES:</H3>
+
+			<div style="display:none">
 			<button class = "button2" id ="CHEAT_UNLOCK_WASTEREPROCESS" > UNLOCK WASTEREPROCESS </button>
 			<button class = "button2" id ="CHEAT_UNLOCK_TRANSMUTEYOGURT" > UNLOCK TRANSMUTEYOGURT </button>
 			<button class = "button2" id ="CHEAT_UNLOCK_BIOWEAPONS" > UNLOCK BIOWEAPONS </button>
 			<button class = "button2" id ="CHEAT_UNLOCK_ESPIONAGE" > UNLOCK ESPIONAGE </button>
 			<button class = "button2" id ="CHEAT_UNLOCK_HACKING" > UNLOCK HACKING </button>
 			<button class = "button2" id ="CHEAT_UNLOCK_COMPOST" > UNLOCK COMPOST </button>
+			</div>
+
+			<div class="contentGrid4" id="CHEAT_UNLOCKABLE_GRID">
+
+			</div>
+
+
 
          <h5> DISCOVER WORLDS: </h5>
 			   <div class="buildCtrlPanel buildCtrlPanel7">
@@ -2336,6 +2354,7 @@ INVENTORY["seedship-transit-CT"]
 <script type="text/javascript" src="starBatch.js"></script>
 <script type="text/javascript" src="starDistroTable.js"></script>
 <script type="text/javascript" src="starTravel.js"></script>
+<script type="text/javascript" src="statusChanges.js"></script>
 
 <script type="text/javascript" src="tvstatic.js"></script>
 <script type="text/javascript" src="main.js"></script>

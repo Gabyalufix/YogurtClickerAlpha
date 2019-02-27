@@ -405,6 +405,14 @@ function TICK_scoutSystems(){
 //MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt"]
 //WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
 
+function cheatFunc_doubleScience(){
+  for(var i=0; i < SCIENCE_TYPES.length; i++){
+    for(var j=0; j < 3; j++){
+      INVENTORY[SCIENCE_TYPES[i]+j+"_SCIENCE_FREE"] = INVENTORY[SCIENCE_TYPES[i]+j+"_SCIENCE_FREE"] * 2;
+    }
+  }
+}
+
 function TICK_INDUSTRY_calcPOWERGEN(){
     var wattMult = this.STATICVAR_HOLDER.WATTAGE_MULTIPLIER
     /*

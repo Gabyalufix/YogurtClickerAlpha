@@ -71,6 +71,36 @@ function makeColoredScienceOLD(ss, sciDescSet, isLT = false){
     return out;
 }
 
+function getScienceColorClass(ss){
+    if(ss.startsWith("bio")){
+        //console.log("   BIO color found for: "+ss[0])
+        if(isLT){
+            //console.log("    LT!")
+            return "THEME_Bio SCICOST_TEXT_LT"
+        } else {
+            //console.log("    DK!")
+            return "THEME_Bio SCICOST_TEXT_DK"
+        }
+    } else if(ss.startsWith("eng")){
+        //console.log("   ENG color found for: "+ss[0])
+        if(isLT){
+            return  "THEME_Bot SCICOST_TEXT_LT"
+        } else {
+            return "THEME_Bot SCICOST_TEXT_DK"
+        }
+    } else if(ss.startsWith("psy")){
+        //console.log("   PSY color found for: "+ss[0])
+        if(isLT){
+           return  "THEME_Psy SCICOST_TEXT_LT"
+        } else {
+           return  "THEME_Psy SCICOST_TEXT_DK"
+        }
+    } else {
+        console.log("   No color found for: "+ss[0])
+    }
+    return out;
+}
+
 function makeColoredScience(ss, sciDescSet, isLT = false){
     //console.log("   coloring: "+ss[0] +" / "+ss[1]);
     var out = fmtSI(ss[1]) +"B "+sciDescSet[ss[0]];
@@ -482,6 +512,49 @@ for(var i=0; i<tabSetNames.length; i++){
    }
 }
 
+
+function projectSelectButtonEvent(){
+   console.log("project: "+elem.project.projectTitle);
+   this.classList.toggle("PROJECT_BUTTON_SELECTED");
+}
+
+function addNewProject(ap, techlvl){
+     var pp = addScaledProject(ap,techlvl)
+     this.GAME.STATS["AVAIL_PROJECT_LIST"][pp.uid] = pp;
+     var elem = document.createElement("PROJECT_BUTTON");
+     var costDesc = this.GAME.STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]
+     elem.className += getScienceColorClass(pp.cost[0]);
+     elem.project = pp;
+     elem.textContent = pp.projectTitle;
+     elem.onclick = this.projectSelectButtonEvent;
+     this.appendChild(elem);
+//   var out = makeColoredScience(cc[0],costDesc, isLT);
+}
+STATS["AVAIL_PROJECT_LIST"] = [];
+
+var masterAvailListElem = document.getElementById("ProjectSelector");
+var masterDescElem = document.getElementById("CURRENT_AVAIL_PROJECT_DESC");
+var masterResearchButton = document.getElementById("RESEARCH_CURRENT_PROJECT");
+
+masterAvailListElem.projectSelectButtonEvent = projectSelectButtonEvent;
+masterAvailListElem.descElem = masterDescElem;
+masterAvailListElem.researchButton = masterResearchButton;
+masterAvailListElem.addMultiProject = addMultiProject;
+masterAvailListElem.addScaledProject = addScaledProject;
+masterAvailListElem.GAME = GAME_GLOBAL;
+masterAvailListElem.researchButton.availListElem = masterAvailListElem;
+masterAvailListElem.researchButton.GAME = GAME_GLOBAL;
+masterAvailListElem.addNewProject = addNewProject;
+
+
+/*
+var projectList   = this.STATICVAR_HOLDER.SCIENCE.SCALED["bio"]
+var pp = projectList[0]
+masterAvailListElem.addNewProject(pp,1)
+
+
+addScaledProject(ap)
+*/
 
 
 for(var i=0; i< SCIENCE_TYPES.length; i++){
@@ -977,18 +1050,36 @@ for (var i = 0; i < coll.length; i++) {
             }
           }
         } else if(this.CURRMODE == "MODE1"){
-          console.log("MODE 2");
-          this.CURRMODE = "MODE2"
-          if(this.ELEMS_MODE1.length > 0){
-            for(var i=0; i < this.ELEMS_MODE1.length;i++){
-               this.ELEMS_MODE1[i].style.display = "none";
-            }
-          }
           if(this.ELEMS_MODE2.length > 0){
+            var anyActive=false;
             for(var i=0; i < this.ELEMS_MODE2.length;i++){
-               this.ELEMS_MODE2[i].style.display = "block";
+              anyActive = anyActive || this.ELEMS_MODE2[i].overrideMode == null || (! this.ELEMS_MODE2[i].overrideMode)
+            }
+            if(! anyActive){
+              console.log("SKIP MODE 2, goto MODE0");
+              this.CURRMODE = "MODE0"
+              if(this.ELEMS_MODE1.length > 0){
+                for(var i=0; i < this.ELEMS_MODE1.length;i++){
+                   this.ELEMS_MODE1[i].style.display = "none";
+                }
+              }
+            } else {
+              console.log("MODE 2");
+              this.CURRMODE = "MODE2"
+              if(this.ELEMS_MODE1.length > 0){
+                for(var i=0; i < this.ELEMS_MODE1.length;i++){
+                   this.ELEMS_MODE1[i].style.display = "none";
+                }
+              }
+              if(this.ELEMS_MODE2.length > 0){
+                for(var i=0; i < this.ELEMS_MODE2.length;i++){
+                   this.ELEMS_MODE2[i].style.display = "block";
+                }
+              }
             }
           }
+        
+
         } else if(this.CURRMODE == "MODE2"){
           console.log("MODE 0");
           this.CURRMODE = "MODE0"
@@ -1732,3 +1823,69 @@ for(var i=1;i<25;i++){
 for(var i=1;i<25;i++){
   console.log("Cost["+i+"] = "+fmtSI( getProjectBaseCost(i) )+" / "+fmtSI( getProjectBaseCost(i) / getProjectBaseCost(1)) )
 }
+
+
+
+var unlockGrid = document.getElementById("CHEAT_UNLOCKABLE_GRID")
+
+for(var i=0; i<STATICVAR_HOLDER.PHASE_STATUS_LIST.length; i++){
+  var sid = STATICVAR_HOLDER.PHASE_STATUS_LIST[i]
+  var elem = document.createElement("button");
+  elem.className += "contentGridItem"
+  elem.className += "contentGridItem1x1"
+  elem.className += "button2"
+  elem.textContent = sid.split("_").join(" ");
+  elem.style["background-color"] = "#c99c9c"
+  elem.sid = sid;
+  elem.onclick = function(){
+    if(STATS.PHASE_STATUS[ this.sid ]){
+      lockStatus(this.sid);
+    } else {
+      unlockStatus(this.sid);
+    }
+    this.setStatus();
+  }
+  elem.setStatus = function(){
+    if(STATS.PHASE_STATUS[ this.sid ]){
+      this.style["background-color"] = "#a4ba91"
+    } else {
+      this.style["background-color"] = "#c99c9c"
+    }
+  }
+  STATICVAR_HOLDER.PHASEDATA[sid].cheatButton = elem;
+  unlockGrid.appendChild(elem);
+}
+
+if(true){
+  var elem = document.createElement("button");
+  elem.className += "contentGridItem"
+  elem.className += "contentGridItem1x1"
+  elem.className += "button2"
+  elem.innerHTML = "<h4>RESET</h4>";
+  elem.sid = sid;
+  elem.onclick = function(){
+    resetStatus();
+    
+  }
+  unlockGrid.appendChild(elem);
+}
+
+document.getElementById("CHEAT_DEBUG_OPEN").onclick = function(){
+  if( document.getElementById("CHEAT_DEBUG_PANEL_CONTENT").style.display != "block"){
+    document.getElementById("CHEAT_DEBUG_PANEL_CONTENT").style.display = "block"
+    document.getElementById("CHEAT_DEBUG_OPEN").innerHTML = "&#x274C;"
+    
+  } else {
+    document.getElementById("CHEAT_DEBUG_PANEL_CONTENT").style.display = "none"
+    document.getElementById("CHEAT_DEBUG_OPEN").innerHTML = "CHEAT"
+  }
+}
+
+
+/*
+     var elem = document.createElement("option");
+     pp.listElem = elem;
+     elem.value = pp.projectID;
+     elem.appendChild( document.createTextNode( pp.projectTitle ) );
+     availListElem.appendChild(elem);
+*/

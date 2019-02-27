@@ -230,7 +230,7 @@ STATS.SEEDSENT.CURRENT_SPAN = 0;
 STATS.SEEDSENT.CURRENT_LEFT = STATICVAR_HOLDER.STAR_TABLE[STATS.SEEDED.CURRENT_SPAN][4];
 
 */
-
+console.log("INIT: "+ INVENTORY["seedship-transit-buffer"].join(","));
 function TICKHELPER_seedShipCalcs(){
     //var sendSpan = this.STATS.SEEDED.CURRENT_SPAN
     //var captSpan = this.STATS.SEEDED.CAPTURING_SPAN
@@ -247,9 +247,14 @@ function TICKHELPER_seedShipCalcs(){
           this.INVENTORY["seedship-transit-buffer"][0][1] <= this.STATS["TICK"] ){
       landct = landct + this.INVENTORY["seedship-transit-buffer"].shift()[0];
     }
-    if(landct >= this.STATS.SEEDCAPT.CURRENT_LEFT ){
+    if(landct >= this.STATS.SEEDCAPT.CURRENT_LEFT & landct > 0){
         var remlandct = landct - this.STATS.SEEDCAPT.CURRENT_LEFT;
-        INVENTORY["seedship-transit-buffer"].unshift([remlandct,this.STATS["TICK"]+1,0])
+        if(remlandct >0){
+          console.log( "unshifting-B: "+ INVENTORY["seedship-transit-buffer"].join(",") )
+          INVENTORY["seedship-transit-buffer"].unshift([remlandct,this.STATS["TICK"]+1,0])
+          console.log( "unshifting-A: "+ INVENTORY["seedship-transit-buffer"].join(",") )
+        }
+
         //ITERATE SPAN:
         landct = this.STATS.SEEDCAPT.CURRENT_LEFT;
         var currSpanWd = STATICVAR_HOLDER.STAR_TABLE[STATS.SEEDCAPT.CURRENT_SPAN][2];
@@ -267,7 +272,10 @@ function TICKHELPER_seedShipCalcs(){
           } else {
               var skipDist = currSpanWd - bufferDistTravelled;
               var skipTime = skipDist / this.STATS.SHIPSTATS.seedship["speedWk"]
+              console.log( "skiptime-B: "+ INVENTORY["seedship-transit-buffer"].join(",") )
               this.INVENTORY["seedship-transit-buffer"][ix][1] = this.INVENTORY["seedship-transit-buffer"][ix][1] - skipTime
+              console.log( "skiptime-A: "+ INVENTORY["seedship-transit-buffer"].join(",") )
+
           }
           ix = ix - 1;
         }
@@ -309,7 +317,9 @@ function TICKHELPER_seedShipCalcs(){
             this.STATS["seedLaunchThisWeek"] = ssct;
             var arriveTime = Math.ceil( dist / this.STATS.SHIPSTATS.seedship["speedWk"] ) + this.STATS["TICK"]
             this.INVENTORY["seedship-transit-CT"] = this.INVENTORY["seedship-transit-CT"] + ssct;
+            console.log( "add-B: "+ INVENTORY["seedship-transit-buffer"].join(",") )
             this.INVENTORY["seedship-transit-buffer"].push([ssct,arriveTime,this.STATS["TICK"]]);
+            console.log( "add-A: "+ INVENTORY["seedship-transit-buffer"].join(",") )
             this.INVENTORY["SHIPS-"+"seedship"+"-CT"] = this.INVENTORY["SHIPS-"+"seedship"+"-CT"] - ssct;
           }
       }
