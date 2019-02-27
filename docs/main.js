@@ -1058,6 +1058,8 @@ for (var i = 0; i < coll.length; i++) {
             if(! anyActive){
               console.log("SKIP MODE 2, goto MODE0");
               this.CURRMODE = "MODE0"
+              this.classList.toggle("active");
+              this.ELEMS_CONTENT.style.display = "none";
               if(this.ELEMS_MODE1.length > 0){
                 for(var i=0; i < this.ELEMS_MODE1.length;i++){
                    this.ELEMS_MODE1[i].style.display = "none";

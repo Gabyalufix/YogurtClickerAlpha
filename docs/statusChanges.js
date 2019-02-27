@@ -1,16 +1,21 @@
 
 
 
+
+
+
 STATICVAR_HOLDER.PHASEDATA = {
     bio_SCIENCE_UNLOCK:{  statID:"bio_SCIENCE_UNLOCK",
-              statTitle: "bio_SCIENCE_UNLOCK",
-              
+              statTitle: "bio_SCIENCE_UNLOCK",elemids:["BIORESEARCH_SLIDER_PANEL"],sliders:[["botSliderPct7","botSliderCheck7"]], 
        onEffect: function(){
           if(( STATS.PHASE_STATUS["bio_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["eng_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["psy_SCIENCE_UNLOCK"])){
             document.getElementById("DATABANK_basic").style.display = "none";
           }
           document.getElementById("DATABANK_MINI").style.display = "block";
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 1;
+          for(var i=0;i<this.elemids.length; i++){
+            document.getElementById(this.elemids[i]).style.display = "block"
+          }
        },
        offEffect: function(){
           if((! STATS.PHASE_STATUS["bio_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["eng_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["psy_SUBFIELD_UNLOCK"])){
@@ -19,6 +24,13 @@ STATICVAR_HOLDER.PHASEDATA = {
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 0;
           document.getElementById("DATABANK_basic").style.display = "block";
           console.log("DATABANKMINI_"+this.sciname+": opacity=0")
+          for(var i=0;i<this.elemids.length; i++){
+            document.getElementById(this.elemids[i]).style.display = "none"
+          }
+          for(var i=0;i<this.sliders.length; i++){
+            document.getElementById(this.sliders[i][1]).checked = true;
+            document.getElementById(this.sliders[i][0]).value = 0;
+          }
        },sciname:"bio"
      },
     eng_SCIENCE_UNLOCK:{  statID:"bio_SCIENCE_UNLOCK",
@@ -255,16 +267,22 @@ STATICVAR_HOLDER.PHASEDATA = {
        }
      },
     Energy_Panel:{  statID:"Energy_Panel",
-       statTitle: "Energy_Panel", elemids:["ENERGY_CONTROL_PANEL"],
+       statTitle: "Energy_Panel", elemids:["ENERGY_CONTROL_PANEL","SOLARARRAY_SLIDER_DIV"], sliders:[["botSliderPct7","botSliderCheck7"]],
        onEffect: function(){
           for(var i=0;i<this.elemids.length; i++){
             document.getElementById(this.elemids[i]).style.display = "block"
           }
+
        },
        offEffect: function(){
           for(var i=0;i<this.elemids.length; i++){
             document.getElementById(this.elemids[i]).style.display = "none"
-          }      
+          }
+          for(var i=0;i<this.sliders.length; i++){
+            document.getElementById(this.sliders[i][1]).checked = true;
+            document.getElementById(this.sliders[i][0]).value = 0;
+          }
+          
        }
      },
     Advanced_Energy_Panel:{  statID:"Advanced_Energy_Panel",
