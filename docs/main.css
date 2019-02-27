@@ -388,6 +388,7 @@ h2 , h3, h4, h5, h6, p {
 
 body {
   overflow: scroll;
+  background-color: var(--LT2);
 }
 
 .FOOTER {
@@ -1071,7 +1072,7 @@ h5 {
   padding:0px;
   margin:0px;
   border: 0px solid transparent;
-  position:relative;
+  position:fixed;
 }
 #FOREGROUND_CANVAS {
   height:100%;

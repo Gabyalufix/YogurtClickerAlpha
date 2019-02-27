@@ -2,9 +2,19 @@
 
 
 
-
+//RESEARCH_PROJECTS_DIV
 
 STATICVAR_HOLDER.PHASEDATA = {
+    research_projects:{  statID:"research_projects",
+       statTitle: "research_projects", elemid:"RESEARCH_AVAIL_PROJECT_PANEL",
+       onEffect: function(){
+          document.getElementById(this.elemid).style.display = "block"
+       },
+       offEffect: function(){
+          document.getElementById(this.elemid).style.display = "none"
+       }
+     },
+    
     bio_SCIENCE_UNLOCK:{  statID:"bio_SCIENCE_UNLOCK",
               statTitle: "bio_SCIENCE_UNLOCK",elemids:["BIORESEARCH_SLIDER_PANEL"],sliders:[["botSliderPct7","botSliderCheck7"]], 
        onEffect: function(){
