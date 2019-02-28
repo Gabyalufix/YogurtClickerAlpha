@@ -538,6 +538,13 @@ function projectSelectButtonEvent(){
    this.masterAvail.researchButton.currProject     = this.project;
    this.masterAvail.researchButton.currProjectElem = this;
    dd = dd + "<BR> &nbsp&nbsp&nbsp" + makeAdvCostString(this.project.cost,delim1=", ",delim2="<BR> &nbsp&nbsp&nbsp", compressThresh = 5, isLT=false)
+   if(this.project.prereqTechs != null && this.project.prereqTechs.length > 0){
+      dd = dd + "<BR> &nbsp&nbsp&nbspPrereqs:" 
+      this.project.prereqTechs.forEach(function(pt){
+          dd = dd + "<BR> &nbsp&nbsp&nbsp&nbsp&nbsp" + STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[pt].projectTitle;
+      })
+      
+   }
    this.descElem.innerHTML = dd
    this.titleDescElem.innerHTML = this.project.projectTitle;
  }
@@ -600,9 +607,17 @@ masterAvailListElem.researchButton.onclick = function(){
         this.GAME.currentResearchEffect = this.GAME.STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ pp.projectID ].effect;
         this.GAME.currentResearchEffect();
         this.GAME.INVENTORY.SCIENCE_RESEARCHED.push(pp.uid);
-        
+        this.GAME.STATS.SCIENCE_DONESET.add(pp.projectID);
         this.currProjectElem.parentNode.removeChild(this.currProjectElem)
         delete this.GAME.STATS["AVAIL_PROJECT_LIST"][pp.uid]
+        
+        var newTechs = updateTechTree()
+        console.log("newTechs: "+newTechs.join(","));
+        newTechs.forEach( function(cpid){
+          var cpp = getSimpleProject(STATICVAR_HOLDER.SCIENCE.TECHTREE[ cpid ],1);
+          masterAvailListElem.addNewProject(cpp);
+        });
+        
         //masterAvailListElem.projectElemList.splice(  )
         /*
         TODO: remove project!
@@ -630,8 +645,8 @@ masterAvailListElem.researchButton.currProject.cost
 masterAvailListElem.researchButton.canAffordTest = function(){
        var pp = this.currProject;
        if(pp != null){
-         //console.log("trying to afford:");
-         var prereqs = pp.upgradePrereqTechs;
+         //console.log("trying to afford:");prereqTechs
+         var prereqs = pp.prereqTechs;
          var meetsPrereqs = true;
          if(prereqs != null){
              for( var i=0; i < prereqs.length; i++){
@@ -657,11 +672,10 @@ masterAvailListElem.researchButton.canAffordTest = function(){
        }
 }
 
-for(var i=0; i < STATS.TECHTREE_ROOTS.length; i++){
-  var pid =  STATS.TECHTREE_ROOTS[i];
+STATS.TECHTREE_ROOTS.forEach(function(pid){
   var pp = getSimpleProject(STATICVAR_HOLDER.SCIENCE.TECHTREE[ pid ],1);
   masterAvailListElem.addNewProject(pp);
-}
+})
 
 
 /*

@@ -611,7 +611,7 @@ function getScaledProject(pp, techlvl){
   //ap.cost =
 }
 function getSimpleProject(pp, techlvl){
-  var ap = { uid : pp.projectID, projectTitle : pp.projectTitle,projectID : pp.projectID, desc : pp.desc, effect : pp.effect, scitype : pp.scitype}
+  var ap = { uid : pp.projectID, projectTitle : pp.projectTitle,projectID : pp.projectID, desc : pp.desc, effect : pp.effect, scitype : pp.scitype, prereqTechs : pp.prereqTechs}
   ap.projectType = pp.projectType;
   if(pp.cost){
     ap.cost = pp.cost.slice();
@@ -762,11 +762,12 @@ if(true){
        STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ pp.projectID ] = pp;
     })
 
-    STATS.TECHTREE_ROOTS = [];
+    STATS.TECHTREE_ROOTS = new Set();
     //var techtreekeys = 
     Object.keys( STATICVAR_HOLDER.SCIENCE.TECHTREE ).forEach( function(key,index){
       if(STATICVAR_HOLDER.SCIENCE.TECHTREE[key].prereqTechs.length == 0){
-        STATS.TECHTREE_ROOTS.push( key );
+        STATS.SCIENCE_LOCKSET.delete(key);
+        STATS.TECHTREE_ROOTS.add( key );
       }
     })
     

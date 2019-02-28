@@ -408,10 +408,16 @@ function TICK_scoutSystems(){
 function cheatFunc_multScience(){
   for(var i=0; i < SCIENCE_TYPES.length; i++){
     for(var j=0; j < 3; j++){
-      INVENTORY[SCIENCE_TYPES[i]+j+"_SCIENCE_FREE"] = INVENTORY[SCIENCE_TYPES[i]+j+"_SCIENCE_FREE"] *100;
+      INVENTORY[SCIENCE_TYPES[i]+j+"_SCIENCE_TOTAL"] = INVENTORY[SCIENCE_TYPES[i]+j+"_SCIENCE_TOTAL"] *10;
+      INVENTORY[SCIENCE_TYPES[i]+"_SCIENCE_TOTAL"] = INVENTORY[SCIENCE_TYPES[i]+"_SCIENCE_TOTAL"] *10;
+      INVENTORY[SCIENCE_TYPES[i]+j+"_SCIENCE_FREE"] = INVENTORY[SCIENCE_TYPES[i]+j+"_SCIENCE_FREE"] *10;
+      INVENTORY[SCIENCE_TYPES[i]+"_SCIENCE_FREE"] = INVENTORY[SCIENCE_TYPES[i]+"_SCIENCE_FREE"] *10;
     }
   }
+  INVENTORY["basic_SCIENCE_FREE"] = INVENTORY["basic_SCIENCE_FREE"] * 10;
+  INVENTORY["basic_SCIENCE_TOTAL"] = INVENTORY["basic_SCIENCE_TOTAL"] * 10;
 }
+document.getElementById("button_cheatMoreScience").onclick = cheatFunc_multScience
 
 function TICK_INDUSTRY_calcPOWERGEN(){
     var wattMult = this.STATICVAR_HOLDER.WATTAGE_MULTIPLIER

@@ -191,10 +191,69 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            },
            desc:"..." ,
            descShort:"...",
-           prereqTechs: []}
+           prereqTechs: []},
+           
+           TECHTREE_biomass:{projectTitle:"Synthetic Biomass",projectID:"TECHTREE_biomass",projectType:"TECHTREE",
+           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
+           cost:[["bio",225000000000000000000]],
+           effect:function(){
+             unlockStatus("BASIC_BIOMASS");
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_BIO"]},
+           
+           TECHTREE_photosynthesis:{projectTitle:"Photosynthetic Chloroplasts",projectID:"TECHTREE_photosynthesis",projectType:"TECHTREE",
+           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
+           cost:[["bio",225000000000000000000]],
+           effect:function(){
+             unlockStatus("photosynthesis");
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_biomass"]},
+           
+           TECHTREE_advPwr:{projectTitle:"Advanced Energy Management",projectID:"TECHTREE_advPwr",projectType:"TECHTREE",
+           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
+           cost:[["eng",225000000000000000000],["bio",225000000000000000000]],
+           effect:function(){
+             unlockStatus("Advanced_Energy_Panel");
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_photosynthesis","TECHTREE_ENG"]}
 }
+//ASSEMBLE_COMPUTRONIUM_NAME
 
-//function 
+
+Object.keys(STATICVAR_HOLDER.SCIENCE.TECHTREE).forEach(function(pid,index){
+    STATICVAR_HOLDER.SCIENCE.TECHTREE[pid].childTechs = [];
+    Object.keys(STATICVAR_HOLDER.SCIENCE.TECHTREE).forEach(function(cpid,index){
+        var cpp = STATICVAR_HOLDER.SCIENCE.TECHTREE[cpid];
+        if(cpp.prereqTechs.includes(pid)){
+            STATICVAR_HOLDER.SCIENCE.TECHTREE[pid].childTechs.push(cpid);
+        }
+    })
+})
+
+function updateTechTree(){
+    var addTechs = [];
+    Array.from(STATS.TECHTREE_ROOTS.keys()).forEach(function(pid){
+        if(STATS.SCIENCE_DONESET.has(pid)){
+            STATS.TECHTREE_ROOTS.delete(pid);
+            console.log("tech["+pid+"]: ["+Array.from(STATICVAR_HOLDER.SCIENCE.TECHTREE[pid].childTechs).join(",")+"]");
+            STATICVAR_HOLDER.SCIENCE.TECHTREE[pid].childTechs.forEach(function(cpid){
+                console.log("testing: "+cpid);
+                if(STATS.SCIENCE_LOCKSET.has(cpid)){
+                    STATS.TECHTREE_ROOTS.add(cpid);
+                    STATS.SCIENCE_LOCKSET.delete(cpid);
+                    addTechs.push(cpid);
+                }
+            })
+        }
+    })
+    return addTechs;
+}
 
 /*
 ******************************************************************************************************************************
