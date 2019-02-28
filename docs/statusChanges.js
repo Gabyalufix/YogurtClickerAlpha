@@ -5,6 +5,27 @@
 //RESEARCH_PROJECTS_DIV
 
 STATICVAR_HOLDER.PHASEDATA = {
+
+    Energy_Panel:{  statID:"Energy_Panel",
+       statTitle: "Energy_Panel", elemids:["ENERGY_CONTROL_PANEL","SOLARARRAY_SLIDER_DIV"], sliders:[["botSliderPct7","botSliderCheck7"]],
+       onEffect: function(){
+          for(var i=0;i<this.elemids.length; i++){
+            document.getElementById(this.elemids[i]).style.display = "block"
+          }
+
+       },
+       offEffect: function(){
+          for(var i=0;i<this.elemids.length; i++){
+            document.getElementById(this.elemids[i]).style.display = "none"
+          }
+          for(var i=0;i<this.sliders.length; i++){
+            document.getElementById(this.sliders[i][1]).checked = true;
+            document.getElementById(this.sliders[i][0]).value = 0;
+          }
+          
+       }
+     },
+
     research_projects:{  statID:"research_projects",
        statTitle: "research_projects", elemid:"RESEARCH_AVAIL_PROJECT_PANEL",
        onEffect: function(){
@@ -327,25 +348,7 @@ STATICVAR_HOLDER.PHASEDATA = {
           }      
        }
      },
-    Energy_Panel:{  statID:"Energy_Panel",
-       statTitle: "Energy_Panel", elemids:["ENERGY_CONTROL_PANEL","SOLARARRAY_SLIDER_DIV"], sliders:[["botSliderPct7","botSliderCheck7"]],
-       onEffect: function(){
-          for(var i=0;i<this.elemids.length; i++){
-            document.getElementById(this.elemids[i]).style.display = "block"
-          }
 
-       },
-       offEffect: function(){
-          for(var i=0;i<this.elemids.length; i++){
-            document.getElementById(this.elemids[i]).style.display = "none"
-          }
-          for(var i=0;i<this.sliders.length; i++){
-            document.getElementById(this.sliders[i][1]).checked = true;
-            document.getElementById(this.sliders[i][0]).value = 0;
-          }
-          
-       }
-     },
     Advanced_Energy_Panel:{  statID:"Advanced_Energy_Panel",
        statTitle: "Advanced_Energy_Panel", elemids:[], modalElemIds:["ADVANCED_ENERGY_CONTROL_PANEL"],
        onEffect: function(){

@@ -546,7 +546,6 @@ function addNewProject(pp){
 //   var out = makeColoredScience(cc[0],costDesc, isLT);
 }
 STATS["AVAIL_PROJECT_LIST"] = [];
-
 var masterAvailListElem = document.getElementById("ProjectSelector");
 var masterDescElem = document.getElementById("CURRENT_AVAIL_PROJECT_DESC");
 var masterResearchButton = document.getElementById("RESEARCH_CURRENT_PROJECT");
@@ -565,6 +564,10 @@ masterAvailListElem.researchButton.GAME = GAME_GLOBAL;
 masterAvailListElem.addNewProject = addNewProject;
 masterAvailListElem.projectElemList = [];
 masterAvailListElem.researchButton.disabled = true;
+
+ELEMS["masterAvailListElem"] = masterAvailListElem;
+masterResearchButton.addNewProject
+
 
 RESEARCH_BUTTONS.push(masterAvailListElem.researchButton);
 
@@ -632,6 +635,13 @@ masterAvailListElem.researchButton.canAffordTest = function(){
        }
 }
 
+for(var i=0; i < STATS.TECHTREE_ROOTS.length; i++){
+  var pid =  STATS.TECHTREE_ROOTS[i];
+  var pp = getSimpleProject(STATICVAR_HOLDER.SCIENCE.TECHTREE[ pid ],1);
+  masterAvailListElem.addNewProject(pp);
+}
+
+
 /*
 var projectList   = this.STATICVAR_HOLDER.SCIENCE.SCALED["bio"]
 var pp = projectList[0]
@@ -640,6 +650,7 @@ masterAvailListElem.addNewProject(pp,1)
 
 addScaledProject(ap)
 */
+
 
 
 for(var i=0; i< SCIENCE_TYPES.length; i++){

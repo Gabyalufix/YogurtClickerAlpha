@@ -4,8 +4,8 @@
 
 
 STATICVAR_HOLDER.SCIENCE = {};
-SCIENCE_PROJECT_TYPES = ["PROGRESS","SCALED","STATICLEVEL","MULTI"]
-
+SCIENCE_PROJECT_TYPES = ["SCALED","STATICLEVEL","MULTI"]
+//"TECHTREE",
 RANDOM_SCIENCE_TYPES =                              ["SCALED","MULTI","SUPER","HYPER"]
 STATICVAR_HOLDER.RANDOM_SCIENCE_TYPES_PROBS_BASE =  [1,        1.5,   0.02,    0.001];
 STATS.RANDOM_SCIENCE_TYPES_PROBS = STATICVAR_HOLDER.RANDOM_SCIENCE_TYPES_PROBS_BASE.slice();
@@ -32,6 +32,10 @@ function drawRandomScienceProject(sciname,currLvl){
      } else if(proType == "HYPER"){
        console.log("UNLOCK HYPERTECH!")
      }
+}
+
+function getTechtreeScienceProjects(){
+     
 }
 
 function getRandomScienceProject(sciname,currLvl){
@@ -94,7 +98,7 @@ function getRandomMulti(sciname, currLvl){
    console.log("   retrieving: "+ projectList[idx].projectID);
    return this.getMultiProject(projectList[idx], currLvl)
 }
-GAME_GLOBAL.unlockRandomMulti = unlockRandomMulti;
+GAME_GLOBAL.getRandomMulti = getRandomMulti;
 
 function getRandomScaled(sciname,currLvl){
    console.log("   attempting unlock SCALED");
@@ -540,28 +544,43 @@ STATS["AVAIL_PROJECTS"] = {
 }
 
 
-
-
-
-
-
 //Science projects that ALWAYS appear once the total tech
 //  in a given type
-STATICVAR_HOLDER.SCIENCE.PROGRESS = {
-  bio:[{projectTitle:"dummyproject1",projectID:"dpro1",
-        req:50e20,
-        unlockPrereq:[],
-        resPrereq:[],
-        cost:[],
-        effect:function(){
-
-        },
-        desc:"", descShort:""}
-      ],
-  eng:[],
-  psy:[],
-  sum:[]
+STATICVAR_HOLDER.SCIENCE.TECHTREE = {
+           TECHTREE_BIO:{projectTitle:"Biological Experimentation",projectID:"TECHTREE_BIO",projectType:"TECHTREE",
+           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
+           effect:function(){
+             unlockStatus("bio_SCIENCE_UNLOCK");
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: []},
+           TECHTREE_ENG:{projectTitle:"Activate Analytic Engine",projectID:"TECHTREE_ENG",projectType:"TECHTREE",
+           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
+           effect:function(){
+             unlockStatus("eng_SCIENCE_UNLOCK");
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: []},
+           TECHTREE_PSY:{projectTitle:"Activate Soulswarm Matrix",projectID:"TECHTREE_PSY",projectType:"TECHTREE",
+           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
+           effect:function(){
+             unlockStatus("psy_SCIENCE_UNLOCK");
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: []}
 }
+
+STATS.TECHTREE_ROOTS = [];
+var techtreekeys = 
+Object.keys( STATICVAR_HOLDER.SCIENCE.TECHTREE ).forEach( function(key,index){
+  if(STATICVAR_HOLDER.SCIENCE.TECHTREE[key].prereqTechs.length == 0){
+    STATS.TECHTREE_ROOTS.push( key );
+    
+  }
+})
 
 //SCALED_SOULSYNTHESIS
 //
