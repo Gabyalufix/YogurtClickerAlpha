@@ -576,7 +576,7 @@
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="5000" class="slider" id="soulSliderPct1"></div>
+						  <input type="range" min="0" max="10000" value="10000" class="slider" id="soulSliderPct1"></div>
 					</div>
 					<label class="pctCheckContainer pctCheckContainerGRID1x1">
 					  <input type="checkbox"  id = "soulSliderCheck1">
@@ -584,19 +584,20 @@
 					</label>
 				</div>
 
-
+            <div id="COMBATSIM_SLIDERPANEL">
 			<h5><span class="INFO_TEXT_STATIC">Combat Sim: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct3_DIV"><span id="soulSliderDisplayPct3"></span></span></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
 					   <div class="sliderBG">
-						  <input type="range" min="0" max="10000" value="5000" class="slider" id="soulSliderPct3"></div>
+						  <input type="range" min="0" max="10000" value="0" class="slider" id="soulSliderPct3"></div>
 					</div>
 					<label class="pctCheckContainer pctCheckContainerGRID1x1">
 					  <input type="checkbox"  id = "soulSliderCheck3">
 					  <span class="checkmark"></span>
 					</label>
-				</div>
+				</div></div>
 
+            <div id="ESPIONAGE_SLIDERPANEL">
 			<h5><span class="INFO_TEXT_STATIC">Espionage: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct2_DIV"><span id="soulSliderDisplayPct2"></span></span></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -607,7 +608,7 @@
 					  <input type="checkbox"  id = "soulSliderCheck2">
 					  <span class="checkmark"></span>
 					</label>
-				</div>
+				</div></div>
 
 
 			</div>
@@ -1774,37 +1775,35 @@ Stellar pop:
 
 
 
-
+        <div class="contentUnitHolder"><div id="COMPUTE_DISTRIBUTION_PANEL">
 			<div class="SubContentBox">
-
 			<div class="SubContentBoxTitle SubContentBoxTitleCtr">
               <div class="INFO_TEXT_STATIC">Processor Distribution: </div>
             </div><div style="line-height:30px"><br></div>
-
             <div style="display: grid; grid-template-columns: 50% 50%;">
+				  <div  style="grid-area: span 1 / span 1; text-align:left;">
+				    <span id="ANALYTIC_ENGINE_DISTRIBUTION_DISPLAY">
+					<h5><span class="INFO_TEXT_STATIC"> Analytic Engine: </span><span id="computation_think_CONTROL_PCT_DISPLAY">75%</span></h5>
+					</span>
+				  </div>
 
-              <div  style="grid-area: span 1 / span 1; text-align:left;">
-                <h5><span class="INFO_TEXT_STATIC"> Analytic Engine: </span><span id="computation_think_CONTROL_PCT_DISPLAY">75%</span></h5>
-              </div>
-
-              <div  style="grid-area: span 1 / span 1; text-align:right;">
-                 <h5> <span class="INFO_TEXT_STATIC"> Soulswarm: </span> <span id="computation_soul_CONTROL_PCT_DISPLAY">25%</span></h5>
-              </div>
-
+				  <div  style="grid-area: span 1 / span 1; text-align:right;">
+				     <span id="SOULSWARM_DISTRIBUTION_DISPLAY">
+					 <h5> <span class="INFO_TEXT_STATIC"> Soulswarm: </span> <span id="computation_soul_CONTROL_PCT_DISPLAY">25%</span></h5>
+					 </span>
+				  </div>
             </div>
-
-
 					<div class="slidecontainer" style="width:100%;">
 					   <div class="sliderBG">
 						  <input type="range" min="0" max="10000" value="2500" class="slider" id="computationSliderPct"  style="width:100%;"></div>
 					</div>
-
             </div>
+        </div></div>
 
 
+<!-- DEPRECATED -->
 		<button class="collapsible" style="display:none;"><h2>Processor Distribution </h2></span></button>
 			<div class="contentLV3" style="display:none;">
-
 
 
 			<h5><span class="INFO_TEXT_STATIC">Analytic Engine </span><div class="valueDisplayDiv" id="compSliderDisplayPct1_DIV"><span id="compSliderDisplayPct1"></span><span id="compSliderDisplayPct1_UNITS"></span></div></h5>
@@ -1832,9 +1831,9 @@ Stellar pop:
 				</div>
 
 		    </div>
+        </div></div>
 
-
-
+        <div class="contentUnitHolder"><div id="COMPUTE_UPKEEP_PANEL" style="display:none">
 		<button class="collapsible"><h2>UPKEEP </h2></span></button>
 			<div class="contentLV3">
 			<h5><span class="INFO_TEXT_STATIC"> Warning: underclocking upkeep processes may result in reduced productivity, efficacy, and efficiency!</span></h5><br>
@@ -1867,6 +1866,7 @@ Stellar pop:
 				</div>
 
 		    </div>
+		</div></div>
         </div>
 </div></div>
 
@@ -1882,6 +1882,7 @@ Stellar pop:
 		<button class="collapsible"><h2>Analysis Focus </h2></span></button>
 			<div class="contentLV3">
 
+            <div id="DEEPTHOUGHT_SLIDERPANEL">
 			<h5><span class="INFO_TEXT_STATIC">Deepthought: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct1_DIV"><span id="thinkSliderDisplayPct1"></span><span id="thinkSliderDisplayPct1_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">
 					<div class="slidecontainer">
@@ -1892,7 +1893,7 @@ Stellar pop:
 					  <input type="checkbox"  id = "thinkSliderCheck1">
 					  <span class="checkmark"></span>
 					</label>
-				</div>
+				</div></div>
 
 			<h5><span class="INFO_TEXT_STATIC">Engineering Research: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct2_DIV"><span id="thinkSliderDisplayPct2"></span><span id="thinkSliderDisplayPct2_UNITS"></span></div></h5>
 				<div class="multiPctSliderSuper">

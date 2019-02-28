@@ -1,6 +1,16 @@
 
 
 
+function lockSlider(sliderID){
+    var ss = document.getElementById(sliderID);
+    ss.value = 0;
+    ss.lockbox.checked = true;
+    
+}
+function unlockSlider(sliderID){
+    
+}
+
 ///////////////////////////////
 
 function canAfford(c){
@@ -269,8 +279,12 @@ function updatePctSliderDisplay(ss){
 GAME_GLOBAL.updatePctSliderDisplay=updatePctSliderDisplay;
 GAME_GLOBAL.updatePctSliderDisplayHelper=updatePctSliderDisplayHelper;
 
-
-
+function adjustSlider(vv){
+    this.onDownMultiSliderPct(this);
+    this.value = vv;
+    this.onInputMultiSliderPct(this);
+    this.value = vv;
+}
 
 function onInputMultiSliderPct(ss){
       var cval = parseFloat(ss.value)
@@ -376,6 +390,7 @@ for(var sfi = 0; sfi < PCTSLIDER_FIELDS.length; sfi++){
         ss.GAME = GAME_GLOBAL;
         ss.onInputMultiSliderPct = onInputMultiSliderPct;
         ss.onDownMultiSliderPct = onDownMultiSliderPct;
+        ss.adjustSlider = adjustSlider;
 
         ss.onmousedown = function() {
           this.onDownMultiSliderPct(this)

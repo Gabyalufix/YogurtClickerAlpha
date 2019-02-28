@@ -4,6 +4,33 @@
 
 //RESEARCH_PROJECTS_DIV
 
+function standard_onEffect(){
+      if(this.elemids != null){
+         for(var i=0;i<this.elemids.length; i++){
+            document.getElementById(this.elemids[i]).style.display = "block"
+          }
+      }
+      if(this.sliders != null){
+          for(var i=0;i<this.sliders.length; i++){
+            document.getElementById(this.sliders[i][1]).checked = false;
+          }
+      }
+}
+function standard_offEffect(){
+      if(this.elemids != null){
+          for(var i=0;i<this.elemids.length; i++){
+            document.getElementById(this.elemids[i]).style.display = "none"
+          }  
+      }
+      if(this.sliders != null){
+          for(var i=0;i<this.sliders.length; i++){
+            document.getElementById(this.sliders[i][1]).checked = true;
+            document.getElementById(this.sliders[i][0]).value = 0;
+          }
+      }
+}
+
+
 STATICVAR_HOLDER.PHASEDATA = {
 
     Energy_Panel:{  statID:"Energy_Panel",
@@ -67,9 +94,8 @@ STATICVAR_HOLDER.PHASEDATA = {
           }
        },sciname:"bio"
      },
-    eng_SCIENCE_UNLOCK:{  statID:"bio_SCIENCE_UNLOCK",
-              statTitle: "bio_SCIENCE_UNLOCK",
-              
+    eng_SCIENCE_UNLOCK:{  statID:"eng_SCIENCE_UNLOCK",
+              statTitle: "eng_SCIENCE_UNLOCK", elemids:["ANALYTIC_ENGINE_DIV","ANALYTIC_ENGINE_DISTRIBUTION_DISPLAY"],
        onEffect: function(){
           if(( STATS.PHASE_STATUS["bio_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["eng_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["psy_SCIENCE_UNLOCK"])){
             document.getElementById("DATABANK_basic").style.display = "none";
@@ -77,6 +103,17 @@ STATICVAR_HOLDER.PHASEDATA = {
           }
           document.getElementById("DATABANK_MINI").style.display = "block";
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 1;
+          for(var i=0;i<this.elemids.length; i++){
+            document.getElementById(this.elemids[i]).style.display = "block"
+          }
+          document.getElementById("COMPUTE_DISTRIBUTION_PANEL").style.display = "block";
+          if(! STATS.PHASE_STATUS["psy_SCIENCE_UNLOCK"]){
+              document.getElementById("computationSliderPct").value = 0;
+              document.getElementById("computationSliderPct").onchange()
+          } else {
+              document.getElementById("computationSliderPct").value = 5000;
+              document.getElementById("computationSliderPct").onchange()
+          }
        },
        offEffect: function(){
           GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
@@ -86,20 +123,36 @@ STATICVAR_HOLDER.PHASEDATA = {
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 0;
           document.getElementById("DATABANK_basic").style.display = "block";
           console.log("DATABANKMINI_"+this.sciname+": opacity=0")
+          for(var i=0;i<this.elemids.length; i++){
+            document.getElementById(this.elemids[i]).style.display = "none"
+          }     
+          if(! STATS.PHASE_STATUS["psy_SCIENCE_UNLOCK"]){
+              document.getElementById("COMPUTE_DISTRIBUTION_PANEL").style.display = "none";
+          }
        },sciname:"eng"
      },
-    psy_SCIENCE_UNLOCK:{  statID:"bio_SCIENCE_UNLOCK",
-              statTitle: "bio_SCIENCE_UNLOCK",
-              
+
+    psy_SCIENCE_UNLOCK:{  statID:"psy_SCIENCE_UNLOCK",
+              statTitle: "psy_SCIENCE_UNLOCK",elemids:["SOULSWARM_DIV","SOULSWARM_DISTRIBUTION_DISPLAY"],
        onEffect: function(){
+          standard_onEffect.call(this)
           if(( STATS.PHASE_STATUS["bio_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["eng_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["psy_SCIENCE_UNLOCK"])){
             document.getElementById("DATABANK_basic").style.display = "none";
             GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
+          }
+          document.getElementById("COMPUTE_DISTRIBUTION_PANEL").style.display = "block";
+          if(! STATS.PHASE_STATUS["eng_SCIENCE_UNLOCK"]){
+              document.getElementById("computationSliderPct").value = 10000;
+              document.getElementById("computationSliderPct").onchange()
+          } else {
+              document.getElementById("computationSliderPct").value = 5000;
+              document.getElementById("computationSliderPct").onchange()
           }
           document.getElementById("DATABANK_MINI").style.display = "block";
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 1;
        },
        offEffect: function(){
+          standard_offEffect.call(this)
           GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
           if((! STATS.PHASE_STATUS["bio_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["eng_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["psy_SUBFIELD_UNLOCK"])){
             document.getElementById("DATABANK_MINI").style.display = "none";
@@ -107,6 +160,9 @@ STATICVAR_HOLDER.PHASEDATA = {
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 0;
           document.getElementById("DATABANK_basic").style.display = "block";
           console.log("DATABANKMINI_"+this.sciname+": opacity=0")
+          if(! STATS.PHASE_STATUS["eng_SCIENCE_UNLOCK"]){
+              document.getElementById("COMPUTE_DISTRIBUTION_PANEL").style.display = "none";
+          }
        },sciname:"psy"
      },
     bio_SUBFIELD_UNLOCK:{  statID:"bio_SUBFIELD_UNLOCK",
@@ -252,30 +308,43 @@ STATICVAR_HOLDER.PHASEDATA = {
           document.getElementById(this.elemid).style.display = "none"
        }
      },
-    soulswarm_matrix:{  statID:"soulswarm_matrix",
-       statTitle: "soulswarm_matrix", elemids:["SOULSWARM_DIV","COMPUTE_CLUSTER_DIV"],
+    soulswarm_combatsim:{  statID:"soulswarm_combatsim",
+       statTitle: "soulswarm_combatsim", elemids:["COMBATSIM_SLIDERPANEL"],sliders:[["soulSliderPct3","soulSliderCheck3"]],
        onEffect: function(){
-          for(var i=0;i<this.elemids.length; i++){
-            document.getElementById(this.elemids[i]).style.display = "block"
-          }
+         standard_onEffect.call(this)
        },
        offEffect: function(){
-          for(var i=0;i<this.elemids.length; i++){
-            document.getElementById(this.elemids[i]).style.display = "none"
-          }      
+         standard_offEffect.call(this);    
        }
      },
+    soulswarm_espionage:{  statID:"soulswarm_espionage",
+       statTitle: "soulswarm_espionage", elemids:["ESPIONAGE_SLIDERPANEL"],sliders:[["soulSliderPct2","soulSliderCheck2"]],
+       onEffect: function(){
+         standard_onEffect.call(this)
+       },
+       offEffect: function(){
+         standard_offEffect.call(this);    
+       }
+     },
+     
     deep_thought:{  statID:"deep_thought",
-       statTitle: "deep_thought", elemids:["ANALYTIC_ENGINE_SLIDERPANEL"],
+       statTitle: "deep_thought", elemids:["ANALYTIC_ENGINE_SLIDERPANEL"],sliders:[["thinkSliderPct1","thinkSliderCheck1"]],
        onEffect: function(){
           for(var i=0;i<this.elemids.length; i++){
             document.getElementById(this.elemids[i]).style.display = "block"
+          }
+          for(var i=0;i<this.sliders.length; i++){
+            document.getElementById(this.sliders[i][1]).checked = false;
           }
        },
        offEffect: function(){
           for(var i=0;i<this.elemids.length; i++){
             document.getElementById(this.elemids[i]).style.display = "none"
-          }      
+          }  
+          for(var i=0;i<this.sliders.length; i++){
+            document.getElementById(this.sliders[i][1]).checked = true;
+            document.getElementById(this.sliders[i][0]).value = 0;
+          }
        }
      },
     World_Forge:{  statID:"World_Forge",
@@ -300,7 +369,7 @@ STATICVAR_HOLDER.PHASEDATA = {
           }
           STATS.STATUS_FLAG["BASIC_BIOMASS"]=true;
           var aa = STATS.ACTIVE_INDUSTRY_LIST 
-          var aax = aa.indexOf("BiomassFarm")
+          var aax = aa.indexOf("YogurtFarm")
           var aay = aa.indexOf("BioResearchFarm")
           if(aax >= 0){
             aa.splice( aax, 1 )
@@ -321,7 +390,7 @@ STATICVAR_HOLDER.PHASEDATA = {
           }
           STATS.STATUS_FLAG["BASIC_BIOMASS"]=false;
           var aa = STATS.ACTIVE_INDUSTRY_LIST 
-          var aax = aa.indexOf("Biomass")
+          var aax = aa.indexOf("Yogurt")
           var aay = aa.indexOf("BioResearch")
           if(aax >= 0){
             aa.splice( aax, 1 )
