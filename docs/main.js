@@ -527,7 +527,6 @@ for(var i=0; i<tabSetNames.length; i++){
    }
 }
 
-
 function projectSelectButtonEvent(){
    console.log("project: "+this.project.projectTitle);
    var elemList = this.masterAvail.projectElemList
@@ -536,6 +535,8 @@ function projectSelectButtonEvent(){
    }
    this.classList.add("PROJECT_BUTTON_SELECTED");
    var dd = this.project.desc;
+   this.masterAvail.researchButton.currProject     = this.project;
+   this.masterAvail.researchButton.currProjectElem = this;
    dd = dd + "<BR> &nbsp&nbsp&nbsp" + makeAdvCostString(this.project.cost,delim1=", ",delim2="<BR> &nbsp&nbsp&nbsp", compressThresh = 5, isLT=false)
    this.descElem.innerHTML = dd
    this.titleDescElem.innerHTML = this.project.projectTitle;
@@ -556,7 +557,8 @@ function addNewProject(pp){
      elem.titleDescElem = ELEMS["CURRENT_AVAIL_PROJECT_TITLE"];
      elem.masterAvail = masterAvailListElem;
      masterAvailListElem.projectElemList.push(elem);
-     masterAvailListElem.researchButton.currProject = pp;
+     //masterAvailListElem.researchButton.currProject     = pp;
+     //masterAvailListElem.researchButton.currProjectElem = elem;
      this.appendChild(elem);
 //   var out = makeColoredScience(cc[0],costDesc, isLT);
 }
@@ -598,11 +600,14 @@ masterAvailListElem.researchButton.onclick = function(){
         this.GAME.currentResearchEffect = this.GAME.STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ pp.projectID ].effect;
         this.GAME.currentResearchEffect();
         this.GAME.INVENTORY.SCIENCE_RESEARCHED.push(pp.uid);
+        
+        this.currProjectElem.parentNode.removeChild(this.currProjectElem)
+        delete this.GAME.STATS["AVAIL_PROJECT_LIST"][pp.uid]
         //masterAvailListElem.projectElemList.splice(  )
         /*
         TODO: remove project!
         */
-        
+        this.currProject = null;
         this.disabled = true;
   }
 }
@@ -619,6 +624,7 @@ masterAvailListElem.addNewProject(ap)
 masterAvailListElem.researchButton.canAffordTest()
 cheatFunc_multScience()
 
+masterAvailListElem.researchButton.currProject.cost
 */
 
 masterAvailListElem.researchButton.canAffordTest = function(){
@@ -646,6 +652,7 @@ masterAvailListElem.researchButton.canAffordTest = function(){
              return false;
          }
        } else {
+         this.disabled = true;
          return false;
        }
 }
@@ -1881,12 +1888,12 @@ window.addEventListener('click',function(event) {
 INVENTORY["STARS-" + "G" +"-CT"] = 1;
 INVENTORY["WORLDS-"+"Bot"+"-CT"] = 1
 
-INVENTORY["POWER-FreeBot-CT"] = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY / 2;
-INVENTORY["MATTER-Botbots-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 7;
-INVENTORY["MATTER-Botpwr-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 3;
-INVENTORY["MATTER-Compute-CT"] = 5000000000000
+INVENTORY["POWER-FreeBot-CT"]    = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY / 2;
+INVENTORY["MATTER-Botbots-CT"]   = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 1.2;
+INVENTORY["MATTER-Botpwr-CT"]    = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 0.75;
+INVENTORY["MATTER-Compute-CT"]   = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 0.3;
 
-INVENTORY["MATTER-Waste-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 119;
+INVENTORY["MATTER-Waste-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 25;
 
 INVENTORY["MATTER-FreeBot-CT"] = (STATICVAR_HOLDER.SOLAR_MASS / 2) - INVENTORY["MATTER-Botbots-CT"] - INVENTORY["MATTER-Botpwr-CT"] - (INVENTORY["MATTER-Waste-CT"] / 2);
 
@@ -1896,7 +1903,7 @@ var START_WITH_GREENWORLD = true;
 if(START_WITH_GREENWORLD){
   INVENTORY["WORLDS-"+"Green"+"-CT"] = 1
   INVENTORY["POWER-FreeGreen-CT"] = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY / 2;
-  INVENTORY["MATTER-Biomass-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 12;
+  INVENTORY["MATTER-Biomass-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 1.2;
   INVENTORY["MATTER-FreeGreen-CT"] = (STATICVAR_HOLDER.SOLAR_MASS / 2) - INVENTORY["MATTER-Biomass-CT"] - (INVENTORY["MATTER-Waste-CT"] / 2);
 }
 

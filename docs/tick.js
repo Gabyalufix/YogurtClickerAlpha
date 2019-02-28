@@ -725,8 +725,9 @@ function TICK_INDUSTRY_calcScienceGain(){
       this.INVENTORY[fid+"_SCIENCE_FREE"] = this.INVENTORY[fid+"_SCIENCE_FREE"] + newSci
 
       if(STATS.STATUS_FLAG["BASIC_SCIENCE"] && fid == "eng"){
-         this.INVENTORY["BASIC_SCIENCE_TOTAL"] = this.INVENTORY["BASIC_SCIENCE_TOTAL"] + newSci / 4294967296;
-         this.ELEMS["basic_FREE_DISPLAY"].textContent = fmtSI(this.INVENTORY["BASIC_SCIENCE_TOTAL"])+"B";
+         this.INVENTORY["basic_SCIENCE_TOTAL"] = this.INVENTORY["basic_SCIENCE_TOTAL"] + newSci / 4294967296;
+         this.INVENTORY["basic_SCIENCE_FREE"]  = this.INVENTORY["basic_SCIENCE_FREE"] + newSci / 4294967296;
+         this.ELEMS["basic_FREE_DISPLAY"].textContent = fmtSI(this.INVENTORY["basic_SCIENCE_FREE"])+"B";
          this.ELEMS["basic_GAIN_RATE"].textContent = fmtSI(newSci / 4294967296)+"";
          
       }

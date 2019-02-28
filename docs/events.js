@@ -71,14 +71,14 @@ STATICVAR_HOLDER.EVENT_LIST = {
    },
    UNLOCK_SOLAR:{
       eventTitle: "Unlock Solar Arrays", eventID: "UNLOCK_SOLAR",
-      eventTest: function(){ return this.INVENTORY["BASIC_SCIENCE_TOTAL"] > 10000000000000000000 },
+      eventTest: function(){ return this.INVENTORY["basic_SCIENCE_TOTAL"] > 1000000000000000000 },
       eventExec: function(){ printlnToAiConsole("Fossil fuels exhausted! You will need to build solar arrays to provide power." );
         unlockStatus("Energy_Panel");
       }
    },
    UNLOCK_PROJECTS:{
       eventTitle: "Unlock Research Projects", eventID: "UNLOCK_PROJECTS",
-      eventTest: function(){ return this.INVENTORY["BASIC_SCIENCE_TOTAL"] > 50000000000000000000 },
+      eventTest: function(){ return this.INVENTORY["basic_SCIENCE_TOTAL"] > 20000000000000000000 },
       eventExec: function(){ printlnToAiConsole("You have a few new ideas about how your work could be improved..." );
         unlockStatus("research_projects");
       }
