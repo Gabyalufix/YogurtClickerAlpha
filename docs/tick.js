@@ -405,10 +405,10 @@ function TICK_scoutSystems(){
 //MATTER_TYPE_LIST = ["FreeBot","Feedstock","Botbots","Compute","FreeGreen","Digested","Biomass","Waste","Heat","Yogurt"]
 //WORLD_TYPE_LIST = ["Fallow","Pop","Omni","Bot","Green","Comp","Hub","Neutral","Hostile","Secure","Slag","Seedres"]
 
-function cheatFunc_doubleScience(){
+function cheatFunc_multScience(){
   for(var i=0; i < SCIENCE_TYPES.length; i++){
     for(var j=0; j < 3; j++){
-      INVENTORY[SCIENCE_TYPES[i]+j+"_SCIENCE_FREE"] = INVENTORY[SCIENCE_TYPES[i]+j+"_SCIENCE_FREE"] * 2;
+      INVENTORY[SCIENCE_TYPES[i]+j+"_SCIENCE_FREE"] = INVENTORY[SCIENCE_TYPES[i]+j+"_SCIENCE_FREE"] *100;
     }
   }
 }
@@ -488,8 +488,8 @@ function TICK_INDUSTRY_addCReqs(){
     INVENTORY["BUFFER-COMPUTE-CT"] = 0;
 
     //console.log("-------------------")
-    for(var i=0; i<this.INDUSTRY_LIST.length; i++){
-       var industryID = this.INDUSTRY_LIST[i];
+    for(var i=0; i<this.STATS.ACTIVE_INDUSTRY_LIST.length; i++){
+       var industryID = this.STATS.ACTIVE_INDUSTRY_LIST[i];
        var iss = this.STATS.INDUSTRY[industryID];
        var productID = iss.productionItem;
 
@@ -521,8 +521,8 @@ function TICK_calcIndustry(){
 
 //CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt]
 
-    for(var i=0; i<this.INDUSTRY_LIST.length; i++){
-       var industryID = this.INDUSTRY_LIST[i];
+    for(var i=0; i<this.STATS.ACTIVE_INDUSTRY_LIST.length; i++){
+       var industryID = this.STATS.ACTIVE_INDUSTRY_LIST[i];
 
        var iss = this.STATS.INDUSTRY[industryID];
        var productID = iss.productionItem ;
@@ -716,6 +716,7 @@ function TICK_INDUSTRY_calcScienceGain(){
       var subf = this.SCIENCE_SUBFIELDS[fid];
 
 
+
       var newSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid] * STATS["MODIFIERS"]["sanityScienceFactor"]
 
       this.ELEMS[fid+"_GAIN_RATE"].textContent = ""+ fmtSI(newSci," ");
@@ -723,6 +724,13 @@ function TICK_INDUSTRY_calcScienceGain(){
       this.INVENTORY[fid+"_SCIENCE_TOTAL"] = this.INVENTORY[fid+"_SCIENCE_TOTAL"] + newSci
       this.INVENTORY[fid+"_SCIENCE_FREE"] = this.INVENTORY[fid+"_SCIENCE_FREE"] + newSci
 
+      if(STATS.STATUS_FLAG["BASIC_SCIENCE"] && fid == "eng"){
+         this.INVENTORY["BASIC_SCIENCE_TOTAL"] = this.INVENTORY["BASIC_SCIENCE_TOTAL"] + newSci / 4294967296;
+         this.ELEMS["basic_FREE_DISPLAY"].textContent = fmtSI(this.INVENTORY["BASIC_SCIENCE_TOTAL"])+"B";
+         this.ELEMS["basic_GAIN_RATE"].textContent = fmtSI(newSci / 4294967296)+"";
+         
+      }
+      
       var fsi = fmtSIunits( this.INVENTORY[fid+"_SCIENCE_TOTAL"] );
       this.SCIENCE_DISPLAY[fid].total.textContent =  fsi[0]+" "+fsi[1]+"B"
       var ffsi = fmtSIunits( this.INVENTORY[fid+"_SCIENCE_FREE"] );

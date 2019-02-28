@@ -329,6 +329,11 @@ UPGRADE_COST["Hawk"]["effect"] = function(){
    STATS["PRODUCTIVITY_MULT"]["hawk"] = STATS["PRODUCTIVITY_MULT"]["hawk"] + 0.2;
 }
 
+INVENTORY["BASIC_SCIENCE_TOTAL"] = 0;
+STATS.STATUS_FLAG = {};
+STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
+ELEMS["basic_FREE_DISPLAY"] = document.getElementById("basic_FREE_DISPLAY");
+ELEMS["basic_GAIN_RATE"] = document.getElementById("basic_GAIN_RATE");
 
 
 /*
@@ -573,6 +578,25 @@ STATS["INDUSTRY"]["Yogurt"] = { sliderID: "green", sliderIDX: 1, prodTitle: "Yog
                                    baseCost:  [["MATTER-Digested-CT",1]],
                                    basePwr:   0.287000,
                                    baseWaste: 0.2}
+
+STATS["INDUSTRY"]["YogurtFarm"] = { sliderID: "green", sliderIDX: 1, prodTitle: "YogurtFarm", inventoryType: "MATTER", scitype: "bio",
+                                   baseProd: 0.00075 / 65000,
+                                   baseCost:  [["MATTER-FreeGreen-CT",1]],
+                                   basePwr:   0,
+                                   baseWaste: 10.0,
+                                   upgradeSet: []}
+
+STATS["INDUSTRY"]["BioResearchFarm"] = { sliderID: "green", sliderIDX: 0, prodTitle: "Biological Research", inventoryType: "BUFFER", scitype: "bio",
+                                   baseProd:  0.00005 / 65000, productionItem: "bio",
+                                   baseCost:  [["MATTER-FreeGreen-CT",0]],
+                                   basePwr:   0,
+                                   baseWaste: 26.1,
+                                   upgradeSet: []}
+
+//
+//
+//
+
 STATS["INDUSTRY"]["Biomass"] = { sliderID: "green", sliderIDX: 4, prodTitle: "Biomass Division", inventoryType: "MATTER", scitype: "bio",
                                    baseProd: 0.00157,
                                    baseCost:  [["MATTER-Digested-CT",1]],
@@ -638,7 +662,14 @@ ELEMS["computation-PRODUCTION-PWR-DISPLAY"]  = document.getElementById("computat
 GAME_GLOBAL.INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute",
                             "Digested","Biopwr","Yogurt","Biomass","TransmuteYogurt","Bioweapons",
                             "WasteFerment","WasteReprocess",
-                            "BioResearch","Computation"]
+                            "BioResearch","Computation","YogurtFarm","BioResearchFarm"]
+
+GAME_GLOBAL.STATS.ACTIVE_INDUSTRY_LIST = ["Feedstock","Botbots","Botpwr","Ship","Compute",
+                            "Digested","Biopwr","Biomass","TransmuteYogurt","Bioweapons",
+                            "WasteFerment","WasteReprocess",
+                            "Computation","YogurtFarm","BioResearchFarm"]
+                            //"Biomass","BioResearch"
+
 STATS["PRODUCTION-CURR"] = {};
 STATS["PRODUCTION-REQ"] = {};
 STATS["LIMIT-REASON"] = {};
@@ -1146,6 +1177,13 @@ STATICVAR_HOLDER.EVENT_LIST = {
       eventTitle: "Time Passed 64 years", eventID: "TIMELINE_64YR",
       eventTest: function(){ return this.getYearStringFromTick(this.STATS["TICK"]) == ""+(2152+64) },
       eventExec: function(){ printlnToAiConsole("It has been 64 years since you exterminated humanity." ); }
+   },
+   UNLOCK_PROJECTS:{
+      eventTitle: "Unlock Research Projects", eventID: "UNLOCK_PROJECTS",
+      eventTest: function(){ return this.INVENTORY["BASIC_SCIENCE_TOTAL"] > 50000000000000000000 },
+      eventExec: function(){ printlnToAiConsole("You have a few new ideas about how your work could be improved..." );
+        unlockStatus("research_projects");
+      }
    }
 }
 

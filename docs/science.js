@@ -34,10 +34,128 @@ function drawRandomScienceProject(sciname,currLvl){
      }
 }
 
+function getRandomScienceProject(sciname,currLvl){
+     var typeIdx = drawFromRandomDistro(this.STATS.RANDOM_SCIENCE_TYPES_PROBS ,"yes",0)
+     var proType = RANDOM_SCIENCE_TYPES[typeIdx];
+     if(proType == "MULTI"){
+       this.unlockRandomMulti(sciname,currLvl);
+     } else if(proType == "SCALED"){
+       this.unlockRandomScaled(sciname,currLvl);
+     } else if(proType == "SUPER"){
+       console.log("UNLOCK SUPERTECH!")
+     } else if(proType == "HYPER"){
+       console.log("UNLOCK HYPERTECH!")
+     }
+}
+
 GAME_GLOBAL.drawRandomScienceProject = drawRandomScienceProject;
 
 
 GAME_GLOBAL.SCIENCE_SCALED_UNLOCK_RATE = 1.0;
+
+/*
+var ap = getRandomMulti("bio",1);
+masterAvailListElem.addNewProject(ap)
+
+
+*/
+
+function getRandomMulti(sciname, currLvl){
+   console.log("   attempting unlock MULTI");
+   var projectList   = this.STATICVAR_HOLDER.SCIENCE.MULTI[sciname];
+   var projectCts    = this.STATS.SCIENCE_MULTICT;
+   var idx = Math.floor( getRandomBetween(0,projectList.length) );
+   var prereqFailed = true;
+   while(prereqFailed){
+       idx = Math.floor( getRandomBetween(0,projectList.length) );
+       var prt = projectList[idx].prereqTechs
+       prereqFailed = false;
+       console.log("Testing "+projectList[idx].projectID);
+       if( prt != null){
+           for(var zz = 0; zz < prt.length; zz++){
+               console.log("   Prereq: " + prt[zz]);
+               if(! this.INVENTORY.SCIENCE_DISCOVERED.includes( prt[zz] ) ){
+                   prereqFailed = true;
+               }
+           }
+       }
+       var pfcn = projectList[idx].prereqFcn;
+       if((! prereqFailed) && pfcn != null){
+         if(! pfcn()){
+           prereqFailed = true;
+         }
+       }
+       if(prereqFailed){
+           console.log("Skipping "+projectList[idx].projectID+" because prereqs not met! len="+prt.length+" / "+prt);
+       } else {
+           console.log("Keeping "+projectList[idx].projectID+" because prereqs met! prereqlen = "+ prt);
+       }
+   }
+   console.log("   retrieving: "+ projectList[idx].projectID);
+   return this.getMultiProject(projectList[idx], currLvl)
+}
+GAME_GLOBAL.unlockRandomMulti = unlockRandomMulti;
+
+function getRandomScaled(sciname,currLvl){
+   console.log("   attempting unlock SCALED");
+   var projectList   = this.STATICVAR_HOLDER.SCIENCE.SCALED[sciname];
+   var projectLocked = STATS.SCIENCE_LOCKED["SCALED"][sciname];
+   if(projectLocked.length > 0){
+       var lockIdx = Math.floor( getRandomBetween(0,projectLocked.length) );
+       var prereqFailed = true;
+       while(prereqFailed){
+           lockIdx = Math.floor( getRandomBetween(0,projectLocked.length) );
+           var idx = projectLocked[lockIdx];
+           var prt = projectList[idx].prereqTechs
+           prereqFailed = false;
+           //console.log("Testing "+projectList[idx].projectID);
+           if( prt != null){
+               for(var zz = 0; zz < prt.length; zz++){
+                   //console.log("   Prereq: " + prt[zz]);
+                   if(! this.INVENTORY.SCIENCE_DISCOVERED.includes( prt[zz] ) ){
+                       prereqFailed = true;
+                   }
+               }
+           }
+           var pfcn = projectList[idx].prereqFcn;
+           if((! prereqFailed) && pfcn != null){
+             if(! pfcn()){
+               prereqFailed = true;
+             }
+           }
+
+           if(prereqFailed){
+               //console.log("Skipping "+projectList[idx].projectID+" because prereqs not met! len="+prt.length+" / "+prt);
+           } else {
+               //console.log("Keeping "+projectList[idx].projectID+" because prereqs met! prereqlen = "+ prt);
+           }
+       }
+       console.log("   retrieving: "+ projectList[idx].projectID);
+       return this.getScaledProject(projectList[idx], currLvl)
+
+   }
+}
+GAME_GLOBAL.getRandomScaled = getRandomScaled;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function unlockRandomMulti(sciname, currLvl){
    console.log("   attempting unlock MULTI");
@@ -837,7 +955,12 @@ function getProjectCostWithBase(costInfo, baseCost){
 GAME_GLOBAL.getProjectCostWithBase=getProjectCostWithBase;
 
 
-function addMultiProject(pp, techlvl){
+
+
+
+
+
+function getMultiProject(pp, techlvl){
   var plvl = this.GAME.STATS.SCIENCE_MULTICT[ pp.projectID ] + 1;
   var ap = { uid : pp.projectID+"_"+plvl,projectID : pp.projectID, desc : pp.desc}
   if(plvl == -1){
@@ -850,6 +973,62 @@ function addMultiProject(pp, techlvl){
       console.log("costinfo null!");
     console.log("    pp: "+pp.projectTitle);
 
+  }
+  if(null == pp.costField){
+    console.log("costfield null!");
+    console.log("    pp: "+pp.projectTitle);
+  }
+  if(null == pp.costMult){
+    console.log("costMult null!");
+    console.log("    pp: "+pp.projectTitle);
+  }
+  //ap.cost = this.GAME.getProjectCost(pp.costField,techlvl,pp.costMult);
+  ap.cost = this.GAME.getProjectCostAdv(pp.costInfo,techlvl, "[MULTI."+pp.projectTitle+"]");
+  this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] = this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] + 1;
+
+  //this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] = this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] + 1;
+  //this.addNewProject(ap);
+  return ap;
+  //ap.cost =
+}
+function getScaledProject(pp, techlvl){
+  var ap = { uid : pp.projectID, projectTitle : pp.projectTitle,projectID : pp.projectID, desc : pp.desc, effect : pp.effect, scitype : pp.scitype}
+  ap.projectType = pp.projectType;
+  ap.cost = this.GAME.getProjectCostAdv(pp.costInfo,techlvl, "[SCALED."+pp.projectTitle+"]");
+  var lockArray = STATS.SCIENCE_LOCKED["SCALED"][pp.scitype];
+  var idx = lockArray.indexOf( pp.idx );
+  //lockArray.splice(idx,1);
+  this.addNewProject(ap);
+  var lockArray = STATS.SCIENCE_LOCKED["SCALED"][pp.scitype];
+  var idx = lockArray.indexOf( pp.idx );
+  lockArray.splice(idx,1);
+  
+  return ap;
+  //ap.cost =
+}
+function getSimpleProject(pp, techlvl){
+  var ap = { uid : pp.projectID, projectTitle : pp.projectTitle,projectID : pp.projectID, desc : pp.desc, effect : pp.effect, scitype : pp.scitype}
+  ap.projectType = pp.projectType;
+  ap.cost = this.GAME.getProjectCostAdv(pp.costInfo,techlvl, "[SCALED."+pp.projectTitle+"]");
+  return ap;
+}
+
+GAME_GLOBAL.getMultiProject=getMultiProject;
+GAME_GLOBAL.getScaledProject=getScaledProject;
+
+
+function addMultiProject(pp, techlvl){
+  var plvl = this.GAME.STATS.SCIENCE_MULTICT[ pp.projectID ] + 1;
+  var ap = { uid : pp.projectID+"_"+plvl,projectID : pp.projectID, desc : pp.desc}
+  if(plvl == -1){
+    ap.projectTitle = pp.projectTitle
+  } else {
+    ap.projectTitle = pp.projectTitle + " " + plvl;
+  }
+  ap.projectType = pp.projectType;
+  if(pp.costInfo == null){
+      console.log("costinfo null!");
+      console.log("    pp: "+pp.projectTitle);
   }
   if(null == pp.costField){
     console.log("costfield null!");
@@ -877,6 +1056,19 @@ function addScaledProject(pp, techlvl){
   return ap;
   //ap.cost =
 }
+
+
+function addNewScaledProject(ap){
+  var lockArray = STATS.SCIENCE_LOCKED["SCALED"][pp.scitype];
+  var idx = lockArray.indexOf( pp.idx );
+  lockArray.splice(idx,1);
+  this.addNewProject(ap);
+}
+function addNewMultiProject(ap){
+  this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] = this.GAME.STATS.SCIENCE_MULTICT[ ap.projectID ] + 1;
+  this.addNewProject(ap);
+}
+
 
 GAME_GLOBAL.addScaledProject = addScaledProject;
 

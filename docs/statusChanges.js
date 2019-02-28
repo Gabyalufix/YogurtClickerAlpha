@@ -16,18 +16,21 @@ STATICVAR_HOLDER.PHASEDATA = {
      },
     
     bio_SCIENCE_UNLOCK:{  statID:"bio_SCIENCE_UNLOCK",
-              statTitle: "bio_SCIENCE_UNLOCK",elemids:["BIORESEARCH_SLIDER_PANEL"],sliders:[["botSliderPct7","botSliderCheck7"]], 
+              statTitle: "bio_SCIENCE_UNLOCK",elemids:["BIORESEARCH_SLIDER_PANEL"],sliders:[["greenSliderPct1","greenSliderCheck1"]], 
        onEffect: function(){
           if(( STATS.PHASE_STATUS["bio_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["eng_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["psy_SCIENCE_UNLOCK"])){
             document.getElementById("DATABANK_basic").style.display = "none";
+            GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = false;
           }
           document.getElementById("DATABANK_MINI").style.display = "block";
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 1;
           for(var i=0;i<this.elemids.length; i++){
             document.getElementById(this.elemids[i]).style.display = "block"
           }
+          
        },
        offEffect: function(){
+          GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
           if((! STATS.PHASE_STATUS["bio_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["eng_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["psy_SUBFIELD_UNLOCK"])){
             document.getElementById("DATABANK_MINI").style.display = "none";
           }
@@ -49,11 +52,13 @@ STATICVAR_HOLDER.PHASEDATA = {
        onEffect: function(){
           if(( STATS.PHASE_STATUS["bio_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["eng_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["psy_SCIENCE_UNLOCK"])){
             document.getElementById("DATABANK_basic").style.display = "none";
+            GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
           }
           document.getElementById("DATABANK_MINI").style.display = "block";
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 1;
        },
        offEffect: function(){
+          GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
           if((! STATS.PHASE_STATUS["bio_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["eng_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["psy_SUBFIELD_UNLOCK"])){
             document.getElementById("DATABANK_MINI").style.display = "none";
           }
@@ -68,11 +73,13 @@ STATICVAR_HOLDER.PHASEDATA = {
        onEffect: function(){
           if(( STATS.PHASE_STATUS["bio_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["eng_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["psy_SCIENCE_UNLOCK"])){
             document.getElementById("DATABANK_basic").style.display = "none";
+            GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
           }
           document.getElementById("DATABANK_MINI").style.display = "block";
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 1;
        },
        offEffect: function(){
+          GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
           if((! STATS.PHASE_STATUS["bio_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["eng_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["psy_SUBFIELD_UNLOCK"])){
             document.getElementById("DATABANK_MINI").style.display = "none";
           }
@@ -263,6 +270,50 @@ STATICVAR_HOLDER.PHASEDATA = {
           }      
        }
      },
+     
+    BASIC_BIOMASS:{  statID:"BASIC_BIOMASS",
+       statTitle: "BASIC_BIOMASS", elemids:["DIGEST_SLIDER_DIV","BIOMASS_SLIDER_DIV"], sliders:[["greenSliderPct6","greenSliderCheck6"],["greenSliderPct5","greenSliderCheck5"]],
+       onEffect: function(){
+          for(var i=0;i<this.elemids.length; i++){
+            document.getElementById(this.elemids[i]).style.display = "block"
+          }
+          STATS.STATUS_FLAG["BASIC_BIOMASS"]=true;
+          var aa = STATS.ACTIVE_INDUSTRY_LIST 
+          var aax = aa.indexOf("BiomassFarm")
+          var aay = aa.indexOf("BioResearchFarm")
+          if(aax >= 0){
+            aa.splice( aax, 1 )
+          }
+          if(aay >= 0){
+            aa.splice( aay, 1 )
+          }
+          aa.push("Yogurt")
+          aa.push("BioResearch")
+       },
+       offEffect: function(){
+          for(var i=0;i<this.elemids.length; i++){
+            document.getElementById(this.elemids[i]).style.display = "none"
+          }
+          for(var i=0;i<this.sliders.length; i++){
+            document.getElementById(this.sliders[i][1]).checked = true;
+            document.getElementById(this.sliders[i][0]).value = 0;
+          }
+          STATS.STATUS_FLAG["BASIC_BIOMASS"]=false;
+          var aa = STATS.ACTIVE_INDUSTRY_LIST 
+          var aax = aa.indexOf("Biomass")
+          var aay = aa.indexOf("BioResearch")
+          if(aax >= 0){
+            aa.splice( aax, 1 )
+          }
+          if(aay >= 0){
+            aa.splice( aay, 1 )
+          }
+          aa.push("YogurtFarm")
+          aa.push("BioResearchFarm")
+          
+       }
+     },
+     
     Matter_Panel:{  statID:"Matter_Panel",
        statTitle: "Matter_Panel", elemids:["MATTER_PANEL_DIV"],
        onEffect: function(){
@@ -364,7 +415,6 @@ function enactCurrentStatusSettings(){
    }
 }
 GAME_GLOBAL.enactCurrentStatusSettings=enactCurrentStatusSettings;
-
 
 
 /*

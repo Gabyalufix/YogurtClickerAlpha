@@ -514,19 +514,34 @@ for(var i=0; i<tabSetNames.length; i++){
 
 
 function projectSelectButtonEvent(){
-   console.log("project: "+elem.project.projectTitle);
-   this.classList.toggle("PROJECT_BUTTON_SELECTED");
-}
+   console.log("project: "+this.project.projectTitle);
+   var elemList = this.masterAvail.projectElemList
+   for(var i=0; i < elemList.length; i++){
+     elemList[i].classList.remove("PROJECT_BUTTON_SELECTED");
+   }
+   this.classList.add("PROJECT_BUTTON_SELECTED");
+   var dd = this.project.desc;
+   dd = dd + "<BR> &nbsp&nbsp&nbsp" + makeAdvCostString(this.project.cost,delim1=", ",delim2="<BR> &nbsp&nbsp&nbsp", compressThresh = 5, isLT=false)
+   this.descElem.innerHTML = dd
+   this.titleDescElem.innerHTML = this.project.projectTitle;
+ }
 
-function addNewProject(ap, techlvl){
-     var pp = addScaledProject(ap,techlvl)
+function addNewProject(pp){
+     //var pp = addScaledProject(ap,techlvl)
      this.GAME.STATS["AVAIL_PROJECT_LIST"][pp.uid] = pp;
-     var elem = document.createElement("PROJECT_BUTTON");
+     var elem = document.createElement("button");
      var costDesc = this.GAME.STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]
-     elem.className += getScienceColorClass(pp.cost[0]);
+     //elem.className += getScienceColorClass(pp.cost[0]);
      elem.project = pp;
      elem.textContent = pp.projectTitle;
      elem.onclick = this.projectSelectButtonEvent;
+     elem.classList.add("PROJECT_BUTTON")
+     elem.GAME = GAME_GLOBAL;
+     elem.descElem = ELEMS["CURRENT_AVAIL_PROJECT_DESC"]
+     elem.titleDescElem = ELEMS["CURRENT_AVAIL_PROJECT_TITLE"];
+     elem.masterAvail = masterAvailListElem;
+     masterAvailListElem.projectElemList.push(elem);
+     masterAvailListElem.researchButton.currProject = pp;
      this.appendChild(elem);
 //   var out = makeColoredScience(cc[0],costDesc, isLT);
 }
@@ -535,6 +550,9 @@ STATS["AVAIL_PROJECT_LIST"] = [];
 var masterAvailListElem = document.getElementById("ProjectSelector");
 var masterDescElem = document.getElementById("CURRENT_AVAIL_PROJECT_DESC");
 var masterResearchButton = document.getElementById("RESEARCH_CURRENT_PROJECT");
+
+ELEMS["CURRENT_AVAIL_PROJECT_TITLE"] = document.getElementById("CURRENT_AVAIL_PROJECT_TITLE");
+ELEMS["CURRENT_AVAIL_PROJECT_DESC"] = document.getElementById("CURRENT_AVAIL_PROJECT_DESC");
 
 masterAvailListElem.projectSelectButtonEvent = projectSelectButtonEvent;
 masterAvailListElem.descElem = masterDescElem;
@@ -545,7 +563,74 @@ masterAvailListElem.GAME = GAME_GLOBAL;
 masterAvailListElem.researchButton.availListElem = masterAvailListElem;
 masterAvailListElem.researchButton.GAME = GAME_GLOBAL;
 masterAvailListElem.addNewProject = addNewProject;
+masterAvailListElem.projectElemList = [];
+masterAvailListElem.researchButton.disabled = true;
 
+RESEARCH_BUTTONS.push(masterAvailListElem.researchButton);
+
+masterAvailListElem.researchButton.onclick = function(){
+  if(this.currProject != null){
+        var pp = this.currProject;
+        for(var kk = 0; kk < pp.cost.length; kk++){
+           //console.log(this.availListElem.pp);
+           //console.log("BEFORE: [val="+this.availListElem.value+"] ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
+           this.GAME.INVENTORY[ pp.cost[kk][0] ] = this.GAME.INVENTORY[ pp.cost[kk][0] ] - pp.cost[kk][1];
+           //console.log("AFTER: ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
+        }
+        this.GAME.currentResearchEffect = this.GAME.STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ pp.projectID ].effect;
+        this.GAME.currentResearchEffect();
+        this.GAME.INVENTORY.SCIENCE_RESEARCHED.push(pp.uid);
+        //masterAvailListElem.projectElemList.splice(  )
+        /*
+        TODO: remove project!
+        */
+        
+        this.disabled = true;
+  }
+}
+
+
+/*
+var ap = getRandomMulti("bio",1);
+masterAvailListElem.addNewProject(ap)
+var ap = getRandomMulti("bio",1);
+masterAvailListElem.addNewProject(ap)
+var ap = getRandomMulti("bio",1);
+masterAvailListElem.addNewProject(ap)
+
+masterAvailListElem.researchButton.canAffordTest()
+cheatFunc_multScience()
+
+*/
+
+masterAvailListElem.researchButton.canAffordTest = function(){
+       var pp = this.currProject;
+       if(pp != null){
+         //console.log("trying to afford:");
+         var prereqs = pp.upgradePrereqTechs;
+         var meetsPrereqs = true;
+         if(prereqs != null){
+             for( var i=0; i < prereqs.length; i++){
+                 if( ! this.GAME.INVENTORY.SCIENCE_RESEARCHED.includes( prereqs[i] ) ){
+                     meetsPrereqs = false;
+                 }
+             }
+         }
+         //console.log("prereq status:"+meetsPrereqs);
+
+         if( this.GAME.canAfford(pp.cost) && meetsPrereqs ){
+             this.disabled = false;
+             //console.log("     affordable!");
+             return true;
+         } else {
+             this.disabled = true;
+             //console.log("     unaffordable!");
+             return false;
+         }
+       } else {
+         return false;
+       }
+}
 
 /*
 var projectList   = this.STATICVAR_HOLDER.SCIENCE.SCALED["bio"]
