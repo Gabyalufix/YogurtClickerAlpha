@@ -538,6 +538,30 @@ STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3], ["MATTER-Waste-CT",
 
 STATS["INDUSTRY"] = {};
 STATS["INDUSTRY"]["Feedstock"] = { sliderID: "bot", sliderIDX: 0, prodTitle: "Botworld Feedstock", inventoryType: "MATTER", scitype: "eng", scifield: "eng2",
+                                   baseProd: 1e-1 * 0.00827,
+                                   baseCost:  [["MATTER-FreeBot-CT",1]],
+                                   basePwr:   9e0 *0.05800,
+                                   baseWaste: 0.5}
+STATS["INDUSTRY"]["Botbots"] = { sliderID: "bot", sliderIDX: 1, prodTitle: "Robotic Fabricator Construction", inventoryType: "MATTER", scitype: "eng", scifield: "eng2",
+                                   baseProd: 1e-1 * 0.0012,
+                                   baseCost:  [["MATTER-Feedstock-CT",1]],
+                                   basePwr:   9e0 *0.331000,
+                                   baseWaste: 1.0}
+
+STATS["INDUSTRY"]["Botpwr"] =   { sliderID: "bot", sliderIDX: 6, prodTitle: "Solar Array Construction", inventoryType: "MATTER", scitype: "eng",
+                                   baseProd: 1e-1 * 0.00209,
+                                   baseCost:  [["MATTER-Feedstock-CT",1]],
+                                   basePwr:   9e0 *0.077200,
+                                   baseWaste: 0.5}
+STATS["INDUSTRY"]["Ship"] = { sliderID: "bot", sliderIDX: 4, prodTitle: "Shipyard Construction", inventoryType: "BUFFER", scitype: "eng",
+                                   baseProd: 1e-1 * 0.000000001 / 3.14,
+                                   baseCost:  [["MATTER-Feedstock-CT",1]],
+                                   basePwr:  9e0 * 0.138000,
+                                   baseWaste: 3140000}
+/*
+pre startgame:
+
+STATS["INDUSTRY"]["Feedstock"] = { sliderID: "bot", sliderIDX: 0, prodTitle: "Botworld Feedstock", inventoryType: "MATTER", scitype: "eng", scifield: "eng2",
                                    baseProd: 0.00827,
                                    baseCost:  [["MATTER-FreeBot-CT",1]],
                                    basePwr:   0.005800,
@@ -553,12 +577,7 @@ STATS["INDUSTRY"]["Botpwr"] =   { sliderID: "bot", sliderIDX: 6, prodTitle: "Sol
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.077200,
                                    baseWaste: 0.2}
-STATS["INDUSTRY"]["Ship"] = { sliderID: "bot", sliderIDX: 4, prodTitle: "Shipyard Construction", inventoryType: "BUFFER", scitype: "eng",
-                                   baseProd: 0.000000001 / 3.14,
-                                   baseCost:  [["MATTER-Feedstock-CT",1]],
-                                   basePwr:   0.138000,
-                                   baseWaste: 3140000}
-/*
+
 STATS["INDUSTRY"]["Compute"] = { sliderID: "bot", sliderIDX: 5, prodTitle: "Computronium Fabrication", inventoryType: "MATTER", scitype: "eng",
                                    baseProd: 0.000679,
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
@@ -598,7 +617,7 @@ STATS["INDUSTRY"]["YogurtFarm"] = { sliderID: "green", sliderIDX: 1, prodTitle: 
                                    upgradeSet: []}
 
 STATS["INDUSTRY"]["BioResearchFarm"] = { sliderID: "green", sliderIDX: 0, prodTitle: "Biological Research", inventoryType: "BUFFER", scitype: "bio",
-                                   baseProd:  0.00005 / 65000, productionItem: "bio",
+                                   baseProd: 7e-3 * 0.00005 / 65000, productionItem: "bio",
                                    baseCost:  [["MATTER-FreeGreen-CT",0]],
                                    basePwr:   0,
                                    baseWaste: 26.1,
@@ -656,9 +675,9 @@ STATS["INDUSTRY"]["BioResearch"] = { sliderID: "green", sliderIDX: 0, prodTitle:
                                    upgradeSet: ["ENER","INPUT"]}
 
 STATS["INDUSTRY"]["Computation"] = { sliderID: "computation", sliderIDX: null, prodTitle: "Computation", inventoryType: "BUFFER", scitype: "eng",
-                                   baseProd:  0.00005, productionItem: "COMPUTE",
+                                   baseProd:  5e-6*0.00005, productionItem: "COMPUTE",
                                    baseCost:  [],
-                                   basePwr:   0.219000,
+                                   basePwr:   3e8*0.219000,
                                    baseWaste: 0,
                                    upgradeSet: ["PROD","ENER"]}
 
@@ -867,7 +886,7 @@ for(var i=0;i<PRODUCTIVITY_STATS.length;i++){
 STATS["PRODUCTIVITY_RATING"]["think"] = (1000000000)
 STATS["PRODUCTIVITY_RATING"]["soul"] = (10000)
 
-
+STATS["PRODUCTIVITY_MULT"]["computation"] = 1
 
 STATS["PRODUCTIVITY_MULT"]["BotpwrGen"] = 1
 STATS["PRODUCTIVITY_MULT"]["BiopwrGen"] = 1
@@ -1093,6 +1112,48 @@ ELEMS["Hawk"+"PowerLimiter"].displayElem = document.getElementById("BotPowerLimi
 STATICVAR_HOLDER.WATTAGE_MULTIPLIER = 5000000000
 STATICVAR_HOLDER.FLOPS_MULTIPLIER = 895275210000000
 STATICVAR_HOLDER.SOULPROD_RATING_FACTOR = 27000000 * 6
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+
+var SCIENCE_UNLOCK_THRESH_BASE = 9e18;
+var SCIENCE_UNLOCK_THRESH_MULT = Math.pow(10,0.25)
+
+STATS["MODIFIERS"] = {};
+STATS["MODIFIERS"]["swarmDiversityFactor"] = 1;
+STATS["MODIFIERS"]["sanityScienceFactor"] = 1;
+STATS["MODIFIERS"]["sanityComputeFactor"] = 1;
+STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] = 1e-4
+
+function getProjectBaseCost(techlvl){
+     return Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, techlvl) * this.SCIENCE_UNLOCK_THRESH_BASE
+}
+function getRandomBaseCost(techlvl){
+   return Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, (Math.random()-0.5) + techlvl) * this.SCIENCE_UNLOCK_THRESH_BASE
+}
+function getProjectCost(costField, techlvl, costMult){
+     var cost = [];
+     for(var i=0; i < costField.length; i++){
+       cost.push([costField[i],
+                  costMult[i] * Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, (Math.random()-0.5) + techlvl) * this.SCIENCE_UNLOCK_THRESH_BASE]);
+     }
+     return cost;
+}
+GAME_GLOBAL.SCIENCE_UNLOCK_THRESH_BASE=SCIENCE_UNLOCK_THRESH_BASE
+GAME_GLOBAL.SCIENCE_UNLOCK_THRESH_MULT=SCIENCE_UNLOCK_THRESH_MULT
+GAME_GLOBAL.getProjectBaseCost=getProjectBaseCost;
+GAME_GLOBAL.getProjectCost=getProjectCost;
+
+STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] = 4294967296
+
+
+//fmtSI(getProjectBaseCost(1) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"])
+//////////////////////////////////////////////////////////////////////////
+
+
 
 
 // 1 gigahertz for 1 week generates: 25 terabytes of data

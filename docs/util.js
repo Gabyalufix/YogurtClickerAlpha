@@ -799,6 +799,39 @@ function ExactLargeNumber( varray ){
 
 
 
+function drawFromRandomDistro(xx,normalize = "yes", defaultResult=-1, debugNote = ""){
+   //options for normalize are yes, no, ifLow, ifHigh
+   if(xx == null){
+     console.log("xx == null: "+debugNote);
+   }
+   //console.log("xx == "+xx);
+
+   var xlo = [];
+   var xhi = [];
+   var total = 0;
+   for(var i=0; i < xx.length; i++){
+       xlo[i] = total;
+       xhi[i] = total + xx[i];
+       total = total + xx[i];
+   }
+   if( total != 1 ){
+     if(normalize = "yes" || (normalize == "ifLow" && total < 1) || (normalize == "ifHigh" && total > 1) ){
+       for(var i=0; i < xx.length; i++){
+           xlo[i] = xlo[i] / total;
+           xhi[i] = xhi[i] / total;
+       }
+     }
+   }
+   var rr = Math.random();
+   for(var i=0; i < xx.length; i++){
+     if( rr <= xhi[i] && rr >= xlo[i] ){
+       return i;
+     }
+   }
+   return defaultResult;
+}
+
+
 
 
 

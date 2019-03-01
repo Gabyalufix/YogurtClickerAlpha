@@ -673,10 +673,6 @@ function TICK_calcIndustry(){
 
 
 }
-STATS["MODIFIERS"] = {};
-STATS["MODIFIERS"]["swarmDiversityFactor"] = 1;
-STATS["MODIFIERS"]["sanityScienceFactor"] = 1;
-STATS["MODIFIERS"]["sanityComputeFactor"] = 1;
 
 //STATS["MODIFIERS"]["sanityScienceFactor"] = 1;
 
@@ -712,7 +708,7 @@ function TICK_INDUSTRY_calcComputation(){
 GAME_GLOBAL.TICK_INDUSTRY_calcComputation = TICK_INDUSTRY_calcComputation;
 
 
-STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] = 1e-6
+
 
 function TICK_INDUSTRY_calcScienceGain(){
 
@@ -729,10 +725,11 @@ function TICK_INDUSTRY_calcScienceGain(){
       var newSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid] * STATS["MODIFIERS"]["sanityScienceFactor"] * STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"]
 
       if(STATS.STATUS_FLAG["BASIC_SCIENCE"] && (fid == "eng" || fid == "psy")){
-             this.INVENTORY["basic_SCIENCE_TOTAL"] = this.INVENTORY["basic_SCIENCE_TOTAL"] + newSci / 4294967296;
-             this.INVENTORY["basic_SCIENCE_FREE"]  = this.INVENTORY["basic_SCIENCE_FREE"] + newSci / 4294967296;
+             var newBasic = newSci / this.STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"]
+             this.INVENTORY["basic_SCIENCE_TOTAL"] = this.INVENTORY["basic_SCIENCE_TOTAL"] + newBasic;
+             this.INVENTORY["basic_SCIENCE_FREE"]  = this.INVENTORY["basic_SCIENCE_FREE"] + newBasic;
              this.ELEMS["basic_FREE_DISPLAY"].textContent = fmtSI(this.INVENTORY["basic_SCIENCE_FREE"])+"B";
-             this.ELEMS["basic_GAIN_RATE"].textContent = fmtSI(newSci / 4294967296)+"";
+             this.ELEMS["basic_GAIN_RATE"].textContent = fmtSI(newBasic)+"";
       }
       if( GAME_GLOBAL.STATS.STATUS_FLAG[fid+"_SCIENCE"]){
           this.ELEMS[fid+"_GAIN_RATE"].textContent = ""+ fmtSI(newSci," ");

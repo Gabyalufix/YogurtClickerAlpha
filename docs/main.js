@@ -111,7 +111,26 @@ function getScienceColorClass(ss){
     return out;
 }
 
-
+function getScienceType(pid){
+    return STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[pid].themeID;
+}
+function getBaseScienceTheme(pid){
+    //console.log("   coloring: "+ss[0] +" / "+ss[1]);
+    var themeID = STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[pid].themeID;
+    if(themeID == "bio"){
+        //console.log("   BIO color found for: "+ss[0])
+            return "THEME_Bio"
+    } else if(themeID == "eng"){
+        //console.log("   ENG color found for: "+ss[0])
+            return "THEME_Bot"
+    } else if(themeID == "psy"){
+        //console.log("   PSY color found for: "+ss[0])
+            return "THEME_Psy"
+    } else {
+        return "";
+    }
+    return out;
+}
 function getScienceTheme(pid, isLT = false){
     //console.log("   coloring: "+ss[0] +" / "+ss[1]);
     var themeID = STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[pid].themeID;
@@ -600,6 +619,12 @@ function addNewProject(pp){
      elem.textContent = pp.projectTitle;
      elem.onclick = this.projectSelectButtonEvent;
      elem.classList.add("PROJECT_BUTTON")
+     elem.classList.add("SCICOST_TEXT_DK")
+     elem.scitype = STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[pp.projectID].themeID
+     elem.typeTheme = getBaseScienceTheme( pp.projectID );
+     if(elem.typeTheme){
+         elem.classList.add(elem.typeTheme)
+     }
      elem.GAME = GAME_GLOBAL;
      elem.descElem = ELEMS["CURRENT_AVAIL_PROJECT_DESC"]
      elem.titleDescElem = ELEMS["CURRENT_AVAIL_PROJECT_TITLE"];
@@ -608,6 +633,7 @@ function addNewProject(pp){
      //masterAvailListElem.researchButton.currProject     = pp;
      //masterAvailListElem.researchButton.currProjectElem = elem;
      this.appendChild(elem);
+     this.filterProjectWindow()
 //   var out = makeColoredScience(cc[0],costDesc, isLT);
 }
 STATS["AVAIL_PROJECT_LIST"] = [];
@@ -632,6 +658,41 @@ masterAvailListElem.researchButton.disabled = true;
 
 ELEMS["masterAvailListElem"] = masterAvailListElem;
 masterResearchButton.addNewProject
+
+masterAvailListElem.filterBoxes = [];
+masterAvailListElem.filterBoxes.bio = document.getElementById("bioProjectFilter");
+masterAvailListElem.filterBoxes.eng = document.getElementById("engProjectFilter");
+masterAvailListElem.filterBoxes.psy = document.getElementById("psyProjectFilter");
+masterAvailListElem.filterBoxes.bio.mrb = masterAvailListElem
+masterAvailListElem.filterBoxes.eng.mrb = masterAvailListElem
+masterAvailListElem.filterBoxes.psy.mrb = masterAvailListElem
+
+function filterProjectWindow(){
+    
+    for(var i=0; i < this.projectElemList.length;i++){
+        var elem = this.projectElemList[i];
+        if( (! this.filterBoxes.bio.checked ) && elem.scitype == "bio"){
+            elem.style.display = "none";
+        } else if( (! this.filterBoxes.eng.checked ) && elem.scitype == "eng"){
+            elem.style.display = "none";
+        } else if( (! this.filterBoxes.psy.checked ) && elem.scitype == "psy"){
+            elem.style.display = "none";
+        } else {
+            elem.style.display = "block";
+        }
+    }
+}
+masterAvailListElem.filterProjectWindow=filterProjectWindow
+
+//masterAvailListElem.filterProjectWindow()
+
+function filterProjectWindowOnChange(){
+    this.mrb.filterProjectWindow()
+}
+
+masterAvailListElem.filterBoxes.bio.onchange = filterProjectWindowOnChange
+masterAvailListElem.filterBoxes.eng.onchange = filterProjectWindowOnChange
+masterAvailListElem.filterBoxes.psy.onchange = filterProjectWindowOnChange
 
 
 RESEARCH_BUTTONS.push(masterAvailListElem.researchButton);

@@ -426,76 +426,22 @@ for(var i=0; i < SCIENCE_TYPES.length; i++){
 
 //{sciFields:[["eng0",1],["eng1",0.25],["eng2",0.1],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.5,0.45,0.05]}
 
-
-
-var SCIENCE_UNLOCK_THRESH_BASE = 5e19;
-var SCIENCE_UNLOCK_THRESH_MULT = Math.pow(10,0.25)
 INVENTORY["SCIENCE-LEVEL-bio"] = 32
 INVENTORY["SCIENCE-LEVEL-eng"] = 32
 INVENTORY["SCIENCE-LEVEL-psy"] = 32
-SCIENCE_UNLOCK_THRESH_BASE=SCIENCE_UNLOCK_THRESH_BASE;
-SCIENCE_UNLOCK_THRESH_MULT=SCIENCE_UNLOCK_THRESH_MULT;
+
+
+
+
 SCIENCE_UNLOCK_RATE=0.4;
+GAME_GLOBAL.SCIENCE_UNLOCK_RATE=SCIENCE_UNLOCK_RATE
+
 
 INVENTORY.SCIENCE_DISCOVERED = [];
 INVENTORY.SCIENCE_RESEARCHED = [];
 
-GAME_GLOBAL.SCIENCE_UNLOCK_THRESH_BASE=SCIENCE_UNLOCK_THRESH_BASE
-GAME_GLOBAL.SCIENCE_UNLOCK_THRESH_MULT=SCIENCE_UNLOCK_THRESH_MULT
-GAME_GLOBAL.SCIENCE_UNLOCK_RATE=SCIENCE_UNLOCK_RATE
-
-function getProjectBaseCost(techlvl){
-     return Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, techlvl) * this.SCIENCE_UNLOCK_THRESH_BASE
-}
-GAME_GLOBAL.getProjectBaseCost=getProjectBaseCost;
-
-function getProjectCost(costField, techlvl, costMult){
-     var cost = [];
-     for(var i=0; i < costField.length; i++){
-       cost.push([costField[i],
-                  costMult[i] * Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, Math.random() + techlvl) * this.SCIENCE_UNLOCK_THRESH_BASE]);
-     }
-     return cost;
-}
-GAME_GLOBAL.getProjectCost=getProjectCost;
-
-function getRandomBaseCost(techlvl){
-   return Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, Math.random() + techlvl) * this.SCIENCE_UNLOCK_THRESH_BASE
-}
-
 //getProjectCostAdv(STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["BioResearch-ENER"]["costInfo"],1)
 
-function drawFromRandomDistro(xx,normalize = "yes", defaultResult=-1, debugNote = ""){
-   //options for normalize are yes, no, ifLow, ifHigh
-   if(xx == null){
-     console.log("xx == null: "+debugNote);
-   }
-   //console.log("xx == "+xx);
-
-   var xlo = [];
-   var xhi = [];
-   var total = 0;
-   for(var i=0; i < xx.length; i++){
-       xlo[i] = total;
-       xhi[i] = total + xx[i];
-       total = total + xx[i];
-   }
-   if( total != 1 ){
-     if(normalize = "yes" || (normalize == "ifLow" && total < 1) || (normalize == "ifHigh" && total > 1) ){
-       for(var i=0; i < xx.length; i++){
-           xlo[i] = xlo[i] / total;
-           xhi[i] = xhi[i] / total;
-       }
-     }
-   }
-   var rr = Math.random();
-   for(var i=0; i < xx.length; i++){
-     if( rr <= xhi[i] && rr >= xlo[i] ){
-       return i;
-     }
-   }
-   return defaultResult;
-}
 
 function getProjectCostAdv(costInfo, techlvl, debugInfo = ""){
      var cost = [];
