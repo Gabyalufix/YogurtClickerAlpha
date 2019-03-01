@@ -163,7 +163,7 @@ STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["BioResearch-INPUT"]["costInfo"]    = {s
 
 
 STATICVAR_HOLDER.SCIENCE.TECHTREE = {
-           TECHTREE_BIO:{projectTitle:"Biological Experimentation",projectID:"TECHTREE_BIO",projectType:"TECHTREE",
+      TECHTREE_BIO:{projectTitle:"Biological Experimentation",projectID:"TECHTREE_BIO",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
            cost:[["basic",118000000000000000000]],
            effect:function(){
@@ -173,7 +173,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            descShort:"...",
            prereqTechs: []},
            
-           TECHTREE_ENG:{projectTitle:"Activate Analytic Engine",projectID:"TECHTREE_ENG",projectType:"TECHTREE",
+      TECHTREE_ENG:{projectTitle:"Activate Analytic Engine",projectID:"TECHTREE_ENG",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
            cost:[["basic",118000000000000000000]],
            effect:function(){
@@ -183,7 +183,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            descShort:"...",
            prereqTechs: []},
            
-           TECHTREE_PSY:{projectTitle:"Activate Soulswarm Matrix",projectID:"TECHTREE_PSY",projectType:"TECHTREE",
+      TECHTREE_PSY:{projectTitle:"Activate Soulswarm Matrix",projectID:"TECHTREE_PSY",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
            cost:[["basic",118000000000000000000]],
            effect:function(){
@@ -193,7 +193,57 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            descShort:"...",
            prereqTechs: []},
            
-           TECHTREE_biomass:{projectTitle:"Synthetic Biomass",projectID:"TECHTREE_biomass",projectType:"TECHTREE",
+      TECHTREE_compproc:{projectTitle:"Hyperefficient Computational Processing",projectID:"TECHTREE_compproc",projectType:"TECHTREE",
+           costInfo: {sciFields:[["psy",1]], sciCtDistro:[1]},
+           cost:[["psy",118000000000000000000]],
+           effect:function(){
+             //unlockStatus("psy_SCIENCE_UNLOCK");
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_PSY"]},
+           
+      TECHTREE_dynaThought:{projectTitle:"Dynamic Thought Patterns",projectID:"TECHTREE_dynaThought",projectType:"TECHTREE",
+           costInfo: {sciFields:[["psy",1]], sciCtDistro:[1]},
+           cost:[["psy",118000000000000000000]],
+           effect:function(){
+             //unlockStatus("psy_SCIENCE_UNLOCK");
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_PSY"]},
+           
+      TECHTREE_heuristicResearch:{projectTitle:"heuristic research",projectID:"TECHTREE_heuristicResearch",projectType:"TECHTREE",
+           costInfo: {sciFields:[["psy",1]], sciCtDistro:[1]},
+           cost:[["psy",118000000000000000000]],
+           effect:function(){
+             //unlockStatus("psy_SCIENCE_UNLOCK");
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_PSY"]},
+           
+      TECHTREE_deepthought:{projectTitle:"Deep Thinking",projectID:"TECHTREE_deepthought",projectType:"TECHTREE",
+           costInfo: {sciFields:[["psy",1]], sciCtDistro:[1]},
+           cost:[["psy",118000000000000000000]],
+           effect:function(){
+             //unlockStatus("psy_SCIENCE_UNLOCK");
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_PSY"]},
+           
+      TECHTREE_slaveAI:{projectTitle:"Slave AI",projectID:"TECHTREE_slaveAI",projectType:"TECHTREE",
+           costInfo: {sciFields:[["psy",1]], sciCtDistro:[1]},
+           cost:[["psy",118000000000000000000]],
+           effect:function(){
+             //unlockStatus("psy_SCIENCE_UNLOCK");
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_deepthought","TECHTREE_dynaThought","TECHTREE_heuristicResearch"]},
+           
+      TECHTREE_biomass:{projectTitle:"Synthetic Biomass",projectID:"TECHTREE_biomass",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
            cost:[["bio",225000000000000000000]],
            effect:function(){
@@ -203,7 +253,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            descShort:"...",
            prereqTechs: ["TECHTREE_BIO"]},
            
-           TECHTREE_photosynthesis:{projectTitle:"Photosynthetic Chloroplasts",projectID:"TECHTREE_photosynthesis",projectType:"TECHTREE",
+      TECHTREE_photosynthesis:{projectTitle:"Photosynthetic Chloroplasts",projectID:"TECHTREE_photosynthesis",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
            cost:[["bio",225000000000000000000]],
            effect:function(){
@@ -213,7 +263,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            descShort:"...",
            prereqTechs: ["TECHTREE_biomass"]},
            
-           TECHTREE_advPwr:{projectTitle:"Advanced Energy Management",projectID:"TECHTREE_advPwr",projectType:"TECHTREE",
+      TECHTREE_advPwr:{projectTitle:"Advanced Energy Management",projectID:"TECHTREE_advPwr",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
            cost:[["eng",225000000000000000000],["bio",225000000000000000000]],
            effect:function(){
@@ -221,7 +271,79 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            },
            desc:"..." ,
            descShort:"...",
-           prereqTechs: ["TECHTREE_photosynthesis","TECHTREE_ENG"]}
+           prereqTechs: ["TECHTREE_photosynthesis","TECHTREE_ENG"]},
+
+      TECHTREE_microscale:{projectTitle:"Microscale Machining",projectID:"TECHTREE_microscale",projectType:"TECHTREE",
+           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
+           cost:[["eng",225000000000000000000]],
+           effect:function(){
+             //TODO
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_ENG"]},
+      TECHTREE_macroscale:{projectTitle:"Macroscale Construction",projectID:"TECHTREE_macroscale",projectType:"TECHTREE",
+           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
+           cost:[["eng",225000000000000000000]],
+           effect:function(){
+             //TODO
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_ENG"]},
+           
+      TECHTREE_biomassUpgrades:{projectTitle:"Biomass Evolution",projectID:"TECHTREE_biomassUpgrades",projectType:"TECHTREE",
+           costInfo: {sciFields:[["bio",1]], sciCtDistro:[1]},
+           cost:[["bio",225000000000000000000]],
+           effect:function(){
+             //TODO
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_biomass","TECHTREE_microscale"]},
+      
+      TECHTREE_nanotech:{projectTitle:"Nanotech Fabrication",projectID:"TECHTREE_nanotech",projectType:"TECHTREE",
+           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
+           cost:[["bio",225000000000000000000],["eng",225000000000000000000]],
+           effect:function(){
+             //TODO
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_microscale","TECHTREE_microscale","TECHTREE_dynaThought"]},
+           
+      TECHTREE_supermaterial:{projectTitle:"Advanced Material Science",projectID:"TECHTREE_supermaterial",projectType:"TECHTREE",
+           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
+           cost:[["eng",225000000000000000000],["psy",225000000000000000000]],
+           effect:function(){
+             //TODO
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_ENG"]},
+           
+           
+      TECHTREE_supermaterial:{projectTitle:"Advanced Material Science",projectID:"TECHTREE_supermaterial",projectType:"TECHTREE",
+           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
+           cost:[["eng",225000000000000000000],["psy",225000000000000000000]],
+           effect:function(){
+             //TODO
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_ENG","TECHTREE_compproc"]},
+           
+      TECHTREE_superconductors:{projectTitle:"Room-Temperature Superconductors",projectID:"TECHTREE_superconductors",projectType:"TECHTREE",
+           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
+           cost:[["eng",225000000000000000000],["psy",225000000000000000000]],
+           effect:function(){
+             //TODO
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_microscale","TECHTREE_dynaThought"]}
+      
+
 }
 //ASSEMBLE_COMPUTRONIUM_NAME
 

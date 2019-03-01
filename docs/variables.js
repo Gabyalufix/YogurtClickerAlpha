@@ -558,12 +558,21 @@ STATS["INDUSTRY"]["Ship"] = { sliderID: "bot", sliderIDX: 4, prodTitle: "Shipyar
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.138000,
                                    baseWaste: 3140000}
-
+/*
 STATS["INDUSTRY"]["Compute"] = { sliderID: "bot", sliderIDX: 5, prodTitle: "Computronium Fabrication", inventoryType: "MATTER", scitype: "eng",
                                    baseProd: 0.000679,
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
                                    basePwr:   0.255000,
                                    baseWaste: 2.3}
+*/
+
+STATS["INDUSTRY"]["Compute"] = { sliderID: "bot", sliderIDX: 5, prodTitle: "Computronium Fabrication", inventoryType: "MATTER", scitype: "eng",
+                                   baseProd: 0.000679 * 1e-6,
+                                   baseCost:  [["MATTER-Feedstock-CT",1]],
+                                   basePwr:   0.255000 * 1e6,
+                                   baseWaste: 2.3}
+
+
 
 STATS["INDUSTRY"]["Digested"] = { sliderID: "green", sliderIDX: 5, prodTitle: "Matter Digestion", inventoryType: "MATTER", scitype: "bio",
                                    baseProd: 0.0057,

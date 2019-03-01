@@ -428,11 +428,11 @@ for(var i=0; i < SCIENCE_TYPES.length; i++){
 
 
 
-var SCIENCE_UNLOCK_THRESH_BASE = 50e27;
-var SCIENCE_UNLOCK_THRESH_MULT = Math.pow(10,0.4)
-INVENTORY["SCIENCE-LEVEL-bio"] = 1
-INVENTORY["SCIENCE-LEVEL-eng"] = 1
-INVENTORY["SCIENCE-LEVEL-psy"] = 1
+var SCIENCE_UNLOCK_THRESH_BASE = 5e19;
+var SCIENCE_UNLOCK_THRESH_MULT = Math.pow(10,0.25)
+INVENTORY["SCIENCE-LEVEL-bio"] = 32
+INVENTORY["SCIENCE-LEVEL-eng"] = 32
+INVENTORY["SCIENCE-LEVEL-psy"] = 32
 SCIENCE_UNLOCK_THRESH_BASE=SCIENCE_UNLOCK_THRESH_BASE;
 SCIENCE_UNLOCK_THRESH_MULT=SCIENCE_UNLOCK_THRESH_MULT;
 SCIENCE_UNLOCK_RATE=0.4;
@@ -770,8 +770,17 @@ if(true){
         STATS.TECHTREE_ROOTS.add( key );
       }
     })
-    
 }
+
+Object.keys( STATICVAR_HOLDER.SCIENCE.PROJECTTABLE ).forEach(function(key){
+  var pp = STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[key];
+  pp.themeID = "UNK";
+  if( pp.cost ){
+    pp.themeID = pp.cost[0][0].slice(0,3);
+  } else if(pp.costInfo){
+    pp.themeID = pp.costInfo.sciFields[0][0].slice(0,3);
+  }
+})
 
 for(var j=0; j < SCIENCEUNIV_PROJECT_TYPES.length; j++){
   var protype = SCIENCEUNIV_PROJECT_TYPES[j];

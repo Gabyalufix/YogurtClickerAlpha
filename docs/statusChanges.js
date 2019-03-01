@@ -15,6 +15,22 @@ function standard_onEffect(){
             document.getElementById(this.sliders[i][1]).checked = false;
           }
       }
+      if(this.classids_opacitymask != null){
+          this.classids_opacitymask.forEach(function(cid){
+            var elemList = document.getElementsByClassName(cid);
+            for(var i=0; i < elemList.length;i++){
+              elemList[i].style.opacity = 1
+            }
+          })
+      }
+      if(this.classids_buttondisable != null){
+          this.classids_buttondisable.forEach(function(cid){
+            var elemList = document.getElementsByClassName(cid);
+            for(var i=0; i < elemList.length;i++){
+              elemList[i].disabled = false
+            }
+          })
+      }
 }
 function standard_offEffect(){
       if(this.elemids != null){
@@ -27,6 +43,22 @@ function standard_offEffect(){
             document.getElementById(this.sliders[i][1]).checked = true;
             document.getElementById(this.sliders[i][0]).value = 0;
           }
+      }
+      if(this.classids_opacitymask != null){
+          this.classids_opacitymask.forEach(function(cid){
+            var elemList = document.getElementsByClassName(cid);
+            for(var i=0; i < elemList.length;i++){
+              elemList[i].style.opacity = 0
+            }
+          })
+      }
+      if(this.classids_buttondisable != null){
+          this.classids_buttondisable.forEach(function(cid){
+            var elemList = document.getElementsByClassName(cid);
+            for(var i=0; i < elemList.length;i++){
+              elemList[i].disabled = true
+            }
+          })
       }
 }
 
@@ -66,40 +98,39 @@ STATICVAR_HOLDER.PHASEDATA = {
     bio_SCIENCE_UNLOCK:{  statID:"bio_SCIENCE_UNLOCK",
               statTitle: "bio_SCIENCE_UNLOCK",elemids:["BIORESEARCH_SLIDER_PANEL"],sliders:[["greenSliderPct1","greenSliderCheck1"]], 
        onEffect: function(){
+          GAME_GLOBAL.STATS.STATUS_FLAG["bio_SCIENCE"] = true;
           if(( STATS.PHASE_STATUS["bio_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["eng_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["psy_SCIENCE_UNLOCK"])){
             document.getElementById("DATABANK_basic").style.display = "none";
             GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = false;
+            document.getElementById("PROJECT_FILTER_PANEL").style.display = "block";
           }
           document.getElementById("DATABANK_MINI").style.display = "block";
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 1;
-          for(var i=0;i<this.elemids.length; i++){
-            document.getElementById(this.elemids[i]).style.display = "block"
-          }
+          standard_onEffect.call(this);
           
        },
        offEffect: function(){
+          GAME_GLOBAL.STATS.STATUS_FLAG["bio_SCIENCE"] = false;
           GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
           if((! STATS.PHASE_STATUS["bio_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["eng_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["psy_SUBFIELD_UNLOCK"])){
             document.getElementById("DATABANK_MINI").style.display = "none";
           }
+          document.getElementById("PROJECT_FILTER_PANEL").style.display = "none";
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 0;
           document.getElementById("DATABANK_basic").style.display = "block";
           console.log("DATABANKMINI_"+this.sciname+": opacity=0")
-          for(var i=0;i<this.elemids.length; i++){
-            document.getElementById(this.elemids[i]).style.display = "none"
-          }
-          for(var i=0;i<this.sliders.length; i++){
-            document.getElementById(this.sliders[i][1]).checked = true;
-            document.getElementById(this.sliders[i][0]).value = 0;
-          }
+          standard_offEffect.call(this);
        },sciname:"bio"
      },
+     
     eng_SCIENCE_UNLOCK:{  statID:"eng_SCIENCE_UNLOCK",
               statTitle: "eng_SCIENCE_UNLOCK", elemids:["ANALYTIC_ENGINE_DIV","ANALYTIC_ENGINE_DISTRIBUTION_DISPLAY"],
        onEffect: function(){
+          GAME_GLOBAL.STATS.STATUS_FLAG["eng_SCIENCE"] = true;
           if(( STATS.PHASE_STATUS["bio_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["eng_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["psy_SCIENCE_UNLOCK"])){
             document.getElementById("DATABANK_basic").style.display = "none";
             GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
+            document.getElementById("PROJECT_FILTER_PANEL").style.display = "block";
           }
           document.getElementById("DATABANK_MINI").style.display = "block";
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 1;
@@ -116,10 +147,12 @@ STATICVAR_HOLDER.PHASEDATA = {
           }
        },
        offEffect: function(){
+          GAME_GLOBAL.STATS.STATUS_FLAG["eng_SCIENCE"] = false;
           GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
           if((! STATS.PHASE_STATUS["bio_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["eng_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["psy_SUBFIELD_UNLOCK"])){
             document.getElementById("DATABANK_MINI").style.display = "none";
           }
+          document.getElementById("PROJECT_FILTER_PANEL").style.display = "none";
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 0;
           document.getElementById("DATABANK_basic").style.display = "block";
           console.log("DATABANKMINI_"+this.sciname+": opacity=0")
@@ -135,10 +168,12 @@ STATICVAR_HOLDER.PHASEDATA = {
     psy_SCIENCE_UNLOCK:{  statID:"psy_SCIENCE_UNLOCK",
               statTitle: "psy_SCIENCE_UNLOCK",elemids:["SOULSWARM_DIV","SOULSWARM_DISTRIBUTION_DISPLAY"],
        onEffect: function(){
+          GAME_GLOBAL.STATS.STATUS_FLAG["psy_SCIENCE"] = true;
           standard_onEffect.call(this)
           if(( STATS.PHASE_STATUS["bio_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["eng_SCIENCE_UNLOCK"]) & (STATS.PHASE_STATUS["psy_SCIENCE_UNLOCK"])){
             document.getElementById("DATABANK_basic").style.display = "none";
             GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
+            document.getElementById("PROJECT_FILTER_PANEL").style.display = "block";
           }
           document.getElementById("COMPUTE_DISTRIBUTION_PANEL").style.display = "block";
           if(! STATS.PHASE_STATUS["eng_SCIENCE_UNLOCK"]){
@@ -152,11 +187,13 @@ STATICVAR_HOLDER.PHASEDATA = {
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 1;
        },
        offEffect: function(){
+          GAME_GLOBAL.STATS.STATUS_FLAG["psy_SCIENCE"] = false;
           standard_offEffect.call(this)
           GAME_GLOBAL.STATS.STATUS_FLAG["BASIC_SCIENCE"] = true;
           if((! STATS.PHASE_STATUS["bio_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["eng_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["psy_SUBFIELD_UNLOCK"])){
             document.getElementById("DATABANK_MINI").style.display = "none";
           }
+          document.getElementById("PROJECT_FILTER_PANEL").style.display = "none";
           document.getElementById("DATABANKMINI_"+this.sciname).style.opacity = 0;
           document.getElementById("DATABANK_basic").style.display = "block";
           console.log("DATABANKMINI_"+this.sciname+": opacity=0")
@@ -308,6 +345,39 @@ STATICVAR_HOLDER.PHASEDATA = {
           document.getElementById(this.elemid).style.display = "none"
        }
      },
+
+    World_Forge:{  statID:"World_Forge",
+       statTitle: "World_Forge", elemids:["WORLD_FORGE_DIV"],
+       onEffect: function(){
+          for(var i=0;i<this.elemids.length; i++){
+            document.getElementById(this.elemids[i]).style.display = "block"
+          }
+       },
+       offEffect: function(){
+          for(var i=0;i<this.elemids.length; i++){
+            document.getElementById(this.elemids[i]).style.display = "none"
+          }      
+       }
+     },
+     
+    WORLDFORGE_CONSTRUCTION:{  statID:"WORLDFORGE_CONSTRUCTION",
+       statTitle: "HAWKING_REACTORS", classids_buttondisable:["worldForgeButtons"],  //classids_opacitymask:["worldForgeBuildPanel"],
+       onEffect: function(){
+          standard_onEffect.call(this)
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+    HAWKING_REACTORS:{  statID:"HAWKING_REACTORS",
+       statTitle: "HAWKING_REACTORS", elemids:["HAWKING_PANEL"],
+       onEffect: function(){
+          standard_onEffect.call(this)
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
     soulswarm_combatsim:{  statID:"soulswarm_combatsim",
        statTitle: "soulswarm_combatsim", elemids:["COMBATSIM_SLIDERPANEL"],sliders:[["soulSliderPct3","soulSliderCheck3"]],
        onEffect: function(){
@@ -328,7 +398,7 @@ STATICVAR_HOLDER.PHASEDATA = {
      },
      
     deep_thought:{  statID:"deep_thought",
-       statTitle: "deep_thought", elemids:["ANALYTIC_ENGINE_SLIDERPANEL"],sliders:[["thinkSliderPct1","thinkSliderCheck1"]],
+       statTitle: "deep_thought", elemids:["DEEPTHOUGHT_SLIDERPANEL"],sliders:[["thinkSliderPct1","thinkSliderCheck1"]],
        onEffect: function(){
           for(var i=0;i<this.elemids.length; i++){
             document.getElementById(this.elemids[i]).style.display = "block"
@@ -347,26 +417,11 @@ STATICVAR_HOLDER.PHASEDATA = {
           }
        }
      },
-    World_Forge:{  statID:"World_Forge",
-       statTitle: "World_Forge", elemids:["WORLD_FORGE_DIV"],
-       onEffect: function(){
-          for(var i=0;i<this.elemids.length; i++){
-            document.getElementById(this.elemids[i]).style.display = "block"
-          }
-       },
-       offEffect: function(){
-          for(var i=0;i<this.elemids.length; i++){
-            document.getElementById(this.elemids[i]).style.display = "none"
-          }      
-       }
-     },
-     
+
     BASIC_BIOMASS:{  statID:"BASIC_BIOMASS",
        statTitle: "BASIC_BIOMASS", elemids:["DIGEST_SLIDER_DIV","BIOMASS_SLIDER_DIV"], sliders:[["greenSliderPct6","greenSliderCheck6"],["greenSliderPct5","greenSliderCheck5"]],
        onEffect: function(){
-          for(var i=0;i<this.elemids.length; i++){
-            document.getElementById(this.elemids[i]).style.display = "block"
-          }
+          standard_onEffect.call(this);
           STATS.STATUS_FLAG["BASIC_BIOMASS"]=true;
           var aa = STATS.ACTIVE_INDUSTRY_LIST 
           var aax = aa.indexOf("YogurtFarm")
@@ -381,13 +436,7 @@ STATICVAR_HOLDER.PHASEDATA = {
           aa.push("BioResearch")
        },
        offEffect: function(){
-          for(var i=0;i<this.elemids.length; i++){
-            document.getElementById(this.elemids[i]).style.display = "none"
-          }
-          for(var i=0;i<this.sliders.length; i++){
-            document.getElementById(this.sliders[i][1]).checked = true;
-            document.getElementById(this.sliders[i][0]).value = 0;
-          }
+          standard_offEffect.call(this);
           STATS.STATUS_FLAG["BASIC_BIOMASS"]=false;
           var aa = STATS.ACTIVE_INDUSTRY_LIST 
           var aax = aa.indexOf("Yogurt")

@@ -111,6 +111,39 @@ function getScienceColorClass(ss){
     return out;
 }
 
+
+function getScienceTheme(pid, isLT = false){
+    //console.log("   coloring: "+ss[0] +" / "+ss[1]);
+    var themeID = STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[pid].themeID;
+    if(themeID == "bio"){
+        //console.log("   BIO color found for: "+ss[0])
+        if(isLT){
+            //console.log("    LT!")
+            return "THEME_Bio SCICOST_TEXT_LT"
+        } else {
+            //console.log("    DK!")
+            return "THEME_Bio SCICOST_TEXT_DK"
+        }
+    } else if(themeID == "eng"){
+        //console.log("   ENG color found for: "+ss[0])
+        if(isLT){
+            return "THEME_Bot SCICOST_TEXT_LT"
+        } else {
+            return "THEME_Bot SCICOST_TEXT_DK"
+        }
+    } else if(themeID == "psy"){
+        //console.log("   PSY color found for: "+ss[0])
+        if(isLT){
+            return "THEME_Psy SCICOST_TEXT_LT"
+        } else {
+            return "THEME_Psy SCICOST_TEXT_DK"
+        }
+    } else {
+        return "";
+    }
+    return out;
+}
+
 function makeColoredScience(ss, sciDescSet, isLT = false){
     //console.log("   coloring: "+ss[0] +" / "+ss[1]);
     var out = fmtSI(ss[1]) +"B "+sciDescSet[ss[0]];
@@ -527,6 +560,7 @@ for(var i=0; i<tabSetNames.length; i++){
    }
 }
 
+
 function projectSelectButtonEvent(){
    console.log("project: "+this.project.projectTitle);
    var elemList = this.masterAvail.projectElemList
@@ -539,9 +573,16 @@ function projectSelectButtonEvent(){
    this.masterAvail.researchButton.currProjectElem = this;
    dd = dd + "<BR> &nbsp&nbsp&nbsp" + makeAdvCostString(this.project.cost,delim1=", ",delim2="<BR> &nbsp&nbsp&nbsp", compressThresh = 5, isLT=false)
    if(this.project.prereqTechs != null && this.project.prereqTechs.length > 0){
+      
       dd = dd + "<BR> &nbsp&nbsp&nbspPrereqs:" 
       this.project.prereqTechs.forEach(function(pt){
-          dd = dd + "<BR> &nbsp&nbsp&nbsp&nbsp&nbsp" + STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[pt].projectTitle;
+          console.log("pt : "+pt);
+          var ptTheme = "PROJECTPANEL_PREREQ_BAD";
+          if( STATS.SCIENCE_DONESET.has(pt) ){
+            ptTheme = "PROJECTPANEL_PREREQ_GOOD";
+          }
+          var typeTheme = getScienceTheme( pt );
+          dd = dd + "<BR> &nbsp&nbsp&nbsp&nbsp&nbsp<span class=\""+ptTheme+" "+typeTheme+"\">" + STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[pt].projectTitle+"</span>"
       })
       
    }
@@ -645,17 +686,22 @@ masterAvailListElem.researchButton.currProject.cost
 masterAvailListElem.researchButton.canAffordTest = function(){
        var pp = this.currProject;
        if(pp != null){
-         //console.log("trying to afford:");prereqTechs
+         //console.log("trying to afford: "+pp.projectID);
          var prereqs = pp.prereqTechs;
          var meetsPrereqs = true;
          if(prereqs != null){
              for( var i=0; i < prereqs.length; i++){
-                 if( ! this.GAME.INVENTORY.SCIENCE_RESEARCHED.includes( prereqs[i] ) ){
+                 if( ! this.GAME.STATS.SCIENCE_DONESET.has( prereqs[i] ) ){
+                     //console.log("failing prereq:"+prereqs[i]);
                      meetsPrereqs = false;
                  }
              }
          }
          //console.log("prereq status:"+meetsPrereqs);
+         
+         //pp.cost.forEach(function(cc){
+         //  console.log("   cc:"+cc.join("-"));
+         //})
 
          if( this.GAME.canAfford(pp.cost) && meetsPrereqs ){
              this.disabled = false;
@@ -1899,28 +1945,6 @@ window.addEventListener('click',function(event) {
 //STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR
 
 
-INVENTORY["STARS-" + "G" +"-CT"] = 1;
-INVENTORY["WORLDS-"+"Bot"+"-CT"] = 1
-
-INVENTORY["POWER-FreeBot-CT"]    = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY / 2;
-INVENTORY["MATTER-Botbots-CT"]   = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 1.2;
-INVENTORY["MATTER-Botpwr-CT"]    = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 0.75;
-INVENTORY["MATTER-Compute-CT"]   = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 0.3;
-
-INVENTORY["MATTER-Waste-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 25;
-
-INVENTORY["MATTER-FreeBot-CT"] = (STATICVAR_HOLDER.SOLAR_MASS / 2) - INVENTORY["MATTER-Botbots-CT"] - INVENTORY["MATTER-Botpwr-CT"] - (INVENTORY["MATTER-Waste-CT"] / 2);
-
-
-
-var START_WITH_GREENWORLD = true;
-if(START_WITH_GREENWORLD){
-  INVENTORY["WORLDS-"+"Green"+"-CT"] = 1
-  INVENTORY["POWER-FreeGreen-CT"] = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY / 2;
-  INVENTORY["MATTER-Biomass-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 1.2;
-  INVENTORY["MATTER-FreeGreen-CT"] = (STATICVAR_HOLDER.SOLAR_MASS / 2) - INVENTORY["MATTER-Biomass-CT"] - (INVENTORY["MATTER-Waste-CT"] / 2);
-}
-
 
 
 /*
@@ -2024,4 +2048,29 @@ document.getElementById("CHEAT_DEBUG_OPEN").onclick = function(){
      availListElem.appendChild(elem);
 */
 
+/*
+********************************************************
+Starting stats:
+*/
 
+INVENTORY["STARS-" + "G" +"-CT"] = 1;
+INVENTORY["WORLDS-"+"Bot"+"-CT"] = 0.5
+
+INVENTORY["POWER-FreeBot-CT"]    = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY / 2;
+INVENTORY["MATTER-Botbots-CT"]   = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 1.2;
+INVENTORY["MATTER-Botpwr-CT"]    = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 0.75;
+INVENTORY["MATTER-Compute-CT"]   = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 0.025;
+
+INVENTORY["MATTER-Waste-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 25;
+
+INVENTORY["MATTER-FreeBot-CT"] = (STATICVAR_HOLDER.SOLAR_MASS / 2) - INVENTORY["MATTER-Botbots-CT"] - INVENTORY["MATTER-Botpwr-CT"] - (INVENTORY["MATTER-Waste-CT"] / 2);
+
+
+
+var START_WITH_GREENWORLD = true;
+if(START_WITH_GREENWORLD){
+  INVENTORY["WORLDS-"+"Green"+"-CT"] = 0.5
+  INVENTORY["POWER-FreeGreen-CT"] = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY / 2;
+  INVENTORY["MATTER-Biomass-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 1.2;
+  INVENTORY["MATTER-FreeGreen-CT"] = (STATICVAR_HOLDER.SOLAR_MASS / 2) - INVENTORY["MATTER-Biomass-CT"] - (INVENTORY["MATTER-Waste-CT"] / 2);
+}

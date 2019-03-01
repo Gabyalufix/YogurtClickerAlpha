@@ -1346,6 +1346,19 @@ h5 {
   cursor: pointer;
 }
 
+
+
+.PROJECTPANEL_PREREQ_GOOD {
+  font-style: italic;
+  opacity: 0.5;
+}
+.PROJECTPANEL_PREREQ_BAD {
+  font-style: normal;
+  font-weight: bold;
+  opacity: 1;
+  text-decoration: underline;
+}
+
 /*
 ===================================================================================================================
 ===================================================================================================================
