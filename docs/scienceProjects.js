@@ -253,6 +253,8 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            descShort:"...",
            prereqTechs: ["TECHTREE_BIO"]},
            
+           
+           
       TECHTREE_photosynthesis:{projectTitle:"Photosynthetic Chloroplasts",projectID:"TECHTREE_photosynthesis",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
            cost:[["bio",225000000000000000000]],
@@ -292,7 +294,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            descShort:"...",
            prereqTechs: ["TECHTREE_ENG"]},
            
-      TECHTREE_biomassUpgrades:{projectTitle:"Biomass Evolution",projectID:"TECHTREE_biomassUpgrades",projectType:"TECHTREE",
+      TECHTREE_biomassUpgrade1:{projectTitle:"Biomass Evolution I",projectID:"TECHTREE_biomassUpgrade1",projectType:"TECHTREE",
            costInfo: {sciFields:[["bio",1]], sciCtDistro:[1]},
            cost:[["bio",225000000000000000000]],
            effect:function(){
@@ -301,6 +303,24 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            desc:"..." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_biomass","TECHTREE_microscale"]},
+      TECHTREE_biomassUpgrade2:{projectTitle:"Biomass Evolution I",projectID:"TECHTREE_biomassUpgrade2",projectType:"TECHTREE",
+           costInfo: {sciFields:[["bio",1]], sciCtDistro:[1]},
+           cost:[["bio",225000000000000000000]],
+           effect:function(){
+             //TODO
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_biomassUpgrade1"]},
+      TECHTREE_biomassUpgrade3:{projectTitle:"Biomass Evolution I",projectID:"TECHTREE_biomassUpgrade3",projectType:"TECHTREE",
+           costInfo: {sciFields:[["bio",1]], sciCtDistro:[1]},
+           cost:[["bio",225000000000000000000]],
+           effect:function(){
+             //TODO
+           },
+           desc:"..." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_biomassUpgrade2","TECHTREE_dynaThought"]},
       
       TECHTREE_nanotech:{projectTitle:"Nanotech Fabrication",projectID:"TECHTREE_nanotech",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
@@ -323,7 +343,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            prereqTechs: ["TECHTREE_ENG"]},
            
            
-      TECHTREE_supermaterial:{projectTitle:"Advanced Material Science",projectID:"TECHTREE_supermaterial",projectType:"TECHTREE",
+      TECHTREE_atomicConstruct:{projectTitle:"Atomic Construction",projectID:"TECHTREE_atomicConstruct",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
            cost:[["eng",225000000000000000000],["psy",225000000000000000000]],
            effect:function(){
@@ -341,8 +361,8 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            },
            desc:"..." ,
            descShort:"...",
-           prereqTechs: ["TECHTREE_microscale","TECHTREE_dynaThought"]}
-      
+           prereqTechs: ["TECHTREE_supermaterial","TECHTREE_microscale","TECHTREE_dynaThought"]}
+
 
 }
 //ASSEMBLE_COMPUTRONIUM_NAME
