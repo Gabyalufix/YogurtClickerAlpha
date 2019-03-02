@@ -1264,13 +1264,19 @@ h5 {
   font-weight: bold;
   background-color: var(LT3);
   border-style: dotted;
+  position: relative;
 }
 .PROJECT_BUTTON_SELECTED {
   border: 1px dotted var(--LT4);
   background-color: var(--DK3);
   color: var(--white);
+  position: relative;
 }
-
+.PROJECT_BUTTON_LVL {
+  position: absolute;
+  top: 3px;
+  right: 10px;
+}
 
 .INFOPANEL {
   display: grid;

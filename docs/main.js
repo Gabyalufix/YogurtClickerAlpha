@@ -629,11 +629,46 @@ function addNewProject(pp){
      elem.descElem = ELEMS["CURRENT_AVAIL_PROJECT_DESC"]
      elem.titleDescElem = ELEMS["CURRENT_AVAIL_PROJECT_TITLE"];
      elem.masterAvail = masterAvailListElem;
-     masterAvailListElem.projectElemList.push(elem);
+     
+     //var lvlElem = document.createElement("span");
+     //lvlElem.textContent = 
+     
+     var isadded = false;
+     //console.log("adding: "+elem.project.projectID+" ["+elem.scitype+"/"+fmtSI(elem.project.cost[0][1])+"]");
+     for(var i = 0; i < this.projectElemList.length; i++){
+       var othrElem = this.projectElemList[i];
+       //console.log("    compareTo: "+othrElem.project.projectID+" ["+othrElem.scitype+"/"+fmtSI(othrElem.project.cost[0][1])+"]");
+       if(othrElem.scitype > elem.scitype){
+         this.projectElemList.splice(i,0,elem);
+         this.insertBefore(elem,othrElem);
+         isadded =true;
+         break;
+         //isadded = true;
+       } else if(othrElem.scitype == elem.scitype){
+         //console.log("        equal scitypes!");
+         if(othrElem.project.cost[0][1] >= elem.project.cost[0][1]){
+           this.projectElemList.splice(i,0,elem);
+           this.insertBefore(elem,othrElem);
+           isadded = true;
+           //console.log("        !!!["+othrElem.project.cost[0][1] + " >= "+elem.project.cost[0][1]);
+           break;           
+         }// else {
+           //console.log("        ...["+othrElem.project.cost[0][1] + " < "+elem.project.cost[0][1]);
+         //}
+       }
+     }
+     if(! isadded){
+         console.log("adding to end!")
+         //add to end:
+         this.projectElemList.push(elem);
+         this.appendChild(elem);
+     }
      //masterAvailListElem.researchButton.currProject     = pp;
      //masterAvailListElem.researchButton.currProjectElem = elem;
-     this.appendChild(elem);
-     this.filterProjectWindow()
+     
+     this.filterProjectWindow();
+     
+     
 //   var out = makeColoredScience(cc[0],costDesc, isLT);
 }
 STATS["AVAIL_PROJECT_LIST"] = [];
@@ -711,6 +746,12 @@ masterAvailListElem.researchButton.onclick = function(){
         this.GAME.INVENTORY.SCIENCE_RESEARCHED.push(pp.uid);
         this.GAME.STATS.SCIENCE_DONESET.add(pp.projectID);
         this.currProjectElem.parentNode.removeChild(this.currProjectElem)
+        for( var i=0; i < masterAvailListElem.projectElemList.length; i++){
+          if( masterAvailListElem.projectElemList[i].project.uid == pp.uid ){
+             masterAvailListElem.projectElemList.splice(i,1)
+          }
+        }
+        
         delete this.GAME.STATS["AVAIL_PROJECT_LIST"][pp.uid]
         
         var newTechs = updateTechTree()

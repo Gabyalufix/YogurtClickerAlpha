@@ -612,7 +612,7 @@ STATS["INDUSTRY"]["Yogurt"] = { sliderID: "green", sliderIDX: 1, prodTitle: "Yog
                                    baseWaste: 0.2}
 
 STATS["INDUSTRY"]["YogurtFarm"] = { sliderID: "green", sliderIDX: 1, prodTitle: "YogurtFarm", inventoryType: "MATTER", scitype: "bio",
-                                   baseProd: 0.00075 / 65000,
+                                   baseProd: 0.00075 / 65000, productionItem: "Yogurt",
                                    baseCost:  [["MATTER-FreeGreen-CT",1]],
                                    basePwr:   0,
                                    baseWaste: 10.0,
