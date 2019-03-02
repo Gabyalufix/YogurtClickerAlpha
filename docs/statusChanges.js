@@ -10,6 +10,11 @@ function standard_onEffect(){
             document.getElementById(this.elemids[i]).style.display = "block"
           }
       }
+      if(this.revelemids != null){
+         for(var i=0;i<this.revelemids.length; i++){
+            document.getElementById(this.revelemids[i]).style.display = "none"
+          }
+      }
       if(this.sliders != null){
           for(var i=0;i<this.sliders.length; i++){
             document.getElementById(this.sliders[i][1]).checked = false;
@@ -31,12 +36,24 @@ function standard_onEffect(){
             }
           })
       }
+      if(this.elemElassToggle != null){
+         this.elemElassToggle.forEach(function(ctt){
+           var elem = document.getElementById( ctt[0] );
+           elem.classList.add(    ctt[1][0] )
+           elem.classList.remove( ctt[1][1] )
+         })
+      }
 }
 function standard_offEffect(){
       if(this.elemids != null){
           for(var i=0;i<this.elemids.length; i++){
             document.getElementById(this.elemids[i]).style.display = "none"
           }  
+      }
+      if(this.revelemids != null){
+         for(var i=0;i<this.revelemids.length; i++){
+            document.getElementById(this.revelemids[i]).style.display = "block"
+          }
       }
       if(this.sliders != null){
           for(var i=0;i<this.sliders.length; i++){
@@ -59,6 +76,13 @@ function standard_offEffect(){
               elemList[i].disabled = true
             }
           })
+      }
+      if(this.elemElassToggle != null){
+         this.elemElassToggle.forEach(function(ctt){
+           var elem = document.getElementById( ctt[0] );
+           elem.classList.add(    ctt[1][1] )
+           elem.classList.remove( ctt[1][0] )
+         })
       }
 }
 
@@ -419,7 +443,12 @@ STATICVAR_HOLDER.PHASEDATA = {
      },
 
     BASIC_BIOMASS:{  statID:"BASIC_BIOMASS",
-       statTitle: "BASIC_BIOMASS", elemids:["DIGEST_SLIDER_DIV","BIOMASS_SLIDER_DIV"], sliders:[["greenSliderPct6","greenSliderCheck6"],["greenSliderPct5","greenSliderCheck5"]],
+       statTitle: "BASIC_BIOMASS", elemids:["DIGEST_SLIDER_DIV","BIOMASS_SLIDER_DIV","Digested_MATTER_DIV1", "Digested_MATTER_DIV2", "Digested_MATTER_DIV3",
+                                                                                     "FreeGreen_MATTER_DIV1","FreeGreen_MATTER_DIV2","FreeGreen_MATTER_DIV3",
+                                                                                     "Biomass_MATTER_DIV1","Biomass_MATTER_DIV2","Biomass_MATTER_DIV3"],
+                                   sliders:[["greenSliderPct6","greenSliderCheck6"],["greenSliderPct5","greenSliderCheck5"]],
+                                   elemElassToggle:[["AGRICULTURE_MATTER_TABLE",["contentGrid4Hz","contentGrid2Hz"]]],
+                                   revelemids:["Farmland_MATTER_DIV1","Farmland_MATTER_DIV2","Farmland_MATTER_DIV3"],
        onEffect: function(){
           standard_onEffect.call(this);
           STATS.STATUS_FLAG["BASIC_BIOMASS"]=true;

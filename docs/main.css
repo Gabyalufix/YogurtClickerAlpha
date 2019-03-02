@@ -671,6 +671,15 @@ h5 {
   grid-auto-flow: column;
   background-color: var(--LT2);
 }
+.contentGrid2Hz {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: auto auto auto;
+  /*grid-gap: 5px;*/
+  padding: 1px;
+  grid-auto-flow: column;
+  background-color: var(--LT2);
+}
 
 .dataTable {
   line-height:1;

@@ -266,6 +266,8 @@ RESOURCE_INFO = {
 
 }
 
+
+
 RESOURCE_INFO["MATTER-FreeBot-CT"] = {itemTitle:"Unprocessed Matter"}
 RESOURCE_INFO["MATTER-Feedstock-CT"] = {itemTitle:"Feedstock"}
 RESOURCE_INFO["MATTER-Botbots-CT"] = {itemTitle:"Botworld Fabricators"}
@@ -777,7 +779,7 @@ GAME_GLOBAL.calcIndustrialCost=calcIndustrialCost;
 
 
 
-STATS["CONVERSIONS"]["pwrFromBotpwrPerProdPerTick"] = 0.001271
+STATS["CONVERSIONS"]["pwrFromBotpwrPerProdPerTick"] = 0.001671
 STATS["CONVERSIONS"]["pwrFromBiopwrPerProdPerTick"] = 0.000187
 STATS["CONVERSIONS"]["pwrFromHawkpwrPerProdPerTick"] = 1
 
@@ -900,6 +902,10 @@ STATS["ENERGYRATE_MULT"]["BotpwrGen"] = 0.70
 STATS["ENERGYRATE_MULT"]["BiopwrGen"] = 0.30
 STATS["ENERGYRATE_MULT"]["HawkpwrGen"]   = 0.95
 
+
+
+STATS["PRODUCTIVITY_MULT"]["green"] = 0.5;
+STATS["PRODUCTIVITY_MULT"]["bot"] = 0.5;
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1031,6 +1037,9 @@ strat:
 
 */
 
+ELEMS["RESOURCE_DISPLAY_MATTER_Farmland"]      = document.getElementById("RESOURCE_DISPLAY_MATTER_Farmland");
+ELEMS["RESOURCE_DISPLAY_MATTERDELTA_Farmland"] = document.getElementById("RESOURCE_DISPLAY_MATTERDELTA_Farmland");
+
 
 ELEMS["bio_GAIN_RATE"] = document.getElementById("bio_GAIN_RATE");
 ELEMS["eng_GAIN_RATE"] = document.getElementById("eng_GAIN_RATE");
@@ -1117,6 +1126,8 @@ STATICVAR_HOLDER.SOULPROD_RATING_FACTOR = 27000000 * 6
 
 
 
+
+
 //////////////////////////////////////////////////////////////////////////
 
 var SCIENCE_UNLOCK_THRESH_BASE = 9e18;
@@ -1180,6 +1191,37 @@ STATICVAR_HOLDER.SEC_PER_TICK = 604800
 STATICVAR_HOLDER.SPEED_OF_LIGHT = 299792000
 STATICVAR_HOLDER.C_SQUARED = Math.pow(299792000,2)
 STATICVAR_HOLDER.MASS_PER_POWERTICK =  (STATICVAR_HOLDER.WATTAGE_MULTIPLIER * STATICVAR_HOLDER.SEC_PER_TICK / STATICVAR_HOLDER.C_SQUARED) / 1000
+
+
+STATICVAR_HOLDER.TONS_PER_ACRE_FARMLAND = 814;
+
+//tons biomass at start:
+//3,770,000,000,000
+//   12,136,884,009
+//farmland:
+//200 tons per acre?
+
+STATICVAR_HOLDER.MASS_LIST = {
+   SOLAR_MASS:1.9885e27,
+   EARTH:5.972e21,
+   INNERS: (6.39e20 + 4.867e21 + 3.285e23),
+   BELT:3.1e18,
+   JUPITER: 1.898e25,
+   SATURN: 5.683e23,
+   URANUS: 8.681e22,
+   NEPTUNE: 1.024e23,
+   OORT: 3e22
+}
+
+
+
+
+
+
+
+
+
+
 
 ELEMS["soul_IDENT_CT"]             =  document.getElementById("soul_IDENT_CT");
 ELEMS["soul_COMPUTE_RESOURCES"]    =  document.getElementById("soul_COMPUTE_RESOURCES");

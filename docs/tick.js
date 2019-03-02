@@ -883,7 +883,12 @@ function TICK_INDUSTRY_calcDeltas(){
               var fmtsid = this.fmtSIdelta(diff);
               sdd.textContent =  fmtsid;
               //sdd.displayUnits.textContent =  fmtsid[1]+"t/wk";
+              if(matterType == "Biomass"){
+                 ELEMS["RESOURCE_DISPLAY_MATTER_Farmland"].textContent      =      fmtSI(matterCt / this.STATICVAR_HOLDER.TONS_PER_ACRE_FARMLAND)
+                 ELEMS["RESOURCE_DISPLAY_MATTERDELTA_Farmland"].textContent = this.fmtSIdelta(diff / this.STATICVAR_HOLDER.TONS_PER_ACRE_FARMLAND);
+              } 
           }
+ 
     }
 }
 GAME_GLOBAL.TICK_INDUSTRY_calcDeltas = TICK_INDUSTRY_calcDeltas;
