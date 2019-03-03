@@ -3,6 +3,14 @@
 
 
 //RESEARCH_PROJECTS_DIV
+function deactivateSlider(ss){
+            document.getElementById(ss[1]).checked = true;
+            document.getElementById(ss[0]).value = 0;
+}
+function activateSlider(ss){
+  document.getElementById(ss[1]).checked = false;
+}
+
 
 function standard_onEffect(){
       if(this.elemids != null){
@@ -42,6 +50,52 @@ function standard_onEffect(){
            elem.classList.add(    ctt[1][0] )
            elem.classList.remove( ctt[1][1] )
          })
+      }
+      
+      if(this.elemStatWhenAllOn != null){
+         if(this.allOnStat === undefined){
+           this.allOnStat = [];
+         }
+         for(var z=0; z < this.elemStatWhenAllOn.length; z++){
+           var ctt = this.elemStatWhenAllOn[z];
+           var elem = document.getElementById( ctt[0] )
+           var statList = ctt[1];
+           var displayStatAllOn  = ctt[2];
+           var displayStatAnyOff = ctt[3]
+           var hasAnyOff = false;
+           console.log("testing: "+ctt[0]);
+           for(var i=0; i < statList.length; i++){
+             console.log("    ["+statList[i]+"] : "+STATS.PHASE_STATUS[statList[i]] );
+             if( ! STATS.PHASE_STATUS[statList[i]] ){
+               hasAnyOff = true;
+               console.log("HASANYOFF :" + hasAnyOff);
+             }
+           }
+           if(hasAnyOff){
+             console.log("    ["+elem.id+"]ANYOFF:"+displayStatAnyOff);
+             elem.style.display = displayStatAnyOff
+             this.allOnStat[z] = false;
+           } else {
+             console.log("    ["+elem.id+"]ALLON:"+displayStatAllOn);
+             elem.style.display = displayStatAllOn
+             this.allOnStat[z] = true;
+           }
+         }
+      }
+      
+      if(this.multiStatFcn != null){
+         if(this.statPct === undefined){
+           this.allOnStat = [];
+         }
+         for(var z=0; z < this.elemStatWhenAllOn.length; z++){
+           var ctt = this.multiStatFcn[0];
+           this.allOnStat[z] = 0;
+           for(var i=0; i < statList.length; i++){
+             if( STATS.PHASE_STATUS[statList[i]] ){
+               this.allOnStat[z] = this.allOnStat[z]+1
+             }
+           }
+         }
       }
 }
 function standard_offEffect(){
@@ -83,6 +137,37 @@ function standard_offEffect(){
            elem.classList.add(    ctt[1][1] )
            elem.classList.remove( ctt[1][0] )
          })
+      }
+      
+      if(this.elemStatWhenAllOn != null){
+         if(this.allOnStat === undefined){
+           this.allOnStat = [];
+         }
+         for(var z=0; z < this.elemStatWhenAllOn.length; z++){
+           var ctt = this.elemStatWhenAllOn[z];
+           var elem = document.getElementById( ctt[0] )
+           var statList = ctt[1];
+           var displayStatAllOn  = ctt[2];
+           var displayStatAnyOff = ctt[3]
+           var hasAnyOff = false;
+           console.log("testing: "+ctt[0]);
+           for(var i=0; i < statList.length; i++){
+             console.log("    ["+statList[i]+"] : "+STATS.PHASE_STATUS[statList[i]] );
+             if( ! STATS.PHASE_STATUS[statList[i]] ){
+               hasAnyOff = true;
+               console.log("HASANYOFF :" + hasAnyOff);
+             }
+           }
+           if(hasAnyOff){
+             console.log("    ["+elem.id+"]ANYOFF:"+displayStatAnyOff);
+             elem.style.display = displayStatAnyOff
+             this.allOnStat[z] = false;
+           } else {
+             console.log("    ["+elem.id+"]ALLON:"+displayStatAllOn);
+             elem.style.display = displayStatAllOn
+             this.allOnStat[z] = true;
+           }
+         }
       }
 }
 
@@ -517,6 +602,168 @@ STATICVAR_HOLDER.PHASEDATA = {
           }
        }
      },
+     
+    green_PRODUCTIVITY_UPGRADE:{  statID:"green_PRODUCTIVITY_UPGRADE",
+       statTitle: "green_PRODUCTIVITY_UPGRADE", elemids:["green_PRODUCTIVITY_PANEL"],
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+     
+    bot_PRODUCTIVITY_UPGRADE:{  statID:"bot_PRODUCTIVITY_UPGRADE",
+       statTitle: "bot_PRODUCTIVITY_UPGRADE", elemids:["bot_PRODUCTIVITY_PANEL"],
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+     
+    green_EFFICIENCY_UPGRADE:{  statID:"green_EFFICIENCY_UPGRADE",
+       statTitle: "green_EFFICIENCY_UPGRADE", elemids:["green_EFFICIENCY_PANEL"],
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+     
+    bot_EFFICIENCY_UPGRADE:{  statID:"bot_EFFICIENCY_UPGRADE",
+       statTitle: "bot_EFFICIENCY_UPGRADE", elemids:["bot_EFFICIENCY_PANEL"],
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+     
+     //elemStatWhenAllOn
+    PSYFIELD_1:{  statID:"PSYFIELD_1",
+       statTitle: "PSYFIELD_1", elemids:["PSY_RESEARCH_SLIDER_1","PSY_RESEARCH_SLIDER_1A"],sliders:[["psySliderPct1","psySliderCheck1"]],
+                                elemStatWhenAllOn:[["PSY_RESEARCH_SLIDER_BASE",["PSYFIELD_1","PSYFIELD_2","PSYFIELD_3"],"none","block"]],
+       onEffect: function(){
+          standard_onEffect.call(this);
+          if( this.allOnStat[0] ){
+            deactivateSlider(["psySliderPct4","psySliderCheck4"])
+          }
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+    PSYFIELD_2:{  statID:"PSYFIELD_2",
+       statTitle: "PSYFIELD_2", elemids:["PSY_RESEARCH_SLIDER_2","PSY_RESEARCH_SLIDER_2A"],sliders:[["psySliderPct2","psySliderCheck2"]],
+                                elemStatWhenAllOn:[["PSY_RESEARCH_SLIDER_BASE",["PSYFIELD_1","PSYFIELD_2","PSYFIELD_3"],"none","block"]],
+       onEffect: function(){
+          standard_onEffect.call(this);
+          if( this.allOnStat[0] ){
+            deactivateSlider(["psySliderPct4","psySliderCheck4"])
+          }
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+    PSYFIELD_3:{  statID:"PSYFIELD_3",
+       statTitle: "PSYFIELD_3", elemids:["PSY_RESEARCH_SLIDER_3"],sliders:[["psySliderPct3","psySliderCheck3"]],
+                                elemStatWhenAllOn:[["PSY_RESEARCH_SLIDER_BASE",["PSYFIELD_1","PSYFIELD_2","PSYFIELD_3"],"none","block"]],
+       onEffect: function(){
+          standard_onEffect.call(this);
+          if( this.allOnStat[0] ){
+            deactivateSlider(["psySliderPct4","psySliderCheck4"])
+          }
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+     
+    BIOFIELD_1:{  statID:"BIOFIELD_1",
+       statTitle: "BIOFIELD_1", elemids:["BIO_RESEARCH_SLIDER_1"],sliders:[["bioSliderPct1","bioSliderCheck1"]],
+                                elemStatWhenAllOn:[["BIO_RESEARCH_SLIDER_BASE",["BIOFIELD_1","BIOFIELD_2","BIOFIELD_3"],"none","block"]],
+       onEffect: function(){
+          standard_onEffect.call(this);
+          if( this.allOnStat[0] ){
+            deactivateSlider(["bioSliderPct4","bioSliderCheck4"])
+          }
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+    BIOFIELD_2:{  statID:"BIOFIELD_2",
+       statTitle: "BIOFIELD_2", elemids:["BIO_RESEARCH_SLIDER_2"],sliders:[["bioSliderPct2","bioSliderCheck2"]],
+                                elemStatWhenAllOn:[["BIO_RESEARCH_SLIDER_BASE",["BIOFIELD_1","BIOFIELD_2","BIOFIELD_3"],"none","block"]],
+       onEffect: function(){
+          standard_onEffect.call(this);
+          if( this.allOnStat[0] ){
+            deactivateSlider(["bioSliderPct4","bioSliderCheck4"])
+          }
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+    BIOFIELD_3:{  statID:"BIOFIELD_3",
+       statTitle: "BIOFIELD_3", elemids:["BIO_RESEARCH_SLIDER_3"],sliders:[["bioSliderPct3","bioSliderCheck3"]],
+                                elemStatWhenAllOn:[["BIO_RESEARCH_SLIDER_BASE",["BIOFIELD_1","BIOFIELD_2","BIOFIELD_3"],"none","block"]],
+       onEffect: function(){
+          standard_onEffect.call(this);
+          if( this.allOnStat[0] ){
+            deactivateSlider(["bioSliderPct4","bioSliderCheck4"])
+          }
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+     
+    ENGFIELD_1:{  statID:"ENGFIELD_1",
+       statTitle: "ENGFIELD_1", elemids:["ENG_RESEARCH_SLIDER_1"],sliders:[["engSliderPct1","engSliderCheck1"]],
+                                elemStatWhenAllOn:[["ENG_RESEARCH_SLIDER_BASE",["ENGFIELD_1","ENGFIELD_2","ENGFIELD_3"],"none","block"]],
+       onEffect: function(){
+          standard_onEffect.call(this);
+          if( this.allOnStat[0] ){
+            deactivateSlider(["engSliderPct4","engSliderCheck4"])
+          }
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+    ENGFIELD_2:{  statID:"ENGFIELD_2",
+       statTitle: "ENGFIELD_2", elemids:["ENG_RESEARCH_SLIDER_2"],sliders:[["engSliderPct2","engSliderCheck2"]],
+                                elemStatWhenAllOn:[["ENG_RESEARCH_SLIDER_BASE",["ENGFIELD_1","ENGFIELD_2","ENGFIELD_3"],"none","block"]],
+       onEffect: function(){
+          standard_onEffect.call(this);
+          if( this.allOnStat[0] ){
+            deactivateSlider(["engSliderPct4","engSliderCheck4"])
+          }
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+    ENGFIELD_3:{  statID:"ENGFIELD_3",
+       statTitle: "ENGFIELD_3", elemids:["ENG_RESEARCH_SLIDER_3"],sliders:[["engSliderPct3","engSliderCheck3"]],
+                                elemStatWhenAllOn:[["ENG_RESEARCH_SLIDER_BASE",["ENGFIELD_1","ENGFIELD_2","ENGFIELD_3"],"none","block"]],
+       onEffect: function(){
+          standard_onEffect.call(this);
+          if( this.allOnStat[0] ){
+            deactivateSlider(["engSliderPct4","engSliderCheck4"])
+          }
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     }
+     
 }
 
 STATICVAR_HOLDER.PHASE_STATUS_LIST = [];
@@ -532,18 +779,21 @@ STATS.PHASE_STATUS = {};
 for(var i=0; i<STATICVAR_HOLDER.PHASE_STATUS_LIST.length; i++){
   var sid = STATICVAR_HOLDER.PHASE_STATUS_LIST[i]
   STATS.PHASE_STATUS[ sid ] = false;
-  
   STATICVAR_HOLDER.PHASEDATA[sid].offEffect();
 }
 
 function unlockStatus(sid){
-  STATS.PHASE_STATUS[sid] = true;
-  STATICVAR_HOLDER.PHASEDATA[sid].onEffect();
+  if(! STATS.PHASE_STATUS[sid]){
+    STATS.PHASE_STATUS[sid] = true;
+    STATICVAR_HOLDER.PHASEDATA[sid].onEffect();
+    }
   STATICVAR_HOLDER.PHASEDATA[sid].cheatButton.setStatus();
 }
 function lockStatus(sid){
-  STATS.PHASE_STATUS[sid] = false;
-  STATICVAR_HOLDER.PHASEDATA[sid].offEffect();
+  if(STATS.PHASE_STATUS[sid]){
+    STATS.PHASE_STATUS[sid] = false;
+    STATICVAR_HOLDER.PHASEDATA[sid].offEffect();
+  }
   STATICVAR_HOLDER.PHASEDATA[sid].cheatButton.setStatus();
 }
 function resetStatus(){

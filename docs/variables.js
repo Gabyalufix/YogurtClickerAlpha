@@ -250,7 +250,7 @@ var PCTSLIDER_DISPLAYUNITSEXPLAIN = {bio:"Byte: the fundamental unit of informat
 
 
 
-var PCTSLIDER_SUBFIELDCT = [3,3,3,7,7,3,3,3,3,3,2,3]
+var PCTSLIDER_SUBFIELDCT = [4,4,4,7,7,3,3,3,3,3,2,3]
 var PCTSLIDERS = {}
 
 STATICVAR_HOLDER.PCTSLIDER_DISPLAYUNITSEXPLAIN=PCTSLIDER_DISPLAYUNITSEXPLAIN;
@@ -677,9 +677,9 @@ STATS["INDUSTRY"]["BioResearch"] = { sliderID: "green", sliderIDX: 0, prodTitle:
                                    upgradeSet: ["ENER","INPUT"]}
 
 STATS["INDUSTRY"]["Computation"] = { sliderID: "computation", sliderIDX: null, prodTitle: "Computation", inventoryType: "BUFFER", scitype: "eng",
-                                   baseProd:  5e-6*0.00005, productionItem: "COMPUTE",
+                                   baseProd:  5e-1*0.00005, productionItem: "COMPUTE",
                                    baseCost:  [],
-                                   basePwr:   3e8*0.219000,
+                                   basePwr:   3e3*0.219000,
                                    baseWaste: 0,
                                    upgradeSet: ["PROD","ENER"]}
 
@@ -1130,14 +1130,15 @@ STATICVAR_HOLDER.SOULPROD_RATING_FACTOR = 27000000 * 6
 
 //////////////////////////////////////////////////////////////////////////
 
-var SCIENCE_UNLOCK_THRESH_BASE = 9e18;
+var SCIENCE_UNLOCK_THRESH_BASE = 9e18 * 1e7;
 var SCIENCE_UNLOCK_THRESH_MULT = Math.pow(10,0.25)
 
 STATS["MODIFIERS"] = {};
 STATS["MODIFIERS"]["swarmDiversityFactor"] = 1;
-STATS["MODIFIERS"]["sanityScienceFactor"] = 1;
-STATS["MODIFIERS"]["sanityComputeFactor"] = 1;
-STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] = 1e-4
+STATS["MODIFIERS"]["sanityScienceFactor"]  = 1;
+STATS["MODIFIERS"]["sanityComputeFactor"]  = 1;
+STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] = 1e-2
+STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] = 42949672
 
 function getProjectBaseCost(techlvl){
      return Math.pow( this.SCIENCE_UNLOCK_THRESH_MULT, techlvl) * this.SCIENCE_UNLOCK_THRESH_BASE
@@ -1158,7 +1159,6 @@ GAME_GLOBAL.SCIENCE_UNLOCK_THRESH_MULT=SCIENCE_UNLOCK_THRESH_MULT
 GAME_GLOBAL.getProjectBaseCost=getProjectBaseCost;
 GAME_GLOBAL.getProjectCost=getProjectCost;
 
-STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] = 4294967296
 
 
 //fmtSI(getProjectBaseCost(1) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"])
