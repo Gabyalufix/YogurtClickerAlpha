@@ -835,7 +835,6 @@ for(var i=0;i<PRODUCTIVITY_STATS.length;i++){
 STATS["PRODUCTIVITY_RATING"]["think"] = (1000000000)
 STATS["PRODUCTIVITY_RATING"]["soul"] = (10000)
 
-STATS["PRODUCTIVITY_MULT"]["computation"] = 1
 
 STATS["PRODUCTIVITY_MULT"]["BotpwrGen"] = 1
 STATS["PRODUCTIVITY_MULT"]["BiopwrGen"] = 1
@@ -849,8 +848,8 @@ STATS["ENERGYRATE_MULT"]["BotpwrGen"] = 0.70
 STATS["ENERGYRATE_MULT"]["BiopwrGen"] = 0.30
 STATS["ENERGYRATE_MULT"]["HawkpwrGen"]   = 0.95
 
-
-
+STATS["ENERGYRATE_MULT"]["computation"] = 2;
+STATS["PRODUCTIVITY_MULT"]["computation"] = 0.5;
 STATS["PRODUCTIVITY_MULT"]["green"] = 0.5;
 STATS["PRODUCTIVITY_MULT"]["bot"] = 0.5;
 
@@ -1093,7 +1092,7 @@ STATICVAR_HOLDER.SOULPROD_RATING_FACTOR = 27000000 * 6
 
 //////////////////////////////////////////////////////////////////////////
 
-var SCIENCE_UNLOCK_THRESH_BASE = 9e18 * 4e6;
+var SCIENCE_UNLOCK_THRESH_BASE = 9e18 * 4e7;
 var SCIENCE_UNLOCK_THRESH_MULT = Math.pow(10,0.25)
 
 STATS["MODIFIERS"] = {};

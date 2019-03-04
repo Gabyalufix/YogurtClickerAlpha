@@ -612,9 +612,10 @@ function projectSelectButtonEvent(){
    this.descElem.innerHTML = dd
    this.titleDescElem.innerHTML = this.project.projectTitle;
    masterAvailListElem.researchButton.canAffordTest(true);
- }
+}
 
 function addNewProject(pp){
+     console.log("     actually adding project: "+pp.uid);
      //var pp = addScaledProject(ap,techlvl)
      this.GAME.STATS["AVAIL_PROJECT_LIST"][pp.uid] = pp;
      var elem = document.createElement("button");
@@ -676,7 +677,11 @@ function addNewProject(pp){
      
 //   var out = makeColoredScience(cc[0],costDesc, isLT);
 }
+
+STATS["CURRENT_DEEPTHOUGHT_DEPTH"] = 1;
 STATS["AVAIL_PROJECT_LIST"] = [];
+
+
 var masterAvailListElem = document.getElementById("ProjectSelector");
 var masterDescElem = document.getElementById("CURRENT_AVAIL_PROJECT_DESC");
 var masterResearchButton = document.getElementById("RESEARCH_CURRENT_PROJECT");
@@ -720,7 +725,21 @@ function filterProjectWindow(){
         } else {
             elem.style.display = "block";
         }
+         var meetPrereqs = true;
+         elem.project.prereqTechs.forEach(function(pt){
+              if( ! STATS.SCIENCE_DONESET.has(pt) ){
+                meetPrereqs = false;
+              }
+         })
+         if(! meetPrereqs){
+             elem.classList.add("PROJECTBUTTON_PREREQ_BAD")
+         } else {
+             elem.classList.remove("PROJECTBUTTON_PREREQ_BAD");
+         }
+        
     }
+    
+    
 }
 masterAvailListElem.filterProjectWindow=filterProjectWindow
 
@@ -763,15 +782,25 @@ masterAvailListElem.researchButton.onclick = function(){
         console.log("newTechs: "+newTechs.join(","));
         newTechs.forEach( function(cpid){
           var cpp = getSimpleProject(STATICVAR_HOLDER.SCIENCE.TECHTREE[ cpid ],1);
-          masterAvailListElem.addNewProject(cpp);
+          if( this.GAME.STATS["AVAIL_PROJECT_LIST"][ cpp.uid ] === undefined ){
+             masterAvailListElem.addNewProject(cpp);
+          }
         });
         
+        var peekTechs = peekAheadTechTree( STATS["CURRENT_DEEPTHOUGHT_DEPTH"] );
+        peekTechs.forEach( function(cpid){
+          var cpp = getSimpleProject(STATICVAR_HOLDER.SCIENCE.TECHTREE[ cpid ],1);
+          if( this.GAME.STATS["AVAIL_PROJECT_LIST"][ cpp.uid ] === undefined ){
+              masterAvailListElem.addNewProject(cpp);
+          }
+        });
         //masterAvailListElem.projectElemList.splice(  )
         /*
         TODO: remove project!
         */
         this.currProject = null;
         this.disabled = true;
+        this.availListElem.filterProjectWindow();
   }
 }
 
@@ -2223,6 +2252,7 @@ function popupNotice(noticeHTML, noticeTitleHTML = "ALERT:", noticeCloseButtonHT
    ELEMS.popupButtons[0].innerHTML = noticeCloseButtonHTML;
    
    openPopupWindow()
+   ELEMS.popupButtons[0].focus();
 }
 
 function popupButton(html="OK",buttonFunc = function(){}, buttonDisabled = false, closeOnClick= true){
@@ -2253,7 +2283,12 @@ popupAdvanced
 
                        
 */
-function popupAdvanced(noticeHTML,params={}){
+function popupAdvanced(noticeHTML,params={
+       buttons : [new popupButton()],
+       allowClose : false,
+       noticeTitleHTML : "ALERT:",
+       focusIdx : 0
+    }){
    var buttons = params.buttons;
    var allowClose = params.allowClose;
    var noticeTitleHTML = params.noticeTitleHTML
@@ -2285,6 +2320,15 @@ function popupAdvanced(noticeHTML,params={}){
      }
    }
    openPopupWindow()
+   var focusIdx = params.focusIdx;
+   if( focusIdx == null){
+       focusIdx = 0;
+   }
+   if(focusIdx >= 0 && buttons.length > 0){
+       ELEMS.popupButtons[focusIdx].focus();
+   }
+   
+   
 }
 
 /*

@@ -171,9 +171,14 @@ STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["BioResearch-INPUT"]["costInfo"]    = {s
 
 
 STATICVAR_HOLDER.SCIENCE.TECHTREE = {
+    
+     /***********************************************************************************
+       TIER-0
+     ************************************************************************************/
+     
       TECHTREE_BIO:{projectTitle:"Biological Experimentation",projectID:"TECHTREE_BIO",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
-           cost:[["basic",getProjectBaseCost(1) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
+           cost:[["basic",getProjectBaseCost(1)*(0.4) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
            effect:function(){
              unlockStatus("bio_SCIENCE_UNLOCK");
            },
@@ -183,7 +188,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            
       TECHTREE_ENG:{projectTitle:"Activate Analytic Engine",projectID:"TECHTREE_ENG",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
-           cost:[["basic",getProjectBaseCost(1) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
+           cost:[["basic",getProjectBaseCost(1)*(0.4) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
            effect:function(){
              unlockStatus("eng_SCIENCE_UNLOCK");
            },
@@ -193,24 +198,127 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            
       TECHTREE_PSY:{projectTitle:"Activate Soulswarm Matrix",projectID:"TECHTREE_PSY",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
-           cost:[["basic",getProjectBaseCost(1) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
+           cost:[["basic",getProjectBaseCost(1)*(0.4) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
            effect:function(){
              unlockStatus("psy_SCIENCE_UNLOCK");
            },
            desc:"..." ,
            descShort:"...",
            prereqTechs: []},
-           
+
+     /***********************************************************************************
+       TIER-1
+     ************************************************************************************/
+
       TECHTREE_compproc:{projectTitle:"Hyperefficient Computational Processing",projectID:"TECHTREE_compproc",projectType:"TECHTREE",
            costInfo: {sciFields:[["psy",1]], sciCtDistro:[1]},
-           cost:[["psy",getProjectBaseCost(1)]],
+           cost:[["psy",getProjectBaseCost(2) / 12]],
            effect:function(){
              //unlockStatus("psy_SCIENCE_UNLOCK");
-             
+             STATS["PRODUCTIVITY_MULT"]["computation"] = STATS["PRODUCTIVITY_MULT"]["computation"] + 0.25;
+             STATS["ENERGYRATE_MULT"]["computation"] = STATS["ENERGYRATE_MULT"]["computation"] - 0.25;
+           },
+           desc:"Increases clock speed and decreases energy usage of compute nodes." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_PSY"]},
+
+      TECHTREE_heuristicResearch:{projectTitle:"Heuristic Research",projectID:"TECHTREE_heuristicResearch",projectType:"TECHTREE",
+           costInfo: {sciFields:[["psy",1]], sciCtDistro:[1]},
+           cost:[["psy",getProjectBaseCost(2) / 12]],
+           effect:function(){
+             //unlockStatus("psy_SCIENCE_UNLOCK");
+             STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] = STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] * 10;
+           },
+           desc:"Research into sentient cognition and heuristic algorithms allows you to glean far more information from scientific experiments and analyses. All science production is increased by a factor of 10." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_PSY"]},
+           
+      TECHTREE_biomass:{projectTitle:"Synthetic Biomass",projectID:"TECHTREE_biomass",projectType:"TECHTREE",
+           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
+           cost:[["bio",getProjectBaseCost(1) / 128000]],
+           effect:function(){
+             unlockStatus("BASIC_BIOMASS");
+           },
+           desc:"Rather than simply relying on farmland, you can develop new synthetic unicellular life that allows you to perform various biological processes on demand. "+
+                "Matter must first be digested, and then the digested matter can be used to product yogurt or as raw material in biological experiments.",
+           descShort:"...",
+           prereqTechs: ["TECHTREE_BIO"]},
+           
+      TECHTREE_photosynthesis:{projectTitle:"Photosynthetic Chloroplasts",projectID:"TECHTREE_photosynthesis",projectType:"TECHTREE",
+           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
+           cost:[["bio",getProjectBaseCost(3) / 128000]],
+           effect:function(){
+             unlockStatus("photosynthesis");
+           },
+           desc:"Unlocks the ability to use biomass chloroplasts to generate power." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_BIO"]},
+
+      TECHTREE_microscale:{projectTitle:"Microscale Machining",projectID:"TECHTREE_microscale",projectType:"TECHTREE",
+           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
+           cost:[["eng",getProjectBaseCost(2) / 12 ]],
+           effect:function(){
+             STATS["INDUSTRY"]["Botbots"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 2;
+             STATS["INDUSTRY"]["Botbots"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] * 0.5;
+           },
+           desc:"Simplifies and accelerates the manufacturing process for assembly robots." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_ENG"]},
+           
+      TECHTREE_macroscale:{projectTitle:"Macroscale Construction",projectID:"TECHTREE_macroscale",projectType:"TECHTREE",
+           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
+           cost:[["eng",getProjectBaseCost(2) / 12]],
+           effect:function(){
+             //STATS["INDUSTRY"]["Botbots"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 1.25;
+             //STATS["INDUSTRY"]["Botbots"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] * (1/1.25);
+             STATS["INDUSTRY"]["Botpwr"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 1.25;
+             STATS["INDUSTRY"]["Botpwr"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] * (1/1.25);
+           },
+           desc:"Simplifies and accelerates the production of solar arrays." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_ENG"]},
+
+      TECHTREE_supermaterial:{projectTitle:"Advanced Material Processing",projectID:"TECHTREE_supermaterial",projectType:"TECHTREE",
+           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
+           cost:[["eng",getProjectBaseCost(3) / 12],["bio",getProjectBaseCost(4)]],
+           effect:function(){
+             STATS["INDUSTRY"]["Feedstock"]["baseProd"] = STATS["INDUSTRY"]["Feedstock"]["baseProd"] * 2;
+             STATS["INDUSTRY"]["Feedstock"]["basePwr"] = STATS["INDUSTRY"]["Feedstock"]["basePwr"] * 0.5;
+           },
+           desc:"Doubles feedstock production rate." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_ENG","TECHTREE_BIO"]},
+
+      TECHTREE_circuit1:{projectTitle:"Improved Circuit Design",projectID:"TECHTREE_circuit1",projectType:"TECHTREE",
+           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
+           cost:[["eng",getProjectBaseCost(3) / 12],["psy",getProjectBaseCost(4)]],
+           effect:function(){
+             STATS["INDUSTRY"]["Feedstock"]["baseProd"] = STATS["INDUSTRY"]["Feedstock"]["baseProd"] * 2;
+             STATS["INDUSTRY"]["Feedstock"]["basePwr"] = STATS["INDUSTRY"]["Feedstock"]["basePwr"] * 0.5;
+           },
+           desc:"Doubles feedstock production rate." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_ENG","TECHTREE_PSY"]},
+
+     /***********************************************************************************
+       TIER-2
+     ************************************************************************************/
+
+      TECHTREE_gigascale:{projectTitle:"GigaScale Construction",projectID:"TECHTREE_gigascale",projectType:"TECHTREE",
+           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
+           cost:[["eng",getProjectBaseCost(15)]],
+           effect:function(){
+             //unlock megastructure construction
            },
            desc:"..." ,
            descShort:"...",
-           prereqTechs: ["TECHTREE_PSY"]},
+           prereqTechs: ["TECHTREE_ENG"]},
+
+
+     /***********************************************************************************
+       TIER-2
+     ************************************************************************************/
+
            
       TECHTREE_dynaThought:{projectTitle:"Dynamic Thought Patterns",projectID:"TECHTREE_dynaThought",projectType:"TECHTREE",
            costInfo: {sciFields:[["psy",1]], sciCtDistro:[1]},
@@ -220,17 +328,6 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
              //STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] = STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] * 2;
            },
            desc:"..." ,
-           descShort:"...",
-           prereqTechs: ["TECHTREE_PSY"]},
-           
-      TECHTREE_heuristicResearch:{projectTitle:"Heuristic Research",projectID:"TECHTREE_heuristicResearch",projectType:"TECHTREE",
-           costInfo: {sciFields:[["psy",1]], sciCtDistro:[1]},
-           cost:[["psy",getProjectBaseCost(2)]],
-           effect:function(){
-             //unlockStatus("psy_SCIENCE_UNLOCK");
-             STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] = STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] * 10;
-           },
-           desc:"Research into sentient cognition and heuristic algorithms allows you to glean far more information from scientific experiments and analyses. All science production is increased by a factor of 10." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_PSY"]},
            
@@ -254,29 +351,6 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            descShort:"...",
            prereqTechs: ["TECHTREE_deepthought","TECHTREE_dynaThought","TECHTREE_heuristicResearch"]},
            
-      TECHTREE_biomass:{projectTitle:"Synthetic Biomass",projectID:"TECHTREE_biomass",projectType:"TECHTREE",
-           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
-           cost:[["bio",getProjectBaseCost(1) / 128000]],
-           effect:function(){
-             unlockStatus("BASIC_BIOMASS");
-           },
-           desc:"Rather than simply relying on farmland, you can develop new synthetic unicellular life that allows you to perform various biological processes on demand. "+
-                "Matter must first be digested, and then the digested matter can be used to product yogurt or as raw material in biological experiments.",
-           descShort:"...",
-           prereqTechs: ["TECHTREE_BIO"]},
-           
-           
-           
-      TECHTREE_photosynthesis:{projectTitle:"Photosynthetic Chloroplasts",projectID:"TECHTREE_photosynthesis",projectType:"TECHTREE",
-           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
-           cost:[["bio",getProjectBaseCost(3)]],
-           effect:function(){
-             unlockStatus("photosynthesis");
-           },
-           desc:"Unlocks the ability to use biomass chloroplasts to generate power." ,
-           descShort:"...",
-           prereqTechs: ["TECHTREE_biomass"]},
-           
       TECHTREE_advPwr:{projectTitle:"Advanced Energy Management",projectID:"TECHTREE_advPwr",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
            cost:[["eng",getProjectBaseCost(4)],["bio",getProjectBaseCost(4)]],
@@ -287,16 +361,8 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            descShort:"...",
            prereqTechs: ["TECHTREE_photosynthesis","TECHTREE_ENG"]},
 
-      TECHTREE_microscale:{projectTitle:"Microscale Machining",projectID:"TECHTREE_microscale",projectType:"TECHTREE",
-           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
-           cost:[["eng",getProjectBaseCost(5)]],
-           effect:function(){
-             STATS["INDUSTRY"]["Botbots"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 2;
-             STATS["INDUSTRY"]["Botbots"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] * 0.5;
-           },
-           desc:"Simplifies and accelerates the manufacturing process for assembly robots and solar arrays." ,
-           descShort:"...",
-           prereqTechs: ["TECHTREE_ENG"]},
+
+           
       TECHTREE_sapphire:{projectTitle:"Sapphire Nanosubstrate",projectID:"TECHTREE_sapphire",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
            cost:[["eng",getProjectBaseCost(5)]],
@@ -349,18 +415,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            descShort:"...",
            prereqTechs: ["TECHTREE_biomassUpgrade3","TECHTREE_bot3"]},
 
-      TECHTREE_macroscale:{projectTitle:"Macroscale Construction",projectID:"TECHTREE_macroscale",projectType:"TECHTREE",
-           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
-           cost:[["eng",225000000000000000000]],
-           effect:function(){
-             STATS["INDUSTRY"]["Botbots"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 1.25;
-             STATS["INDUSTRY"]["Botbots"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] * (1/1.25);
-             STATS["INDUSTRY"]["Botpwr"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 1.25;
-             STATS["INDUSTRY"]["Botpwr"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] * (1/1.25);
-           },
-           desc:"Simplifies and accelerates the production of assembly robots and solar arrays." ,
-           descShort:"...",
-           prereqTechs: ["TECHTREE_ENG"]},
+
            
       TECHTREE_biomassUpgrade1:{projectTitle:"Biomass Evolution I",projectID:"TECHTREE_biomassUpgrade1",projectType:"TECHTREE",
            costInfo: {sciFields:[["bio",1]], sciCtDistro:[1]},
@@ -394,40 +449,28 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
       
       TECHTREE_nanotech:{projectTitle:"Nanotech Fabrication",projectID:"TECHTREE_nanotech",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
-           cost:[["bio",getProjectBaseCost(12)],["eng",getProjectBaseCost(12)]],
+           cost:[["bio",getProjectBaseCost(6)],["eng",getProjectBaseCost(6)]],
            effect:function(){
              //TODO
            },
            desc:"..." ,
            descShort:"...",
-           prereqTechs: ["TECHTREE_microscale","TECHTREE_microscale","TECHTREE_dynaThought"]},
-           
-      TECHTREE_supermaterial:{projectTitle:"Advanced Material Science",projectID:"TECHTREE_supermaterial",projectType:"TECHTREE",
-           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
-           cost:[["eng",getProjectBaseCost(4)],["psy",getProjectBaseCost(4)]],
-           effect:function(){
-             STATS["INDUSTRY"]["Feedstock"]["baseProd"] = STATS["INDUSTRY"]["Feedstock"]["baseProd"] * 2;
-             STATS["INDUSTRY"]["Feedstock"]["basePwr"] = STATS["INDUSTRY"]["Feedstock"]["basePwr"] * 0.5;
-           },
-           desc:"Doubles feedstock production rate." ,
-           descShort:"...",
-           prereqTechs: ["TECHTREE_ENG","TECHTREE_PSY"]},
-           
+           prereqTechs: ["TECHTREE_microscale","TECHTREE_macroscale","TECHTREE_dynaThought"]},
            
       TECHTREE_atomicConstruct:{projectTitle:"Atomic Construction",projectID:"TECHTREE_atomicConstruct",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
-           cost:[["eng",225000000000000000000],["psy",225000000000000000000]],
+           cost:[["eng",getProjectBaseCost(8)],["psy",getProjectBaseCost(8)]],
            effect:function(){
              STATS["INDUSTRY"]["Feedstock"]["baseProd"] = STATS["INDUSTRY"]["Feedstock"]["baseProd"] * 2;
              STATS["INDUSTRY"]["Feedstock"]["basePwr"] = STATS["INDUSTRY"]["Feedstock"]["basePwr"] * 0.5;
            },
            desc:"Doubles feedstock production rate." ,
            descShort:"...",
-           prereqTechs: ["TECHTREE_ENG","TECHTREE_compproc"]},
+           prereqTechs: ["TECHTREE_nanotech","TECHTREE_compproc"]},
            
       TECHTREE_superconductors:{projectTitle:"Room-Temperature Superconductors",projectID:"TECHTREE_superconductors",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
-           cost:[["eng",225000000000000000000],["psy",225000000000000000000]],
+           cost:[["eng",getProjectBaseCost(9)],["psy",getProjectBaseCost(9)]],
            effect:function(){
              //TODO
            },
@@ -435,21 +478,12 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            descShort:"...",
            prereqTechs: ["TECHTREE_supermaterial","TECHTREE_microscale","TECHTREE_dynaThought"]},
 
-      TECHTREE_gigascale:{projectTitle:"GigaScale Construction",projectID:"TECHTREE_gigascale",projectType:"TECHTREE",
-           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
-           cost:[["eng",getProjectBaseCost(15)]],
-           effect:function(){
-             //unlock megastructure construction
-           },
-           desc:"..." ,
-           descShort:"...",
-           prereqTechs: ["TECHTREE_ENG"]},
 
 
       TECHTREE_disassemble_BELT:{projectTitle:"Asteroid Mining",projectID:"TECHTREE_disassemble_BELT",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
            cost:[["eng",getProjectBaseCost(15)]],
-           nonScienceCost:[["MATTER-MEGASTRUCTURE-CT",1e16]],
+           nonScienceCost:[["MATTER-MEGASTRUCTURE-CT",getProjectBaseCost(20)]],
            effect:function(){
              INVENTORY["MATTER-FreeBot-CT"] = INVENTORY["MATTER-FreeBot-CT"] + STATICVAR_HOLDER.MASS_LIST.BELT / 2
              INVENTORY["MATTER-FreeGreen-CT"] = INVENTORY["MATTER-FreeGreen-CT"] + STATICVAR_HOLDER.MASS_LIST.BELT / 2
@@ -461,7 +495,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
       TECHTREE_disassemble_INNERS:{projectTitle:"Planetary StripMining",projectID:"TECHTREE_disassemble_INNERS",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
            cost:[["eng",getProjectBaseCost(15)]],
-           nonScienceCost:[["MATTER-MEGASTRUCTURE-CT",1e16]],
+           nonScienceCost:[["MATTER-MEGASTRUCTURE-CT",getProjectBaseCost(25)]],
            effect:function(){
              INVENTORY["MATTER-FreeBot-CT"] = INVENTORY["MATTER-FreeBot-CT"] + STATICVAR_HOLDER.MASS_LIST.INNERS / 2
              INVENTORY["MATTER-FreeGreen-CT"] = INVENTORY["MATTER-FreeGreen-CT"] + STATICVAR_HOLDER.MASS_LIST.INNERS / 2
@@ -473,7 +507,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
       TECHTREE_disassemble_GASGIANTS:{projectTitle:"Tideshatter Worldbreak",projectID:"TECHTREE_disassemble_GASGIANTS",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
            cost:[["eng",getProjectBaseCost(15)]],
-           nonScienceCost:[["MATTER-MEGASTRUCTURE-CT",1e16]],
+           nonScienceCost:[["MATTER-MEGASTRUCTURE-CT",getProjectBaseCost(30)]],
            effect:function(){
              var ct = STATICVAR_HOLDER.MASS_LIST.JUPITER + STATICVAR_HOLDER.MASS_LIST.SATURN + STATICVAR_HOLDER.MASS_LIST.URANUS + STATICVAR_HOLDER.MASS_LIST.NEPTUNE
              INVENTORY["MATTER-FreeBot-CT"] = INVENTORY["MATTER-FreeBot-CT"] + ct / 2
@@ -486,7 +520,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
       TECHTREE_DYSON:{projectTitle:"Construct Dyson Sphere",projectID:"TECHTREE_disassemble_SYSTEM",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
            cost:[["eng",getProjectBaseCost(15)]],
-           nonScienceCost:[["MATTER-MEGASTRUCTURE-CT",1e16]],
+           nonScienceCost:[["MATTER-MEGASTRUCTURE-CT",getProjectBaseCost(40)]],
            effect:function(){
              var ct = STATICVAR_HOLDER.MASS_LIST.SOLAR_MASS - 5e25;
              INVENTORY["MATTER-FreeBot-CT"] = INVENTORY["MATTER-FreeBot-CT"] + ct / 2
@@ -499,7 +533,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
       TECHTREE_HANGAR:{projectTitle:"Shipyard Construction",projectID:"TECHTREE_HANGAR",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
            cost:[["eng",getProjectBaseCost(15)]],
-           nonScienceCost:[["MATTER-MEGASTRUCTURE-CT",1e16]],
+           nonScienceCost:[["MATTER-MEGASTRUCTURE-CT",getProjectBaseCost(45)]],
            effect:function(){
              var ct = STATICVAR_HOLDER.MASS_LIST.JUPITER + STATICVAR_HOLDER.MASS_LIST.SATURN + STATICVAR_HOLDER.MASS_LIST.URANUS + STATICVAR_HOLDER.MASS_LIST.NEPTUNE
              INVENTORY["MATTER-FreeBot-CT"] = INVENTORY["MATTER-FreeBot-CT"] + ct / 2
@@ -543,25 +577,83 @@ Object.keys(STATICVAR_HOLDER.SCIENCE.TECHTREE).forEach(function(pid,index){
         }
     })
 })
+DEBUG_MODE = true;
 
-function updateTechTree(){
+function updateTechTree(verbose = DEBUG_MODE){
     var addTechs = [];
+    if(verbose){ console.log("--------------------------------");console.log("     updating tech tree:") }
     Array.from(STATS.TECHTREE_ROOTS.keys()).forEach(function(pid){
         if(STATS.SCIENCE_DONESET.has(pid)){
             STATS.TECHTREE_ROOTS.delete(pid);
-            console.log("tech["+pid+"]: ["+Array.from(STATICVAR_HOLDER.SCIENCE.TECHTREE[pid].childTechs).join(",")+"]");
+            console.log("     tech["+pid+"]: ["+Array.from(STATICVAR_HOLDER.SCIENCE.TECHTREE[pid].childTechs).join(",")+"]");
             STATICVAR_HOLDER.SCIENCE.TECHTREE[pid].childTechs.forEach(function(cpid){
-                console.log("testing: "+cpid);
+                console.log("          testing: "+cpid);
                 if(STATS.SCIENCE_LOCKSET.has(cpid)){
-                    STATS.TECHTREE_ROOTS.add(cpid);
-                    STATS.SCIENCE_LOCKSET.delete(cpid);
-                    addTechs.push(cpid);
+                    console.log("             isLocked");
+                    var isAvail = true;
+                    STATICVAR_HOLDER.SCIENCE.TECHTREE[cpid].prereqTechs.forEach( function(prid){
+                        console.log("             prereq["+prid+"] is done? "+STATS.SCIENCE_DONESET.has(prid));
+                        isAvail = isAvail && STATS.SCIENCE_DONESET.has(prid)
+                    })
+                    console.log("             isAvail? "+isAvail);
+                    if(isAvail){
+                      console.log("             adding: "+cpid);
+                      STATS.TECHTREE_ROOTS.add(cpid);
+                      STATS.SCIENCE_LOCKSET.delete(cpid);
+                      addTechs.push(cpid);
+                    }
                 }
             })
         }
     })
+    if(verbose){ 
+        console.log("Finished updating tech tree:"); 
+        addTechs.forEach(function(tt){
+          console.log("    adding: "+tt);  
+        })
+        console.log("--------------------------------");
+      }
     return addTechs;
 }
+
+function peekAheadTechTree(peekDepth = 1,verbose = DEBUG_MODE){
+    if(verbose){ console.log("--------------------------------");console.log("     peeking tech tree:") }
+    var TECH_PEEK_DEPTH = {};
+    var TECH_PEEK_SET = new Set();
+    Array.from(STATS.TECHTREE_ROOTS.keys()).forEach(function(pid){
+        TECH_PEEK_DEPTH[pid] = 0;
+        TECH_PEEK_SET.add(pid);
+    });
+    for( var i=0; i < peekDepth; i++){
+        Array.from(STATS.TECHTREE_ROOTS.keys()).forEach(function(pid){
+            STATICVAR_HOLDER.SCIENCE.TECHTREE[pid].childTechs.forEach(function(cpid){
+                var isPeekable = true;
+                STATICVAR_HOLDER.SCIENCE.TECHTREE[cpid].prereqTechs.forEach( function(prid){
+                    isPeekable = isPeekable && ( STATS.SCIENCE_DONESET.has(prid) || TECH_PEEK_SET.has(prid) )
+                })
+                if(isPeekable){
+                    TECH_PEEK_SET.add(cpid);
+                }
+            })
+        })
+    }
+    /*Array.from(TECH_PEEK_SET).forEach(function(pid){
+        if(){
+            
+        }
+    })*/
+    
+    var out = Array.from(TECH_PEEK_SET);
+    if(verbose){ 
+        console.log("Finished updating tech tree:"); 
+        out.forEach(function(tt){
+          console.log("    adding: "+tt);  
+        })
+        console.log("--------------------------------");
+      }
+    return out;
+}
+
 
 /*
 ******************************************************************************************************************************

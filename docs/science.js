@@ -557,16 +557,19 @@ function getScaledProject(pp, techlvl){
   //ap.cost =
 }
 function getSimpleProject(pp, techlvl){
+  console.log("creating project: "+pp.projectID);
   var ap = { uid : pp.projectID, projectTitle : pp.projectTitle,projectID : pp.projectID, desc : pp.desc, effect : pp.effect, scitype : pp.scitype, prereqTechs : pp.prereqTechs}
   ap.projectType = pp.projectType;
   if(pp.cost){
-    ap.cost = pp.cost.slice();
-    for(var i=0; i < ap.cost.length; i++){
-        ap.cost[i][0] = ap.cost[i][0] + "_SCIENCE_FREE";
+    ap.cost = []
+    for(var i=0; i < pp.cost.length; i++){
+        ap.cost[i] = [pp.cost[i][0] + "_SCIENCE_FREE", pp.cost[i][1]];
     }
   } else {
     ap.cost = this.GAME.getProjectCostAdv(pp.costInfo,techlvl, "[SCALED."+pp.projectTitle+"]");
   }
+  console.log("                "+ap.uid+":"+ap.cost[0][0]+" / "+fmtSI(ap.cost[0][1]));
+
   return ap;
 }
 
