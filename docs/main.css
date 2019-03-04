@@ -537,7 +537,7 @@ h5 {
   background-color: var(--LT1);
 }
 .contentLV3 {
-  padding: 18px 18px;
+  padding: 6px 6px;
   display: block;
   background-color: var(--LT1);
   margin: 0px 5px 0px 10px;
@@ -1061,7 +1061,11 @@ h5 {
   font-weight: bold;
   font-family: "Courier New", Courier, monospace;
 }
-
+.SMALL_SLIDER_TITLE {
+  font-size: 11px;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+}
 
 #CHEAT_DEBUG_PANEL_CONTENT {
   padding: 4px 16px 16px 8px;
@@ -1491,6 +1495,8 @@ h5 {
   margin-bottom: 5px;
   padding: 7px;
 }
+
+
 /*
 ===================================================================================================================
 ===================================================================================================================
@@ -2294,4 +2300,6 @@ input[type=checkbox]
 }
 
 
-
+.DEPRECATED_DIV{
+  display: none;
+}

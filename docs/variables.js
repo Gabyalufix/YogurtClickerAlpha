@@ -630,7 +630,7 @@ STATS["INDUSTRY"]["BioResearchFarm"] = { sliderID: "green", sliderIDX: 0, prodTi
 //
 
 STATS["INDUSTRY"]["Biomass"] = { sliderID: "green", sliderIDX: 4, prodTitle: "Biomass Division", inventoryType: "MATTER", scitype: "bio",
-                                   baseProd: 0.00157,
+                                   baseProd: 0.00097,
                                    baseCost:  [["MATTER-Digested-CT",1]],
                                    basePwr:   0.177000,
                                    baseWaste: 0.1}
@@ -670,10 +670,10 @@ STATS["INDUSTRY"]["TransmuteYogurt"] = { sliderID: "bot", sliderIDX: 3, prodTitl
 
 
 STATS["INDUSTRY"]["BioResearch"] = { sliderID: "green", sliderIDX: 0, prodTitle: "Biological Research", inventoryType: "BUFFER", scitype: "bio",
-                                   baseProd:  0.00005, productionItem: "bio",
+                                   baseProd:  0.000005, productionItem: "bio",
                                    baseCost:  [["MATTER-Digested-CT",0]],
-                                   basePwr:   5.83,
-                                   baseWaste: 26.1,
+                                   basePwr:   58.3,
+                                   baseWaste: 42.1,
                                    upgradeSet: ["ENER","INPUT"]}
 
 STATS["INDUSTRY"]["Computation"] = { sliderID: "computation", sliderIDX: null, prodTitle: "Computation", inventoryType: "BUFFER", scitype: "eng",

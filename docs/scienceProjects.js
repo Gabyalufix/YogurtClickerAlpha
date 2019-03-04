@@ -230,7 +230,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
              //unlockStatus("psy_SCIENCE_UNLOCK");
              STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] = STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] * 10;
            },
-           desc:"..." ,
+           desc:"Research into sentient cognition and heuristic algorithms allows you to glean far more information from scientific experiments and analyses. All science production is increased by a factor of 10." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_PSY"]},
            
@@ -256,11 +256,12 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            
       TECHTREE_biomass:{projectTitle:"Synthetic Biomass",projectID:"TECHTREE_biomass",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
-           cost:[["bio",getProjectBaseCost(1)]],
+           cost:[["bio",getProjectBaseCost(1) / 128000]],
            effect:function(){
              unlockStatus("BASIC_BIOMASS");
            },
-           desc:"..." ,
+           desc:"Rather than simply relying on farmland, you can develop new synthetic unicellular life that allows you to perform various biological processes on demand. "+
+                "Matter must first be digested, and then the digested matter can be used to product yogurt or as raw material in biological experiments.",
            descShort:"...",
            prereqTechs: ["TECHTREE_BIO"]},
            
@@ -272,7 +273,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            effect:function(){
              unlockStatus("photosynthesis");
            },
-           desc:"..." ,
+           desc:"Unlocks the ability to use biomass chloroplasts to generate power." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_biomass"]},
            
@@ -282,7 +283,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            effect:function(){
              unlockStatus("Advanced_Energy_Panel");
            },
-           desc:"..." ,
+           desc:"Unlocks advanced power management control and information panels." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_photosynthesis","TECHTREE_ENG"]},
 
@@ -293,7 +294,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
              STATS["INDUSTRY"]["Botbots"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 2;
              STATS["INDUSTRY"]["Botbots"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] * 0.5;
            },
-           desc:"..." ,
+           desc:"Simplifies and accelerates the manufacturing process for assembly robots and solar arrays." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_ENG"]},
       TECHTREE_sapphire:{projectTitle:"Sapphire Nanosubstrate",projectID:"TECHTREE_sapphire",projectType:"TECHTREE",
@@ -303,7 +304,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
              STATS["INDUSTRY"]["Compute"]["baseProd"] = STATS["INDUSTRY"]["Compute"]["baseProd"] * 2;
              STATS["INDUSTRY"]["Compute"]["basePwr"] = STATS["INDUSTRY"]["Compute"]["basePwr"] * 0.5;
            },
-           desc:"..." ,
+           desc:"Custom-grown sapphire wafers replace silicon as the primary substrate for microchips. The chips are grown as a single crystal, greatly accelerating the microchip manufacturing process." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_microscale","TECHTREE_PSY"]},
 
@@ -313,7 +314,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            effect:function(){
              this.STATS["PRODUCTIVITY_MULT"]["bot"] = this.STATS["PRODUCTIVITY_MULT"]["bot"] + 0.1
            },
-           desc:"..." ,
+           desc:"Improves the productivity of assembly robots by 10%" ,
            descShort:"...",
            prereqTechs: ["TECHTREE_microscale"]},
 
@@ -323,7 +324,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            effect:function(){
              this.STATS["PRODUCTIVITY_MULT"]["bot"] = this.STATS["PRODUCTIVITY_MULT"]["bot"] + 0.1
            },
-           desc:"..." ,
+           desc:"Improves the productivity of assembly robots by 10%" ,
            descShort:"...",
            prereqTechs: ["TECHTREE_microscale","TECHTREE_bot1"]},
 
@@ -333,7 +334,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            effect:function(){
              this.STATS["PRODUCTIVITY_MULT"]["bot"] = this.STATS["PRODUCTIVITY_MULT"]["bot"] + 0.15
            },
-           desc:"..." ,
+           desc:"Improves the productivity of assembly robots by 15%" ,
            descShort:"...",
            prereqTechs: ["TECHTREE_microscale","TECHTREE_bot2"]},
 
@@ -344,7 +345,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
              this.STATS["PRODUCTIVITY_MULT"]["bot"] = this.STATS["PRODUCTIVITY_MULT"]["bot"] + 0.15
              this.STATS["PRODUCTIVITY_MULT"]["green"] = this.STATS["PRODUCTIVITY_MULT"]["green"] + 0.15
            },
-           desc:"..." ,
+           desc:"Improves the productivity of both biomass and assembly robots by 15%" ,
            descShort:"...",
            prereqTechs: ["TECHTREE_biomassUpgrade3","TECHTREE_bot3"]},
 
@@ -357,7 +358,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
              STATS["INDUSTRY"]["Botpwr"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 1.25;
              STATS["INDUSTRY"]["Botpwr"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] * (1/1.25);
            },
-           desc:"..." ,
+           desc:"Simplifies and accelerates the production of assembly robots and solar arrays." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_ENG"]},
            
@@ -408,7 +409,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
              STATS["INDUSTRY"]["Feedstock"]["baseProd"] = STATS["INDUSTRY"]["Feedstock"]["baseProd"] * 2;
              STATS["INDUSTRY"]["Feedstock"]["basePwr"] = STATS["INDUSTRY"]["Feedstock"]["basePwr"] * 0.5;
            },
-           desc:"..." ,
+           desc:"Doubles feedstock production rate." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_ENG","TECHTREE_PSY"]},
            
@@ -420,7 +421,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
              STATS["INDUSTRY"]["Feedstock"]["baseProd"] = STATS["INDUSTRY"]["Feedstock"]["baseProd"] * 2;
              STATS["INDUSTRY"]["Feedstock"]["basePwr"] = STATS["INDUSTRY"]["Feedstock"]["basePwr"] * 0.5;
            },
-           desc:"..." ,
+           desc:"Doubles feedstock production rate." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_ENG","TECHTREE_compproc"]},
            

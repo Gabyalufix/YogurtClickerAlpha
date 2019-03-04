@@ -2100,16 +2100,18 @@ Stellar pop:
 		<button class="collapsibleTHIN collapsible"><h2><span class="INFO_TEXT_STATIC">ANALYTIC ENGINE</span></h2></button>
 			<div class="contentLV3">
 
+            <div class="DEPRECATED_DIV">
 			  <span class="INFO_TEXT_STATIC">Capacity: </span><div class="valueDisplayDiv" id="think_PRODUCTIVITY_DISPLAY_DIV"><span id="think_PRODUCTIVITY_DISPLAY"></span><span id="think_PRODUCTIVITY_DISPLAY_UNITS"></span></div>
+			</div>
 
-			<div class="contentUnitHolder"><div id="ANALYTIC_ENGINE_SLIDERPANEL">
+			<!--<div class="contentUnitHolder"><div id="ANALYTIC_ENGINE_SLIDERPANEL">
 				<div class="SubContentBox">
 				<div class="SubContentBoxTitle SubContentBoxTitleCtr">
 				  <div class="INFO_TEXT_STATIC">Processor Distribution: </div>
-				</div><div style="line-height:30px"><br></div>
-
+				</div><div style="line-height:30px"><br></div>-->
+				
 				<div id="DEEPTHOUGHT_SLIDERPANEL">
-				<h5><span class="INFO_TEXT_STATIC">Deepthought: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct1_DIV"><span id="thinkSliderDisplayPct1"></span><span id="thinkSliderDisplayPct1_UNITS"></span></div></h5>
+				<span class="SMALL_SLIDER_TITLE"><span class="INFO_TEXT_STATIC">Deepthought: </span><span class="valueDisplayDiv" id="thinkSliderDisplayPct1_DIV"><span id="thinkSliderDisplayPct1"></span><span id="thinkSliderDisplayPct1_UNITS"></span></span></span>
 					<div class="multiPctSliderSuper">
 						<div class="slidecontainer">
 						   <div class="sliderBG">
@@ -2121,7 +2123,7 @@ Stellar pop:
 						</label>
 					</div></div>
 
-				<h5><span class="INFO_TEXT_STATIC">Engineering Research: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct2_DIV"><span id="thinkSliderDisplayPct2"></span><span id="thinkSliderDisplayPct2_UNITS"></span></div></h5>
+				<span class="SMALL_SLIDER_TITLE"><span class="INFO_TEXT_STATIC">Engineering Research: </span><span class="valueDisplayDiv" id="thinkSliderDisplayPct2_DIV"><span id="thinkSliderDisplayPct2"></span><span id="thinkSliderDisplayPct2_UNITS"></span></span></span>
 					<div class="multiPctSliderSuper">
 						<div class="slidecontainer">
 						   <div class="sliderBG">
@@ -2134,7 +2136,7 @@ Stellar pop:
 					</div>
 
 				<div class="unlockableHidden" id="LOCKHIDE_HACKING">
-				<h5><span class="INFO_TEXT_STATIC">Hacking: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct3_DIV"><span id="thinkSliderDisplayPct3"></span><span id="thinkSliderDisplayPct3_UNITS"></span></div></h5>
+				<span class="SMALL_SLIDER_TITLE"><span class="INFO_TEXT_STATIC">Hacking: </span><div class="valueDisplayDiv" id="thinkSliderDisplayPct3_DIV"><span id="thinkSliderDisplayPct3"></span><span id="thinkSliderDisplayPct3_UNITS"></span></div></span>
 					<div class="multiPctSliderSuper">
 						<div class="slidecontainer">
 						   <div class="sliderBG">
@@ -2147,7 +2149,7 @@ Stellar pop:
 					</div>
 				</div>
 
-			</div></div></div>
+			<!--</div></div></div>-->
 
 			</div>
 
@@ -2178,11 +2180,11 @@ Stellar pop:
 
 			<span style="display:none;"><span class="INFO_TEXT_STATIC" >Compute Resources: </span><span id="soul_PRODUCTIVITY_DISPLAY"></span></span>
 
-			<div class="contentUnitHolder">
+			<!--<div class="contentUnitHolder">
 			<button class="collapsible"><span class="INFO_TEXT_STATIC"><h2>Task Distribution </h2></span></button>
-				<div class="contentLV3">
+				<div class="contentLV3">-->
 
-				<h5><span class="INFO_TEXT_STATIC">Social Science: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct1_DIV"><span id="soulSliderDisplayPct1"></span></span></h5>
+				<span class="SMALL_SLIDER_TITLE"><span class="INFO_TEXT_STATIC">Social Science: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct1_DIV"><span id="soulSliderDisplayPct1"></span></span></span>
 					<div class="multiPctSliderSuper">
 						<div class="slidecontainer">
 						   <div class="sliderBG">
@@ -2195,7 +2197,7 @@ Stellar pop:
 					</div>
 
 				<div id="COMBATSIM_SLIDERPANEL">
-				<h5><span class="INFO_TEXT_STATIC">Combat Sim: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct3_DIV"><span id="soulSliderDisplayPct3"></span></span></h5>
+				<span class="SMALL_SLIDER_TITLE"><span class="INFO_TEXT_STATIC">Combat Sim: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct3_DIV"><span id="soulSliderDisplayPct3"></span></span></span>
 					<div class="multiPctSliderSuper">
 						<div class="slidecontainer">
 						   <div class="sliderBG">
@@ -2208,7 +2210,7 @@ Stellar pop:
 					</div></div>
 
 				<div id="ESPIONAGE_SLIDERPANEL">
-				<h5><span class="INFO_TEXT_STATIC">Espionage: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct2_DIV"><span id="soulSliderDisplayPct2"></span></span></h5>
+				<span class="SMALL_SLIDER_TITLE"><span class="INFO_TEXT_STATIC">Espionage: </span><span class="valueDisplayDiv" id="soulSliderDisplayPct2_DIV"><span id="soulSliderDisplayPct2"></span></span></span>
 					<div class="multiPctSliderSuper">
 						<div class="slidecontainer">
 						   <div class="sliderBG">
@@ -2221,10 +2223,36 @@ Stellar pop:
 					</div></div>
 
 
-				</div>
-		</div>
+				<!--</div>
+		</div>-->
+		
 		</div>
 		
+	</div></div>
+
+	<div id="compute_PRODUCTIVITY_PANEL"><div class="contentGrid5 dataTable dataTableHorizBorders" style="background-color: var(--LT2); margin-top:10px;">
+		<div class="contentGridItem1x2 contentGridItemHzM contentGridItemNarrowVertPadding">  <h5><span class="INFO_TEXT_STATIC"> SPEED </span>  </h5> </div>
+		<div class="contentGridItem1x1 contentGridItemHzM contentGridItemNarrowVertPadding"> <h5> <span class="INFO_TEXT_STATIC">Lvl-</span><span id="computeProductivityLevel">1</span></h5></div>
+		<div class="contentGridItem1x2 contentGridItemHzM contentGridItemNarrowVertPadding" > <h5><span id="computeProductivityDisplay"> 0</span>  </h5></div>
+
+		<div class="contentGridItem1x4 contentGridItemHzM contentGridItemNarrowVertPadding">
+		   <span class="valueDisplayDiv" id="computeProductivityUpgradeCost"> Upgrade cost goes here ...etc etc. </span>
+		</div>
+		<div class="contentGridItem1x1 contentGridItemHzM contentGridItemNarrowVertPadding">
+			 <button class = "button2" id ="button_computeProductivityUpgrade"  style="height:100%"> UPGRADE </button>
+		</div>
+	</div></div>
+	<div id="compute_EFFICIENCY_PANEL"><div class="contentGrid5 dataTable dataTableHorizBorders" style="background-color: var(--LT2)">
+		<div class="contentGridItem1x2 contentGridItemHzM contentGridItemNarrowVertPadding"> <h5> <div class="INFO_TEXT_STATIC"> EFFICIENCY </div></h5></div>
+		<div class="contentGridItem1x1 contentGridItemHzM contentGridItemNarrowVertPadding"> <h5> <span class="INFO_TEXT_STATIC">Lvl-</span><span id="computeEfficiencyLevel">1</span></h5></div>
+		<div class="valueDisplayDiv contentGridItem1x2 contentGridItemHzM contentGridItemNarrowVertPadding" > <h5> <span id="computeEfficiencyDisplay"> 0</span>% </h5></div>
+
+		<div class="valueDisplayDiv contentGridItem1x4 contentGridItemHzM contentGridItemNarrowVertPadding">
+		   <span class="valueDisplayDiv" id="computeEfficiencyUpgradeCost"> Upgrade cost goes here ...etc etc. </span>
+		</div>
+		<div class="contentGridItem1x1 contentGridItemHzM contentGridItemNarrowVertPadding">
+			 <button class = "button2" id ="button_computeEfficiencyUpgrade" style="height:100%"> UPGRADE </button>
+		</div>
 	</div></div>
 
 <!-- DEPRECATED -->
