@@ -366,59 +366,6 @@ ELEMS["basic_GAIN_RATE"] = document.getElementById("basic_GAIN_RATE");
 
 
 
-STATICVAR_HOLDER.UPGRADABLES = [
-   {itemID:"BiopwrEfficiency",itemTitle:"BiopwrEfficiency",
-       effect : function(lvl){
-          STATS["ENERGYRATE_MULT"]["Bio"+"pwrGen"] = 1 - (1 - STATS["ENERGYRATE_MULT"]["Bio"+"pwrGen"])*0.9
-       },
-       getDisplayString : function(){ STATS["ENERGYRATE_MULT"]["Bio"+"pwrGen"] },
-       costScalingFunction : stdCostScalingFcn,
-       costInfo: {sciFields:[["bio0",0.5],["bio1",0.25],["bio2",0.25],["eng2",0.25],["eng1",0.25],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.75,0.15,0.1]},
-       ELEM_COSTDISPLAY: document.getElementById("GreenPowerEfficiencyUpgradeCost"),
-       ELEM_BUTTON:      document.getElementById("button_GreenPowerEfficiencyUpgrade"),
-       ELEM_DISPLAY:      document.getElementById("GreenPowerEfficiencyDisplay"),
-       ELEM_LVL:      document.getElementById("GreenPowerEfficiencyLevel")
-
-   },
-   {itemID:"BiopwrProductivity",itemTitle:"BiopwrProductivity",
-       effect : function(lvl){
-          STATS["PRODUCTIVITY_MULT"]["Bio"+"pwrGen"] = STATS["PRODUCTIVITY_MULT"]["Bio"+"pwrGen"] * 1.2
-       },
-       getDisplayString : function(){ "?" },
-       costScalingFunction : stdCostScalingFcn,
-       costInfo: {sciFields:[["bio0",0.5],["bio1",0.25],["bio2",0.25],["eng2",0.25],["eng1",0.25],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.75,0.15,0.1]},
-       ELEM_COSTDISPLAY: document.getElementById("GreenPowerCapacityUpgradeCost"),
-       ELEM_BUTTON:      document.getElementById("button_GreenPowerCapacityUpgrade"),
-       ELEM_DISPLAY:      document.getElementById("GreenPowerProductivityDisplay"),
-       ELEM_LVL:      document.getElementById("GreenPowerProductivityLevel")
-   },
-   {itemID:"BotpwrEfficiency",itemTitle:"BotpwrEfficiency",
-       effect : function(lvl){
-          STATS["ENERGYRATE_MULT"]["Bot"+"pwrGen"] = 1 - (1 - STATS["ENERGYRATE_MULT"]["Bot"+"pwrGen"])*0.9
-       },
-       getDisplayString : function(){ STATS["ENERGYRATE_MULT"]["Bot"+"pwrGen"] },
-       costScalingFunction : stdCostScalingFcn,
-       costInfo: {sciFields:[["eng2",0.8],["eng1",0.2],["eng0",0.2],["bio1",0.2],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.75,0.20,0.05]},
-       ELEM_COSTDISPLAY: document.getElementById("BotPowerEfficiencyUpgradeCost"),
-       ELEM_BUTTON:      document.getElementById("button_BotPowerEfficiencyUpgrade"),
-       ELEM_DISPLAY:      document.getElementById("BotPowerEfficiencyDisplay"),
-       ELEM_LVL:      document.getElementById("BotPowerEfficiencyLevel")
-   },
-   {itemID:"BotpwrProductivity",itemTitle:"BotpwrProductivity",
-       effect : function(lvl){
-          STATS["PRODUCTIVITY_MULT"]["Bot"+"pwrGen"] = STATS["PRODUCTIVITY_MULT"]["Bot"+"pwrGen"] * 1.2
-       },
-       getDisplayString : function(){ "?" },
-       costScalingFunction : stdCostScalingFcn,
-       costInfo: {sciFields:[["eng2",0.8],["eng1",0.2],["eng0",0.2],["bio1",0.2],["psy1",0.05],["psy0",0.025]], sciCtDistro:[0.75,0.20,0.05]},
-       ELEM_COSTDISPLAY: document.getElementById("BotPowerCapacityUpgradeCost"),
-       ELEM_BUTTON:      document.getElementById("button_BotPowerCapacityUpgrade"),
-       ELEM_DISPLAY:      document.getElementById("BotPowerProductivityDisplay"),
-       ELEM_LVL:      document.getElementById("BotPowerProductivityLevel")
-
-
-   },
-];
 
 /*
 

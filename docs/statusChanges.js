@@ -650,8 +650,8 @@ STATICVAR_HOLDER.PHASEDATA = {
        }
      },
      
-    bot_PRODUCTIVITY_UPGRADE:{  statID:"bot_PRODUCTIVITY_UPGRADE",
-       statTitle: "bot_PRODUCTIVITY_UPGRADE", elemids:["bot_PRODUCTIVITY_PANEL"],
+    green_EFFICIENCY_UPGRADE:{  statID:"green_EFFICIENCY_UPGRADE",
+       statTitle: "green_EFFICIENCY_UPGRADE", elemids:["green_EFFICIENCY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
        },
@@ -660,8 +660,18 @@ STATICVAR_HOLDER.PHASEDATA = {
        }
      },
      
-    green_EFFICIENCY_UPGRADE:{  statID:"green_EFFICIENCY_UPGRADE",
-       statTitle: "green_EFFICIENCY_UPGRADE", elemids:["green_EFFICIENCY_PANEL"],
+    yogo_PRODUCTIVITY_UPGRADE:{  statID:"yogo_PRODUCTIVITY_UPGRADE",
+       statTitle: "yogo_PRODUCTIVITY_UPGRADE", elemids:["yogo_PRODUCTIVITY_PANEL"],
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+     
+    bot_PRODUCTIVITY_UPGRADE:{  statID:"bot_PRODUCTIVITY_UPGRADE",
+       statTitle: "bot_PRODUCTIVITY_UPGRADE", elemids:["bot_PRODUCTIVITY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
        },
@@ -678,7 +688,66 @@ STATICVAR_HOLDER.PHASEDATA = {
        offEffect: function(){
           standard_offEffect.call(this);    
        }
-     }/*,
+     },
+
+    greenPower_PRODUCTIVITY_UPGRADE:{  statID:"greenPower_PRODUCTIVITY_UPGRADE",
+       statTitle: "greenPower_PRODUCTIVITY_UPGRADE", elemids:["greenPower_PRODUCTIVITY_PANEL"],
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+    greenPower_EFFICIENCY_UPGRADE:{  statID:"greenPower_EFFICIENCY_UPGRADE",
+       statTitle: "greenPower_EFFICIENCY_UPGRADE", elemids:["greenPower_EFFICIENCY_PANEL"],
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+
+    botPower_PRODUCTIVITY_UPGRADE:{  statID:"botPower_PRODUCTIVITY_UPGRADE",
+       statTitle: "botPower_PRODUCTIVITY_UPGRADE", elemids:["botPower_PRODUCTIVITY_PANEL"],
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+    botPower_EFFICIENCY_UPGRADE:{  statID:"botPower_EFFICIENCY_UPGRADE",
+       statTitle: "botPower_EFFICIENCY_UPGRADE", elemids:["botPower_EFFICIENCY_PANEL"],
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+
+    compute_PRODUCTIVITY_UPGRADE:{  statID:"compute_PRODUCTIVITY_UPGRADE",
+       statTitle: "compute_PRODUCTIVITY_UPGRADE", elemids:["compute_PRODUCTIVITY_PANEL"],
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     },
+    compute_EFFICIENCY_UPGRADE:{  statID:"compute_EFFICIENCY_UPGRADE",
+       statTitle: "compute_EFFICIENCY_UPGRADE", elemids:["compute_EFFICIENCY_PANEL"],
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     }//,
+     
+     /*,
      
      
      //elemStatWhenAllOn
@@ -798,64 +867,29 @@ GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"] = {bio:false,eng:false,psy:false
      },
 */
 
+var SCITYPE_SUBFIELD_UNLOCK_CT = {bio:3, eng:3, psy: 2}
+
 
 STATICVAR_HOLDER.SCIENCE_TYPES.forEach(function(scitype){
   var capSciType = scitype.toUpperCase();
   var scifreestring = scitype+"_SCIENCE_FREE"
   var scititle = STATICVAR_HOLDER["INVENTORY_DESC_FULL"][scifreestring]
-  var getMultiStatFcn = function(){ 
-    return [[[capSciType+"FIELD_1",capSciType+"FIELD_2",capSciType+"FIELD_3"],function(ct,pct){
-            if(pct == 1){
-              document.getElementById(capSciType+"_RESEARCH_SLIDER_BASE").style.display = "none"
-              deactivateSlider([scitype+"SliderPct4",scitype+"SliderCheck4"])
-              unlockStatus(scitype+"_SUBFIELD_UNLOCK")
-              popupAdvanced("With the development of the third and final specialization of "+scititle+" research, "+
-                            "there is no longer any real benefit in continuing unfocused research into "+scititle+". "+
-                            "All future research will be directed towards one of the three specializations.",
-                            {noticeTitleHTML:"Notice: Advanced "+scititle,
-                             allowClose:true})
-              GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] = true;
-              GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] = true;
-              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 0;
-            } else if(pct == 0){
-              document.getElementById(capSciType+"_RESEARCH_SLIDER_BASE").style.display = "block";
-              lockStatus(scitype+"_SUBFIELD_UNLOCK")
-              GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] = false;
-              GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] = false;
-              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 0;
-            } else if(ct == 1){
-              document.getElementById(capSciType+"_RESEARCH_SLIDER_BASE").style.display = "block"
-              activateSlider([scitype+"SliderPct4",scitype+"SliderCheck4"])
-              unlockStatus(scitype+"_SUBFIELD_UNLOCK")
-              popupAdvanced("You have developed new research methods that allow you to focus on a sub-specialization of "+
-                            scititle+" research. You can now distribute your research efforts between unfocused "+scititle+" research and "+
-                            "research into "+STATICVAR_HOLDER["INVENTORY_DESC_FULL"][this.subSciType]+".<br><br>"+
-                            STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"][this.subSciType],
-                            {noticeTitleHTML:""+STATICVAR_HOLDER["INVENTORY_DESC_FULL"][this.subSciType]+" Research:",
-                             allowClose:true})
-              GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] = false;
-              GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] = true;
-              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 1;
-            } else {
-              document.getElementById(capSciType+"_RESEARCH_SLIDER_BASE").style.display = "block"
-              activateSlider([scitype+"SliderPct4",scitype+"SliderCheck4"])
-              unlockStatus(scitype+"_SUBFIELD_UNLOCK")
-              GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] = false;
-              GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] = true;
-              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 1;
-            }
-    }]]
+  
+  var SUBFIELD_DISPLAYS = []
+  for(var i=0; i < SCITYPE_SUBFIELD_UNLOCK_CT[scitype];i++){
+      SUBFIELD_DISPLAYS[i] = capSciType+"FIELD_"+(i+1);
   }
-  var multiStatFcn = getMultiStatFcn();
+  
   
   function lockOrUnlockDatabanks(){
       var completeCt = 0;
       var partialCt = 0;
+      console.log("TEST");
       STATICVAR_HOLDER.SCIENCE_TYPES.forEach( function(key,index){
-        if(STATUS_FLAG["COMPLETE_UNLOCK"][key]){
+        if( GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][key]){
           completeCt++;
         }
-        if(STATUS_FLAG["PARTIAL_UNLOCK"][key]){
+        if( GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][key]){
           partialCt++;
         }
       });
@@ -876,13 +910,75 @@ STATICVAR_HOLDER.SCIENCE_TYPES.forEach(function(scitype){
         }
       }
   }
+  //[capSciType+"FIELD_1",capSciType+"FIELD_2",capSciType+"FIELD_3"]
+  
+  var getMultiStatFcn = function(){ 
+    return [[SUBFIELD_DISPLAYS,function(ct,pct){
+            if(pct == 1){
+              document.getElementById(capSciType+"_RESEARCH_SLIDER_BASE").style.display = "none"
+              deactivateSlider([scitype+"SliderPct4",scitype+"SliderCheck4"])
+              //unlockStatus(scitype+"_SUBFIELD_UNLOCK")
+              popupAdvanced("With the development of the third and final specialization of "+scititle+" research, "+
+                            "there is no longer any real benefit in continuing unfocused research into "+scititle+". "+
+                            "All future research will be directed towards one of the three specializations.",
+                            {noticeTitleHTML:"Notice: Advanced "+scititle,
+                             allowClose:true})
+              GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] = true;
+              GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] = true;
+              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 0;
+              //document.getElementById("DATABANK_DIV").style.display = "block";
+              document.getElementById("DATABANK_"+scitype).style.display = "block";
+              document.getElementById(scitype+"_SLIDER_PANEL").style.display="block";
+            } else if(pct == 0){
+              document.getElementById(capSciType+"_RESEARCH_SLIDER_BASE").style.display = "block";
+              //lockStatus(scitype+"_SUBFIELD_UNLOCK")
+              GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] = false;
+              GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] = false;
+              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 0;
+              document.getElementById("DATABANK_"+scitype).style.display = "none";
+              document.getElementById(scitype+"_SLIDER_PANEL").style.display="none";
+            } else if(ct == 1){
+              document.getElementById(capSciType+"_RESEARCH_SLIDER_BASE").style.display = "block"
+              activateSlider([scitype+"SliderPct4",scitype+"SliderCheck4"])
+              //unlockStatus(scitype+"_SUBFIELD_UNLOCK")
+              popupAdvanced("You have developed new research methods that allow you to focus on a sub-specialization of "+
+                            scititle+" research. You can now distribute your research efforts between unfocused "+scititle+" research and "+
+                            "research into "+STATICVAR_HOLDER["INVENTORY_DESC_FULL"][this.subSciType]+".<br><br>"+
+                            STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"][this.subSciType],
+                            {noticeTitleHTML:""+STATICVAR_HOLDER["INVENTORY_DESC_FULL"][this.subSciType]+" Research:",
+                             allowClose:true})
+              GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] = false;
+              GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] = true;
+              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 1;
+              document.getElementById("DATABANK_"+scitype).style.display = "block";
+              document.getElementById(scitype+"_SLIDER_PANEL").style.display="block";
+            } else {
+              document.getElementById(capSciType+"_RESEARCH_SLIDER_BASE").style.display = "block"
+              activateSlider([scitype+"SliderPct4",scitype+"SliderCheck4"])
+              //unlockStatus(scitype+"_SUBFIELD_UNLOCK")
+              GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] = false;
+              GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] = true;
+              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 1;
+              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 1;
+              document.getElementById("DATABANK_"+scitype).style.display = "block";
+              document.getElementById(scitype+"_SLIDER_PANEL").style.display="block";
+            }
+            
+            lockOrUnlockDatabanks();
+    }]]
+  }
+  var multiStatFcn = getMultiStatFcn();
+  
+
   
   for(var i=0; i < 3; i++){
      var statID = capSciType+"FIELD_"+(i+1);
      STATICVAR_HOLDER.PHASEDATA[statID] = {  statID:statID, subSciType:"eng"+i+"_SCIENCE_FREE",scitype:scitype,
-       statTitle: statID, elemids:[capSciType+"_RESEARCH_SLIDER_"+(i+1)],sliders:[[scitype+"SliderPct"+(i+1),scitype+"SliderCheck"+(i+1)]],
-                                   multiStatFcn: multiStatFcn,
-                                   elems_opacitymask: [["DATABANK_"+scitype+(i+1),[1,0]]],
+                          statTitle: statID, 
+                          elemids:[capSciType+"_RESEARCH_SLIDER_"+(i+1)],
+                          sliders:[[scitype+"SliderPct"+(i+1),scitype+"SliderCheck"+(i+1)]],
+                          multiStatFcn: multiStatFcn,
+                          elems_opacitymask: [["DATABANK_"+scitype+(i+1),[1,0]]],
        onEffect: function(){
           standard_onEffect.call(this);
           //unlockStatus()
@@ -899,6 +995,26 @@ STATICVAR_HOLDER.SCIENCE_TYPES.forEach(function(scitype){
 })
 
 /*
+
+          document.getElementById("DATABANK_DIV").style.display = "block";
+          document.getElementById("DATABANK_bio").style.display = "block";
+          document.getElementById("DATABANKMINI_bio").style.opacity = 0;
+          document.getElementById("bio_SLIDER_PANEL").style.display="block";
+          document.getElementById("SCIENCEFOCUS_DIV").style.display="block";
+       },
+       offEffect: function(){
+          document.getElementById("DATABANK_bio").style.display = "none";
+          if((! STATS.PHASE_STATUS["bio_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["eng_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["psy_SUBFIELD_UNLOCK"])){
+            document.getElementById("DATABANK_DIV").style.display = "none";
+            document.getElementById("SCIENCEFOCUS_DIV").style.display="none";
+          }
+          
+          if( STATS.PHASE_STATUS[this.sciname+"_SCIENCE_UNLOCK"] ){
+            document.getElementById("DATABANKMINI_bio").style.opacity = 1;
+            document.getElementById("DATABANK_MINI").style.display = "block";
+          }
+            document.getElementById("bio_SLIDER_PANEL").style.display="none";
+
           document.getElementById("DATABANK_DIV").style.display = "block";
           document.getElementById("DATABANK_bio").style.display = "block";
           document.getElementById("DATABANKMINI_bio").style.opacity = 0;
