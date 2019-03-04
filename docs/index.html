@@ -18,8 +18,6 @@
 
 <div class="SETTINGS_WINDOW" id="SETTINGS_WINDOW">
 
-
-
 <div class="SETTINGS_WINDOW_CONTENT" id="SETTINGS_WINDOW_CONTENT">
 
 
@@ -51,6 +49,45 @@
 </div>
 
 </div>
+
+
+<!--
+####################################################################################################
+------------------------------ POPUPS:
+####################################################################################################
+-->
+
+
+<div id="POPUP_WINDOW">
+
+	<div id="POPUP_WINDOW_CONTENT"> <div id="POPUP_WINDOW_CONTENT_INNER">
+		<span id="POPUP_WINDOW_CLOSE">&times;</span>
+		<h1> <span id="POPUP_WINDOW_TITLELINE"> </span> </h1>
+		
+		<div id="POPUP_WINDOW_TEXTBOX_HOLDER">
+		   <div id="POPUP_WINDOW_TEXTBOX">
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+
+There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+		   </div>
+		</div>
+		
+		<div id="POPUP_WINDOW_BUTTONSET">
+		   <button class = "button2 POPUP_WINDOW_BUTTON" id ="POPUP_WINDOW_BUTTON1" > A </button>
+		   <button class = "button2 POPUP_WINDOW_BUTTON" id ="POPUP_WINDOW_BUTTON2" > B </button>
+		   <button class = "button2 POPUP_WINDOW_BUTTON" id ="POPUP_WINDOW_BUTTON3" > C </button>
+		</div>
+		
+	</div></div>
+
+</div>
+
 
 
 <!--
@@ -1842,9 +1879,9 @@ Stellar pop:
     			   <div class="contentGridItem1x4 contentGridItemNoBorders bgLT1" style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Biology: </span> <span id="bio_TOTAL_DISPLAY"></span> <span style="display:none;"> (<span id="bio_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
     			   <div class="contentGridItem1x2 contentGridItemNoBorders bgLT1" style="text-align: right;"><h5><span id="bio_GAIN_RATE">0.0</span>B/wk</h5></div>
 
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Cellular Processes </span></h6><div class="valueDisplayDiv displaySm" id="bio1_TOTAL_DISPLAYDIV"><span id="bio1_TOTAL_DISPLAY"></span><span id="bio1_TOTAL_DISPLAY_UNITS"></span></div>       <span id="bio1_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Biomechanoid Augmentation </span></h6><div class="valueDisplayDiv displaySm" id="bio2_TOTAL_DISPLAYDIV"><span id="bio2_TOTAL_DISPLAY"></span><span id="bio2_TOTAL_DISPLAY_UNITS"></span></div>    <span id="bio2_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Genetic Engineering </span></h6><div class="valueDisplayDiv displaySm" id="bio3_TOTAL_DISPLAYDIV"><span id="bio3_TOTAL_DISPLAY"></span><span id="bio3_TOTAL_DISPLAY_UNITS"></span></div>   <span id="bio3_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_bio1"><h6><span class="INFO_TEXT_STATIC">Cellular Processes </span></h6><div class="valueDisplayDiv displaySm" id="bio1_TOTAL_DISPLAYDIV"><span id="bio1_TOTAL_DISPLAY"></span><span id="bio1_TOTAL_DISPLAY_UNITS"></span></div>       <span id="bio1_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_bio2"><h6><span class="INFO_TEXT_STATIC">Biomechanoid Augmentation </span></h6><div class="valueDisplayDiv displaySm" id="bio2_TOTAL_DISPLAYDIV"><span id="bio2_TOTAL_DISPLAY"></span><span id="bio2_TOTAL_DISPLAY_UNITS"></span></div>    <span id="bio2_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_bio3"><h6><span class="INFO_TEXT_STATIC">Genetic Engineering </span></h6><div class="valueDisplayDiv displaySm" id="bio3_TOTAL_DISPLAYDIV"><span id="bio3_TOTAL_DISPLAY"></span><span id="bio3_TOTAL_DISPLAY_UNITS"></span></div>   <span id="bio3_FREE_DISPLAY"></span></div>
 				</div>
 			</div>
 
@@ -1855,9 +1892,9 @@ Stellar pop:
     			   <div class="bgLT1 contentGridItem1x4 contentGridItemNoBorders " style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Engineering: </span> <span id="eng_TOTAL_DISPLAY"></span>  <span style="display:none;">(<span id="eng_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
     			   <div class="bgLT1 contentGridItem1x2 contentGridItemNoBorders " style="text-align: right;"><h5><span id="eng_GAIN_RATE">0.0</span>B/wk</h5></div>
 
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Construction </span></h6><div class="valueDisplayDiv displaySm" id="eng1_TOTAL_DISPLAYDIV"><span id="eng1_TOTAL_DISPLAY"></span><span id="eng1_TOTAL_DISPLAY_UNITS"></span></div>     <span id="eng1_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">Matter & Material Science </span></h6><div class="valueDisplayDiv displaySm" id="eng2_TOTAL_DISPLAYDIV"><span id="eng2_TOTAL_DISPLAY"></span><span id="eng2_TOTAL_DISPLAY_UNITS"></span></div>      <span id="eng2_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC">High-Energy Physics </span></h6><div class="valueDisplayDiv displaySm" id="eng3_TOTAL_DISPLAYDIV"><span id="eng3_TOTAL_DISPLAY"></span><span id="eng3_TOTAL_DISPLAY_UNITS"></span></div>    <span id="eng3_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_eng1"><h6><span class="INFO_TEXT_STATIC">Construction </span></h6><div class="valueDisplayDiv displaySm" id="eng1_TOTAL_DISPLAYDIV"><span id="eng1_TOTAL_DISPLAY"></span><span id="eng1_TOTAL_DISPLAY_UNITS"></span></div>     <span id="eng1_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_eng2"><h6><span class="INFO_TEXT_STATIC">Matter & Material Science </span></h6><div class="valueDisplayDiv displaySm" id="eng2_TOTAL_DISPLAYDIV"><span id="eng2_TOTAL_DISPLAY"></span><span id="eng2_TOTAL_DISPLAY_UNITS"></span></div>      <span id="eng2_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_eng3"><h6><span class="INFO_TEXT_STATIC">High-Energy Physics </span></h6><div class="valueDisplayDiv displaySm" id="eng3_TOTAL_DISPLAYDIV"><span id="eng3_TOTAL_DISPLAY"></span><span id="eng3_TOTAL_DISPLAY_UNITS"></span></div>    <span id="eng3_FREE_DISPLAY"></span></div>
 				</div>
 			</div>
 
@@ -1868,9 +1905,9 @@ Stellar pop:
     			   <div class="contentGridItem1x4 contentGridItemNoBorders bgLT1" style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Social Science: </span> <span id="psy_TOTAL_DISPLAY"></span>  <span style="display:none;">(<span id="psy_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
     			   <div class="contentGridItem1x2 contentGridItemNoBorders bgLT1" style="text-align: right;"><h5><span id="psy_GAIN_RATE">0.0</span>B/wk</h5></div>
 
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC"> Cognition </span></h6><div class="valueDisplayDiv displaySm" id="psy1_TOTAL_DISPLAYDIV"><span id="psy1_TOTAL_DISPLAY"></span><span id="psy1_TOTAL_DISPLAY_UNITS"></span></div>        <span id="psy1_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC"> Creativity & Intuition </span></h6><div class="valueDisplayDiv displaySm" id="psy2_TOTAL_DISPLAYDIV"><span id="psy2_TOTAL_DISPLAY"></span><span id="psy2_TOTAL_DISPLAY_UNITS"></span></div>     <span id="psy2_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center"><h6><span class="INFO_TEXT_STATIC"> Strategy & Tactics </span></h6><div class="valueDisplayDiv displaySm" id="psy3_TOTAL_DISPLAYDIV"><span id="psy3_TOTAL_DISPLAY"></span><span id="psy3_TOTAL_DISPLAY_UNITS"></span></div>         <span id="psy3_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_psy1"><h6><span class="INFO_TEXT_STATIC"> Cognition </span></h6><div class="valueDisplayDiv displaySm" id="psy1_TOTAL_DISPLAYDIV"><span id="psy1_TOTAL_DISPLAY"></span><span id="psy1_TOTAL_DISPLAY_UNITS"></span></div>        <span id="psy1_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_psy2"><h6><span class="INFO_TEXT_STATIC"> Creativity & Intuition </span></h6><div class="valueDisplayDiv displaySm" id="psy2_TOTAL_DISPLAYDIV"><span id="psy2_TOTAL_DISPLAY"></span><span id="psy2_TOTAL_DISPLAY_UNITS"></span></div>     <span id="psy2_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_psy3"><h6><span class="INFO_TEXT_STATIC"> Strategy & Tactics </span></h6><div class="valueDisplayDiv displaySm" id="psy3_TOTAL_DISPLAYDIV"><span id="psy3_TOTAL_DISPLAY"></span><span id="psy3_TOTAL_DISPLAY_UNITS"></span></div>         <span id="psy3_FREE_DISPLAY"></span></div>
 				</div>
 			</div>
 

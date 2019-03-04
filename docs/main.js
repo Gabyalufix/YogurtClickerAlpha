@@ -13,10 +13,14 @@ function unlockSlider(sliderID){
 
 ///////////////////////////////
 
-function canAfford(c){
+function canAfford(c, verbose=false){
    for(var i=0; i<c.length;i++){
       if( this.INVENTORY[ c[i][0] ] < c[i][1] ){
+        if(verbose){ console.log("         ["+c[i][0]+"] - ["+fmtSI(this.INVENTORY[ c[i][0] ])+" vs "+fmtSI(c[i][1])+"]: FAIL") }
+
          return false;
+      } else {
+        if(verbose){ console.log("         ["+c[i][0]+"] - ["+fmtSI(this.INVENTORY[ c[i][0] ])+" vs "+fmtSI(c[i][1])+"]: OK") }
       }
    }
    return true;
@@ -607,6 +611,7 @@ function projectSelectButtonEvent(){
    }
    this.descElem.innerHTML = dd
    this.titleDescElem.innerHTML = this.project.projectTitle;
+   masterAvailListElem.researchButton.canAffordTest(true);
  }
 
 function addNewProject(pp){
@@ -785,16 +790,16 @@ cheatFunc_multScience()
 masterAvailListElem.researchButton.currProject.cost
 */
 
-masterAvailListElem.researchButton.canAffordTest = function(){
+masterAvailListElem.researchButton.canAffordTest = function(verbose = false){
        var pp = this.currProject;
        if(pp != null){
-         //console.log("trying to afford: "+pp.projectID);
+         if(verbose){ console.log("trying to afford: "+pp.projectID)}
          var prereqs = pp.prereqTechs;
          var meetsPrereqs = true;
          if(prereqs != null){
              for( var i=0; i < prereqs.length; i++){
                  if( ! this.GAME.STATS.SCIENCE_DONESET.has( prereqs[i] ) ){
-                     //console.log("failing prereq:"+prereqs[i]);
+                     if(verbose){console.log("failing prereq:"+prereqs[i]);}
                      meetsPrereqs = false;
                  }
              }
@@ -805,13 +810,13 @@ masterAvailListElem.researchButton.canAffordTest = function(){
          //  console.log("   cc:"+cc.join("-"));
          //})
 
-         if( this.GAME.canAfford(pp.cost) && meetsPrereqs ){
+         if( this.GAME.canAfford(pp.cost,verbose) && meetsPrereqs ){
              this.disabled = false;
-             //console.log("     affordable!");
+             if(verbose){console.log("     affordable!")}
              return true;
          } else {
              this.disabled = true;
-             //console.log("     unaffordable!");
+             if(verbose){console.log("     unaffordable!")}
              return false;
          }
        } else {
@@ -1488,6 +1493,18 @@ function printToAiConsole(ttt){
 console.log( document.getElementById("AI_CONSOLE").scrollTop)
 console.log( document.getElementById("AI_CONSOLE").scrollHeight)
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////// POPUPS
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2140,6 +2157,155 @@ document.getElementById("CHEAT_DEBUG_OPEN").onclick = function(){
     document.getElementById("CHEAT_DEBUG_OPEN").innerHTML = "CHEAT"
   }
 }
+
+
+
+/*
+************************************************************************************************************************************************************************
+************************************************************************************************************************************************************************
+************************************************************************************************************************************************************************
+************************************************************************************************************************************************************************
+************************************************************************************************************************************************************************
+***************** POPUP WINDOW:
+*/
+
+ELEMS[""] = document.getElementById("POPUP_WINDOW")
+
+function activatePopupWindow(){
+
+}
+
+
+ELEMS.popupBG     = document.getElementById('POPUP_WINDOW');
+ELEMS.popupWindow = document.getElementById('POPUP_WINDOW_CONTENT');
+ELEMS.popupTextBox = document.getElementById("POPUP_WINDOW_TEXTBOX");
+ELEMS.popupTitle = document.getElementById("POPUP_WINDOW_TITLELINE");
+ELEMS.popupCloseButton = document.getElementById("POPUP_WINDOW_CLOSE")
+
+ELEMS.popupButtons = [
+  document.getElementById("POPUP_WINDOW_BUTTON1"),
+  document.getElementById("POPUP_WINDOW_BUTTON2"),
+  document.getElementById("POPUP_WINDOW_BUTTON3")
+]
+
+
+function openPopupWindow(){
+    ELEMS.popupBG.style.display="block"
+    ELEMS.popupWindow.style.display = "block"
+    STATS["PAUSE"] = true;
+}
+function closePopupWindow(){
+    ELEMS.popupBG.style.display="none"
+    ELEMS.popupWindow.style.display = "none"
+    STATS["PAUSE"] = false;
+}
+
+document.getElementById("POPUP_WINDOW_CLOSE").onclick = function(){
+    ELEMS.popupBG.style.display="none"
+    ELEMS.popupWindow.style.display = "none"
+    STATS["PAUSE"] = false;
+}
+
+ELEMS.popupButtons.forEach( function(ppb){
+  ppb.onclick = closePopupWindow;
+})
+
+function popupNotice(noticeHTML, noticeTitleHTML = "ALERT:", noticeCloseButtonHTML = "OK"){
+   ELEMS.popupTextBox.innerHTML = noticeHTML;
+   ELEMS.popupTitle.innerHTML = noticeTitleHTML;
+
+   ELEMS.popupCloseButton.disabled = false
+
+   ELEMS.popupButtons[0].style.display = "block"
+   ELEMS.popupButtons[1].style.display = "none"
+   ELEMS.popupButtons[2].style.display = "none"
+   
+   ELEMS.popupButtons[0].innerHTML = noticeCloseButtonHTML;
+   
+   openPopupWindow()
+}
+
+function popupButton(html="OK",buttonFunc = function(){}, buttonDisabled = false, closeOnClick= true){
+   this.html = html;
+   this.buttonFunc = buttonFunc;
+   this.buttonDisabled = buttonDisabled;
+   this.closeOnClick = closeOnClick;
+   this.getOnClick = function(){
+     if(closeOnClick){
+         return function(){
+           buttonFunc();
+           closePopupWindow();
+         }
+     } else {
+         return function(){
+           buttonFunc();
+         }
+     }
+   }
+}
+/*
+noticeHTML, 
+                       buttons = [new popupButton()],
+                       allowClose = false,
+                       noticeTitleHTML = "ALERT:"
+
+popupAdvanced
+
+                       
+*/
+function popupAdvanced(noticeHTML,params={}){
+   var buttons = params.buttons;
+   var allowClose = params.allowClose;
+   var noticeTitleHTML = params.noticeTitleHTML
+   if(buttons === undefined){
+     buttons = [new popupButton()]
+   }
+   if(allowClose === undefined){
+     allowClose = false
+   }
+   if(noticeTitleHTML === undefined){
+     noticeTitleHTML = "ALERT:"
+   }
+   ELEMS.popupTextBox.innerHTML = noticeHTML;
+   ELEMS.popupTitle.innerHTML = noticeTitleHTML;
+
+   ELEMS.popupCloseButton.disabled = ! allowClose
+
+   for(var i=0; i < ELEMS.popupButtons.length; i++){
+     var belem = ELEMS.popupButtons[i];
+     
+     if(i < buttons.length){
+       var buttonInfo = buttons[i];
+       belem.style.display = "block";
+       belem.innerHTML = buttonInfo.html;
+       belem.onclick   = buttonInfo.getOnClick();
+       belem.disabled  = buttonInfo.buttonDisabled;
+     } else {
+       belem.style.display = "none";
+     }
+   }
+   openPopupWindow()
+}
+
+/*
+
+popupNotice(
+
+window.addEventListener("click",function(event){
+  if(event.target == settingsBG) {
+    ELEMS.popupBG.style.display="none"
+    settingsWindow.style.display = "none";
+  }
+})*/
+
+
+/*
+************************************************************************************************************************************************************************
+************************************************************************************************************************************************************************
+************************************************************************************************************************************************************************
+************************************************************************************************************************************************************************
+************************************************************************************************************************************************************************
+*/
 
 
 /*

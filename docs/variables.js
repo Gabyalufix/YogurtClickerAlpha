@@ -919,7 +919,7 @@ SCIENCE_TYPES_FULL.push("sum")
 STATS["PRODUCTIVITY_MULT"]["scout"] = 1
 STATS["PRODUCTIVITY_MULT"]["battleplate"] = 1
 
-
+STATICVAR_HOLDER.SCIENCE_TYPES = SCIENCE_TYPES;
 
 
 
@@ -953,6 +953,22 @@ STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy1_SCIENCE_FREE"] = "Create"
 STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["psy2_SCIENCE_FREE"] = "Strat/Tac"
 STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]["basic_SCIENCE_FREE"] = "Basic"
 
+
+
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"] = {};
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["bio_SCIENCE_FREE"] = "Research into Biology is focused on ..."
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["bio0_SCIENCE_FREE"] = "Research into Cellular Processes is focused on ..."
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["bio1_SCIENCE_FREE"] = "Research into Biomechanoid Augmentation is focused on ..."
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["bio2_SCIENCE_FREE"] = "Research into Genetic Engineering is focused on ..."
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["eng_SCIENCE_FREE"] = "Research into Engineering  is focused on ..."
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["eng0_SCIENCE_FREE"] = "Research into Construction is focused on building and designing new machines and structures."
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["eng1_SCIENCE_FREE"] = "Research into Matter & Material Science is focused on developing new forms of matter, providing base materials that are stronger, tougher, more flexible, more heat resistant, or are otherwise better suited to their given purposes."
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["eng2_SCIENCE_FREE"] = "Research into High Energy Physics is focused on on the study of the nature of physics itself, particularly under extreme conditions such as extreme velocity, mass/energy density, temperature, or electromagnetic flux."
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["psy_SCIENCE_FREE"] = "Research into Social Science is focused on ..."
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["psy0_SCIENCE_FREE"] = "Research into Cognition is focused on ..."
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["psy1_SCIENCE_FREE"] = "Research into Creativity & Intuition is focused on ..."
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["psy2_SCIENCE_FREE"] = "Research into Strategy & Tactics is focused on ..."
+STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"]["basic_SCIENCE_FREE"] = "Research into Basic Research is focused on ..."
 
 STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"] = STATICVAR_HOLDER["INVENTORY_DESC_SHORT"]
 
@@ -1130,7 +1146,7 @@ STATICVAR_HOLDER.SOULPROD_RATING_FACTOR = 27000000 * 6
 
 //////////////////////////////////////////////////////////////////////////
 
-var SCIENCE_UNLOCK_THRESH_BASE = 9e18 * 1e7;
+var SCIENCE_UNLOCK_THRESH_BASE = 9e18 * 4e6;
 var SCIENCE_UNLOCK_THRESH_MULT = Math.pow(10,0.25)
 
 STATS["MODIFIERS"] = {};

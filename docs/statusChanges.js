@@ -36,6 +36,13 @@ function standard_onEffect(){
             }
           })
       }
+      if(this.elems_opacitymask != null){
+          this.elems_opacitymask.forEach(function(cid){
+            var elem = document.getElementById(cid[0]);
+            elem.style.opacity = cid[1][0];
+          })
+      }
+      
       if(this.classids_buttondisable != null){
           this.classids_buttondisable.forEach(function(cid){
             var elemList = document.getElementsByClassName(cid);
@@ -84,17 +91,21 @@ function standard_onEffect(){
       }
       
       if(this.multiStatFcn != null){
-         if(this.statPct === undefined){
-           this.allOnStat = [];
+         if(this.multiStatPct === undefined){
+           this.multiStatPct = [];
+           this.multiStatCt = [];
          }
-         for(var z=0; z < this.elemStatWhenAllOn.length; z++){
-           var ctt = this.multiStatFcn[0];
-           this.allOnStat[z] = 0;
+         for(var z=0; z < this.multiStatFcn.length; z++){
+           var ctt = this.multiStatFcn[z];
+           var statList = ctt[0];
+           this.multiStatCt[z] = 0;
            for(var i=0; i < statList.length; i++){
              if( STATS.PHASE_STATUS[statList[i]] ){
-               this.allOnStat[z] = this.allOnStat[z]+1
+               this.multiStatCt[z] = this.multiStatCt[z]+1
              }
            }
+           this.multiStatPct[z] = this.multiStatCt[z] / statList.length;
+           ctt[1].call(this,this.multiStatCt[z],this.multiStatPct[z]);
          }
       }
 }
@@ -121,6 +132,12 @@ function standard_offEffect(){
             for(var i=0; i < elemList.length;i++){
               elemList[i].style.opacity = 0
             }
+          })
+      }
+      if(this.elems_opacitymask != null){
+          this.elems_opacitymask.forEach(function(cid){
+            var elem = document.getElementById(cid[0]);
+            elem.style.opacity = cid[1][1];
           })
       }
       if(this.classids_buttondisable != null){
@@ -169,6 +186,26 @@ function standard_offEffect(){
            }
          }
       }
+      
+      if(this.multiStatFcn != null){
+         if(this.multiStatPct === undefined){
+           this.multiStatPct = [];
+           this.multiStatCt = [];
+         }
+         for(var z=0; z < this.multiStatFcn.length; z++){
+           var ctt = this.multiStatFcn[z];
+           var statList = ctt[0];
+           this.multiStatCt[z] = 0;
+           for(var i=0; i < statList.length; i++){
+             if( STATS.PHASE_STATUS[statList[i]] ){
+               this.multiStatCt[z] = this.multiStatCt[z]+1
+             }
+           }
+           this.multiStatPct[z] = this.multiStatCt[z] / statList.length;
+           ctt[1].call(this,this.multiStatCt[z],this.multiStatPct[z]);
+         }
+      }
+      
 }
 
 
@@ -641,7 +678,8 @@ STATICVAR_HOLDER.PHASEDATA = {
        offEffect: function(){
           standard_offEffect.call(this);    
        }
-     },
+     }/*,
+     
      
      //elemStatWhenAllOn
     PSYFIELD_1:{  statID:"PSYFIELD_1",
@@ -722,49 +760,215 @@ STATICVAR_HOLDER.PHASEDATA = {
        offEffect: function(){
           standard_offEffect.call(this);    
        }
-     },
+     }*/
      
-    ENGFIELD_1:{  statID:"ENGFIELD_1",
+}
+
+GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"] = {bio:false,eng:false,psy:false}
+GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"] = {bio:false,eng:false,psy:false}
+
+
+/*
+    bio_SUBFIELD_UNLOCK:{  statID:"bio_SUBFIELD_UNLOCK",
+       statTitle: "bio_SUBFIELD_UNLOCK",
+       onEffect: function(){
+          if(( STATS.PHASE_STATUS["bio_SUBFIELD_UNLOCK"]) & (STATS.PHASE_STATUS["eng_SUBFIELD_UNLOCK"]) & (STATS.PHASE_STATUS["psy_SUBFIELD_UNLOCK"])){
+            document.getElementById("DATABANK_MINI").style.display = "none";
+          }
+          document.getElementById("DATABANK_DIV").style.display = "block";
+          document.getElementById("DATABANK_bio").style.display = "block";
+          document.getElementById("DATABANKMINI_bio").style.opacity = 0;
+          document.getElementById("bio_SLIDER_PANEL").style.display="block";
+          document.getElementById("SCIENCEFOCUS_DIV").style.display="block";
+       },
+       offEffect: function(){
+          document.getElementById("DATABANK_bio").style.display = "none";
+          if((! STATS.PHASE_STATUS["bio_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["eng_SUBFIELD_UNLOCK"]) & (! STATS.PHASE_STATUS["psy_SUBFIELD_UNLOCK"])){
+            document.getElementById("DATABANK_DIV").style.display = "none";
+            document.getElementById("SCIENCEFOCUS_DIV").style.display="none";
+          }
+          
+          if( STATS.PHASE_STATUS[this.sciname+"_SCIENCE_UNLOCK"] ){
+            document.getElementById("DATABANKMINI_bio").style.opacity = 1;
+            document.getElementById("DATABANK_MINI").style.display = "block";
+          }
+            document.getElementById("bio_SLIDER_PANEL").style.display="none";
+
+       },sciname:"bio"
+     },
+*/
+
+
+STATICVAR_HOLDER.SCIENCE_TYPES.forEach(function(scitype){
+  var capSciType = scitype.toUpperCase();
+  var scifreestring = scitype+"_SCIENCE_FREE"
+  var scititle = STATICVAR_HOLDER["INVENTORY_DESC_FULL"][scifreestring]
+  var getMultiStatFcn = function(){ 
+    return [[[capSciType+"FIELD_1",capSciType+"FIELD_2",capSciType+"FIELD_3"],function(ct,pct){
+            if(pct == 1){
+              document.getElementById(capSciType+"_RESEARCH_SLIDER_BASE").style.display = "none"
+              deactivateSlider([scitype+"SliderPct4",scitype+"SliderCheck4"])
+              unlockStatus(scitype+"_SUBFIELD_UNLOCK")
+              popupAdvanced("With the development of the third and final specialization of "+scititle+" research, "+
+                            "there is no longer any real benefit in continuing unfocused research into "+scititle+". "+
+                            "All future research will be directed towards one of the three specializations.",
+                            {noticeTitleHTML:"Notice: Advanced "+scititle,
+                             allowClose:true})
+              GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] = true;
+              GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] = true;
+              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 0;
+            } else if(pct == 0){
+              document.getElementById(capSciType+"_RESEARCH_SLIDER_BASE").style.display = "block";
+              lockStatus(scitype+"_SUBFIELD_UNLOCK")
+              GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] = false;
+              GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] = false;
+              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 0;
+            } else if(ct == 1){
+              document.getElementById(capSciType+"_RESEARCH_SLIDER_BASE").style.display = "block"
+              activateSlider([scitype+"SliderPct4",scitype+"SliderCheck4"])
+              unlockStatus(scitype+"_SUBFIELD_UNLOCK")
+              popupAdvanced("You have developed new research methods that allow you to focus on a sub-specialization of "+
+                            scititle+" research. You can now distribute your research efforts between unfocused "+scititle+" research and "+
+                            "research into "+STATICVAR_HOLDER["INVENTORY_DESC_FULL"][this.subSciType]+".<br><br>"+
+                            STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"][this.subSciType],
+                            {noticeTitleHTML:""+STATICVAR_HOLDER["INVENTORY_DESC_FULL"][this.subSciType]+" Research:",
+                             allowClose:true})
+              GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] = false;
+              GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] = true;
+              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 1;
+            } else {
+              document.getElementById(capSciType+"_RESEARCH_SLIDER_BASE").style.display = "block"
+              activateSlider([scitype+"SliderPct4",scitype+"SliderCheck4"])
+              unlockStatus(scitype+"_SUBFIELD_UNLOCK")
+              GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] = false;
+              GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] = true;
+              document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 1;
+            }
+    }]]
+  }
+  var multiStatFcn = getMultiStatFcn();
+  
+  function lockOrUnlockDatabanks(){
+      var completeCt = 0;
+      var partialCt = 0;
+      STATICVAR_HOLDER.SCIENCE_TYPES.forEach( function(key,index){
+        if(STATUS_FLAG["COMPLETE_UNLOCK"][key]){
+          completeCt++;
+        }
+        if(STATUS_FLAG["PARTIAL_UNLOCK"][key]){
+          partialCt++;
+        }
+      });
+      //var thisComplete = STATUS_FLAG["COMPLETE_UNLOCK"][this.scitype];
+      //var thisPartial = STATUS_FLAG["COMPLETE_UNLOCK"][this.scitype];
+      if(partialCt == 0){
+        document.getElementById("DATABANK_DIV").style.display = "none";
+        document.getElementById("SCIENCEFOCUS_DIV").style.display="none";
+      } else {
+        document.getElementById("DATABANK_DIV").style.display = "block";
+        document.getElementById("SCIENCEFOCUS_DIV").style.display="block";
+        //document.getElementById("DATABANK_"+this.scitype).style.display = "block";
+        //document.getElementById("DATABANKMINI_"+this.scitype).style.opacity = 0;
+        if(completeCt == 3){
+          document.getElementById("DATABANK_MINI").style.display = "none";
+        } else if(partialCt > 0){
+          document.getElementById("DATABANK_MINI").style.display = "block";
+        }
+      }
+  }
+  
+  for(var i=0; i < 3; i++){
+     var statID = capSciType+"FIELD_"+(i+1);
+     STATICVAR_HOLDER.PHASEDATA[statID] = {  statID:statID, subSciType:"eng"+i+"_SCIENCE_FREE",scitype:scitype,
+       statTitle: statID, elemids:[capSciType+"_RESEARCH_SLIDER_"+(i+1)],sliders:[[scitype+"SliderPct"+(i+1),scitype+"SliderCheck"+(i+1)]],
+                                   multiStatFcn: multiStatFcn,
+                                   elems_opacitymask: [["DATABANK_"+scitype+(i+1),[1,0]]],
+       onEffect: function(){
+          standard_onEffect.call(this);
+          //unlockStatus()
+          //lockOrUnlockDatabanks.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this); 
+          
+          //lockOrUnlockDatabanks.call(this);
+       }
+     }
+  }
+  
+})
+
+/*
+          document.getElementById("DATABANK_DIV").style.display = "block";
+          document.getElementById("DATABANK_bio").style.display = "block";
+          document.getElementById("DATABANKMINI_bio").style.opacity = 0;
+          document.getElementById("bio_SLIDER_PANEL").style.display="block";
+          document.getElementById("SCIENCEFOCUS_DIV").style.display="block";
+
+
+var engineering_multiStatFcn = 
+       [[["ENGFIELD_1","ENGFIELD_2","ENGFIELD_3"],function(ct,pct){
+            if(pct == 1){
+              document.getElementById("ENG_RESEARCH_SLIDER_BASE").style.display = "none"
+              deactivateSlider(["engSliderPct4","engSliderCheck4"])
+              unlockStatus("eng_SUBFIELD_UNLOCK")
+              popupAdvanced("With the development of the third and final specialization of engineering research, "+
+                            "you no longer see any benefit in continuing unfocused research into engineering science. "+
+                            "All future research will be directed towards one of the three specializations.",
+                            {noticeTitleHTML:"Notice: Advanced Engineering",
+                             allowClose:true})
+            } else if(pct == 0){
+              document.getElementById("ENG_RESEARCH_SLIDER_BASE").style.display = "block";
+              lockStatus("eng_SUBFIELD_UNLOCK")
+            } else if(ct == 1){
+              document.getElementById("ENG_RESEARCH_SLIDER_BASE").style.display = "block"
+              activateSlider(["engSliderPct4","engSliderCheck4"])
+              unlockStatus("eng_SUBFIELD_UNLOCK")
+              popupAdvanced("You have developed new research methods that allow you to focus on a sub-specialization of "+
+                            "engineering research. You can now distribute your research efforts between unfocused engineering research and "+
+                            "research into "+STATICVAR_HOLDER["INVENTORY_DESC_FULL"][this.subSciType]+".<br><br>"+
+                            STATICVAR_HOLDER["INVENTORY_DESC_LONGFORM"][this.subSciType],
+                            {noticeTitleHTML:""+STATICVAR_HOLDER["INVENTORY_DESC_FULL"][this.subSciType]+" Research:",
+                             allowClose:true})
+            } else {
+              document.getElementById("ENG_RESEARCH_SLIDER_BASE").style.display = "block"
+              activateSlider(["engSliderPct4","engSliderCheck4"])
+              unlockStatus("eng_SUBFIELD_UNLOCK")
+            }
+        }]]
+
+STATICVAR_HOLDER.PHASEDATA.ENGFIELD_1 = {  statID:"ENGFIELD_1", subSciType:"eng0_SCIENCE_FREE",
        statTitle: "ENGFIELD_1", elemids:["ENG_RESEARCH_SLIDER_1"],sliders:[["engSliderPct1","engSliderCheck1"]],
-                                elemStatWhenAllOn:[["ENG_RESEARCH_SLIDER_BASE",["ENGFIELD_1","ENGFIELD_2","ENGFIELD_3"],"none","block"]],
+                                multiStatFcn: engineering_multiStatFcn,
        onEffect: function(){
           standard_onEffect.call(this);
-          if( this.allOnStat[0] ){
-            deactivateSlider(["engSliderPct4","engSliderCheck4"])
-          }
-       },
-       offEffect: function(){
-          standard_offEffect.call(this);    
-       }
-     },
-    ENGFIELD_2:{  statID:"ENGFIELD_2",
-       statTitle: "ENGFIELD_2", elemids:["ENG_RESEARCH_SLIDER_2"],sliders:[["engSliderPct2","engSliderCheck2"]],
-                                elemStatWhenAllOn:[["ENG_RESEARCH_SLIDER_BASE",["ENGFIELD_1","ENGFIELD_2","ENGFIELD_3"],"none","block"]],
-       onEffect: function(){
-          standard_onEffect.call(this);
-          if( this.allOnStat[0] ){
-            deactivateSlider(["engSliderPct4","engSliderCheck4"])
-          }
-       },
-       offEffect: function(){
-          standard_offEffect.call(this);    
-       }
-     },
-    ENGFIELD_3:{  statID:"ENGFIELD_3",
-       statTitle: "ENGFIELD_3", elemids:["ENG_RESEARCH_SLIDER_3"],sliders:[["engSliderPct3","engSliderCheck3"]],
-                                elemStatWhenAllOn:[["ENG_RESEARCH_SLIDER_BASE",["ENGFIELD_1","ENGFIELD_2","ENGFIELD_3"],"none","block"]],
-       onEffect: function(){
-          standard_onEffect.call(this);
-          if( this.allOnStat[0] ){
-            deactivateSlider(["engSliderPct4","engSliderCheck4"])
-          }
        },
        offEffect: function(){
           standard_offEffect.call(this);    
        }
      }
      
-}
+STATICVAR_HOLDER.PHASEDATA.ENGFIELD_2 = {  statID:"ENGFIELD_2", subSciType:"eng1_SCIENCE_FREE",
+       statTitle: "ENGFIELD_2", elemids:["ENG_RESEARCH_SLIDER_2"],sliders:[["engSliderPct2","engSliderCheck2"]],
+                                multiStatFcn: engineering_multiStatFcn,
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);
+       }
+     },
+STATICVAR_HOLDER.PHASEDATA.ENGFIELD_3 = {  statID:"ENGFIELD_3", subSciType:"eng2_SCIENCE_FREE",
+       statTitle: "ENGFIELD_3", elemids:["ENG_RESEARCH_SLIDER_3"],sliders:[["engSliderPct3","engSliderCheck3"]],
+                                multiStatFcn: engineering_multiStatFcn,
+       onEffect: function(){
+          standard_onEffect.call(this);
+       },
+       offEffect: function(){
+          standard_offEffect.call(this);    
+       }
+     }
+*/
 
 STATICVAR_HOLDER.PHASE_STATUS_LIST = [];
 
@@ -787,14 +991,18 @@ function unlockStatus(sid){
     STATS.PHASE_STATUS[sid] = true;
     STATICVAR_HOLDER.PHASEDATA[sid].onEffect();
     }
-  STATICVAR_HOLDER.PHASEDATA[sid].cheatButton.setStatus();
+  if(STATICVAR_HOLDER.PHASEDATA[sid].cheatButton != null){
+    STATICVAR_HOLDER.PHASEDATA[sid].cheatButton.setStatus();
+  }
 }
-function lockStatus(sid){
+function lockStatus(sid, updateCheatButton = true){
   if(STATS.PHASE_STATUS[sid]){
     STATS.PHASE_STATUS[sid] = false;
     STATICVAR_HOLDER.PHASEDATA[sid].offEffect();
   }
-  STATICVAR_HOLDER.PHASEDATA[sid].cheatButton.setStatus();
+  if(STATICVAR_HOLDER.PHASEDATA[sid].cheatButton != null){
+    STATICVAR_HOLDER.PHASEDATA[sid].cheatButton.setStatus();
+  }
 }
 function resetStatus(){
     for(var i=0; i<STATICVAR_HOLDER.PHASE_STATUS_LIST.length; i++){
