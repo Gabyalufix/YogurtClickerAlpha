@@ -999,6 +999,8 @@ strat:
 
 */
 
+STATS.UPGRADE_PANEL_UNLOCK_CT = 0;
+
 ELEMS["RESOURCE_DISPLAY_MATTER_Farmland"]      = document.getElementById("RESOURCE_DISPLAY_MATTER_Farmland");
 ELEMS["RESOURCE_DISPLAY_MATTERDELTA_Farmland"] = document.getElementById("RESOURCE_DISPLAY_MATTERDELTA_Farmland");
 

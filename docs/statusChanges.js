@@ -644,6 +644,7 @@ STATICVAR_HOLDER.PHASEDATA = {
        statTitle: "green_PRODUCTIVITY_UPGRADE", elemids:["green_PRODUCTIVITY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
+          STATS.UPGRADE_PANEL_UNLOCK = this.statTitle;
        },
        offEffect: function(){
           standard_offEffect.call(this);    
@@ -654,6 +655,7 @@ STATICVAR_HOLDER.PHASEDATA = {
        statTitle: "green_EFFICIENCY_UPGRADE", elemids:["green_EFFICIENCY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
+          STATS.UPGRADE_PANEL_UNLOCK = this.statTitle;
        },
        offEffect: function(){
           standard_offEffect.call(this);    
@@ -664,6 +666,7 @@ STATICVAR_HOLDER.PHASEDATA = {
        statTitle: "yogo_PRODUCTIVITY_UPGRADE", elemids:["yogo_PRODUCTIVITY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
+          STATS.UPGRADE_PANEL_UNLOCK = this.statTitle;
        },
        offEffect: function(){
           standard_offEffect.call(this);    
@@ -674,6 +677,7 @@ STATICVAR_HOLDER.PHASEDATA = {
        statTitle: "bot_PRODUCTIVITY_UPGRADE", elemids:["bot_PRODUCTIVITY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
+          STATS.UPGRADE_PANEL_UNLOCK = this.statTitle;
        },
        offEffect: function(){
           standard_offEffect.call(this);    
@@ -684,6 +688,7 @@ STATICVAR_HOLDER.PHASEDATA = {
        statTitle: "bot_EFFICIENCY_UPGRADE", elemids:["bot_EFFICIENCY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
+          STATS.UPGRADE_PANEL_UNLOCK = this.statTitle;
        },
        offEffect: function(){
           standard_offEffect.call(this);    
@@ -694,6 +699,7 @@ STATICVAR_HOLDER.PHASEDATA = {
        statTitle: "greenPower_PRODUCTIVITY_UPGRADE", elemids:["greenPower_PRODUCTIVITY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
+          STATS.UPGRADE_PANEL_UNLOCK = this.statTitle;
        },
        offEffect: function(){
           standard_offEffect.call(this);    
@@ -703,6 +709,7 @@ STATICVAR_HOLDER.PHASEDATA = {
        statTitle: "greenPower_EFFICIENCY_UPGRADE", elemids:["greenPower_EFFICIENCY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
+          STATS.UPGRADE_PANEL_UNLOCK = this.statTitle;
        },
        offEffect: function(){
           standard_offEffect.call(this);    
@@ -713,6 +720,7 @@ STATICVAR_HOLDER.PHASEDATA = {
        statTitle: "botPower_PRODUCTIVITY_UPGRADE", elemids:["botPower_PRODUCTIVITY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
+          STATS.UPGRADE_PANEL_UNLOCK = this.statTitle;
        },
        offEffect: function(){
           standard_offEffect.call(this);    
@@ -722,6 +730,7 @@ STATICVAR_HOLDER.PHASEDATA = {
        statTitle: "botPower_EFFICIENCY_UPGRADE", elemids:["botPower_EFFICIENCY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
+          STATS.UPGRADE_PANEL_UNLOCK = this.statTitle;
        },
        offEffect: function(){
           standard_offEffect.call(this);    
@@ -732,6 +741,7 @@ STATICVAR_HOLDER.PHASEDATA = {
        statTitle: "compute_PRODUCTIVITY_UPGRADE", elemids:["compute_PRODUCTIVITY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
+          STATS.UPGRADE_PANEL_UNLOCK = this.statTitle;
        },
        offEffect: function(){
           standard_offEffect.call(this);    
@@ -741,6 +751,7 @@ STATICVAR_HOLDER.PHASEDATA = {
        statTitle: "compute_EFFICIENCY_UPGRADE", elemids:["compute_EFFICIENCY_PANEL"],
        onEffect: function(){
           standard_onEffect.call(this);
+          STATS.UPGRADE_PANEL_UNLOCK = this.statTitle;
        },
        offEffect: function(){
           standard_offEffect.call(this);    

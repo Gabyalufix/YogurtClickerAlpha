@@ -1061,21 +1061,7 @@ function TICK_constructWorlds(){
   }
 }
 
-function TICK_calcEvents(){
-  for(var i=0; i < STATS.EVENTS_LOCKED.length; i++){
-    var tt = STATS.EVENTS_LOCKED[i]
-    var tx = STATICVAR_HOLDER.EVENT_LIST[tt];
-    //console.log("EL: "+STATS.EVENTS_LOCKED);
-    if( tx.eventTest.call(this.GAME) ){
-      console.log("UNLOCKING: "+tt);
-      tx.eventExec.call(this.GAME);
-      STATS.EVENTS_LOCKED.splice(i,1);
-      i = i - 1;
-       console.log("PL: "+STATS.EVENTS_LOCKED);
-    }
 
-  }
-}
 
 GAME_GLOBAL.TICK_calcEvents = TICK_calcEvents;
 

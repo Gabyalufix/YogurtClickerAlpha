@@ -82,7 +82,22 @@ STATICVAR_HOLDER.EVENT_LIST = {
       eventExec: function(){ printlnToAiConsole("You have a few new ideas about how your work could be improved..." );
         unlockStatus("research_projects");
       }
-   }
+   },
+   
+   UNLOCK_FIRST_UPGRADE_PANEL:{
+      eventTitle: "Unlock First Upgrade Panel", eventID: "UNLOCK_FIRST_UPGRADE_PANEL",
+      eventTest: function(){ return  this.STATS.UPGRADE_PANEL_UNLOCK != undefined },
+      eventExec: function(){
+        var uppan = this.STATS.UPGRADE_PANEL_UNLOCK;
+        printlnToAiConsole("You have unlocked your first upgrade panel!" );
+              popupAdvanced("Your recent research has given you access to your first upgrade panel! "+
+                            "You can use the "+uppan+" to upgrade that ability indefinitely. "+
+                            "Each upgrade will cost progressively more than the previous.",
+                            {noticeTitleHTML:""+uppan,
+                             allowClose:true})
+      }
+   },
+   
 }
 STATS.EVENTS_LOCKED = [];
 var allEventList = Object.keys(STATICVAR_HOLDER.EVENT_LIST)
@@ -95,3 +110,19 @@ console.log("Locked events: "+STATS.EVENTS_LOCKED.length+" Events");
 console.log("Locked events: ["+STATS.EVENTS_LOCKED.join(",")+"]");
 
 //STATS.EVENTS_LOCKED=Object.keys(STATICVAR_HOLDER.EVENT_LIST).slice();
+
+function TICK_calcEvents(){
+  for(var i=0; i < STATS.EVENTS_LOCKED.length; i++){
+    var tt = STATS.EVENTS_LOCKED[i]
+    var tx = STATICVAR_HOLDER.EVENT_LIST[tt];
+    //console.log("EL: "+STATS.EVENTS_LOCKED);
+    if( tx.eventTest.call(this.GAME) ){
+      console.log("UNLOCKING: "+tt);
+      tx.eventExec.call(this.GAME);
+      STATS.EVENTS_LOCKED.splice(i,1);
+      i = i - 1;
+       console.log("PL: "+STATS.EVENTS_LOCKED);
+    }
+
+  }
+}
