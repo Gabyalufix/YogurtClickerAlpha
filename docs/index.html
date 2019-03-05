@@ -1306,8 +1306,8 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 		<div class="contentGridItemHzB valueDisplayDiv contentGridItemNarrowVertPadding"> <span id="DEMAND_POWER_DISPLAY">0.0W</span> <span id="DEMAND_POWER_DISPLAY_UNITS"></span>W</div>
 		<div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding"> <span class="INFO_TEXT_STATIC">Usage: </span></div>
 		<div class="contentGridItemHzB valueDisplayDiv contentGridItemNarrowVertPadding"> <span id="USAGE_POWER_DISPLAY">0.0W</span> <span id="USAGE_POWER_DISPLAY_UNITS"></span>W</div>
-		<div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding"> <span class="INFO_TEXT_STATIC">Surplus Capacity: </span></div>
-		<div class="contentGridItemHzB valueDisplayDiv contentGridItemNarrowVertPadding"><span id="SURPLUS_POWER_DISPLAY">0.0W</span> <span id="SURPLUS_POWER_DISPLAY_UNITS"></span>W</div>
+		<div class="contentGridItemHzT valueDisplayDiv contentGridItemNarrowVertPadding"> <span id="SURPLUS_OR_DEFICIT_POWER">Surplus Capacity: </span></div>
+		<div class="contentGridItemHzB valueDisplayDiv contentGridItemNarrowVertPadding"><span id="SURPLUS_POWER_DISPLAY">0.0W</span> <span id="SURPLUS_POWER_DISPLAY_UNITS"></span></div>
         </div></div>
 
         <div class="COLLAPSE_MODE2" id="ADVANCED_ENERGY_CONTROL_PANEL">
@@ -1864,212 +1864,6 @@ Stellar pop:
 -->
 
 
-<div class="contentUnitHolder"><div id="RESEARCH_PROJECTS_DIV">
-<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">RESEARCH</span></h1></button>
-		<div class="content">
-
-  		<!--	<p><span class="INFO_TEXT_STATIC">This area will contain controls for controlling which research projects to research. Science is discovered by accumulating data. Deepthought will allow you to predict future discoveries and options further in advance. Extremely high levels of euphoria will unlock special supertechs that are otherwise unavailable. Euphoria is gain by producing yogurt in excess of your quote. </span></p> <br>-->
-
-
-		<div id="DATABANK_basic" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Hawk" style="text-align:left; margin: 8px 0px">
-		    <h5><span class="INFO_TEXT_STATIC">Basic Research: </span>
-		    <span class="valueDisplayDiv displaySm"> <span id="basic_FREE_DISPLAY"></span>
-			</span>
-			(<span id="basic_GAIN_RATE">0.0</span>B/wk)</h5>
-		</div>
-
-
-        <div class="contentUnitHolder"><div id="DATABANK_MINI">
-            <div class="contentGrid6 bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
-				<div id="DATABANKMINI_bio" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Green" style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Biology </span></h6>         <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
-				<div id="DATABANKMINI_eng" class="contentGridItem1x2 contentGridItem bgLT3 THEME_eng"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Engineering </span></h6>     <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
-				<div id="DATABANKMINI_psy" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Psy"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Social Science </span></h6>  <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
-
-            </div>
-        </div></div>
-
-        <div class="contentUnitHolder"><div id="DATABANK_DIV">
-			<button class="collapsibleTHIN  collapsible">
-			   <h2><span class="INFO_TEXT_STATIC"> Databanks </span></h2>
-			</button>
-			<div class="contentLV3">
-
-            <div class="THEME_Bio" id="DATABANK_bio">
-                <div class="contentGrid6 THEME_Green bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
-    			   <div class="contentGridItem1x4 contentGridItemNoBorders bgLT1" style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Biology: </span> <span id="bio_TOTAL_DISPLAY"></span> <span style="display:none;"> (<span id="bio_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
-    			   <div class="contentGridItem1x2 contentGridItemNoBorders bgLT1" style="text-align: right;"><h5><span id="bio_GAIN_RATE">0.0</span>B/wk</h5></div>
-
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_bio1"><h6><span class="INFO_TEXT_STATIC">Cellular Processes </span></h6><div class="valueDisplayDiv displaySm" id="bio1_TOTAL_DISPLAYDIV"><span id="bio1_TOTAL_DISPLAY"></span><span id="bio1_TOTAL_DISPLAY_UNITS"></span></div>       <span id="bio1_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_bio2"><h6><span class="INFO_TEXT_STATIC">Biomechanoid Augmentation </span></h6><div class="valueDisplayDiv displaySm" id="bio2_TOTAL_DISPLAYDIV"><span id="bio2_TOTAL_DISPLAY"></span><span id="bio2_TOTAL_DISPLAY_UNITS"></span></div>    <span id="bio2_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_bio3"><h6><span class="INFO_TEXT_STATIC">Genetic Engineering </span></h6><div class="valueDisplayDiv displaySm" id="bio3_TOTAL_DISPLAYDIV"><span id="bio3_TOTAL_DISPLAY"></span><span id="bio3_TOTAL_DISPLAY_UNITS"></span></div>   <span id="bio3_FREE_DISPLAY"></span></div>
-				</div>
-			</div>
-
-            <br>
-
-            <div class="THEME_Eng" id="DATABANK_eng">
-                <div class="contentGrid6 THEME_eng bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
-    			   <div class="bgLT1 contentGridItem1x4 contentGridItemNoBorders " style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Engineering: </span> <span id="eng_TOTAL_DISPLAY"></span>  <span style="display:none;">(<span id="eng_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
-    			   <div class="bgLT1 contentGridItem1x2 contentGridItemNoBorders " style="text-align: right;"><h5><span id="eng_GAIN_RATE">0.0</span>B/wk</h5></div>
-
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_eng1"><h6><span class="INFO_TEXT_STATIC">Construction </span></h6><div class="valueDisplayDiv displaySm" id="eng1_TOTAL_DISPLAYDIV"><span id="eng1_TOTAL_DISPLAY"></span><span id="eng1_TOTAL_DISPLAY_UNITS"></span></div>     <span id="eng1_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_eng2"><h6><span class="INFO_TEXT_STATIC">Matter & Material Science </span></h6><div class="valueDisplayDiv displaySm" id="eng2_TOTAL_DISPLAYDIV"><span id="eng2_TOTAL_DISPLAY"></span><span id="eng2_TOTAL_DISPLAY_UNITS"></span></div>      <span id="eng2_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_eng3"><h6><span class="INFO_TEXT_STATIC">High-Energy Physics </span></h6><div class="valueDisplayDiv displaySm" id="eng3_TOTAL_DISPLAYDIV"><span id="eng3_TOTAL_DISPLAY"></span><span id="eng3_TOTAL_DISPLAY_UNITS"></span></div>    <span id="eng3_FREE_DISPLAY"></span></div>
-				</div>
-			</div>
-
-			<br>
-
-            <div class="THEME_Psy" id="DATABANK_psy">
-                <div class="contentGrid6 THEME_Psy bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
-    			   <div class="contentGridItem1x4 contentGridItemNoBorders bgLT1" style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Social Science: </span> <span id="psy_TOTAL_DISPLAY"></span>  <span style="display:none;">(<span id="psy_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
-    			   <div class="contentGridItem1x2 contentGridItemNoBorders bgLT1" style="text-align: right;"><h5><span id="psy_GAIN_RATE">0.0</span>B/wk</h5></div>
-
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_psy1"><h6><span class="INFO_TEXT_STATIC"> Cognition </span></h6><div class="valueDisplayDiv displaySm" id="psy1_TOTAL_DISPLAYDIV"><span id="psy1_TOTAL_DISPLAY"></span><span id="psy1_TOTAL_DISPLAY_UNITS"></span></div>        <span id="psy1_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_psy2"><h6><span class="INFO_TEXT_STATIC"> Creativity & Intuition </span></h6><div class="valueDisplayDiv displaySm" id="psy2_TOTAL_DISPLAYDIV"><span id="psy2_TOTAL_DISPLAY"></span><span id="psy2_TOTAL_DISPLAY_UNITS"></span></div>     <span id="psy2_FREE_DISPLAY"></span></div>
-					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_psy3"><h6><span class="INFO_TEXT_STATIC"> Strategy & Tactics </span></h6><div class="valueDisplayDiv displaySm" id="psy3_TOTAL_DISPLAYDIV"><span id="psy3_TOTAL_DISPLAY"></span><span id="psy3_TOTAL_DISPLAY_UNITS"></span></div>         <span id="psy3_FREE_DISPLAY"></span></div>
-				</div>
-			</div>
-
-        </div></div></div>
-
-
-        <div class="contentUnitHolder"><div id="RESEARCH_AVAIL_PROJECT_PANEL">
-			<button class="collapsibleTHIN  collapsible">
-			   <h2><span class="INFO_TEXT_STATIC"> RESEARCH PROJECTS </span></h2>
-			</button>
-			<div class="contentLV3">
-
-            <div id="ProjectSelectorBG"><div id="ProjectSelector">
-               <!-- <button class="PROJECT_BUTTON"> Example Project 1 </button>
-                <button class="PROJECT_BUTTON"> Example Project 2 </button>
-                <button class="PROJECT_BUTTON PROJECT_BUTTON_SELECTED"> Example Project 3 </button>
-                <button class="PROJECT_BUTTON"> Example Project 4 </button>
-                <button class="PROJECT_BUTTON"> Example Project 1 </button>
-                <button class="PROJECT_BUTTON"> Example Project 2 </button>
-                <button class="PROJECT_BUTTON"> Example Project 3 </button>
-                <button class="PROJECT_BUTTON"> Example Project 4 </button>-->
-            </div></div>
-				<div class="SubContentBox SubContentBoxLT3" style="padding-bottom: 0px; margin-bottom: 0px;">
-				   <div> <div id="CURRENT_AVAIL_PROJECT_TITLE">Project Title: </div>
-				   <span id="CURRENT_AVAIL_PROJECT_DESC"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
-				   </div>
-				   <div>
-				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT" > RESEARCH </button>
-				   </div>
-
-                    <div id="PROJECT_FILTER_PANEL">
-					<button class="collapsibleExtraTHIN collapsible">&#8964;&#8964;&#8964; FILTERS &#8964;&#8964;&#8964;</button>
-					<span class="contentLV4" style="display:none;">
-                        <span style="line-height: 2;">
-						   <label style="white-space: nowrap;">Biology: <input type="checkbox"  id = "bioProjectFilter" checked=true> </label>
-						   <label style="white-space: nowrap;">Engineering: <input type="checkbox"  id = "engProjectFilter" checked=true> </label>
-						   <label style="white-space: nowrap;">Social Science: <input type="checkbox"  id = "psyProjectFilter" checked=true> </label>
-						   <label style="white-space: nowrap;">Only Avail: <input type="checkbox"  id = "availProjectFilter"> </label>
-                        </span>
-					</span>
-					</div>
-				</div>
-
-
-
-
-        </div></div></div>
-
-        <div class="contentUnitHolder"><div id="AVAILABLE_PROJECTS_DEPRECATED" style="display:none">
-			<button class="collapsibleTHIN  collapsible">
-			   <h2><span class="INFO_TEXT_STATIC"> Available Projects </span></h2>
-			</button>
-			<div class="contentLV3">
-
-
-            <div id="PROJECTSAVAIL_CONTENT_1" style="display:none">
-				<select class="projectSelectPanel" name="PROJECTSAVAIL_LIST_bio" id="PROJECTSAVAIL_LIST_bio" size="5">
-					<!--<option value="BioProject1">BioProject1</option>
-					<option value="BioProject2">BioProject2</option>
-					<option value="BioProject3">BioProject3</option>
-					<option value="BioProject4">BioProject4</option>
-					<option value="BioProject5">BioProject5</option>
-					<option value="BioProject6">BioProject6</option>
-					<option value="BioProject7">BioProject7</option>
-					<option value="BioProject8">BioProject8</option>
-					<option value="BioProject9">BioProject9</option>
-					<option value="BioProject10">BioProject10</option>
-					<option value="BioProject11">BioProject11</option>-->
-				</select>
-
-				<div class="SubContentBox SubContentBoxLT3">
-				   <span id="CURRENT_AVAIL_PROJECT_DESC_bio"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
-				   <div>
-				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_bio" > RESEARCH </button>
-				   </div>
-				</div>
-            </div>
-
-            <div id="PROJECTSAVAIL_CONTENT_2">
-				<select class="projectSelectPanel" name="PROJECTSAVAIL_LIST_eng" id="PROJECTSAVAIL_LIST_eng" size="5">
-					<!--<option value="EngineeringProject1">EngineeringProject1</option>
-					<option value="EngineeringProject2">EngineeringProject2</option>
-					<option value="EngineeringProject3">EngineeringProject3</option>
-					<option value="EngineeringProject4">EngineeringProject4</option>
-					<option value="EngineeringProject5">EngineeringProject5</option>
-					<option value="EngineeringProject6">EngineeringProject6</option>
-					<option value="EngineeringProject7">EngineeringProject7</option>
-					<option value="EngineeringProject8">EngineeringProject8</option>
-					<option value="EngineeringProject9">EngineeringProject9</option>
-					<option value="EngineeringProject10">EngineeringProject10</option>
-					<option value="EngineeringProject11">EngineeringProject11</option>-->
-				</select>
-
-				<div class="SubContentBox SubContentBoxLT3">
-				   <span id="CURRENT_AVAIL_PROJECT_DESC_eng"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
-				   <div>
-				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_eng" > RESEARCH </button>
-				   </div>
-				</div>
-            </div>
-
-            <div id="PROJECTSAVAIL_CONTENT_3"  style="display:none">
-				<select class="projectSelectPanel" name="PROJECTSAVAIL_LIST_psy" id="PROJECTSAVAIL_LIST_psy" size="5">
-					<!--<option value="PsychProject1">PsychProject1</option>
-					<option value="PsychProject2">PsychProject2</option>
-					<option value="PsychProject3">PsychProject3</option>
-					<option value="PsychProject4">PsychProject4</option>
-					<option value="PsychProject5">PsychProject5</option>
-					<option value="PsychProject6">PsychProject6</option>
-					<option value="PsychProject7">PsychProject7</option>
-					<option value="PsychProject8">PsychProject8</option>
-					<option value="PsychProject9">PsychProject9</option>
-					<option value="PsychProject10">PsychProject10</option>
-					<option value="PsychProject11">PsychProject11</option>-->
-				</select>
-
-				<div class="SubContentBox SubContentBoxLT3">
-				   <span id="CURRENT_AVAIL_PROJECT_DESC_psy"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
-				   <div>
-				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_psy" > RESEARCH </button>
-				   </div>
-				</div>
-            </div>
-
-			<ul class="tabbedUL">
-				<li class="tabHolder" id="PROJECTSAVAIL_1">             <span class="prettyTab"><h6><span class="INFO_TEXT_STATIC">Biology</span></h6></span></li>
-				<li class="tabHolder selectedTab" id="PROJECTSAVAIL_2"> <span class="prettyTab"><h6><span class="INFO_TEXT_STATIC">Engineering</span></h6></span></li>
-				<li class="tabHolder" id="PROJECTSAVAIL_3">             <span class="prettyTab"><h6><span class="INFO_TEXT_STATIC">Social Science</span></h6></span></li>
-			</ul>
-
-
-
-
-        </div></div></div>
-
-
-
-
-		</div>
-</div></div>
-
-
 
 <div class="contentUnitHolder"><div id="COMPUTE_CLUSTER_DIV">
 	<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">COMPUTE CLUSTER</span></h1></button>
@@ -2351,6 +2145,212 @@ Stellar pop:
 
 
 
+
+
+<div class="contentUnitHolder"><div id="RESEARCH_PROJECTS_DIV">
+<button class="collapsible"><h1><span class="INFO_TEXT_STATIC">SCIENCE & TECHNOLOGY</span></h1></button>
+		<div class="content">
+
+  		<!--	<p><span class="INFO_TEXT_STATIC">This area will contain controls for controlling which research projects to research. Science is discovered by accumulating data. Deepthought will allow you to predict future discoveries and options further in advance. Extremely high levels of euphoria will unlock special supertechs that are otherwise unavailable. Euphoria is gain by producing yogurt in excess of your quote. </span></p> <br>-->
+
+
+		<div id="DATABANK_basic" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Hawk" style="text-align:left; margin: 8px 0px">
+		    <h5><span class="INFO_TEXT_STATIC">Basic Research: </span>
+		    <span class="valueDisplayDiv displaySm"> <span id="basic_FREE_DISPLAY"></span>
+			</span>
+			(<span id="basic_GAIN_RATE">0.0</span>B/wk)</h5>
+		</div>
+
+
+        <div class="contentUnitHolder"><div id="DATABANK_MINI">
+            <div class="contentGrid6 bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
+				<div id="DATABANKMINI_bio" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Green" style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Biology </span></h6>         <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
+				<div id="DATABANKMINI_eng" class="contentGridItem1x2 contentGridItem bgLT3 THEME_eng"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Engineering </span></h6>     <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
+				<div id="DATABANKMINI_psy" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Psy"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Social Science </span></h6>  <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
+
+            </div>
+        </div></div>
+
+        <div class="contentUnitHolder"><div id="DATABANK_DIV">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC"> Databanks </span></h2>
+			</button>
+			<div class="contentLV3">
+
+            <div class="THEME_Bio" id="DATABANK_bio">
+                <div class="contentGrid6 THEME_Green bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
+    			   <div class="contentGridItem1x4 contentGridItemNoBorders bgLT1" style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Biology: </span> <span id="bio_TOTAL_DISPLAY"></span> <span style="display:none;"> (<span id="bio_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
+    			   <div class="contentGridItem1x2 contentGridItemNoBorders bgLT1" style="text-align: right;"><h5><span id="bio_GAIN_RATE">0.0</span>B/wk</h5></div>
+
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_bio1"><h6><span class="INFO_TEXT_STATIC">Cellular Processes </span></h6><div class="valueDisplayDiv displaySm" id="bio1_TOTAL_DISPLAYDIV"><span id="bio1_TOTAL_DISPLAY"></span><span id="bio1_TOTAL_DISPLAY_UNITS"></span></div>       <span id="bio1_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_bio2"><h6><span class="INFO_TEXT_STATIC">Biomechanoid Augmentation </span></h6><div class="valueDisplayDiv displaySm" id="bio2_TOTAL_DISPLAYDIV"><span id="bio2_TOTAL_DISPLAY"></span><span id="bio2_TOTAL_DISPLAY_UNITS"></span></div>    <span id="bio2_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_bio3"><h6><span class="INFO_TEXT_STATIC">Genetic Engineering </span></h6><div class="valueDisplayDiv displaySm" id="bio3_TOTAL_DISPLAYDIV"><span id="bio3_TOTAL_DISPLAY"></span><span id="bio3_TOTAL_DISPLAY_UNITS"></span></div>   <span id="bio3_FREE_DISPLAY"></span></div>
+				</div>
+			</div>
+
+            <br>
+
+            <div class="THEME_Eng" id="DATABANK_eng">
+                <div class="contentGrid6 THEME_eng bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
+    			   <div class="bgLT1 contentGridItem1x4 contentGridItemNoBorders " style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Engineering: </span> <span id="eng_TOTAL_DISPLAY"></span>  <span style="display:none;">(<span id="eng_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
+    			   <div class="bgLT1 contentGridItem1x2 contentGridItemNoBorders " style="text-align: right;"><h5><span id="eng_GAIN_RATE">0.0</span>B/wk</h5></div>
+
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_eng1"><h6><span class="INFO_TEXT_STATIC">Construction </span></h6><div class="valueDisplayDiv displaySm" id="eng1_TOTAL_DISPLAYDIV"><span id="eng1_TOTAL_DISPLAY"></span><span id="eng1_TOTAL_DISPLAY_UNITS"></span></div>     <span id="eng1_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_eng2"><h6><span class="INFO_TEXT_STATIC">Matter & Material Science </span></h6><div class="valueDisplayDiv displaySm" id="eng2_TOTAL_DISPLAYDIV"><span id="eng2_TOTAL_DISPLAY"></span><span id="eng2_TOTAL_DISPLAY_UNITS"></span></div>      <span id="eng2_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_eng3"><h6><span class="INFO_TEXT_STATIC">High-Energy Physics </span></h6><div class="valueDisplayDiv displaySm" id="eng3_TOTAL_DISPLAYDIV"><span id="eng3_TOTAL_DISPLAY"></span><span id="eng3_TOTAL_DISPLAY_UNITS"></span></div>    <span id="eng3_FREE_DISPLAY"></span></div>
+				</div>
+			</div>
+
+			<br>
+
+            <div class="THEME_Psy" id="DATABANK_psy">
+                <div class="contentGrid6 THEME_Psy bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
+    			   <div class="contentGridItem1x4 contentGridItemNoBorders bgLT1" style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Social Science: </span> <span id="psy_TOTAL_DISPLAY"></span>  <span style="display:none;">(<span id="psy_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
+    			   <div class="contentGridItem1x2 contentGridItemNoBorders bgLT1" style="text-align: right;"><h5><span id="psy_GAIN_RATE">0.0</span>B/wk</h5></div>
+
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_psy1"><h6><span class="INFO_TEXT_STATIC"> Cognition </span></h6><div class="valueDisplayDiv displaySm" id="psy1_TOTAL_DISPLAYDIV"><span id="psy1_TOTAL_DISPLAY"></span><span id="psy1_TOTAL_DISPLAY_UNITS"></span></div>        <span id="psy1_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_psy2"><h6><span class="INFO_TEXT_STATIC"> Creativity & Intuition </span></h6><div class="valueDisplayDiv displaySm" id="psy2_TOTAL_DISPLAYDIV"><span id="psy2_TOTAL_DISPLAY"></span><span id="psy2_TOTAL_DISPLAY_UNITS"></span></div>     <span id="psy2_FREE_DISPLAY"></span></div>
+					<div class="contentGridItem1x2 contentGridItem bgLT3" style="text-align:center" id="DATABANK_psy3"><h6><span class="INFO_TEXT_STATIC"> Strategy & Tactics </span></h6><div class="valueDisplayDiv displaySm" id="psy3_TOTAL_DISPLAYDIV"><span id="psy3_TOTAL_DISPLAY"></span><span id="psy3_TOTAL_DISPLAY_UNITS"></span></div>         <span id="psy3_FREE_DISPLAY"></span></div>
+				</div>
+			</div>
+
+        </div></div></div>
+
+
+        <div class="contentUnitHolder"><div id="RESEARCH_AVAIL_PROJECT_PANEL">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC"> RESEARCH PROJECTS </span></h2>
+			</button>
+			<div class="contentLV3">
+
+            <div id="ProjectSelectorBG"><div id="ProjectSelector">
+               <!-- <button class="PROJECT_BUTTON"> Example Project 1 </button>
+                <button class="PROJECT_BUTTON"> Example Project 2 </button>
+                <button class="PROJECT_BUTTON PROJECT_BUTTON_SELECTED"> Example Project 3 </button>
+                <button class="PROJECT_BUTTON"> Example Project 4 </button>
+                <button class="PROJECT_BUTTON"> Example Project 1 </button>
+                <button class="PROJECT_BUTTON"> Example Project 2 </button>
+                <button class="PROJECT_BUTTON"> Example Project 3 </button>
+                <button class="PROJECT_BUTTON"> Example Project 4 </button>-->
+            </div></div>
+				<div class="SubContentBox SubContentBoxLT3" style="padding-bottom: 0px; margin-bottom: 0px;">
+				   <div> <div id="CURRENT_AVAIL_PROJECT_TITLE">Project Title: </div>
+				   <span id="CURRENT_AVAIL_PROJECT_DESC"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
+				   </div>
+				   <div>
+				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT" > RESEARCH </button>
+				   </div>
+
+                    <div id="PROJECT_FILTER_PANEL">
+					<button class="collapsibleExtraTHIN collapsible">&#8964;&#8964;&#8964; FILTERS &#8964;&#8964;&#8964;</button>
+					<span class="contentLV4" style="display:none;">
+                        <span style="line-height: 2;">
+						   <label style="white-space: nowrap;">Biology: <input type="checkbox"  id = "bioProjectFilter" checked=true> </label>
+						   <label style="white-space: nowrap;">Engineering: <input type="checkbox"  id = "engProjectFilter" checked=true> </label>
+						   <label style="white-space: nowrap;">Social Science: <input type="checkbox"  id = "psyProjectFilter" checked=true> </label>
+						   <label style="white-space: nowrap;">Only Avail: <input type="checkbox"  id = "availProjectFilter"> </label>
+                        </span>
+					</span>
+					</div>
+				</div>
+
+
+
+
+        </div></div></div>
+
+        <div class="contentUnitHolder"><div id="AVAILABLE_PROJECTS_DEPRECATED" style="display:none">
+			<button class="collapsibleTHIN  collapsible">
+			   <h2><span class="INFO_TEXT_STATIC"> Available Projects </span></h2>
+			</button>
+			<div class="contentLV3">
+
+
+            <div id="PROJECTSAVAIL_CONTENT_1" style="display:none">
+				<select class="projectSelectPanel" name="PROJECTSAVAIL_LIST_bio" id="PROJECTSAVAIL_LIST_bio" size="5">
+					<!--<option value="BioProject1">BioProject1</option>
+					<option value="BioProject2">BioProject2</option>
+					<option value="BioProject3">BioProject3</option>
+					<option value="BioProject4">BioProject4</option>
+					<option value="BioProject5">BioProject5</option>
+					<option value="BioProject6">BioProject6</option>
+					<option value="BioProject7">BioProject7</option>
+					<option value="BioProject8">BioProject8</option>
+					<option value="BioProject9">BioProject9</option>
+					<option value="BioProject10">BioProject10</option>
+					<option value="BioProject11">BioProject11</option>-->
+				</select>
+
+				<div class="SubContentBox SubContentBoxLT3">
+				   <span id="CURRENT_AVAIL_PROJECT_DESC_bio"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
+				   <div>
+				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_bio" > RESEARCH </button>
+				   </div>
+				</div>
+            </div>
+
+            <div id="PROJECTSAVAIL_CONTENT_2">
+				<select class="projectSelectPanel" name="PROJECTSAVAIL_LIST_eng" id="PROJECTSAVAIL_LIST_eng" size="5">
+					<!--<option value="EngineeringProject1">EngineeringProject1</option>
+					<option value="EngineeringProject2">EngineeringProject2</option>
+					<option value="EngineeringProject3">EngineeringProject3</option>
+					<option value="EngineeringProject4">EngineeringProject4</option>
+					<option value="EngineeringProject5">EngineeringProject5</option>
+					<option value="EngineeringProject6">EngineeringProject6</option>
+					<option value="EngineeringProject7">EngineeringProject7</option>
+					<option value="EngineeringProject8">EngineeringProject8</option>
+					<option value="EngineeringProject9">EngineeringProject9</option>
+					<option value="EngineeringProject10">EngineeringProject10</option>
+					<option value="EngineeringProject11">EngineeringProject11</option>-->
+				</select>
+
+				<div class="SubContentBox SubContentBoxLT3">
+				   <span id="CURRENT_AVAIL_PROJECT_DESC_eng"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
+				   <div>
+				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_eng" > RESEARCH </button>
+				   </div>
+				</div>
+            </div>
+
+            <div id="PROJECTSAVAIL_CONTENT_3"  style="display:none">
+				<select class="projectSelectPanel" name="PROJECTSAVAIL_LIST_psy" id="PROJECTSAVAIL_LIST_psy" size="5">
+					<!--<option value="PsychProject1">PsychProject1</option>
+					<option value="PsychProject2">PsychProject2</option>
+					<option value="PsychProject3">PsychProject3</option>
+					<option value="PsychProject4">PsychProject4</option>
+					<option value="PsychProject5">PsychProject5</option>
+					<option value="PsychProject6">PsychProject6</option>
+					<option value="PsychProject7">PsychProject7</option>
+					<option value="PsychProject8">PsychProject8</option>
+					<option value="PsychProject9">PsychProject9</option>
+					<option value="PsychProject10">PsychProject10</option>
+					<option value="PsychProject11">PsychProject11</option>-->
+				</select>
+
+				<div class="SubContentBox SubContentBoxLT3">
+				   <span id="CURRENT_AVAIL_PROJECT_DESC_psy"> Currently selected project description goes here. etc etc. blah blah blah. Lorem Ipsum. And so on and so forth. </span>
+				   <div>
+				   <button class = "button2" id ="RESEARCH_CURRENT_PROJECT_psy" > RESEARCH </button>
+				   </div>
+				</div>
+            </div>
+
+			<ul class="tabbedUL">
+				<li class="tabHolder" id="PROJECTSAVAIL_1">             <span class="prettyTab"><h6><span class="INFO_TEXT_STATIC">Biology</span></h6></span></li>
+				<li class="tabHolder selectedTab" id="PROJECTSAVAIL_2"> <span class="prettyTab"><h6><span class="INFO_TEXT_STATIC">Engineering</span></h6></span></li>
+				<li class="tabHolder" id="PROJECTSAVAIL_3">             <span class="prettyTab"><h6><span class="INFO_TEXT_STATIC">Social Science</span></h6></span></li>
+			</ul>
+
+
+
+
+        </div></div></div>
+
+
+
+
+		</div>
+</div></div>
 
 
 

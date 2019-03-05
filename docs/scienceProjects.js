@@ -177,7 +177,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
      ************************************************************************************/
      
       TECHTREE_BIO:{projectTitle:"Biological Experimentation",projectID:"TECHTREE_BIO",projectType:"TECHTREE",
-           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
+           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]}, noPeek : true,
            cost:[["basic",getProjectBaseCost(1)*(0.4) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
            effect:function(){
              unlockStatus("bio_SCIENCE_UNLOCK");
@@ -187,7 +187,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            prereqTechs: []},
            
       TECHTREE_ENG:{projectTitle:"Activate Analytic Engine",projectID:"TECHTREE_ENG",projectType:"TECHTREE",
-           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
+           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]}, noPeek : true,
            cost:[["basic",getProjectBaseCost(1)*(0.4) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
            effect:function(){
              unlockStatus("eng_SCIENCE_UNLOCK");
@@ -197,7 +197,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            prereqTechs: []},
            
       TECHTREE_PSY:{projectTitle:"Activate Soulswarm Matrix",projectID:"TECHTREE_PSY",projectType:"TECHTREE",
-           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
+           costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]}, noPeek : true,
            cost:[["basic",getProjectBaseCost(1)*(0.4) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
            effect:function(){
              unlockStatus("psy_SCIENCE_UNLOCK");
@@ -626,15 +626,18 @@ function peekAheadTechTree(peekDepth = 1,verbose = DEBUG_MODE){
     });
     for( var i=0; i < peekDepth; i++){
         Array.from(STATS.TECHTREE_ROOTS.keys()).forEach(function(pid){
-            STATICVAR_HOLDER.SCIENCE.TECHTREE[pid].childTechs.forEach(function(cpid){
-                var isPeekable = true;
-                STATICVAR_HOLDER.SCIENCE.TECHTREE[cpid].prereqTechs.forEach( function(prid){
-                    isPeekable = isPeekable && ( STATS.SCIENCE_DONESET.has(prid) || TECH_PEEK_SET.has(prid) )
+            if( ! STATICVAR_HOLDER.SCIENCE.TECHTREE[pid].noPeek ){  
+                STATICVAR_HOLDER.SCIENCE.TECHTREE[pid].childTechs.forEach(function(cpid){
+                    var isPeekable = true;
+                    STATICVAR_HOLDER.SCIENCE.TECHTREE[cpid].prereqTechs.forEach( function(prid){
+                        isPeekable = isPeekable && ( STATS.SCIENCE_DONESET.has(prid) || TECH_PEEK_SET.has(prid) ) 
+                        
+                    })
+                    if(isPeekable){
+                        TECH_PEEK_SET.add(cpid);
+                    }
                 })
-                if(isPeekable){
-                    TECH_PEEK_SET.add(cpid);
-                }
-            })
+            }
         })
     }
     /*Array.from(TECH_PEEK_SET).forEach(function(pid){

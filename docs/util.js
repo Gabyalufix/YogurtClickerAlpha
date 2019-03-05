@@ -626,6 +626,62 @@ function fmtSIflat(x, yottaCtThreshold = 2){
   }
 }
 
+
+/*
+  fracstyle: one of: ["milli","frac","int"]
+*/
+function fmtSIadv(x, fracDigits = 2, fracStyle = "milli",delim="", yottaCtThreshold = 2){
+  var extraDigits = fracDigits - 2;
+  if(x <= 0 ){
+    var digits = Math.max(0,2 + extraDigits)
+    if(digits > 0){
+      return "0."+"0".repeat(digits);
+    } else {
+      return "0";
+    }
+  } else if(x < 1 && fracStyle == "int"){
+    return 0;
+  } else if(x < 1 && fracStyle == "frac"){
+    var digits = Math.max(0, 2 + extraDigits);
+    return roundTo(x,digits)+"";
+  } else if(x < 1 && fracStyle == "milli"){
+      var d = -Math.floor(Math.log10(x))
+      var dd = (Math.floor((d-1) / 3))
+      var suffix = SIPREFIXLOW[dd];
+      var rr = x * Math.pow(10,(dd+1)*3)
+      var dp = ((d+2) % 3)
+      var digits = Math.max(0, dp + extraDigits);
+      return roundTo(rr,digits)+suffix;
+  } else if(x < 10){
+    var digits = Math.max(0,2 + extraDigits);
+    var suffix = "";
+    return roundTo(x,digits)+suffix;
+  } else if(x < 100){
+    var digits = Math.max(0,1 + extraDigits);
+    var suffix = "";
+    return roundTo(x,digits)+suffix;
+  } else if(x < 1000){
+    var digits = Math.max(0,0 + extraDigits);
+    var suffix = "";
+    return roundTo(x,digits)+suffix;
+  } else {
+      var d = Math.floor(Math.log10(x))
+      var dd = Math.floor(d / 3) - 1
+      var ddd = Math.floor(dd / 8)
+      var dddString = "Y".repeat(ddd)
+      if(ddd >= yottaCtThreshold){
+         dddString="Y"+supText(""+ddd)
+      }
+      var ddp = dd - ddd * 8
+      var rr = x / Math.pow(10,(dd+1)*3)
+      var dp = 2 - (d - ((dd+1)*3))
+      var suffix = SIPREFIX[ddp] + dddString;
+      var digits = Math.max(0,dp + extraDigits);
+      return roundTo(rr,digits) +delim+ suffix
+  }
+}
+
+
 //Returns [0]baseNumber, [1]prefixAbbrev, [2]prefixFull, [3]prefixExponent, [4]a string of prefix descriptions
 function fmtSIlog(x){
   if(x == 0){

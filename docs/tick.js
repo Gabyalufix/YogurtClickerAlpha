@@ -778,24 +778,34 @@ function TICK_INDUSTRY_calcPowerUsage(){
        //this.ELEMS["USAGE_POWER_DISPLAY"].unitDisp.textContent =  pwrFmt4[1];
        //this.ELEMS["DEMAND_POWER_DISPLAY"].unitDisp.textContent =  pwrFmt6[1];
 
-    var pwrFmt3 = fmtSIflat( Math.round(this.INVENTORY["POWER"]) * wattMult )
-    var pwrFmt4 = fmtSIflat( Math.round((this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"]))* wattMult )
-    var pwrFmt5 = fmtSIflat( Math.round(this.INVENTORY["POWERGEN"]) * wattMult )
-    var pwrFmt6 = fmtSIflat( Math.round(this.STATS["CURR_POWER_DEMAND"]) * wattMult )
-
-    //console.log(pwrFmt3 +"/"+pwrFmt4+"/"+pwrFmt5+"/"+pwrFmt6);
-    var makeAnonFunc = function(xpwrFmt3,xpwrFmt4, xpwrFmt5, xpwrFmt6){
-                return function(){
-                    //console.log(xpwrFmt3 +"/"+xpwrFmt4+"/"+xpwrFmt5+"/"+xpwrFmt6);
-                    this.GAME.ELEMS["SURPLUS_POWER_DISPLAY"].textContent =  xpwrFmt3;
-                    this.GAME.ELEMS["USAGE_POWER_DISPLAY"].textContent =  xpwrFmt4;
-                    this.GAME.ELEMS["POWER_DISPLAY"].textContent =  xpwrFmt5;
-                    this.GAME.ELEMS["DEMAND_POWER_DISPLAY"].textContent =  xpwrFmt6;
-                    //console.log(this.GAME.ELEMS["DEMAND_POWER_DISPLAY"].innerHTML);
-                }
+    //fmtSIadv(x, fracDigits = 2, fracStyle = "milli"
+    var pwrFracDigits = 3;
+    var pwrFmt4 = fmtSIadv( Math.round((this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"]))* wattMult , fracDigits=pwrFracDigits)
+    var pwrFmt5 = fmtSIadv( Math.round(this.INVENTORY["POWERGEN"]) * wattMult , fracDigits=pwrFracDigits)
+    var pwrFmt6 = fmtSIadv( Math.round(this.STATS["CURR_POWER_DEMAND"]) * wattMult , fracDigits=pwrFracDigits)
+    this.ELEMS["USAGE_POWER_DISPLAY"].textContent =  pwrFmt4;
+    this.ELEMS["POWER_DISPLAY"].textContent =  pwrFmt5;
+    this.ELEMS["DEMAND_POWER_DISPLAY"].textContent =  pwrFmt6;
+    
+    if( Math.round(this.INVENTORY["POWER"]) > 0 ){
+       var pwrFmt3 = fmtSIadv( Math.round(this.INVENTORY["POWER"]) * wattMult , fracDigits=pwrFracDigits)
+       this.ELEMS["SURPLUS_POWER_DISPLAY"].textContent =  pwrFmt3+"W";
+       this.ELEMS["SURPLUS_OR_DEFICIT_POWER"].textContent = "Surplus:";
+       this.ELEMS["SURPLUS_POWER_DISPLAY"].style.color = "var(--textWarnGreen)";
+       this.ELEMS["SURPLUS_OR_DEFICIT_POWER"].style.color = "var(--textWarnGreen)";
+    } else {
+       var pwrFmt3 = fmtSIadv( Math.round(this.STATS["CURR_POWER_DEMAND"] - this.INVENTORY["POWERGEN"]) * wattMult , fracDigits=pwrFracDigits)
+       this.ELEMS["SURPLUS_POWER_DISPLAY"].textContent =  pwrFmt3+"W";
+       this.ELEMS["SURPLUS_OR_DEFICIT_POWER"].textContent = "Defecit:";
+       this.ELEMS["SURPLUS_POWER_DISPLAY"].style.color = "var(--textWarnRed)";
+       this.ELEMS["SURPLUS_OR_DEFICIT_POWER"].style.color = "var(--textWarnRed)";
     }
-    var anonFunc = makeAnonFunc(pwrFmt3,pwrFmt4,pwrFmt5,pwrFmt6);
-    window.requestAnimationFrame(anonFunc);
+    
+    SURPLUS_OR_DEFICIT_POWER
+
+    
+
+
 
     var pwrUsage = this.INVENTORY["POWERGEN"] - this.INVENTORY["POWER"];
     var pwrUsageLeft = pwrUsage;
@@ -822,10 +832,10 @@ function TICK_INDUSTRY_calcPowerUsage(){
       var currThermalMass = (this.INVENTORY["POWER-Free"+worldType+"-CT"] * this.STATICVAR_HOLDER.MASS_PER_POWERTICK)
 
       var makeAnonFunc2 = function(){
-                    var wpAvail = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult )
-                    var wpThermal = fmtSIflat( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult )
-                    var wpCollect = fmtSIflat( Math.round( worldPowerCollected ) * wattMult )
-                    var wpOutput = fmtSIflat( Math.round( worldPwrUsage ) * wattMult )
+                    var wpAvail = fmtSIadv( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult , fracDigits=pwrFracDigits)
+                    var wpThermal = fmtSIadv( Math.round( this.INVENTORY["POWER-Free"+worldType+"-CT"]) * wattMult , fracDigits=pwrFracDigits)
+                    var wpCollect = fmtSIadv( Math.round( worldPowerCollected ) * wattMult , fracDigits=pwrFracDigits)
+                    var wpOutput = fmtSIadv( Math.round( worldPwrUsage ) * wattMult, fracDigits=pwrFracDigits )
                     var xpp = pp;
                     return function(){
                       xpp.powerAVAIL.textContent   = wpAvail;

@@ -708,23 +708,18 @@ masterAvailListElem.filterBoxes = [];
 masterAvailListElem.filterBoxes.bio = document.getElementById("bioProjectFilter");
 masterAvailListElem.filterBoxes.eng = document.getElementById("engProjectFilter");
 masterAvailListElem.filterBoxes.psy = document.getElementById("psyProjectFilter");
+masterAvailListElem.filterBoxes.avail = document.getElementById("availProjectFilter");
+
 masterAvailListElem.filterBoxes.bio.mrb = masterAvailListElem
 masterAvailListElem.filterBoxes.eng.mrb = masterAvailListElem
 masterAvailListElem.filterBoxes.psy.mrb = masterAvailListElem
+masterAvailListElem.filterBoxes.avail.mrb = masterAvailListElem
 
 function filterProjectWindow(){
     
     for(var i=0; i < this.projectElemList.length;i++){
         var elem = this.projectElemList[i];
-        if( (! this.filterBoxes.bio.checked ) && elem.scitype == "bio"){
-            elem.style.display = "none";
-        } else if( (! this.filterBoxes.eng.checked ) && elem.scitype == "eng"){
-            elem.style.display = "none";
-        } else if( (! this.filterBoxes.psy.checked ) && elem.scitype == "psy"){
-            elem.style.display = "none";
-        } else {
-            elem.style.display = "block";
-        }
+        
          var meetPrereqs = true;
          elem.project.prereqTechs.forEach(function(pt){
               if( ! STATS.SCIENCE_DONESET.has(pt) ){
@@ -736,6 +731,20 @@ function filterProjectWindow(){
          } else {
              elem.classList.remove("PROJECTBUTTON_PREREQ_BAD");
          }
+        
+        
+        if( (! this.filterBoxes.bio.checked ) && elem.scitype == "bio"){
+            elem.style.display = "none";
+        } else if( (! this.filterBoxes.eng.checked ) && elem.scitype == "eng"){
+            elem.style.display = "none";
+        } else if( (! this.filterBoxes.psy.checked ) && elem.scitype == "psy"){
+            elem.style.display = "none";
+        } else if( this.filterBoxes.avail.checked && (! meetPrereqs) ){
+            elem.style.display = "none";
+        } else {
+            elem.style.display = "block";
+        }
+
         
     }
     
@@ -752,6 +761,7 @@ function filterProjectWindowOnChange(){
 masterAvailListElem.filterBoxes.bio.onchange = filterProjectWindowOnChange
 masterAvailListElem.filterBoxes.eng.onchange = filterProjectWindowOnChange
 masterAvailListElem.filterBoxes.psy.onchange = filterProjectWindowOnChange
+masterAvailListElem.filterBoxes.avail.onchange = filterProjectWindowOnChange
 
 
 RESEARCH_BUTTONS.push(masterAvailListElem.researchButton);
