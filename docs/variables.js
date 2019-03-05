@@ -1095,7 +1095,7 @@ STATICVAR_HOLDER.SOULPROD_RATING_FACTOR = 27000000 * 6
 
 //////////////////////////////////////////////////////////////////////////
 
-var SCIENCE_UNLOCK_THRESH_BASE = 9e18 * 4e7;
+var SCIENCE_UNLOCK_THRESH_BASE = 9e18 * 7e6;
 var SCIENCE_UNLOCK_THRESH_MULT = Math.pow(10,0.25)
 
 STATS["MODIFIERS"] = {};

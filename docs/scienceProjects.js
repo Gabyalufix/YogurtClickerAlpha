@@ -224,7 +224,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
      
       TECHTREE_BIO:{projectTitle:"Biological Experimentation",projectID:"TECHTREE_BIO",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]}, noPeek : true,
-           cost:[["basic",getProjectBaseCost(1)*(0.4) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
+           cost:[["basic",getProjectBaseCost(1)*(1.0) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
            effect:function(){
              unlockStatus("bio_SCIENCE_UNLOCK");
            },
@@ -234,7 +234,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            
       TECHTREE_ENG:{projectTitle:"Activate Analytic Engine",projectID:"TECHTREE_ENG",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]}, noPeek : true,
-           cost:[["basic",getProjectBaseCost(1)*(0.4) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
+           cost:[["basic",getProjectBaseCost(1)*(1.0) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
            effect:function(){
              unlockStatus("eng_SCIENCE_UNLOCK");
            },
@@ -244,7 +244,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            
       TECHTREE_PSY:{projectTitle:"Activate Soulswarm Matrix",projectID:"TECHTREE_PSY",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]}, noPeek : true,
-           cost:[["basic",getProjectBaseCost(1)*(0.4) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
+           cost:[["basic",getProjectBaseCost(1)*(1.0) / STATICVAR_HOLDER["BASIC_SCIENCE_MODIFIER"] ]],
            effect:function(){
              unlockStatus("psy_SCIENCE_UNLOCK");
            },
@@ -258,7 +258,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
 
       TECHTREE_compproc:{projectTitle:"Hyperefficient Computational Processing",projectID:"TECHTREE_compproc",projectType:"TECHTREE",
            costInfo: {sciFields:[["psy",1]], sciCtDistro:[1]},
-           cost:[["psy",getProjectBaseCost(2) / 12]],
+           cost:[["psy",getProjectBaseCost(2) / 6]],
            effect:function(){
              //unlockStatus("psy_SCIENCE_UNLOCK");
              STATS["PRODUCTIVITY_MULT"]["computation"] = STATS["PRODUCTIVITY_MULT"]["computation"] + 0.25;
@@ -270,7 +270,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
 
       TECHTREE_heuristicResearch:{projectTitle:"Heuristic Research",projectID:"TECHTREE_heuristicResearch",projectType:"TECHTREE",
            costInfo: {sciFields:[["psy",1]], sciCtDistro:[1]},
-           cost:[["psy",getProjectBaseCost(2) / 12]],
+           cost:[["psy",getProjectBaseCost(2) / 6]],
            effect:function(){
              //unlockStatus("psy_SCIENCE_UNLOCK");
              STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] = STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] * 3;
@@ -283,7 +283,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            
       TECHTREE_biomass:{projectTitle:"Synthetic Biomass",projectID:"TECHTREE_biomass",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
-           cost:[["bio",getProjectBaseCost(1) / 128000]],
+           cost:[["bio",getProjectBaseCost(1) *0.8 / 128000]],
            effect:function(){
              unlockStatus("BASIC_BIOMASS");
            },
@@ -296,7 +296,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            
       TECHTREE_photosynthesis:{projectTitle:"Photosynthetic Chloroplasts",projectID:"TECHTREE_photosynthesis",projectType:"TECHTREE",
            costInfo: {sciFields:[["basic",1]], sciCtDistro:[1]},
-           cost:[["bio",getProjectBaseCost(3) / 128000]],
+           cost:[["bio",getProjectBaseCost(3) *0.8  / 128000]],
            effect:function(){
              unlockStatus("photosynthesis");
            },

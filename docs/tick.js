@@ -529,7 +529,10 @@ function TICK_calcIndustry(){
     //this.executeAllConstructionRequests()
 
 //CONSTRUCTION_REQUESTS.push( [inventoryItemName, requestCt, unitCost, requestCt]
-
+    if(! this.STATS.STATUS_FLAG["BASIC_BIOMASS"] ){
+        this.INVENTORY["MATTER-Biomass-CT"] = this.INVENTORY["MATTER-Biomass-CT"] + 4e6;
+    }
+    
     for(var i=0; i<this.STATS.ACTIVE_INDUSTRY_LIST.length; i++){
        var industryID = this.STATS.ACTIVE_INDUSTRY_LIST[i];
 
