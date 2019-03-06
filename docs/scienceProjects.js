@@ -220,6 +220,30 @@ STATS["INDUSTRY"]["Feedstock"].baseProd
 STATS["INDUSTRY"]["Feedstock"].basePwr
 STATS["INDUSTRY"]["Botpwr"]
 STATS["INDUSTRY"]["Compute"]
+             Cost[1] = 112Y / 1.0
+main.js:2160 Cost[2] = 199Y / 1.8
+main.js:2160 Cost[3] = 354Y / 3.2
+main.js:2160 Cost[4] = 630Y / 5.6
+main.js:2160 Cost[5] = 1.12kY / 10.0
+main.js:2160 Cost[6] = 1.99kY / 17.8
+main.js:2160 Cost[7] = 3.54kY / 31.6
+main.js:2160 Cost[8] = 6.30kY / 56.2
+main.js:2160 Cost[9] = 11.2kY / 100.0
+main.js:2160 Cost[10] = 19.9kY / 178
+main.js:2160 Cost[11] = 35.4kY / 316
+main.js:2160 Cost[12] = 63.0kY / 562
+main.js:2160 Cost[13] = 112kY / 1000
+main.js:2160 Cost[14] = 199kY / 1.78k
+main.js:2160 Cost[15] = 354kY / 3.16k
+main.js:2160 Cost[16] = 630kY / 5.62k
+main.js:2160 Cost[17] = 1.12MY / 10.0k
+main.js:2160 Cost[18] = 1.99MY / 17.8k
+main.js:2160 Cost[19] = 3.54MY / 31.6k
+main.js:2160 Cost[20] = 6.30MY / 56.2k
+main.js:2160 Cost[21] = 11.2MY / 100k
+main.js:2160 Cost[22] = 19.9MY / 178k
+main.js:2160 Cost[23] = 35.4MY / 316k
+main.js:2160 Cost[24] = 63.0MY / 562k
 
 */
 
@@ -337,7 +361,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
 
       TECHTREE_supermaterial:{projectTitle:"Advanced Material Processing",projectID:"TECHTREE_supermaterial",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
-           cost:[["eng",getProjectBaseCost(3) / 12],["bio",getProjectBaseCost(4)]],
+           cost:[["eng",getProjectBaseCost(3) / 12],["bio",getProjectBaseCost(3) / 12]],
            effect:function(){
              STATS["INDUSTRY"]["Feedstock"]["baseProd"] = STATS["INDUSTRY"]["Feedstock"]["baseProd"] * 3;
              STATS["INDUSTRY"]["Feedstock"]["basePwr"] = STATS["INDUSTRY"]["Feedstock"]["basePwr"] / 3;
@@ -348,7 +372,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
 
       TECHTREE_circuit1:{projectTitle:"Improved Circuit Design",projectID:"TECHTREE_circuit1",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
-           cost:[["eng",getProjectBaseCost(3) / 12],["psy",getProjectBaseCost(4)]],
+           cost:[["eng",getProjectBaseCost(3) / 12],["psy",getProjectBaseCost(3) / 12]],
            effect:function(){
              STATS["INDUSTRY"]["Compute"]["baseProd"] = STATS["INDUSTRY"]["Compute"]["baseProd"] * 3;
              STATS["INDUSTRY"]["Compute"]["basePwr"] = STATS["INDUSTRY"]["Compute"]["basePwr"] /3;
@@ -374,7 +398,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
      
       TECHTREE_biomassUpgrade1:{projectTitle:"Biomass Evolution I",projectID:"TECHTREE_biomassUpgrade1",projectType:"TECHTREE",
            costInfo: {sciFields:[["bio",1]], sciCtDistro:[1]},
-           cost:[["bio",getProjectBaseCost(5)]],
+           cost:[["bio",getProjectBaseCost(4)]],
            effect:function(){
               this.STATS["PRODUCTIVITY_MULT"]["green"] = this.STATS["PRODUCTIVITY_MULT"]["green"] + 0.1
            },
@@ -383,7 +407,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            prereqTechs: ["TECHTREE_biomass","TECHTREE_microscale"]},
            
       TECHTREE_heuristicResearch2:{projectTitle:"Synergistic Experimental Design",projectID:"TECHTREE_heuristicResearch2",projectType:"TECHTREE",
-           cost:[["bio",getProjectBaseCost(3) / 12]],
+           cost:[["bio",getProjectBaseCost(4)]],
            effect:function(){
              //unlockStatus("psy_SCIENCE_UNLOCK");
              STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] = STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] * 2;
@@ -416,7 +440,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
 
       TECHTREE_nanotech:{projectTitle:"Nanotech Fabrication",projectID:"TECHTREE_nanotech",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
-           cost:[["eng",getProjectBaseCost(6)],["psy",getProjectBaseCost(6)]],
+           cost:[["eng",getProjectBaseCost(4)],["psy",getProjectBaseCost(3)]],
            effect:function(){
              STATS["INDUSTRY"]["Botbot"]["baseProd"] = STATS["INDUSTRY"]["Botbot"]["baseProd"] * 3;
              STATS["INDUSTRY"]["Botbot"]["basePwr"] = STATS["INDUSTRY"]["Botbot"]["basePwr"] / 2 ;
@@ -429,7 +453,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            
       TECHTREE_organicConstruct1:{projectTitle:"Technoorganic Structure Lattice",projectID:"TECHTREE_organicConstruct1",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
-           cost:[["bio",getProjectBaseCost(6)],["eng",getProjectBaseCost(6)]],
+           cost:[["bio",getProjectBaseCost(4)],["eng",getProjectBaseCost(3)]],
            effect:function(){
              STATS["INDUSTRY"]["Botpwr"]["baseProd"] = STATS["INDUSTRY"]["Botpwr"]["baseProd"] * 3;
              STATS["INDUSTRY"]["Botpwr"]["basePwr"] = STATS["INDUSTRY"]["Botpwr"]["basePwr"] / 3;

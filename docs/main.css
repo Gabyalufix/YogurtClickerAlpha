@@ -1069,7 +1069,10 @@ h5 {
   font-weight: bold;
   font-family: "Courier New", Courier, monospace;
 }
-
+.databank_table {
+  margin-top:8px;
+  margin-bottom:8px;
+}
 #CHEAT_DEBUG_PANEL_CONTENT {
   padding: 4px 16px 16px 8px;
   overflow: auto;

@@ -761,11 +761,14 @@ function TICK_INDUSTRY_calcScienceGain(){
                 var ffssi = fmtSIunits( this.INVENTORY[fid+j+"_SCIENCE_FREE"] );
                 this.SCIENCE_DISPLAY[fid][j].textContent =   ffssi[0]+" "+ffssi[1]+"B"
               }
+              this.ELEMS[fid+"Base_GAIN_RATE"].textContent = fmtSI(newBaseSci)
           } else {
               //console.log("basic: "+scitype);
               this.INVENTORY[fid+"_SCIENCE_FREE"] = this.INVENTORY[fid+"_SCIENCE_FREE"] + newSci
               var ffsi = fmtSIunits( this.INVENTORY[fid+"_SCIENCE_FREE"] );
               this.SCIENCE_DISPLAY[fid].total.free.textContent =  ffsi[0]+" "+ffsi[1]+"B"
+              this.ELEMS[fid+"Base_GAIN_RATE"].textContent = fmtSI(newSci)
+
           }
 
 

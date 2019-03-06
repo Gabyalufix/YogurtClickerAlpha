@@ -26,7 +26,7 @@
   <h1> SETTINGS: </h1>
   					<BR>
   					<BR>
-					
+
 					<span><input type="checkbox" checked="true" id = "ENABLE_CHEATS_CHECKBOX">
 					Enable Cheats </span>
 					<span><input type="checkbox" checked="true" id = "ENABLE_TUTORIAL_CHECKBOX">
@@ -2171,9 +2171,9 @@ Stellar pop:
 
         <div class="contentUnitHolder"><div id="DATABANK_MINI">
             <div class="contentGrid6 bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
-				<div id="DATABANKMINI_bio" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Green" style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Biology </span></h6>         <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
-				<div id="DATABANKMINI_eng" class="contentGridItem1x2 contentGridItem bgLT3 THEME_eng"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Engineering </span></h6>     <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
-				<div id="DATABANKMINI_psy" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Psy"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Social Science </span></h6>  <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_FREE_DISPLAY.COPY"></span>         </div>   <h5><span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_GAIN_RATE.COPY">0.0</span>B/wk</h5>    </div>
+				<div id="DATABANKMINI_bio" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Green" style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Biology </span></h6>         <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="bio_FREE_DISPLAY.COPY"></span>         </div>   <h5><span id="bioBase_GAIN_RATE">0.0</span>B/wk</h5>    </div>
+				<div id="DATABANKMINI_eng" class="contentGridItem1x2 contentGridItem bgLT3 THEME_eng"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Engineering </span></h6>     <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="eng_FREE_DISPLAY.COPY"></span>         </div>   <h5><span id="engBase_GAIN_RATE">0.0</span>B/wk</h5>    </div>
+				<div id="DATABANKMINI_psy" class="contentGridItem1x2 contentGridItem bgLT3 THEME_Psy"   style="text-align:center"><h6>  <span class="INFO_TEXT_STATIC">Social Science </span></h6>  <div class="valueDisplayDiv displaySm" >   <span class="COPY_VALUEDISPLAY_ELEMENT" id="psy_FREE_DISPLAY.COPY"></span>         </div>   <h5><span id="psyBase_GAIN_RATE">0.0</span>B/wk</h5>    </div>
 
             </div>
         </div></div>
@@ -2184,7 +2184,7 @@ Stellar pop:
 			</button>
 			<div class="contentLV3">
 
-            <div class="THEME_Bio" id="DATABANK_bio">
+            <div class="databank_table THEME_Bio" id="DATABANK_bio">
                 <div class="contentGrid6 THEME_Green bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
     			   <div class="contentGridItem1x4 contentGridItemNoBorders bgLT1" style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Biology: </span> <span id="bio_TOTAL_DISPLAY"></span> <span style="display:none;"> (<span id="bio_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
     			   <div class="contentGridItem1x2 contentGridItemNoBorders bgLT1" style="text-align: right;"><h5><span id="bio_GAIN_RATE">0.0</span>B/wk</h5></div>
@@ -2195,9 +2195,7 @@ Stellar pop:
 				</div>
 			</div>
 
-            <br>
-
-            <div class="THEME_Eng" id="DATABANK_eng">
+            <div class="databank_table THEME_Eng" id="DATABANK_eng">
                 <div class="contentGrid6 THEME_eng bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
     			   <div class="bgLT1 contentGridItem1x4 contentGridItemNoBorders " style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Engineering: </span> <span id="eng_TOTAL_DISPLAY"></span>  <span style="display:none;">(<span id="eng_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
     			   <div class="bgLT1 contentGridItem1x2 contentGridItemNoBorders " style="text-align: right;"><h5><span id="eng_GAIN_RATE">0.0</span>B/wk</h5></div>
@@ -2208,9 +2206,7 @@ Stellar pop:
 				</div>
 			</div>
 
-			<br>
-
-            <div class="THEME_Psy" id="DATABANK_psy">
+            <div class="databank_table THEME_Psy" id="DATABANK_psy">
                 <div class="contentGrid6 THEME_Psy bgLT1" style="border: 2px solid var(--DK3); grid-gap: 0px;">
     			   <div class="contentGridItem1x4 contentGridItemNoBorders bgLT1" style="text-align: left;"><h5><span class="INFO_TEXT_STATIC">Social Science: </span> <span id="psy_TOTAL_DISPLAY"></span>  <span style="display:none;">(<span id="psy_FREE_DISPLAY">0</span> <span class="INFO_TEXT_STATIC">unspent</span>) </span> </h5></div>
     			   <div class="contentGridItem1x2 contentGridItemNoBorders bgLT1" style="text-align: right;"><h5><span id="psy_GAIN_RATE">0.0</span>B/wk</h5></div>

@@ -1011,6 +1011,11 @@ ELEMS["bio_GAIN_RATE"] = document.getElementById("bio_GAIN_RATE");
 ELEMS["eng_GAIN_RATE"] = document.getElementById("eng_GAIN_RATE");
 ELEMS["psy_GAIN_RATE"] = document.getElementById("psy_GAIN_RATE");
 
+ELEMS["bioBase_GAIN_RATE"] = document.getElementById("bioBase_GAIN_RATE");
+ELEMS["engBase_GAIN_RATE"] = document.getElementById("engBase_GAIN_RATE");
+ELEMS["psyBase_GAIN_RATE"] = document.getElementById("psyBase_GAIN_RATE");
+
+
 
 ELEMS["POWER_DISPLAY"] = document.getElementById("POWER_DISPLAY")
 ELEMS["Botpwr_POWER_DISPLAY"] = document.getElementById("Botpwr_POWER_DISPLAY")
