@@ -214,7 +214,14 @@ STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["BioResearch-INPUT"]["costInfo"]    = {s
 ***********************************
 */
 
+/*
 
+STATS["INDUSTRY"]["Feedstock"].baseProd
+STATS["INDUSTRY"]["Feedstock"].basePwr
+STATS["INDUSTRY"]["Botpwr"]
+STATS["INDUSTRY"]["Compute"]
+
+*/
 
 STATICVAR_HOLDER.SCIENCE.TECHTREE = {
     
@@ -308,8 +315,8 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
            cost:[["eng",getProjectBaseCost(2) / 12 ]],
            effect:function(){
-             STATS["INDUSTRY"]["Botbots"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 2;
-             STATS["INDUSTRY"]["Botbots"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] * 0.5;
+             STATS["INDUSTRY"]["Botbots"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 3;
+             STATS["INDUSTRY"]["Botbots"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] / 3;
            },
            desc:"Simplifies and accelerates the manufacturing process for assembly robots." ,
            descShort:"...",
@@ -321,10 +328,10 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            effect:function(){
              //STATS["INDUSTRY"]["Botbots"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 1.25;
              //STATS["INDUSTRY"]["Botbots"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] * (1/1.25);
-             STATS["INDUSTRY"]["Botpwr"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 1.25;
-             STATS["INDUSTRY"]["Botpwr"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] * (1/1.25);
+             STATS["INDUSTRY"]["Botpwr"]["baseProd"] = STATS["INDUSTRY"]["Botbots"]["baseProd"] * 3;
+             STATS["INDUSTRY"]["Botpwr"]["basePwr"] = STATS["INDUSTRY"]["Botbots"]["basePwr"] / 3;
            },
-           desc:"Simplifies and accelerates the production of solar arrays." ,
+           desc:"Simplifies and accelerates the production of solar arrays by a factor of 3." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_ENG"]},
 
@@ -332,10 +339,10 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
            cost:[["eng",getProjectBaseCost(3) / 12],["bio",getProjectBaseCost(4)]],
            effect:function(){
-             STATS["INDUSTRY"]["Feedstock"]["baseProd"] = STATS["INDUSTRY"]["Feedstock"]["baseProd"] * 2;
-             STATS["INDUSTRY"]["Feedstock"]["basePwr"] = STATS["INDUSTRY"]["Feedstock"]["basePwr"] * 0.5;
+             STATS["INDUSTRY"]["Feedstock"]["baseProd"] = STATS["INDUSTRY"]["Feedstock"]["baseProd"] * 3;
+             STATS["INDUSTRY"]["Feedstock"]["basePwr"] = STATS["INDUSTRY"]["Feedstock"]["basePwr"] / 3;
            },
-           desc:"Doubles feedstock production rate." ,
+           desc:"Triples feedstock production rate." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_ENG","TECHTREE_BIO"]},
 
@@ -343,13 +350,12 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
            cost:[["eng",getProjectBaseCost(3) / 12],["psy",getProjectBaseCost(4)]],
            effect:function(){
-             STATS["INDUSTRY"]["Feedstock"]["baseProd"] = STATS["INDUSTRY"]["Feedstock"]["baseProd"] * 2;
-             STATS["INDUSTRY"]["Feedstock"]["basePwr"] = STATS["INDUSTRY"]["Feedstock"]["basePwr"] * 0.5;
+             STATS["INDUSTRY"]["Compute"]["baseProd"] = STATS["INDUSTRY"]["Compute"]["baseProd"] * 3;
+             STATS["INDUSTRY"]["Compute"]["basePwr"] = STATS["INDUSTRY"]["Compute"]["basePwr"] /3;
            },
-           desc:"Doubles feedstock production rate." ,
+           desc:"Triples compute production." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_ENG","TECHTREE_PSY"]},
-
 
       TECHTREE_dynaThought:{projectTitle:"Dynamic Thought Patterns",projectID:"TECHTREE_dynaThought",projectType:"TECHTREE",
            costInfo: {sciFields:[["psy",1]], sciCtDistro:[1]},
@@ -358,7 +364,7 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
              //unlockStatus("psy_SCIENCE_UNLOCK");
              //STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] = STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"] * 2;
            },
-           desc:"..." ,
+           desc:"A keystone upgrade, required for many advanced technologies." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_PSY"]},
            
@@ -401,6 +407,8 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
            cost:[["eng",getProjectBaseCost(4)],["bio",getProjectBaseCost(4)]],
            effect:function(){
              unlockStatus("Advanced_Energy_Panel");
+             STATS["PRODUCTIVITY_MULT"]["BotpwrGen"] = STATS["PRODUCTIVITY_MULT"]["BotpwrGen"] + 0.2;
+             STATS["PRODUCTIVITY_MULT"]["BiopwrGen"] = STATS["PRODUCTIVITY_MULT"]["BiopwrGen"] + 0.2;
            },
            desc:"Unlocks advanced power management control and information panels." ,
            descShort:"...",
@@ -408,11 +416,26 @@ STATICVAR_HOLDER.SCIENCE.TECHTREE = {
 
       TECHTREE_nanotech:{projectTitle:"Nanotech Fabrication",projectID:"TECHTREE_nanotech",projectType:"TECHTREE",
            costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
+           cost:[["eng",getProjectBaseCost(6)],["psy",getProjectBaseCost(6)]],
+           effect:function(){
+             STATS["INDUSTRY"]["Botbot"]["baseProd"] = STATS["INDUSTRY"]["Botbot"]["baseProd"] * 3;
+             STATS["INDUSTRY"]["Botbot"]["basePwr"] = STATS["INDUSTRY"]["Botbot"]["basePwr"] / 2 ;
+             STATS["INDUSTRY"]["Compute"]["baseProd"] = STATS["INDUSTRY"]["Compute"]["baseProd"] * 3;
+             STATS["INDUSTRY"]["Compute"]["basePwr"] = STATS["INDUSTRY"]["Compute"]["basePwr"] / 2;
+           },
+           desc:"Triples assembly robot production and computer production, but also substantially increases production power requirements." ,
+           descShort:"...",
+           prereqTechs: ["TECHTREE_microscale","TECHTREE_macroscale","TECHTREE_dynaThought"]},
+           
+      TECHTREE_organicConstruct1:{projectTitle:"Technoorganic Structure Lattice",projectID:"TECHTREE_organicConstruct1",projectType:"TECHTREE",
+           costInfo: {sciFields:[["eng",1]], sciCtDistro:[1]},
            cost:[["bio",getProjectBaseCost(6)],["eng",getProjectBaseCost(6)]],
            effect:function(){
-             //TODO
+             STATS["INDUSTRY"]["Botpwr"]["baseProd"] = STATS["INDUSTRY"]["Botpwr"]["baseProd"] * 3;
+             STATS["INDUSTRY"]["Botpwr"]["basePwr"] = STATS["INDUSTRY"]["Botpwr"]["basePwr"] / 3;
+             STATS["PRODUCTIVITY_MULT"]["BotpwrGen"] = STATS["PRODUCTIVITY_MULT"]["BotpwrGen"] + 0.05;
            },
-           desc:"..." ,
+           desc:"Demi-organic structures are far more robust, as they are capable of self repair. They are also easier to produce, since they grow themselves. Triples solar array production and grants a modest increase to solar panel productivity." ,
            descShort:"...",
            prereqTechs: ["TECHTREE_microscale","TECHTREE_macroscale","TECHTREE_dynaThought"]},
            

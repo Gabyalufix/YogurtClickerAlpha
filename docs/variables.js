@@ -485,6 +485,8 @@ STATS["CONVERSIONS"]["ComputePerProdPerTick"] = 0.0012
 STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3], ["MATTER-Waste-CT",-0.3], ["POWER",0.255000]]
 
 
+
+
 STATS["INDUSTRY"] = {};
 STATS["INDUSTRY"]["Feedstock"] = { sliderID: "bot", sliderIDX: 0, prodTitle: "Botworld Feedstock", inventoryType: "MATTER", scitype: "eng", scifield: "eng2",
                                    baseProd: 1e-1 * 0.00827,
@@ -535,9 +537,9 @@ STATS["INDUSTRY"]["Compute"] = { sliderID: "bot", sliderIDX: 5, prodTitle: "Comp
 */
 
 STATS["INDUSTRY"]["Compute"] = { sliderID: "bot", sliderIDX: 5, prodTitle: "Computronium Fabrication", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd: 0.000679 * 1e-6,
+                                   baseProd: 0.000679 * 1e-2,
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
-                                   basePwr:   0.255000 * 1e6,
+                                   basePwr:   0.255000 * 1e2,
                                    baseWaste: 2.3}
 
 
