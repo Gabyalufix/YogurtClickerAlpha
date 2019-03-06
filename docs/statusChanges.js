@@ -574,6 +574,7 @@ STATICVAR_HOLDER.PHASEDATA = {
        onEffect: function(){
           standard_onEffect.call(this);
           STATS.STATUS_FLAG["BASIC_BIOMASS"]=true;
+          STATS["PRODUCTION-CURR"]["YogurtFarm"] = 0;
           var aa = STATS.ACTIVE_INDUSTRY_LIST 
           var aax = aa.indexOf("YogurtFarm")
           var aay = aa.indexOf("BioResearchFarm")

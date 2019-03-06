@@ -400,9 +400,58 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 </div>
 </div>
 
+<!--
+    this.ELEMS["DEBUG_YOGO_RATE"].textContent         = fmtSIadv(yoDelta,4);
+    this.ELEMS["DEBUG_YOGO_QUOTA"].textContent        = fmtSIadv(STATS.EUPHORIA.YOGO_QUOTA_RATE * yoTotal,4);
+    this.ELEMS["DEBUG_YOGO_RATEPCT"].textContent      = roundTo(yoPct,5) * 100;
+    this.ELEMS["DEBUG_YOGO_QUOTAPCT"].textContent     = roundTo(STATS.EUPHORIA.YOGO_QUOTA_RATE,5) * 100;
+    this.ELEMS["DEBUG_EUPHORIA_DELTA"].textContent    = ""+yoRating;
+    this.ELEMS["DEBUG_BUG_CT"].textContent            = "???";
+    this.ELEMS["DEBUG_EUPHORIA_CT"].textContent = "???";
+    this.ELEMS["DEBUG_EUPHORIA_DELTA"].textContent    = ""+yoRating;
+-->
+<div class="contentUnitHolder "><div id="DEBUG_INFO_PANEL">
+			<button class="collapsible">
+			   <h1><span class="INFO_TEXT_STATIC">DEBUG_DATA:</span></h1>
+			</button>
+	 <div class="content">
 
+     <div class="contentGrid4 dataTable contentGridBG">
+        <div class="contentGridItem contentGridItem1x1 bgLT3 contentGrid1Hz">
+          <div> YOGURT RATE: </div>
+          <div id="DEBUG_YOGO_RATE"> 0.0  </div>
+        </div>
+        <div class="contentGridItem contentGridItem1x1 bgLT3 contentGrid1Hz">
+          <div> YOGURT QUOTA: </div>
+          <div id="DEBUG_YOGO_QUOTA"> 0.0  </div>
+        </div>
 
+        <div class="contentGridItem contentGridItem1x1 bgLT3 contentGrid1Hz">
+          <div> YOGURT PCT: </div>
+          <div id="DEBUG_YOGO_RATEPCT"> 0.0  </div>
+        </div>
+        <div class="contentGridItem contentGridItem1x1 bgLT3 contentGrid1Hz">
+          <div> QUOTA PCT: </div>
+          <div id="DEBUG_YOGO_QUOTAPCT"> 0.0  </div>
+        </div>
 
+        <div class="contentGridItem contentGridItem1x1 bgLT3 contentGrid1Hz">
+          <div> EUPHORIA RATING: </div>
+          <div id="DEBUG_EUPHORIA_DELTA"> 0.0  </div>
+        </div>
+        <div class="contentGridItem contentGridItem1x1 bgLT3 contentGrid1Hz">
+          <div> EUPHORIA TOTAL: </div>
+          <div id="DEBUG_EUPHORIA_CT"> 0.0 </div>
+        </div>
+        <div class="contentGridItem contentGridItem1x1 bgLT3 contentGrid1Hz">
+          <div> BUG CT: </div>
+          <div id="DEBUG_BUG_CT"> 0.0  </div>
+        </div>
+
+     </div>
+
+	</div>
+</div></div>
 
 <!--
 =================================================

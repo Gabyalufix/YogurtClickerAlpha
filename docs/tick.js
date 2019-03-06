@@ -84,6 +84,7 @@ function TICK_runFastTick(){
         GAME.TICK_calcScience();
         GAME.TICK_INDUSTRY_calcDeltas()
         GAME.TICK_calcEvents();
+        GAME.TICK_calcEuphoria();
 
         secTimer++;
         if (secTimer >= 250){
