@@ -913,7 +913,7 @@ STATS.EUPHORIA.EUPHORIA_DELTA = 0;
 INVENTORY["BUFFER-EUPHORIA-CT"] = 0;
 INVENTORY["BUFFER-BUGS-CT"] = 0;
 
-STATS.EUPHORIA.YOGO_QUOTA_RATE = 0.001;
+STATS.EUPHORIA.YOGO_QUOTA_RATE = 0.000001;
 
 ELEMS["DEBUG_EUPHORIA_DELTA"] = document.getElementById("DEBUG_EUPHORIA_DELTA");
 ELEMS["DEBUG_EUPHORIA_CT"] = document.getElementById("DEBUG_EUPHORIA_CT");
@@ -933,8 +933,8 @@ function TICK_calcEuphoria(){
     
     this.ELEMS["DEBUG_YOGO_RATE"].textContent         = fmtSIadv(yoDelta,4);
     this.ELEMS["DEBUG_YOGO_QUOTA"].textContent        = fmtSIadv(STATS.EUPHORIA.YOGO_QUOTA_RATE * yoTotal,4);
-    this.ELEMS["DEBUG_YOGO_RATEPCT"].textContent      = roundTo(yoPct * 100,3);
-    this.ELEMS["DEBUG_YOGO_QUOTAPCT"].textContent     = roundTo(STATS.EUPHORIA.YOGO_QUOTA_RATE * 100,3);
+    this.ELEMS["DEBUG_YOGO_RATEPCT"].textContent      = roundTo(yoPct * 100,7);
+    this.ELEMS["DEBUG_YOGO_QUOTAPCT"].textContent     = roundTo(STATS.EUPHORIA.YOGO_QUOTA_RATE * 100,7);
     this.ELEMS["DEBUG_EUPHORIA_DELTA"].textContent    = ""+roundTo(yoRating,4);
     this.ELEMS["DEBUG_BUG_CT"].textContent            = "???";
     this.ELEMS["DEBUG_EUPHORIA_CT"].textContent = "???";
