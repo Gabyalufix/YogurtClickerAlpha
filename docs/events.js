@@ -2,6 +2,7 @@
 INVENTORY["EVENTS"] = new Set();
 
 
+
 STATICVAR_HOLDER.EVENT_LIST = {
    FOUND_FIRST_SUPERGIANT:{
       eventTitle: "Found First Supergiant", eventID: "FIRST_SUPERGIANT", 
@@ -99,6 +100,43 @@ STATICVAR_HOLDER.EVENT_LIST = {
    },
    
 }
+
+
+STATICVAR_HOLDER.TUTORIAL_EVENT_LIST = {
+   INPUT_THROTTLED:{
+      eventTitle: "TUTORIAL: Industry Input-Limited", eventID: "INPUT_THROTTLED", lockOnInit: false,
+      eventTest: function(){ return Boolean( STATS.IS_RESOURCE_STARVED["MATTER-Feedstock-CT"] ) && STATS.TICK > 6 },
+      eventExec: function(){ 
+        printlnToAiConsole("NOTICE: Your industry is feedstock-starved!" );
+              popupAdvanced("Your industry is not operating at capacity because you are not producing enough processed feedstock. <br><br>"+
+                            "Feedstock is processed matter that serves as raw material for your assembly machines to use in producing computer circuits, "+
+                            "solar arrays, and more assembly robots.  <br><br> Note that the productivity bars in the production control panel "+
+                            "are yellow and do not reach fully to the slider bar. This indicates how much actual production is occurring, as "+
+                            "limited by your input.  <br><br>It is strongly recommended that you increase the 'Process Matter' slider to produce more feedstock!",
+                            {noticeTitleHTML:"TUTORIAL: Resource starvation",
+                             allowClose:true,
+                             isTutorial:true})
+      }
+   },
+   POWER_THROTTLED:{
+      eventTitle: "TUTORIAL: Industry Energy-Limited", eventID: "POWER_THROTTLED", lockOnInit: false,
+      eventTest: function(){ return Boolean( STATS.IS_RESOURCE_STARVED["POWER"] ) && STATS.TICK > 6 },
+      eventExec: function(){ 
+        printlnToAiConsole("NOTICE: Your industry is energy-starved!" );
+              popupAdvanced("Your industry is not operating at full capacity because you are not producing enough energy to fully power all processes. <br><br>"+
+                            "Note that the productivity bars in the production control panel "+
+                            "are yellow and do not reach fully to the slider bar. This indicates how much actual production is occurring, as "+
+                            "limited by your power.<br><br> "+
+                            "It is recommended that you either create more solar arrays, switch more biomass into photosynthesis mode (if available), research power "+
+                            "upgrades, or switch production to less power-hungry processes. "+
+                            "",
+                            {noticeTitleHTML:"TUTORIAL: Energy starvation",
+                             allowClose:true,
+                             isTutorial:true})
+      }
+   },
+}
+
 STATS.EVENTS_LOCKED = [];
 var allEventList = Object.keys(STATICVAR_HOLDER.EVENT_LIST)
 for(var i=0; i < allEventList.length; i++){
@@ -108,6 +146,23 @@ for(var i=0; i < allEventList.length; i++){
 }
 console.log("Locked events: "+STATS.EVENTS_LOCKED.length+" Events");
 console.log("Locked events: ["+STATS.EVENTS_LOCKED.join(",")+"]");
+
+
+
+STATS.TUTORIAL_EVENTS_LOCKED = [];
+var tutEventList = Object.keys(STATICVAR_HOLDER.TUTORIAL_EVENT_LIST)
+for(var i=0; i < tutEventList.length; i++){
+  if( ! (STATICVAR_HOLDER.TUTORIAL_EVENT_LIST[tutEventList[i]].lockOnInit) ){
+    STATS.TUTORIAL_EVENTS_LOCKED.push(tutEventList[i]);
+  }
+}
+
+
+
+
+
+
+
 
 //STATS.EVENTS_LOCKED=Object.keys(STATICVAR_HOLDER.EVENT_LIST).slice();
 
@@ -123,6 +178,20 @@ function TICK_calcEvents(){
       i = i - 1;
        console.log("PL: "+STATS.EVENTS_LOCKED);
     }
-
   }
+  if(this.STATS.TUTORIAL_ACTIVE){
+      for(var i=0; i < STATS.TUTORIAL_EVENTS_LOCKED.length; i++){
+        var tt = STATS.TUTORIAL_EVENTS_LOCKED[i]
+        var tx = STATICVAR_HOLDER.TUTORIAL_EVENT_LIST[tt];
+        //console.log("EL: "+STATS.EVENTS_LOCKED);
+        if( tx.eventTest.call(this.GAME) ){
+          console.log("UNLOCKING: "+tt);
+          tx.eventExec.call(this.GAME);
+          STATS.TUTORIAL_EVENTS_LOCKED.splice(i,1);
+          i = i - 1;
+          //console.log("PL: "+STATS.TUTORIAL_EVENTS_LOCKED);
+        }
+      }
+  }
+  
 }

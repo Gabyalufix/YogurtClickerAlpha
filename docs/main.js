@@ -1058,6 +1058,10 @@ for( var i = 0; i < STATICVAR_HOLDER.SHIP_TYPE_LIST.length; i++){
 
 }
 
+
+
+
+
 STATS["RUN_MANUAL_TICKS"] = 0;
 
       ELEMS["CHEATPANEL_TIME"] = {
@@ -1665,14 +1669,25 @@ window.onclick = function(event) {
 
 document.getElementById("ENABLE_CHEATS_CHECKBOX").oninput = function(){
   if(this.checked){
-    console.log("TEST1")
-    document.getElementById("CHEAT_DEBUG_PANEL").style.display = "block";
+    console.log("CHEATS ON!")
+    document.getElementById("CHEAT_DEBUG_OPEN").style.display = "block";
   } else {
-    console.log("TEST2")
-    document.getElementById("CHEAT_DEBUG_PANEL").style.display = "none";
+    console.log("CHEATS OFF!")
+    document.getElementById("CHEAT_DEBUG_OPEN").style.display = "none";
 
   }
 }
+STATS.TUTORIAL_ACTIVE = true;
+document.getElementById("ENABLE_TUTORIAL_CHECKBOX").oninput = function(){
+  if(this.checked){
+    console.log("TUTORIAL ON!")
+    STATS.TUTORIAL_ACTIVE = true;
+  } else {
+    console.log("TUTORIAL OFF!")
+    STATS.TUTORIAL_ACTIVE = false;
+  }
+}
+
 
 
 
@@ -1844,8 +1859,10 @@ function executeAllConstructionRequests(){
       iterationCausedChange = false;
 
       for(var i=0; i<this.STATICVAR_HOLDER.SHARED_RESOURCE_LIST.length; i++){
+        
         var userList = resourceUserList[i];
         var rr = this.STATICVAR_HOLDER.SHARED_RESOURCE_LIST[i];
+        STATS.IS_RESOURCE_STARVED[rr] = false;
         //console.log("  [[["+rr+"]]]:");
         var userList = [];
         var totalResourceRequested = 0;
@@ -1869,7 +1886,9 @@ function executeAllConstructionRequests(){
 
           for(var j=0; j < userList.length;j++){
             var uu = userList[j];
-
+            if(this.CONSTRUCTION_REQUESTS[uu[0]][3] > 0){
+              STATS.IS_RESOURCE_STARVED[rr] = true;
+            }
             STATS["LIMIT-REASON"][this.CONSTRUCTION_REQUESTS[uu[0]][4]] = rr;
             this.CONSTRUCTION_REQUESTS[uu[0]][3] = 0;
             //console.log("            ZEROING:"+this.CONSTRUCTION_REQUESTS[j][0]);
@@ -1879,6 +1898,7 @@ function executeAllConstructionRequests(){
           iterationCausedChange = true;
           var frac = this.INVENTORY[rr] / totalResourceRequested;
           //console.log("    Insufficient["+rr+"]: "+frac);
+          STATS.IS_RESOURCE_STARVED[rr] = true;
           for(var j=0; j < userList.length;j++){
             var uu = userList[j];
             STATS["LIMIT-REASON"][this.CONSTRUCTION_REQUESTS[uu[0]][4]] = rr;
@@ -2210,10 +2230,6 @@ document.getElementById("CHEAT_DEBUG_OPEN").onclick = function(){
 
 ELEMS[""] = document.getElementById("POPUP_WINDOW")
 
-function activatePopupWindow(){
-
-}
-
 
 ELEMS.popupBG     = document.getElementById('POPUP_WINDOW');
 ELEMS.popupWindow = document.getElementById('POPUP_WINDOW_CONTENT');
@@ -2221,11 +2237,25 @@ ELEMS.popupTextBox = document.getElementById("POPUP_WINDOW_TEXTBOX");
 ELEMS.popupTitle = document.getElementById("POPUP_WINDOW_TITLELINE");
 ELEMS.popupCloseButton = document.getElementById("POPUP_WINDOW_CLOSE")
 
+ELEMS.popupChecks = [
+  document.getElementById("POPUP_WINDOW_CHECK1"),
+  document.getElementById("POPUP_WINDOW_CHECK2"),
+  document.getElementById("POPUP_WINDOW_CHECK3")
+]
+ELEMS.popupChecks[0].LS = document.getElementById("POPUP_WINDOW_CHECKLS1")
+ELEMS.popupChecks[1].LS = document.getElementById("POPUP_WINDOW_CHECKLS2")
+ELEMS.popupChecks[2].LS = document.getElementById("POPUP_WINDOW_CHECKLS3")
+ELEMS.popupChecks[0].L = document.getElementById("POPUP_WINDOW_CHECKLAB1")
+ELEMS.popupChecks[1].L = document.getElementById("POPUP_WINDOW_CHECKLAB2")
+ELEMS.popupChecks[2].L = document.getElementById("POPUP_WINDOW_CHECKLAB3")
+
+
 ELEMS.popupButtons = [
   document.getElementById("POPUP_WINDOW_BUTTON1"),
   document.getElementById("POPUP_WINDOW_BUTTON2"),
   document.getElementById("POPUP_WINDOW_BUTTON3")
 ]
+
 
 
 function openPopupWindow(){
@@ -2259,6 +2289,10 @@ function popupNotice(noticeHTML, noticeTitleHTML = "ALERT:", noticeCloseButtonHT
    ELEMS.popupButtons[1].style.display = "none"
    ELEMS.popupButtons[2].style.display = "none"
    
+   ELEMS.popupChecks[0].L.style.display = "none"
+   ELEMS.popupChecks[1].L.style.display = "none"
+   ELEMS.popupChecks[2].L.style.display = "none"
+   
    ELEMS.popupButtons[0].innerHTML = noticeCloseButtonHTML;
    
    openPopupWindow()
@@ -2271,16 +2305,16 @@ function popupButton(html="OK",buttonFunc = function(){}, buttonDisabled = false
    this.buttonDisabled = buttonDisabled;
    this.closeOnClick = closeOnClick;
    this.getOnClick = function(){
-     if(closeOnClick){
-         return function(){
-           buttonFunc();
-           closePopupWindow();
+         if(closeOnClick){
+             return function(){
+               buttonFunc();
+               closePopupWindow();
+             }
+         } else {
+             return function(){
+               buttonFunc();
+             }
          }
-     } else {
-         return function(){
-           buttonFunc();
-         }
-     }
    }
 }
 /*
@@ -2291,9 +2325,10 @@ noticeHTML,
 
 popupAdvanced
 
-                       
+TODO: add checkbox controls!                       
 */
 function popupAdvanced(noticeHTML,params={
+       isTutorial : false,
        buttons : [new popupButton()],
        allowClose : false,
        noticeTitleHTML : "ALERT:",
@@ -2302,9 +2337,35 @@ function popupAdvanced(noticeHTML,params={
    var buttons = params.buttons;
    var allowClose = params.allowClose;
    var noticeTitleHTML = params.noticeTitleHTML
+   var isTutorial = params.isTutorial
    if(buttons === undefined){
-     buttons = [new popupButton()]
+     if(isTutorial){
+       buttons = [new popupButton(
+          html="OK",
+          buttonFunc = function(){
+            if( ELEMS.popupChecks[0].checked ){
+               document.getElementById("ENABLE_TUTORIAL_CHECKBOX").checked = false;
+               console.log("TUTORIAL OFF!")
+               STATS.TUTORIAL_ACTIVE = false;
+            }
+          }, 
+          buttonDisabled = false, 
+          closeOnClick= true
+       )];
+
+       
+     } else {
+       buttons = [new popupButton()]
+     }
    }
+   if(isTutorial){
+       ELEMS.popupChecks[0].L.style.display = "block";
+       ELEMS.popupChecks[1].L.style.display = "none";
+       ELEMS.popupChecks[2].L.style.display = "none";
+       ELEMS.popupChecks[0].checked = false;
+       ELEMS.popupChecks[0].LS.innerHTML = "Turn off tutorial popups."
+   }
+   
    if(allowClose === undefined){
      allowClose = false
    }

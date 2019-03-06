@@ -724,6 +724,7 @@ function TICK_INDUSTRY_calcScienceGain(){
 
     for(var i=0;i<this.SCIENCE_TYPES.length;i++){
       var fid = this.SCIENCE_TYPES[i];
+      var scitype = fid;
       var subf = this.SCIENCE_SUBFIELDS[fid];
       var newSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid] * STATS["MODIFIERS"]["sanityScienceFactor"] * STATS["MODIFIERS"]["GLOBAL_SCIENCE_MODIFIER"]
 
@@ -734,28 +735,41 @@ function TICK_INDUSTRY_calcScienceGain(){
              this.ELEMS["basic_FREE_DISPLAY"].textContent = fmtSI(this.INVENTORY["basic_SCIENCE_FREE"])+"B";
              this.ELEMS["basic_GAIN_RATE"].textContent = fmtSI(newBasic)+"";
       }
+      
       if( GAME_GLOBAL.STATS.STATUS_FLAG[fid+"_SCIENCE"]){
-          this.ELEMS[fid+"_GAIN_RATE"].textContent = ""+ fmtSI(newSci," ");
-
           this.INVENTORY[fid+"_SCIENCE_TOTAL"] = this.INVENTORY[fid+"_SCIENCE_TOTAL"] + newSci
-          this.INVENTORY[fid+"_SCIENCE_FREE"] = this.INVENTORY[fid+"_SCIENCE_FREE"] + newSci
-
-
-
-          var fsi = fmtSIunits( this.INVENTORY[fid+"_SCIENCE_TOTAL"] );
-          this.SCIENCE_DISPLAY[fid].total.textContent =  fsi[0]+" "+fsi[1]+"B"
-          var ffsi = fmtSIunits( this.INVENTORY[fid+"_SCIENCE_FREE"] );
-          this.SCIENCE_DISPLAY[fid].total.free.textContent =  ffsi[0]+" "+ffsi[1]+"B"
-
-          for(var j=0;j<subf;j++){
-            var newSubSci = this.STATS["PRODUCTIVITY_RATING"][fid] * this.STATS["PRODUCTIVITY_MULT"][fid] * this.SETTINGS[fid+"_FRACTION"][j];
-            this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] = this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] + newSubSci
-            this.INVENTORY[fid+j+"_SCIENCE_FREE"]  = this.INVENTORY[fid+j+"_SCIENCE_FREE"]  + newSubSci
-            //var fssi = fmtSIunits( this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] );
-            //this.SCIENCE_DISPLAY[fid][j].textContent =   fssi[0]+" "+fssi[1]+"B"
-            var ffssi = fmtSIunits( this.INVENTORY[fid+j+"_SCIENCE_FREE"] );
-            this.SCIENCE_DISPLAY[fid][j].textContent =   ffssi[0]+" "+ffssi[1]+"B"
+          this.ELEMS[fid+"_GAIN_RATE"].textContent = ""+ fmtSI(newSci," ");
+          this.SCIENCE_DISPLAY[fid].total.textContent =  fmtSI( this.INVENTORY[fid+"_SCIENCE_TOTAL"] )+"B"
+          if(GAME_GLOBAL.STATS.STATUS_FLAG["COMPLETE_UNLOCK"][scitype] ) {
+              //console.log("full: "+scitype);
+              for(var j=0;j<subf;j++){
+                var newSubSci = newSci * this.SETTINGS[fid+"_FRACTION"][j];
+                this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] = this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] + newSubSci
+                this.INVENTORY[fid+j+"_SCIENCE_FREE"]  = this.INVENTORY[fid+j+"_SCIENCE_FREE"]  + newSubSci
+                var ffssi = fmtSIunits( this.INVENTORY[fid+j+"_SCIENCE_FREE"] );
+                this.SCIENCE_DISPLAY[fid][j].textContent =   ffssi[0]+" "+ffssi[1]+"B"
+              }
+          } else if(GAME_GLOBAL.STATS.STATUS_FLAG["PARTIAL_UNLOCK"][scitype] ) {
+              //console.log("partial: "+scitype);
+              var newBaseSci = newSci * this.SETTINGS[fid+"_FRACTION"][3];
+              this.INVENTORY[fid+"_SCIENCE_FREE"] = this.INVENTORY[fid+"_SCIENCE_FREE"] + newBaseSci
+              this.SCIENCE_DISPLAY[fid].total.free.textContent =  fmtSI( this.INVENTORY[fid+"_SCIENCE_FREE"] )+"B"
+              for(var j=0;j<subf;j++){
+                var newSubSci = newSci * this.SETTINGS[fid+"_FRACTION"][j];
+                this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] = this.INVENTORY[fid+j+"_SCIENCE_TOTAL"] + newSubSci
+                this.INVENTORY[fid+j+"_SCIENCE_FREE"]  = this.INVENTORY[fid+j+"_SCIENCE_FREE"]  + newSubSci
+                var ffssi = fmtSIunits( this.INVENTORY[fid+j+"_SCIENCE_FREE"] );
+                this.SCIENCE_DISPLAY[fid][j].textContent =   ffssi[0]+" "+ffssi[1]+"B"
+              }
+          } else {
+              //console.log("basic: "+scitype);
+              this.INVENTORY[fid+"_SCIENCE_FREE"] = this.INVENTORY[fid+"_SCIENCE_FREE"] + newSci
+              var ffsi = fmtSIunits( this.INVENTORY[fid+"_SCIENCE_FREE"] );
+              this.SCIENCE_DISPLAY[fid].total.free.textContent =  ffsi[0]+" "+ffsi[1]+"B"
           }
+
+
+
        }
     }
 

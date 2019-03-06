@@ -984,7 +984,7 @@ STATICVAR_HOLDER.SCIENCE_TYPES.forEach(function(scitype){
   
   for(var i=0; i < 3; i++){
      var statID = capSciType+"FIELD_"+(i+1);
-     STATICVAR_HOLDER.PHASEDATA[statID] = {  statID:statID, subSciType:"eng"+i+"_SCIENCE_FREE",scitype:scitype,
+     STATICVAR_HOLDER.PHASEDATA[statID] = {  statID:statID, subSciType:scitype+i+"_SCIENCE_FREE",scitype:scitype,
                           statTitle: statID, 
                           elemids:[capSciType+"_RESEARCH_SLIDER_"+(i+1)],
                           sliders:[[scitype+"SliderPct"+(i+1),scitype+"SliderCheck"+(i+1)]],
@@ -992,6 +992,7 @@ STATICVAR_HOLDER.SCIENCE_TYPES.forEach(function(scitype){
                           elems_opacitymask: [["DATABANK_"+scitype+(i+1),[1,0]]],
        onEffect: function(){
           standard_onEffect.call(this);
+          
           //unlockStatus()
           //lockOrUnlockDatabanks.call(this);
        },
