@@ -938,7 +938,9 @@ function TICK_calcEuphoria(){
     this.ELEMS["DEBUG_EUPHORIA_DELTA"].textContent    = ""+roundTo(yoRating,4);
     this.ELEMS["DEBUG_BUG_CT"].textContent            = "???";
     this.ELEMS["DEBUG_EUPHORIA_CT"].textContent = "???";
-
+    
+    INVENTORY["BUFFER-BUGS-CT"] = INVENTORY["BUFFER-BUGS-CT"] + Math.min( 1000 -  Math.exp(yoRating), 0 )
+    
 }
 GAME_GLOBAL.TICK_calcEuphoria = TICK_calcEuphoria;
 
