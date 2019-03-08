@@ -318,7 +318,18 @@ i=0;
 
 
 function roundTo(value, decimals) {
-  return Number(Math.round(value+'e'+decimals)+'e-'+decimals).toFixed(decimals);
+  var nn = Number(Math.round(value+'e'+decimals)+'e-'+decimals)
+  if(isNaN(nn)){
+      if(value < 1 && value >= 0){
+        return Number("0").toFixed(decimals);
+      } else if(value > -1 && value <= 0){
+        return Number("0").toFixed(decimals); 
+      } else {
+        return "?"+value+"?"
+      }
+  } else {
+      return nn.toFixed(decimals);;
+  }
 }
 
 

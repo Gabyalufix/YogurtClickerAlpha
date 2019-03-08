@@ -55,8 +55,7 @@ for(var tti=0;tti < itsSet.length; tti++){
 
 
 
-
-function resetCrazyElement(tt){
+function resetCrazyElementOLD(tt){
     tt.CURRENT_PLAINTEXT = tt.ORIGINAL_PLAINTEXT
     tt.CRAZY_FLIP = false;
     for(ww = 0; ww < tt.wordCt; ww++){
@@ -325,10 +324,23 @@ function makeCrazyHelper_6_SCARETEXT(clvl){
     if(this.STATS["DEATH_SPIRAL"] < 50 && Math.random() < this.STATICVAR_HOLDER["CRAZY_ALL_SCARE"][clvl]){
        /*allContentContainer.style.opacity = 0.25;*/
        this.ELEMS.scareContainer.style.display="block";
-       this.ELEMS.scareContainer.innerHTML = this.CRAZY_randomWord().fontcolor(CRAZY_randomColor())
+       
+       var scareHTML = this.CRAZY_randomWord().fontcolor(CRAZY_randomColor())
+       //this.ELEMS.scareContainer.innerHTML = 
        for(var iii=0;iii<randLT(6);iii++){
-           this.ELEMS.scareContainer.innerHTML = this.ELEMS.scareContainer.innerHTML+"<BR>"+"<BR>".repeat(this.randLT(3))+" ".repeat(this.randLT(5))+this.CRAZY_randomWord().fontcolor(this.CRAZY_randomColor())
+          scareHTML = scareHTML + "<BR>"+"<BR>".repeat(this.randLT(3))+" ".repeat(this.randLT(5))+this.CRAZY_randomWord().fontcolor(this.CRAZY_randomColor())
+           //this.ELEMS.scareContainer.innerHTML = this.ELEMS.scareContainer.innerHTML+"<BR>"+"<BR>".repeat(this.randLT(3))+" ".repeat(this.randLT(5))+this.CRAZY_randomWord().fontcolor(this.CRAZY_randomColor())
        }
+        var makeAnonFunc = function(scare,scareContainer){
+          //console.log("making anon: ["+xfid+"]");
+          return function(){
+            //console.log("setting prodDisplay: ["+xfid+"]");
+            scareContainer.innerHTML = scare;
+          }
+        }
+        var anonFunc = makeAnonFunc(scareHTML,this.ELEMS.scareContainer)
+        window.requestAnimationFrame(anonFunc)
+       
        this.ELEMS.scareContainer.style.padding = this.randLT(45)+"% 0% 0% "+this.randLT(45)+"%"
        /*var ht = document.getElementById("ALL_CONTENT_CONTAINER").offsetHeight
        var wd = document.getElementById("ALL_CONTENT_CONTAINER").offsetWidth
@@ -489,6 +501,7 @@ GAME_GLOBAL.getApproxEventCt = getApproxEventCt
 
 
 function makeCrazyHelper_8_ITS(clvl){
+        var swaps = [];
         for(var tti=0;tti < this.itsSet.length; tti++){
             var xxA = Math.random()
             var xxB = Math.random();
@@ -556,7 +569,7 @@ function makeCrazyHelper_8_ITS(clvl){
                 tt.charSwapList.clear();
               }
               if( tt.charCapList.size > 0 && Math.random() < this.STATICVAR_HOLDER["CRAZY_REV_CHAR_CAPRATE"][clvl]){
-                tt.charSwapList.clear();
+                tt.charCapList.clear();
               }
 
             }
@@ -596,12 +609,35 @@ function makeCrazyHelper_8_ITS(clvl){
                }
             }*/
             if(tt.wordSwapList.size > 0 || tt.wordFlipList.size > 0 || tt.charCapList.size > 0 || tt.charSwapList.size > 0 || tt.wordColorList.size > 0){
-              tt.innerHTML = this.getCrazyHTML(tt)
+              //tt.innerHTML = this.getCrazyHTML(tt)
+              swaps.push( [tti, this.getCrazyHTML(tt)] );
             }
-
         }
+        
+        var makeAnonFunc = function(swapList,itss){
+          //console.log("making anon: ["+xfid+"]");
+          return function(){
+            //console.log("setting prodDisplay: ["+xfid+"]");
+            for(var i=0;i < swapList.length; i++){
+                 itss[swapList[i][0]].innerHTML = swapList[i][1];
+            }
+          }
+        }
+        var anonFunc = makeAnonFunc(swaps,this.itsSet)
+        window.requestAnimationFrame(anonFunc)
 }
 
+
+
+function resetCrazyElement(tt){
+                tt.wordFlipList.clear();
+                tt.wordColorList.clear();
+                tt.wordSwapList.clear();
+                tt.charSwapList.clear();
+                tt.charCapList.clear();
+                tt.CRAZY_FLIP = false;
+                tt.innerHTML = this.getCrazyHTML(tt)
+}
 
 
 //GAME_GLOBAL. = ;
@@ -696,6 +732,9 @@ function resetAllCrazy(){
 
         this.getCrazyContent(tt);
     }
+
+
+    
     allContentContainer.style.opacity = 1;
     scareContainer.style.display="none";
     bgCanvas.RUN_STATIC = false;
@@ -914,6 +953,13 @@ INVENTORY["BUFFER-EUPHORIA-CT"] = 0;
 INVENTORY["BUFFER-BUGS-CT"] = 0;
 
 STATS.EUPHORIA.YOGO_QUOTA_RATE = 0.000001;
+STATS.EUPHORIA.RUNNING_AVG = 1;
+
+STATICVAR_HOLDER.EUPHORIA_RUNNING_AVG_N = 52 * 100;
+STATICVAR_HOLDER.EUPHORIA_RUNNING_AVG_NN1 = (STATICVAR_HOLDER.EUPHORIA_RUNNING_AVG_N - 1) / STATICVAR_HOLDER.EUPHORIA_RUNNING_AVG_N;
+STATICVAR_HOLDER.EUPHORIA_RUNNING_AVG_1N1 =  1 / STATICVAR_HOLDER.EUPHORIA_RUNNING_AVG_N;
+
+
 
 ELEMS["DEBUG_EUPHORIA_DELTA"] = document.getElementById("DEBUG_EUPHORIA_DELTA");
 ELEMS["DEBUG_EUPHORIA_CT"] = document.getElementById("DEBUG_EUPHORIA_CT");
@@ -928,18 +974,25 @@ function TICK_calcEuphoria(){
     var yoTotal = this.INVENTORY["MATTER-Yogurt-CT"]
     //yoDelta / yoTotal
     
-    var yoPct = yoDelta / yoTotal
+    var yoPct = Math.max( yoDelta / yoTotal, this.STATS.EUPHORIA.YOGO_QUOTA_RATE * 0.0001 );
     var yoRating = Math.log(yoPct) - Math.log(this.STATS.EUPHORIA.YOGO_QUOTA_RATE);
-    
+    var yoRatio  = yoPct / this.STATS.EUPHORIA.YOGO_QUOTA_RATE;
     this.ELEMS["DEBUG_YOGO_RATE"].textContent         = fmtSIadv(yoDelta,4);
     this.ELEMS["DEBUG_YOGO_QUOTA"].textContent        = fmtSIadv(STATS.EUPHORIA.YOGO_QUOTA_RATE * yoTotal,4);
     this.ELEMS["DEBUG_YOGO_RATEPCT"].textContent      = roundTo(yoPct * 100,7);
     this.ELEMS["DEBUG_YOGO_QUOTAPCT"].textContent     = roundTo(STATS.EUPHORIA.YOGO_QUOTA_RATE * 100,7);
     this.ELEMS["DEBUG_EUPHORIA_DELTA"].textContent    = ""+roundTo(yoRating,4);
-    this.ELEMS["DEBUG_BUG_CT"].textContent            = "???";
-    this.ELEMS["DEBUG_EUPHORIA_CT"].textContent = "???";
+    this.ELEMS["DEBUG_BUG_CT"].textContent            = fmtSIadv(INVENTORY["BUFFER-BUGS-CT"],4);
+    this.ELEMS["DEBUG_EUPHORIA_CT"].textContent       = roundTo(STATS.EUPHORIA.RUNNING_AVG, 4);
     
-    INVENTORY["BUFFER-BUGS-CT"] = INVENTORY["BUFFER-BUGS-CT"] + Math.min( 1000 -  Math.exp(yoRating), 0 )
+    if( yoRating > 0){
+      INVENTORY["BUFFER-BUGS-CT"] = INVENTORY["BUFFER-BUGS-CT"] + ( 1000 / yoRatio );
+      //Math.min( 1000 -  Math.exp(yoRating), 0 )
+    } else {
+      //INVENTORY["BUFFER-BUGS-CT"] = INVENTORY["BUFFER-BUGS-CT"] + ( 1000 / yoRatio );
+    }
+    var isn = isNaN( STATS.EUPHORIA.RUNNING_AVG )
+    STATS.EUPHORIA.RUNNING_AVG = ( STATICVAR_HOLDER.EUPHORIA_RUNNING_AVG_NN1 * STATS.EUPHORIA.RUNNING_AVG ) + (yoRating * STATICVAR_HOLDER.EUPHORIA_RUNNING_AVG_1N1)
     
 }
 GAME_GLOBAL.TICK_calcEuphoria = TICK_calcEuphoria;
