@@ -1067,6 +1067,8 @@ h5 {
 */
 /* Or make canvas and static fixed? */
 
+
+
 .SCIENCE_SUBFIELD_SLIDER_TITLE {
   font-size: 11px;
   font-weight: bold;
@@ -1282,6 +1284,7 @@ h5 {
   border: 2px solid var(--DK4);
   border-radius: 5px;
   padding: 2px;
+  position: relative;
 }
 #ProjectSelector {
   height: 100%;
@@ -1292,7 +1295,22 @@ h5 {
   font-weight: bold;
   overflow-y: scroll;
   border-style: none;
+
 }
+
+
+#ProjectSelectorExpandPanel {
+   position: absolute;
+   top:0px;
+   left:0px;
+   padding: 1px;
+   display: grid;
+   grid-template-columns: 15px;
+   grid-template-rows: 15px 15px;
+   z-index: 1; /* Sit on top */
+
+}
+
 .PROJECT_BUTTON {
   border-bottom: 1px dotted var(--LT2);
   padding: 2px;

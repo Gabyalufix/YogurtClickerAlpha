@@ -2431,6 +2431,22 @@ window.addEventListener("click",function(event){
      availListElem.appendChild(elem);
 */
 
+document.getElementById("ProjectSelectorBG").sizeMult = 1;
+document.getElementById("button_projectSelectBig").smallerButton = document.getElementById("button_projectSelectSmall")
+document.getElementById("button_projectSelectBig").onclick = function(){
+  document.getElementById("ProjectSelectorBG").sizeMult =  document.getElementById("ProjectSelectorBG").sizeMult + 0.5;
+  document.getElementById("ProjectSelectorBG").style.height = (document.getElementById("ProjectSelectorBG").sizeMult * 128) + "px"
+  console.log("sizeMult = "+document.getElementById("ProjectSelectorBG").sizeMult);
+  this.smallerButton.disabled = false;
+}
+document.getElementById("button_projectSelectSmall").onclick = function(){
+  document.getElementById("ProjectSelectorBG").sizeMult =  document.getElementById("ProjectSelectorBG").sizeMult - 0.5;
+  document.getElementById("ProjectSelectorBG").style.height = (document.getElementById("ProjectSelectorBG").sizeMult * 128) + "px"
+  console.log("sizeMult = "+document.getElementById("ProjectSelectorBG").sizeMult);
+  if(document.getElementById("ProjectSelectorBG").sizeMult <= 0.6){
+    this.disabled = true;
+  }
+}
 /*
 ********************************************************
 Starting stats:
