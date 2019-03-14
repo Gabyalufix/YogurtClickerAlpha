@@ -445,7 +445,7 @@ INVENTORY.SCIENCE_DISCOVERED = [];
 INVENTORY.SCIENCE_RESEARCHED = [];
 
 //getProjectCostAdv(STATICVAR_HOLDER.SCIENCE.MULTI_INDUSTRY["BioResearch-ENER"]["costInfo"],1)
-
+//getProjectCostAdvSCI( STATICVAR_HOLDER.SCIENCE.SCALED["eng"][0].costInfo )
 function getProjectCostAdvSCI(costInfo, debugInfo = ""){
      var cost = [];
 
@@ -467,7 +467,7 @@ function getProjectCostAdvSCI(costInfo, debugInfo = ""){
            //buffer = buffer + costInfo.sciFields[idx][1];
            var idx = costIdxIdx[idxIdx];
            idxSet.add( idx  );
-           cost.push( [ costInfo.sciFields[idx][0]+"_SCIENCE_FREE", Math.pow(Math.pow(2,i),4) ] );
+           cost.push( [ costInfo.sciFields[idx][0]+"_SCIENCE_FREE", 1 / Math.pow(Math.pow(2,i),4) ] );
        }
      }
      return cost;
