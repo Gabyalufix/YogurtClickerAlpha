@@ -741,4 +741,54 @@ for(var j=0; j < SCIENCEUNIV_PROJECT_TYPES.length; j++){
   }
 }
 
+/*
+
+New science pricing system:
+
+*/
+
+
+STATS.SCIENCE_LEVEL = {
+  bio: 0, bio0:0, bio1: 0, bio2:0,
+  eng: 0, eng0:0, eng1: 0, eng2:0,
+  psy: 0, psy0:0, psy1: 0, psy2:0
+}
+
+STATICVAR_HOLDER.LEVELLED_SCIENCE_POWERMOD = sqrt(10);
+STATICVAR_HOLDER.LEVELLED_SCIENCE_BASE = 1e18;
+
+
+
+function getSciencePriceAtLevel(lvl){
+   Math.pow(STATICVAR_HOLDER.LEVELLED_SCIENCE_POWERMOD,lvl) * STATICVAR_HOLDER.LEVELLED_SCIENCE_BASE
+}
+
+function getPrice( scitype, amt , unlock = false, levelmod = 0, accum = 0){
+  if(amt == 0){
+    return accum;  
+  }
+  var scilvl = STATS.SCIENCE_LEVEL[scitype] + levelmod;
+  var lvlCost = getSciencePriceAtLevel( Math.floor(scilvl) );
+  var amtLeftToNextLevel = Math.ceil(scilvl) - scilvl;
+  if(amtLeftToNextLevel == 0){
+    amtLeftToNextLevel = 1;    
+  }
+  if(amt > amtLeftToNextLevel){
+    if(unlock){
+          STATS.SCIENCE_LEVEL[scitype] = Math.round(STATS.SCIENCE_LEVEL[scitype] + amtLeftToNextLevel);
+    }
+    return getPrice(scitype, amt - amtLeftToNextLevel, unlock, levelmod + amtLeftToNextLevel, accum + lvlCost * amtLeftToNextLevel)
+  } else {
+    if(unlock){
+      STATS.SCIENCE_LEVEL[scitype] = STATS.SCIENCE_LEVEL[scitype] + amt;
+    }
+    return lvlCost * amt + accum
+  }
+}
+function iteratePrice(scitype,amt){
+
+}
+
+
+
 
