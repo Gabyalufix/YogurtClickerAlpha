@@ -27,6 +27,37 @@ function canAfford(c, verbose=false){
 }
 GAME_GLOBAL.canAfford = canAfford
 
+function canAffordSCI(c, verbose=false){
+   for(var i=0; i<c.length;i++){
+      var scitype = c[i][0];
+      var amt = c[i][1];
+      var sciamt = getPrice( scitype, amt )
+      if( this.INVENTORY[ scitype ] < sciamt ){
+        if(verbose){ console.log("         ["+scitype+"] - ["+fmtSI(this.INVENTORY[ scitype ])+" vs "+fmtSI(sciamt)+"]: FAIL") }
+
+         return false;
+      } else {
+        if(verbose){ console.log("         ["+scitype+"] - ["+fmtSI(this.INVENTORY[ scitype ])+" vs "+fmtSI(sciamt)+"]: OK") }
+      }
+   }
+   return true;
+}
+GAME_GLOBAL.canAffordSCI = canAffordSCI
+
+function purchaseSCI(c, verbose=false){
+   for(var i=0; i<c.length;i++){
+      var scitype = c[i][0];
+      var amt = c[i][1];
+      var sciamt = getPrice( scitype, amt, true )
+      this.INVENTORY[ scitype ] = this.INVENTORY[ scitype ] - sciamt;
+   }
+}
+GAME_GLOBAL.purchaseSCI = purchaseSCI
+
+
+
+
+
 function makeCostAbbriv(cc,delim){
    var ccc = fmtSI(cc[0][1]);
    var costString = ccc +"B "+ STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"][cc[0][0]];
@@ -199,6 +230,61 @@ function makeColoredScience(ss, sciDescSet, isLT = false){
     return out;
 }
 
+function makeColoredScienceSCI(ss, sciDescSet, isLT = false){
+    //console.log("   coloring: "+ss[0] +" / "+ss[1]);
+    var scitype = ss[0];
+    var amt = ss[1];
+    var sciamt = getPrice( scitype, amt )
+    
+    var out = fmtSI(sciamt) +"B "+sciDescSet[scitype];
+    if(scitype.startsWith("bio")){
+        //console.log("   BIO color found for: "+ss[0])
+        if(isLT){
+            //console.log("    LT!")
+            out = "<SPAN class=\"THEME_Bio SCICOST_TEXT_LT\">"+out+"</SPAN>"
+        } else {
+            //console.log("    DK!")
+            out = "<SPAN class=\"THEME_Bio SCICOST_TEXT_DK\">"+out+"</SPAN>"
+        }
+    } else if(scitype.startsWith("eng")){
+        //console.log("   ENG color found for: "+ss[0])
+        if(isLT){
+            out = "<SPAN class=\"THEME_Bot SCICOST_TEXT_LT\">"+out+"</SPAN>"
+        } else {
+            out = "<SPAN class=\"THEME_Bot SCICOST_TEXT_DK\">"+out+"</SPAN>"
+        }
+    } else if(scitype.startsWith("psy")){
+        //console.log("   PSY color found for: "+ss[0])
+        if(isLT){
+            out = "<SPAN class=\"THEME_Psy SCICOST_TEXT_LT\">"+out+"</SPAN>"
+        } else {
+            out = "<SPAN class=\"THEME_Psy SCICOST_TEXT_DK\">"+out+"</SPAN>"
+        }
+    } else {
+        console.log("   No color found for: "+ss[0])
+    }
+    return out;
+}
+
+
+function makeAdvCostStringSCI(cc,delim1=", ",delim2=",<BR>", compressThresh = 2, isLT=false){
+    //console.log("advString input: "+cc);
+   var costDesc = STATICVAR_HOLDER["INVENTORY_DESC_FULL"]
+   var delim = delim2;
+   if(cc.length > compressThresh){
+     costDesc = STATICVAR_HOLDER["INVENTORY_DESC_ABBRIV"]
+     delim=delim1;
+   }
+   var out = makeColoredScienceSCI(cc[0],costDesc, isLT);
+   if(cc.length > 1){
+      for(var i=1; i<cc.length;i++){
+          out = out + delim + makeColoredScienceSCI(cc[i],costDesc,isLT);
+      }
+   }
+   //console.log("advString: "+out);
+   return out;
+}
+GAME_GLOBAL.makeAdvCostStringSCI = makeAdvCostStringSCI
 
 function makeAdvCostString(cc,delim1=", ",delim2=",<BR>", compressThresh = 2, isLT=false){
     //console.log("advString input: "+cc);
@@ -594,7 +680,7 @@ function projectSelectButtonEvent(){
    var dd = this.project.desc;
    this.masterAvail.researchButton.currProject     = this.project;
    this.masterAvail.researchButton.currProjectElem = this;
-   dd = dd + "<BR> &nbsp&nbsp&nbsp" + makeAdvCostString(this.project.cost,delim1=", ",delim2="<BR> &nbsp&nbsp&nbsp", compressThresh = 5, isLT=false)
+   dd = dd + "<BR> &nbsp&nbsp&nbsp" + makeAdvCostStringSCI(this.project.cost,delim1=", ",delim2="<BR> &nbsp&nbsp&nbsp", compressThresh = 5, isLT=false)
    if(this.project.prereqTechs != null && this.project.prereqTechs.length > 0){
       
       dd = dd + "<BR> &nbsp&nbsp&nbspPrereqs:" 
@@ -652,13 +738,23 @@ function addNewProject(pp){
          //isadded = true;
        } else if(othrElem.scitype == elem.scitype){
          //console.log("        equal scitypes!");
-         if(othrElem.project.cost[0][1] >= elem.project.cost[0][1]){
+         //sort by index?
+         if(othrElem.project.idx >= elem.project.idx ){
+           this.projectElemList.splice(i,0,elem);
+           this.insertBefore(elem,othrElem);
+           isadded = true;
+           //console.log("        !!!["+othrElem.project.cost[0][1] + " >= "+elem.project.cost[0][1]);
+           break;
+         }
+         //sort by cost?
+         
+         /*if(othrElem.project.cost[0][1] >= elem.project.cost[0][1]){
            this.projectElemList.splice(i,0,elem);
            this.insertBefore(elem,othrElem);
            isadded = true;
            //console.log("        !!!["+othrElem.project.cost[0][1] + " >= "+elem.project.cost[0][1]);
            break;           
-         }// else {
+         }*/// else {
            //console.log("        ...["+othrElem.project.cost[0][1] + " < "+elem.project.cost[0][1]);
          //}
        }
@@ -721,11 +817,13 @@ function filterProjectWindow(){
         var elem = this.projectElemList[i];
         
          var meetPrereqs = true;
-         elem.project.prereqTechs.forEach(function(pt){
-              if( ! STATS.SCIENCE_DONESET.has(pt) ){
-                meetPrereqs = false;
-              }
-         })
+         if(elem.project.prereqTechs){
+           elem.project.prereqTechs.forEach(function(pt){
+                if( ! STATS.SCIENCE_DONESET.has(pt) ){
+                   meetPrereqs = false;
+                }
+           })
+         }
          if(! meetPrereqs){
              elem.classList.add("PROJECTBUTTON_PREREQ_BAD")
          } else {
@@ -762,6 +860,8 @@ masterAvailListElem.filterBoxes.bio.onchange = filterProjectWindowOnChange
 masterAvailListElem.filterBoxes.eng.onchange = filterProjectWindowOnChange
 masterAvailListElem.filterBoxes.psy.onchange = filterProjectWindowOnChange
 masterAvailListElem.filterBoxes.avail.onchange = filterProjectWindowOnChange
+masterAvailListElem.getMultiProject = getMultiProject
+masterAvailListElem.getScaledProject = getScaledProject
 
 
 RESEARCH_BUTTONS.push(masterAvailListElem.researchButton);
@@ -769,12 +869,13 @@ RESEARCH_BUTTONS.push(masterAvailListElem.researchButton);
 masterAvailListElem.researchButton.onclick = function(){
   if(this.currProject != null){
         var pp = this.currProject;
-        for(var kk = 0; kk < pp.cost.length; kk++){
-           //console.log(this.availListElem.pp);
-           //console.log("BEFORE: [val="+this.availListElem.value+"] ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
-           this.GAME.INVENTORY[ pp.cost[kk][0] ] = this.GAME.INVENTORY[ pp.cost[kk][0] ] - pp.cost[kk][1];
-           //console.log("AFTER: ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
-        }
+        //for(var kk = 0; kk < pp.cost.length; kk++){
+           ////console.log(this.availListElem.pp);
+           ////console.log("BEFORE: [val="+this.availListElem.value+"] ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
+           //this.GAME.INVENTORY[ pp.cost[kk][0] ] = this.GAME.INVENTORY[ pp.cost[kk][0] ] - pp.cost[kk][1];
+           ////console.log("AFTER: ["+pp.cost[kk][0]+"/\n"+pp.cost[kk][1]+"]:\n"+INVENTORY[ pp.cost[kk][0] ]);
+        //}
+        this.GAME.purchaseSCI( pp.cost );
         this.GAME.currentResearchEffect = this.GAME.STATICVAR_HOLDER.SCIENCE.PROJECTTABLE[ pp.projectID ].effect;
         this.GAME.currentResearchEffect();
         this.GAME.INVENTORY.SCIENCE_RESEARCHED.push(pp.uid);
@@ -849,7 +950,7 @@ masterAvailListElem.researchButton.canAffordTest = function(verbose = false){
          //  console.log("   cc:"+cc.join("-"));
          //})
 
-         if( this.GAME.canAfford(pp.cost,verbose) && meetsPrereqs ){
+         if( this.GAME.canAffordSCI(pp.cost,verbose) && meetsPrereqs ){
              this.disabled = false;
              if(verbose){console.log("     affordable!")}
              return true;
@@ -880,7 +981,7 @@ addScaledProject(ap)
 */
 
 
-
+/*
 for(var i=0; i< SCIENCE_TYPES.length; i++){
    //PROJECTSAVAIL_LIST_bio
    //CURRENT_AVAIL_PROJECT_DESC_bio
@@ -914,16 +1015,7 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
      elem.appendChild( document.createTextNode( pp.projectTitle ) );
      this.appendChild(elem);
    }
-   /*for(var j=0; j < STATS["UNLOCK_PROJECTS"][fid].length; j++){
-     var pp = STATS["UNLOCK_PROJECTS"][fid][j];
-     STATS["AVAIL_PROJECT_LIST"][fid].push(pp.projectID);
-     STATS["AVAIL_PROJECTS"][fid][pp.projectID] = pp;
-     var elem = document.createElement("option");
-     pp.listElem = elem;
-     elem.value = pp.projectID;
-     elem.appendChild( document.createTextNode( pp.projectTitle ) );
-     availListElem.appendChild(elem);
-   }*/
+
 
    researchButton.canAffordTest = function(){
        var vv = this.availListElem.value;
@@ -957,10 +1049,7 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
        var pp = this.GAME.STATS["AVAIL_PROJECTS"][this.fid][vv];
        //console.log("this.value="+this.value+", pp = "+pp);
        var dd = pp.desc;
-       /*for(var k=0; k < pp.cost.length;k++){
-          var ccc = fmtSIunits(pp.cost[k][1]);
-          dd = dd + "<br> &nbsp&nbsp&nbsp"+ccc[0]+ccc[1]+"B "+ this.GAME.STATICVAR_HOLDER["INVENTORY_DESC_FULL"][pp.cost[k][0]]
-       }*/
+
        dd = dd + "<BR> &nbsp&nbsp&nbsp" + makeAdvCostString(pp.cost,delim1=", ",delim2="<BR> &nbsp&nbsp&nbsp", compressThresh = 5, isLT=false)
        this.descElem.innerHTML = dd
        if( this.GAME.canAfford(pp.cost) ){
@@ -995,7 +1084,7 @@ for(var i=0; i< SCIENCE_TYPES.length; i++){
      var ap2 = availListElem.addMultiProject(projectList[idx2],1)
      availListElem.value = ap1.uid;
      availListElem.onchange();
-}
+}*/
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2457,9 +2546,9 @@ INVENTORY["STARS-" + "G" +"-CT"] = 1;
 INVENTORY["WORLDS-"+"Bot"+"-CT"] = 0.5
 
 INVENTORY["POWER-FreeBot-CT"]    = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY / 2;
-INVENTORY["MATTER-Botbots-CT"]   = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 1.2;
-INVENTORY["MATTER-Botpwr-CT"]    = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 0.75;
-INVENTORY["MATTER-Compute-CT"]   = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 0.025;
+INVENTORY["MATTER-Botbots-CT"]   = 3141592000             //STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 1.2;
+INVENTORY["MATTER-Botpwr-CT"]    = 3141592000  *0.77       //STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 0.75;
+INVENTORY["MATTER-Compute-CT"]   = 3141592000 *0.025      //STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 0.025;
 
 INVENTORY["MATTER-Waste-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 25;
 
@@ -2472,7 +2561,7 @@ var START_WITH_GREENWORLD = true;
 if(START_WITH_GREENWORLD){
   INVENTORY["WORLDS-"+"Green"+"-CT"] = 0.5
   INVENTORY["POWER-FreeGreen-CT"] = STATICVAR_HOLDER.WATTAGE_SOL_LUMINOSITY / 2;
-  INVENTORY["MATTER-Biomass-CT"] = STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 1.2;
+  INVENTORY["MATTER-Biomass-CT"] = 3141592000 //STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR * 1.2;
   INVENTORY["MATTER-FreeGreen-CT"] = STATICVAR_HOLDER.MASS_LIST.EARTH / 2
   //(STATICVAR_HOLDER.SOLAR_MASS / 2) - INVENTORY["MATTER-Biomass-CT"] - (INVENTORY["MATTER-Waste-CT"] / 2);
 }

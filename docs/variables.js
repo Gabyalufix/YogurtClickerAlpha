@@ -489,25 +489,26 @@ STATS["COST-MATTER-Compute"] = [["MATTER-Feedstock-CT",1.3], ["MATTER-Waste-CT",
 
 STATS["INDUSTRY"] = {};
 STATS["INDUSTRY"]["Feedstock"] = { sliderID: "bot", sliderIDX: 0, prodTitle: "Botworld Feedstock", inventoryType: "MATTER", scitype: "eng", scifield: "eng2",
-                                   baseProd: 1e-1 * 0.00827,
+                                   baseProd: 0.00827,
                                    baseCost:  [["MATTER-FreeBot-CT",1]],
-                                   basePwr:   9e0 *0.05800,
+                                   basePwr:   0.05800,
                                    baseWaste: 0.5}
+
 STATS["INDUSTRY"]["Botbots"] = { sliderID: "bot", sliderIDX: 1, prodTitle: "Robotic Fabricator Construction", inventoryType: "MATTER", scitype: "eng", scifield: "eng2",
-                                   baseProd: 1e-1 * 0.0012,
+                                   baseProd: 0.0012,
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
-                                   basePwr:   9e0 *0.331000,
+                                   basePwr:   0.331000,
                                    baseWaste: 1.0}
 
 STATS["INDUSTRY"]["Botpwr"] =   { sliderID: "bot", sliderIDX: 6, prodTitle: "Solar Array Construction", inventoryType: "MATTER", scitype: "eng",
-                                   baseProd: 1e-1 * 0.00209,
+                                   baseProd:  0.00209,
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
-                                   basePwr:   9e0 *0.077200,
+                                   basePwr:   0.077200,
                                    baseWaste: 0.5}
 STATS["INDUSTRY"]["Ship"] = { sliderID: "bot", sliderIDX: 4, prodTitle: "Shipyard Construction", inventoryType: "BUFFER", scitype: "eng",
-                                   baseProd: 1e-1 * 0.000000001 / 3.14,
+                                   baseProd: 0.000000001 / 3.14,
                                    baseCost:  [["MATTER-Feedstock-CT",1]],
-                                   basePwr:  9e0 * 0.138000,
+                                   basePwr:  0.138000,
                                    baseWaste: 3140000}
 /*
 pre startgame:
@@ -1176,7 +1177,7 @@ STATICVAR_HOLDER.SOULSperFLOP           =   (0.000000001)
 STATICVAR_HOLDER.BYTES_PER_TON_BIOMASS  = 6.42e+18;
 
 
-STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR = 3141592000000;
+STATICVAR_HOLDER.EARTHS_INDUSTRIAL_UNITFACTOR = 3141592000000 * 1e-4;
 
 
 STATICVAR_HOLDER.TRUE_WATTS_SOL_LUMINOSITY = 3.828e26
