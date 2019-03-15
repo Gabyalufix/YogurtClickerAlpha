@@ -864,15 +864,18 @@ function ExactLargeNumber( varray ){
 
 
 
+//drawFromRandomDistro([1,0.5,0.25],"ifLow",-1, "", true)
 
-
-function drawFromRandomDistro(xx,normalize = "yes", defaultResult=-1, debugNote = ""){
+function drawFromRandomDistro(xx,normalize = "yes", defaultResult=-1, debugNote = "", verbose=false){
    //options for normalize are yes, no, ifLow, ifHigh
+   if(["yes","no","ifLow","ifHigh"].indexOf(normalize) == -1){
+      console.log("WARNING: normalize must be one of: yes,no,ifHigh,ifLow. Found: \""+normalize+"\"")
+   }
    if(xx == null){
      console.log("xx == null: "+debugNote);
    }
    //console.log("xx == "+xx);
-
+   if(verbose){ console.log("     randomDistro["+xx.join(",")+"]") }
    var xlo = [];
    var xhi = [];
    var total = 0;
@@ -881,17 +884,27 @@ function drawFromRandomDistro(xx,normalize = "yes", defaultResult=-1, debugNote 
        xhi[i] = total + xx[i];
        total = total + xx[i];
    }
+   if(verbose){ console.log("             xlo["+xlo.join(",")+"]") }
+   if(verbose){ console.log("             xhi["+xhi.join(",")+"]") }
+   if(verbose){ console.log("           total="+total) }
+
    if( total != 1 ){
-     if(normalize = "yes" || (normalize == "ifLow" && total < 1) || (normalize == "ifHigh" && total > 1) ){
+     if(normalize == "yes" || (normalize == "ifLow" && total < 1) || (normalize == "ifHigh" && total > 1) ){
        for(var i=0; i < xx.length; i++){
            xlo[i] = xlo[i] / total;
            xhi[i] = xhi[i] / total;
        }
      }
    }
+   if(verbose){ console.log("             xlo["+xlo.join(",")+"]") }
+   if(verbose){ console.log("             xhi["+xhi.join(",")+"]") }
+
    var rr = Math.random();
+   if(verbose){ console.log("             rr="+rr) }
+
    for(var i=0; i < xx.length; i++){
      if( rr <= xhi[i] && rr >= xlo[i] ){
+          if(verbose){ console.log("             i="+i) }
        return i;
      }
    }
